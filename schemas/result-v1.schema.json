@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "deposium.result/v1",
+  "description": "One durable raw trace record. Output/raw_output accept arbitrary JSON, including empty or incorrect decisions: these must remain evidence and fail scoring where appropriate. Runtime checks case identity, request hash, finite JSON and status consistency.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "contract_id",
+    "request_sha256",
+    "status",
+    "output",
+    "raw_output",
+    "error",
+    "duration_ms"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "deposium.result/v1"
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+    },
+    "contract_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+    },
+    "request_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {
+      "enum": [
+        "ok",
+        "unsupported",
+        "missing",
+        "error",
+        "timeout",
+        "abstain"
+      ]
+    },
+    "output": {},
+    "raw_output": {},
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "duration_ms": {
+      "type": "number",
+      "minimum": 0
+    }
+  }
+}

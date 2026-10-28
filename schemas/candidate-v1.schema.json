@@ -1,0 +1,2063 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "deposium.candidate/v1",
+  "description": "Recorded controls, pinned component replays and explicit isolated-model profiles. Declared capabilities do not establish product qualification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile_id",
+    "adapter",
+    "qualification",
+    "capabilities",
+    "model",
+    "timeout_seconds",
+    "revision",
+    "recordings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "deposium.candidate/v1"
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "adapter": {
+      "enum": [
+        "mcps",
+        "recorded",
+        "julia",
+        "mcps_resident",
+        "gliner",
+        "jev_http",
+        "indecis",
+        "decision2",
+        "vela2",
+        "noma",
+        "laya",
+        "small_model",
+        "d3",
+        "systemone_local",
+        "gliclass",
+        "vela3_fast"
+      ]
+    },
+    "qualification": {
+      "enum": [
+        "component_replay",
+        "harness_control",
+        "model_isolated"
+      ]
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "mcps.document-plan",
+          "mcps.document-followup",
+          "mcps.scope-dispatch",
+          "mcps.semantic-source-route",
+          "mcps.search",
+          "bench.context-choice"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "model": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/model_config"
+        },
+        {
+          "$ref": "#/$defs/gliner_model_config"
+        },
+        {
+          "$ref": "#/$defs/jev_http_model_config"
+        },
+        {
+          "$ref": "#/$defs/indecis_model_config"
+        },
+        {
+          "$ref": "#/$defs/decision2_model_config"
+        },
+        {
+          "$ref": "#/$defs/vela2_model_config"
+        },
+        {
+          "$ref": "#/$defs/noma_model_config"
+        },
+        {
+          "$ref": "#/$defs/laya_model_config"
+        },
+        {
+          "$ref": "#/$defs/small_model_config"
+        },
+        {
+          "$ref": "#/$defs/d3_model_config"
+        },
+        {
+          "$ref": "#/$defs/systemone_local_model_config"
+        },
+        {
+          "$ref": "#/$defs/gliclass_model_config"
+        },
+        {
+          "$ref": "#/$defs/vela3_fast_model_config"
+        }
+      ]
+    },
+    "timeout_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "revision": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "recordings": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "mcps"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "component_replay"
+          },
+          "revision": {
+            "type": "string"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "capabilities": {
+            "items": {
+              "enum": [
+                "mcps.document-plan",
+                "mcps.document-followup",
+                "mcps.scope-dispatch",
+                "mcps.semantic-source-route"
+              ]
+            }
+          },
+          "model": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "recorded"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "harness_control"
+          },
+          "revision": {
+            "type": "null"
+          },
+          "recordings": {
+            "type": "string"
+          },
+          "model": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "julia"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "model": {
+            "$ref": "#/$defs/model_config"
+          },
+          "capabilities": {
+            "enum": [
+              [
+                "mcps.document-plan"
+              ],
+              [
+                "bench.context-choice"
+              ]
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "mcps_resident"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "component_replay"
+          },
+          "revision": {
+            "type": "string"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "capabilities": {
+            "items": {
+              "enum": [
+                "mcps.document-plan",
+                "mcps.document-followup",
+                "mcps.scope-dispatch",
+                "mcps.semantic-source-route"
+              ]
+            }
+          },
+          "model": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "gliner"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "model": {
+            "$ref": "#/$defs/gliner_model_config"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "jev_http"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "type": "null"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "model": {
+            "$ref": "#/$defs/jev_http_model_config"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "timeout_seconds": {
+            "maximum": 30
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "indecis"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "revision": {
+            "const": "c721113d59a1d91b447450324f51c4b3332c924a"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "model": {
+            "$ref": "#/$defs/indecis_model_config"
+          },
+          "timeout_seconds": {
+            "maximum": 30
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "decision2"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "enum": [
+              "3594047d69f476f1d01cf84c593e213fc3a4dfe0",
+              "cd49ea3813fd8ba0928a9a23ef6c9a0f2f0cd764",
+              "ae269ecf34a0b3a89026bc1afd9c995279212fad"
+            ]
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "model": {
+            "$ref": "#/$defs/decision2_model_config"
+          },
+          "timeout_seconds": {
+            "maximum": 60
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "revision": {
+                "const": "3594047d69f476f1d01cf84c593e213fc3a4dfe0"
+              },
+              "model": {
+                "properties": {
+                  "repo_id": {
+                    "const": "vllm-sr/Decision-2.0-Eos-0.8B"
+                  },
+                  "max_rss_mb": {
+                    "maximum": 6144
+                  }
+                }
+              },
+              "timeout_seconds": {
+                "maximum": 30
+              }
+            }
+          },
+          {
+            "properties": {
+              "revision": {
+                "const": "cd49ea3813fd8ba0928a9a23ef6c9a0f2f0cd764"
+              },
+              "model": {
+                "properties": {
+                  "repo_id": {
+                    "const": "vllm-sr/Decision-2.0-Kai-0.6B"
+                  },
+                  "max_rss_mb": {
+                    "maximum": 6144
+                  }
+                }
+              },
+              "timeout_seconds": {
+                "maximum": 30
+              }
+            }
+          },
+          {
+            "properties": {
+              "revision": {
+                "const": "ae269ecf34a0b3a89026bc1afd9c995279212fad"
+              },
+              "model": {
+                "properties": {
+                  "repo_id": {
+                    "const": "vllm-sr/Decision-2.0-Nox-4B"
+                  },
+                  "max_rss_mb": {
+                    "const": 22528
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "vela2"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "enum": [
+              "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+              "326b01d81f61fff7fd4ae570e54b87a49119e490",
+              "d692394127f6f87fc581d8634c9558fe4776efce"
+            ]
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "model": {
+            "$ref": "#/$defs/vela2_model_config"
+          },
+          "timeout_seconds": {
+            "maximum": 60
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "revision": {
+                "const": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409"
+              },
+              "model": {
+                "properties": {
+                  "repo_id": {
+                    "const": "vllm-sr/Vela-2.0-0.3B"
+                  },
+                  "max_rss_mb": {
+                    "maximum": 4096
+                  }
+                }
+              },
+              "timeout_seconds": {
+                "maximum": 30
+              }
+            }
+          },
+          {
+            "properties": {
+              "revision": {
+                "const": "326b01d81f61fff7fd4ae570e54b87a49119e490"
+              },
+              "model": {
+                "properties": {
+                  "repo_id": {
+                    "const": "vllm-sr/Vela-2.0-0.8B"
+                  },
+                  "max_rss_mb": {
+                    "maximum": 6144
+                  }
+                }
+              },
+              "timeout_seconds": {
+                "maximum": 30
+              }
+            }
+          },
+          {
+            "properties": {
+              "revision": {
+                "const": "d692394127f6f87fc581d8634c9558fe4776efce"
+              },
+              "model": {
+                "properties": {
+                  "repo_id": {
+                    "const": "vllm-sr/Vela-2.0-4B"
+                  },
+                  "max_rss_mb": {
+                    "const": 22528
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "noma"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "const": "fac0429688a137ce451a27ad34d05e9fd47fb624"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "model": {
+            "$ref": "#/$defs/noma_model_config"
+          },
+          "timeout_seconds": {
+            "maximum": 30
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "laya"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "const": "1720e3e3357cfe1e281542e223f8273b0890ca34"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "model": {
+            "$ref": "#/$defs/laya_model_config"
+          },
+          "timeout_seconds": {
+            "maximum": 30
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "small_model"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "timeout_seconds": {
+            "exclusiveMinimum": 0,
+            "maximum": 60
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "revision": {
+                "const": "414f8d6438174f5b2133a9c21a478fc42625e308"
+              },
+              "model": {
+                "$ref": "#/$defs/omni_model_config"
+              },
+              "timeout_seconds": {
+                "maximum": 30
+              }
+            }
+          },
+          {
+            "properties": {
+              "revision": {
+                "const": "5afb8eeff127621fea2d66fc63f56798ada12eda"
+              },
+              "model": {
+                "$ref": "#/$defs/muose_model_config"
+              },
+              "timeout_seconds": {
+                "maximum": 30
+              }
+            }
+          },
+          {
+            "properties": {
+              "revision": {
+                "const": "d5b398ed03de073a00bc4e53acf53afda409445e"
+              },
+              "model": {
+                "$ref": "#/$defs/modernjev_model_config"
+              },
+              "timeout_seconds": {
+                "maximum": 30
+              }
+            }
+          },
+          {
+            "properties": {
+              "revision": {
+                "const": "051bcc464b01b9f92942b364d9586b0ef5912432"
+              },
+              "model": {
+                "$ref": "#/$defs/liquid3_model_config"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "d3"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "enum": [
+              "18d61df78684675463af9ae732872478845c5a79",
+              "a8d25a91ef75552803f7009d25b7bd435991abd9",
+              "3aeb1c22a5632aac72353c36b3d0111c40e7dbf4",
+              "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4",
+              "521525effa79469d899a570726547dd7f00da3af"
+            ]
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "model": {
+            "$ref": "#/$defs/d3_model_config"
+          },
+          "timeout_seconds": {
+            "maximum": 60
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "revision": {
+                "const": "18d61df78684675463af9ae732872478845c5a79"
+              },
+              "model": {
+                "properties": {
+                  "repo_id": {
+                    "const": "vllm-sr/d3-edge"
+                  },
+                  "max_rss_mb": {
+                    "const": 6144
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "revision": {
+                "const": "a8d25a91ef75552803f7009d25b7bd435991abd9"
+              },
+              "model": {
+                "properties": {
+                  "repo_id": {
+                    "const": "vllm-sr/d3-lite"
+                  },
+                  "max_rss_mb": {
+                    "const": 6144
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "revision": {
+                "const": "3aeb1c22a5632aac72353c36b3d0111c40e7dbf4"
+              },
+              "model": {
+                "properties": {
+                  "repo_id": {
+                    "const": "vllm-sr/d3-nano"
+                  },
+                  "max_rss_mb": {
+                    "const": 12288
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "revision": {
+                "const": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4"
+              },
+              "model": {
+                "properties": {
+                  "repo_id": {
+                    "const": "vllm-sr/d3-mini"
+                  },
+                  "max_rss_mb": {
+                    "const": 14336
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "revision": {
+                "const": "521525effa79469d899a570726547dd7f00da3af"
+              },
+              "model": {
+                "properties": {
+                  "repo_id": {
+                    "const": "vllm-sr/d3-flash"
+                  },
+                  "max_rss_mb": {
+                    "const": 18432
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "systemone_local"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "timeout_seconds": {
+            "maximum": 30
+          },
+          "model": {
+            "$ref": "#/$defs/systemone_local_model_config"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "gliclass"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "const": "14d11a92b5e0bab4a166e1fce4cc0777cac27182"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "model": {
+            "$ref": "#/$defs/gliclass_model_config"
+          },
+          "timeout_seconds": {
+            "maximum": 30
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "vela3_fast"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "const": "9e338f39babc622f42e9bd8556398fe2d80d9f13"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "model": {
+            "$ref": "#/$defs/vela3_fast_model_config"
+          },
+          "timeout_seconds": {
+            "maximum": 30
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_id",
+        "local_dir",
+        "runtime_python",
+        "assets_manifest",
+        "prompt_path",
+        "runtime_lock",
+        "max_length",
+        "head_length",
+        "threads",
+        "max_rss_mb"
+      ],
+      "properties": {
+        "repo_id": {
+          "const": "SupersonicLabs/Julia-1"
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "max_length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192
+        },
+        "head_length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192
+        },
+        "threads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "max_rss_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3072
+        }
+      },
+      "description": "head_length + 4 must be below max_length, checked by the profile parser before worker startup; installed runtime versions are observed separately from the archived lock."
+    },
+    "gliner_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_id",
+        "local_dir",
+        "runtime_python",
+        "assets_manifest",
+        "prompt_path",
+        "runtime_lock",
+        "max_length",
+        "threads",
+        "max_rss_mb"
+      ],
+      "properties": {
+        "repo_id": {
+          "const": "fastino/GLiNER2.5-multi-Decide"
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "max_length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "threads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "max_rss_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3072
+        }
+      },
+      "description": "head_length + 4 must be below max_length, checked by the profile parser before worker startup; installed runtime versions are observed separately from the archived lock."
+    },
+    "jev_http_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoint",
+        "model_id",
+        "credential_env",
+        "budget_ledger",
+        "max_requests",
+        "max_input_tokens",
+        "reserved_input_tokens_per_request",
+        "max_request_bytes",
+        "min_interval_seconds"
+      ],
+      "properties": {
+        "endpoint": {
+          "const": "https://api.typesafe.ai/v1/systemone"
+        },
+        "model_id": {
+          "type": "string",
+          "pattern": "^jev-[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "credential_env": {
+          "const": "TYPESAFE_API_KEY"
+        },
+        "budget_ledger": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "max_requests": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 800
+        },
+        "max_input_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2000000
+        },
+        "reserved_input_tokens_per_request": {
+          "const": 65536
+        },
+        "max_request_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 131072
+        },
+        "min_interval_seconds": {
+          "type": "number",
+          "minimum": 0.1
+        }
+      },
+      "description": "Explicit remote API policy; budget ledger survives launches/resumes. No immutable HF revision or local model assets are claimed."
+    },
+    "indecis_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_id",
+        "local_dir",
+        "assets_manifest",
+        "prompt_path",
+        "source_dir",
+        "source_manifest",
+        "worker_binary",
+        "build_manifest",
+        "source_revision",
+        "max_length",
+        "threads",
+        "max_rss_mb"
+      ],
+      "properties": {
+        "repo_id": {
+          "const": "hotchpotch/bekko-embedding-v1-a8m"
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "source_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "source_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "worker_binary": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "build_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "source_revision": {
+          "const": "339e191405ac9be90f6857f810f478b3312b7f35"
+        },
+        "max_length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "threads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "max_rss_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3072
+        }
+      },
+      "description": "Pinned untrained Bekko backbone and Indecis source/build identity. Native encoding admission is checked before forward, separately from the reference length grid."
+    },
+    "noma_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_id",
+        "source_revision",
+        "local_dir",
+        "source_dir",
+        "runtime_python",
+        "assets_manifest",
+        "source_manifest",
+        "prompt_path",
+        "runtime_lock",
+        "max_length",
+        "threads",
+        "max_rss_mb"
+      ],
+      "properties": {
+        "repo_id": {
+          "const": "BlackdromeAILabs/noma"
+        },
+        "source_revision": {
+          "const": "8cfda260d8af88c18b1de1852e13dcbe9958042f"
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "source_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "source_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "max_length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "threads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2
+        },
+        "max_rss_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8192
+        }
+      },
+      "description": "Pinned Noma CPU pilot with an explicit source bundle and native serializer preflight."
+    },
+    "decision2_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_id",
+        "local_dir",
+        "runtime_python",
+        "assets_manifest",
+        "prompt_path",
+        "runtime_lock",
+        "max_length",
+        "threads",
+        "max_rss_mb"
+      ],
+      "properties": {
+        "repo_id": {
+          "enum": [
+            "vllm-sr/Decision-2.0-Eos-0.8B",
+            "vllm-sr/Decision-2.0-Kai-0.6B",
+            "vllm-sr/Decision-2.0-Nox-4B"
+          ]
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "max_length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "threads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2
+        },
+        "max_rss_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 22528
+        }
+      },
+      "description": "Pinned Decision 2.0 local CPU pilot; native context and effective resource budget are recorded separately."
+    },
+    "laya_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_id",
+        "source_revision",
+        "local_dir",
+        "source_dir",
+        "runtime_python",
+        "assets_manifest",
+        "source_manifest",
+        "prompt_path",
+        "runtime_lock",
+        "max_length",
+        "threads",
+        "max_rss_mb",
+        "head_length"
+      ],
+      "properties": {
+        "repo_id": {
+          "const": "convaiinnovations/laya-multilingual"
+        },
+        "source_revision": {
+          "const": "2e4d9c87e8b1621deb344eac7de5c7258f32f849"
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "source_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "source_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "max_length": {
+          "const": 1024
+        },
+        "threads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2
+        },
+        "max_rss_mb": {
+          "const": 3072
+        },
+        "head_length": {
+          "const": 256
+        }
+      },
+      "description": "Pinned Laya multilingual CPU pilot, native lossless encoding audit, 1024/256."
+    },
+    "small_model_config": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/omni_model_config"
+        },
+        {
+          "$ref": "#/$defs/liquid3_model_config"
+        },
+        {
+          "$ref": "#/$defs/muose_model_config"
+        },
+        {
+          "$ref": "#/$defs/modernjev_model_config"
+        }
+      ]
+    },
+    "omni_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "repo_id",
+        "local_dir",
+        "source_dir",
+        "runtime_python",
+        "assets_manifest",
+        "source_manifest",
+        "runtime_lock",
+        "prompt_path",
+        "max_length",
+        "threads",
+        "max_rss_mb"
+      ],
+      "properties": {
+        "mode": {
+          "const": "omni"
+        },
+        "repo_id": {
+          "const": "LiquidAI/d1-omni-600M"
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "max_length": {
+          "const": 16384,
+          "type": "integer"
+        },
+        "threads": {
+          "const": 2,
+          "type": "integer"
+        },
+        "max_rss_mb": {
+          "const": 4096,
+          "type": "integer"
+        }
+      }
+    },
+    "liquid3_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "repo_id",
+        "local_dir",
+        "source_dir",
+        "runtime_python",
+        "assets_manifest",
+        "source_manifest",
+        "runtime_lock",
+        "prompt_path",
+        "max_length",
+        "threads",
+        "max_rss_mb"
+      ],
+      "properties": {
+        "mode": {
+          "const": "liquid3"
+        },
+        "repo_id": {
+          "const": "LiquidAI/d1-3B"
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "max_length": {
+          "const": 4096,
+          "type": "integer"
+        },
+        "threads": {
+          "const": 2,
+          "type": "integer"
+        },
+        "max_rss_mb": {
+          "const": 18432,
+          "type": "integer"
+        }
+      }
+    },
+    "muose_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "repo_id",
+        "local_dir",
+        "source_dir",
+        "runtime_python",
+        "assets_manifest",
+        "source_manifest",
+        "runtime_lock",
+        "template_path",
+        "max_length",
+        "threads",
+        "max_rss_mb"
+      ],
+      "properties": {
+        "mode": {
+          "const": "muose"
+        },
+        "repo_id": {
+          "const": "muose/Muose-50M-Decision"
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "template_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "max_length": {
+          "const": 512,
+          "type": "integer"
+        },
+        "threads": {
+          "const": 2,
+          "type": "integer"
+        },
+        "max_rss_mb": {
+          "const": 4096,
+          "type": "integer"
+        }
+      }
+    },
+    "modernjev_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "repo_id",
+        "local_dir",
+        "source_dir",
+        "runtime_python",
+        "assets_manifest",
+        "source_manifest",
+        "runtime_lock",
+        "template_path",
+        "max_length",
+        "threads",
+        "max_rss_mb"
+      ],
+      "properties": {
+        "mode": {
+          "const": "modernjev"
+        },
+        "repo_id": {
+          "const": "MaziyarPanahi/ModernJEV-Decide-Preview"
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "template_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "max_length": {
+          "const": 4096,
+          "type": "integer"
+        },
+        "threads": {
+          "const": 2,
+          "type": "integer"
+        },
+        "max_rss_mb": {
+          "const": 4096,
+          "type": "integer"
+        }
+      }
+    },
+    "vela2_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_id",
+        "local_dir",
+        "runtime_python",
+        "assets_manifest",
+        "prompt_path",
+        "runtime_lock",
+        "max_length",
+        "threads",
+        "max_rss_mb"
+      ],
+      "properties": {
+        "repo_id": {
+          "enum": [
+            "vllm-sr/Vela-2.0-0.3B",
+            "vllm-sr/Vela-2.0-0.8B",
+            "vllm-sr/Vela-2.0-4B"
+          ]
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "max_length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "threads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2
+        },
+        "max_rss_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 22528
+        }
+      },
+      "description": "Pinned Vela2 0.3B and 0.8B local FP32 CPU pilots with variant-specific RSS ceilings."
+    },
+    "d3_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_id",
+        "local_dir",
+        "runtime_python",
+        "assets_manifest",
+        "prompt_path",
+        "runtime_lock",
+        "max_length",
+        "threads",
+        "max_rss_mb"
+      ],
+      "properties": {
+        "repo_id": {
+          "enum": [
+            "vllm-sr/d3-edge",
+            "vllm-sr/d3-lite",
+            "vllm-sr/d3-nano",
+            "vllm-sr/d3-mini",
+            "vllm-sr/d3-flash"
+          ]
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "max_length": {
+          "const": 4096
+        },
+        "threads": {
+          "const": 2
+        },
+        "max_rss_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18432
+        }
+      },
+      "description": "Pinned D3 CPU choice model with native BF16 backbone and FP32 readout."
+    },
+    "systemone_local_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoint",
+        "model_id",
+        "repo_id",
+        "session_manifest",
+        "session_sha256",
+        "max_length",
+        "max_rss_mb",
+        "credential_env"
+      ],
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "pattern": "^http://127\\.0\\.0\\.1:[0-9]+/v1/systemone$"
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "repo_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "session_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "session_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "max_length": {
+          "type": "integer",
+          "minimum": 128,
+          "maximum": 32768
+        },
+        "max_rss_mb": {
+          "type": "integer",
+          "minimum": 256,
+          "maximum": 49152
+        },
+        "credential_env": {
+          "const": "DEPOSIUM_BENCH_LOCAL_KEY"
+        }
+      }
+    },
+    "gliclass_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_id",
+        "source_revision",
+        "local_dir",
+        "source_dir",
+        "runtime_python",
+        "assets_manifest",
+        "source_manifest",
+        "prompt_path",
+        "runtime_lock",
+        "max_length",
+        "threads",
+        "max_rss_mb",
+        "device",
+        "dtype",
+        "backend",
+        "min_free_mb"
+      ],
+      "properties": {
+        "repo_id": {
+          "const": "knowledgator/gliclass-v4-9b"
+        },
+        "source_revision": {
+          "const": "6a00f8067648f25aa0f4f477d167c5f391cb4165"
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "source_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "source_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "max_length": {
+          "const": 4096
+        },
+        "threads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2
+        },
+        "max_rss_mb": {
+          "const": 32768
+        },
+        "device": {
+          "const": "mps"
+        },
+        "dtype": {
+          "const": "bfloat16"
+        },
+        "backend": {
+          "const": "eager"
+        },
+        "min_free_mb": {
+          "const": 8192
+        }
+      },
+      "description": "Pinned GLiClass v4 9B, native eager BF16 pilot with lossless encoding and owned-process supervision; only MPS is qualified by the present campaign."
+    },
+    "vela3_fast_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo_id",
+        "local_dir",
+        "runtime_python",
+        "assets_manifest",
+        "prompt_path",
+        "runtime_lock",
+        "max_length",
+        "threads",
+        "max_rss_mb",
+        "device",
+        "dtype",
+        "backend",
+        "min_free_mb"
+      ],
+      "properties": {
+        "repo_id": {
+          "const": "vllm-sr/vela3-fast"
+        },
+        "local_dir": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_python": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "assets_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "prompt_path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "runtime_lock": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "max_length": {
+          "const": 4096
+        },
+        "threads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2
+        },
+        "max_rss_mb": {
+          "const": 8192
+        },
+        "device": {
+          "const": "cpu"
+        },
+        "dtype": {
+          "const": "float32"
+        },
+        "backend": {
+          "const": "sdpa"
+        },
+        "min_free_mb": {
+          "const": 8192
+        }
+      },
+      "description": "Pinned Vela3-fast 380M F32 CPU SDPA decision-backbone-only candidate; no span, vision, routing or product qualification."
+    }
+  }
+}

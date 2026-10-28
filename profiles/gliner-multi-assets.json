@@ -1,0 +1,37 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "fastino/GLiNER2.5-multi-Decide",
+  "revision": "a35a0cd3b7a0f00f2effc576f454cd48fa98aa5f",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "989d19265d83c9a3886577b5d3851e6c58b585f15d5b2912e925655b201fc42d",
+      "size": 17002
+    },
+    {
+      "path": "config.json",
+      "sha256": "be5123080c0f3f01b938bc46a5dd0d7a2e515a34f6df798dfd70ed04c277c8bf",
+      "size": 3152
+    },
+    {
+      "path": "encoder_config/config.json",
+      "sha256": "d0ebbcb8b458e285a39e12cc315cbaf3d1c6f631e7281e6b22dd5b4071183f83",
+      "size": 858
+    },
+    {
+      "path": "model.safetensors",
+      "sha256": "9efe0f88c99f2aa794452e9559dc60e98d60d9fa2bf1b60cf2710411b6da5b4e",
+      "size": 1149461028
+    },
+    {
+      "path": "tokenizer.json",
+      "sha256": "c62446df87ae18ec98b133f8f84fc449a07cc89bbf8ef192a4cb5f9c53777a7a",
+      "size": 16035853
+    },
+    {
+      "path": "tokenizer_config.json",
+      "sha256": "fd4a31dc2f1f17e31638c5f0e783b81cdb2fbe6bddd116a8d9e5d50d78148cf1",
+      "size": 646
+    }
+  ]
+}

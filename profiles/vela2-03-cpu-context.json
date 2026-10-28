@@ -1,0 +1,23 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "vela2-03-cpu-context-v1",
+  "adapter": "vela2",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "model": {
+    "repo_id": "vllm-sr/Vela-2.0-0.3B",
+    "local_dir": "../models/Vela-2.0-0.3B-d6f03aa",
+    "runtime_python": "../.cache/decision2-runtime/bin/python",
+    "assets_manifest": "vela2-03-assets.json",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "runtime_lock": "../runtimes/small-models/runtime.lock",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 4096
+  },
+  "timeout_seconds": 30,
+  "revision": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+  "recordings": null
+}

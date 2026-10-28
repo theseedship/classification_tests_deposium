@@ -1,0 +1,73 @@
+{
+  "schema_version": "deposium.dataset-projection/v1",
+  "dataset_id": "document-task-v1",
+  "parent_dataset": "../decisions-v1/cases.jsonl",
+  "parent_sha256": "88c728ee18d91647a6c3ee1a8ecfc65e808c916d82dba5ad70925dc4be3b3ab6",
+  "sha256": "0e81cea2f2b47bb46a4bc7a62589a48c94175296a34e9d7c85ef8776fbaf9e1a",
+  "contract_id": "mcps.document-plan",
+  "assertion_paths": [
+    "/task"
+  ],
+  "case_count": 14,
+  "selection": "all parent cases matching contract; selection fixed before model inference",
+  "unchanged_fields": [
+    "case_id",
+    "scenario_id",
+    "translation_family",
+    "document_ids",
+    "split",
+    "language",
+    "pack",
+    "contract_id",
+    "input"
+  ],
+  "human_review": "not_performed",
+  "agent_review": "../../docs/CORPUS_REVIEW.md",
+  "core_case_ids": [
+    "doc-count-fr",
+    "doc-count-en",
+    "doc-list-fr",
+    "doc-list-en",
+    "doc-compound-fr",
+    "doc-compound-en",
+    "doc-content-fr",
+    "doc-content-en",
+    "presentation-table-fr",
+    "presentation-table-en",
+    "presentation-mermaid-fr",
+    "presentation-mermaid-en"
+  ],
+  "context_extension_case_ids": [
+    "presentation-language-followup-fr",
+    "presentation-language-followup-en"
+  ],
+  "excluded_case_ids": [
+    "follow-resolved-fr",
+    "follow-resolved-en",
+    "follow-space-changed-fr",
+    "follow-space-changed-en",
+    "follow-incomplete-fr",
+    "follow-incomplete-en",
+    "sources-pinned-documents-fr",
+    "sources-pinned-documents-en",
+    "sources-explicit-web-fr",
+    "sources-explicit-web-en",
+    "sources-disabled-geo-fr",
+    "sources-disabled-geo-en",
+    "sources-scope-documents-fr",
+    "sources-scope-documents-en",
+    "evidence-useful-vs-topic-fr",
+    "evidence-useful-vs-topic-en",
+    "evidence-contradiction-fr",
+    "evidence-contradiction-en",
+    "evidence-multiple-fr",
+    "evidence-multiple-en",
+    "evidence-insufficient-fr",
+    "evidence-insufficient-en"
+  ],
+  "limitations": [
+    "Task-only projection does not qualify full plans, formats, counts, sources, rights or product.",
+    "Small exploratory corpus includes all splits; no held-out generalization or calibration claim.",
+    "Two context-extension cases use exactly the same history as the MCPs baseline."
+  ]
+}

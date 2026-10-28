@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "deposium.archive-seal/v1",
+  "description": "Seal shape only. Runtime verifies the file list, file bytes and aggregate fingerprint. This is an integrity fingerprint, not a signature.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "files",
+    "sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "deposium.archive-seal/v1"
+    },
+    "files": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^(?!\\.{1,2}$)[^/\\\\]+$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

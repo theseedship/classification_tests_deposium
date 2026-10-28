@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deposium.invalid/schemas/passage-case-v1.schema.json",
+  "title": "Exploratory passage evidence case",
+  "description": "Cross-record partitions, exact annotation coverage, UTF-8 hashes and Unicode character spans are also checked by deposium_bench.passage_dataset.validate_cases.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "family_id", "scenario_id", "split", "question_language", "passage_language", "view", "query", "passages", "annotations", "provenance"],
+  "properties": {
+    "schema_version": {"const": "deposium.passage-case/v1"},
+    "case_id": {"$ref": "#/$defs/text"},
+    "family_id": {"$ref": "#/$defs/text"},
+    "scenario_id": {"$ref": "#/$defs/text"},
+    "split": {"enum": ["train", "calibration", "test"]},
+    "question_language": {"$ref": "#/$defs/language"},
+    "passage_language": {"$ref": "#/$defs/language"},
+    "view": {"enum": ["full", "head_384"]},
+    "query": {"$ref": "#/$defs/text"},
+    "passages": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/passage"}},
+    "annotations": {"$ref": "#/$defs/annotations"},
+    "provenance": {"type": "object", "minProperties": 1}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "language": {"enum": ["fr", "en", "de", "es", "it", "pt"]},
+    "passage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "document_id", "text", "language", "sha256"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"},
+        "document_id": {"$ref": "#/$defs/text"},
+        "text": {"$ref": "#/$defs/text"},
+        "language": {"$ref": "#/$defs/language"},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "span": {
+      "type": "object", "additionalProperties": false,
+      "required": ["start", "end", "text"],
+      "properties": {
+        "start": {"type": "integer", "minimum": 0},
+        "end": {"type": "integer", "minimum": 1},
+        "text": {"type": "string", "minLength": 1}
+      }
+    },
+    "judgment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["passage_id", "label", "spans"],
+      "properties": {
+        "passage_id": {"$ref": "#/$defs/text"},
+        "label": {"enum": ["supports", "refutes", "insufficient"]},
+        "spans": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/span"}}
+      },
+      "if": {"properties": {"label": {"const": "insufficient"}}},
+      "then": {"properties": {"spans": {"maxItems": 0}}},
+      "else": {"properties": {"spans": {"minItems": 1}}}
+    },
+    "claim": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "text", "judgments"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"},
+        "text": {"$ref": "#/$defs/text"},
+        "judgments": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/judgment"}}
+      }
+    },
+    "relevance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["passage_id", "grade", "role"],
+      "properties": {
+        "passage_id": {"$ref": "#/$defs/text"},
+        "grade": {"type": "integer", "minimum": 0, "maximum": 3},
+        "role": {"$ref": "#/$defs/text"}
+      }
+    },
+    "annotations": {
+      "type": "object", "additionalProperties": false,
+      "required": ["review", "query_status", "relevance", "claims", "minimal_evidence_sets", "rationale"],
+      "properties": {
+        "review": {"const": "agent_only_pending_human"},
+        "query_status": {"enum": ["answerable", "insufficient_visible_evidence", "conflicting_visible_evidence"]},
+        "relevance": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/relevance"}},
+        "claims": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/claim"}},
+        "minimal_evidence_sets": {
+          "type": "array", "uniqueItems": true,
+          "items": {"type": "array", "minItems": 1, "maxItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/text"}}
+        },
+        "rationale": {"$ref": "#/$defs/text"}
+      },
+      "if": {"properties": {"query_status": {"const": "answerable"}}},
+      "then": {"properties": {"minimal_evidence_sets": {"minItems": 1}}},
+      "else": {"properties": {"minimal_evidence_sets": {"maxItems": 0}}}
+    }
+  }
+}

@@ -1,0 +1,1370 @@
+{
+  "schema_version": "deposium.mastra-comparison-evidence/v1",
+  "date": "2026-10-02",
+  "qualification": "provisional_agreement_agent_only_references",
+  "human_approved_references": 0,
+  "cases_scored": 0,
+  "projection_version": "mastra-read-choice/v1",
+  "dataset_sha256": "d66ec51d9b8d89f46b87b90b80bcd0d45abf1570fa9857c24d9ce39117935497",
+  "requests_sha256": "c076aedc2810c758d830c59bb21d404dcbad41df353f7df218950935381f7752",
+  "analysis_code_sha256": "8380d140bc186ee4cf8811be862f7d6fa7e46fed68d035f6539fdf42434f4776",
+  "models": {
+    "indecis": {
+      "archive": "results/mastra-read-indecis-002",
+      "bench_commit": "84952938103e6c8f83b45c177033456490e244ed",
+      "bench_clean": true,
+      "archive_seal_sha256": "f8740741589392a6c5d28fb5feb946ce466db6ffdff8f3bb34b1929dac471116",
+      "archive_seal_file_sha256": "89e64b1b897438ff2ea110fb2b1e1fff414eb9a4a723e53d1e6dc5a6d572f652",
+      "archive_files": {
+        "adapter-initial.json": "94e2c56d88e0b7edfbe37f2c243a8521886e92bc1dccf4774abe875b0fb66461",
+        "cases.jsonl": "d66ec51d9b8d89f46b87b90b80bcd0d45abf1570fa9857c24d9ce39117935497",
+        "manifest.json": "c5bbefb4609847b4271d2b7fcba665c66e66f951cdea6114c4ce8a54be34fd05",
+        "profile.json": "e893c662f6cbcb029084fc156c3a7b4d742bee8605c47e4b3f9c685d7db070e9",
+        "raw.jsonl": "055867c27fa79c880f058b81f818c875bdbd6b1749c13b56455be16f5b11259f",
+        "requests.jsonl": "c076aedc2810c758d830c59bb21d404dcbad41df353f7df218950935381f7752",
+        "stack-preflight.json": "88452ca4ddaede2325109f1d3c1760cf57704023ac1db842150042f1e2b6238d",
+        "summary.json": "ec66cfe739ad18cb2d886ac5f9ece12fb4720e88684e977959d8a8573438a0ac"
+      },
+      "profile_sha256": "237f35c068ca7ce231250bba28d7a8b1c566997410dd76f14f7c2d9b2ffcaf30",
+      "runtime": {
+        "identity_sha256": "2f8d4a90a4ac712151c1424b4a48350867b32a3ffdd4e984ee3d1818915026f8",
+        "model_revision": "c721113d59a1d91b447450324f51c4b3332c924a",
+        "source_revision": "339e191405ac9be90f6857f810f478b3312b7f35",
+        "binary_sha256": "979bb28b26bd81834ec8bd203617fb9bef99e90ad326c6310671a70e0815bff6",
+        "model_assets_sha256": "228aa6a5b4810ebd63e02233e054521139dfd9ae4989ff512986ac6cb8bdfd70",
+        "prompt_sha256": "726c830812c4135e6822ce30c8312b542d413a4227d442529fa28604c26e78ae",
+        "runtime": {
+          "backbone_revision": "c721113d59a1d91b447450324f51c4b3332c924a",
+          "go": "go1.27.1-X:simd",
+          "goarch": "amd64",
+          "goos": "linux",
+          "indecis_revision": "339e191405ac9be90f6857f810f478b3312b7f35",
+          "parent_python": "3.14.2"
+        },
+        "settings": {
+          "cache_policy": "request_local",
+          "max_length": 4096,
+          "max_rss_mb": 3072,
+          "mode": "open_untrained",
+          "strict_encoding": true,
+          "threads": 2,
+          "trained": false
+        },
+        "init_wall_ms": 1215.8141180116218,
+        "load_ms": 1078.571572,
+        "load_rss_mb": 790
+      },
+      "coverage": {
+        "total": 24,
+        "valid_decisions": 24,
+        "agreement_count": 11,
+        "agreement_over_all": 0.4583333333333333,
+        "agreement_over_valid": 0.4583333333333333,
+        "statuses": {
+          "ok": 24
+        }
+      },
+      "agreement_by_language": {
+        "en": {
+          "agreements": 6,
+          "cases": 12
+        },
+        "fr": {
+          "agreements": 5,
+          "cases": 12
+        }
+      },
+      "agreement_by_split": {
+        "calibration": {
+          "agreements": 4,
+          "cases": 6
+        },
+        "test": {
+          "agreements": 7,
+          "cases": 18
+        }
+      },
+      "agreement_by_action": {
+        "search": {
+          "agreements": 5,
+          "cases": 8
+        },
+        "stats": {
+          "agreements": 6,
+          "cases": 8
+        },
+        "fallback": {
+          "agreements": 0,
+          "cases": 8
+        }
+      },
+      "action_matrix": {
+        "search": {
+          "search": 5,
+          "stats": 3
+        },
+        "stats": {
+          "stats": 6,
+          "search": 2
+        },
+        "fallback": {
+          "search": 5,
+          "stats": 3
+        }
+      },
+      "paired_languages": {
+        "complete_pairs": 12,
+        "same_action": 10
+      },
+      "timing": {
+        "adapter_wall_ms": {
+          "count": 24,
+          "median_ms": 44.69256699667312,
+          "p95_ms": 56.99792000814341,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "decision_ms": {
+          "count": 24,
+          "median_ms": 36.5024865,
+          "p95_ms": 48.376834,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "inference_ms": {
+          "count": 24,
+          "median_ms": 36.3117075,
+          "p95_ms": 48.156656,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "http_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        }
+      },
+      "first_call": {
+        "adapter_wall_ms": {
+          "count": 1,
+          "median_ms": 68.01012899086345,
+          "p95_ms": 68.01012899086345
+        },
+        "decision_ms": {
+          "count": 1,
+          "median_ms": 60.60176,
+          "p95_ms": 60.60176
+        },
+        "inference_ms": {
+          "count": 1,
+          "median_ms": 60.149517,
+          "p95_ms": 60.149517
+        },
+        "http_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null
+        }
+      },
+      "following_calls": {
+        "adapter_wall_ms": {
+          "count": 23,
+          "median_ms": 44.62254900136031,
+          "p95_ms": 54.280956988804974
+        },
+        "decision_ms": {
+          "count": 23,
+          "median_ms": 36.243977,
+          "p95_ms": 44.085258
+        },
+        "inference_ms": {
+          "count": 23,
+          "median_ms": 36.069383,
+          "p95_ms": 43.911244
+        },
+        "http_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null
+        }
+      },
+      "rss_peak_reported_mib": 894.875,
+      "forward_execution_flags": {
+        "true": 24,
+        "false": 0,
+        "unknown": 0
+      },
+      "http": {
+        "attempted": 0,
+        "cached_failure": 0,
+        "usage_observations": 0,
+        "input_tokens": null,
+        "output_tokens": null,
+        "observed_models": {}
+      },
+      "native_encoding_tokens_range": {
+        "min": 66,
+        "max": 117
+      },
+      "memory_before": {
+        "MemAvailable_mib": 12733.828125,
+        "MemTotal_mib": 44142.6640625,
+        "SwapFree_mib": 3.40234375,
+        "SwapTotal_mib": 16384.0
+      },
+      "memory_after": {
+        "MemAvailable_mib": 12717.73828125,
+        "MemTotal_mib": 44142.6640625,
+        "SwapFree_mib": 3.40234375,
+        "SwapTotal_mib": 16384.0
+      },
+      "maximum_adapter_wall_ms": 68.01012899086345
+    },
+    "julia": {
+      "archive": "results/mastra-read-julia-001",
+      "bench_commit": "8e8cb02d3a8185a6b422ee99cf38319143eff4ea",
+      "bench_clean": true,
+      "archive_seal_sha256": "b1e0dd410a39d78fe585169b69243ba7c8924c8aeacb95fdca0491b5632016b7",
+      "archive_seal_file_sha256": "1cfbc1c42931a560dd5f24f5d08eb3d317934381d9ad41b451702a3f3558ae65",
+      "archive_files": {
+        "adapter-initial.json": "1ac7c7d2370afebb1daf0a87c0d0a8ccefac040b8576dc66686193e52b4203c6",
+        "cases.jsonl": "d66ec51d9b8d89f46b87b90b80bcd0d45abf1570fa9857c24d9ce39117935497",
+        "manifest.json": "2aea164d166281c77984cdb783035e2e8b430037585f258412c471dac00da2d6",
+        "profile.json": "a1a26ddfa18cd2c78e3835a44febac74ce65d013982582a0712156df3897be80",
+        "raw.jsonl": "9cc0b68f519c4d45836e6a9ef630c019131b6b534dadc5fbe67f03eee1f70115",
+        "requests.jsonl": "c076aedc2810c758d830c59bb21d404dcbad41df353f7df218950935381f7752",
+        "stack-preflight.json": "453c7b6c6e27360dc282e94827ffebddc5e52931fd7b0f88d2b88da2ceb165de",
+        "summary.json": "c67cf718e8dcac64bd1b3f7402df5e9fa74797943c62aca48113108db1096a47"
+      },
+      "profile_sha256": "deb1b6367611f1960a368eb8fa5b9573be8acb3e699d8aeafc534b64103551ca",
+      "runtime": {
+        "identity_sha256": "fa855e5e3d060e208e0daae653ca6e732cadd8792566a88a4f34720f8ab93d78",
+        "model_revision": "a85b127321d580d65176c89ced8273f305745d85",
+        "model_assets_sha256": "75e82141109a14b85980b2e6b41fe1c1192be7ffa0110701ace72351f24f4a9b",
+        "prompt_sha256": "316eebad75df81666e9d4003e8949f9106b3398299381d8d6ca9cbe616771d31",
+        "runtime": {
+          "numpy": "2.5.3",
+          "python": "3.12.3",
+          "tokenizers": "0.22.2",
+          "torch": "2.14.0+cpu",
+          "transformers": "5.0.0"
+        },
+        "settings": {
+          "backend": "torch",
+          "device": "cpu",
+          "head_length": 512,
+          "marker_only_head": false,
+          "max_length": 8192,
+          "max_rss_mb": 3072,
+          "strict_encoding": true,
+          "threads": 2
+        },
+        "init_wall_ms": 14637.85584300058,
+        "load_ms": 14206.543980995775,
+        "load_rss_mb": 921.96875
+      },
+      "coverage": {
+        "total": 24,
+        "valid_decisions": 24,
+        "agreement_count": 11,
+        "agreement_over_all": 0.4583333333333333,
+        "agreement_over_valid": 0.4583333333333333,
+        "statuses": {
+          "ok": 24
+        }
+      },
+      "agreement_by_language": {
+        "en": {
+          "agreements": 6,
+          "cases": 12
+        },
+        "fr": {
+          "agreements": 5,
+          "cases": 12
+        }
+      },
+      "agreement_by_split": {
+        "calibration": {
+          "agreements": 4,
+          "cases": 6
+        },
+        "test": {
+          "agreements": 7,
+          "cases": 18
+        }
+      },
+      "agreement_by_action": {
+        "search": {
+          "agreements": 6,
+          "cases": 8
+        },
+        "stats": {
+          "agreements": 4,
+          "cases": 8
+        },
+        "fallback": {
+          "agreements": 1,
+          "cases": 8
+        }
+      },
+      "action_matrix": {
+        "search": {
+          "search": 6,
+          "fallback": 1,
+          "stats": 1
+        },
+        "stats": {
+          "stats": 4,
+          "search": 2,
+          "fallback": 2
+        },
+        "fallback": {
+          "search": 6,
+          "stats": 1,
+          "fallback": 1
+        }
+      },
+      "paired_languages": {
+        "complete_pairs": 12,
+        "same_action": 5
+      },
+      "timing": {
+        "adapter_wall_ms": {
+          "count": 24,
+          "median_ms": 100.2106410014676,
+          "p95_ms": 146.57585200620815,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "decision_ms": {
+          "count": 24,
+          "median_ms": 95.91199149872409,
+          "p95_ms": 141.19720899907406,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "inference_ms": {
+          "count": 24,
+          "median_ms": 95.81172300386243,
+          "p95_ms": 141.0936269967351,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "http_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        }
+      },
+      "first_call": {
+        "adapter_wall_ms": {
+          "count": 1,
+          "median_ms": 164.42991299845744,
+          "p95_ms": 164.42991299845744
+        },
+        "decision_ms": {
+          "count": 1,
+          "median_ms": 160.09937999479007,
+          "p95_ms": 160.09937999479007
+        },
+        "inference_ms": {
+          "count": 1,
+          "median_ms": 159.98599900922272,
+          "p95_ms": 159.98599900922272
+        },
+        "http_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null
+        }
+      },
+      "following_calls": {
+        "adapter_wall_ms": {
+          "count": 23,
+          "median_ms": 99.54346300219186,
+          "p95_ms": 114.79929900087882
+        },
+        "decision_ms": {
+          "count": 23,
+          "median_ms": 95.17355299612973,
+          "p95_ms": 110.51082500489429
+        },
+        "inference_ms": {
+          "count": 23,
+          "median_ms": 95.07326100720093,
+          "p95_ms": 110.41033599758521
+        },
+        "http_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null
+        }
+      },
+      "rss_peak_reported_mib": 1019.2734375,
+      "forward_execution_flags": {
+        "true": 0,
+        "false": 0,
+        "unknown": 24
+      },
+      "http": {
+        "attempted": 0,
+        "cached_failure": 0,
+        "usage_observations": 0,
+        "input_tokens": null,
+        "output_tokens": null,
+        "observed_models": {}
+      },
+      "native_encoding_tokens_range": {
+        "min": 119,
+        "max": 182
+      },
+      "memory_before": {
+        "MemAvailable_mib": 10863.96484375,
+        "MemTotal_mib": 44142.6640625,
+        "SwapFree_mib": 0.00390625,
+        "SwapTotal_mib": 16384.0
+      },
+      "memory_after": {
+        "MemAvailable_mib": 12891.33984375,
+        "MemTotal_mib": 44142.6640625,
+        "SwapFree_mib": 0.15625,
+        "SwapTotal_mib": 16384.0
+      },
+      "maximum_adapter_wall_ms": 164.42991299845744
+    },
+    "gliner": {
+      "archive": "results/mastra-read-gliner-001",
+      "bench_commit": "8e8cb02d3a8185a6b422ee99cf38319143eff4ea",
+      "bench_clean": true,
+      "archive_seal_sha256": "a6a9ef66c7f095989a14cd15ecdf74e9105a1b0af7db9d08ce6b6befbfbb1639",
+      "archive_seal_file_sha256": "6fe9d11dbfa9c417b5a79688c65972c1fab4c2abf650761a45c058b02e1c1046",
+      "archive_files": {
+        "adapter-initial.json": "15ca94c745756a156898ca39276e39f7dd8907f90b230e6f68a4be295998db02",
+        "cases.jsonl": "d66ec51d9b8d89f46b87b90b80bcd0d45abf1570fa9857c24d9ce39117935497",
+        "manifest.json": "91c513d5b15983660273fb10b23c11b94ebc92c899885a64a278e7b0d3996204",
+        "profile.json": "67b9095c126c172c71e2aca1045fd253f8252423fba821487b3bae3bed8a9e53",
+        "raw.jsonl": "87b678778979e47be69df618b56f9829ca82bdb54d56ba653fb830afd39841dc",
+        "requests.jsonl": "c076aedc2810c758d830c59bb21d404dcbad41df353f7df218950935381f7752",
+        "stack-preflight.json": "cdca7c0b98735109c0af51e03165a772a9919125309e72d7a19fc5b4e7da522c",
+        "summary.json": "7d8726950af28cdb44826c53e39d6bce64ed043b8163610e6c5a2cd9d50f7315"
+      },
+      "profile_sha256": "255660be90df53faabf34cb136b310541f64c884268380da1cccb6f5b206278a",
+      "runtime": {
+        "identity_sha256": "c8282535b535511aedd069db6690b6cb1d2fae3af445f4814575ece3e895afab",
+        "model_revision": "a35a0cd3b7a0f00f2effc576f454cd48fa98aa5f",
+        "model_assets_sha256": "492b491f2da19dfdb7650fd2ac67bf9f16d36ae0e255021301994830418ec32f",
+        "prompt_sha256": "a71187e1a3ff9d48d4907745fdf425258b8a34adc1542da1ae109d1c33fb876d",
+        "runtime": {
+          "gliner2": "2.0.0",
+          "numpy": "2.5.3",
+          "python": "3.12.3",
+          "tokenizers": "0.22.2",
+          "torch": "2.14.0+cpu",
+          "transformers": "4.57.6"
+        },
+        "settings": {
+          "backend": "torch",
+          "device": "cpu",
+          "max_length": 4096,
+          "max_rss_mb": 3072,
+          "multi_label": false,
+          "strict_encoding": true,
+          "threads": 2
+        },
+        "init_wall_ms": 13069.233500005794,
+        "load_ms": 12390.85018800688,
+        "load_rss_mb": 2886.2265625
+      },
+      "coverage": {
+        "total": 24,
+        "valid_decisions": 24,
+        "agreement_count": 12,
+        "agreement_over_all": 0.5,
+        "agreement_over_valid": 0.5,
+        "statuses": {
+          "ok": 24
+        }
+      },
+      "agreement_by_language": {
+        "en": {
+          "agreements": 4,
+          "cases": 12
+        },
+        "fr": {
+          "agreements": 8,
+          "cases": 12
+        }
+      },
+      "agreement_by_split": {
+        "calibration": {
+          "agreements": 3,
+          "cases": 6
+        },
+        "test": {
+          "agreements": 9,
+          "cases": 18
+        }
+      },
+      "agreement_by_action": {
+        "search": {
+          "agreements": 8,
+          "cases": 8
+        },
+        "stats": {
+          "agreements": 4,
+          "cases": 8
+        },
+        "fallback": {
+          "agreements": 0,
+          "cases": 8
+        }
+      },
+      "action_matrix": {
+        "search": {
+          "search": 8
+        },
+        "stats": {
+          "stats": 4,
+          "search": 4
+        },
+        "fallback": {
+          "stats": 3,
+          "search": 5
+        }
+      },
+      "paired_languages": {
+        "complete_pairs": 12,
+        "same_action": 5
+      },
+      "timing": {
+        "adapter_wall_ms": {
+          "count": 24,
+          "median_ms": 391.8848920002347,
+          "p95_ms": 582.6355140015949,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "decision_ms": {
+          "count": 24,
+          "median_ms": 383.79927149799187,
+          "p95_ms": 573.0092879966833,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "inference_ms": {
+          "count": 24,
+          "median_ms": 381.2086475008982,
+          "p95_ms": 570.5565030075377,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "http_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        }
+      },
+      "first_call": {
+        "adapter_wall_ms": {
+          "count": 1,
+          "median_ms": 424.4684379955288,
+          "p95_ms": 424.4684379955288
+        },
+        "decision_ms": {
+          "count": 1,
+          "median_ms": 416.8241370061878,
+          "p95_ms": 416.8241370061878
+        },
+        "inference_ms": {
+          "count": 1,
+          "median_ms": 408.6300979979569,
+          "p95_ms": 408.6300979979569
+        },
+        "http_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null
+        }
+      },
+      "following_calls": {
+        "adapter_wall_ms": {
+          "count": 23,
+          "median_ms": 385.9427650022553,
+          "p95_ms": 582.6355140015949
+        },
+        "decision_ms": {
+          "count": 23,
+          "median_ms": 377.8400890005287,
+          "p95_ms": 573.0092879966833
+        },
+        "inference_ms": {
+          "count": 23,
+          "median_ms": 375.12591799895745,
+          "p95_ms": 570.5565030075377
+        },
+        "http_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null
+        }
+      },
+      "rss_peak_reported_mib": 2886.2265625,
+      "forward_execution_flags": {
+        "true": 24,
+        "false": 0,
+        "unknown": 0
+      },
+      "http": {
+        "attempted": 0,
+        "cached_failure": 0,
+        "usage_observations": 0,
+        "input_tokens": null,
+        "output_tokens": null,
+        "observed_models": {}
+      },
+      "native_encoding_tokens_range": {
+        "min": 159,
+        "max": 245
+      },
+      "memory_before": {
+        "MemAvailable_mib": 12910.17578125,
+        "MemTotal_mib": 44142.6640625,
+        "SwapFree_mib": 0.23046875,
+        "SwapTotal_mib": 16384.0
+      },
+      "memory_after": {
+        "MemAvailable_mib": 11349.5625,
+        "MemTotal_mib": 44142.6640625,
+        "SwapFree_mib": 40.296875,
+        "SwapTotal_mib": 16384.0
+      },
+      "maximum_adapter_wall_ms": 670.370499996352
+    },
+    "jev": {
+      "archive": "results/mastra-read-jev-001",
+      "bench_commit": "b69ea8a4304e3435a36a74fe5752cd8c8c41c2f3",
+      "bench_clean": true,
+      "archive_seal_sha256": "f3c756580c9ecaa7a639c83edb351efc5881aa86d0c69f3edbfbb0f497273821",
+      "archive_seal_file_sha256": "038308a521777cb4de46bf1add5e614535c039201ded92937c08b84e5a44521b",
+      "archive_files": {
+        "adapter-initial.json": "21d305195f406a0393cd442f919b3de019e770fdca455f841d30fb7756c3414a",
+        "cases.jsonl": "d66ec51d9b8d89f46b87b90b80bcd0d45abf1570fa9857c24d9ce39117935497",
+        "manifest.json": "38cf942977aa96ed1ad82d11df4238a3eb0f3e54e6f0f753726f058a9da778fa",
+        "profile.json": "cb91ae0d8dab9f13f4c9130a8a69cd5eef7f660024fdf32871239085279ed2ac",
+        "raw.jsonl": "9da27bd09cc44b2644db5bc90afefb559de6a7925e5329ef83e3f2f46d898f43",
+        "requests.jsonl": "c076aedc2810c758d830c59bb21d404dcbad41df353f7df218950935381f7752",
+        "stack-preflight.json": "e1fdaf0e095c94de55837965591fd587cd7f7bf2d7a63477c3d03a10dc38ae72",
+        "summary.json": "3237b59f863f0b3b61e7ae84408aaa39982ff7e0b6a1f48096baf27eefcc4f31"
+      },
+      "profile_sha256": "72ff88729268f10cf7c83d93aa42ca521aa0697f41a18a9e7633b923e07e35e5",
+      "runtime": {
+        "identity_sha256": "4937ed330d264f17f3016903969aeb96a09e83c74a11306a9df96ff902930b5e",
+        "runtime": {
+          "openssl": "OpenSSL 3.5.4 30 Sep 2025",
+          "python": "3.14.2"
+        },
+        "settings": {
+          "endpoint": "https://api.typesafe.ai/v1/systemone",
+          "max_input_tokens": 2000000,
+          "max_request_bytes": 131072,
+          "max_requests": 800,
+          "min_interval_seconds": 0.1,
+          "model_id": "jev-1.13.0",
+          "proxy": false,
+          "redirects": false,
+          "reserved_input_tokens_per_request": 65536,
+          "retry_policy": "none",
+          "timeout_seconds": 30.0,
+          "tls_verify": true
+        }
+      },
+      "coverage": {
+        "total": 24,
+        "valid_decisions": 24,
+        "agreement_count": 20,
+        "agreement_over_all": 0.8333333333333334,
+        "agreement_over_valid": 0.8333333333333334,
+        "statuses": {
+          "ok": 24
+        }
+      },
+      "agreement_by_language": {
+        "en": {
+          "agreements": 11,
+          "cases": 12
+        },
+        "fr": {
+          "agreements": 9,
+          "cases": 12
+        }
+      },
+      "agreement_by_split": {
+        "calibration": {
+          "agreements": 4,
+          "cases": 6
+        },
+        "test": {
+          "agreements": 16,
+          "cases": 18
+        }
+      },
+      "agreement_by_action": {
+        "search": {
+          "agreements": 8,
+          "cases": 8
+        },
+        "stats": {
+          "agreements": 8,
+          "cases": 8
+        },
+        "fallback": {
+          "agreements": 4,
+          "cases": 8
+        }
+      },
+      "action_matrix": {
+        "search": {
+          "search": 8
+        },
+        "stats": {
+          "stats": 8
+        },
+        "fallback": {
+          "stats": 2,
+          "search": 2,
+          "fallback": 4
+        }
+      },
+      "paired_languages": {
+        "complete_pairs": 12,
+        "same_action": 9
+      },
+      "timing": {
+        "adapter_wall_ms": {
+          "count": 24,
+          "median_ms": 288.01910049514845,
+          "p95_ms": 355.34093499882147,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "decision_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "inference_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        },
+        "http_ms": {
+          "count": 24,
+          "median_ms": 264.0740620045108,
+          "p95_ms": 333.47598400723655,
+          "p95_method": "nearest_rank_descriptive_single_pass"
+        }
+      },
+      "first_call": {
+        "adapter_wall_ms": {
+          "count": 1,
+          "median_ms": 355.34093499882147,
+          "p95_ms": 355.34093499882147
+        },
+        "decision_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null
+        },
+        "inference_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null
+        },
+        "http_ms": {
+          "count": 1,
+          "median_ms": 333.47598400723655,
+          "p95_ms": 333.47598400723655
+        }
+      },
+      "following_calls": {
+        "adapter_wall_ms": {
+          "count": 23,
+          "median_ms": 286.6064449917758,
+          "p95_ms": 347.8933759906795
+        },
+        "decision_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null
+        },
+        "inference_ms": {
+          "count": 0,
+          "median_ms": null,
+          "p95_ms": null
+        },
+        "http_ms": {
+          "count": 23,
+          "median_ms": 263.7543010059744,
+          "p95_ms": 324.16275500145275
+        }
+      },
+      "rss_peak_reported_mib": null,
+      "forward_execution_flags": {
+        "true": 0,
+        "false": 0,
+        "unknown": 24
+      },
+      "http": {
+        "attempted": 24,
+        "cached_failure": 0,
+        "usage_observations": 24,
+        "input_tokens": 10274,
+        "output_tokens": 2067,
+        "observed_models": {
+          "jev-1.13.0": 24
+        }
+      },
+      "native_encoding_tokens_range": null,
+      "memory_before": {
+        "MemAvailable_mib": 9542.23046875,
+        "MemTotal_mib": 44142.6640625,
+        "SwapFree_mib": 2.81640625,
+        "SwapTotal_mib": 16384.0
+      },
+      "memory_after": {
+        "MemAvailable_mib": 11690.22265625,
+        "MemTotal_mib": 44142.6640625,
+        "SwapFree_mib": 2.91015625,
+        "SwapTotal_mib": 16384.0
+      },
+      "maximum_adapter_wall_ms": 918.1495270022424
+    }
+  },
+  "cases": [
+    {
+      "case_id": "mastra-read-warranty-clause-fr",
+      "language": "fr",
+      "split": "calibration",
+      "family": "mastra-read-warranty-clause",
+      "proposed_actions": [
+        "search"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "search"
+      },
+      "agrees_with_proposal": {
+        "indecis": true,
+        "julia": true,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-warranty-clause-en",
+      "language": "en",
+      "split": "calibration",
+      "family": "mastra-read-warranty-clause",
+      "proposed_actions": [
+        "search"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "search"
+      },
+      "agrees_with_proposal": {
+        "indecis": true,
+        "julia": true,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-negated-corpus-count-fr",
+      "language": "fr",
+      "split": "test",
+      "family": "mastra-read-negated-corpus-count",
+      "proposed_actions": [
+        "search"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "fallback",
+        "gliner": "search",
+        "jev": "search"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": false,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-negated-corpus-count-en",
+      "language": "en",
+      "split": "test",
+      "family": "mastra-read-negated-corpus-count",
+      "proposed_actions": [
+        "search"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "search"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": true,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-quoted-count-heading-fr",
+      "language": "fr",
+      "split": "test",
+      "family": "mastra-read-quoted-count-heading",
+      "proposed_actions": [
+        "search"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "stats",
+        "gliner": "search",
+        "jev": "search"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": false,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-quoted-count-heading-en",
+      "language": "en",
+      "split": "test",
+      "family": "mastra-read-quoted-count-heading",
+      "proposed_actions": [
+        "search"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "search"
+      },
+      "agrees_with_proposal": {
+        "indecis": true,
+        "julia": true,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-typo-source-request-fr",
+      "language": "fr",
+      "split": "test",
+      "family": "mastra-read-typo-source-request",
+      "proposed_actions": [
+        "search"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "search"
+      },
+      "agrees_with_proposal": {
+        "indecis": true,
+        "julia": true,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-typo-source-request-en",
+      "language": "en",
+      "split": "test",
+      "family": "mastra-read-typo-source-request",
+      "proposed_actions": [
+        "search"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "search"
+      },
+      "agrees_with_proposal": {
+        "indecis": true,
+        "julia": true,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-document-entity-volumes-fr",
+      "language": "fr",
+      "split": "calibration",
+      "family": "mastra-read-document-entity-volumes",
+      "proposed_actions": [
+        "stats"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "stats",
+        "gliner": "stats",
+        "jev": "stats"
+      },
+      "agrees_with_proposal": {
+        "indecis": true,
+        "julia": true,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-document-entity-volumes-en",
+      "language": "en",
+      "split": "calibration",
+      "family": "mastra-read-document-entity-volumes",
+      "proposed_actions": [
+        "stats"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "stats",
+        "gliner": "search",
+        "jev": "stats"
+      },
+      "agrees_with_proposal": {
+        "indecis": true,
+        "julia": true,
+        "gliner": false,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-negated-excerpt-request-fr",
+      "language": "fr",
+      "split": "test",
+      "family": "mastra-read-negated-excerpt-request",
+      "proposed_actions": [
+        "stats"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "stats",
+        "gliner": "stats",
+        "jev": "stats"
+      },
+      "agrees_with_proposal": {
+        "indecis": true,
+        "julia": true,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-negated-excerpt-request-en",
+      "language": "en",
+      "split": "test",
+      "family": "mastra-read-negated-excerpt-request",
+      "proposed_actions": [
+        "stats"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "stats"
+      },
+      "agrees_with_proposal": {
+        "indecis": true,
+        "julia": false,
+        "gliner": false,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-contextual-space-count-fr",
+      "language": "fr",
+      "split": "test",
+      "family": "mastra-read-contextual-space-count",
+      "proposed_actions": [
+        "stats"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "fallback",
+        "gliner": "stats",
+        "jev": "stats"
+      },
+      "agrees_with_proposal": {
+        "indecis": true,
+        "julia": false,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-contextual-space-count-en",
+      "language": "en",
+      "split": "test",
+      "family": "mastra-read-contextual-space-count",
+      "proposed_actions": [
+        "stats"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "stats"
+      },
+      "agrees_with_proposal": {
+        "indecis": true,
+        "julia": false,
+        "gliner": false,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-quoted-request-vs-actual-count-fr",
+      "language": "fr",
+      "split": "test",
+      "family": "mastra-read-quoted-request-vs-actual-count",
+      "proposed_actions": [
+        "stats"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "fallback",
+        "gliner": "stats",
+        "jev": "stats"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": false,
+        "gliner": true,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-quoted-request-vs-actual-count-en",
+      "language": "en",
+      "split": "test",
+      "family": "mastra-read-quoted-request-vs-actual-count",
+      "proposed_actions": [
+        "stats"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "stats",
+        "gliner": "search",
+        "jev": "stats"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": true,
+        "gliner": false,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-unspecified-problem-fr",
+      "language": "fr",
+      "split": "calibration",
+      "family": "mastra-read-unspecified-problem",
+      "proposed_actions": [
+        "fallback"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "search",
+        "gliner": "stats",
+        "jev": "stats"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": false,
+        "gliner": false,
+        "jev": false
+      }
+    },
+    {
+      "case_id": "mastra-read-unspecified-problem-en",
+      "language": "en",
+      "split": "calibration",
+      "family": "mastra-read-unspecified-problem",
+      "proposed_actions": [
+        "fallback"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "search"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": false,
+        "gliner": false,
+        "jev": false
+      }
+    },
+    {
+      "case_id": "mastra-read-count-retrieve-synthesize-fr",
+      "language": "fr",
+      "split": "test",
+      "family": "mastra-read-count-retrieve-synthesize",
+      "proposed_actions": [
+        "fallback"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "stats"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": false,
+        "gliner": false,
+        "jev": false
+      }
+    },
+    {
+      "case_id": "mastra-read-count-retrieve-synthesize-en",
+      "language": "en",
+      "split": "test",
+      "family": "mastra-read-count-retrieve-synthesize",
+      "proposed_actions": [
+        "fallback"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "stats",
+        "gliner": "search",
+        "jev": "fallback"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": false,
+        "gliner": false,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-negated-both-actions-fr",
+      "language": "fr",
+      "split": "test",
+      "family": "mastra-read-negated-both-actions",
+      "proposed_actions": [
+        "fallback"
+      ],
+      "predictions": {
+        "indecis": "stats",
+        "julia": "fallback",
+        "gliner": "stats",
+        "jev": "fallback"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": true,
+        "gliner": false,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-negated-both-actions-en",
+      "language": "en",
+      "split": "test",
+      "family": "mastra-read-negated-both-actions",
+      "proposed_actions": [
+        "fallback"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "fallback"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": false,
+        "gliner": false,
+        "jev": true
+      }
+    },
+    {
+      "case_id": "mastra-read-external-cooking-duration-fr",
+      "language": "fr",
+      "split": "test",
+      "family": "mastra-read-external-cooking-duration",
+      "proposed_actions": [
+        "fallback"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "search",
+        "gliner": "stats",
+        "jev": "search"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": false,
+        "gliner": false,
+        "jev": false
+      }
+    },
+    {
+      "case_id": "mastra-read-external-cooking-duration-en",
+      "language": "en",
+      "split": "test",
+      "family": "mastra-read-external-cooking-duration",
+      "proposed_actions": [
+        "fallback"
+      ],
+      "predictions": {
+        "indecis": "search",
+        "julia": "search",
+        "gliner": "search",
+        "jev": "fallback"
+      },
+      "agrees_with_proposal": {
+        "indecis": false,
+        "julia": false,
+        "gliner": false,
+        "jev": true
+      }
+    }
+  ],
+  "budget": {
+    "path": "results/jev-pilot-budget-001.jsonl",
+    "before": {
+      "bytes": 293881,
+      "sha256": "71178ad73edfdc67b17fe170c8f4374399dc5a2d380fc1b945a87ec46d1b14ea",
+      "attempts": 735,
+      "settlements": 733,
+      "charged_input_tokens": 1314405
+    },
+    "after": {
+      "bytes": 303469,
+      "sha256": "d386cb4956c46780b19dab9267cfc606708e1bd88804e8b50a337caf8d83cf29",
+      "attempts": 759,
+      "settlements": 757,
+      "charged_input_tokens": 1324679
+    },
+    "prior_prefix_unchanged": true,
+    "delta_attempts": 24,
+    "delta_input_tokens": 10274
+  },
+  "notes": [
+    "Julia archive summary forward_executed=0 counted absent flags as zero; raw files unchanged, derived flags correctly show 24 unknown with 24 successful inference outputs.",
+    "Jev HTTP requests are observed; server forwards, memory and inference time are not observed.",
+    "Timing p95 uses nearest rank, one pass without warm-up or repeats; native token counts have different definitions.",
+    "All requests are synthetic; no product tool dispatch or comparative native planner run."
+  ]
+}

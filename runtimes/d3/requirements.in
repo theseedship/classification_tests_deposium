@@ -1,0 +1,5 @@
+# CPU text-only D3 runtime. Preserve the complete historical Decision2 pins.
+-r ../decision2/requirements.lock
+accelerate>=1.10
+einops
+pillow>=10

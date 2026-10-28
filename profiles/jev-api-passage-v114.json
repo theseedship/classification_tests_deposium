@@ -1,0 +1,23 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "jev-1.14.0-api-passage-v1",
+  "adapter": "jev_http",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "model": {
+    "endpoint": "https://api.typesafe.ai/v1/systemone",
+    "model_id": "jev-1.14.0",
+    "credential_env": "TYPESAFE_API_KEY",
+    "budget_ledger": "../results/jev-passage-budget-20261015-001.jsonl",
+    "max_requests": 728,
+    "max_input_tokens": 2000000,
+    "reserved_input_tokens_per_request": 65536,
+    "max_request_bytes": 131072,
+    "min_interval_seconds": 0.1
+  },
+  "timeout_seconds": 30,
+  "revision": null,
+  "recordings": null
+}

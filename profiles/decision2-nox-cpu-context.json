@@ -1,0 +1,23 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "decision2-nox-4b-cpu-context-v1",
+  "adapter": "decision2",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "model": {
+    "repo_id": "vllm-sr/Decision-2.0-Nox-4B",
+    "local_dir": "../models/Decision-2.0-Nox-4B-ae269ec",
+    "runtime_python": "../.cache/d3-runtime/bin/python",
+    "assets_manifest": "decision2-nox-assets.json",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "runtime_lock": "../runtimes/decision2/requirements.lock",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 22528
+  },
+  "timeout_seconds": 60,
+  "revision": "ae269ecf34a0b3a89026bc1afd9c995279212fad",
+  "recordings": null
+}

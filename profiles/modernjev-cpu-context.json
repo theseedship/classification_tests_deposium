@@ -1,0 +1,26 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "modernjev-cpu-context-v1",
+  "adapter": "small_model",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "model": {
+    "mode": "modernjev",
+    "repo_id": "MaziyarPanahi/ModernJEV-Decide-Preview",
+    "local_dir": "../models/ModernJEV-Decide-Preview-d5b398e",
+    "source_dir": "../.cache/small-model-sources/modernjev-d5b398e",
+    "runtime_python": "../.cache/decision2-runtime/bin/python",
+    "assets_manifest": "modernjev-assets.json",
+    "source_manifest": "modernjev-source-assets.json",
+    "runtime_lock": "../runtimes/small-models/runtime.lock",
+    "template_path": "modernjev-choice-projection-v1.json",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 4096
+  },
+  "timeout_seconds": 30,
+  "revision": "d5b398ed03de073a00bc4e53acf53afda409445e",
+  "recordings": null
+}

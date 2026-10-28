@@ -1,0 +1,37 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "LiquidAI/d1-3B",
+  "revision": "051bcc464b01b9f92942b364d9586b0ef5912432",
+  "files": [
+    {
+      "path": "api.py",
+      "size": 3478,
+      "sha256": "94e9f82eabfdf92c4abe1153e9a6dc4dd9821f9cc2fec3221e79e70723d8ada0"
+    },
+    {
+      "path": "hybrid.py",
+      "size": 14416,
+      "sha256": "ce579827b952a6978a3560f70e74be9e228f9029de46048996b0c5f58d7f1f39"
+    },
+    {
+      "path": "lfm2_vl.py",
+      "size": 5602,
+      "sha256": "f9e8d3354572a169237865283594b0364209fdb858901121b9f99147328b5d95"
+    },
+    {
+      "path": "modeling_d1.py",
+      "size": 1335,
+      "sha256": "7fc6a001f80fc2d146f2a51128478f3b3bd4f1423a3ac129bc10f3fd0caf1d98"
+    },
+    {
+      "path": "prompt.py",
+      "size": 12478,
+      "sha256": "a20b5f52e41a6d29e694bb8c861a5a4803ce3eb69364edad79511ccf8edb5c31"
+    },
+    {
+      "path": "runner.py",
+      "size": 11776,
+      "sha256": "24d3ae718e9f9717771c0df39c93d324d00aa27bf3e12bab085c0922096cb0dd"
+    }
+  ]
+}

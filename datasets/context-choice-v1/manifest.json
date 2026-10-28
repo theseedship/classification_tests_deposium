@@ -1,0 +1,51 @@
+{
+  "schema_version": "deposium.research-dataset/v1",
+  "dataset_id": "context-choice-v1",
+  "version": "1.0.0-exploratory",
+  "case_schema": "deposium.case/v2",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+  "case_count": 132,
+  "family_count": 66,
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "contract_id": "bench.context-choice",
+  "review": "agent_only",
+  "human_review": "not_performed",
+  "provenance": "synthetic; base specifications fixed before candidate inference",
+  "oracle_version": "deposium.research-oracles/v1",
+  "construction_revision": "Before any candidate inference, bilingual choices were aligned to the same semantic order and position balancing was checked within each language. No semantic answer was changed.",
+  "counts_by_domain": {
+    "documentary": 76,
+    "mathematics": 28,
+    "chemistry": 28
+  },
+  "counts_by_difficulty": {
+    "D1": 40,
+    "D2": 40,
+    "D3": 52
+  },
+  "counts_by_split": {
+    "calibration": 30,
+    "train": 36,
+    "test": 66
+  },
+  "counts_by_correct_position": {
+    "a": 34,
+    "b": 34,
+    "c": 32,
+    "d": 32
+  },
+  "split_policy": "Keep translations, length/order variants and documents in one family split. Documentary tasks: 4 train/2 calibration/6 test families per class; sciences: 3/3/6; insufficiency: 1 calibration/1 test per domain.",
+  "limitations": [
+    "Documentary references are agent judgments, not human-reviewed ground truth.",
+    "Exact science oracles prove only the stated finite rational/polynomial/type/atom/charge tasks.",
+    "Conservation and charge balance do not prove reaction feasibility or compound stability.",
+    "Six insufficiency families choose an explicit semantic option; they do not abstain technically.",
+    "Families share reasoning operations; 66 scenario families are not 66 independent algorithms.",
+    "No model, integrated stack, service, latency or product qualification is claimed.",
+    "Length is null for these bases; longer variants require their separate provenance."
+  ]
+}

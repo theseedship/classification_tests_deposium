@@ -1,0 +1,64 @@
+{
+  "schema_version": "deposium.mastra-read-review-manifest/v0",
+  "dataset_id": "mastra-read-pilot-v0",
+  "case_schema_version": "deposium.mastra-read-review/v0",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "d66ec51d9b8d89f46b87b90b80bcd0d45abf1570fa9857c24d9ce39117935497",
+  "created_date": "2026-10-02",
+  "reference_status": "review_pending",
+  "annotation_provenance": "agent_only",
+  "evaluation_status": "not_run",
+  "human_approved_references": 0,
+  "source": {
+    "component": "deposium_MCPs",
+    "revision": "391be12078b1f3daa24a50c31c3a39eb72d7fb94",
+    "inspection": "source_only_not_runtime",
+    "files_sha256": {
+      "src/agents/deposium-agent.ts": "e44e04e585fa3601955057a10a5b3c0f03ca80d6ae3363baf4a1209c77b735b1",
+      "src/agents/use-mastra-transport.ts": "6bc6da68d1aedaa27b0d87cc8d51c08545673ceaa85e946bd7f99f79eb74ac02"
+    }
+  },
+  "protocol_document": "docs/MCP_TOOL_SELECTION_PILOT.md",
+  "actions": {
+    "search": "deposium_search",
+    "stats": "deposium_analyze",
+    "fallback": "benchmark_planner_reentry_without_tool_execution"
+  },
+  "counts": {
+    "cases": 24,
+    "translation_families": 12,
+    "languages": {
+      "fr": 12,
+      "en": 12
+    },
+    "splits": {
+      "calibration": 6,
+      "test": 18
+    },
+    "proposed_actions": {
+      "search": 8,
+      "stats": 8,
+      "fallback": 8
+    },
+    "proposed_choice_ids": {
+      "a": 8,
+      "c": 8,
+      "b": 8
+    }
+  },
+  "design": {
+    "options_rotation": "Within each proposed-action group, family ordinal modulo 3; identical semantic order in FR/EN. Each split and language has balanced proposed positions.",
+    "split_policy": "First family of each proposed action is calibration; remaining three families are test. Translations stay together.",
+    "fixture_id": "synthetic-corpus-a",
+    "fixture_role": "One common synthetic execution recipe; not candidate-visible and not proof of authorization or materialization.",
+    "independence": "Twelve authored task patterns, not twelve independently observed users. Shared labels, scope framing and execution fixture limit generalization."
+  },
+  "limitations": [
+    "Synthetic proposals, not observed usage or human gold.",
+    "No prediction or routing output was consulted to assign references.",
+    "No model, planner, business read, service or fixture execution was performed.",
+    "Counts concern proposed selection only; wrapper output assertions require the separately qualified fixture.",
+    "Fallback is a benchmark action, not a promise of implemented abstention/HITL.",
+    "Shared fixture is not a holdout corpus; splits isolate task families only."
+  ]
+}

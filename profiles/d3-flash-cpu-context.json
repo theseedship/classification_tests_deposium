@@ -1,0 +1,23 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "d3-flash-cpu-context-v1",
+  "adapter": "d3",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "model": {
+    "repo_id": "vllm-sr/d3-flash",
+    "local_dir": "../models/d3-flash-521525e",
+    "runtime_python": "../.cache/d3-runtime/bin/python",
+    "assets_manifest": "d3-flash-assets.json",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "runtime_lock": "../runtimes/d3/runtime.lock",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 18432
+  },
+  "timeout_seconds": 60,
+  "revision": "521525effa79469d899a570726547dd7f00da3af",
+  "recordings": null
+}

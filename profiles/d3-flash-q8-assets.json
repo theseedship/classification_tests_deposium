@@ -1,0 +1,6 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "ggml-org/vllm-d3-flash-GGUF",
+  "revision": "3d53d13778bf8035e6e1e534ce489ed052ee5663",
+  "files": [{"path": "vllm-d3-flash-Q8_0.gguf", "size": 9527503296, "sha256": "7352edf6be85d93ab8806a17e1b3d0a7e71ee3685af3212ddbe679b742c2221b"}]
+}

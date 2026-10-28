@@ -1,0 +1,23 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "d3-mini-cpu-context-v1",
+  "adapter": "d3",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "model": {
+    "repo_id": "vllm-sr/d3-mini",
+    "local_dir": "../models/d3-mini-a475367",
+    "runtime_python": "../.cache/d3-runtime/bin/python",
+    "assets_manifest": "d3-mini-assets.json",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "runtime_lock": "../runtimes/d3/runtime.lock",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 14336
+  },
+  "timeout_seconds": 60,
+  "revision": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4",
+  "recordings": null
+}

@@ -1,0 +1,251 @@
+{
+  "schema_version": "deposium.graph-service-controls/v0",
+  "qualification": "synthetic_in_memory_duckdb_cte_only",
+  "fixture": {
+    "grants": [
+      { "spaceId": "00000000-0000-0000-0000-000000000001", "ownerTenantId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "accessMode": "member" },
+      { "spaceId": "00000000-0000-0000-0000-000000000002", "ownerTenantId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "accessMode": "member" }
+    ],
+    "folders": {
+      "00000000-0000-0000-0000-000000000001": [1],
+      "00000000-0000-0000-0000-000000000002": [2]
+    },
+    "entities": [
+      { "tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "space_id": "1", "file_id": 10, "entity_id": "A", "entity_type": "PERSON", "entity_name": "Alpha", "properties": { "doc_id": "synthetic-page-1" } },
+      { "tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "space_id": "2", "file_id": 20, "entity_id": "B", "entity_type": "PERSON", "entity_name": "Beta", "properties": { "doc_id": "synthetic-page-2" } },
+      { "tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "space_id": "2", "file_id": 20, "entity_id": "C", "entity_type": "PERSON", "entity_name": "Gamma", "properties": { "doc_id": "synthetic-page-2" } },
+      { "tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "space_id": "1", "file_id": 10, "entity_id": "isolated", "entity_type": "PERSON", "entity_name": "Isolated", "properties": {} },
+      { "tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "space_id": "9", "file_id": 90, "entity_id": "outside", "entity_type": "SECRET", "entity_name": "Outside", "properties": {} },
+      { "tenant_id": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff", "space_id": "1", "file_id": 99, "entity_id": "A", "entity_type": "SECRET", "entity_name": "Other Alpha", "properties": {} },
+      { "tenant_id": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff", "space_id": "1", "file_id": 99, "entity_id": "B", "entity_type": "SECRET", "entity_name": "Other Beta", "properties": {} }
+    ],
+    "relations": [
+      { "tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "space_id": "1", "file_id": 10, "relation_id": "r1", "source_id": "person|alpha", "target_id": "B", "relation_type": "KNOWS", "confidence": 0.8 },
+      { "tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "space_id": "2", "file_id": 20, "relation_id": "r2", "source_id": "B", "target_id": "C", "relation_type": "WORKS_WITH", "confidence": 0.9 },
+      { "tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "space_id": "9", "file_id": 90, "relation_id": "outside-edge", "source_id": "A", "target_id": "outside", "relation_type": "FORBIDDEN", "confidence": 1.0 },
+      { "tenant_id": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff", "space_id": "1", "file_id": 99, "relation_id": "other-edge", "source_id": "A", "target_id": "B", "relation_type": "FORBIDDEN", "confidence": 1.0 }
+    ]
+  },
+  "controls": [
+    {
+      "case_id": "helper-search-across-spaces",
+      "entrypoint": "helper",
+      "input": { "operation": "search", "entity": "Alpha" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "expected_before": [{ "path": ["outcome"], "equals": "legacy_untyped_output" }, { "path": ["output", "matches"], "equals": 0 }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "nodes", 0, "id"], "equals": "A" }, { "path": ["output", "edge_count"], "equals": 0 }]
+    },
+    {
+      "case_id": "helper-neighbors-all-folders",
+      "entrypoint": "helper",
+      "input": { "operation": "neighbors", "entity": "Alpha", "max_depth": 2 },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "expected_before": [{ "path": ["outcome"], "equals": "error" }, { "path": ["native_exception", "name"], "equals": "TypeError" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "nodes", 0, "id"], "equals": "A" }, { "path": ["output", "edges", 0, "id"], "equals": "r1" }, { "path": ["output", "edges", 0, "source"], "equals": "A" }, { "path": ["output", "edges", 0, "target"], "equals": "B" }, { "path": ["output", "edges", 1, "id"], "equals": "r2" }]
+    },
+    {
+      "case_id": "helper-path-forward",
+      "entrypoint": "helper",
+      "input": { "operation": "path", "entity": "Alpha", "end_entity": "Gamma", "max_hops": 4 },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "hop_count"], "equals": 2 }, { "path": ["output", "path", "nodes", 0, "id"], "equals": "A" }, { "path": ["output", "path", "nodes", 2, "id"], "equals": "C" }, { "path": ["output", "path", "edges", 0, "id"], "equals": "r1" }, { "path": ["output", "path", "edges", 0, "properties", "stored_source_id"], "equals": "person|alpha" }, { "path": ["output", "path", "edges", 1, "id"], "equals": "r2" }]
+    },
+    {
+      "case_id": "helper-path-reverse",
+      "entrypoint": "helper",
+      "input": { "operation": "path", "entity": "Gamma", "end_entity": "Alpha", "max_hops": 4 },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "path", "nodes", 0, "id"], "equals": "C" }, { "path": ["output", "path", "nodes", 2, "id"], "equals": "A" }, { "path": ["output", "path", "edges", 0, "source"], "equals": "B" }, { "path": ["output", "path", "edges", 0, "target"], "equals": "C" }, { "path": ["output", "path", "edges", 1, "source"], "equals": "A" }, { "path": ["output", "path", "edges", 1, "target"], "equals": "B" }]
+    },
+    {
+      "case_id": "helper-path-missing-target",
+      "entrypoint": "helper",
+      "input": { "operation": "path", "entity": "Alpha", "end_entity": "Missing" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "empty" }, { "path": ["output", "endpoint"], "equals": "target" }, { "path": ["output", "reason"], "equals": "entity_not_found" }]
+    },
+    {
+      "case_id": "helper-path-missing-source",
+      "entrypoint": "helper",
+      "input": { "operation": "path", "entity": "Missing", "end_entity": "Gamma" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "empty" }, { "path": ["output", "endpoint"], "equals": "source" }, { "path": ["output", "reason"], "equals": "entity_not_found" }]
+    },
+    {
+      "case_id": "helper-no-scope",
+      "entrypoint": "helper",
+      "input": { "operation": "search", "entity": "Alpha", "tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": [] },
+      "service": {},
+      "expected_before": [{ "path": ["outcome"], "equals": "legacy_untyped_output" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "error" }, { "path": ["output", "error_code"], "equals": "scope_required" }, { "path": ["query_counts", "statements"], "equals": 0 }]
+    },
+    {
+      "case_id": "helper-denied-grant",
+      "entrypoint": "helper",
+      "input": { "operation": "search", "entity": "Alpha" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "fixture_overrides": { "grants": [] },
+      "expected_before": [{ "path": ["outcome"], "equals": "legacy_untyped_output" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "error" }, { "path": ["output", "error_code"], "equals": "scope_authorization_failed" }, { "path": ["query_counts", "statements"], "equals": 0 }]
+    },
+    {
+      "case_id": "helper-folder-unavailable",
+      "entrypoint": "helper",
+      "input": { "operation": "search", "entity": "Alpha" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "fixture_overrides": { "faults": { "folder": "unavailable" } },
+      "expected_before": [{ "path": ["outcome"], "equals": "legacy_untyped_output" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "error" }, { "path": ["output", "error_code"], "equals": "scope_resolution_failed" }, { "path": ["query_counts", "statements"], "equals": 0 }]
+    },
+    {
+      "case_id": "helper-sql-error-sanitized",
+      "entrypoint": "helper",
+      "input": { "operation": "path", "entity": "Alpha", "end_entity": "Gamma" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "fixture_overrides": { "faults": { "sql": "relations_missing" } },
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "error" }, { "path": ["output", "error_code"], "equals": "graph_query_failed" }]
+    },
+    {
+      "case_id": "legacy-service-search",
+      "entrypoint": "legacy_service",
+      "input": { "operation": "search", "entity": "Alpha" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": { "graph_name": "entity_graph_aaaaaaaa_bbbb_cccc_dddd_eeeeeeeeeeee_1", "folder_ids": ["1", "2"], "limit": 20 },
+      "expected_before": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "nodes", 0, "id"], "equals": "A" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "nodes", 0, "id"], "equals": "A" }]
+    },
+    {
+      "case_id": "legacy-service-neighbors",
+      "entrypoint": "legacy_service",
+      "input": { "operation": "neighbors", "entity": "Alpha" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": { "graph_name": "entity_graph_aaaaaaaa_bbbb_cccc_dddd_eeeeeeeeeeee_1", "owner_tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "folder_ids": ["1", "2"], "source_id": "A", "max_depth": 1 },
+      "expected_before": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "center", "id"], "equals": "A" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "center", "id"], "equals": "A" }]
+    },
+    {
+      "case_id": "legacy-service-path-cte",
+      "entrypoint": "legacy_service",
+      "input": { "operation": "path", "entity": "Alpha", "end_entity": "Gamma" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": { "graph_name": "entity_graph_aaaaaaaa_bbbb_cccc_dddd_eeeeeeeeeeee_1", "folder_ids": ["1", "2"], "source_id": "A", "target_id": "C", "max_hops": 2 },
+      "expected_before": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "nodes", 0, "id"], "equals": "A" }, { "path": ["output", "edges", 0, "id"], "equals": "r1" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "nodes", 0, "id"], "equals": "A" }, { "path": ["output", "edges", 0, "id"], "equals": "r1" }]
+    },
+    {
+      "case_id": "strict-service-search",
+      "entrypoint": "strict_service",
+      "input": { "operation": "search", "entity": "Alpha" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": { "graph_name": "entity_graph_aaaaaaaa_bbbb_cccc_dddd_eeeeeeeeeeee_1", "folder_ids": ["1", "2"], "limit": 20 },
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "nodes", 0, "id"], "equals": "A" }, { "path": ["output", "edges"], "equals": [] }]
+    },
+    {
+      "case_id": "strict-service-path-forward",
+      "entrypoint": "strict_service",
+      "input": { "operation": "path", "entity": "Alpha", "end_entity": "Gamma" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": { "graph_name": "entity_graph_aaaaaaaa_bbbb_cccc_dddd_eeeeeeeeeeee_1", "folder_ids": ["1", "2"], "source_id": "A", "target_id": "C", "max_hops": 4 },
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "hop_count"], "equals": 2 }, { "path": ["output", "path", "nodes", 0, "id"], "equals": "A" }, { "path": ["output", "path", "nodes", 2, "id"], "equals": "C" }, { "path": ["output", "path", "edges", 0, "id"], "equals": "r1" }, { "path": ["output", "path", "edges", 0, "source"], "equals": "A" }, { "path": ["output", "path", "edges", 0, "target"], "equals": "B" }, { "path": ["output", "path", "edges", 0, "properties", "stored_source_id"], "equals": "person|alpha" }]
+    },
+    {
+      "case_id": "strict-service-path-reverse",
+      "entrypoint": "strict_service",
+      "input": { "operation": "path", "entity": "Gamma", "end_entity": "Alpha" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": { "graph_name": "entity_graph_aaaaaaaa_bbbb_cccc_dddd_eeeeeeeeeeee_1", "folder_ids": ["1", "2"], "source_id": "C", "target_id": "A", "max_hops": 4 },
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "path", "nodes", 0, "id"], "equals": "C" }, { "path": ["output", "path", "edges", 0, "source"], "equals": "B" }, { "path": ["output", "path", "edges", 0, "target"], "equals": "C" }, { "path": ["output", "path", "edges", 1, "source"], "equals": "A" }, { "path": ["output", "path", "edges", 1, "target"], "equals": "B" }]
+    },
+    {
+      "case_id": "strict-service-zero-hop",
+      "entrypoint": "strict_service",
+      "input": { "operation": "path", "entity": "Beta", "end_entity": "Beta" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": { "graph_name": "entity_graph_aaaaaaaa_bbbb_cccc_dddd_eeeeeeeeeeee_1", "folder_ids": ["1", "2"], "source_id": "B", "target_id": "B", "max_hops": 0 },
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "hop_count"], "equals": 0 }, { "path": ["output", "path", "nodes", 0, "id"], "equals": "B" }, { "path": ["output", "path", "edges"], "equals": [] }]
+    },
+    {
+      "case_id": "strict-service-disconnected",
+      "entrypoint": "strict_service",
+      "input": { "operation": "path", "entity": "Alpha", "end_entity": "Isolated" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": { "graph_name": "entity_graph_aaaaaaaa_bbbb_cccc_dddd_eeeeeeeeeeee_1", "folder_ids": ["1", "2"], "source_id": "A", "target_id": "isolated", "max_hops": 4 },
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "no_path" }, { "path": ["output", "metadata", "traversal"], "equals": "undirected" }]
+    },
+    {
+      "case_id": "strict-service-hop-limit",
+      "entrypoint": "strict_service",
+      "input": { "operation": "path", "entity": "Alpha", "end_entity": "Gamma" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": { "graph_name": "entity_graph_aaaaaaaa_bbbb_cccc_dddd_eeeeeeeeeeee_1", "folder_ids": ["1", "2"], "source_id": "A", "target_id": "C", "max_hops": 1 },
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "limit_reached" }, { "path": ["output", "reason"], "equals": "max_hops" }]
+    },
+    {
+      "case_id": "helper-ambiguous-name",
+      "entrypoint": "helper",
+      "input": { "operation": "neighbors", "entity": "Alpha" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "fixture_overrides": { "entities_add": [
+        { "tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "space_id": "2", "file_id": 21, "entity_id": "AA", "entity_type": "PERSON", "entity_name": "Alpha", "properties": {} }
+      ] },
+      "expected_before": [{ "path": ["outcome"], "equals": "error" }, { "path": ["native_exception", "name"], "equals": "TypeError" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ambiguous" }, { "path": ["output", "choices", 0, "id"], "equals": "A" }, { "path": ["output", "choices", 1, "id"], "equals": "AA" }]
+    },
+    {
+      "case_id": "helper-explicit-id-amid-homonym",
+      "entrypoint": "helper",
+      "input": { "operation": "search", "entity": "Alpha", "entity_id": "A" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "fixture_overrides": { "entities_add": [
+        { "tenant_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "space_id": "2", "file_id": 21, "entity_id": "AA", "entity_type": "PERSON", "entity_name": "Alpha", "properties": {} }
+      ] },
+      "expected_before": [{ "path": ["outcome"], "equals": "legacy_untyped_output" }, { "path": ["output", "matches"], "equals": 0 }],
+      "expected_after": [{ "path": ["outcome"], "equals": "ok" }, { "path": ["output", "nodes", 0, "id"], "equals": "A" }, { "path": ["output", "node_count"], "equals": 1 }]
+    },
+    {
+      "case_id": "helper-mixed-storage-owners",
+      "entrypoint": "helper",
+      "input": { "operation": "search", "entity": "Alpha" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": {},
+      "fixture_overrides": { "grants": [
+        { "spaceId": "00000000-0000-0000-0000-000000000001", "ownerTenantId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "accessMode": "member" },
+        { "spaceId": "00000000-0000-0000-0000-000000000002", "ownerTenantId": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff", "accessMode": "member" }
+      ] },
+      "expected_before": [{ "path": ["outcome"], "equals": "legacy_untyped_output" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "error" }, { "path": ["output", "error_code"], "equals": "mixed_storage_owners" }, { "path": ["query_counts", "statements"], "equals": 0 }]
+    },
+    {
+      "case_id": "strict-service-edge-budget",
+      "entrypoint": "strict_service",
+      "input": { "operation": "path", "entity": "Alpha", "end_entity": "Gamma" },
+      "context": { "tenant_id": "11111111-2222-3333-4444-555555555555", "space_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"] },
+      "service": { "graph_name": "entity_graph_aaaaaaaa_bbbb_cccc_dddd_eeeeeeeeeeee_1", "folder_ids": ["1", "2"], "source_id": "A", "target_id": "C", "max_hops": 4, "path_options": { "maxScannedEdges": 1 } },
+      "expected_before": [{ "path": ["outcome"], "equals": "not_implemented" }],
+      "expected_after": [{ "path": ["outcome"], "equals": "limit_reached" }, { "path": ["output", "reason"], "equals": "max_scanned_edges" }, { "path": ["output", "metadata", "scanned_edges"], "equals": 1 }]
+    }
+  ]
+}

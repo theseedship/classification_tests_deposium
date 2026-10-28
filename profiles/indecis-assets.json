@@ -1,0 +1,22 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "hotchpotch/bekko-embedding-v1-a8m",
+  "revision": "c721113d59a1d91b447450324f51c4b3332c924a",
+  "files": [
+    {
+      "path": "config.json",
+      "sha256": "950f344b034bb96a6ac3da045b1cd5ba037c08d8e4978471d407324622f8878e",
+      "size": 1207
+    },
+    {
+      "path": "model.safetensors",
+      "sha256": "5db74812b69eb6c17845f5ecaab533e6e0816877fcf9639a25dd187862d0e885",
+      "size": 211952896
+    },
+    {
+      "path": "tokenizer.json",
+      "sha256": "8bd47075711f75a143d1b78e01a41cc65c1c591b00d3cfeffc23db07adce1392",
+      "size": 34363442
+    }
+  ]
+}

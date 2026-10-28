@@ -1,0 +1,68 @@
+{
+  "documentary": {
+    "fr": [
+      "Annexe indépendante {n} : le dossier {code} conserve une copie de consultation datée.",
+      "Autre document {n} : les métadonnées précisent la pagination et la langue du fichier {code}.",
+      "Notice hors demande active {n} : le rapport {code} possède une table des matières.",
+      "Archive distincte {n} : la version du document {code} a été vérifiée lors du dépôt.",
+      "Pièce séparée {n} : le fichier {code} réunit des notes de réunion sans lien avec la demande.",
+      "Fiche de rangement {n} : le document {code} est classé avec ses annexes originales.",
+      "Registre indépendant {n} : le titre et la date du fichier {code} sont renseignés.",
+      "Information sur un autre dossier {n} : la pièce {code} comporte une bibliographie."
+    ],
+    "en": [
+      "Independent appendix {n}: folder {code} retains a dated consultation copy.",
+      "Other document {n}: metadata specifies page numbering and the language of file {code}.",
+      "Notice outside the active request {n}: report {code} has a table of contents.",
+      "Separate archive {n}: the version of document {code} was checked when deposited.",
+      "Separate item {n}: file {code} contains meeting notes unrelated to the request.",
+      "Filing card {n}: document {code} is stored with its original appendices.",
+      "Independent register {n}: the title and date of file {code} are recorded.",
+      "Information on another folder {n}: item {code} includes a bibliography."
+    ]
+  },
+  "mathematics": {
+    "fr": [
+      "Autre exercice {n} : une figure du dossier {code} comporte un repère orthogonal.",
+      "Annexe indépendante {n} : la notation du chapitre {code} distingue vecteurs et scalaires.",
+      "Note sur un autre problème {n} : le tableau {code} énumère des variables auxiliaires.",
+      "Exercice séparé {n} : la courbe {code} est présentée avec ses axes et sa légende.",
+      "Fiche sans lien avec le calcul actif {n} : le cahier {code} réserve une page aux unités.",
+      "Remarque indépendante {n} : les indices du diagramme {code} identifient ses sommets.",
+      "Autre démonstration {n} : le texte {code} distingue les hypothèses de la conclusion.",
+      "Archive mathématique distincte {n} : le document {code} utilise des parenthèses explicites."
+    ],
+    "en": [
+      "Other exercise {n}: a figure in folder {code} uses orthogonal coordinate axes.",
+      "Independent appendix {n}: the notation in chapter {code} distinguishes vectors and scalars.",
+      "Note on another problem {n}: table {code} lists auxiliary variables.",
+      "Separate exercise {n}: curve {code} is shown with its axes and legend.",
+      "Card unrelated to the active calculation {n}: notebook {code} reserves a page for units.",
+      "Independent remark {n}: the indices of diagram {code} identify its vertices.",
+      "Other proof {n}: text {code} distinguishes assumptions from the conclusion.",
+      "Separate mathematical archive {n}: document {code} uses explicit parentheses."
+    ]
+  },
+  "chemistry": {
+    "fr": [
+      "Échantillon indépendant {n} : la fiche {code} indique la date de son étiquetage.",
+      "Autre étude {n} : le rapport {code} distingue les données mesurées des observations.",
+      "Annexe sans lien avec le mélange actif {n} : le registre {code} décrit ses unités.",
+      "Fiche séparée {n} : le tableau {code} comporte une colonne pour les incertitudes.",
+      "Analyse distincte {n} : le document {code} précise la convention de notation des espèces.",
+      "Autre lot {n} : le dossier {code} conserve la liste de ses instruments.",
+      "Observation indépendante {n} : la légende du schéma {code} identifie les phases.",
+      "Archive séparée {n} : la page {code} présente une liste de symboles et leurs définitions."
+    ],
+    "en": [
+      "Independent sample {n}: card {code} records the date of its labeling.",
+      "Other study {n}: report {code} distinguishes measured data from observations.",
+      "Appendix unrelated to the active mixture {n}: register {code} describes its units.",
+      "Separate card {n}: table {code} includes a column for uncertainties.",
+      "Distinct analysis {n}: document {code} specifies the notation convention for species.",
+      "Other batch {n}: folder {code} retains a list of its instruments.",
+      "Independent observation {n}: the legend of diagram {code} identifies phases.",
+      "Separate archive {n}: page {code} presents symbols and their definitions."
+    ]
+  }
+}

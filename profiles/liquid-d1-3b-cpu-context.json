@@ -1,0 +1,26 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "liquid-d1-3b-cpu-context-v1",
+  "adapter": "small_model",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "model": {
+    "mode": "liquid3",
+    "repo_id": "LiquidAI/d1-3B",
+    "local_dir": "../models/d1-3B-051bcc4",
+    "source_dir": "../.cache/small-model-sources/liquid3-051bcc4",
+    "runtime_python": "../.cache/d3-runtime/bin/python",
+    "assets_manifest": "liquid3-assets.json",
+    "source_manifest": "liquid3-source-assets.json",
+    "runtime_lock": "../runtimes/small-models/runtime.lock",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 18432
+  },
+  "timeout_seconds": 60,
+  "revision": "051bcc464b01b9f92942b364d9586b0ef5912432",
+  "recordings": null
+}

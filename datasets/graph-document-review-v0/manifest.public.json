@@ -1,0 +1,18 @@
+{
+  "schema_version": "deposium.graph-document-review-manifest/v0",
+  "dataset_id": "graph-document-review-v0",
+  "cases_file": "cases.review.jsonl",
+  "cases_sha256": "8611986b259149f3bf5a509490474c83963b1b253f26ca660419ef45c43de900",
+  "case_count": 16,
+  "family_count": 8,
+  "status": "unresolved_review_only",
+  "comparison": {
+    "purpose": "Public unresolved templates for graph evidence review; no operational comparison is distributed.",
+    "observation_status": "not_run"
+  },
+  "limitations": [
+    "Unresolved review templates only; no private documents, runtime observations, or corpus measurements are distributed.",
+    "References require separately authorized evidence and human review before any scoring.",
+    "Template validation does not execute a model, application, private query, or corpus."
+  ]
+}

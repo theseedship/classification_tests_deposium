@@ -1,0 +1,30 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "gliclass-v4-9b-mps-bf16-v1",
+  "adapter": "gliclass",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "revision": "14d11a92b5e0bab4a166e1fce4cc0777cac27182",
+  "recordings": null,
+  "timeout_seconds": 30,
+  "model": {
+    "repo_id": "knowledgator/gliclass-v4-9b",
+    "source_revision": "6a00f8067648f25aa0f4f477d167c5f391cb4165",
+    "local_dir": "../models/gliclass-v4-9b-14d11a9",
+    "source_dir": "../results/.sources/gliclass-runtime-6a00f80",
+    "runtime_python": "../results/.toolchains/gliclass-python/bin/python",
+    "assets_manifest": "gliclass-v4-9b-assets.json",
+    "source_manifest": "gliclass-source-assets.json",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "runtime_lock": "../runtimes/gliclass/runtime.lock",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 32768,
+    "min_free_mb": 8192,
+    "device": "mps",
+    "dtype": "bfloat16",
+    "backend": "eager"
+  }
+}

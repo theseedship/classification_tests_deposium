@@ -1,0 +1,11 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "fixture-control",
+  "adapter": "recorded",
+  "qualification": "harness_control",
+  "capabilities": ["mcps.document-plan", "mcps.document-followup", "mcps.scope-dispatch", "mcps.semantic-source-route", "mcps.search"],
+  "model": null,
+  "timeout_seconds": 15,
+  "revision": null,
+  "recordings": "../fixtures/control-responses.jsonl"
+}

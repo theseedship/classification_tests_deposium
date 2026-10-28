@@ -1,0 +1,12 @@
+{
+  "schema_version": "deposium.indecis-choice-prompt/v1",
+  "input_protocol": "context_choice",
+  "mode": "open_untrained",
+  "state_field": "context",
+  "instruction_field": "question",
+  "options_field": "options",
+  "output_field": "choice_id",
+  "option_serialization": "description_newline_question",
+  "cache_policy": "request_local",
+  "trained": false
+}

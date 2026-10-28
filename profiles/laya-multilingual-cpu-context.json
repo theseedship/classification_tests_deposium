@@ -1,0 +1,25 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "laya-multilingual-cpu-context-v1",
+  "adapter": "laya",
+  "qualification": "model_isolated",
+  "capabilities": ["bench.context-choice"],
+  "model": {
+    "repo_id": "convaiinnovations/laya-multilingual",
+    "source_revision": "2e4d9c87e8b1621deb344eac7de5c7258f32f849",
+    "local_dir": "../models/laya-multilingual-1720e3e-prepared",
+    "source_dir": "../.cache/laya-source-2e4d9c8",
+    "runtime_python": "../.cache/decision2-runtime/bin/python",
+    "assets_manifest": "laya-multilingual-assets.json",
+    "source_manifest": "laya-source-assets.json",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "runtime_lock": "../runtimes/decision2/requirements.lock",
+    "max_length": 1024,
+    "head_length": 256,
+    "threads": 2,
+    "max_rss_mb": 3072
+  },
+  "timeout_seconds": 30,
+  "revision": "1720e3e3357cfe1e281542e223f8273b0890ca34",
+  "recordings": null
+}

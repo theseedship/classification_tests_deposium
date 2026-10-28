@@ -1,0 +1,55 @@
+{
+  "current_json_sha256": "17220514d426ab5cc0b67f02e65cfd39fa6ff64687710050caebde72aac53aa0",
+  "historical_analysis_sha256": "81d9a80fc50bb97c88562a009165aa997434bea7f55a94a39f5fa8a400bb3cf2",
+  "historical_manifest_sha256": "5cc6133e80c470d783b331adc4df03e16ec3efb79cfae06f02eb01af1c5d21f9",
+  "historical_sol_sha256": "6659ab61c392c0123eb46350595181ba5f2e6530b59713a21847f755ea4fe97c",
+  "models": 22,
+  "new_archives": [
+    {
+      "archive": "context-base-liquid3-20261011-001",
+      "files_verified": 7,
+      "kind": "base",
+      "label": "Liquid3",
+      "seal_sha256": "fd0f1a96216136526b17d7b386ca785c24b2a8d58a4da99282c33159aaba18ef"
+    },
+    {
+      "archive": "mastra-read-liquid3-20261011-001",
+      "files_verified": 8,
+      "kind": "mastra",
+      "label": "Liquid3",
+      "seal_sha256": "dce0635425124cf0fd226d471abd9cd3f0abfe07ee8a902b832f6e47b2aa15a1"
+    },
+    {
+      "archive": "context-base-nox-20261011-001",
+      "files_verified": 7,
+      "kind": "base",
+      "label": "Nox",
+      "seal_sha256": "fc4fa5f2c5929f588612a9f463bd18cae6038e001d62510d349ae5f8c0141cc3"
+    },
+    {
+      "archive": "mastra-read-nox-20261011-001",
+      "files_verified": 8,
+      "kind": "mastra",
+      "label": "Nox",
+      "seal_sha256": "999fea9ed6f03ecdca66ee1e54e88119e666dbb4ac74b38e66ee91d16b5c5323"
+    },
+    {
+      "archive": "context-base-vela4-20261011-001",
+      "files_verified": 7,
+      "kind": "base",
+      "label": "Vela4",
+      "seal_sha256": "66e09768d4134489f1b636d956cd459968c27c31608bacc40c4ea162d28640d8"
+    },
+    {
+      "archive": "mastra-read-vela4-20261011-001",
+      "files_verified": 8,
+      "kind": "mastra",
+      "label": "Vela4",
+      "seal_sha256": "96bf19c9054d485f4b36a56120c7d7a1153e2b1bc457856e02c8e85101d5246b"
+    }
+  ],
+  "producer_sha256": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
+  "report_sha256": "c0d6642d26a31c42c12b996e4f3f4d659b5f97f951a50ad6e415f567f11cdf4d",
+  "schema_version": "deposium.composed-larger-cpu-comparison/v1",
+  "scope": "new_sealed_archives_plus_frozen_historical_aggregates"
+}

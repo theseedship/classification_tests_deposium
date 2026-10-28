@@ -1,0 +1,332 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "blackdromeai-labs/noma",
+  "revision": "8cfda260d8af88c18b1de1852e13dcbe9958042f",
+  "files": [
+    {
+      "path": ".gitignore",
+      "size": 280,
+      "sha256": "21a0ad6303983d9e4f5902b945ea0a8b17984b5e24334b0195d59e1a1d1113f9"
+    },
+    {
+      "path": "AGENTS.md",
+      "size": 2438,
+      "sha256": "e2a5b87c312fc1538a12b4d54082d82484a70a43a742ef60167ac5a152975a8a"
+    },
+    {
+      "path": "CITATION.cff",
+      "size": 336,
+      "sha256": "4d08135e266d6165f1452d7b3102845983e791c0b8a5b575d65b45980e4220c4"
+    },
+    {
+      "path": "LICENSE",
+      "size": 17099,
+      "sha256": "9221c2f936159b8446d329249fb4c0f25be510f447383a0f13336ac7985668a3"
+    },
+    {
+      "path": "NOTICE",
+      "size": 394,
+      "sha256": "74ac7743bc619a08456d8db2a4a81d3057c50bef041c4f0532ea0b67a9c13c03"
+    },
+    {
+      "path": "README.md",
+      "size": 15860,
+      "sha256": "cb8741b2f6e8907002c0976f5a2469f124691700e04340187b81f7307f8cbcaf"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "size": 6187,
+      "sha256": "11e9c14dcbd8c89a9d2e5d71a1994560be1dc8c41f0f32db94f8622baaec8e9f"
+    },
+    {
+      "path": "docs/DATA.md",
+      "size": 3701,
+      "sha256": "b4a8a15918086a6deffd307715a481629cdd2538538959d6ac21a6d69629b834"
+    },
+    {
+      "path": "docs/EVALUATION.md",
+      "size": 8978,
+      "sha256": "9a5d88f01eb97b42bf2a58fee6dc53df93fe1fb9096e01e4c54f88c1b297cca2"
+    },
+    {
+      "path": "docs/SERVING.md",
+      "size": 4825,
+      "sha256": "0a0e82af5e6d1b55555781d3fd67ee6e639b4de198dd2ab0664ca2a742fb6cd6"
+    },
+    {
+      "path": "docs/TRAINING.md",
+      "size": 4600,
+      "sha256": "a6b8275bfcda1df933ab50913a9960afcd7b9584ac2e678f8f6010193f9f54a4"
+    },
+    {
+      "path": "docs/USAGE.md",
+      "size": 4948,
+      "sha256": "77ce59d00db42297006532a9a7abd9a4eff9255c4c2944902d98e4d47792bcce"
+    },
+    {
+      "path": "media/ablations.svg",
+      "size": 10249,
+      "sha256": "6b8b2045c7cf08750f34fa1fdb2df1deb6376de58faeddcda483e8c781a649f1"
+    },
+    {
+      "path": "media/accuracy.svg",
+      "size": 3046,
+      "sha256": "489b45cd0b422c1d2e81d2b994b93f3c990b0ad6c73345128005e069d67dcb35"
+    },
+    {
+      "path": "media/agent-loop.svg",
+      "size": 5216,
+      "sha256": "1e13e976349a9899ab2ec30ee42f8ee885e3044f3fc4e2f5fb67ec657ff81ec5"
+    },
+    {
+      "path": "media/architecture.svg",
+      "size": 8711,
+      "sha256": "57406b4f09614ec11f9d7b99fa29e58765ef1e05d73b4db20d29ca8b2fb4a6d1"
+    },
+    {
+      "path": "media/banner.svg",
+      "size": 4400,
+      "sha256": "fee16ef95f77954f2f780b3cf990bb53925f774e89a08252d70afa4f3956ce45"
+    },
+    {
+      "path": "media/calibration.svg",
+      "size": 3016,
+      "sha256": "81e95157a73edd4ca8da91e6a13bbc3f8a6a8c5889264ab5584bc8daf4fc271f"
+    },
+    {
+      "path": "media/cost.svg",
+      "size": 5060,
+      "sha256": "cd5f027d2561c2c3d7a0e4a2b0abc141f157f05cdd74356599c9a86a85c9b750"
+    },
+    {
+      "path": "media/decision-head.svg",
+      "size": 10963,
+      "sha256": "5530aa77ba271fe1ca0bdc2b6b9f552039526542c933214aa7b8a34b01adfaa1"
+    },
+    {
+      "path": "media/families.svg",
+      "size": 7622,
+      "sha256": "7eed0a1212e74c897309bb13be45c84babc17baa2eb08e78ed4cadba75af0df2"
+    },
+    {
+      "path": "media/latency.svg",
+      "size": 6460,
+      "sha256": "208e556ab983b7a4001ae1d68b63cbbb536e16a918a022356bb658a9c0ef6564"
+    },
+    {
+      "path": "media/playground-agent.png",
+      "size": 1312334,
+      "sha256": "9b18e4b6e651150a7298f45680cba3bb20da5a0c06019bd09b4c6e5befec8f6f"
+    },
+    {
+      "path": "media/playground-code.gif",
+      "size": 5814877,
+      "sha256": "dcbff1d11301f816d9cda6ed748876fdb39a2870f190d63af93c20b04a163f5d"
+    },
+    {
+      "path": "media/playground-code.png",
+      "size": 268648,
+      "sha256": "e07aa4fdc8bca9a9ccf72ce5597c5fb9c7e75070cc55df64eb5d72ce5787f260"
+    },
+    {
+      "path": "media/playground-contract.png",
+      "size": 1268239,
+      "sha256": "753329aa1f955a5462bfb4b6f56cd9e10297b37396e23178fb59c7d9871b4322"
+    },
+    {
+      "path": "media/playground-custom.gif",
+      "size": 4764601,
+      "sha256": "276cdba92d6a2ad773f80eebe64c392123600bd8fee2766ebd1ba908f81cd12e"
+    },
+    {
+      "path": "media/playground-light.png",
+      "size": 3920678,
+      "sha256": "66415d18a5a5568734283d7b8f962ea36dcb6c286b0812509c1239ffab9b3dbf"
+    },
+    {
+      "path": "media/playground-mobile.png",
+      "size": 1042898,
+      "sha256": "6f4b282cbfc2711b99ac5dc4554de0be0f457a1d35514ed53f4d8917bec9bfae"
+    },
+    {
+      "path": "media/playground-moderation.png",
+      "size": 1291194,
+      "sha256": "fc8619f4f00553768c35650eb9c4bd1e77bbd76c26a983da0d48ab3ad170d085"
+    },
+    {
+      "path": "media/playground-presets.gif",
+      "size": 4280851,
+      "sha256": "a96381ce9edc9391eafaefc9f5c7365cada24e0bb5c98154474d0d84d3c6b76b"
+    },
+    {
+      "path": "media/playground-routing.png",
+      "size": 1068935,
+      "sha256": "d595539ef374e3d51f4ccc5e33c1118861a64d910023fa402dd214c882c83645"
+    },
+    {
+      "path": "media/speed-path.svg",
+      "size": 3195,
+      "sha256": "c0953fa37615940873fe5e7060f048bac832bd7aacdd0cefd5e9b49f0bf91e0e"
+    },
+    {
+      "path": "noma/__init__.py",
+      "size": 316,
+      "sha256": "3183bc32e4ea88a23c2b1d138d1a5261c536f33dddae1c523b28b92d989f7b4b"
+    },
+    {
+      "path": "noma/cli.py",
+      "size": 1312,
+      "sha256": "369e72c49442727ed8dd4a627b8ee4a79bbcffc356972be63c1c5d96c24bf812"
+    },
+    {
+      "path": "noma/eval/__init__.py",
+      "size": 279,
+      "sha256": "25b7b93a7d1b5fcff79bbdb5f8f266ecee5e21811c2b4633a83a492617aab2f2"
+    },
+    {
+      "path": "noma/eval/quick.py",
+      "size": 2399,
+      "sha256": "2dd5c406b7a464a0b25b10cfd9d8d68994fc32a4f6ccacb6ea6052882cef9e86"
+    },
+    {
+      "path": "noma/export.py",
+      "size": 5708,
+      "sha256": "0db875e31b842114cd859528fb9082d78a5373ecb276f138c6140cde5648ffd7"
+    },
+    {
+      "path": "noma/model/__init__.py",
+      "size": 62,
+      "sha256": "54924784542dc21ca161758793065e544d67b1d78e095aaebb291d5d9fd37570"
+    },
+    {
+      "path": "noma/model/check.py",
+      "size": 4199,
+      "sha256": "d83971677f385521edab2a258713caae3044ca2d8e0d11ef489bbc22c65b3314"
+    },
+    {
+      "path": "noma/model/facts.py",
+      "size": 12528,
+      "sha256": "44af9fa51b37ea4b03318b61184268545f31c21aaea4d1abde960426f491cd7b"
+    },
+    {
+      "path": "noma/model/heads.py",
+      "size": 3679,
+      "sha256": "e85c4d55bf400d1b589b7a6e8708087254dee8680f579fc0c2fdae45959082c1"
+    },
+    {
+      "path": "noma/model/noma.py",
+      "size": 14534,
+      "sha256": "dea73cfdbd132582fe9106f1f8cbf158d0055e312f52ec256533c9a53385f318"
+    },
+    {
+      "path": "noma/model/serialize.py",
+      "size": 5001,
+      "sha256": "243cf046fbea2c3b5e3fc5189c37660d3f79d22e5eeedfaf41917c6691cfda85"
+    },
+    {
+      "path": "noma/probe/__init__.py",
+      "size": 62,
+      "sha256": "d1ce061b19518673783110c4b7909df4df326f8ce6496a0a2f9ec042d172605f"
+    },
+    {
+      "path": "noma/probe/capacity.py",
+      "size": 9614,
+      "sha256": "a009ee43da35790ebe34061e9d78b369ce3deb2950d1da47329780ec98da44d0"
+    },
+    {
+      "path": "noma/serve/__init__.py",
+      "size": 19,
+      "sha256": "c49b274178302622e271f0abe0df7ef5ce4dce40029f1e59bcefd91047d49f0c"
+    },
+    {
+      "path": "noma/serve/app.py",
+      "size": 6167,
+      "sha256": "6a8bff186fcbe4700155a6d099c227d6248c6fb47454ddc466403b4f07989486"
+    },
+    {
+      "path": "noma/serve/bench.py",
+      "size": 5146,
+      "sha256": "e0310f8cbb2b10849b849c88ad14341b741f4f56a0e342beb983d7c0be95ebdf"
+    },
+    {
+      "path": "noma/serve/jev_client_check.py",
+      "size": 2055,
+      "sha256": "075de4488ab418d4e9f3e33242a60d4a37b80be73bb9fb40dd9cd1d35b55cc74"
+    },
+    {
+      "path": "noma/serve/latency_summary.py",
+      "size": 638,
+      "sha256": "c5697f4ab4e7b8f1496ea21fbc26121f44a71a0b6cbe2ac0ae2f78ac71b16972"
+    },
+    {
+      "path": "noma/serve/static/app.css",
+      "size": 13719,
+      "sha256": "812edaf63ba282daf13bce3940511049047c4a779b3cc50b9c9a8bd673a4d4b9"
+    },
+    {
+      "path": "noma/serve/static/app.js",
+      "size": 16083,
+      "sha256": "5d3621e5f5eaf2d96f23d9c5bb16ac9b26628aab62153267769cc56a2a24a4d5"
+    },
+    {
+      "path": "noma/serve/static/blackdrome-logo.svg",
+      "size": 89548,
+      "sha256": "26fa10ce278140b0f025787618db829d4694af7e7cf0c0995ece2033a1a3cc14"
+    },
+    {
+      "path": "noma/serve/static/index.html",
+      "size": 5244,
+      "sha256": "6300c9a6ddd1b2bc748fe76fbaaf72883ac933da5e4d5a0983cd9983326b498b"
+    },
+    {
+      "path": "noma/train/__init__.py",
+      "size": 20,
+      "sha256": "5ce4d99f7401df2121ed81cf18b16119745e22fe015200cb8fd77f8e8f872cca"
+    },
+    {
+      "path": "noma/train/data.py",
+      "size": 2792,
+      "sha256": "3c90c8f190fc45fdf1e0926d080ef4429e55c8d294e81bbc7d12b6119e6f7b1a"
+    },
+    {
+      "path": "noma/train/encode.py",
+      "size": 3141,
+      "sha256": "a9051992fb967021cd17d5a98a039a21c95796fd7500716ec00d90277d1aaa93"
+    },
+    {
+      "path": "noma/train/losses.py",
+      "size": 2643,
+      "sha256": "e93266f13e4ed234d0011242ce4848bb1a75bc5935f7e2d1b73427580e443667"
+    },
+    {
+      "path": "noma/train/train.py",
+      "size": 13525,
+      "sha256": "be56a9f41fc242e89fdab50d6569500bafda83a6da53215dd162bbf42f575b42"
+    },
+    {
+      "path": "pyproject.toml",
+      "size": 1473,
+      "sha256": "40e0aa8afd05403f27877a2a47fa0a8c495219fd00e5260e42ad5e0980256634"
+    },
+    {
+      "path": "scripts/make_figures.py",
+      "size": 16794,
+      "sha256": "5d0f281d8e1b974674180e45871059c18bd778b5f03c784955753f7e8d8b46b6"
+    },
+    {
+      "path": "scripts/record_playground.py",
+      "size": 6263,
+      "sha256": "a693fc083c6d53cdbd0bbdfc123c733e8b78b30117692bec906e1faeaad09395"
+    },
+    {
+      "path": "tests/test_model.py",
+      "size": 5790,
+      "sha256": "a81463d34b6d22a2bfe2e60959a79eabb791f5c60556d71c19ea6ab86570c163"
+    },
+    {
+      "path": "tests/test_serve.py",
+      "size": 4943,
+      "sha256": "6c203b1a82c5a9efde0f452b1cacd4eaa054e58f5dbfabd9f8cd97760143cd5c"
+    }
+  ]
+}

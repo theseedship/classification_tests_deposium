@@ -1,0 +1,129 @@
+{
+  "schema_version": "deposium.tool-selection-review-manifest/v0",
+  "dataset_id": "tool-selection-review-v0",
+  "status": "review_only_not_runner_compatible",
+  "cases_file": "cases.review.jsonl",
+  "cases_sha256": "9a1a9616ea87c6bd06c45dd6d2a32063dca0f46f53cecf58ac0743a9d3df8d6f",
+  "case_count": 16,
+  "family_count": 8,
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "split_policy": "unassigned; keep translations, paraphrases and future variants in one family before assigning splits",
+  "provenance": {
+    "kind": "synthetic",
+    "usage_observed": false,
+    "human_review": "pending",
+    "reference_policy": "Proposals from user intent and source contracts before any model run; fixtures delimit scope, never copied heuristic golds."
+  },
+  "counts": {
+    "boundaries": {
+      "connector_short_choice": 8,
+      "mastra_in_process_tool_choice": 8
+    },
+    "proposed_pending_review": 14,
+    "blocked_implementation": 2,
+    "scorable_now": 0,
+    "training_eligible_now": 0
+  },
+  "source_checkout": {
+    "component": "deposium_MCPs",
+    "head": "391be12078b1f3daa24a50c31c3a39eb72d7fb94",
+    "tracked_dirty": false,
+    "runtime_observed": false,
+    "sources": [
+      {
+        "source_id": "mastra_tools",
+        "component": "deposium_MCPs",
+        "path": "src/agents/deposium-agent.ts",
+        "sha256": "e44e04e585fa3601955057a10a5b3c0f03ca80d6ae3363baf4a1209c77b735b1",
+        "size_bytes": 45225,
+        "lines": [
+          294,
+          331,
+          351,
+          401,
+          421,
+          483,
+          495,
+          840
+        ]
+      },
+      {
+        "source_id": "mastra_counts",
+        "component": "deposium_MCPs",
+        "path": "src/tools/corpus-stats.ts",
+        "sha256": "9bbe377f384c97563cc6e46983f540e3ac2181940a9267aa97123596135c613b",
+        "size_bytes": 8891,
+        "lines": [
+          118
+        ]
+      },
+      {
+        "source_id": "connector_selector",
+        "component": "deposium_MCPs",
+        "path": "src/services/connector-orchestrator.ts",
+        "sha256": "cb4c2e18866a4aceee6731630fee4192d5b1e65c7427b921ddf010ce85ab7f79",
+        "size_bytes": 26646,
+        "lines": [
+          49,
+          240
+        ]
+      },
+      {
+        "source_id": "connector_caller",
+        "component": "deposium_MCPs",
+        "path": "src/routes/chat-handlers/connector.ts",
+        "sha256": "4dcbc780c822f92e7a6708b5f03a2638a14899fe1cd10f9e7e84d499730203c9",
+        "size_bytes": 23270,
+        "lines": [
+          224
+        ]
+      },
+      {
+        "source_id": "connector_fixture",
+        "component": "deposium_MCPs",
+        "path": "tests/unit/services/connector-orchestrator-parity.test.ts",
+        "sha256": "0bfb0bcd6a508e0f7b46d2df76b6910eb64fc2455ccc0851abba810429644cd1",
+        "size_bytes": 4681,
+        "lines": [
+          33
+        ]
+      }
+    ]
+  },
+  "registry_mapping": {
+    "connector_decisions": [
+      "mcps.connector-orchestrator-selection",
+      "mcps.legacy-connector-keyword-choice"
+    ],
+    "registered_contract_ids": [],
+    "mastra_boundary": "No dedicated registry decision or runner contract currently asserted.",
+    "excluded_direct_mapping": [
+      "mcps.autonomous-agent-loop"
+    ]
+  },
+  "candidate_protocol": {
+    "status": "planned_new_adapter",
+    "visible_fields": [
+      "candidate_input.message",
+      "candidate_input.observations",
+      "candidate_input.options"
+    ],
+    "future_output": "Opaque option ID; normalization to be specified by future adapter."
+  },
+  "baseline_policy": {
+    "connector": "Existing pure heuristic is already cheap: semantic quality gain first, especially negation/quoted requests.",
+    "mastra": "May avoid one routing LLM turn only when arguments/scope safely resolved; no measured saving.",
+    "controls": "Pseudo-tool HITL/fallback interception requires separate integration proof."
+  },
+  "limitations": [
+    "No current runner schema, scorer, harness, train-ready dataset or actual benchmark.",
+    "Synthetic examples/observations are not collected user traces.",
+    "14 choice proposals require independent bilingual human review.",
+    "2 graph controls have empty acceptable_choices, blocked implementation and no future score/train eligibility until fixed and explicitly reviewed.",
+    "Tool choice is separate from arguments, plan order, successful execution, grounded synthesis, ACL/resources.",
+    "Answer bridge calls executeChat with verification_mode none and may search again; no prior-block reuse demonstrated."
+  ]
+}

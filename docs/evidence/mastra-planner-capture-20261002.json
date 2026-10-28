@@ -1,0 +1,142 @@
+{
+  "schema_version": "deposium.mastra-planner-capture-evidence/v0",
+  "observed_date": "2026-10-02",
+  "archive": "results/mastra-planner-capture-001",
+  "qualification": "real_planner_scripted_provider_mock_backends",
+  "mode": "full_native_pool_capture",
+  "comparable_to_three_label_candidate": false,
+  "counts": {
+    "controls": 3,
+    "controls_passed": 3,
+    "cases_scored": 0,
+    "model_calls": 0
+  },
+  "semantic_evaluation_status": "not_run",
+  "service_status": "not_observed",
+  "source": {
+    "revision": "391be12078b1f3daa24a50c31c3a39eb72d7fb94",
+    "source_kind": "committed_file_snapshot",
+    "files_sha256": {
+      "src/agents/deposium-agent.ts": "e44e04e585fa3601955057a10a5b3c0f03ca80d6ae3363baf4a1209c77b735b1",
+      "src/agents/use-mastra-transport.ts": "6bc6da68d1aedaa27b0d87cc8d51c08545673ceaa85e946bd7f99f79eb74ac02",
+      "src/services/explicit-no-info-answer.ts": "5d1d3dd56cf42c19e825e9d9aaba2547dc274de89dc32db9b63f50083d8e39f5",
+      "src/utils/mcp-logger.ts": "7aeb61f30612c76afd3b83656a0164df9f4e70abd6e1a3ca0d03ef9a2d16f58f",
+      "src/utils/trace-context.ts": "de543f9d5e199a662fe09a1222b266e0d7106b0a670621100abb37665315e3b9",
+      "package.json": "ef76eeffbfe8435738dff86cc6572342305173147615c14cebc4025bd0e3c7f6",
+      "package-lock.json": "b73f05356bbfa49fd394990cf01a0d5b8fd64938d35554032345465dbd43af51"
+    },
+    "installed_dependencies": "shared_read_only_not_a_frozen_closure",
+    "application_worktree_executed": false
+  },
+  "bench_commit_matching_archived_files": {
+    "revision": "84952938103e6c8f83b45c177033456490e244ed",
+    "scope": "Only the two bench files hashed by the archive; archive records no bench commit.",
+    "files_match_commit": {
+      "deposium_bench/mastra_pilot.py": true,
+      "bridges/mastra-planner-capture.mjs": true
+    }
+  },
+  "bench_files_sha256": {
+    "deposium_bench/mastra_pilot.py": "4a24c5ac67b590d3f96e5c9a39ff91bbd63ed24a864232b25cf24c357722034d",
+    "bridges/mastra-planner-capture.mjs": "aa60ebfb2129714dbe4672d48bcda26663f06d953cfa9d862a6c6d65d960e903"
+  },
+  "archive_files_sha256_verified": {
+    "controls.json": "26660dc2f061565fdb0b38cf4814bd5143bca07634ff74301ed2adfa3410ecc2",
+    "results.jsonl": "3b50cab807d5f1347f3c0d95d47211f69689ee61ca4dfdaeb8b71ff2a9191a9c",
+    "stack-registry.json": "d9cd33a36b5d326a5b51135732d5fb44d26828b879f0af83b2b6f30de6610bb6",
+    "summary.json": "bcc6f0bb336a219b95e036190c13a244b0e39f8427db0122cbbbae4b8de2cce1"
+  },
+  "archive_seal": {
+    "present": false,
+    "sha256": null
+  },
+  "catalog_sha256": "95c78b47a82d2d22bd50f5c0ed753628a24ed3c885be3b5777ddc027211186d2",
+  "native_pool": [
+    "abstain_decision",
+    "deposium_analyze",
+    "deposium_answer",
+    "deposium_graph",
+    "deposium_search",
+    "escalate_decision"
+  ],
+  "runtime": {
+    "node": "v24.19.0",
+    "packages": {
+      "tsx": {
+        "version": "4.23.12",
+        "package_json_sha256": "96aee9fd252d0cc31f3c01468250961f5b338c797bc208700d7db926450c7659"
+      },
+      "zod": {
+        "version": "4.4.3",
+        "package_json_sha256": "c630bd10b52dcf71c112a2bf78dbf2734b9db58d62de663b8d86c2ec2c8cda2e"
+      },
+      "@mastra/core": {
+        "version": "1.63.0",
+        "package_json_sha256": "da29c1b9d3b7b60cbd23faa37e87040c11573ee89fd972da400c9039559518b6"
+      },
+      "@mastra/mcp": {
+        "version": "1.17.2",
+        "package_json_sha256": "b9faf2d5c89bae91d3a8fda25ae97dcb106760b90a9f46781fd3d7fdbcf388a2"
+      },
+      "@ai-sdk/openai": {
+        "version": "4.0.50",
+        "package_json_sha256": "0d13deb3300dfcf2452778636fca55f918c6b537f9a0f80ce8189d920f4431a1"
+      }
+    }
+  },
+  "controls": [
+    {
+      "case_id": "planner-search-capture",
+      "passed": true,
+      "observed_decision_kind": "tool_call",
+      "ordered_tool_calls": [
+        "deposium_search"
+      ],
+      "provider_request_body_sha256": "1f794cf11c7467bf28f36d6fbc97acb7006464c2b2ef15ab18a94a6334214783",
+      "requested_provider_model": "openai/gpt-oss-120b",
+      "scripted_provider_requests": 1,
+      "native_tool_executions": 1,
+      "real_provider_calls": 0,
+      "network_attempts": 0,
+      "blocked_loader_ipc_attempts": 1
+    },
+    {
+      "case_id": "planner-stats-capture",
+      "passed": true,
+      "observed_decision_kind": "tool_call",
+      "ordered_tool_calls": [
+        "deposium_analyze"
+      ],
+      "provider_request_body_sha256": "1f794cf11c7467bf28f36d6fbc97acb7006464c2b2ef15ab18a94a6334214783",
+      "requested_provider_model": "openai/gpt-oss-120b",
+      "scripted_provider_requests": 1,
+      "native_tool_executions": 1,
+      "real_provider_calls": 0,
+      "network_attempts": 0,
+      "blocked_loader_ipc_attempts": 1
+    },
+    {
+      "case_id": "planner-text-stop-capture",
+      "passed": true,
+      "observed_decision_kind": "text_stop",
+      "ordered_tool_calls": [],
+      "provider_request_body_sha256": "1f794cf11c7467bf28f36d6fbc97acb7006464c2b2ef15ab18a94a6334214783",
+      "requested_provider_model": "openai/gpt-oss-120b",
+      "scripted_provider_requests": 1,
+      "native_tool_executions": 0,
+      "real_provider_calls": 0,
+      "network_attempts": 0,
+      "blocked_loader_ipc_attempts": 1,
+      "fallback_equivalent": false
+    }
+  ],
+  "limits": [
+    "Planner provider responses are scripted, with the full six-tool pool; no model comparison.",
+    "searchHub and getCorpusStats are simulated, including returned counts and passages.",
+    "Caller scope is synthetic; no authentication, database isolation or live service is qualified.",
+    "Cold process duration is not decision latency or a speed-up measurement.",
+    "Native text stop does not establish fallback to the complete planner.",
+    "Scripted provider usage is fixture data; no LLM latency or real token consumption is measured.",
+    "The archive has file hashes and no seal.json."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "d3-lite-cpu-context-v1",
+  "adapter": "d3",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "model": {
+    "repo_id": "vllm-sr/d3-lite",
+    "local_dir": "../models/d3-lite-a8d25a9",
+    "runtime_python": "../.cache/d3-runtime/bin/python",
+    "assets_manifest": "d3-lite-assets.json",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "runtime_lock": "../runtimes/d3/runtime.lock",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 6144
+  },
+  "timeout_seconds": 60,
+  "revision": "a8d25a91ef75552803f7009d25b7bd435991abd9",
+  "recordings": null
+}

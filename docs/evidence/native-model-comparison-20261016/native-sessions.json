@@ -1,0 +1,340 @@
+{
+  "date": "2026-10-16",
+  "hardware": "Apple M5 Pro, 64 GiB unified memory",
+  "memory_limitations": [
+    "Sampled process-group RSS does not measure all unified GPU memory.",
+    "macOS available memory is a free/inactive/speculative-page estimate."
+  ],
+  "not_run": [
+    "D3 27B Q8",
+    "WSL CUDA inference",
+    "integrated routing",
+    "product paths",
+    "long-context grid",
+    "repeated latency campaign"
+  ],
+  "observations": {
+    "D3FlashQ4": {
+      "archive_name": "d3-flash-q4-native-pilot-20261016-001",
+      "bench_git": {
+        "dirty": false,
+        "gitmodules_sha256": null,
+        "head": "96b102b52fd7cc0dfe88c1a48355e99675e12bbe",
+        "status_counts": {
+          "conflicted": 0,
+          "staged": 0,
+          "unstaged": 0,
+          "untracked": 0
+        }
+      },
+      "completed": true,
+      "created_at": "2026-10-15T22:46:36.675249+00:00",
+      "filename": "vllm-d3-flash-Q4_K_M.gguf",
+      "files_sha256": {
+        "bases/seal.json": "c7c29e89a07ba25c180c51e3ec7dc72d2c0dc43615a11d82c90e203cb6c56d95",
+        "bench-source.tar": "94bdb3d13c903759168fc344f2b197b57c5dec8bfff611ceae6f79a3ca117910",
+        "mastra/seal.json": "1062bfc28bcbf51d974cc54513e331465225dadfbaa6d2044e38d2c3421a4dd0",
+        "pilot-seal.json": "359117bcb340a23b67c9d293a7b621e093f821eed32fe8e33288fe223a7bf1e4",
+        "pilot.json": "09845f4b41e7484d99f1bec17cbede278be7a97d344a034be663183792337c2a",
+        "service-source.tar": "8f8468dc04e7839f4e9423b9dbaf604923df9602f20c21f643c8f8737b34d330",
+        "session.json": "71e226f516715b9515378bf6090a4daac20e447b33917564520e383fbdb27843"
+      },
+      "gateway_exit_code": 0,
+      "gateway_sha256": "11c795638f9852672e164e559a484219c3e34353f44e9ffa81a861c8ff231585",
+      "harness_sha256": "4dec7fc81385e17a27b7cf2b26c232a1b2864d4ee6295d80eee10c0ba8af86a7",
+      "memory_after": {
+        "MemAvailable_mib": 30209.53125,
+        "MemTotal_mib": 65536.0,
+        "limitation": "Reclaimable-page estimate, not Linux MemAvailable or a GPU allocation measurement",
+        "method": "macos_free_inactive_speculative_estimate"
+      },
+      "memory_before": {
+        "MemAvailable_mib": 36481.296875,
+        "MemTotal_mib": 65536.0,
+        "limitation": "Reclaimable-page estimate, not Linux MemAvailable or a GPU allocation measurement",
+        "method": "macos_free_inactive_speculative_estimate"
+      },
+      "model": {
+        "alias": "d3-flash-q4",
+        "repo_id": "ggml-org/vllm-d3-flash-GGUF",
+        "revision": "3d53d13778bf8035e6e1e534ce489ed052ee5663",
+        "sha256": "8140de6f2e0939b435ac585ecdec97f4aef1545ff01d072fe7f7e4c88ebaa611"
+      },
+      "recorded_budget": {
+        "max_seconds": 1200,
+        "min_available_mib": 8192,
+        "rss_guard_mib": 14336,
+        "sample_interval_seconds": 0.25
+      },
+      "resources": {
+        "min_available_mib": 30088.25,
+        "rss_peak_mib": 6819.421875,
+        "stop_reason": null
+      },
+      "rss_guard_mib": 14336,
+      "runtime": {
+        "backend_requested": "metal",
+        "repository": "https://github.com/ggml-org/llama.cpp.git",
+        "revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+        "sha256": "3bc062d01ef3278441a357552c201c87032ee52cdcffbc9034dd43d5d1b25e6b"
+      },
+      "runtime_pin_sha256": "e8e3e7997b69e5028a50d92de7c0935b8b28516b41e887d3e9fb8c58cd4980e8",
+      "settings": {
+        "concurrency": 1,
+        "context": 4096,
+        "parallel": 1,
+        "questions_per_call": 1,
+        "truncation": "reject_in_pinned_native_engine"
+      },
+      "size_bytes": 6603024832,
+      "supervisor_sha256": "747b5f6d39e6e90afd784b5731289cc92d76269313bddf1a1cc1c4e56d0b3cbb"
+    },
+    "D3FlashQ8": {
+      "archive_name": "d3-flash-native-pilot-20261016-001",
+      "bench_git": {
+        "dirty": false,
+        "gitmodules_sha256": null,
+        "head": "87259b19bea57b80ffeeb3e732fe7002cc2c2ad0",
+        "status_counts": {
+          "conflicted": 0,
+          "staged": 0,
+          "unstaged": 0,
+          "untracked": 0
+        }
+      },
+      "completed": true,
+      "created_at": "2026-10-15T22:31:18.019663+00:00",
+      "filename": "vllm-d3-flash-Q8_0.gguf",
+      "files_sha256": {
+        "bases/seal.json": "c6c2c30b487cd592a3c371cbcc3c9432158894c5d9077cec116a2d6417394c19",
+        "bench-source.tar": "1fd9064dd34d2302f269d698ac5b504b5266b6e25ebe62594226736fcbe0c9cc",
+        "mastra/seal.json": "066f23849682989eb7af5d1c58c0213a5c856670476c214ac69d9eaeaff96938",
+        "pilot-seal.json": "433be47d6815a640efe77f63859353bebeeb874df557f68e5bdce9dfc50f526a",
+        "pilot.json": "48e2f8ca29b711d86ab7fa36efc3b5c9bc6c0dff3e123f6bf6b1974896eb15d8",
+        "service-source.tar": "8f8468dc04e7839f4e9423b9dbaf604923df9602f20c21f643c8f8737b34d330",
+        "session.json": "aefc95aba9343700aae90d1aa3cbc00f36ae1c874b9d26f9b6d9cbcfdc4cfd06"
+      },
+      "gateway_exit_code": 0,
+      "gateway_sha256": "11c795638f9852672e164e559a484219c3e34353f44e9ffa81a861c8ff231585",
+      "harness_sha256": "4dec7fc81385e17a27b7cf2b26c232a1b2864d4ee6295d80eee10c0ba8af86a7",
+      "memory_after": {
+        "MemAvailable_mib": 30689.3125,
+        "MemTotal_mib": 65536.0,
+        "limitation": "Reclaimable-page estimate, not Linux MemAvailable or a GPU allocation measurement",
+        "method": "macos_free_inactive_speculative_estimate"
+      },
+      "memory_before": {
+        "MemAvailable_mib": 42483.53125,
+        "MemTotal_mib": 65536.0,
+        "limitation": "Reclaimable-page estimate, not Linux MemAvailable or a GPU allocation measurement",
+        "method": "macos_free_inactive_speculative_estimate"
+      },
+      "model": {
+        "alias": "d3-flash-q8",
+        "repo_id": "ggml-org/vllm-d3-flash-GGUF",
+        "revision": "3d53d13778bf8035e6e1e534ce489ed052ee5663",
+        "sha256": "7352edf6be85d93ab8806a17e1b3d0a7e71ee3685af3212ddbe679b742c2221b"
+      },
+      "recorded_budget": null,
+      "resources": {
+        "min_available_mib": 30425.453125,
+        "rss_peak_mib": 9613.65625,
+        "stop_reason": null
+      },
+      "rss_guard_mib": 20480,
+      "runtime": {
+        "backend_requested": "metal",
+        "repository": "https://github.com/ggml-org/llama.cpp.git",
+        "revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+        "sha256": "3bc062d01ef3278441a357552c201c87032ee52cdcffbc9034dd43d5d1b25e6b"
+      },
+      "runtime_pin_sha256": "e8e3e7997b69e5028a50d92de7c0935b8b28516b41e887d3e9fb8c58cd4980e8",
+      "settings": {
+        "concurrency": 1,
+        "context": 4096,
+        "parallel": 1,
+        "questions_per_call": 1,
+        "truncation": "reject_in_pinned_native_engine"
+      },
+      "size_bytes": 9527503296,
+      "supervisor_sha256": "572d24573cb0441c86012b48284a60e92a5cdfaef95ad433ee67e77c5d8310b9"
+    },
+    "D3Q4": {
+      "archive_name": "d3-27b-q4-native-pilot-20261016-001",
+      "bench_git": {
+        "dirty": false,
+        "gitmodules_sha256": null,
+        "head": "96b102b52fd7cc0dfe88c1a48355e99675e12bbe",
+        "status_counts": {
+          "conflicted": 0,
+          "staged": 0,
+          "unstaged": 0,
+          "untracked": 0
+        }
+      },
+      "completed": true,
+      "created_at": "2026-10-15T22:55:08.191673+00:00",
+      "filename": "vllm-d3-Q4_K_M.gguf",
+      "files_sha256": {
+        "bases/seal.json": "3dda9c4cc52901f30490c536f6e1533d7ddae927e954b4e311c83544e6808892",
+        "bench-source.tar": "94bdb3d13c903759168fc344f2b197b57c5dec8bfff611ceae6f79a3ca117910",
+        "mastra/seal.json": "e2c9a5ceb3ab82ab7d788d92fdd5bc8970f3bbbaee7884c6075669ab902ad287",
+        "pilot-seal.json": "4044e4e37ed44233f6802d687368409a6cc6a4022aa61f76a8d30084f568ba83",
+        "pilot.json": "bcee6b9b09e33677c44a720bacb42e9ff6f81b4aa05a0c2af6eeda756470f5b4",
+        "service-source.tar": "8f8468dc04e7839f4e9423b9dbaf604923df9602f20c21f643c8f8737b34d330",
+        "session.json": "27ee27f3505562715612b5c988e8e3111ac6afdd05d5a6a106ddb99d9a2dcf02"
+      },
+      "gateway_exit_code": 0,
+      "gateway_sha256": "11c795638f9852672e164e559a484219c3e34353f44e9ffa81a861c8ff231585",
+      "harness_sha256": "4dec7fc81385e17a27b7cf2b26c232a1b2864d4ee6295d80eee10c0ba8af86a7",
+      "memory_after": {
+        "MemAvailable_mib": 21684.96875,
+        "MemTotal_mib": 65536.0,
+        "limitation": "Reclaimable-page estimate, not Linux MemAvailable or a GPU allocation measurement",
+        "method": "macos_free_inactive_speculative_estimate"
+      },
+      "memory_before": {
+        "MemAvailable_mib": 37527.90625,
+        "MemTotal_mib": 65536.0,
+        "limitation": "Reclaimable-page estimate, not Linux MemAvailable or a GPU allocation measurement",
+        "method": "macos_free_inactive_speculative_estimate"
+      },
+      "model": {
+        "alias": "d3-27b-q4",
+        "repo_id": "ggml-org/vllm-d3-GGUF",
+        "revision": "de9670136f5ddd83e677c89ce041d5b9bb3b0dcb",
+        "sha256": "a5a341e8611dc5d916c8f4c693dbef4a68e57eb17d37914fd56dcb5a9221eb2d"
+      },
+      "recorded_budget": {
+        "max_seconds": 1200,
+        "min_available_mib": 8192,
+        "rss_guard_mib": 24576,
+        "sample_interval_seconds": 0.25
+      },
+      "resources": {
+        "min_available_mib": 21303.03125,
+        "rss_peak_mib": 19264.59375,
+        "stop_reason": null
+      },
+      "rss_guard_mib": 24576,
+      "runtime": {
+        "backend_requested": "metal",
+        "repository": "https://github.com/ggml-org/llama.cpp.git",
+        "revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+        "sha256": "3bc062d01ef3278441a357552c201c87032ee52cdcffbc9034dd43d5d1b25e6b"
+      },
+      "runtime_pin_sha256": "e8e3e7997b69e5028a50d92de7c0935b8b28516b41e887d3e9fb8c58cd4980e8",
+      "settings": {
+        "concurrency": 1,
+        "context": 4096,
+        "parallel": 1,
+        "questions_per_call": 1,
+        "truncation": "reject_in_pinned_native_engine"
+      },
+      "size_bytes": 19403686112,
+      "supervisor_sha256": "747b5f6d39e6e90afd784b5731289cc92d76269313bddf1a1cc1c4e56d0b3cbb"
+    },
+    "EosQ8": {
+      "archive_name": "eos-native-pilot-20261016-001",
+      "bench_git": {
+        "dirty": false,
+        "gitmodules_sha256": null,
+        "head": "87259b19bea57b80ffeeb3e732fe7002cc2c2ad0",
+        "status_counts": {
+          "conflicted": 0,
+          "staged": 0,
+          "unstaged": 0,
+          "untracked": 0
+        }
+      },
+      "completed": true,
+      "created_at": "2026-10-15T22:29:09.763901+00:00",
+      "filename": "Decision-2.0-Eos-0.8B-Q8_0.gguf",
+      "files_sha256": {
+        "bases/seal.json": "f35092e78f524a719a4d2fce9504abcbc489758b2cc688df56dcf7d7769a3fc5",
+        "bench-source.tar": "1fd9064dd34d2302f269d698ac5b504b5266b6e25ebe62594226736fcbe0c9cc",
+        "mastra/seal.json": "36b994abc2efd1efa52ca83c9fc9ca2eb6a8554663448d0b16d2094476dcfaa5",
+        "pilot-seal.json": "3cbbe2392b3031c4025f872076c94ef680556a25a9e5cb5610f6c04a954d2c85",
+        "pilot.json": "534457308bf401fd4b1829bbecfe58ce1c6adfb94c3a0b4a0cc00853dbfd9ee4",
+        "service-source.tar": "74473b09a15e529c4d85f83b4a1ee799e7edc9db9e6752ac2deb0b184f767b8f",
+        "session.json": "faef61129e2ed941d75b0221a8845b97b3f92a69a4b8e20c168513ad1118a6f2"
+      },
+      "gateway_exit_code": 0,
+      "gateway_sha256": "11c795638f9852672e164e559a484219c3e34353f44e9ffa81a861c8ff231585",
+      "harness_sha256": "4dec7fc81385e17a27b7cf2b26c232a1b2864d4ee6295d80eee10c0ba8af86a7",
+      "memory_after": {
+        "MemAvailable_mib": 36062.0,
+        "MemTotal_mib": 65536.0,
+        "limitation": "Reclaimable-page estimate, not Linux MemAvailable or a GPU allocation measurement",
+        "method": "macos_free_inactive_speculative_estimate"
+      },
+      "memory_before": {
+        "MemAvailable_mib": 37283.28125,
+        "MemTotal_mib": 65536.0,
+        "limitation": "Reclaimable-page estimate, not Linux MemAvailable or a GPU allocation measurement",
+        "method": "macos_free_inactive_speculative_estimate"
+      },
+      "model": {
+        "alias": "eos-q8",
+        "repo_id": "vllm-sr/Decision-2.0-Eos-0.8B-GGUF",
+        "revision": "a02a4cc6a4d637003ceede6f8b3b0bb0125b2d66",
+        "sha256": "abc6b5e14fcaa5646399c052fc4a0c7bbe817efccbdee9bbae7e38f193f1af8a"
+      },
+      "recorded_budget": null,
+      "resources": {
+        "min_available_mib": 35931.40625,
+        "rss_peak_mib": 1406.125,
+        "stop_reason": null
+      },
+      "rss_guard_mib": 8192,
+      "runtime": {
+        "backend_requested": "metal",
+        "repository": "https://github.com/Xunzhuo/llama.cpp.git",
+        "revision": "3c64a581d4f95bb2de409d383741fa5b18d84345",
+        "sha256": "a374077a425562e3aa82588975790af48dd6e573d7137e8d5db362b4b94cba10"
+      },
+      "runtime_pin_sha256": "7c16cdfb9af37341e7269a89ade8e30569376c31af902ae27dbda4a624ac172b",
+      "settings": {
+        "concurrency": 1,
+        "context": 4096,
+        "parallel": 1,
+        "questions_per_call": 1,
+        "truncation": "reject_in_pinned_native_engine"
+      },
+      "size_bytes": 816049472,
+      "supervisor_sha256": "572d24573cb0441c86012b48284a60e92a5cdfaef95ad433ee67e77c5d8310b9"
+    }
+  },
+  "schema_version": "deposium.native-pilot-aggregate/v1",
+  "scope": "isolated models through real local gateway",
+  "validation": {
+    "linux_final": {
+      "bench_tests": 531,
+      "hardware_inference": "not_run",
+      "launcher_tests": 10,
+      "passed": 514,
+      "registry": "valid",
+      "skipped": 17
+    },
+    "logs_sha256": {
+      "d3-bench-baseline-mac-20261016-001.log": "630b9e29ef3b426b36c79f8be7e6aaf97fd99550ced27ed858d6ec57940dbf9d",
+      "d3-bench-linux-20261016-004.log": "90bf0617a5f941c8d20c296667a67d0a13487b09329a6d457e7ac02a8694c34d",
+      "d3-bench-tests-20261016-002.log": "be21807548fc20f799d267004a8b12718b67e49cb732ed1e06d22acfe78debee",
+      "d3-native-analysis-tests-20261016-001.log": "1f416bcbbe7b89dc49b058c7ad430f4b94bff4b27ed678d68b024090cf43014e",
+      "d3-q4-targeted-linux-20261016-001.log": "47d2af1b341c0b6864ef4a1913aea22b8cef1d983a58706987fe3e9b0fbd15ad",
+      "d3-q4-targeted-mac-20261016-001.log": "2a8014c8dc05370537d982689603f37871b03392f6ae7eb72be7367379d29c67"
+    },
+    "mac_historical_suite": {
+      "baseline_tests": 516,
+      "errors_each": 6,
+      "extension_tests": 524,
+      "fail_error_signatures": "identical_in_order",
+      "failures_each": 51,
+      "skips_each": 31
+    },
+    "mac_targeted_final": {
+      "status": "pass",
+      "tests": 40
+    }
+  }
+}

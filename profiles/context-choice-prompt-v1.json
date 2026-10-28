@@ -1,0 +1,9 @@
+{
+  "schema_version": "deposium.context-choice-prompt/v1",
+  "input_protocol": "context_choice",
+  "order": "as_supplied",
+  "state_field": "context",
+  "question_field": "question",
+  "options_field": "options",
+  "output_field": "choice_id"
+}

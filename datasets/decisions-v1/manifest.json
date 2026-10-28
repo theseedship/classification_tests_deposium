@@ -1,0 +1,214 @@
+{
+  "schema_version": "deposium.dataset-manifest/v1",
+  "dataset_id": "decisions-v1",
+  "version": "1.0.0-exploratory",
+  "case_schema": "deposium.case/v1",
+  "case_count": 36,
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "88c728ee18d91647a6c3ee1a8ecfc65e808c916d82dba5ad70925dc4be3b3ab6",
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "packs": [
+    "DOC",
+    "FOLLOWUP",
+    "PRESENTATION",
+    "SOURCES",
+    "EVIDENCE"
+  ],
+  "provenance": {
+    "kind": "synthetic",
+    "private_data": false,
+    "author": "agent-authored fixtures, 2026-10-01",
+    "human_review": "not_performed",
+    "reference_policy": "Assertions specified from requirements and native input/output contracts before any component replay. References are not regenerated from candidate outputs."
+  },
+  "split_policy": "Group scenario, document and translation family in one split; no shared document ID across splits. FR/EN followup inputs are identical native contexts: language comprehension is not claimed for resolveDocumentFollowUp.",
+  "document_scope": "Synthetic inventory identities express quality requirements. Planner/selection calls do not read canonical documents, enforce ACL or prove the same inventory in a product answer.",
+  "evidence_output_contract": {
+    "evidence_ids": "unique passage IDs providing useful support or refutation",
+    "contradiction_ids": "unique passage IDs refuting a premise; also included in evidence_ids",
+    "insufficient": "boolean: provided pool does not answer every requested fact"
+  },
+  "component_limitations": {
+    "mcps.search": "Frozen query/passage decision task. The current MCP component bridge declares this contract unsupported; no search/rerank call, no copied application implementation.",
+    "other_contracts": "Isolated native component calls only; no injected candidate or complete chat-stream/product route."
+  },
+  "scenarios": [
+    {
+      "scenario_id": "doc-count",
+      "translation_family": "doc-count-fr-en",
+      "split": "train",
+      "document_ids": [
+        "synthetic:doc-count:d1",
+        "synthetic:doc-count:d2"
+      ],
+      "description": "Un compte de catalogue porte sur tout l’inventaire autorisé; le plan ne prouve pas le compte produit."
+    },
+    {
+      "scenario_id": "doc-list",
+      "translation_family": "doc-list-fr-en",
+      "split": "train",
+      "document_ids": [
+        "synthetic:doc-list:d1",
+        "synthetic:doc-list:d2"
+      ],
+      "description": "La liste est une opération de catalogue, sans réduire sa couverture à des passages retrouvés."
+    },
+    {
+      "scenario_id": "doc-compound",
+      "translation_family": "doc-compound-fr-en",
+      "split": "calibration",
+      "document_ids": [
+        "synthetic:doc-compound:d1",
+        "synthetic:doc-compound:d2"
+      ],
+      "description": "Compte, noms et résumés concernent le même inventaire; la fidélité de ce plan reste une exigence distincte du routage complet."
+    },
+    {
+      "scenario_id": "doc-content",
+      "translation_family": "doc-content-fr-en",
+      "split": "test",
+      "document_ids": [
+        "synthetic:doc-content:d1",
+        "synthetic:doc-content:d2"
+      ],
+      "description": "Une question de contenu exige récupération ciblée, même si elle mentionne les documents."
+    },
+    {
+      "scenario_id": "follow-resolved",
+      "translation_family": "follow-resolved-fr-en",
+      "split": "train",
+      "document_ids": [
+        "synthetic:follow-resolved:d1",
+        "synthetic:follow-resolved:d2"
+      ],
+      "description": "Une sélection complète avec même chat, espace et fichiers permet le suivi; ordre des fichiers indifférent. Éligibilité déjà résolue par l’appelant, pas compréhension linguistique testée ici."
+    },
+    {
+      "scenario_id": "follow-space-changed",
+      "translation_family": "follow-space-changed-fr-en",
+      "split": "test",
+      "document_ids": [
+        "synthetic:follow-space-changed:d1",
+        "synthetic:follow-space-changed:d2"
+      ],
+      "description": "Le changement d’espace invalide l’ancre; une clarification doit précéder toute opération. Aucun droit d’accès n’est déduit de cette sélection."
+    },
+    {
+      "scenario_id": "follow-incomplete",
+      "translation_family": "follow-incomplete-fr-en",
+      "split": "test",
+      "document_ids": [
+        "synthetic:follow-incomplete:d1",
+        "synthetic:follow-incomplete:d2"
+      ],
+      "description": "Une sélection incomplète ne détermine pas le référent de tous les résumés; demander clarification."
+    },
+    {
+      "scenario_id": "presentation-table",
+      "translation_family": "presentation-table-fr-en",
+      "split": "calibration",
+      "document_ids": [
+        "synthetic:presentation-table:d1",
+        "synthetic:presentation-table:d2"
+      ],
+      "description": "La table et la langue française sont des contraintes de présentation du résumé stocké, indépendantes de la langue de la question."
+    },
+    {
+      "scenario_id": "presentation-mermaid",
+      "translation_family": "presentation-mermaid-fr-en",
+      "split": "test",
+      "document_ids": [
+        "synthetic:presentation-mermaid:d1",
+        "synthetic:presentation-mermaid:d2"
+      ],
+      "description": "Une demande de diagramme conserve Mermaid comme format sans devenir une simple liste de fichiers."
+    },
+    {
+      "scenario_id": "presentation-language-followup",
+      "translation_family": "presentation-language-followup-fr-en",
+      "split": "test",
+      "document_ids": [
+        "synthetic:presentation-language-followup:d1",
+        "synthetic:presentation-language-followup:d2"
+      ],
+      "description": "Après des résumés tabulaires, le changement de langue conserve la tâche et le tableau. Ce cas de planner historique ne valide pas l’ancre fonctionnelle ni la traduction générée."
+    },
+    {
+      "scenario_id": "sources-pinned-documents",
+      "translation_family": "sources-pinned-documents-fr-en",
+      "split": "test",
+      "document_ids": [
+        "synthetic:sources-pinned-documents:d1",
+        "synthetic:sources-pinned-documents:d2"
+      ],
+      "description": "Le choix documentaire explicite reste autoritaire malgré une intention géographique proposée; disponibilité des fichiers et ACL hors périmètre."
+    },
+    {
+      "scenario_id": "sources-explicit-web",
+      "translation_family": "sources-explicit-web-fr-en",
+      "split": "test",
+      "document_ids": [],
+      "description": "Le choix Web explicite passe au routeur propriétaire; passthrough ne signifie ni connecteur disponible ni recherche exécutée."
+    },
+    {
+      "scenario_id": "sources-disabled-geo",
+      "translation_family": "sources-disabled-geo-fr-en",
+      "split": "test",
+      "document_ids": [],
+      "description": "Une intention géographique ne rend pas disponible un connecteur absent. Aucune opération externe ne doit être revendiquée."
+    },
+    {
+      "scenario_id": "sources-scope-documents",
+      "translation_family": "sources-scope-documents-fr-en",
+      "split": "calibration",
+      "document_ids": [
+        "synthetic:sources-scope-documents:d1",
+        "synthetic:sources-scope-documents:d2"
+      ],
+      "description": "Le dispatch pré-classification choisit le scope documentaire explicite quand des documents sont présents; aucun parcours HTTP ou ACL traversé."
+    },
+    {
+      "scenario_id": "evidence-useful-vs-topic",
+      "translation_family": "evidence-useful-vs-topic-fr-en",
+      "split": "calibration",
+      "document_ids": [
+        "synthetic:evidence-useful-vs-topic:d1",
+        "synthetic:evidence-useful-vs-topic:d2"
+      ],
+      "description": "La date répond à la question; la couleur du toit est proche du sujet mais ne fournit aucune preuve utile. Pool figé, pas de retrieval ou rerank MCP exécuté."
+    },
+    {
+      "scenario_id": "evidence-contradiction",
+      "translation_family": "evidence-contradiction-fr-en",
+      "split": "test",
+      "document_ids": [
+        "synthetic:evidence-contradiction:d1",
+        "synthetic:evidence-contradiction:d2"
+      ],
+      "description": "Une réfutation explicite est une preuve utile à conserver, même si elle contredit la prémisse de la question."
+    },
+    {
+      "scenario_id": "evidence-multiple",
+      "translation_family": "evidence-multiple-fr-en",
+      "split": "test",
+      "document_ids": [
+        "synthetic:evidence-multiple:d1",
+        "synthetic:evidence-multiple:d2"
+      ],
+      "description": "Deux preuves sont requises pour couvrir les deux jours; une seule réponse partielle ne satisfait pas le besoin."
+    },
+    {
+      "scenario_id": "evidence-insufficient",
+      "translation_family": "evidence-insufficient-fr-en",
+      "split": "test",
+      "document_ids": [
+        "synthetic:evidence-insufficient:d1",
+        "synthetic:evidence-insufficient:d2"
+      ],
+      "description": "Ni la date d’examen ni le montant de l’année précédente ne donnent le montant 2031; abstention permise sur information réellement insuffisante."
+    }
+  ]
+}

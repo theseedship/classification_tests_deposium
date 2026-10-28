@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "deposium.runtime-artifacts/v1",
+  "description": "Bounded runtime artifact inventory. File identities and fingerprint values must be verified against the actual runtime; paths identify observed files, not permission to execute them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "hash_scope",
+    "total_bytes",
+    "packages",
+    "files",
+    "limits"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "deposium.runtime-artifacts/v1"
+    },
+    "hash_scope": {
+      "const": "node_executable; selected_whole_package_js_json_native; esbuild_binaries"
+    },
+    "total_bytes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 209715200
+    },
+    "packages": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "root",
+          "version"
+        ],
+        "properties": {
+          "root": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+          }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "owner",
+          "path",
+          "sha256",
+          "size",
+          "mtime_ns",
+          "ctime_ns",
+          "device",
+          "inode"
+        ],
+        "properties": {
+          "owner": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "mtime_ns": {
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          },
+          "ctime_ns": {
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          },
+          "device": {
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          },
+          "inode": {
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        }
+      },
+      "maxItems": 5000
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_bytes",
+        "max_files"
+      ],
+      "properties": {
+        "max_bytes": {
+          "const": 209715200
+        },
+        "max_files": {
+          "const": 5000
+        }
+      }
+    }
+  }
+}

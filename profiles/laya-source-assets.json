@@ -1,0 +1,4792 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "NandhaKishorM/laya",
+  "revision": "2e4d9c87e8b1621deb344eac7de5c7258f32f849",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "size": 356,
+      "sha256": "bc2b65e36d06299f1810460c957272fc339bf494a31c9e2607f7f9419682b322"
+    },
+    {
+      "path": ".envrc",
+      "size": 10,
+      "sha256": "1d26c74fd25a4c3dbb09e029fc609588da499fd4af2a41c88f6316c7f8c54cf1"
+    },
+    {
+      "path": ".gitattributes",
+      "size": 901,
+      "sha256": "b124dc7054ac5ddb8f376e490038df001be42421802d3547e56808242a444f04"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "size": 2233,
+      "sha256": "e30825318cb3449c690457f44e2b0940ff8dd674b0c6bb0f0123d5b52d9bcb89"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "size": 329,
+      "sha256": "ef84204f1ee20554bc07d642787410e581c9570e6c3d2ed83dc9a3e8061f8299"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+      "size": 1569,
+      "sha256": "6f0b4fd07e46b6cd0f1a20c8c4bdc34b3f5f1181f24b712582173c4637518acc"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "size": 520,
+      "sha256": "54d27cb29179f567c41edefc7f75f28e52afd024d2a0dc6adcb8535e28f872b6"
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "size": 584,
+      "sha256": "ab94bfe77fadb0553616c0b334626533883f1b06c7dcb79361b4fc7c49c7e4b0"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "size": 16412,
+      "sha256": "8106445fa2fca1bcd4ff339c88bce0d203ed4700e75b3a13d3ce95e48032e754"
+    },
+    {
+      "path": ".github/workflows/docker.yml",
+      "size": 9857,
+      "sha256": "f54d328294a2bdad078b761250c62c9578bed039dcd1bbdb00792dbc4a7dfc37"
+    },
+    {
+      "path": ".github/workflows/docs.yml",
+      "size": 2832,
+      "sha256": "6f8c0aca5915e8371cef73adfa7c041df7907fc66eaf847ebec832b676781e6f"
+    },
+    {
+      "path": ".github/workflows/dotnet.yml",
+      "size": 10580,
+      "sha256": "5e72093f097d3583b4d17008fe49973c88704104c5b2c794a580f1dc9a548c64"
+    },
+    {
+      "path": ".github/workflows/evals.yml",
+      "size": 4016,
+      "sha256": "e517c8688509689cd6519e92e283cddb41d78ebd0eaca7a9a14e8b1dc6df096f"
+    },
+    {
+      "path": ".github/workflows/release-ts.yml",
+      "size": 4414,
+      "sha256": "f6c25372a9f1254399f3501a5ae6103ba33ba9a07596ea0bc1e58f04ed024094"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "size": 4016,
+      "sha256": "8d5c77e62fb78c2aad639a90eb33728472cae95ed08b4f7b881f479d3ccad931"
+    },
+    {
+      "path": ".github/workflows/security.yml",
+      "size": 8808,
+      "sha256": "34b359c285db9d11056400346fff355deee9bb3f1942e17509c5fdf8ef64ba20"
+    },
+    {
+      "path": ".gitignore",
+      "size": 1265,
+      "sha256": "820632d6eb7b0ec1a821bb643a3d954c3829714dca503b2791b1589c47717df2"
+    },
+    {
+      "path": "AGENTS.md",
+      "size": 2782,
+      "sha256": "e5937e8d434525534590afe8a881feff23f2b0e25cb509c6de785dae495e3183"
+    },
+    {
+      "path": "BENCHMARKS.md",
+      "size": 30577,
+      "sha256": "a8377611795291e4855638b9fb9ec6d9d085ea724ffb016c8559fa52401dad6c"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "size": 5217,
+      "sha256": "c3bb16f0269b59721291f9cbce8c829275d4b089db9b44a0c0d28b2e26bc4f21"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "size": 5582,
+      "sha256": "800aa60f1bd297faa205a49bbe4e8bf46e1b88098be6467105ed8c6212dc92e1"
+    },
+    {
+      "path": "Dockerfile",
+      "size": 3813,
+      "sha256": "2b396728b7041756537f9d5ae2e5850e934d08e24b57a3688ad05d5a4a8d13bf"
+    },
+    {
+      "path": "LICENSE",
+      "size": 10173,
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9"
+    },
+    {
+      "path": "README.md",
+      "size": 109559,
+      "sha256": "dfde97a6a4dd803937626cf4feceeb90115b993f9023d67bceb32f6a028ff2bd"
+    },
+    {
+      "path": "SECURITY.md",
+      "size": 8051,
+      "sha256": "47de822430651976f1ba314b29cafb128968b442e6ced3a9845c0246d5bb124d"
+    },
+    {
+      "path": "assets/benchmark_comparison.png",
+      "size": 467466,
+      "sha256": "78e4b926bfca3950ff5441d1030a1453515973fbe5d7dd70a1c764a81f0d3d38"
+    },
+    {
+      "path": "assets/devto_cover.png",
+      "size": 87148,
+      "sha256": "6fc2594a85ebc0a80495447910a5108edb6ff81d0976442f7aa8493814f0ee4b"
+    },
+    {
+      "path": "assets/laya_benchmark.png",
+      "size": 260892,
+      "sha256": "e01e49f0d842b4616e44c4c9a0feb92a9ae45efeb533f8f838888715dc89c2b9"
+    },
+    {
+      "path": "assets/laya_benchmark_common.png",
+      "size": 278159,
+      "sha256": "183b0b17e8d90e091582e415d9f1da0ef34b40c3db6ccd2c8bbfd2b9232b95a6"
+    },
+    {
+      "path": "assets/laya_vs_jev.png",
+      "size": 216412,
+      "sha256": "5c06517ea7f3e5f3f84873ddaa3cb470f101ad0276f921c58886f8fb12fbe0a8"
+    },
+    {
+      "path": "assets/laya_vs_jev_full.png",
+      "size": 487005,
+      "sha256": "ee47b751d524a0bb65159e026141b4ce70cc83d03b14df8ec68afbc7bcdb95b3"
+    },
+    {
+      "path": "assets/logo-lockup-dark.png",
+      "size": 27666,
+      "sha256": "e683b423cf4f13961fced54a29fad6bb8bb733a0bfc28960c011f8b9f773ca7c"
+    },
+    {
+      "path": "assets/logo-lockup-dark.svg",
+      "size": 1590,
+      "sha256": "40c23ec9db5837c09e5ef7d6dc46ffda8eda28f50d2040936e23e882b9c46b93"
+    },
+    {
+      "path": "assets/logo-lockup.png",
+      "size": 26761,
+      "sha256": "e0235069e914c7889612fcba8b0a8c82133a6ee8a871c9076e867c22fa156f4d"
+    },
+    {
+      "path": "assets/logo-lockup.svg",
+      "size": 1590,
+      "sha256": "a1f8e8b98fbcc7cd410e42ba997548c01fe780217d82678a38d24a39e6365821"
+    },
+    {
+      "path": "assets/logo-mark-ink.png",
+      "size": 17378,
+      "sha256": "f542388fb4ddaf5f1afe44db8fead9303f75ba38913a0b94654976a89c6f6b35"
+    },
+    {
+      "path": "assets/logo-mark-ink.svg",
+      "size": 1320,
+      "sha256": "c95f251f6e7fe888995763645d8ad351323f64fa0eff7d8d17f65aac90e0108c"
+    },
+    {
+      "path": "assets/logo-mark-mono.svg",
+      "size": 1380,
+      "sha256": "c8d281d8a6c9ae3d0c2864e291ce9a463f50f8f52b5ef1b271d3c277b7a75c28"
+    },
+    {
+      "path": "assets/logo-mark.png",
+      "size": 17962,
+      "sha256": "bb04c3ec2afbf455d81f73512e79fce1bc910444e3258335e66305d3ab969367"
+    },
+    {
+      "path": "assets/logo-mark.svg",
+      "size": 1320,
+      "sha256": "377539eb0f4255bc27fb53afffaa1b9e1acffafa4f3699c6a673dafd8b7bd870"
+    },
+    {
+      "path": "assets/long_context_8192.png",
+      "size": 100980,
+      "sha256": "a9095108e27b41309da81db85b764c8196633c7a299838d5c4a534005b7e735e"
+    },
+    {
+      "path": "assets/make_logo.py",
+      "size": 5624,
+      "sha256": "b3286df1bdb5af6f0d4369222942b871fe94529e62787e71d20961379e9f67ec"
+    },
+    {
+      "path": "benchmarks/bench-rtx4070.png",
+      "size": 112986,
+      "sha256": "45f076df8de2f611145a72d57e49273e533c7c0cf9913417e24c0b358b810354"
+    },
+    {
+      "path": "benchmarks/bench_compile.py",
+      "size": 3618,
+      "sha256": "51ffe42626fc10fa4731ef3833ef7205d06a01976c2a2be595bd9104a45499f0"
+    },
+    {
+      "path": "benchmarks/bench_compile_defaults.py",
+      "size": 3772,
+      "sha256": "3488341e915a5cea74412f302b43a28b1859fdab4efbecb3fea2c290597f35e9"
+    },
+    {
+      "path": "benchmarks/bench_fast.py",
+      "size": 7443,
+      "sha256": "607808f2097621e5caa95de7db5c17cb57c3c585ce8564ed6b9b393bbd36ec48"
+    },
+    {
+      "path": "benchmarks/bench_predict_batch.py",
+      "size": 13156,
+      "sha256": "1f93297ebc5190d763d87fd32ad906855bf911dbfdf0137dcbe81b39ebc31552"
+    },
+    {
+      "path": "benchmarks/compare_compile_defaults.py",
+      "size": 1106,
+      "sha256": "650ed4ba73effc85805881f3f1b29ea47c4a7b37b2b90f420197b7192fd81701"
+    },
+    {
+      "path": "benchmarks/parity_fast.py",
+      "size": 6797,
+      "sha256": "d78d057f2ef05535c4661ef6a60298307f41d1498dc14aacc890b10e02bc9ef8"
+    },
+    {
+      "path": "benchmarks/plot_results.py",
+      "size": 4944,
+      "sha256": "c7ed6cfd287db8958ecd6d7b117ba167add57b31beea9da82d56646355f6662b"
+    },
+    {
+      "path": "benchmarks/results-consistency-rtx4070.json",
+      "size": 525,
+      "sha256": "c4752bd67ec408f3da7764f7bb9a56546260b5b2b545e70bb817c7e89620ece6"
+    },
+    {
+      "path": "benchmarks/results-router-rtx4070.json",
+      "size": 1310,
+      "sha256": "7df851303ec5edc7b6eb9e25d93d92cd0b4ae2d83d89f06d9e3624bb8316289e"
+    },
+    {
+      "path": "benchmarks/results-rtx4070.json",
+      "size": 4837,
+      "sha256": "24489220cab2da7a05cd6e96d40ceff2c6eedcf2a1d2fc9a16793cbe3bf6770c"
+    },
+    {
+      "path": "benchmarks/results/aoti_multilingual_rtx4070.json",
+      "size": 15283,
+      "sha256": "a5eb709b0fb8edd472ac0efd7d8e49ccda7d6c172ee0dbd97546e4749fb17f95"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/README.md",
+      "size": 11231,
+      "sha256": "8df3ac5f1d9f33ccc5946b4a41425b5c8ccea07f5828f9a585b7ea5ff1fa7b79"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/baseline-cold.command",
+      "size": 331,
+      "sha256": "de5551c5baa41110f2994536a4e0d0550d0f0a55566545ae2a66d8b2820306d2"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/baseline-cold.log",
+      "size": 8927,
+      "sha256": "6b30bf43bcb8d7eaf503fe9a5167e31a0a88cea0a1900bcc204375a41ba4326e"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/baseline-restart.command",
+      "size": 302,
+      "sha256": "abc11f37332aff694d7b4348ac24da8c36d49c69f0f815ea57c7bc6786479967"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/baseline-restart.log",
+      "size": 7896,
+      "sha256": "47f755e5156f8bd8dca4bce224ba6d11a8f50c3f46c81ec9984689c00772432d"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-cold.command",
+      "size": 331,
+      "sha256": "d26e8973b155bea9615724c65527b1742b6dc31c0a3d9ba02769c85aa27c68e3"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-cold.log",
+      "size": 9114,
+      "sha256": "f0c9425a3d6cd9d937408eebacba6866999addfda9ae1bcbf31cf29c5186ca61"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-final-tests.log",
+      "size": 447,
+      "sha256": "f525c0d1785794487c59428f09de6cd5e1113f25d066dc879c57e4df2b63a813"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-order-tests.log",
+      "size": 447,
+      "sha256": "f525c0d1785794487c59428f09de6cd5e1113f25d066dc879c57e4df2b63a813"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-quiet-cold.command",
+      "size": 329,
+      "sha256": "917f11de0362f14e56ffda288a7a02cfef20378cb0f4bd2f472a2a9190ea097e"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-quiet-cold.log",
+      "size": 7723,
+      "sha256": "150750640f6b8f84813f4515e23030aa8d0f62c8a7e848a5d8a28cad36e85dff"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-quiet-restart.command",
+      "size": 329,
+      "sha256": "917f11de0362f14e56ffda288a7a02cfef20378cb0f4bd2f472a2a9190ea097e"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-quiet-restart.log",
+      "size": 7809,
+      "sha256": "7265badbaaab78ac79a83f35b83d160d442637cd9e3d91918f1d6e6721bcf920"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-restart.command",
+      "size": 331,
+      "sha256": "d26e8973b155bea9615724c65527b1742b6dc31c0a3d9ba02769c85aa27c68e3"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-restart.log",
+      "size": 7805,
+      "sha256": "fa4049b42f67d98d6bb2ed33c7afeb9ba0f3bdbc445b66ab8d9de36a43f1081c"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-validation.log",
+      "size": 1098,
+      "sha256": "e8604c1f181af2b58eff71cbf75081c09d66c8d7139c13f601c08f8755c45d71"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-verified-cold.command",
+      "size": 332,
+      "sha256": "2b2322fe803748c259cd40830c2a5b8337e6fdb5e82cde5f6191dfa262278934"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-verified-cold.log",
+      "size": 8966,
+      "sha256": "10c6a7fc89ab94aca01b9dfe678322b067dd6073225e6aee8dc326efb11fd893"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-verified-restart.command",
+      "size": 332,
+      "sha256": "2b2322fe803748c259cd40830c2a5b8337e6fdb5e82cde5f6191dfa262278934"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-verified-restart.log",
+      "size": 7753,
+      "sha256": "fcfbd6912211a3926e319030c8ea9de485b840e12a79d0a45ec2876abcb0c3cd"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/cache-verified-validation.log",
+      "size": 1098,
+      "sha256": "de31f6eefb442dc1854b54b586acb5321b9f14bcfcb04d67828acd75c383237d"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/docs-install.log",
+      "size": 95,
+      "sha256": "29f9adb20264b47ac32a134ad41504129fea26a89e6578e8e2cd4cd50b977eaf"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-cold.command",
+      "size": 353,
+      "sha256": "69b93fa6101cb900a62b2b00bdcba00e0d01067d953ce510923223cfff62d3f6"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-cold.log",
+      "size": 19440,
+      "sha256": "a4fa4ab0433a244b60fc3e31a60ecb465970781ec28f92d2030a9b04ae96863e"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-cuda-final.log",
+      "size": 75,
+      "sha256": "a0ca5203e86b083badf71e8c0731fe8f2bd6c0d5e4ccc5fdc397caab97ca2118"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-cuda-tests.log",
+      "size": 75,
+      "sha256": "a0ca5203e86b083badf71e8c0731fe8f2bd6c0d5e4ccc5fdc397caab97ca2118"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-default-reference.command",
+      "size": 332,
+      "sha256": "2b2322fe803748c259cd40830c2a5b8337e6fdb5e82cde5f6191dfa262278934"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-default-reference.log",
+      "size": 17606,
+      "sha256": "4fba8a6e4317791c51548aa9aa172cf6e1d9c47849fe3828c294dfd5eced59c6"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-final-validation.log",
+      "size": 1168,
+      "sha256": "bf8ae92f8436181f32275abc88ee608c7ede024b1d81c3035c7d754eedf23ae9"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-parity.log",
+      "size": 203,
+      "sha256": "569b7bb0568e1c1aefecbac63f292011c3d5f7dd8f4df54a9e6f1427e5d4a7f9"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-regressions.log",
+      "size": 2394,
+      "sha256": "6622c5673e0c7c7f8a964d2ac46fb85b1fe72c1434ee14b8836901a20b379ea0"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-restart.command",
+      "size": 353,
+      "sha256": "69b93fa6101cb900a62b2b00bdcba00e0d01067d953ce510923223cfff62d3f6"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-restart.log",
+      "size": 18227,
+      "sha256": "cc63d1a300ba6c420a8333d107e5a8c780914dcd581a9f17be081b29356f0dd5"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/mode-validation.log",
+      "size": 1168,
+      "sha256": "61e8f09291cbaf9eb728b76e9163399847988538267746b7f5b639238b949e7f"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/warmup-api.log",
+      "size": 48,
+      "sha256": "9b1266b997e6804847e9f2fe66fe5a4121ebf86701a4144d49d30507712d6822"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/warmup-cold.command",
+      "size": 288,
+      "sha256": "8ce65a15f8360d88ae0df63b15da34a78628594f7377059dfa0b68f9a1efd936"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/warmup-cold.log",
+      "size": 9117,
+      "sha256": "c63422eac0692a5e79d4d8bb8774fdcf3feae21547bb2627543fb0e51d55a808"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/warmup-docs.log",
+      "size": 54,
+      "sha256": "70bdef05dad40e6f0bc760c7c25b8720c924219da75357f4f823d0c185b641c6"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/warmup-restart.command",
+      "size": 288,
+      "sha256": "8ce65a15f8360d88ae0df63b15da34a78628594f7377059dfa0b68f9a1efd936"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/warmup-restart.log",
+      "size": 7982,
+      "sha256": "bee02554ac9e89e4676de88e9514904c2d4c3f56476bec8be1098b4d078e5dbf"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/warmup-tests.log",
+      "size": 383,
+      "sha256": "2219686509da4e74279ec1467c5ab2885b793cab1c7681b1e404134d1ec670b2"
+    },
+    {
+      "path": "benchmarks/results/compile-defaults/warmup-validation.log",
+      "size": 1034,
+      "sha256": "57a4f66127e843f886d6b4e9f05eb1d78089ccc5df8e58c3a356934f57257edd"
+    },
+    {
+      "path": "benchmarks/results/fast_english_rtx4070.json",
+      "size": 1535,
+      "sha256": "6e3ca6766c8ab74be1333fe2135b2f082f2ca962754644cf7201fed5a05e9d8d"
+    },
+    {
+      "path": "benchmarks/results/fast_multilingual_rtx4070.json",
+      "size": 1551,
+      "sha256": "28805e6f88d2a65393e42882d9a32c3990cf40a00d7a0fe1c7ede8c3cf90250b"
+    },
+    {
+      "path": "benchmarks/results/parity_english_fp16_rtx4070.json",
+      "size": 110501,
+      "sha256": "5175f9d580e9caca1813698eaef28ea2622940e300d6fc1b4912e75859be6496"
+    },
+    {
+      "path": "benchmarks/results/parity_english_rtx4070.json",
+      "size": 110437,
+      "sha256": "6845678606fd9c181fd72fd6647ed2c9ab87fd89d0154de085c214824353e831"
+    },
+    {
+      "path": "benchmarks/results/parity_multilingual_fp16_rtx4070.json",
+      "size": 111434,
+      "sha256": "fb98256907ef0ead447e457c2cc41fd884e13a1aa5ed7557f539e47d812c9d0c"
+    },
+    {
+      "path": "benchmarks/results/parity_multilingual_rtx4070.json",
+      "size": 111299,
+      "sha256": "60e060cd5702589ad2f69adaa6b9aaaceae3e2a7b42e58ec357c57553afb0bc6"
+    },
+    {
+      "path": "benchmarks/results/parity_typed_decisions_fp16_rtx4070.json",
+      "size": 111100,
+      "sha256": "144e248ccf26db14f53d7b0e018d479f968a367de699c29e368f8fc54a1dc4d8"
+    },
+    {
+      "path": "benchmarks/results/parity_typed_decisions_rtx4070.json",
+      "size": 111073,
+      "sha256": "21dfd86c2b65e5dd2c052d05f04820d572eba328a6d18c58c6fd293646bb0be0"
+    },
+    {
+      "path": "compose.cuda.yaml",
+      "size": 1481,
+      "sha256": "1fe345d09607ab3a1eab55d72d4fc36c75110e5fa044ec0768599d7b437fa01b"
+    },
+    {
+      "path": "compose.example.yml",
+      "size": 1423,
+      "sha256": "40f0f3149cda2a711517db10c0ca0f191e30c1f63f2b788e196d0cbb406f7c5c"
+    },
+    {
+      "path": "compose.http.yaml",
+      "size": 5491,
+      "sha256": "578c3d628924c13075f5cc3a262bfde74665641f230adbe759838980826faf92"
+    },
+    {
+      "path": "compose.modelscope.yaml",
+      "size": 3016,
+      "sha256": "f04a235af123665ec2013c30de81d83e61b3b31d581cd89194daaa794f9dcea0"
+    },
+    {
+      "path": "compose.spark.yaml",
+      "size": 1744,
+      "sha256": "d6a8e1e14dfb9c0f065c3bb7b921fe2fdb6298e5554a20f49c82e2c506a3a690"
+    },
+    {
+      "path": "compose.yaml",
+      "size": 1552,
+      "sha256": "353aa8b36823b1aca558d16c92ec5e978d05cefa09c118bf55532cf9679beaf2"
+    },
+    {
+      "path": "docker/check_torch.py",
+      "size": 3971,
+      "sha256": "9e8bc9f6d8d49d251e9ef94fad120810c6dae66a0667f890890e887d952f1878"
+    },
+    {
+      "path": "docker/entrypoint.py",
+      "size": 2282,
+      "sha256": "5d4c19dfce56392ac0103e374512403b573d1bd671917ef8dc9a7aa8665abeaa"
+    },
+    {
+      "path": "docker/prefetch_modelscope.py",
+      "size": 15011,
+      "sha256": "be10455ab1c252f840f801d5c77cd4315c970af8702649812954dfb0bec17287"
+    },
+    {
+      "path": "docs/.nav.yml",
+      "size": 545,
+      "sha256": "8559091f579309aa5aa250de40f6b9c7c9ee308713dda5159b73d57648078e5f"
+    },
+    {
+      "path": "docs/benchmarks.md",
+      "size": 5582,
+      "sha256": "460b10ce0c4e785c76c2c6a0a5e291f12329c8a70260acf6ff633316e65ef20a"
+    },
+    {
+      "path": "docs/cli-mcp.md",
+      "size": 14982,
+      "sha256": "3bd7444360533c8ec330ed6be795c8ce1bdea8ee9cc54ed19159ad7a3619443b"
+    },
+    {
+      "path": "docs/compile-and-fast-path.md",
+      "size": 10232,
+      "sha256": "7872509b94fb83a0500f07de2aff1897c3491f868a1eaa2d0cbe0c00e7b6466a"
+    },
+    {
+      "path": "docs/crewai.md",
+      "size": 9125,
+      "sha256": "ca74d7b2b6fe808226803b0a56b585f61ddde9ed7939d4caf991190b85d9f297"
+    },
+    {
+      "path": "docs/docker-platforms.md",
+      "size": 4295,
+      "sha256": "06f6f3eaca6b856be6e890190143c13758b41f165d962b5e2c69c551354f0a1d"
+    },
+    {
+      "path": "docs/docker.md",
+      "size": 20839,
+      "sha256": "eb2ded1f525c82aeaf1bdc6d5a247194bec38d2a0d2db36d62e39de2a78894a4"
+    },
+    {
+      "path": "docs/evals.md",
+      "size": 21077,
+      "sha256": "fba2362fe7947f7a044913389af78ee3e583957ccd57cd665890bfd0ca1a7527"
+    },
+    {
+      "path": "docs/fast-backends.md",
+      "size": 16948,
+      "sha256": "f0931490c90155ea2300b8980002402203be38d8e3aca7c6de547c072fa29710"
+    },
+    {
+      "path": "docs/finetune.md",
+      "size": 8264,
+      "sha256": "24ccc1594911891b5b13044a9b7376a03d60893ecf47818837b0d40ab09dae76"
+    },
+    {
+      "path": "docs/finetune_browser_agent.md",
+      "size": 5347,
+      "sha256": "5f08a073ea9adf6cda65cf92f74c3264c6232f56eb7fd6b444a2899a7d5f0efd"
+    },
+    {
+      "path": "docs/hooks/.nav.yml",
+      "size": 231,
+      "sha256": "8acaacfe8e09f6f31df7fbc292451257903b2debef5668ea1205a73cf12dff51"
+    },
+    {
+      "path": "docs/hooks/api.md",
+      "size": 18750,
+      "sha256": "7ca1bff9eca73dd0e3095d079252bd60cc81e9d8c1508ff6920e477eae808bec"
+    },
+    {
+      "path": "docs/hooks/errors.md",
+      "size": 7639,
+      "sha256": "19f32f0446195f8f8ad9d7a133a0506f9825b641177e304414125107e838d5c1"
+    },
+    {
+      "path": "docs/hooks/examples.md",
+      "size": 11815,
+      "sha256": "ace630e21365ddbad7f602234031b919bf9699bb0033cfa83025b45b3093ef97"
+    },
+    {
+      "path": "docs/hooks/index.md",
+      "size": 7096,
+      "sha256": "87aa024eb8d85d599a64efe64b17468d4b16f06bd8fb700d58af3ae6a84182ce"
+    },
+    {
+      "path": "docs/hooks/lifecycle.md",
+      "size": 11871,
+      "sha256": "da80f8068e5d3b845a303da81a758f09f1b8d4d2b5b2b02f411293efd20f2725"
+    },
+    {
+      "path": "docs/hooks/patterns.md",
+      "size": 15463,
+      "sha256": "6038a8e24186d98de6f146dc052089b87aff12c65de87f43b9af1b109be3535d"
+    },
+    {
+      "path": "docs/hooks/tracing.md",
+      "size": 5681,
+      "sha256": "b89a2ce5a2efd832b6f9efad6c942ff790bc11711d63d7933c0e8334991ac860"
+    },
+    {
+      "path": "docs/http-api.md",
+      "size": 23860,
+      "sha256": "9c972e0053e6da0566e9860ea5573b4ce203a7ae931ad8fc4c1cb32ed22542e6"
+    },
+    {
+      "path": "docs/index.md",
+      "size": 2160,
+      "sha256": "bf19bc49d80d41ca4716bd144c763e10b6469877c1adff948b771fcdf17d6676"
+    },
+    {
+      "path": "docs/langchain.md",
+      "size": 20734,
+      "sha256": "4994f3f8426bd579bf3812def60ba42db515f3d501f2283edf66ddbd18c0cd06"
+    },
+    {
+      "path": "docs/llamaindex.md",
+      "size": 8637,
+      "sha256": "06529793c90abd0cd43d51b7f1382741f7f5470d812b1f550e502274672fc209"
+    },
+    {
+      "path": "docs/questions-and-answers.md",
+      "size": 10522,
+      "sha256": "d3c595886a380697ac309c2c18f252ccd4c30f9feb6d266ec85caf4d08f92362"
+    },
+    {
+      "path": "docs/reference/.nav.yml",
+      "size": 201,
+      "sha256": "d9035d9a3792260438d930787724062e8b8985cb34b42ea785b0129053b5baab"
+    },
+    {
+      "path": "docs/reference/agent.md",
+      "size": 1687,
+      "sha256": "ff2b7497c4f6e5da95b46b71c8c94683397cdad5a91c15dd1f0dfed9f3cddfdc"
+    },
+    {
+      "path": "docs/reference/helpers.md",
+      "size": 1411,
+      "sha256": "e40eb6230813fae74a96407cc4f0d806c6aa03aabb13c3d9e08eacff666da49a"
+    },
+    {
+      "path": "docs/reference/index.md",
+      "size": 793,
+      "sha256": "332ea44c9b757a245fbbb9ef99110e31aaf73a07d82f8078332a6fc047ed7162"
+    },
+    {
+      "path": "docs/reference/langchain.md",
+      "size": 400,
+      "sha256": "45dc2b8e5141cc3efe8e11afb2d4326e67ee0b152d3ee12664ffda453ddd4008"
+    },
+    {
+      "path": "docs/reference/router.md",
+      "size": 230,
+      "sha256": "ec82616b8c56339cbf5a130e12c3e97ae5bf918803666cb5863e40a82eed12dc"
+    },
+    {
+      "path": "docs/routing.md",
+      "size": 8721,
+      "sha256": "20e1434454adb83b9826e0e3d3757f50a52c439797c99f17d4b4c28e17216423"
+    },
+    {
+      "path": "docs/security.md",
+      "size": 16207,
+      "sha256": "9f3dd623f21a075b38e847fab98faadcf2b1005b9e6e66f9ffe177caf732c924"
+    },
+    {
+      "path": "docs/staged-adoption.md",
+      "size": 7474,
+      "sha256": "c28508d01dc3f8c388160548163a8ea2a70ec930acd6167965929463be46e3a7"
+    },
+    {
+      "path": "docs/structured.md",
+      "size": 12574,
+      "sha256": "c2213e8edf983962ea5ce3209ab8f76aaaeaf2eed57e155931e75156c5fbfc75"
+    },
+    {
+      "path": "docs/typescript-sdk.md",
+      "size": 4774,
+      "sha256": "bff43e404b55c9a8d9ad7d6913e94e6c35052c2fb07f4a805915d064c27387d2"
+    },
+    {
+      "path": "docs/use-cases.md",
+      "size": 17464,
+      "sha256": "0f2ff5f9c9140e110ed3dacfc8321c435c407b3569bdc217f913a64bc8898ac0"
+    },
+    {
+      "path": "examples/01_first_call_minimal.py",
+      "size": 1480,
+      "sha256": "e20cda4955cb9f5bffe2ec5ba5d4fabed580d74ebfb1c10ac4bda74c5a4501ef"
+    },
+    {
+      "path": "examples/02_hello_world_decision.py",
+      "size": 1077,
+      "sha256": "2d3849b6caa17da19dc0562f423589ddfacdbba27a69af788c78b5073944146c"
+    },
+    {
+      "path": "examples/03_reading_the_result.py",
+      "size": 6069,
+      "sha256": "df80a1457a0775892ae5b08dbf5eed74f1633fe25a11b6b25f5998bfde843297"
+    },
+    {
+      "path": "examples/04_choice_question.py",
+      "size": 2655,
+      "sha256": "0818798574ff8c290830aec37672badfc1efa3ae829c95536e7c854e69a022d4"
+    },
+    {
+      "path": "examples/05_choice_criteria_design.py",
+      "size": 3564,
+      "sha256": "dfe723758a1fdbf9b4315ec2b694973c2bd7f1a0450b143fce606a9ea94e8524"
+    },
+    {
+      "path": "examples/06_score_question.py",
+      "size": 2566,
+      "sha256": "826fd28053e5eaf557712af9d850f18b70d28946de0142a2b57a74802ca8791e"
+    },
+    {
+      "path": "examples/07_score_levels.py",
+      "size": 3708,
+      "sha256": "7815a8a44ebf93fb39da5c6fedd818924398a96dd9f17cec65d1cce7292e8ec3"
+    },
+    {
+      "path": "examples/08_noul_question.py",
+      "size": 2580,
+      "sha256": "22ba6c98755c5f609bee02241d2b19a0855a0e18c5ee564c68845713fe3d32bb"
+    },
+    {
+      "path": "examples/09_noul_criteria_wording.py",
+      "size": 3846,
+      "sha256": "4c8e8bb94be8bdaf9ff4d4f9563ef7d699abcaa95e5b422b83de44eb6716fd1e"
+    },
+    {
+      "path": "examples/10_mixed_primitives_one_pass.py",
+      "size": 1414,
+      "sha256": "381e9f4a3caee4c6d508065fac335060cb8c0c1131e36fd8a82bfa0523a5b945"
+    },
+    {
+      "path": "examples/11_json_state.py",
+      "size": 3218,
+      "sha256": "d01af0aa964396dcf7d25d221f71b42ec4496e6de0068041ea3822b364ed6632"
+    },
+    {
+      "path": "examples/12_state_wording_matters.py",
+      "size": 6373,
+      "sha256": "7de431dd925f63cb3e1517aa84386ef186d9869e77ceabacb3a63c817eac1459"
+    },
+    {
+      "path": "examples/13_email_state_and_cleaning.py",
+      "size": 5250,
+      "sha256": "1dd5b925893db7733203722732135718e45ebb1f0228ec7f5fd05483fb1aa5f9"
+    },
+    {
+      "path": "examples/14_conversation_turns.py",
+      "size": 3304,
+      "sha256": "43a32b677bf7c70fbc16a8006cf322bdc87b8f83da93f5025beb6b6620d04173"
+    },
+    {
+      "path": "examples/15_truncation_basics.py",
+      "size": 5452,
+      "sha256": "549e8adef1119c2704907b3ccbcd2a9b1845b4da82718102c08166ad205367e6"
+    },
+    {
+      "path": "examples/16_many_questions_one_pass.py",
+      "size": 5205,
+      "sha256": "768db6bb2b6dc5a3e974c0c3de47b37e29407c790d17e47f2aa26d04f29c999d"
+    },
+    {
+      "path": "examples/17_timing_a_call.py",
+      "size": 4935,
+      "sha256": "0cbf4171fc242579f9dddd6c5807a5679c7b2b381e8f536cf8d23b628e063091"
+    },
+    {
+      "path": "examples/18_confidence_gating.py",
+      "size": 3943,
+      "sha256": "7cbb7ba61ab05daa73307fd1697c698d3a4ec116873139109a4478500f1b5588"
+    },
+    {
+      "path": "examples/19_many_states_loop.py",
+      "size": 5002,
+      "sha256": "4dbf95258d46b7b96ca6b7d1a5d90ad7d943cb763dbe7893870c6fd965146c4b"
+    },
+    {
+      "path": "examples/20_which_checkpoint.py",
+      "size": 5587,
+      "sha256": "7ffd7d6436613f83ad35ffa8d42009cd31dc7cc29e91e126ab345995f4376d33"
+    },
+    {
+      "path": "examples/21_routing_without_running.py",
+      "size": 3767,
+      "sha256": "98c55f2a1bc20a868f70509d8c8252e63753e8228e306915836e5fe8e23b7111"
+    },
+    {
+      "path": "examples/22_route_and_predict_multilingual.py",
+      "size": 2764,
+      "sha256": "c28f29789a96ccaf373d7f9355ba4e4274a91c6265dc2e7e2e40f2188a4729d9"
+    },
+    {
+      "path": "examples/23_local_offline_models.py",
+      "size": 3759,
+      "sha256": "d903fc63164b62d4fa0f08798b306594de674950ab7f2241531ab810780c4ef7"
+    },
+    {
+      "path": "examples/24_preload_and_memory.py",
+      "size": 5858,
+      "sha256": "40453c0d46de894df5ff9ce514df9223db3e93b38af0ab4c0fc0ef753d5e52e4"
+    },
+    {
+      "path": "examples/25_preset_email_phishing.py",
+      "size": 5275,
+      "sha256": "ce38d30764f03a344adeb11d1d9de41684dbbb1ec2b47442c8941f88a65395ce"
+    },
+    {
+      "path": "examples/26_presets_triage.py",
+      "size": 2848,
+      "sha256": "c7c3ea0d0cf4ec2923d3e8f622b71630a1927cae4361defbf43b64ae25e1ac47"
+    },
+    {
+      "path": "examples/27_presets_guardrails.py",
+      "size": 3196,
+      "sha256": "6adb87bef8386d3acd9652636fa35fee64a7269238432e5f63ef157ca097a654"
+    },
+    {
+      "path": "examples/28_presets_moderation.py",
+      "size": 5462,
+      "sha256": "5171fe82e771205e493b14579c5956e83ce992eb74adc8a7f18452b8d3de1922"
+    },
+    {
+      "path": "examples/29_presets_model_router.py",
+      "size": 3584,
+      "sha256": "61055931c4425b457339e619e7e8f6cda6547daa84fad54d9b11660f33f9ca46"
+    },
+    {
+      "path": "examples/30_custom_schema_design.py",
+      "size": 6858,
+      "sha256": "09a9e16365885708ad1bbc48ada64dab81c27d7fa150471807a1d8b11d9161c1"
+    },
+    {
+      "path": "examples/31_structured_criteria.py",
+      "size": 4861,
+      "sha256": "ceb2c5db88c94d30d049d81594fb9164e5e916214dce8678388d19984df7b151"
+    },
+    {
+      "path": "examples/32_typed_decisions_workflow.py",
+      "size": 7201,
+      "sha256": "267b24dc4502f5c0c03d76eba2a3a10bc7e08f6e9eb3755735aaea673f2b7f05"
+    },
+    {
+      "path": "examples/33_high_cardinality_choice.py",
+      "size": 9897,
+      "sha256": "5a46ebff31e28055733feaa1a9aa661a9daa1c08bb5d726817d951eb2e378497"
+    },
+    {
+      "path": "examples/34_calibration_temperature.py",
+      "size": 6535,
+      "sha256": "749fc52fd287a42198c1b9ff5a3cd0096d2901dbca32472758943031339e15c4"
+    },
+    {
+      "path": "examples/35_device_selection_and_latency.py",
+      "size": 8088,
+      "sha256": "a6b14f2c38f262cfe8e81d53b1e5137c635f59cd4027e67cbad3a30f502ea59f"
+    },
+    {
+      "path": "examples/36_batch_throughput.py",
+      "size": 4578,
+      "sha256": "02e82004007796f11393f4808df5d41bcf29f4d2c685251535361879913ed577"
+    },
+    {
+      "path": "examples/37_long_document.py",
+      "size": 10282,
+      "sha256": "5b6867a0e7b6db8b6e83abed2fed01e2a2cff7427e1c0122b1ef48c5146b5b44"
+    },
+    {
+      "path": "examples/38_multi_checkpoint_pipeline.py",
+      "size": 6441,
+      "sha256": "deaa8967a14ff8cd8d9e62347dd373ff170f7284ff41694d892d36ba0b271da9"
+    },
+    {
+      "path": "examples/39_error_handling.py",
+      "size": 5446,
+      "sha256": "96d96006aec134e832d30fa38d18bba7e209d5a96bdb7044f2c8692925a12697"
+    },
+    {
+      "path": "examples/40_caching_and_monitoring.py",
+      "size": 9574,
+      "sha256": "06e1bc7673b03a06c4eaf47e4879df2ff2a8f6225b03c5ede2c33aed1261082f"
+    },
+    {
+      "path": "examples/41_production_triage_service.py",
+      "size": 6732,
+      "sha256": "21684dde62646f0811776626cfc11a6abdac633b36bb48ce2a4b8cce0392febe"
+    },
+    {
+      "path": "examples/README.md",
+      "size": 8877,
+      "sha256": "b469e31cdd2b04c5a7a295e40f7a88fc4bbe1c9714f700f761a57ae56fdf8c49"
+    },
+    {
+      "path": "examples/_common.py",
+      "size": 7152,
+      "sha256": "8d91d63cfa40dffcb349951616f33f1fe45461e5146dc049afaca082f06f7acc"
+    },
+    {
+      "path": "examples/crewai_quickstart.py",
+      "size": 5694,
+      "sha256": "0ace2d3ee8a942f052bbcf6d0e64f239a9a0492ccbc90e4c572565aeeedc5918"
+    },
+    {
+      "path": "examples/docker/quickstart.py",
+      "size": 1236,
+      "sha256": "3d897438370f45be232f0c2b04655e08cfc58dd740e67c4f8ef91487843df082"
+    },
+    {
+      "path": "examples/docker/request.json",
+      "size": 745,
+      "sha256": "391b6ebececf8566f9eaa9c08a06cf4dece760410e070d87fc6ca38184de2b7b"
+    },
+    {
+      "path": "examples/hooks/README.md",
+      "size": 523,
+      "sha256": "6c0a8cd2cc7a926e2f576c9a2c09bcb781fe6d5189d529e42a23a04d6b245bdd"
+    },
+    {
+      "path": "examples/hooks/audit.py",
+      "size": 1855,
+      "sha256": "254fb30ae8a93898f13d1ceda392bc054275ef089be136b6aa89aaf04d0aae00"
+    },
+    {
+      "path": "examples/hooks/cache.py",
+      "size": 3531,
+      "sha256": "14d8cc3695b014f246714522a60b004f916106a55b17706d4567f91f2d08c889"
+    },
+    {
+      "path": "examples/hooks/otel.py",
+      "size": 963,
+      "sha256": "cd693dfebab255f6356b2fcd2899934bad67026752a7805cfc781e5150de5824"
+    },
+    {
+      "path": "examples/hooks/redact.py",
+      "size": 930,
+      "sha256": "ce83a5dcf47611b5b19606bf3c17c30ce31907fea88ae62c6cc31760a59ed44e"
+    },
+    {
+      "path": "examples/langchain_quickstart.py",
+      "size": 5499,
+      "sha256": "98db3a1364eecb88f6c6f5051ba247dec75109e618e15b47b9951df654c2d3b7"
+    },
+    {
+      "path": "examples/llamaindex_quickstart.py",
+      "size": 6419,
+      "sha256": "886b0c8fa9e2309cdd43ecf4c09d09e1a3ce21c8af30d57702683894337047cc"
+    },
+    {
+      "path": "examples/run_all.sh",
+      "size": 1530,
+      "sha256": "975113d62d2d4fb120998d4892ba074c2ebd9386cdfb736356247a5b16a3c0f5"
+    },
+    {
+      "path": "examples/server.py",
+      "size": 203019,
+      "sha256": "29b24ec178bd4b5416a45d6ced2f0156f01e04ea02b08738277bf685be2472f1"
+    },
+    {
+      "path": "flake.lock",
+      "size": 1523,
+      "sha256": "7a1a61076fcb095c2ea6b1aa5bfb454bb71c6a027df100e1eef4fcb437c48ab4"
+    },
+    {
+      "path": "flake.nix",
+      "size": 2315,
+      "sha256": "941c90250a5370c21025690464894ab85eb09f2f611530d58a779529db2e3f0d"
+    },
+    {
+      "path": "laya-dotnet/.gitignore",
+      "size": 399,
+      "sha256": "84bc8a31aeaeee8120cc5f5d453a0184468a6adb2f9d9478724e2b002f38a315"
+    },
+    {
+      "path": "laya-dotnet/CHANGELOG.md",
+      "size": 2330,
+      "sha256": "ee5152fc1a776b2cf57e3a3c91def6cef8c8dd8119c5ed8f43ee2cdee158f758"
+    },
+    {
+      "path": "laya-dotnet/Directory.Build.props",
+      "size": 333,
+      "sha256": "842cea2e65c100f971d039c2ecfed3be53ed970dd07cef420172c85136f927b1"
+    },
+    {
+      "path": "laya-dotnet/Laya.slnx",
+      "size": 433,
+      "sha256": "7885a29877881ff51af97a2656989fcdfaae77340a7747f09f05815a1d0147d4"
+    },
+    {
+      "path": "laya-dotnet/MODELS.md",
+      "size": 20618,
+      "sha256": "c2691597fc68e352395e69dfe2250c57d392fd9a81f70aa3946457da3187e750"
+    },
+    {
+      "path": "laya-dotnet/README.md",
+      "size": 46519,
+      "sha256": "4797fd23a20dede5732209101c2efdda508cdbec84060f9a364941fa592ec3a0"
+    },
+    {
+      "path": "laya-dotnet/global.json",
+      "size": 141,
+      "sha256": "e76756643391c913ede73df24c7bdc3aba3f7936bf61c79d568c01f4be4ff3c1"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Benchmark/.gitignore",
+      "size": 118,
+      "sha256": "6ab9e03d6eff628d2e51bc2136be1d7ddcd8ac13d00d6f41ee8980955dd43896"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Benchmark/Laya.Benchmark.csproj",
+      "size": 426,
+      "sha256": "704427a65cca18c1271a2db9909600ac5e63a76de9c689bf1013780f10aa2f5f"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Benchmark/Program.cs",
+      "size": 9501,
+      "sha256": "0b2c7b65dea63abfeb8a98f636b358b6497462b997881353f1b6dac8942ccca4"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Benchmark/README.md",
+      "size": 5737,
+      "sha256": "3359929fbcafefb90f39a1c9d4288304af822c15176f8a429080d06f6e252ee4"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Routing/DemoHashingEmbedder.cs",
+      "size": 4594,
+      "sha256": "fe7a1bd035cfaef069563e6fe228f884f40628d0ff6f233969ba06b35bff7014"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Routing/Laya.Routing.csproj",
+      "size": 335,
+      "sha256": "c074bd332bbeb561db927e88bbf159863023714eabeb834cb0685a34370acdf1"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Routing/Program.cs",
+      "size": 17536,
+      "sha256": "956fac7756eeb691126a530a87e105682e4a407dfaa621ca0d0cfa0321739a68"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Routing/README.md",
+      "size": 13714,
+      "sha256": "461ef1aa9293d654e6c356c79b8d05393360c332b3f8950e990c6086c0023213"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Sample/.gitignore",
+      "size": 118,
+      "sha256": "6ab9e03d6eff628d2e51bc2136be1d7ddcd8ac13d00d6f41ee8980955dd43896"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Sample/Laya.Sample.csproj",
+      "size": 335,
+      "sha256": "c074bd332bbeb561db927e88bbf159863023714eabeb834cb0685a34370acdf1"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Sample/Program.cs",
+      "size": 7855,
+      "sha256": "1492e85deba3b001772719b7a966cd1416b153471245484d8ab21401f8cd33ee"
+    },
+    {
+      "path": "laya-dotnet/samples/Laya.Sample/README.md",
+      "size": 15740,
+      "sha256": "1d460372397a00c842c0414bb37efcb207402c5bcbafd1178fd2f8a17787090d"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/Answers.cs",
+      "size": 9984,
+      "sha256": "115c141c2a52638b5464697e05d4dae0933ee02b5453cdb43fa06ebe5f48704d"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/Calibration.cs",
+      "size": 6504,
+      "sha256": "93fc8b7ea80ed5c9bbc3b51055a24317b3411bbc7eb39960a11e709ffe2e6843"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/Collator.cs",
+      "size": 5027,
+      "sha256": "2fca83eb2c5046155e618de7c781ff78a28dcbbcb61c5de40b27b518f61c2e6e"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/ILayaPredictor.cs",
+      "size": 593,
+      "sha256": "73e6f0e121151ebeec8559c93f0f0fe21182264403791e4c1b6ff6db52a14928"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/LanguageDetection.cs",
+      "size": 36157,
+      "sha256": "6d697e0bd65e00657f031e47f9725b8f06abada54649a9cc0fc51824b9d4f358"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/Laya.csproj",
+      "size": 2184,
+      "sha256": "7fcff712eaccc7c212a8f5f78e531b1f7e274a06b68ac5b38f1a32370f98472d"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/LayaConfig.cs",
+      "size": 5385,
+      "sha256": "4f98505371fb060a0d88b3ea6398397ffa6b587d485c4943defea89beab7fe44"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/LayaEmail.cs",
+      "size": 12707,
+      "sha256": "f3a54e96f0ce258e61b59a4c3533f14f7a1fc920852a7668a616c563b1f1f6a1"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/LayaEngine.cs",
+      "size": 22046,
+      "sha256": "84cd62afb8b11490bb11de307f68b1554606048c8c650e145170f1d9192f2cf9"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/LayaOptions.cs",
+      "size": 7405,
+      "sha256": "98e5046ffaeace2f23bcd6600f54cfed0fe5214bcd8660b5f335248bdd7c4615"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/LayaPresets.cs",
+      "size": 7886,
+      "sha256": "ad9e7815f082495cb9a258bb0d3c1fbaabd804e47eb644111fff1697cf9c8ba3"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/LayaRouter.cs",
+      "size": 23508,
+      "sha256": "63c9e30be58de61d4be41acb1ea68bcea9bbc4cf517580cce0651c524ca7ffc5"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/LayaShortlist.cs",
+      "size": 13304,
+      "sha256": "3d2e7ba8f113cd74b34c9bcff9e69ba0e5b09f16802e84b28b2c62016fc06d8d"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/ModelArtifacts.cs",
+      "size": 23763,
+      "sha256": "33c76ab68864f78f69c0112cdc6bd4ddc40e005f4bac357deca01dbaacd3e93a"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/PythonJson.cs",
+      "size": 17021,
+      "sha256": "8932a463df0c465bec6997aec192c420a1afba97d35924efee6173d6e212538f"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/Questions.cs",
+      "size": 8707,
+      "sha256": "e4066baa1d0210f6eea3b761459f3c2a04cc087e7f1d5e66a6666865d868b85d"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/SequenceBuilder.cs",
+      "size": 8340,
+      "sha256": "ce42ac587580333a8fb75144b8b39239d0164e858b4740562a5e4d552c88acdb"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/Tokenization/HfTokenizer.cs",
+      "size": 18677,
+      "sha256": "9b9382f158d8fed90e31aee3db96ab77e93b06d542ddfdb84a9f405540d7234e"
+    },
+    {
+      "path": "laya-dotnet/src/Laya/Tokenization/ILayaTokenizer.cs",
+      "size": 1977,
+      "sha256": "9dc633f7fff86d4f19294309ad90d140c7a5926be25b569b871b9c1f9dd35048"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/CalibrationTests.cs",
+      "size": 7586,
+      "sha256": "d49a7d317c902862b6f2e34ed98eead7af3a465f921b2b8ba26570c6800cdc3e"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/CollatorTests.cs",
+      "size": 5489,
+      "sha256": "fbdbe45dcc7a4e7f98167414094f837c388e9c56b4652f24c5c5de9352503b98"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/GoldenData.cs",
+      "size": 13942,
+      "sha256": "ad93d700c580eef88cf51b96083fb2a7a493f4924238b18e4221ed704ab48fcf"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/HashingEmbedder.cs",
+      "size": 3968,
+      "sha256": "08c28aa85d9eaba96a04a30dfc32197f8ec353d1b2027b033fea9e91d63a1191"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/HashingEmbedderTests.cs",
+      "size": 2623,
+      "sha256": "b62269482f6c5a76157bef91a8ce6cdee3d2bcce5371393c6e08de8235365e97"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/HfTokenizerFallbackTests.cs",
+      "size": 7610,
+      "sha256": "d29547fd6869299516080a8b0fc2274d78ffe147866f4f6153ad824ececf0348"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/LanguageDetectionTests.cs",
+      "size": 15965,
+      "sha256": "d6373213b9302f18b31277f3b6716e50a282a96da9c04b57228132c162b5f362"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/Laya.Tests.csproj",
+      "size": 614,
+      "sha256": "9d7b8e9e3ca2d9ea19c9fd6a2847612cd20077cc55eb58e536409c2e29754b0c"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/LayaEmailTests.cs",
+      "size": 7095,
+      "sha256": "24bc43fb4af07c0adb88e5effb264351cee9fe09514a7b3233d5e6d93bcc08c8"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/LayaRouterTests.cs",
+      "size": 23045,
+      "sha256": "03e0b1879e9d2717502ce65f41bbb1846a27a13777d834fcbe2e70db9514b9d2"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/LayaShortlistTests.cs",
+      "size": 20023,
+      "sha256": "4930564c63ac29f1a403e199d765dffae43c40f1fb5cdab3fc671cd95641c7fd"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/ModelArtifactsTests.cs",
+      "size": 6628,
+      "sha256": "8b0dfaf2bf7dfe8c092c9c05fbc1994adc6203949295ad236c4a24cd3300a46d"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/PredictParityTests.cs",
+      "size": 14068,
+      "sha256": "4d839d7a168266f72b7615da6fe78ef67b62d39baf957f08927355aced85631b"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/PresetsTests.cs",
+      "size": 13443,
+      "sha256": "b32d24e599f00adaa9c9a70b7e3eb70b8d31bfa0c54b0c15f1bc4bc13d85e2d1"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/PythonJsonTests.cs",
+      "size": 8034,
+      "sha256": "7d5f736ee6433975e32202b23e41d4be0790425e328569ed76a130ad5ae30522"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/RouterEndToEndTests.cs",
+      "size": 7259,
+      "sha256": "8924db7ddc21df1a7233ebcc67fd0c821d9de21eb4b329a2e6c3740cea22adbc"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/RoutingGoldenData.cs",
+      "size": 2564,
+      "sha256": "4c2c67ecd72b6a2d9cc9bd313e3c73929d86d5a80e966ee85e4b7e0e401dd634"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/SequenceBuilderTests.cs",
+      "size": 11213,
+      "sha256": "ffcfbbe6762675262274191108defdd882b248d1aec00dc46904d4e490fcada4"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/ShapeSweepTests.cs",
+      "size": 14023,
+      "sha256": "0c630d756389922233b8bf7342ffedde93992373366bc9194a2064be40154b45"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/ShortlistEndToEndTests.cs",
+      "size": 4108,
+      "sha256": "df08c68d73e82ca0927a7a376af5b85c5ee120e055020f2eb434aab36ddeb62f"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/StubTokenizer.cs",
+      "size": 1790,
+      "sha256": "f43f8ea5528f99f09a2504de4849d4539c428c83e70da864baa2a41538646279"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/TestArtifacts.cs",
+      "size": 14947,
+      "sha256": "f348042dcb4560d4c59a5a098fb84e360296602e1c56ea410f9c5228cefb8caa"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/TokenizerParityTests.cs",
+      "size": 7264,
+      "sha256": "0ca63efd57b64c7d8c20165703ae91c4b6589317e6f812cab358c6e095e7558a"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_arabic.json",
+      "size": 13847,
+      "sha256": "0e932f0c99f8b8b215c8695e0804f92bb8840fa9bba18d255da88ff3a155cb72"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_choice_criteria_list.json",
+      "size": 3206,
+      "sha256": "49f503b408944ca6cf587f3391e9c70ebac60be21cb97c0d2d2a83b6c72d9036"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_cjk.json",
+      "size": 13263,
+      "sha256": "b55256581df55ad3ec465979237c1c7daafb32417cf446f77fc94d9390c931ad"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_criterion_shapes.json",
+      "size": 10280,
+      "sha256": "b4b3030b1e0a893e337b7364768044277c9e20c4fd3608f05f0873716d6884f2"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_dict_state.json",
+      "size": 5855,
+      "sha256": "6375269cb6f27d0ecb47f06395f61fb92bb024d40360b787e665478fb11c8503"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_json_escaping.json",
+      "size": 7151,
+      "sha256": "4878534e6ffee29913656d8f95c137cc30e6ff43c480b9c0617b02f3c3f04c87"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_list_state.json",
+      "size": 5161,
+      "sha256": "5256876393b8daaf97a7e3b50ff4d545a97406a93bd7f66a6dff9190d9d07722"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_long_state.json",
+      "size": 111897,
+      "sha256": "cfb895ce6296c3fc767a8fed93c94ae267709cf05a69c8039e106b4ba9d354c3"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_many_options.json",
+      "size": 19614,
+      "sha256": "9a292c5842cdd65684f5494b3d058fa9c7e5b16b7e420d47a4be542451515c66"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_mask_injection.json",
+      "size": 3771,
+      "sha256": "d5d34c2880cfbbdcca7060175cdb950726e54536b6d74c737cd1992031907dec"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_nonstring_instructions.json",
+      "size": 6965,
+      "sha256": "5797b823449d2cf260c6606967130c79b41947cb500d5fa5a9210f32ae6a9465"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_options_exceed_head.json",
+      "size": 11734,
+      "sha256": "d4e88a244d95ab78fcb272f7ede7ad42cedec8357c4659bb53967261a0b21597"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_quickstart.json",
+      "size": 21674,
+      "sha256": "5b4203307afc27cc91debc3e2e987dacb0c8a01abcab3893e16e009e0e6d4693"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_sample_app_english.json",
+      "size": 20445,
+      "sha256": "25dfe5c5dd9c92b795e452fceff48c2b7b7f8505a09e525340cf5aa26dc62445"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_sample_app_hindi.json",
+      "size": 21191,
+      "sha256": "8e112654dcd57fc2f878f59b3d9c48512031ef365f50434eb67f9a1e2080bd22"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_shortlist_many_options.json",
+      "size": 18719,
+      "sha256": "cf79cd7ee93b1c4199eb630b880d578d2fb37f95bec5076843eebdaffa85453b"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/case_single_option.json",
+      "size": 2495,
+      "sha256": "fae59d2f9d67219e0c97171cc861c2a0a3e35102e8b545865cad5643c1028499"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/index.json",
+      "size": 1821,
+      "sha256": "bcca9999b0d6898bbd4ecd5f90fc50f87cef463e42539f7a6f78b22589c73538"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/json_probe.json",
+      "size": 6884,
+      "sha256": "df50795efc7f10343200f06010f47bd1c807f9257a2be4c8e6f29f1de8a24cdf"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/meta.json",
+      "size": 1912,
+      "sha256": "dfcd21b91917b7195259945e9e7a434b98d83a0c2664acf4279cff8ab5449a17"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/english/tokenizer_probe.json",
+      "size": 6303,
+      "sha256": "02bb6d03d530e376b2d9cbda229337529c815fd615572a9f40c3a0e9bebbf6d7"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_arabic.json",
+      "size": 9102,
+      "sha256": "6c20f0a124921c5fee26e9db0956a9055550f8f7b9c18c2bffa3ddaf87e51917"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_choice_criteria_list.json",
+      "size": 3146,
+      "sha256": "b60cab23f83bc9e516a9573ed1b0f6a75f9e01bf30701a3eee7c7575e3c26a8d"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_cjk.json",
+      "size": 8992,
+      "sha256": "4ddd8ea4228e2193c41cf2cc4073d50f2b19aeb3658e3818de638265e21bc9fa"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_criterion_shapes.json",
+      "size": 10453,
+      "sha256": "48bbebf81f869719351e76aafda8431814872e696a6c7703af94ce9e2755e374"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_dict_state.json",
+      "size": 6004,
+      "sha256": "d4141d6f24c7844f52ed6d101f1673703110d6af59ff036ccdb2512a08373405"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_json_escaping.json",
+      "size": 8158,
+      "sha256": "134d99fc5b29b7167149892e6adc29c04dd53df81c904b8516b2f34d89291545"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_list_state.json",
+      "size": 5152,
+      "sha256": "6f28e988219d500abcf10513948d5f75121f68f4ad73d2d722c548d84b2e7e51"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_long_state.json",
+      "size": 154636,
+      "sha256": "ca665e40affcd41e51eed82c4eb09700e38a16c49e8b5fc99730bd51a1d0ddd5"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_many_options.json",
+      "size": 22735,
+      "sha256": "9a5ae43545ce0299be063040c3995e41186e81b6da5e5f25015ee4fa380dbf0b"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_mask_injection.json",
+      "size": 3502,
+      "sha256": "5b4924b7b0ddd77a8f47bfdc17d59ad19a99294248fad0f7e86cdf701903afcf"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_nonstring_instructions.json",
+      "size": 6543,
+      "sha256": "479c9143ffdd5f6732fa1aec4ff3ee554d93556cd63391ea9796f438e50b0bb4"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_options_exceed_head.json",
+      "size": 11735,
+      "sha256": "90e552160677947eaf65da0287edea544c2a83e11efd774a73a42748e0eb0bd1"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_quickstart.json",
+      "size": 21611,
+      "sha256": "786a7da17ad03b80f0914592da7c1f4aea3f76484943bbe3c96cd40c1433b37a"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_sample_app_english.json",
+      "size": 20380,
+      "sha256": "9b69e72ead810a8e9a676c3c21c3286d3ada827b8fb3d0981b467d0b36bab486"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_sample_app_hindi.json",
+      "size": 15999,
+      "sha256": "196a37a5418ab8608a842a13fe9d75badd1281a5b1de6c0b5654b450cb559349"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_shortlist_many_options.json",
+      "size": 21806,
+      "sha256": "58be9d52f6245c62cfc6cd1006d9a51103a0cf8f1b42feaf8cf0403b5ec55cb9"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/case_single_option.json",
+      "size": 2488,
+      "sha256": "0d8e4069b033b8d5cd0ccb817171761106eda7d02f257ca171b4d2144bfb9f87"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/index.json",
+      "size": 1821,
+      "sha256": "bcca9999b0d6898bbd4ecd5f90fc50f87cef463e42539f7a6f78b22589c73538"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/json_probe.json",
+      "size": 6884,
+      "sha256": "df50795efc7f10343200f06010f47bd1c807f9257a2be4c8e6f29f1de8a24cdf"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/meta.json",
+      "size": 1364,
+      "sha256": "de3f0fe9e3f351aa510cd578b8f56a80938a227ac68307e7c7faa8e3da196d51"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/multilingual/tokenizer_probe.json",
+      "size": 5934,
+      "sha256": "cac6d7dd5ff4c497596436299f964371a852618bcbbe880099847d89f06cf722"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/routing/email_probe.json",
+      "size": 18231,
+      "sha256": "1d719576b8648f73130a64e7475ab82e246a172d1fdbda21085dd2e9bca29379"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/routing/hashing_embedder_probe.json",
+      "size": 17047,
+      "sha256": "5d067be6c556668acff3860eb7a88058f31b5007d6804b5acfeb04f461fba9e2"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/routing/lang_probe.json",
+      "size": 178389,
+      "sha256": "9bdbc959659c3a0601ea8f1e59f0b581225b00900d61422c0f23a3678a64535a"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/routing/meta.json",
+      "size": 757,
+      "sha256": "d5c96e551356645eb19ffb1c06d548e1b28623cd90917c6bbded230062b9c287"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/routing/route_probe.json",
+      "size": 48753,
+      "sha256": "d7f208886bd4d951eec3359ccbee0d7f8cc0d2465acddc68f272b7caa1741a0c"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/routing/sample_inputs.json",
+      "size": 17095,
+      "sha256": "bb97615b622b08d929a31da8aac0752012ff14071c10e143c2a8d517016f7a82"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/routing/shortlist_probe.json",
+      "size": 11634,
+      "sha256": "3ec28bdf3512049199ac05b4c87e9f19775391761c4da5f10b20fe726f6261cc"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_arabic.json",
+      "size": 13836,
+      "sha256": "dc6360294523e1eb8d294c3b65cc25ff4036c9fcc978e94144610c12dfbab0cc"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_choice_criteria_list.json",
+      "size": 3214,
+      "sha256": "9c4b33ab46a940104944e6aa5d72b6336caf64696781ad38333bf2dfb285ee51"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_cjk.json",
+      "size": 13266,
+      "sha256": "e3fb9c6ec6516a050aa10df1af879890f3eb06760b2b213d93010050e9a8c967"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_criterion_shapes.json",
+      "size": 10273,
+      "sha256": "154f151a8772c0ff77c447a9b9471554991683db6886d0bc9f15d4c808073e48"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_dict_state.json",
+      "size": 5857,
+      "sha256": "f1c00e6b3d9c38b56492000006ab8d9e4c122ed76c279022a0db6cfc6763c82c"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_json_escaping.json",
+      "size": 7158,
+      "sha256": "b6c5cc59db209b914a981f8247cfb6c0f3dda3d87085913e16efd27eb7955d98"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_list_state.json",
+      "size": 5159,
+      "sha256": "95267b5d404199b392999021813e131af515665a34de8313349a99f0ba2ec927"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_long_state.json",
+      "size": 150874,
+      "sha256": "4ee96adff3b0d490272e2bd4d871874d9eaae1553ad1ff86c08c9fd60772024e"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_many_options.json",
+      "size": 22113,
+      "sha256": "e17f988730c791435ac55e06699963643bf8c3efea6a7833b9c326c31d9a43bd"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_mask_injection.json",
+      "size": 3770,
+      "sha256": "d56d7fdaf0f5d56e87b3ae78a9d51c377ce1114f641a5a1bdee1082040d03b67"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_nonstring_instructions.json",
+      "size": 6969,
+      "sha256": "fb2b9198e4a7a501015ea98d5c1c1d2db96e67d7702974e98f984eedb321720c"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_options_exceed_head.json",
+      "size": 11735,
+      "sha256": "90e552160677947eaf65da0287edea544c2a83e11efd774a73a42748e0eb0bd1"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_quickstart.json",
+      "size": 21680,
+      "sha256": "4c3ba96e8a0626d8eead651b2e3f0a54c7d7fc5056e4d7be375afc6cbd70a46f"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_sample_app_english.json",
+      "size": 20446,
+      "sha256": "9f8b4bf79e0842f1af372b6933d74deb8f18ea746b976bd470ee175d58edffbe"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_sample_app_hindi.json",
+      "size": 21197,
+      "sha256": "b35148d9bfd76c3fc71f45289759046d4bb57396171236c7c3c99fc770a0dd75"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_shortlist_many_options.json",
+      "size": 21441,
+      "sha256": "ef30d1cc91b2e4a6b2063a14086ca1ceef647325a31bbc1678dfbd1ba1997d37"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/case_single_option.json",
+      "size": 2494,
+      "sha256": "a9bcabf60411b66af694933dcc45a4dcd8d6fa5ea21071b100923ceea4901253"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/index.json",
+      "size": 1821,
+      "sha256": "bcca9999b0d6898bbd4ecd5f90fc50f87cef463e42539f7a6f78b22589c73538"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/json_probe.json",
+      "size": 6884,
+      "sha256": "df50795efc7f10343200f06010f47bd1c807f9257a2be4c8e6f29f1de8a24cdf"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/meta.json",
+      "size": 2032,
+      "sha256": "68cb5cf97fa18615fee75be19021df2eb1e64412e78165e0b2ee6ceed445e7b1"
+    },
+    {
+      "path": "laya-dotnet/tests/Laya.Tests/golden/typed-decisions/tokenizer_probe.json",
+      "size": 6303,
+      "sha256": "02bb6d03d530e376b2d9cbda229337529c815fd615572a9f40c3a0e9bebbf6d7"
+    },
+    {
+      "path": "laya-dotnet/tools/bench_python.py",
+      "size": 12000,
+      "sha256": "c72805ee524403d76798cc925b314e60925d048f376625f80a4a7be525810f95"
+    },
+    {
+      "path": "laya-dotnet/tools/check_test_skips.py",
+      "size": 5109,
+      "sha256": "4073649458984a2f4470a83f62bba208d6e6e07b5f6ce0c1174d425816250ced"
+    },
+    {
+      "path": "laya-dotnet/tools/dump_golden.py",
+      "size": 20769,
+      "sha256": "cb141ba10e27c88dfb44486fb1d937a9304ccc2c3b47b5fbccd28082fe78fbd2"
+    },
+    {
+      "path": "laya-dotnet/tools/dump_routing_golden.py",
+      "size": 16839,
+      "sha256": "be3c2a584bb411c7a3581e11493fbb5204ed62ad678a4a60c3fa7d2e84e0a7a9"
+    },
+    {
+      "path": "laya-dotnet/tools/export_onnx.py",
+      "size": 34104,
+      "sha256": "5e95a5dcfa32d3dcba63ddf9411a9d8a1f9773a58f1bf8507c642992166ac323"
+    },
+    {
+      "path": "laya-dotnet/tools/golden_cases.py",
+      "size": 12842,
+      "sha256": "8dd46031440c71b935acde04b846a9d1b409ff0371bf50ca0d3087f616adbf30"
+    },
+    {
+      "path": "laya-dotnet/tools/hashing_embedder.py",
+      "size": 5321,
+      "sha256": "4069ec9a0a4bb4f500fd10429b49203d20f78248d6d9a5b093ab79e131acc614"
+    },
+    {
+      "path": "laya-dotnet/tools/regen_golden.py",
+      "size": 11237,
+      "sha256": "19708a11cf1439716add12481b6e17060099e7a9c33fe409178f50f736450792"
+    },
+    {
+      "path": "laya-dotnet/tools/requirements-regen.txt",
+      "size": 624,
+      "sha256": "b008b01bece2ff0bcc9487c63ecec991b96bb100c93982d59f302fc781b095ef"
+    },
+    {
+      "path": "laya-dotnet/tools/routing_cases.py",
+      "size": 54107,
+      "sha256": "95c19682c0e4bc22eebad53c58a143ee3ae15b199e35a717bc4e5924d120dfa5"
+    },
+    {
+      "path": "laya-dotnet/tools/sample_cases.py",
+      "size": 2683,
+      "sha256": "b81cbd758e5e9759ec4c9b76f81a33823be2c631e7bae44f619b0d72e36c6a2e"
+    },
+    {
+      "path": "laya-dotnet/tools/test_ci_tools.py",
+      "size": 4226,
+      "sha256": "1d42b36633760b7c88df1fd7dbb7d9e431cc9217624968fe154ec1769f4ebec6"
+    },
+    {
+      "path": "laya-ts/LICENSE",
+      "size": 10173,
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9"
+    },
+    {
+      "path": "laya-ts/README.md",
+      "size": 10419,
+      "sha256": "7260d9e0e54bd31371aee90745cfb7f9dbcff7c77e663f9aa919cfb73397f227"
+    },
+    {
+      "path": "laya-ts/examples/snake.mjs",
+      "size": 6164,
+      "sha256": "d649b0257a8fc3fcbee92d77a6fd4ff6b44a5f6da34c321a695aea35638e04f3"
+    },
+    {
+      "path": "laya-ts/examples/try-ml.mjs",
+      "size": 2335,
+      "sha256": "b230d29a6b55b354e038fe2af9a0673641646be4da8a630ad457f32a20e97469"
+    },
+    {
+      "path": "laya-ts/examples/web/app.js",
+      "size": 8803,
+      "sha256": "16fc125212d922bca29616b963af8724a04d42abd25843e5a53cfd4bc137b493"
+    },
+    {
+      "path": "laya-ts/examples/web/index.html",
+      "size": 6513,
+      "sha256": "7af5dd325d397b05f850751eb3c8e0b7e15e619c3137ccd003a7d38b2e4c87ec"
+    },
+    {
+      "path": "laya-ts/package-lock.json",
+      "size": 62980,
+      "sha256": "8afb25ed467aa163bc724d8cd8f8e5edbc3cdb1703e52e21787a9525cfce59f4"
+    },
+    {
+      "path": "laya-ts/package.json",
+      "size": 1365,
+      "sha256": "bb28defb06bd4d1188ffa82aa46f4b231fd8496fa5cc0d6b09dc84b3fe5afdf2"
+    },
+    {
+      "path": "laya-ts/scripts/export_onnx.py",
+      "size": 13044,
+      "sha256": "d540417e858bda28337c2ba05a50fb7ddd532b41b153f9e6cf688cfbcb7c85ff"
+    },
+    {
+      "path": "laya-ts/src/agent.ts",
+      "size": 38277,
+      "sha256": "229da1e1409f7f94ae3b4608af0d590b7c80bcd437b480c6209b246ba48a5843"
+    },
+    {
+      "path": "laya-ts/src/common.ts",
+      "size": 21280,
+      "sha256": "1bcc5b3cf077e8ac016ce526fcfcfec15adf3406aa2b6a4238c69a74601b0287"
+    },
+    {
+      "path": "laya-ts/src/dx.ts",
+      "size": 1803,
+      "sha256": "62081f954d7383218e864f46855fa89196d6c5140c562625e26810e9060463fd"
+    },
+    {
+      "path": "laya-ts/src/email.ts",
+      "size": 8688,
+      "sha256": "981c6535d4a13cd694e6c39d8539be67fe74868f870d4d891b9c3a7dc4603150"
+    },
+    {
+      "path": "laya-ts/src/hooks.ts",
+      "size": 13196,
+      "sha256": "4fc5129dd15fc93d0b84a308675f6e48f535178eb7d97cf1481d30d46608170f"
+    },
+    {
+      "path": "laya-ts/src/index.ts",
+      "size": 2842,
+      "sha256": "4ea9905aa7ed84e2becafd60a7c93540647df807344236d931c4e0e3aca78a9d"
+    },
+    {
+      "path": "laya-ts/src/lang.ts",
+      "size": 26660,
+      "sha256": "5cfe06f28acd7264dbb9a63213b0e8d0884c806c783f622fa007f3002da405a2"
+    },
+    {
+      "path": "laya-ts/src/presets.ts",
+      "size": 5852,
+      "sha256": "dd1e75ea978d24d0d31045820476d1d90555b78748ce9123c7f09e8d1a5e0ace"
+    },
+    {
+      "path": "laya-ts/src/providers.ts",
+      "size": 26707,
+      "sha256": "0119dc596390f97c86c3a3fb4711ed393780d5f3d9de7bf2a8169d3dafee8157"
+    },
+    {
+      "path": "laya-ts/src/router.ts",
+      "size": 37155,
+      "sha256": "37d2880bd45a0b92dc90484a9ae0072a4f4cd137acdc0b775c927ac64c050e59"
+    },
+    {
+      "path": "laya-ts/src/shortlist.ts",
+      "size": 10052,
+      "sha256": "69e79c30f77fba28a0321c087a432de00450383553e1bd868549c2dec18b1fa0"
+    },
+    {
+      "path": "laya-ts/src/structured.ts",
+      "size": 14383,
+      "sha256": "2df9c63646c53bfd3edf7f33a6d99ceda35d088c03b8f79992cb233a681e70b0"
+    },
+    {
+      "path": "laya-ts/src/tokenizer.ts",
+      "size": 21458,
+      "sha256": "94c5e2b14536c762f8ecd0247343b19b6195c61122d395cf4f1f380459574f1f"
+    },
+    {
+      "path": "laya-ts/tests/agent.test.ts",
+      "size": 3929,
+      "sha256": "036143c03451dfb9b5b0f18b3a2d417e18c70f1e732739fc1f779d6f770bf696"
+    },
+    {
+      "path": "laya-ts/tests/answer-confidence.test.ts",
+      "size": 2633,
+      "sha256": "53964f2b6c368393b48733d447c30a700f9bd30a75597d8d9a75ee35d0bc443c"
+    },
+    {
+      "path": "laya-ts/tests/audit-regressions.test.ts",
+      "size": 8162,
+      "sha256": "7a7724306a13cc096d60df3864c5b711f3b737fb1010b233efa1c2420953db33"
+    },
+    {
+      "path": "laya-ts/tests/blank-lang-routing.test.ts",
+      "size": 2311,
+      "sha256": "a2db9f0f554f91dda7e2c3af06b94eadc6692aa91778c966361ab88e681c2cde"
+    },
+    {
+      "path": "laya-ts/tests/bpe-complexity.test.ts",
+      "size": 19709,
+      "sha256": "871d23a386350f462ae81eb7e03d050019fbde6c1065dfad14c6d294e1b92769"
+    },
+    {
+      "path": "laya-ts/tests/bpe.test.ts",
+      "size": 3827,
+      "sha256": "a0dfbb95a037b33d904a1aaba1ca3376b8de7b2be313b9504e42a0f10a64f544"
+    },
+    {
+      "path": "laya-ts/tests/confidence-gating.test.ts",
+      "size": 13279,
+      "sha256": "215df49fa5d855cd7fcd8e8251f529f4d4cad493ad7f36370a05ab440bc1fb7d"
+    },
+    {
+      "path": "laya-ts/tests/dx.test.ts",
+      "size": 2492,
+      "sha256": "55c95226da828d552c6f8fbb2d090f0bcf6bbc9075e2e0f4aa887fa3aead11ba"
+    },
+    {
+      "path": "laya-ts/tests/email-presets.test.ts",
+      "size": 8098,
+      "sha256": "56d4a8cae999bde8ce15fd99f48a1ec7080fc3eb5af520c0758b68a1dceaa035"
+    },
+    {
+      "path": "laya-ts/tests/flat-parity.test.ts",
+      "size": 1188,
+      "sha256": "2225bdd56001953ec6da43b1a6a14824f61c8bd1bf89db34b3ccef1605fce029"
+    },
+    {
+      "path": "laya-ts/tests/histogram-binning.test.ts",
+      "size": 10283,
+      "sha256": "f75515e73085e9e089adb3e875a00cf20bf758f31009cbc05de0120e3e623f46"
+    },
+    {
+      "path": "laya-ts/tests/hooks.test.ts",
+      "size": 19207,
+      "sha256": "74b83e336a9a901b1cc6c772fdd8d71a88d93204128f5f234144d2dab5d8298e"
+    },
+    {
+      "path": "laya-ts/tests/identifier-complexity.test.ts",
+      "size": 6357,
+      "sha256": "63fc8c3aea51aae79ac756f55943169e349ec72eac3b62ba5672591b0f78af8b"
+    },
+    {
+      "path": "laya-ts/tests/lang-agnostic-codes.test.ts",
+      "size": 2397,
+      "sha256": "d96338b10f2077bd2b4cee66d7d193fa5fb79f66d3381ad8f17f57a15c7504dd"
+    },
+    {
+      "path": "laya-ts/tests/lang-temperature.test.ts",
+      "size": 13413,
+      "sha256": "829e7656c1c75fb635492daefed70fe9eac67b529f688eeb0bb8e543b9d9824e"
+    },
+    {
+      "path": "laya-ts/tests/lang.test.ts",
+      "size": 11088,
+      "sha256": "6139c96b8f9655597ef9d2a3d4b354fd804658df784e937d6eac4abefbd608d8"
+    },
+    {
+      "path": "laya-ts/tests/legend-parity.test.ts",
+      "size": 4407,
+      "sha256": "7f0b2e69dc75fb7aecb15c695f8b186c9886061ad493341d0cf4bd10c4a038c1"
+    },
+    {
+      "path": "laya-ts/tests/load-robustness.test.ts",
+      "size": 3594,
+      "sha256": "06186b9b2e8164b30c27b8d7e90e4011b074dd2b160564c6e75d28074ceb2606"
+    },
+    {
+      "path": "laya-ts/tests/maxlen.test.ts",
+      "size": 417,
+      "sha256": "7e15b87a0d744257770b3c32a10a34373dec30b375bc967083b1c4371083d4c5"
+    },
+    {
+      "path": "laya-ts/tests/option-collapse.test.ts",
+      "size": 6955,
+      "sha256": "9c471122e88833a4c91d94a46112a6adcffd6f59a2ccdb0afd139104395a4d0c"
+    },
+    {
+      "path": "laya-ts/tests/package-e2e.mjs",
+      "size": 6078,
+      "sha256": "c672ca61cbf32bed79d2fa7e0670a6f685f134c2a7bec0e9551d893bb0affda3"
+    },
+    {
+      "path": "laya-ts/tests/parity-sequence.test.ts",
+      "size": 7044,
+      "sha256": "fb7c6dc636fbdfdabf4898c17f2368475c215117bb0c2964d06778e759f50e64"
+    },
+    {
+      "path": "laya-ts/tests/prefix-cache.test.ts",
+      "size": 1261,
+      "sha256": "cb1dcc4c18e7aeaef1063e138d2017854a8b762b898cc07357f3bdcab840281c"
+    },
+    {
+      "path": "laya-ts/tests/question-instructions.test.ts",
+      "size": 3192,
+      "sha256": "02b71e1e7d40a659354398b9ea2a263210426f3b7f2e470244487629f4a9c93e"
+    },
+    {
+      "path": "laya-ts/tests/revision-pinning.test.ts",
+      "size": 13608,
+      "sha256": "2c748e9affae89e0c761f2a3290ad7f920f9139c07e9ab4e0f59c4893576dedc"
+    },
+    {
+      "path": "laya-ts/tests/router-batch.test.ts",
+      "size": 16608,
+      "sha256": "e7e2c30e58c946e7d1edc8d6171765e12cf472f252b345a84ad3807cbaf3e5b5"
+    },
+    {
+      "path": "laya-ts/tests/router.test.ts",
+      "size": 2720,
+      "sha256": "10e7e8b9f1f7962a9b915fe370fd0d717b96797ebcb3973a24b6c4e751c5dc3a"
+    },
+    {
+      "path": "laya-ts/tests/scaffold.test.ts",
+      "size": 190,
+      "sha256": "41f493cfcde48e7990d16f01df5b4e86a45723c1c62471b5f578240e72f31bd7"
+    },
+    {
+      "path": "laya-ts/tests/sequence-prefix.test.ts",
+      "size": 4177,
+      "sha256": "163186458acb244dd3e4c9d2bf2694910ef7069b52642cbbc9b9db22624c30d7"
+    },
+    {
+      "path": "laya-ts/tests/shortlist.test.ts",
+      "size": 792,
+      "sha256": "7164fc473525e7403fa9143afd625421a815118040ae4ea70db203eb193bbde2"
+    },
+    {
+      "path": "laya-ts/tests/structured.test.ts",
+      "size": 15689,
+      "sha256": "a8e40eca047bf638ed86afec7aaad3f770dfb9abfbc8fd027f65861b36ce77b8"
+    },
+    {
+      "path": "laya-ts/tests/swedish-routing.test.ts",
+      "size": 1259,
+      "sha256": "992230cc59cd03009e513f0ec711df21346b131b40a311dda18f45f63a558c66"
+    },
+    {
+      "path": "laya-ts/tests/tokenizer-parity.test.ts",
+      "size": 7783,
+      "sha256": "3fffde5b1adb429f0181df8c26ded5799a774e3eb9882f2c7d1d942c7326c726"
+    },
+    {
+      "path": "laya-ts/tests/truncation.test.ts",
+      "size": 7660,
+      "sha256": "f26bc55145955a108eb61323e168d081f4255568beb0d7a2f08d99b28317355d"
+    },
+    {
+      "path": "laya-ts/tests/web-provider.test.ts",
+      "size": 3553,
+      "sha256": "40021bbc2e80fff37669151c925a91bfe201a5a322b3c78e2dde4c594d3dd8f2"
+    },
+    {
+      "path": "laya-ts/tsconfig.json",
+      "size": 522,
+      "sha256": "c2f7fc882c36bb969b84a2506d5e6da03dc10e4d991a96ef0fe73589734543c4"
+    },
+    {
+      "path": "laya/__init__.py",
+      "size": 4765,
+      "sha256": "8bacff5622f1052507b7b762a9f62fbcd54fe6b6b24ea38b9a32c3245a2f9cc4"
+    },
+    {
+      "path": "laya/_compile.py",
+      "size": 4469,
+      "sha256": "487cbd1550ef180ece7ec948b99d34eb280930b16f889a5c5b2c4621000a5ede"
+    },
+    {
+      "path": "laya/_eval_policy.py",
+      "size": 7985,
+      "sha256": "c16f59a1c653c43c9085e540fc08a782cc986d4e99ab236cad35aabb8f8f8746"
+    },
+    {
+      "path": "laya/agent.py",
+      "size": 120787,
+      "sha256": "fce3efddb648b7911d3054773b233873493ba57fedc023f073a60368f5e237b4"
+    },
+    {
+      "path": "laya/backends/__init__.py",
+      "size": 4613,
+      "sha256": "16b44c9b126d9a281d436276612a8acf5738811c6eb3c5434e2edcd9baa949c5"
+    },
+    {
+      "path": "laya/backends/base.py",
+      "size": 6576,
+      "sha256": "840783491d33f6b4d66507278c2fd3d2b90b69d4a87da6bb6ff89c8c281d6d28"
+    },
+    {
+      "path": "laya/backends/compile.py",
+      "size": 6367,
+      "sha256": "8f23429302b1f707a37e240ed1d59413e1e13c3cf51d52da6511be3d5f4dc27f"
+    },
+    {
+      "path": "laya/backends/eager.py",
+      "size": 461,
+      "sha256": "8ea3450c633b5e3a5f98881d4bccd61b43c7ed11b46251516a67f5b2de525887"
+    },
+    {
+      "path": "laya/backends/tilelang.py",
+      "size": 1940,
+      "sha256": "ec039de76453d15a045cf3dfdc89df6a67e6c1e5eaeb5c389073d4cfd9ea0786"
+    },
+    {
+      "path": "laya/calibrate.py",
+      "size": 29994,
+      "sha256": "046ab37810cd6ebc26534d012bd4109faf76203adc627e525f77effdb82b1c19"
+    },
+    {
+      "path": "laya/cli.py",
+      "size": 21532,
+      "sha256": "11192da39d4725832e4a8836b618057f8befbadc80ba464e3de70b7cd0508b1d"
+    },
+    {
+      "path": "laya/common.py",
+      "size": 43089,
+      "sha256": "0e4020cc844db80b28e446f3d5fed5a927ae6a8dc4af806fdd334107855211c2"
+    },
+    {
+      "path": "laya/confidence.py",
+      "size": 11678,
+      "sha256": "b46851bc1b2cb89ae63febebae96656381a1f076d19fc186ecfdbd1fbf88fd9b"
+    },
+    {
+      "path": "laya/email.py",
+      "size": 16430,
+      "sha256": "1e9741d6424aeed69d8bffbd35ff735a0d483837f0474d3a9ff02d7dd53d451e"
+    },
+    {
+      "path": "laya/evals.py",
+      "size": 44360,
+      "sha256": "2192134d6e590d4773aa31d1e7f938fc2b9e44dede8a820fe60e5e2444736862"
+    },
+    {
+      "path": "laya/evals_cli.py",
+      "size": 25813,
+      "sha256": "c8a516481c9f3620b9d1eb581499f45c93f124288c89bb7549e2da5719159473"
+    },
+    {
+      "path": "laya/evals_shortlist.py",
+      "size": 7624,
+      "sha256": "c759cf291c98fd46374844488eb1ed311c3c8e326238c2cddcf1046626c6499f"
+    },
+    {
+      "path": "laya/fast.py",
+      "size": 13767,
+      "sha256": "df722a500cf0074ba01e67fccd510cc1c279c2851594100c7c4ba5755ad08b9c"
+    },
+    {
+      "path": "laya/hooks.py",
+      "size": 21324,
+      "sha256": "61f034082d0cf9e9b4f83212bf9b547adb7269a1adda14a8ad3d77d76077cb7b"
+    },
+    {
+      "path": "laya/integrations/__init__.py",
+      "size": 787,
+      "sha256": "a89caea33c7974f87420486d692dc42897d23ec015a6b77982bc3e7232ee592f"
+    },
+    {
+      "path": "laya/integrations/_controls.py",
+      "size": 5370,
+      "sha256": "32ee545ff2354d5896a66a9f4ea7d0bcdd3f744b589a97358f2fbdcd40b75106"
+    },
+    {
+      "path": "laya/integrations/_errors.py",
+      "size": 483,
+      "sha256": "f47f5d3e4e3a0d7329ba859b873900dfdfee638280ba82fc778016c3e5d1897e"
+    },
+    {
+      "path": "laya/integrations/_guard.py",
+      "size": 831,
+      "sha256": "6ff6306fb8b5f45faa511f55582bc8dea2abb693922a886f4dc2224e85f8c636"
+    },
+    {
+      "path": "laya/integrations/crewai.py",
+      "size": 21517,
+      "sha256": "de4bfbc4c1f19de1eda20fa18b2d03bbd0cd9829e516675ab7ba8af2c8958db2"
+    },
+    {
+      "path": "laya/integrations/langchain.py",
+      "size": 45898,
+      "sha256": "03104605d9f1ff56f2463fb0c006850e4dfab45d85ef104f8ae91eef61da6c30"
+    },
+    {
+      "path": "laya/integrations/llamaindex.py",
+      "size": 25008,
+      "sha256": "86cdd0e92421817cc10a5121491205c5b0a76083b44a073bab7756a85188ba72"
+    },
+    {
+      "path": "laya/lang.py",
+      "size": 41251,
+      "sha256": "9a19b93dda8e784dfc8e326a1d29b67b14e170280ac0327171fc68fd2b76d1c9"
+    },
+    {
+      "path": "laya/mcp/__init__.py",
+      "size": 422,
+      "sha256": "3cddfbdb68ea7e25aaa46df3fd732a939d24b07ea2fbfbde2ba92a99af4b43d2"
+    },
+    {
+      "path": "laya/mcp/device.py",
+      "size": 7861,
+      "sha256": "43d26c0e9145be8e45520bd46cb3e968f902148e4be4105f22c82dfed56bfd47"
+    },
+    {
+      "path": "laya/mcp/remote.py",
+      "size": 11732,
+      "sha256": "17bae7a271ef9d1aca3a22bc40d6709ff35d2235be6171e372c2558afa5354af"
+    },
+    {
+      "path": "laya/mcp/server.py",
+      "size": 22482,
+      "sha256": "e3ca8896f638c408189acece2ac426177bf1733c94232e59a1fe9ad6f197f090"
+    },
+    {
+      "path": "laya/mcp/tools.py",
+      "size": 56644,
+      "sha256": "36c2a8791c4a543ae9ca6d2d87cb9d5450cd5249f67538ed21949028aa9bdfdd"
+    },
+    {
+      "path": "laya/onnx_agent.py",
+      "size": 47243,
+      "sha256": "d15eff733925af9f8dcb044f435ab674bb17b2e68a358104fca91e98f56c45e3"
+    },
+    {
+      "path": "laya/presets.py",
+      "size": 8322,
+      "sha256": "40d91d74f5bd585b40f70c34c95cb4fe2aec83a85cfdb93e4c623a5d904defa3"
+    },
+    {
+      "path": "laya/revisions.py",
+      "size": 7015,
+      "sha256": "3d07822d231e94d7e22da0fbae89cac159b7525ff87c54efb72f10a09f7319bc"
+    },
+    {
+      "path": "laya/router.py",
+      "size": 78635,
+      "sha256": "8efe0be26560f394cd41fc1efaf6d96021b9418f9d53a38a757259039e9fcb0a"
+    },
+    {
+      "path": "laya/serve.py",
+      "size": 65476,
+      "sha256": "e3ab7c88aaf071c9774a0b03d644a97aacc306445bfaa9819422edc5e5b28520"
+    },
+    {
+      "path": "laya/shortlist.py",
+      "size": 16234,
+      "sha256": "6459e2ea60a22f8e0a82023af8cf6e59ec752a74ecf27989cce4d76ccc764cf8"
+    },
+    {
+      "path": "laya/structured.py",
+      "size": 18449,
+      "sha256": "d2966656d25fbb34593c738d0e6912dbfe269fadb3fc8853a7820e4834d7306b"
+    },
+    {
+      "path": "laya/tl_kernels.py",
+      "size": 11829,
+      "sha256": "f909abeb14be08968846d175abadd4c65ce1e5f1cb7f853dd565ab2ad6e5ec1a"
+    },
+    {
+      "path": "nix/laya-serve.nix",
+      "size": 17616,
+      "sha256": "a731d38741ef086287fe5b6cedbdeb5f76e7204561692af2add9b4fe39a9b38b"
+    },
+    {
+      "path": "nix/package.nix",
+      "size": 1597,
+      "sha256": "f74f077096e201341852d1576184861a7cc827c49655554eb451a124d5be92de"
+    },
+    {
+      "path": "notebooks/laya_finetune_typed_decisions_2xT4_kaggle.ipynb",
+      "size": 41289,
+      "sha256": "d97004a95c878e4d2d8158d0f91efa7922cdc854d7454d7a0ccda115444eccb0"
+    },
+    {
+      "path": "notebooks/laya_finetune_typed_decisions_mps.py",
+      "size": 16063,
+      "sha256": "22ffb2bea0bb24a48650783336a77ead0acd0c111730b6005277c96ee6897dc5"
+    },
+    {
+      "path": "pyproject.toml",
+      "size": 2880,
+      "sha256": "bbc08e362b1515516883f1a3d81995a5e44f58b29742f4e852bf8264e8b4d3b1"
+    },
+    {
+      "path": "requirements-docs.txt",
+      "size": 210,
+      "sha256": "d2c371bdbcf23fcf326ff593fc48d3db404becbac99e8d65c066ec263b4f6286"
+    },
+    {
+      "path": "research/README.md",
+      "size": 13626,
+      "sha256": "a91201b6d64aa384efe2080c3899be0a5f47ef0b0c510ce54640974932331225"
+    },
+    {
+      "path": "research/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/README.md",
+      "size": 13320,
+      "sha256": "9c8613534f183904e960e7cd65ce3e4cf262a0ed7dda56e10f332c804286453b"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/audit.py",
+      "size": 4461,
+      "sha256": "4f68c03bff00e2c338c84222be73a8e8b898f3bffa1b232c85195099199f3f6a"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/baseline_llm.py",
+      "size": 7004,
+      "sha256": "bfc2345337a08978e1d94c8b018192f5b686c890818cd2df9440da4879721e62"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/build_cases.py",
+      "size": 26394,
+      "sha256": "05b9112e3a09b4b2f80ff6a038b5a0028f523f24954e7e9118b305fb2e012ade"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/cases.jsonl",
+      "size": 13503,
+      "sha256": "6ea5c7a9ff26b8c2eaeea657393074a1bc7f63fa0bf6a297e3e5b9058d9679bc"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/clinic.jsonl",
+      "size": 5365,
+      "sha256": "545990173a6667b797ea1e7ecb5fc3150a5cf20a288ab54f34738a5183f18efc"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/frustration.jsonl",
+      "size": 958,
+      "sha256": "0274d9f4143c18192330bde3aa42b72b9652510af3739d17f2ed1bfe7202307d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/independent_cases.jsonl",
+      "size": 4417,
+      "sha256": "7d412fbf8683963f3ac5a4b28c7a586b2330622aab90ec00a43ae7bebc8b826d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/independent_clinic.jsonl",
+      "size": 3111,
+      "sha256": "ad6b345d9a2edfc7a46f07d827aa1d7d528f9750a67025e760dc661fa6476baa"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/cases.facturacion.need.json",
+      "size": 1077,
+      "sha256": "ea188c3f66acdf1c6f6e5437e5fd5171ddf470a6d932b847155130e2a1f394a6"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/cases.facturacion.refuse.json",
+      "size": 701,
+      "sha256": "ff29e24050496f8f0b15ef8f2e1da61cf42f762cce2140834c53f4faf06f0419"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/cases.soporte.need.json",
+      "size": 769,
+      "sha256": "f947e10b51251890d010b218578fbb773e12ca950168a42f84a637e82bc4b81c"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/cases.soporte.refuse.json",
+      "size": 840,
+      "sha256": "1eced74637f0ad1ce51668cf4bef643ed1c28473384d1ce75820845482a4f376"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/cases.ventas.need.json",
+      "size": 788,
+      "sha256": "ad15d6dc86539697759dac8b0a1d8fca36bbc9ae206f1f60a8605d7b6b3094e6"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/cases.ventas.refuse.json",
+      "size": 839,
+      "sha256": "6778d3e76e355d5b971ba11fd9ddf35dcf8ee6f0a25b4b4ead348d72f6dd0d70"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/clinic.citas.need.json",
+      "size": 947,
+      "sha256": "cedff2a213a5192866f66ffbae9642f8ccf00f07583c50e332ea8db130496cc7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/clinic.citas.refuse.json",
+      "size": 677,
+      "sha256": "772ef8249eba5180f10b8255529e85f84df06e8b2f2103f9ab2c6e8850b194b8"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/clinic.emergencias.need.json",
+      "size": 737,
+      "sha256": "1213d66c7800ba51667c6f044b3a8a1b0bb0022f016fa1b780dea94f7ec151c0"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/clinic.emergencias.refuse.json",
+      "size": 719,
+      "sha256": "a379f606b0b6dc78fcb9509b8487d45df7f497b40e3a28ec6cddc579fe2d3cb8"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/clinic.farmacia.need.json",
+      "size": 993,
+      "sha256": "9d07da0ad055c7ef2d1699a8a030750446a77ac5c5b97094f8eb58602c313fe4"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/clinic.farmacia.refuse.json",
+      "size": 693,
+      "sha256": "eed86f9dc41890c8106cc1ebdd2f7f6a06b6aa05bf63256c94d4bd7396037b2e"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/clinic.laboratorio.need.json",
+      "size": 896,
+      "sha256": "3a1316183e39a54489740435588c88b6672d45d9b78397e0446c19fe4ff40cf0"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/clinic.laboratorio.refuse.json",
+      "size": 911,
+      "sha256": "a870dc6add5c3f19575d34f25e8ec35f7d157266c3cc0535434c359cf0d042f9"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/pool.hangup_refused.json",
+      "size": 587,
+      "sha256": "639c508c20d887c2fb49adb94efe7877d9d7084195d41b38a36694ea5ffcfd48"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/data/raw_independent/pool.human_with_no.json",
+      "size": 916,
+      "sha256": "ec7706c947ec96a3b7b232c197523fc3a122b161055d86623641bba898f7b63d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/metrics.py",
+      "size": 4732,
+      "sha256": "7e86fe7b0d725ea9be74c97ade5af9bed61ee0239c0bdbd0ed652c405162cbd1"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/prompts.py",
+      "size": 4025,
+      "sha256": "6a95e30382abdc55cab620d068b2a4d334a2167d6f4de2372e9166dc7fec17e7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v1__cases__es_criteria.json",
+      "size": 50291,
+      "sha256": "ba39119cd38f8057a6e8cc87feaf53de2c01e5edaae0ece39c7cfabf6e5c76ea"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v1__clinic__es_criteria.json",
+      "size": 22079,
+      "sha256": "92dc62922cfacc01aa481a9989fc494417e18339ff138fb607fe761d022ce813"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v2__cases__es_criteria.json",
+      "size": 50324,
+      "sha256": "039f2e0b90ed209ec49380ef4075f8a84baa3a3cf81a0ed8d304c71e0334fa8c"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v2__clinic__es_criteria.json",
+      "size": 22095,
+      "sha256": "2c79a1f2cfa7ebe10b43b630532f137c8eb8a4c037e15a9933a0c590d7f48b2c"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v2__frustration__es_criteria.json",
+      "size": 5654,
+      "sha256": "3259ce0b408608c068cc931e4daf4976103dabab781910da294c599577272f10"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v2__independent_cases__es_criteria.json",
+      "size": 15531,
+      "sha256": "b2adc93cec1f4bf2535768b0928b26f0de0060e7ce6b42ccd8fc3145c2235d55"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v2__independent_clinic__es_criteria.json",
+      "size": 11387,
+      "sha256": "9f42b073063f2eec8eb7579589a4bfbd353f94cc91b925ec2e741ea3120c44b6"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v3-no-templates__cases__es_criteria.json",
+      "size": 50250,
+      "sha256": "e3e1b3a78ce875de529e5ad79450df53fb14846853742eaa986dd30eb6a606ef"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v3-no-templates__clinic__es_criteria.json",
+      "size": 22159,
+      "sha256": "87596ac05da126139ad65d05adb45ff82acc04286b4fc28617ecbdf279eb329d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v3-no-templates__independent_cases__es_criteria.json",
+      "size": 15481,
+      "sha256": "8a607a2725625b554eeaef069f5f703b180031bf03dade03ce296f5cb0542237"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v3-no-templates__independent_clinic__es_criteria.json",
+      "size": 11415,
+      "sha256": "f38228c28f902c4a097ade1368c0481665ee976277f91ac9d187083ae87694a5"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v4__cases__es_criteria.json",
+      "size": 50278,
+      "sha256": "56e823df2f007c68aeea77100bad62a06401de47886eab12542518d68cc6a7f5"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v4__clinic__es_criteria.json",
+      "size": 22071,
+      "sha256": "42601f12a822cc9a323396413b532679bb9f23014ec7981979e0ad6572d17f84"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v4__frustration__es_criteria.json",
+      "size": 5653,
+      "sha256": "26ac8779e7b12d01371b5c9bd524da89117c0e6c89702ed7119fb57513f6bed7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v4__independent_cases__es_criteria.json",
+      "size": 15453,
+      "sha256": "785304450df03deacab60e4343afbd7ac21a58f87221091bbc137091a327d261"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v4__independent_clinic__es_criteria.json",
+      "size": 11401,
+      "sha256": "573430bd45acd02b00f4f2d633330d4ac8723a44ec13e80cff2b9bf37f1c30bc"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v5__cases__es_criteria.json",
+      "size": 50362,
+      "sha256": "a7021a889941c3f57649c5ac0fdff5c1fd92d4ca6dc61eb5763b25745a898c78"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v5__clinic__es_criteria.json",
+      "size": 22017,
+      "sha256": "90f56110ffe1e25bafac2fdd09a57af1dc3dd6b288a44614d1943ace519a5726"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v5__frustration__es_criteria.json",
+      "size": 5623,
+      "sha256": "0270b79863d50bef0c8887c63f234e28d4efd5c96b0bb39d72456081f8c760b4"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v5__independent_cases__es_criteria.json",
+      "size": 15454,
+      "sha256": "fd7cb28d6aafd486c017cfdb4314cbc1c750daa3d3d483f8978b33ed949a1427"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-es-phone-v5__independent_clinic__es_criteria.json",
+      "size": 11448,
+      "sha256": "3b1499977e44af7b3b47fc5e2999eae2cd55956bf09ae1692b35e5c4c5b36f77"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-multilingual__cases__en_criteria.json",
+      "size": 50382,
+      "sha256": "9d726db0b85d20e2425adf6fa1e1ea035f33c9dbe88da0e64a3426c0528946ee"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-multilingual__cases__es_criteria.json",
+      "size": 50462,
+      "sha256": "eb05aa11d4bd8e802f2f8baff93a27a001e6eaaa4a825596c58c96ab1dd6ecb4"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-multilingual__clinic__en_criteria.json",
+      "size": 22361,
+      "sha256": "f9e09427e0e3e899556e6e9bea5a0788014c587602875507cb46786de4c991aa"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-multilingual__clinic__es_criteria.json",
+      "size": 22403,
+      "sha256": "1b1e92c0f0a41cc3621166e6d7f5dbc11f601cc605b799b8750506f3ff5c5c0b"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-multilingual__frustration__es_criteria.json",
+      "size": 5588,
+      "sha256": "db542c345df0f0c46b85fd5e1ed4612fbcd4c149e395a08a0d3418e0d2f54e96"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-multilingual__independent_cases__es_criteria.json",
+      "size": 15834,
+      "sha256": "bd2ff8580482e2ca1f892a5820811659c5e91dedb631770db7d9bac174e02719"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-multilingual__independent_clinic__es_criteria.json",
+      "size": 11637,
+      "sha256": "1646ade05293256e7a64cbbca925a1630edd24d67d2d7570f0dc5b26d5399693"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-typed-decisions__cases__en_criteria.json",
+      "size": 50425,
+      "sha256": "50a83668596d2b766154989d695221867ddc69f7ae486812c8827e4e02bf601e"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-typed-decisions__cases__es_criteria.json",
+      "size": 50306,
+      "sha256": "b84e0721960b5cf02fe33f2dbb2282d74d7c2bbc8e4c325c28f5a74928607346"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya-typed-decisions__clinic__en_criteria.json",
+      "size": 22372,
+      "sha256": "db13d0f872abbbca70c4465e649d1d2c09c014f5f1d6ca9a2d00bc6a129a4d04"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya__cases__en_criteria.json",
+      "size": 50513,
+      "sha256": "7a0bbb55ab48e934489d10779e63aab9f14593d5f4f11adbf8eb3691f8613433"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/laya__cases__es_criteria.json",
+      "size": 50352,
+      "sha256": "aae0235b6f12882b6cc03ca3e75cec7a23dfaa5ea06ee0e43df5f71997d7fb88"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/llm-qwen2.5-7b-instruct__cases.json",
+      "size": 51637,
+      "sha256": "7ceb6dcac06d5f3fbab4cdf1cdc1e6ce3566eb7db05a120297ec20fe2cd059f9"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/llm-qwen2.5-7b-instruct__clinic.json",
+      "size": 21118,
+      "sha256": "13048547daa89d8689fe460130b3799643764c964c5522eb1395e7c478cc8dd3"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/llm-qwen2.5-7b-instruct__frustration.json",
+      "size": 6205,
+      "sha256": "5137adc442a74e2b2c170dab978168e0a4093c4d50b987187cef3dde9cbbfed8"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/llm-qwen2.5-7b-instruct__independent_cases.json",
+      "size": 15985,
+      "sha256": "95471b55c567f494779c827d544968f86f193b9daef1f54ae34446ff5c637999"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/results/llm-qwen2.5-7b-instruct__independent_clinic.json",
+      "size": 11003,
+      "sha256": "c5297377a05635ded2f743c5a4baa366964ff01e03ca3b208e35fa54e517c891"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/run.py",
+      "size": 3611,
+      "sha256": "41a800c61012468d04853a7c4e54c06baac5df6d065d474ce39552559f5a13ea"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/tests/test_es_phone_turns.py",
+      "size": 8068,
+      "sha256": "75bea3c4d2fe3cd8e90e00d6c24b51ead966eef73731836e64d66f3574562a19"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/.gitignore",
+      "size": 12,
+      "sha256": "1c31f0f56d6a854757b8345a4c45a2fc934cd9e1d8d589d92d3489f48abee6c4"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/build_train.py",
+      "size": 12967,
+      "sha256": "923a0e4327a184166df4bfa1e13fb886b6464beb03fb5e502aca4da655163c3a"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/domains.py",
+      "size": 7209,
+      "sha256": "badabbd00e240b5c9f1ba19071ac575653f9e7a4b5d061f2b16b885bfb9dffee"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/generate.py",
+      "size": 9480,
+      "sha256": "2305c511638a156cea24c659c5b7fdf31fe37345217934ee2a78075e6c0710c5"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.boletos.direct.json",
+      "size": 933,
+      "sha256": "4f45e868e92f1efa0a98b7fcc894e36e56854f9084f38a6e98881bd787d0ce9a"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.boletos.indirect.json",
+      "size": 3094,
+      "sha256": "6d9d2179513d75514cbf1b253b80e29dd8ed09627af0042f685df3c0ee3ea7a7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.boletos.needs_with_no.json",
+      "size": 1334,
+      "sha256": "70ac08ba3b2016f00fbd47115f92356bfdd5081212307503a7691724e207b4ab"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.boletos.negated.json",
+      "size": 933,
+      "sha256": "fad6c54fca74b6be0e083b38e541cf3f6cf3578ccc5c0deff41ce9ecfa986197"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.cambios.direct.json",
+      "size": 878,
+      "sha256": "6e85ec0f562a6e5980b20200c3b8ef15ea6caa301b147fe1cab5a13bbef6e1af"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.cambios.indirect.json",
+      "size": 1798,
+      "sha256": "c4bb4d55ec3eb02948b398063ae4738b962f7d6ff7fce5b4b0b311fe1dd8803b"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.cambios.needs_with_no.json",
+      "size": 1456,
+      "sha256": "d602e7da8d7f764570819315f486bab151482196aa666a4f10e5893ada81a4c4"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.cambios.negated.json",
+      "size": 1095,
+      "sha256": "51a899bf19df487d3a9d7690519f307ecc6c47ad3ee55b33156a5f9c8d1c6419"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.excursiones.direct.json",
+      "size": 864,
+      "sha256": "61b14a892394bde50cb03e22a9892d1c3d4269f08e31e3a62e7a87582a695193"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.excursiones.indirect.json",
+      "size": 2537,
+      "sha256": "6e13b58fbdab76948ce506bdf5721eacee4fcd9b097ce8edbe1443cc12fc9c64"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.excursiones.needs_with_no.json",
+      "size": 1423,
+      "sha256": "624cb05072ebbf9ffb4b05564eb4eedc3fc8e226db4f9a226962b62f13ba35af"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.excursiones.negated.json",
+      "size": 934,
+      "sha256": "98ae4db55f6554324d9c4d851f377593785b165649e655323f8c4bb2ca8dc5d3"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.open.json",
+      "size": 1368,
+      "sha256": "6ca386bf12faefa6693dd9ab8daf774b1d535473502d691039d4662931ffbffa"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.visas.direct.json",
+      "size": 945,
+      "sha256": "93a4d0566c41b7b52eab0a440c4700e0df923b11d63949e310c3e4599d8f41e5"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.visas.indirect.json",
+      "size": 2777,
+      "sha256": "184115f0c3f74d7fc91bc46c9ed3ed5cbb6a9c221d86dacb20331ca389313c8f"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.visas.needs_with_no.json",
+      "size": 1328,
+      "sha256": "c39387814db9b829fb39c987856f39e6828af7cf0c93f0bc82e3149f35b20328"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/agencia.visas.negated.json",
+      "size": 892,
+      "sha256": "04dd23d2aa626795c5c27e6c5f925dc05e83f30c11d4e1286e34631dc83c02d3"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.cobranza.direct.json",
+      "size": 804,
+      "sha256": "f3abccf3df1a9c5f7e80e8226a259f0efd1802f4a3b1efd6f25f8de796202520"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.cobranza.indirect.json",
+      "size": 2481,
+      "sha256": "5fa53912c29ab3f9e273c690ab4f405616d33054c414a5bd4c8c359ef7439d2d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.cobranza.needs_with_no.json",
+      "size": 1417,
+      "sha256": "654c177c2cffc8710a0f6e67cda0b6317faf86b7d6db8b509080ab15ca3a28ca"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.cobranza.negated.json",
+      "size": 800,
+      "sha256": "ff8fa058849772c4af9d57e25c149e27ef01c2ccffca0ff172b2a8d2076e4162"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.open.json",
+      "size": 1667,
+      "sha256": "d4410226df49df642c7ff4cf9d4410603c44194c7382522bff3bf929e38771d2"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.polizas.direct.json",
+      "size": 995,
+      "sha256": "1bac673e2015bcb8ca0842d1eb9fc78e180da438b640d9cf84274e10ffc62a76"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.polizas.indirect.json",
+      "size": 2262,
+      "sha256": "40037ddcd79df092286f9f165bef760b5f01b03998f79d1aefabffa6a8f07fe1"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.polizas.needs_with_no.json",
+      "size": 1396,
+      "sha256": "2bf00cb36a4f744473912cd8bc447db492200fbfcaaa90d117c866ab7a19b6e0"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.polizas.negated.json",
+      "size": 1341,
+      "sha256": "83cff6011532bc2f9907edd5f0a3e66f7f863d2008f86f643d1d2268c8331225"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.siniestros.direct.json",
+      "size": 936,
+      "sha256": "081f34c91bb309e302d33b91d496c066a7f1800c766f0fdcf70f5ef26b7f0d0b"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.siniestros.indirect.json",
+      "size": 2272,
+      "sha256": "62a50044750e97119ddc8376e988e7621c60d12fcdc3adc4c868c845199384d0"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.siniestros.needs_with_no.json",
+      "size": 1529,
+      "sha256": "98123027c4b50fa8c712f4173aa21a57c81b7b9c47fc82bffb2948ae14ba5713"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/aseguradora.siniestros.negated.json",
+      "size": 1370,
+      "sha256": "bffd6d8a3d7bb9b25eb34582819ba67583007b86d30c2b32028b1aaf0549a1e4"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.cuentas.direct.json",
+      "size": 908,
+      "sha256": "6bf92d62850ad28d0fb5f18fdb17ea16513d14b4dbb806df266aeff7e5e3f697"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.cuentas.indirect.json",
+      "size": 2616,
+      "sha256": "0118ad37c61148c2a1388dc33869d18c521e9a1160ef3bfa30bf8b33de9bb53b"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.cuentas.needs_with_no.json",
+      "size": 1360,
+      "sha256": "d4420e8a4c8fe978a30a5acbd9ccad603be154015369d92c7829c87a75a49873"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.cuentas.negated.json",
+      "size": 1205,
+      "sha256": "6a59fc1df489af76c42f1ed9b3acf850df8472f98671cbad454a5117bc56b9ca"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.open.json",
+      "size": 1749,
+      "sha256": "33a50815fc9eb089f00120016ab5b1665a7d08cde1a022b3ba2a714a397348c1"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.prestamos.direct.json",
+      "size": 1045,
+      "sha256": "fb70b042940f6c555f9bc79b776cc93bb55af58f626809d2dcafb95b151598af"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.prestamos.indirect.json",
+      "size": 2370,
+      "sha256": "406f313ab3d40dd961988f5f9e4013c8613cae10b8b49bad2a9cc2a3d2c25200"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.prestamos.needs_with_no.json",
+      "size": 1408,
+      "sha256": "5445bae23254364dc9d494c608247371ece34868c5eac55509d6fa6ec5526623"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.prestamos.negated.json",
+      "size": 971,
+      "sha256": "a3789405bad89aba3d22cbbcc95303e5961ca631478a7a15737250491be0f048"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.remesas.direct.json",
+      "size": 903,
+      "sha256": "bcef99f9a21dfba07338ab4a2b1283c6d826cd29dfde5cafc9b26b3ef7270f63"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.remesas.indirect.json",
+      "size": 3055,
+      "sha256": "12edce3002fab4377daebc41e5983f738f4abb69d5fa5f81f0e54f8ef97bbcb7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.remesas.needs_with_no.json",
+      "size": 1233,
+      "sha256": "c952f988991b580bc75a46703f4b07d573e7cae7336739e326d2ce21e2d70ffc"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.remesas.negated.json",
+      "size": 899,
+      "sha256": "4e6f876e4c2b8726e9ae33777aa9bfd86c1d9faebcc9f36f60d49e0f73f25132"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.tarjetas.direct.json",
+      "size": 910,
+      "sha256": "7e4264648f11130252e7b92ccc32669f1060890ad9d3b5e3b77bf91d14aad451"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.tarjetas.indirect.json",
+      "size": 2171,
+      "sha256": "8a1c3862b6c95fd27db532a5ae8159436714eecb88e2ddde2aa8b2c2fa8cc65b"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.tarjetas.needs_with_no.json",
+      "size": 1000,
+      "sha256": "5b2550733866907fcbffa8b6fff5c7869b194f3cbbe833f3372231c0313e09d6"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/banco.tarjetas.negated.json",
+      "size": 768,
+      "sha256": "b41fb2143f2c0c2f2a2ef715b380d18cf95a343eb6e0855560a1e163dd1bad35"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.admisiones.direct.json",
+      "size": 796,
+      "sha256": "c3cf5f5a67e230e63dfe1be9d68e79df68805f91ea6339919eed5bb78c5e9ef5"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.admisiones.indirect.json",
+      "size": 3351,
+      "sha256": "301faf9cfe85bb248ef60e6d67b7f3af943113c25b786f3423bd0c90d57150d6"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.admisiones.needs_with_no.json",
+      "size": 1243,
+      "sha256": "ed220dbe8c88f8bc549551f1d5c80fdde6a69c06ecb53c536be55a4bcef38b83"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.admisiones.negated.json",
+      "size": 898,
+      "sha256": "3e85fe4d96963a050924677c0a0efed024dceb928640e8022ee7423728d41402"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.direccion.direct.json",
+      "size": 865,
+      "sha256": "bfecd3e4870ee1139c5a1d443beecf54c7ed2a5036c0e3c71cb2ff4f66de63e7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.direccion.indirect.json",
+      "size": 2729,
+      "sha256": "a6ff75ed0f4cede0dda3446e21cc3663e14c01e5fb2ffe8786ef9d6b6fd5a005"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.direccion.needs_with_no.json",
+      "size": 1749,
+      "sha256": "c84ee170dc1bd0269020bce217a11637f333ea7f4a7338431688ade44e3246ce"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.direccion.negated.json",
+      "size": 906,
+      "sha256": "035644e19eb41490fbc21aa6bed471680f5f950e14b48fed5044f5c54803f0ba"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.open.json",
+      "size": 1412,
+      "sha256": "9fd1a7e42349c9602aeafd7f9fcddba989f8ea2e5e7512012d439704efb1c477"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.registro.direct.json",
+      "size": 936,
+      "sha256": "d413098e325d6970a82e1e6a7367e482ea5d86183c1ac764a42f2d17c005cb06"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.registro.indirect.json",
+      "size": 2381,
+      "sha256": "ef2572a716a4b8e7df71c65b54dd0a0378fea156ec50a2c1c3733069f7079503"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.registro.needs_with_no.json",
+      "size": 1238,
+      "sha256": "af39ff470210dc9ac745527c2236af2aba0da80f2c65859538aa5fd56d0e7a56"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.registro.negated.json",
+      "size": 850,
+      "sha256": "ef6722c40e3a2ff669e4bc39450fcdd35316386595ede97b45a54de4d291555e"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.tesoreria.direct.json",
+      "size": 1031,
+      "sha256": "cd197d7841c6323b3d798c8bfe429b4f1ca9c67830358d6af96aefca8ae1fd07"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.tesoreria.indirect.json",
+      "size": 2513,
+      "sha256": "7ca4e4e5a374ee4af69a5094e58afe1c3d2162733f099d73067541f827174f67"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.tesoreria.needs_with_no.json",
+      "size": 1278,
+      "sha256": "bf1bcf2a18690946cbb05262047e49c616184404e4f590dfb5028e754118c8aa"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/colegio.tesoreria.negated.json",
+      "size": 1169,
+      "sha256": "25d86ab2712419d9675af8d8192f12c9e4b9e36e021f6db346cdc2e136006626"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.alquiler.direct.json",
+      "size": 979,
+      "sha256": "5fbb5f4746b3168162adeb8844aae1a33174e4dafce6c6529e0537d63a7bfdcc"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.alquiler.indirect.json",
+      "size": 2413,
+      "sha256": "50f4996e741e0d16b2ab18377a03892c0707e78ffa1a6a83b86bd3d88ad9e15c"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.alquiler.needs_with_no.json",
+      "size": 1285,
+      "sha256": "c0ef7ff05fe828e962c4e493baffa9af82c3e5171eb1162d2832f61a1ea0c24b"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.alquiler.negated.json",
+      "size": 965,
+      "sha256": "c2fe5cd7a64458c9fae3945ef3e8bc2b52c9c42e62f95981e61f56ae08ffdac1"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.open.json",
+      "size": 1231,
+      "sha256": "4314d99f90927bc0574b4cbf7e6cf18ecca4e853c16092931a56472e01a45974"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.repuestos.direct.json",
+      "size": 968,
+      "sha256": "83d40adca57e686d3ef56370f4214046853fca147bbe1a310db2b9c8cea97731"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.repuestos.indirect.json",
+      "size": 3637,
+      "sha256": "1bf19d10ce7bf32ba254319fd66c39b7e331a2289326b3df965b12c5adc4c0e4"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.repuestos.needs_with_no.json",
+      "size": 1464,
+      "sha256": "c54218b5d2906b13f9cea53c909fc846fcd9d7daacbda690e61f418607a94282"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.repuestos.negated.json",
+      "size": 1079,
+      "sha256": "797d13055a6ad2953b6a4efd1b062fd21e6412f18def3c0779a7ec2c7fa6ae29"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.taller.direct.json",
+      "size": 870,
+      "sha256": "9e99f61242c890636cda37655630c9d7f6b81ac236ee768560afaf39b8d3c840"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.taller.indirect.json",
+      "size": 2399,
+      "sha256": "871f71f46d125d1f7901a4b3fdedeffaea310ac86bd9253543087fa4085d493a"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.taller.needs_with_no.json",
+      "size": 1091,
+      "sha256": "44b4789e6697741ff4f32e12592b0896318323bb70610b01496d84477705a08e"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.taller.negated.json",
+      "size": 828,
+      "sha256": "dd124eeb78e6585996f3b8e7b36f0e6cc13745bc46091d780314a6fb5d68558a"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.vehiculos.direct.json",
+      "size": 900,
+      "sha256": "379aa69a8fc74e2b2441613daf8f9bc70f31ad8992e81330fc2330373021250d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.vehiculos.indirect.json",
+      "size": 2798,
+      "sha256": "84e0d5cf78e846dd2dd516b590d4df084a6ffef0f596356a352285f1ecefe1b1"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.vehiculos.needs_with_no.json",
+      "size": 855,
+      "sha256": "1a137b8e2a2a5494aa4f1cf3eb1d05300b536d58559d89ea1437120bf0a72eac"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/concesionaria.vehiculos.negated.json",
+      "size": 1277,
+      "sha256": "0f7903bcc3289fa0e41d0984476bdbbfc902d2d579f681c6ce1707ff188ed0a6"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.clases.direct.json",
+      "size": 719,
+      "sha256": "e1ffaaa6ba9688518cbb455a51a9d0d086b0908c0ca9c6a629e07d1e8abcfbc6"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.clases.indirect.json",
+      "size": 1897,
+      "sha256": "5af46c32af1d2fdef8166bdb146e8a127bde9d4d257c82d22671c5cbde4d5eec"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.clases.needs_with_no.json",
+      "size": 1168,
+      "sha256": "484601e950085ef1351edb73eb583ec3c57f852b1ed151b750b4588408c9bfbf"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.clases.negated.json",
+      "size": 593,
+      "sha256": "f1c3fe3cbea21a61a3f4cd45232724b9df959614e54769f515ddbe825cc99a38"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.entrenadores.direct.json",
+      "size": 1079,
+      "sha256": "aa0317d82cc813250efb74f311cf74bc15fb501cbcc67cee37e3c42e8add0591"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.entrenadores.indirect.json",
+      "size": 2377,
+      "sha256": "08b5d05c71fd34c0a1f4ac26dba570a994a8c0ad5e2fc44a7be896860a7c261f"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.entrenadores.needs_with_no.json",
+      "size": 998,
+      "sha256": "eb3cd89237429f8ae03ec62c738c895ca90278886a9c0dc4ee90b605e5161e6c"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.entrenadores.negated.json",
+      "size": 637,
+      "sha256": "701ee04f1510a944857b09005ef3e3d33c1d93f92a353f4e2b44bd63bc90c046"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.membresias.direct.json",
+      "size": 820,
+      "sha256": "165474a0d5b595fa6023c04eee11ece1f634817e1c1255e10e24cc5121d85e25"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.membresias.indirect.json",
+      "size": 2501,
+      "sha256": "4f378e2f8b295925a1de05ad7f327d3072689454b5e28f711340cbd13e292792"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.membresias.needs_with_no.json",
+      "size": 1398,
+      "sha256": "093d0ec3f6dcdb64fa10615bd6b621082da54f326b16eec192493cdb6c086529"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.membresias.negated.json",
+      "size": 1202,
+      "sha256": "76a2bc0b71da6d08682684c7c0b122295f34978fcec3f56269818176496281f7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/gimnasio.open.json",
+      "size": 1344,
+      "sha256": "d8d739a4f46a6de4a6a368a1332a6784f696b865790498672267bb0b60fd6672"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.eventos.direct.json",
+      "size": 910,
+      "sha256": "072d76b95229d7c0a344f8defca524c77047a42a3cdb635ea2f5f7c5ae3af4e5"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.eventos.indirect.json",
+      "size": 3121,
+      "sha256": "dc5df193ebac7937f4bff93f27402427de7674deeb2b0fc306a95d72ec42bed8"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.eventos.needs_with_no.json",
+      "size": 1397,
+      "sha256": "85d17efb329717fec72ebb864421b4a6387a79fcfce9f3973cc2c9aa0bd6741d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.eventos.negated.json",
+      "size": 661,
+      "sha256": "e6adfe98caf9f56dbc8124d7c68ee106039863c9b00b65853847ea027dc59dae"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.mantenimiento.direct.json",
+      "size": 898,
+      "sha256": "02b00fa14e2524fcf81d7892a17dbb788d22a9ea6b02f7611b19619d11d3363e"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.mantenimiento.indirect.json",
+      "size": 2255,
+      "sha256": "accb89063c35675957b58716682fbb35da0dd30385ee529b8de96c04eb93c3ae"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.mantenimiento.needs_with_no.json",
+      "size": 1001,
+      "sha256": "7b1599470abcb64ba87fbab469cbff4762438c1e003ea44d9cd121a7e123041e"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.mantenimiento.negated.json",
+      "size": 1134,
+      "sha256": "67c0044170706b709d6a5d2a0b96276b2e0d76035770f65a56b5795b79589392"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.open.json",
+      "size": 1270,
+      "sha256": "ab9ef1b74e4c601fa242893923012673a1df53d4c674026e672ff338151761e9"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.reservaciones.direct.json",
+      "size": 920,
+      "sha256": "de44a2cdcf3807b1d582fa62c71675ecd98c9ef5faea6bf931d12e90b2f10aef"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.reservaciones.indirect.json",
+      "size": 2541,
+      "sha256": "7ca48dfd48f12a9a3992a179e5e8ea222ed556ce4d69e8ac4b454afc52849b43"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.reservaciones.needs_with_no.json",
+      "size": 1284,
+      "sha256": "7fd53c2d76136ef767d29248903ef64d5c1e29567ef70e8abd84277c4e4fa52e"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.reservaciones.negated.json",
+      "size": 1193,
+      "sha256": "5b101612019706baa0228f73741ac589bbe7dc1d83aec1a785288c4b3eb476f5"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.restaurante.direct.json",
+      "size": 849,
+      "sha256": "3d4cece51bfca6b27aa8d42a618ad2d7d1dcac55473e24e982e00f2d8c3cbc43"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.restaurante.indirect.json",
+      "size": 2036,
+      "sha256": "0d9746ead1d75c89bdda1682d8f2c0f1af734283c9141b6f540cc8edb9f9250d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.restaurante.needs_with_no.json",
+      "size": 1418,
+      "sha256": "804f44d7cbfe02f74822011e2d0942fa9b0741b6b139f46e3fc2a3560b32dd3b"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/hotel.restaurante.negated.json",
+      "size": 1250,
+      "sha256": "4a1ef01716c449343fc4424540acbf5ca510b581b1f52da22ea92c702308e11a"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.alquileres.direct.json",
+      "size": 877,
+      "sha256": "9d39e2dce150323d0eb9a4efcd2edb9d4dbf1272e78ec7b079be729d8c978657"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.alquileres.indirect.json",
+      "size": 3713,
+      "sha256": "6ad3f4f6d7a4b809b82bf364f83dd8eb781a7b7c792c57e5f86cb4da78cfbbd9"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.alquileres.needs_with_no.json",
+      "size": 1367,
+      "sha256": "45238ec18a9402afb445a67a4a77df14071b1e44319bd4dcd25eca04e7068796"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.alquileres.negated.json",
+      "size": 998,
+      "sha256": "303deecacb60baa9abbc46b879814e7f8dc4f050bccdab1fd36070a6b3615566"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.avaluos.direct.json",
+      "size": 996,
+      "sha256": "aef6ef6853542ff60c65b9aefe39cdc51057b8f3fcc52789d67b6f312d3a4063"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.avaluos.indirect.json",
+      "size": 2308,
+      "sha256": "e99d3a173131608bb8de6f12abc4bc3b439a5e3fbe5c762e8c7b13ecfd182cbd"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.avaluos.needs_with_no.json",
+      "size": 1282,
+      "sha256": "acbb3dc754c007ddd9c687cd40a63d0187a9185659f13506557d4a33bfdb337d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.avaluos.negated.json",
+      "size": 1271,
+      "sha256": "82cf7a73c0cc651c5bb2a0ae57de42a0cf113a6184873cda8b4d40a514bf9284"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.compraventa.direct.json",
+      "size": 894,
+      "sha256": "134d1e3ebcf6336443b10efc77728927cf7ed48d60e2e3662dfc6c5954994568"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.compraventa.indirect.json",
+      "size": 3049,
+      "sha256": "f965a030037e259c79492be1720092b907adaa48e2321e73b24c3db90e9005b8"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.compraventa.needs_with_no.json",
+      "size": 1501,
+      "sha256": "fb4a7cfebbace5fa3ad3f23214640ff34733e71e998c1b1f33e3dc16977e98cd"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.compraventa.negated.json",
+      "size": 1471,
+      "sha256": "6cc919bf21bdaf608fc9a8dd69b98608dff92ef12674ea6be6ab5062196e0be3"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.condominios.direct.json",
+      "size": 927,
+      "sha256": "50abd3106abe07309b876f5a0f5c2cef791bf2439083b89146f62966adc4b66e"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.condominios.indirect.json",
+      "size": 2272,
+      "sha256": "e5cb4471845cf87f6a123ebb49a4c938fa338d15f4c8dc413b2f6e59be9b0a9b"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.condominios.needs_with_no.json",
+      "size": 1450,
+      "sha256": "bb5abec7b67eba7b9125df4e536e3b50c9d443bf9e49b5e74ea7190cb15cff68"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.condominios.negated.json",
+      "size": 1193,
+      "sha256": "98166f6b549fc325fa1b82eb5a7e32c52eb1f730125a9d310ba47e43f15ab18e"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/inmobiliaria.open.json",
+      "size": 1589,
+      "sha256": "79ae28f84881a4fac10b7b0c8e24015bd4f7a92f592ca67ef54aa2b9dd28543f"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.aseo.direct.json",
+      "size": 859,
+      "sha256": "f5f551483283ef4c21db7bc6daab1b218c95b05f2f9f32cdb525c0efb9212077"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.aseo.indirect.json",
+      "size": 2601,
+      "sha256": "852a2bfe90376878fe348c57596744878f57fed44c3ab60c462998981a61a70f"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.aseo.needs_with_no.json",
+      "size": 1118,
+      "sha256": "6001ac80d3fa478955b464d9e7dd23549d602665080b6c374db00c4ed7782d69"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.aseo.negated.json",
+      "size": 1012,
+      "sha256": "0f6bea0e712f88e0a9dcc5a1d4d07adcbee87b1710fda16e92dfa1202000f070"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.catastro.direct.json",
+      "size": 876,
+      "sha256": "b2817f2cdfe11e555943d64952616d3f19bf12f184acfa13682d0d9ff379fae1"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.catastro.indirect.json",
+      "size": 2317,
+      "sha256": "4f386113e00b1eed6d54de55338f972cb7483b9edb03699b4eecd6f6b293cba0"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.catastro.needs_with_no.json",
+      "size": 1408,
+      "sha256": "9af8427871b03664f00cca43d6f5fae6a64c42fc1570ec841279931e96e74df3"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.catastro.negated.json",
+      "size": 633,
+      "sha256": "fcf333d59b99c12d1211462ae6194a2f8917d5a39e878cf97e9277b011fa5bc8"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.impuestos.direct.json",
+      "size": 1066,
+      "sha256": "27ae82eee1bae389b79cf9b6ed7172467a2cc2c88925cc4923214e2b72e12215"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.impuestos.indirect.json",
+      "size": 3178,
+      "sha256": "22f8e99cad934dd4c337181b1d9c01f9c11f2bc2629cdbfdda9f77e0fd2edc52"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.impuestos.needs_with_no.json",
+      "size": 1381,
+      "sha256": "a2f9cd19fc2dd96e80ab97f63baf6df58554f89de678424f67c60cef20d4188b"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.impuestos.negated.json",
+      "size": 1000,
+      "sha256": "0adcb227199ffaa188daaaa9cbe54d432416fea275dd30b8a1f0a8473c1a1c4e"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.open.json",
+      "size": 1532,
+      "sha256": "abf88ddcb340e8afadf44258a6af2f91d4681cd989aababc304042a133d64602"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.permisos.direct.json",
+      "size": 1103,
+      "sha256": "a77d086fb4ed8f437a01f9ddf6767a391e5f1a84d4a0127612353cfbda6dc834"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.permisos.indirect.json",
+      "size": 2662,
+      "sha256": "2e49a3279a245d201c762a5d15e546f345803712a9f93b5f294aead7258f7b6d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.permisos.needs_with_no.json",
+      "size": 1663,
+      "sha256": "cf9cf6cff4067dbc19923ad6ea91e64c926e31e7431a18adc35991b828dbfeba"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/municipalidad.permisos.negated.json",
+      "size": 841,
+      "sha256": "fbddfd2fe783bfdc1c1b9170755e49d4a687e0215b2f145319c3b02fea813615"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.aduanas.direct.json",
+      "size": 1058,
+      "sha256": "a5c4de798d868775959d3e346cc2817f7d55c16a38d7586a3fc31436ba60394d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.aduanas.indirect.json",
+      "size": 3110,
+      "sha256": "bf33ceeffb00be99774a1df5ecfc0343b307fcb81d348253db8bbfe39d4b3f01"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.aduanas.needs_with_no.json",
+      "size": 1375,
+      "sha256": "9552f23491f57b6c5d9adb35e1562445a214b570baf53a6105c11bb1d554c448"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.aduanas.negated.json",
+      "size": 1023,
+      "sha256": "fbbeb5f452a0971cd87407ea8580dbc267df4262cd8d051e6bf6162da6518c33"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.casilleros.direct.json",
+      "size": 926,
+      "sha256": "81f07ba50cddaa6018e47f5d7dae1e7fc05dae4d62350739385985b0c2d1188e"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.casilleros.indirect.json",
+      "size": 3587,
+      "sha256": "388840bbc1a078ada41a54c5137ddc699d5c5f3e98bb6d396dabb2f66ed10eeb"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.casilleros.needs_with_no.json",
+      "size": 1233,
+      "sha256": "0fcb9985510f84eb854b79bcba4fd77117230d82c4fc594ad43880ecfa21c6ed"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.casilleros.negated.json",
+      "size": 1152,
+      "sha256": "b79f0eaf9240d34ceee76aca08595caf4932a998faa190adf5ac9ac509442ca5"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.open.json",
+      "size": 1540,
+      "sha256": "0987117dc5c642f8547baa0d64dd07c5c936d5e783e60fe43544001f6d8a0778"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.rastreo.direct.json",
+      "size": 804,
+      "sha256": "6bc437bf66f7b0141268c3f8a6c5527b340db6032a23cf6bf526c0d44bc060b8"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.rastreo.indirect.json",
+      "size": 3285,
+      "sha256": "e3e9173632ab490eaab618f27d71351b99f57b89eec989a25bbe501f62bdb8f7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.rastreo.needs_with_no.json",
+      "size": 1561,
+      "sha256": "3a2c65ad4041e332b5a2fd8b49ac7204af57abd9cff266dc540c09bfffc5e116"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.rastreo.negated.json",
+      "size": 1073,
+      "sha256": "2d0f6ef7b9f39ff1f9f56f703ec0cb2da4e3ec02c48f6adb41a18fba05abfa99"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.recoleccion.direct.json",
+      "size": 767,
+      "sha256": "5b8b6a281adaae412466605149a2944a6a4484bbf16a5141dbd57f4e873e39af"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.recoleccion.indirect.json",
+      "size": 2288,
+      "sha256": "fca6ca4e08a1ba89e539749b75e1ea5e672ef2f59b5e9868a1806429c0e4fde7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.recoleccion.needs_with_no.json",
+      "size": 1617,
+      "sha256": "f7cd22bdbf585a6effae9a30be8aa5b452dc91a6b0c8405ca7b96bd66005d41d"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/paqueteria.recoleccion.negated.json",
+      "size": 1167,
+      "sha256": "3cf422bb938599d9a5c8683cf9fe789d20a08ebbdac0631a1d7e202e9c6485a7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/pool.farewell.json",
+      "size": 3751,
+      "sha256": "222a547b6fdef2d6cda10600454e80df39ada30a5663d9e9cd26a6107415c120"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/pool.frustration.json",
+      "size": 4754,
+      "sha256": "e32794e728b404046beb1cee4dc6d622d8e0279f414167b7361aa42efd5bb414"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/pool.frustration_human.json",
+      "size": 4265,
+      "sha256": "94c1f6a46f2bf2d1277a1079ad6fb628d67ec50674ee9edf3c60de3700aef8a9"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/pool.greeting.json",
+      "size": 3026,
+      "sha256": "826a5bb5cb002168c98ea2a790e179acc449a33b7c50c98bd70c945a2cf73789"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/pool.human.json",
+      "size": 6188,
+      "sha256": "c6c7d5e466cf1d6f50703ca254cfb48b94d6110fa09bea30d6eb622fc9a86ae9"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/pool.human_with_no.json",
+      "size": 4602,
+      "sha256": "089b9b212fc73d22ba832033956defb8f0488ea144f3769da6d273f99c8af0b8"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/pool.negated_hangup.json",
+      "size": 4893,
+      "sha256": "35539090dacf9465142927b2d2fc8ddb9dd7500e8bf2f0bff17b9efa8e20955f"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/pool.negated_human.json",
+      "size": 4547,
+      "sha256": "138140fa948b0943f6302d75bbfc7cc013913d0f95b66c381f53ad3115229081"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.banquetes.direct.json",
+      "size": 882,
+      "sha256": "9cc946ff12531c8c6fcb79a55f0329906e628bdba63ea1ceea3ba84c66aade64"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.banquetes.indirect.json",
+      "size": 3503,
+      "sha256": "8cef26f2ba8c1abc7fc8cd651098a7a21afea166abf1c6f2b5179594cd7272fc"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.banquetes.needs_with_no.json",
+      "size": 1079,
+      "sha256": "156d760d61120b0a472fe177e4c3c40fb9addbdc3104290aabc30e56caf72faa"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.banquetes.negated.json",
+      "size": 1212,
+      "sha256": "d4262ec7e92a865a7bde5213960cfaa69e672a8f5f4a2fe84e6b21744f2bcc8c"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.domicilio.direct.json",
+      "size": 808,
+      "sha256": "48a2d7f8c973a13bb9d457e6b57d161154e84be9c0425db1b59763ee897bf7c6"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.domicilio.indirect.json",
+      "size": 2038,
+      "sha256": "739c2e23bad0c6f75adfbd26d72c730466b3f4ddfe02d8977e5d336edcdaeb3f"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.domicilio.needs_with_no.json",
+      "size": 1595,
+      "sha256": "fe69bdd789ea9c1d8575f4e35c78f52346cdd8dace80e9f7102b5fb612e63899"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.domicilio.negated.json",
+      "size": 729,
+      "sha256": "66dd3b3f40da8041e42ba8737dbedc17da6d9c733bb6a68a410e1d28b89114f7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.open.json",
+      "size": 1344,
+      "sha256": "8d02fe1748bcd5d11a4906c0c068ade2715fe4e9a9334c899cacc2a42893ca3c"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.reservas.direct.json",
+      "size": 687,
+      "sha256": "548c6ed68c6d235aab4b9de7f56eb36cf62da1e51eca9f2b719745b26d256780"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.reservas.indirect.json",
+      "size": 2619,
+      "sha256": "2b5560d924244e4236a29173df470c871742a5b5a27d14e6e0a3c9866aa4bfe0"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.reservas.needs_with_no.json",
+      "size": 1375,
+      "sha256": "94b3354b74481d0a137e04fb821285a3071a50835cbf5d9f832c19f425d1f4ba"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/restaurante.reservas.negated.json",
+      "size": 795,
+      "sha256": "d23cc22ba8d77f26ef06a2717e344aeb21ca50c83e3df33e1f25e7991934bc89"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.credito.direct.json",
+      "size": 934,
+      "sha256": "574d45452fd7243e8f0c86b9a3a7fd601f7f735345029b45c709527a473e2f6c"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.credito.indirect.json",
+      "size": 2162,
+      "sha256": "ea6c2aeb57ca863c379031749a47a0a82e003a9fbbc4195409d65853c24ae5e8"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.credito.needs_with_no.json",
+      "size": 1335,
+      "sha256": "87ba6504e36991a32391bb8ad964031b435b303b37f1a7dce544057aace80755"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.credito.negated.json",
+      "size": 1176,
+      "sha256": "8428eee1efbec1f868b2e709a93f13936c015cd7ec3c8f1c132bbadba1184054"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.entregas.direct.json",
+      "size": 863,
+      "sha256": "9d4829aa6469f47ad2bf499170e1af511e9730ab51009d29ff51c46ad1565f62"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.entregas.indirect.json",
+      "size": 2300,
+      "sha256": "c6d11f91c469c07fc821c299baca49b60e8b1a459e4ba4ef6187123824b3d4f7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.entregas.needs_with_no.json",
+      "size": 1245,
+      "sha256": "1edf2dbd422ebd3d40c9123e3955869b7e9ce05a12b708bc78f27c664b0ce198"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.entregas.negated.json",
+      "size": 680,
+      "sha256": "2517295015fa70149331c9361d30b76cc55d23e9f4471f7a0d9de8ee179a6886"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.garantias.direct.json",
+      "size": 1101,
+      "sha256": "0893efe4ca6fbb99f4381df9d171952644b649bfaa6c380c37713430fcbe62ad"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.garantias.indirect.json",
+      "size": 2323,
+      "sha256": "9635eacca46aff65fdeb32225819a2c90e815bf49caf841951785bdd6d2e9aec"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.garantias.needs_with_no.json",
+      "size": 1463,
+      "sha256": "a700ce69ab3323609e5afd55874e2717ec6d1bf2bc22295ac75d9a2033d97cf3"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.garantias.negated.json",
+      "size": 729,
+      "sha256": "7789a364138115c94c32289495bb491afac89df1796d355f3c98363936e853c0"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.instalaciones.direct.json",
+      "size": 922,
+      "sha256": "d0e6ae19d9f648c20069032afef8055584dae5e79bf7d6fdb76c2224942d8d95"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.instalaciones.indirect.json",
+      "size": 3011,
+      "sha256": "1914b108c2d6cfe7e5ca24786d08d4ab9cc1803d4edbc59a5eea5944ae206129"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.instalaciones.needs_with_no.json",
+      "size": 1592,
+      "sha256": "3e137a830b8a4c9ff9b8fcd13feaf52ce21c884b7b76cb5783e43c71c3ec4097"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.instalaciones.negated.json",
+      "size": 1433,
+      "sha256": "09f7f7c980a64d7114b3cefb0fe732cf555bc22fc491b8516fd2c0b869f5f685"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/tienda.open.json",
+      "size": 1627,
+      "sha256": "aad1023b1a7ec975f8a6b3744ba0592fe2e6f666479736b97cb7fa9d21aa90d2"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.becas.direct.json",
+      "size": 852,
+      "sha256": "a9adb89ce8dffb488eef43521ac55a8e319bb64d0fc0d71f7f931f9eed2380b7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.becas.indirect.json",
+      "size": 2544,
+      "sha256": "544a04a8397c58bcd1267686830ada4b756f54e064c0158c6cd582248ae2c0a8"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.becas.needs_with_no.json",
+      "size": 1642,
+      "sha256": "e0ed285bd63c9c2a14506af8008c691005555c449cc6220611584ac650edb80a"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.becas.negated.json",
+      "size": 1131,
+      "sha256": "0546646b2038a9ab6a6a06ef40b01707ad3a4b996de7d3968a676804a76e3edd"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.biblioteca.direct.json",
+      "size": 1013,
+      "sha256": "38810f49f7456e3b0184774a13eb84b4347f48046fc36c8754419f72f9fb32b4"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.biblioteca.indirect.json",
+      "size": 2325,
+      "sha256": "609e213f153fdd694a9e15c9e43407e8f0612a831cba47f2304b914c20d98d87"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.biblioteca.needs_with_no.json",
+      "size": 1202,
+      "sha256": "9c80ca9d9d83b694ecac528c193c3fd1a88a22c29e10c08159400a2bd6466adc"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.biblioteca.negated.json",
+      "size": 861,
+      "sha256": "596c441ad29b56003ee8195069585f4767229955f09fa473e32b9489f4eebf43"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.matricula.direct.json",
+      "size": 795,
+      "sha256": "f612b73878d00d1bea2c85282121ceb22c42c790747f6655654feec0fa949285"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.matricula.indirect.json",
+      "size": 2910,
+      "sha256": "49ebb5609d141e041351debf35e89ddc2a51022e3b8b523d63f7c0240aba8d3c"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.matricula.needs_with_no.json",
+      "size": 1149,
+      "sha256": "b3505ffba1882b2a975ccef89855429f5d9927dba799307c03dada58dd9bede7"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.matricula.negated.json",
+      "size": 918,
+      "sha256": "65f46ac00a5903e362304289cafbbdb744da9d3e3f80756d3fb8d61789b39c1b"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.open.json",
+      "size": 1900,
+      "sha256": "6a3c02bf6b977a2df0e90c8b66737f9528b9a7f51bf03c8e8eb178e848bb8a67"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.posgrados.direct.json",
+      "size": 887,
+      "sha256": "47293adc82cc4c6c0fbdcd115d64ba4f2ab720300c782935a005c78833a7c4ca"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.posgrados.indirect.json",
+      "size": 2629,
+      "sha256": "63bb4553d705e4b19d13cf6def914034e914b256078204b932055eab4aaded07"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.posgrados.needs_with_no.json",
+      "size": 1293,
+      "sha256": "0b44d53792ba0edb4edf764eabb18e94c9dbb8f8b9e08d653ea2bac0be304a1c"
+    },
+    {
+      "path": "research/benchmarks/es_phone_turns/train/raw/universidad.posgrados.negated.json",
+      "size": 994,
+      "sha256": "094a448fa597a154a50bf1c4c98c8cd65445517ed62cb83dbd952951886d7db8"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/LICENSE",
+      "size": 1069,
+      "sha256": "fdf440e5214588d9edcdc1ec315cddbd8525fe509242c24989a8472d283325f4"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/README.md",
+      "size": 7641,
+      "sha256": "35b31969dd22280266f2102b37e22351f7589851c88fb27f82ebb2cb2b4a3910"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/README.zh-CN.md",
+      "size": 3170,
+      "sha256": "bee39e97afc165cf8877f8a8cf601bdbf0b61611e85510337062bbc0246202a6"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/SOURCE.json",
+      "size": 1554,
+      "sha256": "08e87111674e91b66390d266f79ee00aaea2ce613a2b320619ad7e685ea0d3be"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/assets/xiaohongshu-scorecard-3x4-en.png",
+      "size": 262304,
+      "sha256": "8e6b8871ce5d6e1acd4ef15ea451788312c3be2999e021400a714b74cb3d648b"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/assets/xiaohongshu-scorecard-3x4.png",
+      "size": 347711,
+      "sha256": "6df3fd501463355ee080ff9b024288d393047b52c5910ae9ce6a361acbf9a803"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/assets/xiaohongshu-table-3x4.png",
+      "size": 393320,
+      "sha256": "1872cd09fe7ebd9d38e688a0d3848582ba61c1624cc47f1ce00274b4aa56045e"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/audit.py",
+      "size": 4909,
+      "sha256": "c4eb6b81019327cd0ad88a97c1184d9fb9744180ddcb0f0f961ae9e4a5f4d54d"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/data/cases.jsonl",
+      "size": 22994,
+      "sha256": "56bdd8cbb96fc65a07e1caf0c1ebcac03cb6a56079944a7af4bf03d71846e3ba"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/data/manifest.json",
+      "size": 2387,
+      "sha256": "c5c93e043cd993f7dd0fd11a0b71f1ef7702684396c7b961df98eb51e0f62cae"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/metrics.py",
+      "size": 3680,
+      "sha256": "1f9bb7a6a7170b169a779d748e0debada938fd90942d5458487a31b795c24ac0"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/prompts.py",
+      "size": 3392,
+      "sha256": "e7bb752c1907015f96e81b27793eeacb6832aaab8f21722aa2318ad0bfa5a3c4"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/render_cards.py",
+      "size": 8468,
+      "sha256": "3a4ae69fc47270574645483dcf28941e9939d3ad2b507e3aa87a370bfbb5f5a0"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/results/v1/environment_check.json",
+      "size": 7495,
+      "sha256": "f8b75b7ac5fbe5b1f298542b217e5d7b6d43407b5542ff816256d8ff5c21711a"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/results/v1/jev/metadata.json",
+      "size": 790,
+      "sha256": "9135a8924bb45ac0dc16b8a768540d5b6bd821e8e2dcecaa8749a3001e14f3f4"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/results/v1/jev/raw.jsonl",
+      "size": 245672,
+      "sha256": "a1dfd4de1819117cbd1470a187e2e8dd8f4cce7469c9c3c98befe1a282beab23"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/results/v1/laya/metadata.json",
+      "size": 1703,
+      "sha256": "999851aa84a713ebd983d3d05ca074eadc5d2fe70af6dfa0efc546582607c40a"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/results/v1/laya/raw.jsonl",
+      "size": 450482,
+      "sha256": "1c8dab17062f9244888f580907b62a845cf1e7b199e7041810a9301bd55c28e0"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/results/v1/option_token_audit.json",
+      "size": 357,
+      "sha256": "d9b8b97e858ed4561bea0dd9344c99d523f9c26cb8e85cfb220636cbd3a13d4a"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/results/v1/summary.json",
+      "size": 43745,
+      "sha256": "ec4a60b495b6d47192f8a82a1258bcf46db1e33396b1caf3cff706f0435a934c"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/run.py",
+      "size": 9138,
+      "sha256": "0809319bfd63279eb07881ccc8ca6a411483f2427a5c74460ba4687bd7eb0ed6"
+    },
+    {
+      "path": "research/benchmarks/feishu_zh/tests/test_audit.py",
+      "size": 3687,
+      "sha256": "bb3713cc504a8a3904ec084002aa9d1123ae09538552847ab87600d5ea1cb906"
+    },
+    {
+      "path": "research/benchmarks/idle_unload/README.md",
+      "size": 3670,
+      "sha256": "8388eb77f176c57ef10f83f285821e8ad91afe46883af4bfc2fc1fd621b15aed"
+    },
+    {
+      "path": "research/benchmarks/idle_unload/benchmark.py",
+      "size": 6353,
+      "sha256": "909fedc10e06c698311a0f036a49e4b98c9adef054f3a3c9b955236e4361ef1c"
+    },
+    {
+      "path": "research/benchmarks/idle_unload/results.json",
+      "size": 17082,
+      "sha256": "c415e54500d3c4fd844a00dae9ccf8eb5d76290a4debd882ac8f2a982bb524b5"
+    },
+    {
+      "path": "research/benchmarks/idle_unload/validation.json",
+      "size": 2860,
+      "sha256": "cef3667b405a58cc0496cf699532bac31ec9a7a993d2d3cf7e4340fba470af40"
+    },
+    {
+      "path": "research/benchmarks/zh_short_commands/README.md",
+      "size": 12605,
+      "sha256": "0c897dd52f77a80f61360972af4ca01275b92aaa0a33d2a7b9e6ebda5d07d21c"
+    },
+    {
+      "path": "research/benchmarks/zh_short_commands/README.zh-CN.md",
+      "size": 11933,
+      "sha256": "a5ad3dcd82f99f00d7135351a3082da1f15e894e5cde003c8276b05e494bf059"
+    },
+    {
+      "path": "research/benchmarks/zh_short_commands/audit.py",
+      "size": 15000,
+      "sha256": "156082467a127af2947bc813ce63e626cb9756ead5d84fee01f80eab9fff5897"
+    },
+    {
+      "path": "research/benchmarks/zh_short_commands/data/cases.jsonl",
+      "size": 1858,
+      "sha256": "2d789879fe11328fb8b8099aaf35ddf7b2e301b393f9525701368339da28181e"
+    },
+    {
+      "path": "research/benchmarks/zh_short_commands/data/manifest.json",
+      "size": 1744,
+      "sha256": "57f13a079a4bee4ad591fcc25adedd0da7b1c8ae032fd438f0c0249152edc1eb"
+    },
+    {
+      "path": "research/benchmarks/zh_short_commands/prompts.py",
+      "size": 5824,
+      "sha256": "d26c8357a302f887258382c5a40d1c1320adab8b3e86c364ef150a913a06686d"
+    },
+    {
+      "path": "research/benchmarks/zh_short_commands/results/v1/laya-multilingual/report.json",
+      "size": 195072,
+      "sha256": "872d304d2fd404fd2973b17b85962c862d05bba6b020eb23f6f0d91d1ccae8b8"
+    },
+    {
+      "path": "research/benchmarks/zh_short_commands/run.py",
+      "size": 12514,
+      "sha256": "ca421d2f111fa53ba8ba0ee0545485e9e572be941840a5546bf28f646ccddf4b"
+    },
+    {
+      "path": "research/benchmarks/zh_short_commands/tests/test_audit.py",
+      "size": 14250,
+      "sha256": "34fa211491a48e6486b7b935352537ae9e4ceb4ebb39694d06f0112ca06c3ed8"
+    },
+    {
+      "path": "research/benchmarks/zh_short_commands/tests/test_benchmark.py",
+      "size": 12146,
+      "sha256": "f7a5a54bd0db9fe8ecefda7a6353474b0c0b9d9a754d7fc9669a3cf5ecb7d352"
+    },
+    {
+      "path": "research/eval/README.md",
+      "size": 35362,
+      "sha256": "e3fc14aaf25095682709341ba3bf550dd6eda381b9c840ea4e9ba309acaa6f18"
+    },
+    {
+      "path": "research/eval/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/eval/laya_eval.py",
+      "size": 16352,
+      "sha256": "4c0fd6ff2e30033a35b485f44f5c9290467154d06177c9ed2b7879664302730e"
+    },
+    {
+      "path": "research/eval/metamorphic.py",
+      "size": 33866,
+      "sha256": "bdd85069940160f8f683ae71d0fe065ce776e88a8c0e5e241a402f009c540b6b"
+    },
+    {
+      "path": "research/eval/presentation_checks.py",
+      "size": 30580,
+      "sha256": "c5bab66b9de435283d7bc46ef0a0292c04e9a58cce1bfcd452ead9e8ee7d329b"
+    },
+    {
+      "path": "research/eval/test_laya_eval.py",
+      "size": 11443,
+      "sha256": "d206e86129965405d0238d9e9373c40b538918376a7d97c4a61c10a1d3783b7b"
+    },
+    {
+      "path": "research/eval/test_metamorphic.py",
+      "size": 35877,
+      "sha256": "3820996ac2f6a46fbc4e7b1368d87897199dae54f635d37635d7585eae840af1"
+    },
+    {
+      "path": "research/eval/test_presentation_checks.py",
+      "size": 15190,
+      "sha256": "8fa043c1ed35ac66f170cfb2c5941f72971e1b8096229857a829b030c36bbe5c"
+    },
+    {
+      "path": "research/evals/README.md",
+      "size": 4144,
+      "sha256": "179817214ee4ba8e1a92bcf59a232422e0b45da0a44e0262269e169f4e6e7166"
+    },
+    {
+      "path": "research/evals/act_head_eval.py",
+      "size": 13260,
+      "sha256": "66c068cd64db28323d8b186ff050af16e9b8623f7bb9f9c585d3b4a5bc2df7a3"
+    },
+    {
+      "path": "research/evals/check_regression.py",
+      "size": 3007,
+      "sha256": "bd526585e5d0d0871facf5716a541d82a4439fda88a58cf06d9a258390dd574a"
+    },
+    {
+      "path": "research/evals/dataset.template.jsonl",
+      "size": 604,
+      "sha256": "e282e9780f1e9857f4e8d5a18a9510368f36e08ef421922e61901e7f9feadbea"
+    },
+    {
+      "path": "research/evals/fixture.jsonl",
+      "size": 3380,
+      "sha256": "55d5e18c71fdb16f9a6e67cdecc5b972f14cd1d53ea58cd8daa101bee4d96adc"
+    },
+    {
+      "path": "research/evals/massive_route_comparison.md",
+      "size": 3124,
+      "sha256": "596d924f2c586a55ea5cae87e6844e717e159fdc2c328f02ed926ad8f0c3eebc"
+    },
+    {
+      "path": "research/evals/massive_route_comparison.py",
+      "size": 6907,
+      "sha256": "de198a25cdd5a1fe5aaa9a8bfae6104a57ad2685bb36387b6372ae4cdf431f5b"
+    },
+    {
+      "path": "research/evals/test_act_head_eval.py",
+      "size": 12641,
+      "sha256": "8a0da8ff029c6e5df1d86451d29fe903de7340bc3787dfa0371b773caf8a1dca"
+    },
+    {
+      "path": "research/evals/thresholds.json",
+      "size": 330,
+      "sha256": "ffd38ebd9f5e1e8d5b44891ee3a97a31232347391e4c54619cc9bfe818ddf72f"
+    },
+    {
+      "path": "research/evals/zh_decision_bench.jsonl",
+      "size": 146482,
+      "sha256": "59c74927d91657a3bceea89a61e64660d471cd1eaa8eab9778f760ca46d85c37"
+    },
+    {
+      "path": "research/results/app_benchmark_results.json",
+      "size": 12514,
+      "sha256": "15a7ba8a4d123cd1de499ef8036d14ce52e25bfb2bf6ac1d03702135d79c0a05"
+    },
+    {
+      "path": "research/results/confidence_definitions.json",
+      "size": 8670,
+      "sha256": "1f85b1ef6c2d1797873d0f0f4b95fe7e1e0e022e0d1357b35b0618d1d8b57864"
+    },
+    {
+      "path": "research/results/cpu_51_language_sweep.json",
+      "size": 38420,
+      "sha256": "74ee2989b8d4d276faf29af6dd49664a2d39ce3bcbefa2671f3a7764df1e8e5e"
+    },
+    {
+      "path": "research/results/cpu_51_language_sweep_clamped.json",
+      "size": 35604,
+      "sha256": "c0c25d5409fa2ca1ffac8e6f729fffde327d2daf8eec315f0fce24e0e6427913"
+    },
+    {
+      "path": "research/results/cpu_51_language_sweep_refreshed.json",
+      "size": 70253,
+      "sha256": "e7561983ef2f372c7501306a8a92ac9ecf7979761bdae837b9b0d14c2419e486"
+    },
+    {
+      "path": "research/results/eval_english_51_languages.json",
+      "size": 9651,
+      "sha256": "7965e1f683d2dbf71d2c84bc92946fb54f6c3b562ceab784c964de76e75f8358"
+    },
+    {
+      "path": "research/results/latency_cpu_m7a_xlarge_20260924.json",
+      "size": 5431,
+      "sha256": "f2a8dadb84ad39beb0b248b1ed99de956ebb86c26af59d19669fe943c943ab79"
+    },
+    {
+      "path": "research/results/length_batching_cpu_20260924.json",
+      "size": 6004,
+      "sha256": "ea5b6c9f8f142b07aa46708b2d445fe0f4401590e447721db3cff6c3f3506519"
+    },
+    {
+      "path": "research/results/long_context_multilingual.json",
+      "size": 123939,
+      "sha256": "09c6fced8e9800ff6c76bd021318a0417fcee43506c45e3d46850989a8380368"
+    },
+    {
+      "path": "research/results/massive_route_comparison_swedish.json",
+      "size": 53005,
+      "sha256": "da7003786f320a4c6d6197c0ceeb08d1ba335ce09190f0856d26984c2ea66737"
+    },
+    {
+      "path": "research/results/nvidia_capacity_20260925.json",
+      "size": 40524,
+      "sha256": "c5e6f179f6170daee685126a3e2e7ae9abfab3a64fbd0cb46e309111ee8132d6"
+    },
+    {
+      "path": "research/results/position_sensitivity_multilingual.json",
+      "size": 57865,
+      "sha256": "a86290283c8035d4eabc83da126662053b90dc266c4514ef7d937be8b6ad633d"
+    },
+    {
+      "path": "research/results/presentation_checks_choice.json",
+      "size": 19286,
+      "sha256": "d6b0d56e46732afc37d639e13b5b21ce60e929c2478c94205ac2af4f3f3768ef"
+    },
+    {
+      "path": "research/results/presentation_checks_langs.json",
+      "size": 10014,
+      "sha256": "9a48bdeb7ff562e0bc94139bcd8ffd10dcc9f6c901ccb7297e3020e834bb39dd"
+    },
+    {
+      "path": "research/results/presentation_checks_shipped.json",
+      "size": 3706,
+      "sha256": "25837c6f04b212d280d9875584836cb1eb9ad3c1ad2116c2e5f8ad2202cb234f"
+    },
+    {
+      "path": "research/results/question_token_reuse_cuda.json",
+      "size": 9283,
+      "sha256": "059ee17e357d936f694f83e007a40d0ad074c4ac7faa1e9a408cafcb8448ed98"
+    },
+    {
+      "path": "research/results/t4_colab_benchmark.json",
+      "size": 143907,
+      "sha256": "484a20273e75c659a2275f09bdb78a4b682363402b591c4bfc8ab12a382d1ec8"
+    },
+    {
+      "path": "research/results/zh_rerun_part_a.json",
+      "size": 2156,
+      "sha256": "a94fd558b67ef1b1e1a0d90508c1946a8cfbce698d84b3626f6e635c6d743210"
+    },
+    {
+      "path": "research/scripts/bench_apps.py",
+      "size": 15974,
+      "sha256": "dc78587045ee077b50ff7f99b05ce49a9837ed4c0721ee78e6e203fac707d791"
+    },
+    {
+      "path": "research/scripts/bench_latency.py",
+      "size": 8307,
+      "sha256": "b83cdc954c33af7f8cff47a5490ce0fc060ef64d8936c8f335485056fc140c72"
+    },
+    {
+      "path": "research/scripts/bench_length_batching.py",
+      "size": 10382,
+      "sha256": "a29fa2db7742566ba1c00d5f0743b2f78727430d2ccb0b841525b1443ea098cb"
+    },
+    {
+      "path": "research/scripts/bench_local.py",
+      "size": 15929,
+      "sha256": "d2fb453be28e958b982c3e349fae9844a0245a2d333120a1e6bada55b93098be"
+    },
+    {
+      "path": "research/scripts/bench_long_context.py",
+      "size": 6311,
+      "sha256": "1867b70d672f2af871989c2ea4c1e4d1beb967518679c002a9fb4b063688a79f"
+    },
+    {
+      "path": "research/scripts/bench_nvidia_capacity.py",
+      "size": 21885,
+      "sha256": "f0c705e3407ec94aa0c81b79fc360b76211def2adc5b39538b2083befa4233c1"
+    },
+    {
+      "path": "research/scripts/bench_position_sensitivity.py",
+      "size": 10130,
+      "sha256": "2689dd21056389df23946d2dd08e34de490a455ddda99f21e42fc96c67d6b695"
+    },
+    {
+      "path": "research/scripts/bench_question_token_reuse.py",
+      "size": 7979,
+      "sha256": "f2eafeca83b92f7ae391ccb2705cf2da0f7537fbc677522edaf6d89d7bf4d9df"
+    },
+    {
+      "path": "research/scripts/bench_router_grouping.py",
+      "size": 3202,
+      "sha256": "07f01d491f7bee7179f8c6587d4c3987c2cfd76eb7ff9625177cfc1553c2984d"
+    },
+    {
+      "path": "research/scripts/build_benchmark_nb.py",
+      "size": 38853,
+      "sha256": "60178dd7f9e4607a7c6aa842f7ee495374be81b3d99db94a1fe5e86d4ab43683"
+    },
+    {
+      "path": "research/scripts/confidence_definitions.py",
+      "size": 12576,
+      "sha256": "f534c3e3be61f6170a19e9690b61b3deae044fc5b4a718da3e07b4f74ecef758"
+    },
+    {
+      "path": "research/scripts/finetune_single_device.py",
+      "size": 12429,
+      "sha256": "c19122f54e3031b885703ccd8b9cf7985f7959bbaefe95bf066b914006eac2e3"
+    },
+    {
+      "path": "research/scripts/laya_benchmark_colab.ipynb",
+      "size": 48167,
+      "sha256": "84fd892500bf160574493bb096cb1720f484e5c8de34937641576ceae937be32"
+    },
+    {
+      "path": "research/scripts/make_plots.py",
+      "size": 7988,
+      "sha256": "936d8b95a48628f83bfbf0dd0809173a5db45c2f227c0d70a830712685b74796"
+    },
+    {
+      "path": "research/scripts/plot_long_context.py",
+      "size": 2248,
+      "sha256": "8cb5b36c34ab165a16a33f4f20888b6480e6f52143c605992957fd3414cb50bb"
+    },
+    {
+      "path": "scripts/check_aoti.py",
+      "size": 9655,
+      "sha256": "e63bc8515afa9445a9eb9c5ff39ae60af2c6e21bf9ed6c2ca82087a2d25d874a"
+    },
+    {
+      "path": "scripts/export_onnx.py",
+      "size": 7002,
+      "sha256": "3dc6eac8971358ad5531c7124f2e631ddd4da6890a8df8a6237051e56b4594e2"
+    },
+    {
+      "path": "scripts/test_suites.py",
+      "size": 5426,
+      "sha256": "fd397df312a3a44a25b878dc49a9cbd0d902dadcabf3c635bb67980639cced75"
+    },
+    {
+      "path": "sdk/typescript/LICENSE",
+      "size": 10173,
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9"
+    },
+    {
+      "path": "sdk/typescript/README.md",
+      "size": 13629,
+      "sha256": "c849371b71d975d5cf22f3cb87570fcfd8e51474618cd8aa19c68c2ca2578b32"
+    },
+    {
+      "path": "sdk/typescript/examples/triage.mjs",
+      "size": 478,
+      "sha256": "0113aa56acf83218c66bfc21b44c28b1ebc1213bbbf454cf5c79a5b93147d7f3"
+    },
+    {
+      "path": "sdk/typescript/package-lock.json",
+      "size": 787,
+      "sha256": "57e53dddce8140354ebb51fb6f2225dee31fa5f8117805da3e75212cf8569c98"
+    },
+    {
+      "path": "sdk/typescript/package.json",
+      "size": 1201,
+      "sha256": "0e7c8a0cb18142de18e9ba4df5c7d2d03688dc32ce64ab6342b9e21ee138e033"
+    },
+    {
+      "path": "sdk/typescript/scripts/build.mjs",
+      "size": 464,
+      "sha256": "8393f655d41ad5b36652240a57f1b905ec98457f6473fc951d04eae7f353ef49"
+    },
+    {
+      "path": "sdk/typescript/scripts/sync_presets.py",
+      "size": 1983,
+      "sha256": "8f64ce622cfac9af7a1eb2c634b5526156371331a16dcee8808972aacf51b2dc"
+    },
+    {
+      "path": "sdk/typescript/src/client.ts",
+      "size": 8896,
+      "sha256": "028b973e1bc7ad6c56c0195ef8113c868b09eae1020fd858a96a1cfd8b569646"
+    },
+    {
+      "path": "sdk/typescript/src/errors.ts",
+      "size": 781,
+      "sha256": "fc2641aed36fd89bdf48a7500a9625383a4ecb4ef0cedbc428f5bd525a73533e"
+    },
+    {
+      "path": "sdk/typescript/src/index.ts",
+      "size": 171,
+      "sha256": "917c44fa9efc5fbe95d6ddac28ca8d47a2700ce19d22685c3cc6a3b77a7ff44e"
+    },
+    {
+      "path": "sdk/typescript/src/presets.ts",
+      "size": 6653,
+      "sha256": "f8f76f19b984c21773c5f37b137e47705d0fa25f409018270470a7140ccf86de"
+    },
+    {
+      "path": "sdk/typescript/src/response.ts",
+      "size": 7652,
+      "sha256": "ed6eb271293b8085c1aa3ad0dcb474f69d1389e756ef9a9c1edabc0f3b2f2960"
+    },
+    {
+      "path": "sdk/typescript/src/types.ts",
+      "size": 8658,
+      "sha256": "948ffd2df566f22f36a190122dca2af0bc34eb54b5edcf81eb1aa5d6890e418a"
+    },
+    {
+      "path": "sdk/typescript/src/validation.ts",
+      "size": 3328,
+      "sha256": "418d7d7878a708ac658ee82cec4bd1c56b32b9aa8b465a3c9dc3db294251b75d"
+    },
+    {
+      "path": "sdk/typescript/test/client.test.mjs",
+      "size": 22808,
+      "sha256": "6d788e2957d2f99987d0ff882ee8b4e80d4a976fb1a27c1695792a6dab2280bb"
+    },
+    {
+      "path": "sdk/typescript/test/commonjs.cts",
+      "size": 406,
+      "sha256": "e6d29808d44d21568bd30172c98ae036e500677c55bec503f7e953434fa25737"
+    },
+    {
+      "path": "sdk/typescript/test/docs.test.mjs",
+      "size": 7193,
+      "sha256": "9f1af1a86b8e14f49b178f8c16c3d87f85a5747d2ab8e314c301227be30ee83d"
+    },
+    {
+      "path": "sdk/typescript/test/integration.mjs",
+      "size": 3996,
+      "sha256": "aaabd51946e2392d893ba8e0c06dcef0374b1c09c75ddb8b66b68f77fb7ed73a"
+    },
+    {
+      "path": "sdk/typescript/test/tsconfig.json",
+      "size": 126,
+      "sha256": "ee0df79a9f61cdf74efd6b8cfb8ada5067d56e8e1ec3ec96ffa9c7a26d33b337"
+    },
+    {
+      "path": "sdk/typescript/test/types.ts",
+      "size": 7091,
+      "sha256": "bb147daf3d1783792090f3136e48b0aaa9efa01e303219200526a953727128be"
+    },
+    {
+      "path": "sdk/typescript/tsconfig.cjs.json",
+      "size": 181,
+      "sha256": "783f88caf3e300309d0e916c985e7f3f9c89052f93872bd10623c571d01ba2fb"
+    },
+    {
+      "path": "sdk/typescript/tsconfig.json",
+      "size": 397,
+      "sha256": "d406ad71d3723ae234648295e2574aee513f976b88fe8aa837802380f0aeb39c"
+    },
+    {
+      "path": "setup.py",
+      "size": 124,
+      "sha256": "f462066ed9db7ab9e9db6937b39225772bce1bd641acba0d06384b9ea639aa0b"
+    },
+    {
+      "path": "tests/sdk_server_fixture.py",
+      "size": 3453,
+      "sha256": "ea88f0df09be771fde8765b2cbdecee3bc98b1d7a5c627f2a3874a5b969f1b57"
+    },
+    {
+      "path": "tests/test_agent_gate.py",
+      "size": 7458,
+      "sha256": "bd7d8897fde2d5b497550f9281b26b5baf7ca7ab4e7d0a102b4e002be21a8978"
+    },
+    {
+      "path": "tests/test_attention_dynamic_shapes.py",
+      "size": 4185,
+      "sha256": "37a185d24be44229d0b229ae91b13b14100f681e6c2c814607e0ac7016f46c61"
+    },
+    {
+      "path": "tests/test_audit_regressions.py",
+      "size": 8282,
+      "sha256": "a8bd6818446c0240b812f31b1c80235dba4c58ea7a53aeedcafca3a7681ffef0"
+    },
+    {
+      "path": "tests/test_audit_scope.py",
+      "size": 11856,
+      "sha256": "7119d33dbb6c228d6b595f65a2529ebae52165747d0052654ada516069f0ff3c"
+    },
+    {
+      "path": "tests/test_backends.py",
+      "size": 13393,
+      "sha256": "6f973f959697c4d9a43384e876d9b2e287c0f2f8a7dc82f1de1602901cd2d2a4"
+    },
+    {
+      "path": "tests/test_batch.py",
+      "size": 19514,
+      "sha256": "a9382d314fbcee3ccca63f3f3cf0cdf33b27cbea561c8b0b85b9c6864eed03d1"
+    },
+    {
+      "path": "tests/test_blank_lang_routing.py",
+      "size": 4497,
+      "sha256": "9a591b2ad95c3b1c7ce4a54b12d8d46b07cc6b65023230194f35ccf8cb959225"
+    },
+    {
+      "path": "tests/test_calibrate.py",
+      "size": 38530,
+      "sha256": "95892cff1784fa4c9a9d8d97ed22d936e3a5ebb42628b84eceebf74783a97e4d"
+    },
+    {
+      "path": "tests/test_calibration_persistence.py",
+      "size": 9982,
+      "sha256": "d53236ab178b04208aa89427ec7d7b1181d4ae6d54aaa0ab00c6b6092872651a"
+    },
+    {
+      "path": "tests/test_cli.py",
+      "size": 38182,
+      "sha256": "ff0aa2a01fa71c5cbb06c416d2fe77a6664b724c4788fe0b613b9e151ccd830c"
+    },
+    {
+      "path": "tests/test_cli_lang_guess.py",
+      "size": 8849,
+      "sha256": "2b13ae7fe402a3096114d78aa2f17bd4c2d1c610e2439cddcdddc50e9cd73eff"
+    },
+    {
+      "path": "tests/test_compile.py",
+      "size": 15994,
+      "sha256": "e0ae13d7d2e6f0d6022a785cfb43c957988ca8caaff0fc1c68a65e7bae55110b"
+    },
+    {
+      "path": "tests/test_compile_cuda.py",
+      "size": 2381,
+      "sha256": "1126e9f56c89ae066c99238fd43a57caf92f8668a3e8bb18fcec504ad360a3a2"
+    },
+    {
+      "path": "tests/test_compose_env.py",
+      "size": 36902,
+      "sha256": "fe90c32c72ddb81c7a84244634500ca258399811e2731217f37a61f09d6fffad"
+    },
+    {
+      "path": "tests/test_confidence.py",
+      "size": 30708,
+      "sha256": "eabc01e9dd68d6d5536c3a71c9d17e4fa42ead7227272f98a7f0c42ea16349d5"
+    },
+    {
+      "path": "tests/test_conformal_abstention.py",
+      "size": 6795,
+      "sha256": "5b392b49d02af032cbf8e90b00eacc64fe1778c06defc05a017c57d94d748f8e"
+    },
+    {
+      "path": "tests/test_context_manager.py",
+      "size": 578,
+      "sha256": "d5a528f03aedcaf7cbd0afe8877dd74a7bba6bc1c2e1c2da8106254ab1257130"
+    },
+    {
+      "path": "tests/test_crewai.py",
+      "size": 24428,
+      "sha256": "74ef9a41a10dfc6b307c1dd36180e5aeb00c67109426c10ff77b70b28889fe82"
+    },
+    {
+      "path": "tests/test_criteria.py",
+      "size": 35340,
+      "sha256": "89785530df9d4999770fba37d2eed7f3a89fc87050ea572246b9186e12f8ee9e"
+    },
+    {
+      "path": "tests/test_criteria_normalization.py",
+      "size": 1143,
+      "sha256": "5b0c9cded01bcfb876710fb2f2ca229e247a6c8170c0258389fe89688ab1bda4"
+    },
+    {
+      "path": "tests/test_decision_model.py",
+      "size": 5367,
+      "sha256": "cc0437f270268d7040209997a0e44bb0c22d7a6d90abe0b84ea05264124f8382"
+    },
+    {
+      "path": "tests/test_doc_tables.py",
+      "size": 13790,
+      "sha256": "6e01abeb7dfe854fe9220f3fb5625207d13b8b588665a6acbc5167b682a47f6b"
+    },
+    {
+      "path": "tests/test_docker_entrypoint.py",
+      "size": 10779,
+      "sha256": "80d763f090c7e3adfc15f8e9727ac0d6db2fa8b930313db6ff4a92c9892344dc"
+    },
+    {
+      "path": "tests/test_docker_torch.py",
+      "size": 5138,
+      "sha256": "76d98c10c74483dfc89b5303ebad4ca63a69ac51168972226eb5e6504dcc81a5"
+    },
+    {
+      "path": "tests/test_download.py",
+      "size": 22571,
+      "sha256": "917ebabefc72d2cc2f597f50e735bb8577fd89e50e9d78dd1b899c59b3bc8045"
+    },
+    {
+      "path": "tests/test_email.py",
+      "size": 34656,
+      "sha256": "920563954f70141275efe5a7a4ec1bc719416add42ddf7c92526146d008497ac"
+    },
+    {
+      "path": "tests/test_empty_questions.py",
+      "size": 12521,
+      "sha256": "141744c8117519d93da0582682e7e34d71e848e36e83b648a5eb0a55c065d2d4"
+    },
+    {
+      "path": "tests/test_env_docs.py",
+      "size": 21939,
+      "sha256": "50fb4ede75a964c664bf2744fcd053a0d6788bf4704224d0019a3367f9231172"
+    },
+    {
+      "path": "tests/test_evals.py",
+      "size": 101434,
+      "sha256": "b03f6d64614baef6cced26563f47f0b1ea66418bca73694ad5a535987dfb27e7"
+    },
+    {
+      "path": "tests/test_evals_api.py",
+      "size": 10534,
+      "sha256": "da11b90ee368a25c9cd1ad0cb05808c75268e407385d0fe4576b53024bbb000f"
+    },
+    {
+      "path": "tests/test_evals_onnx.py",
+      "size": 10759,
+      "sha256": "44e368c365a4991a50deb54e8f96696da369a885f1b4a5cfaff1e024938625c8"
+    },
+    {
+      "path": "tests/test_evals_shortlist.py",
+      "size": 5748,
+      "sha256": "cfa89ea51d18da3a6970ae37f0ccf67bc67ec5adc8e91806ef5c51bf4f106f22"
+    },
+    {
+      "path": "tests/test_example_server_errors.py",
+      "size": 7414,
+      "sha256": "e8b1e6acd9dbf552e38d2462722b3b183a4eb7ab5251125920dd28f694accfc6"
+    },
+    {
+      "path": "tests/test_example_server_limits.py",
+      "size": 48793,
+      "sha256": "452dae647d0716f3950c583b7b34bba09c1e5c8fc95252a5e2865073d82c730a"
+    },
+    {
+      "path": "tests/test_example_server_per_call_controls.py",
+      "size": 19644,
+      "sha256": "8842a0ff29b1c4ec1c75b8434bbe38a4b8f1e313bc2fa6fcea06651678b695be"
+    },
+    {
+      "path": "tests/test_export_onnx_safety.py",
+      "size": 943,
+      "sha256": "9374a77f86abda2dfaefc2d7963e23261060a5cb1bd0d270d053c8dcc235676b"
+    },
+    {
+      "path": "tests/test_fast.py",
+      "size": 5301,
+      "sha256": "464007512eb1b6136e28a2a6642afdad0279d38f53f00cbedceb797a8833fbd0"
+    },
+    {
+      "path": "tests/test_fast_cpu.py",
+      "size": 9649,
+      "sha256": "558f021db7e50c69d1814f3a1fd680a417917d486110e5b5445852bac5f18f39"
+    },
+    {
+      "path": "tests/test_fast_head_partition.py",
+      "size": 2680,
+      "sha256": "b2a5ec65c91cbe7cfed0f93e7f1dffc583498b9a1b6ae7885671401456c674e9"
+    },
+    {
+      "path": "tests/test_head_checkpointing.py",
+      "size": 6563,
+      "sha256": "21da87025e3b7aec65bc944a4f46a8c59bf0507eb5d9a8d6aebad28cdb3d3515"
+    },
+    {
+      "path": "tests/test_hooks.py",
+      "size": 60644,
+      "sha256": "5fbabf524e03d465b9038beaf72d237d907a5e2655140666de5f9ba96524d284"
+    },
+    {
+      "path": "tests/test_hooks_api.py",
+      "size": 49411,
+      "sha256": "4a464f4f85dd70e6d94d1b8a849efb99f5be114a2fa771633e9f2b13d879b415"
+    },
+    {
+      "path": "tests/test_identifier_complexity.py",
+      "size": 6878,
+      "sha256": "267e5928a7c986001ba9e1058550f8c57f4867ee2115f041a961d65715c1275c"
+    },
+    {
+      "path": "tests/test_imports.py",
+      "size": 2275,
+      "sha256": "e178e4a4f06f2267db065f3a963ea2285658f7f2ab39511116e2fe496477b98e"
+    },
+    {
+      "path": "tests/test_lang_guess.py",
+      "size": 22856,
+      "sha256": "6d199830d84cbb58156a1255d907d076fd94a677004ff681545f65c45eef0abb"
+    },
+    {
+      "path": "tests/test_lang_stats.py",
+      "size": 3630,
+      "sha256": "c4f6441c5445a614f73b83de3f4cfb5ba649c38986e5334925a9d57b295629ac"
+    },
+    {
+      "path": "tests/test_langchain.py",
+      "size": 63061,
+      "sha256": "6038d8d49427d6a8758df6e667854d9c69f4bf30c9ca7ec563c780c0adeef816"
+    },
+    {
+      "path": "tests/test_langchain_real_mode.py",
+      "size": 7557,
+      "sha256": "11c2a55cf1750a974fb05e0b9185dad98d802736aa209a952f5b5e98a12be6ce"
+    },
+    {
+      "path": "tests/test_lazy_import.py",
+      "size": 3213,
+      "sha256": "897d80e147acd873161d70d9fddd162b1aecf3b854f6c15d6b616a6b24939c24"
+    },
+    {
+      "path": "tests/test_llamaindex.py",
+      "size": 23299,
+      "sha256": "cf78343382e51998746e51ce52495ff410816bda52a002e311ed4f2545b316bb"
+    },
+    {
+      "path": "tests/test_load_errors.py",
+      "size": 25248,
+      "sha256": "57c92b9ff158829136b516accdff5f332ff8e40b3c029b12bcd34cf74d2d7d08"
+    },
+    {
+      "path": "tests/test_local_e2e.py",
+      "size": 19533,
+      "sha256": "e030cd61af37805baf6add6121f69733744c3b2b48c46ae7368041dcdcc4366c"
+    },
+    {
+      "path": "tests/test_mcp.py",
+      "size": 130917,
+      "sha256": "92e3b6fdf7a129bbaf6316233a48fd3559836e561edc1af0ad467b1196c37f1a"
+    },
+    {
+      "path": "tests/test_mcp_device.py",
+      "size": 5400,
+      "sha256": "8a299e392a0afb14011fdf439a712d0240f4ea1c111d5ed83bdd44d4a1f38959"
+    },
+    {
+      "path": "tests/test_mcp_local_e2e.py",
+      "size": 26706,
+      "sha256": "0583f22898d2755f92e0670a4ca02f4a9b82f9ffaf262afeab0fb6f97d771bdd"
+    },
+    {
+      "path": "tests/test_mcp_remote.py",
+      "size": 17014,
+      "sha256": "b9f6af2b6674075fdb6313d875fdb810fa4a31e9cba82a60deba71e88034fad0"
+    },
+    {
+      "path": "tests/test_modelscope_prefetch.py",
+      "size": 21857,
+      "sha256": "7bd72f5ec4f0c9ea458ef2585e99242079f03a3d8f61debb6ebdd0e5a87444f8"
+    },
+    {
+      "path": "tests/test_onnx.py",
+      "size": 5941,
+      "sha256": "855cbb7592df3619d8ecda8090863c41d69b4abb6a2d1deaa7e334fd5d2c5760"
+    },
+    {
+      "path": "tests/test_onnx_batch.py",
+      "size": 14373,
+      "sha256": "cb6eccdae19b248949e7112e182130f9d2467cdba16c786366360a80aa815233"
+    },
+    {
+      "path": "tests/test_onnx_lang_parity.py",
+      "size": 10479,
+      "sha256": "66381742f21f860b04f36b0813174a04626832a6180ee12b4cfb09d47ec46d6e"
+    },
+    {
+      "path": "tests/test_onnx_long.py",
+      "size": 17636,
+      "sha256": "9f7ff6475fc5d9536e612adbbc0598ec5eeca42c2d09249387517da04bf50aa5"
+    },
+    {
+      "path": "tests/test_onnx_quantize.py",
+      "size": 6921,
+      "sha256": "781bcd87c0c53ea52d1c985e1dfaa144ec5050fb6d5d8099ad4b2ea02b490b3e"
+    },
+    {
+      "path": "tests/test_onnx_sort.py",
+      "size": 7112,
+      "sha256": "30408ac12e1115d1ef1b189b1f5ab476a8ba282d0358acbec9c5c68265ded747"
+    },
+    {
+      "path": "tests/test_onnx_truncation_parity.py",
+      "size": 5326,
+      "sha256": "949a39915bfc3007482d55b710f6f9cee080aca4e62e43ea0ea277f4c39b66af"
+    },
+    {
+      "path": "tests/test_option_collapse.py",
+      "size": 6754,
+      "sha256": "a21e40fd22cd8fdcfbc105031caec93c0a4db17b6063d84e66591b68b9234c82"
+    },
+    {
+      "path": "tests/test_option_order.py",
+      "size": 12276,
+      "sha256": "03d80e29d8d9015bfa265d94cd7fdaca287272f8d0a8ee4ec9fac2c8911d69e1"
+    },
+    {
+      "path": "tests/test_packaging.py",
+      "size": 43708,
+      "sha256": "3a0740337e25fc71d07dba5103a249693c849c6250c34698e88af304fa822f46"
+    },
+    {
+      "path": "tests/test_portability.py",
+      "size": 14808,
+      "sha256": "0725257bfdd5d36217b13946725f297caf6f0e99362b067ae2d0526dc4333ed4"
+    },
+    {
+      "path": "tests/test_predict_batch.py",
+      "size": 8821,
+      "sha256": "09908bc82047836e0b182463e9e25dc764ab89a994f5792826e8ded50b0f19a0"
+    },
+    {
+      "path": "tests/test_predict_long.py",
+      "size": 61630,
+      "sha256": "fc0c004277a48d7b7add781c6d0eaceffe5a2f0cf20ddc41813114a47e543939"
+    },
+    {
+      "path": "tests/test_question_token_reuse.py",
+      "size": 11256,
+      "sha256": "c0f839101e5455379875ec666435c9417563960964e5ee5550c1fd261260264d"
+    },
+    {
+      "path": "tests/test_revision_pinning.py",
+      "size": 46683,
+      "sha256": "79e67216e6f963e0af85b15b65bff852060f571414e19a185f997b7735f2e295"
+    },
+    {
+      "path": "tests/test_router.py",
+      "size": 88877,
+      "sha256": "8ada28813f38479580d708ae70dbc288ba9e5b9a597810e704afbeb9f5996bc6"
+    },
+    {
+      "path": "tests/test_router_batch.py",
+      "size": 24045,
+      "sha256": "0d6ab6e30beb9faef95946801967b8a42eabff8884679dc331e940683bfac105"
+    },
+    {
+      "path": "tests/test_router_memory.py",
+      "size": 12047,
+      "sha256": "25f3232a6e0f8a93beca7dabeb9e1c1ba1bd1b882f2e5599dc086ff7fd1738c4"
+    },
+    {
+      "path": "tests/test_runtime_fixes.py",
+      "size": 24887,
+      "sha256": "cd3b4f8a466487686b365a358006609f4d540f84d3bca37ddeda10d976bad1e6"
+    },
+    {
+      "path": "tests/test_serve.py",
+      "size": 152841,
+      "sha256": "4e34f7455533a319b23921a03c2a31dc25f876b43e0e7d1be10f942faea20031"
+    },
+    {
+      "path": "tests/test_server_example.py",
+      "size": 13636,
+      "sha256": "d88fd523ee4673be3e0e592a2fa8e2149ec22e1ec55b68c5871877f72e8358a3"
+    },
+    {
+      "path": "tests/test_shortlist.py",
+      "size": 31950,
+      "sha256": "8784142a427158a8e6482c450a2115d3e7fb4bb5b637451ac70694a3b3954e6f"
+    },
+    {
+      "path": "tests/test_shortlist_cosine.py",
+      "size": 9879,
+      "sha256": "7322717358dc325d96ff5ed78afeff67ef59748e85bfa1477f9cecb64ced6b96"
+    },
+    {
+      "path": "tests/test_state_budget.py",
+      "size": 23372,
+      "sha256": "dc1642e37d957f44c162fd748cb91a57bbdbcc9bfe5de0d28e10fd4957c64d44"
+    },
+    {
+      "path": "tests/test_structured.py",
+      "size": 25599,
+      "sha256": "a10aa33667897c5bf751e5ed2f8393abd3b540bece85a52ed13f1535e8ade8fe"
+    },
+    {
+      "path": "tests/test_structured_api.py",
+      "size": 5393,
+      "sha256": "caf0a46559cb785997692d3fffb461cb2bb1b471c28d1397920caa6d851cdb27"
+    },
+    {
+      "path": "tests/test_structured_docs.py",
+      "size": 28871,
+      "sha256": "5c56aba64e384daa9fee30b8ea10d243d2997fd37f441c15c6e325207b15d8b9"
+    },
+    {
+      "path": "tests/test_system_one_lang.py",
+      "size": 4973,
+      "sha256": "49609146114cd2723b85dccc2c7ec87dc3337ca8db7cb5f67495c1d8d1f0b5af"
+    },
+    {
+      "path": "tests/test_temperature_loading.py",
+      "size": 8325,
+      "sha256": "03bc49cb4b635ec10eca639af8e485c02dabca781132d44734c6a6d09c3b815c"
+    },
+    {
+      "path": "tests/test_tokenizer_cache.py",
+      "size": 3909,
+      "sha256": "520ab91ec9129552adcd2a28d81af67c657a6f05e8b5886e9b893fd09e4017a2"
+    },
+    {
+      "path": "tests/test_tokenizer_concurrency.py",
+      "size": 4867,
+      "sha256": "c47068a8cee8f809337d60cbe717fe999f5401972bfd0ed17d07748942e0f3b3"
+    },
+    {
+      "path": "tests/test_training.py",
+      "size": 15667,
+      "sha256": "b004e199c17740e41b1d8911dbf7a844ac7d70cd48b727b5db07ff0fa1d7308f"
+    },
+    {
+      "path": "tests/test_truncation.py",
+      "size": 14583,
+      "sha256": "6ded70a2a56f4fa15229a6f3fe537de84d8057a6ac4efaffad7133f5ee11f286"
+    },
+    {
+      "path": "tests/test_truncation_direction.py",
+      "size": 7968,
+      "sha256": "b1128a3d76a50fa251e6fc1e2eb41b0398388fd65e90a4755ef4da430ac75f16"
+    },
+    {
+      "path": "tests/test_verify_checkpoints.py",
+      "size": 5960,
+      "sha256": "8e73e0897b1104bbd78a7f39473fa09801bca4f67702705d3d6079b3444a58a2"
+    },
+    {
+      "path": "verify/bench_devices.py",
+      "size": 3030,
+      "sha256": "af7e2d126122c01a388f167a67c2c8a53c9bf060f2c8fd0d2335cf4416da6cb1"
+    },
+    {
+      "path": "verify/checkpoints.json",
+      "size": 1452,
+      "sha256": "b130131e4f2333695f24fd104584f45656406f805bbd648f578b14b204728a5e"
+    },
+    {
+      "path": "verify/checkpoints.py",
+      "size": 6793,
+      "sha256": "f3bd83424496587471c7b86f90c7cadd0212235bf97e4866b15db364f075eb56"
+    },
+    {
+      "path": "verify/edge_sweep.py",
+      "size": 11660,
+      "sha256": "8bf036abb8aa1fa64130771eb43b18f3b288e6597547a983fe5acd60c167c0f7"
+    },
+    {
+      "path": "verify/laya_smoke_test.py",
+      "size": 8854,
+      "sha256": "d53b5a98c1cf82c3b1b50d9829252485546ba1d6edbbe0dcb0a465948095f2f7"
+    },
+    {
+      "path": "verify/numerics_check.py",
+      "size": 8878,
+      "sha256": "0196146011305d1d021f959de2c4432c74781bdcc48267f974ab3a8a96002444"
+    },
+    {
+      "path": "verify/soak_check.py",
+      "size": 12137,
+      "sha256": "91018fc59381ce4fc9defe15a11059b8fbc7d75fcf426367cb0e59148b209667"
+    },
+    {
+      "path": "zensical.toml",
+      "size": 1917,
+      "sha256": "2622a81378d8016eefa1ee4ac8b47ea42c59bf9f051734dc51e471b0c7611c1c"
+    }
+  ]
+}

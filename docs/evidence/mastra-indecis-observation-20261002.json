@@ -1,0 +1,592 @@
+{
+  "schema_version": "deposium.mastra-observation-evidence/v1",
+  "date": "2026-10-02",
+  "qualification": "provisional_agreement_agent_only_references",
+  "bench_commit": "84952938103e6c8f83b45c177033456490e244ed",
+  "bench_source_sha256": "d40567a097caec085e143dcee82afeb0e2ff8120022b5e8ce29d950150d6bd88",
+  "projection_version": "mastra-read-choice/v1",
+  "dataset_sha256": "d66ec51d9b8d89f46b87b90b80bcd0d45abf1570fa9857c24d9ce39117935497",
+  "requests_sha256": "c076aedc2810c758d830c59bb21d404dcbad41df353f7df218950935381f7752",
+  "source_profile_sha256": "237f35c068ca7ce231250bba28d7a8b1c566997410dd76f14f7c2d9b2ffcaf30",
+  "runtime": {
+    "identity_sha256": "2f8d4a90a4ac712151c1424b4a48350867b32a3ffdd4e984ee3d1818915026f8",
+    "model_revision": "c721113d59a1d91b447450324f51c4b3332c924a",
+    "source_revision": "339e191405ac9be90f6857f810f478b3312b7f35",
+    "binary_sha256": "979bb28b26bd81834ec8bd203617fb9bef99e90ad326c6310671a70e0815bff6",
+    "worker_sha256": "9db9bd2a8f6602925cac91a5be4337c0b085ef9dea5e7549b26377b9656fe53b",
+    "model_assets_sha256": "228aa6a5b4810ebd63e02233e054521139dfd9ae4989ff512986ac6cb8bdfd70",
+    "source_files_sha256": "72245b84b7532703262d3fd763296debe2fe2054563fb3dc4780e1a3b7425f93",
+    "prompt_sha256": "726c830812c4135e6822ce30c8312b542d413a4227d442529fa28604c26e78ae",
+    "runtime": {
+      "backbone_revision": "c721113d59a1d91b447450324f51c4b3332c924a",
+      "go": "go1.27.1-X:simd",
+      "goarch": "amd64",
+      "goos": "linux",
+      "indecis_revision": "339e191405ac9be90f6857f810f478b3312b7f35",
+      "parent_python": "3.14.2"
+    },
+    "settings": {
+      "cache_policy": "request_local",
+      "max_length": 4096,
+      "max_rss_mb": 3072,
+      "mode": "open_untrained",
+      "strict_encoding": true,
+      "threads": 2,
+      "trained": false
+    },
+    "init_wall_ms": 1215.8141180116218,
+    "load_ms": 1078.571572,
+    "load_rss_mb": 790
+  },
+  "metrics": {
+    "action_matrix": {
+      "fallback": {
+        "search": 5,
+        "stats": 3
+      },
+      "search": {
+        "search": 5,
+        "stats": 3
+      },
+      "stats": {
+        "search": 2,
+        "stats": 6
+      }
+    },
+    "by_language": {
+      "en": {
+        "agreement_count": 6,
+        "agreement_over_all": 0.5,
+        "agreement_over_valid": 0.5,
+        "statuses": {
+          "ok": 12
+        },
+        "total": 12,
+        "valid_decisions": 12
+      },
+      "fr": {
+        "agreement_count": 5,
+        "agreement_over_all": 0.4166666666666667,
+        "agreement_over_valid": 0.4166666666666667,
+        "statuses": {
+          "ok": 12
+        },
+        "total": 12,
+        "valid_decisions": 12
+      }
+    },
+    "by_proposed_action": {
+      "fallback": {
+        "agreement_count": 0,
+        "agreement_over_all": 0.0,
+        "agreement_over_valid": 0.0,
+        "statuses": {
+          "ok": 8
+        },
+        "total": 8,
+        "valid_decisions": 8
+      },
+      "search": {
+        "agreement_count": 5,
+        "agreement_over_all": 0.625,
+        "agreement_over_valid": 0.625,
+        "statuses": {
+          "ok": 8
+        },
+        "total": 8,
+        "valid_decisions": 8
+      },
+      "stats": {
+        "agreement_count": 6,
+        "agreement_over_all": 0.75,
+        "agreement_over_valid": 0.75,
+        "statuses": {
+          "ok": 8
+        },
+        "total": 8,
+        "valid_decisions": 8
+      }
+    },
+    "by_split": {
+      "calibration": {
+        "agreement_count": 4,
+        "agreement_over_all": 0.6666666666666666,
+        "agreement_over_valid": 0.6666666666666666,
+        "statuses": {
+          "ok": 6
+        },
+        "total": 6,
+        "valid_decisions": 6
+      },
+      "test": {
+        "agreement_count": 7,
+        "agreement_over_all": 0.3888888888888889,
+        "agreement_over_valid": 0.3888888888888889,
+        "statuses": {
+          "ok": 18
+        },
+        "total": 18,
+        "valid_decisions": 18
+      }
+    },
+    "cases_scored": 0,
+    "coverage": {
+      "agreement_count": 11,
+      "agreement_over_all": 0.4583333333333333,
+      "agreement_over_valid": 0.4583333333333333,
+      "statuses": {
+        "ok": 24
+      },
+      "total": 24,
+      "valid_decisions": 24
+    },
+    "forward_executed": 24,
+    "human_approved_references": 0,
+    "paired_languages": {
+      "complete_pairs": 12,
+      "same_action": 10
+    },
+    "qualification": "provisional_agreement_agent_only_references",
+    "rows": [
+      {
+        "agrees_with_proposal": true,
+        "case_id": "mastra-read-warranty-clause-fr",
+        "family": "mastra-read-warranty-clause",
+        "language": "fr",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "search"
+        ],
+        "split": "calibration",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": true,
+        "case_id": "mastra-read-warranty-clause-en",
+        "family": "mastra-read-warranty-clause",
+        "language": "en",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "search"
+        ],
+        "split": "calibration",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-negated-corpus-count-fr",
+        "family": "mastra-read-negated-corpus-count",
+        "language": "fr",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "search"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-negated-corpus-count-en",
+        "family": "mastra-read-negated-corpus-count",
+        "language": "en",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "search"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-quoted-count-heading-fr",
+        "family": "mastra-read-quoted-count-heading",
+        "language": "fr",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "search"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": true,
+        "case_id": "mastra-read-quoted-count-heading-en",
+        "family": "mastra-read-quoted-count-heading",
+        "language": "en",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "search"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": true,
+        "case_id": "mastra-read-typo-source-request-fr",
+        "family": "mastra-read-typo-source-request",
+        "language": "fr",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "search"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": true,
+        "case_id": "mastra-read-typo-source-request-en",
+        "family": "mastra-read-typo-source-request",
+        "language": "en",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "search"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": true,
+        "case_id": "mastra-read-document-entity-volumes-fr",
+        "family": "mastra-read-document-entity-volumes",
+        "language": "fr",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "stats"
+        ],
+        "split": "calibration",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": true,
+        "case_id": "mastra-read-document-entity-volumes-en",
+        "family": "mastra-read-document-entity-volumes",
+        "language": "en",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "stats"
+        ],
+        "split": "calibration",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": true,
+        "case_id": "mastra-read-negated-excerpt-request-fr",
+        "family": "mastra-read-negated-excerpt-request",
+        "language": "fr",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "stats"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": true,
+        "case_id": "mastra-read-negated-excerpt-request-en",
+        "family": "mastra-read-negated-excerpt-request",
+        "language": "en",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "stats"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": true,
+        "case_id": "mastra-read-contextual-space-count-fr",
+        "family": "mastra-read-contextual-space-count",
+        "language": "fr",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "stats"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": true,
+        "case_id": "mastra-read-contextual-space-count-en",
+        "family": "mastra-read-contextual-space-count",
+        "language": "en",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "stats"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-quoted-request-vs-actual-count-fr",
+        "family": "mastra-read-quoted-request-vs-actual-count",
+        "language": "fr",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "stats"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-quoted-request-vs-actual-count-en",
+        "family": "mastra-read-quoted-request-vs-actual-count",
+        "language": "en",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "stats"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-unspecified-problem-fr",
+        "family": "mastra-read-unspecified-problem",
+        "language": "fr",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "fallback"
+        ],
+        "split": "calibration",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-unspecified-problem-en",
+        "family": "mastra-read-unspecified-problem",
+        "language": "en",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "fallback"
+        ],
+        "split": "calibration",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-count-retrieve-synthesize-fr",
+        "family": "mastra-read-count-retrieve-synthesize",
+        "language": "fr",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "fallback"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-count-retrieve-synthesize-en",
+        "family": "mastra-read-count-retrieve-synthesize",
+        "language": "en",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "fallback"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-negated-both-actions-fr",
+        "family": "mastra-read-negated-both-actions",
+        "language": "fr",
+        "predicted_action": "stats",
+        "proposed_actions": [
+          "fallback"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-negated-both-actions-en",
+        "family": "mastra-read-negated-both-actions",
+        "language": "en",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "fallback"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-external-cooking-duration-fr",
+        "family": "mastra-read-external-cooking-duration",
+        "language": "fr",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "fallback"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      },
+      {
+        "agrees_with_proposal": false,
+        "case_id": "mastra-read-external-cooking-duration-en",
+        "family": "mastra-read-external-cooking-duration",
+        "language": "en",
+        "predicted_action": "search",
+        "proposed_actions": [
+          "fallback"
+        ],
+        "split": "test",
+        "status": "ok",
+        "valid": true
+      }
+    ],
+    "rss_peak_reported_mib": 894.875,
+    "semantic_verdict": "not_qualified",
+    "timing": {
+      "adapter_wall_ms": {
+        "count": 24,
+        "median_ms": 44.69256699667312,
+        "p95_method": "nearest_rank_descriptive_single_pass",
+        "p95_ms": 56.99792000814341
+      },
+      "decision_ms": {
+        "count": 24,
+        "median_ms": 36.5024865,
+        "p95_method": "nearest_rank_descriptive_single_pass",
+        "p95_ms": 48.376834
+      },
+      "inference_ms": {
+        "count": 24,
+        "median_ms": 36.3117075,
+        "p95_method": "nearest_rank_descriptive_single_pass",
+        "p95_ms": 48.156656
+      }
+    }
+  },
+  "first_call": {
+    "case_id": "mastra-read-warranty-clause-fr",
+    "adapter_wall_ms": {
+      "count": 1,
+      "median_ms": 68.01012899086345,
+      "p95_ms": 68.01012899086345
+    },
+    "decision_ms": {
+      "count": 1,
+      "median_ms": 60.60176,
+      "p95_ms": 60.60176
+    },
+    "inference_ms": {
+      "count": 1,
+      "median_ms": 60.149517,
+      "p95_ms": 60.149517
+    }
+  },
+  "following_calls": {
+    "adapter_wall_ms": {
+      "count": 23,
+      "median_ms": 44.62254900136031,
+      "p95_ms": 54.280956988804974
+    },
+    "decision_ms": {
+      "count": 23,
+      "median_ms": 36.243977,
+      "p95_ms": 44.085258
+    },
+    "inference_ms": {
+      "count": 23,
+      "median_ms": 36.069383,
+      "p95_ms": 43.911244
+    }
+  },
+  "token_ranges": {
+    "context_tokens": {
+      "min": 66,
+      "max": 117
+    },
+    "total_tokens": {
+      "min": 148,
+      "max": 211
+    },
+    "max_sequence_tokens": {
+      "min": 66,
+      "max": 117
+    }
+  },
+  "truncated_cases": 0,
+  "memory_before": {
+    "MemAvailable_mib": 12733.828125,
+    "MemTotal_mib": 44142.6640625,
+    "SwapFree_mib": 3.40234375,
+    "SwapTotal_mib": 16384.0
+  },
+  "memory_after": {
+    "MemAvailable_mib": 12717.73828125,
+    "MemTotal_mib": 44142.6640625,
+    "SwapFree_mib": 3.40234375,
+    "SwapTotal_mib": 16384.0
+  },
+  "model_phase_wall_ms": 2433.9102469966747,
+  "archives": [
+    {
+      "path": "results/mastra-read-indecis-001",
+      "seal_file_sha256": "54fde220080eac33cd4d9f2982131912f977067d3282a8eb4e02c2dd7b3a6bfa",
+      "seal_sha256": "7464f54013bccfd2de5d842c4c2cdfa5a0802307d350949ccfdb1c8aae502d5e",
+      "files": {
+        "adapter-initial.json": "5a409e7a65a92ed19cd18913000124cf31c2f466bbf23ce38adaeb9c389ba7a1",
+        "cases.jsonl": "d66ec51d9b8d89f46b87b90b80bcd0d45abf1570fa9857c24d9ce39117935497",
+        "manifest.json": "c8dcb850172f11bf191aa001b604b3d16c22e5ca146c7e69b566cc1c48e7b4bb",
+        "profile.json": "e893c662f6cbcb029084fc156c3a7b4d742bee8605c47e4b3f9c685d7db070e9",
+        "raw.jsonl": "73aab24733f3fa039079ad6b713ab8e5eb1fae3b090fcceff071bdd222f9bc1c",
+        "requests.jsonl": "c076aedc2810c758d830c59bb21d404dcbad41df353f7df218950935381f7752",
+        "stack-preflight.json": "718d383fe74ad44a2b896f30c622ea5385ee25c6e66a9f9fadab23959688bb27",
+        "summary.json": "bd58cf5f1fdc706eec65e8ef8276f01c74b6aa7fca6839ab01ed675e92c1d4c4"
+      },
+      "valid_decisions": 0,
+      "forward_executed": 0
+    },
+    {
+      "path": "results/mastra-read-indecis-002",
+      "seal_file_sha256": "89e64b1b897438ff2ea110fb2b1e1fff414eb9a4a723e53d1e6dc5a6d572f652",
+      "seal_sha256": "f8740741589392a6c5d28fb5feb946ce466db6ffdff8f3bb34b1929dac471116",
+      "files": {
+        "adapter-initial.json": "94e2c56d88e0b7edfbe37f2c243a8521886e92bc1dccf4774abe875b0fb66461",
+        "cases.jsonl": "d66ec51d9b8d89f46b87b90b80bcd0d45abf1570fa9857c24d9ce39117935497",
+        "manifest.json": "c5bbefb4609847b4271d2b7fcba665c66e66f951cdea6114c4ce8a54be34fd05",
+        "profile.json": "e893c662f6cbcb029084fc156c3a7b4d742bee8605c47e4b3f9c685d7db070e9",
+        "raw.jsonl": "055867c27fa79c880f058b81f818c875bdbd6b1749c13b56455be16f5b11259f",
+        "requests.jsonl": "c076aedc2810c758d830c59bb21d404dcbad41df353f7df218950935381f7752",
+        "stack-preflight.json": "88452ca4ddaede2325109f1d3c1760cf57704023ac1db842150042f1e2b6238d",
+        "summary.json": "ec66cfe739ad18cb2d886ac5f9ece12fb4720e88684e977959d8a8573438a0ac"
+      },
+      "valid_decisions": 24,
+      "forward_executed": 24
+    }
+  ],
+  "limitations": [
+    "References are pending human review; agreement is not accuracy.",
+    "No MCP tool, planner or product path is executed.",
+    "Single pass without warm-up; timings are descriptive and include host pressure.",
+    "Budgets checked between calls; one in-flight adapter call may finish after the wall deadline."
+  ]
+}

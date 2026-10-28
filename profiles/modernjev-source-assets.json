@@ -1,0 +1,12 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "MaziyarPanahi/ModernJEV-Decide-Preview",
+  "revision": "d5b398ed03de073a00bc4e53acf53afda409445e",
+  "files": [
+    {
+      "path": "predict.py",
+      "size": 5162,
+      "sha256": "d77ea48b1fadc19b8e77404d6066031d571d01d7c2b6120526499b069bea2fd5"
+    }
+  ]
+}

@@ -1,0 +1,386 @@
+{
+  "schema_version": "deposium.mastra-read-contracts/v0",
+  "fixture_id": "synthetic-corpus-a",
+  "qualification": "synthetic_backend_responses_not_a_search_corpus",
+  "backend_fixture": {
+    "search": {
+      "documents": [
+        {
+          "id": "fixture-doc-1"
+        },
+        {
+          "id": "fixture-doc-2"
+        }
+      ],
+      "blocks": [
+        {
+          "text": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "doc_id": "fixture-doc-1",
+          "page": 2
+        },
+        {
+          "text": "Synthetic passage 2.",
+          "doc_id": "fixture-doc-2",
+          "page": 2
+        },
+        {
+          "text": "Synthetic passage 3.",
+          "doc_id": "fixture-doc-2",
+          "page": 3
+        },
+        {
+          "text": "Synthetic passage 4.",
+          "doc_id": "fixture-doc-2",
+          "page": 4
+        },
+        {
+          "text": "Synthetic passage 5.",
+          "doc_id": "fixture-doc-2",
+          "page": 5
+        },
+        {
+          "text": "Synthetic passage 6.",
+          "doc_id": "fixture-doc-2",
+          "page": 6
+        }
+      ],
+      "graph_context": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+    },
+    "stats": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"total_documents\":2,\"total_entities\":7}"
+        }
+      ]
+    }
+  },
+  "controls": [
+    {
+      "case_id": "search-scope-and-output-bounds",
+      "request": {
+        "action": "search",
+        "message": "Find the source passages.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        },
+        "tool_args": {
+          "tenant_id": "wrong-tenant",
+          "space_ids": [
+            "22222222-2222-4222-8222-222222222222"
+          ]
+        }
+      },
+      "expected": {
+        "status": "ok",
+        "qualification": "mock_native_contract",
+        "output": {
+          "documents": 2,
+          "blocks": 6,
+          "top_blocks": [
+            {
+              "text": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "doc_id": "fixture-doc-1",
+              "page": 2
+            },
+            {
+              "text": "Synthetic passage 2.",
+              "doc_id": "fixture-doc-2",
+              "page": 2
+            },
+            {
+              "text": "Synthetic passage 3.",
+              "doc_id": "fixture-doc-2",
+              "page": 3
+            },
+            {
+              "text": "Synthetic passage 4.",
+              "doc_id": "fixture-doc-2",
+              "page": 4
+            },
+            {
+              "text": "Synthetic passage 5.",
+              "doc_id": "fixture-doc-2",
+              "page": 5
+            }
+          ],
+          "graph_context": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+        },
+        "captured_calls": [
+          {
+            "handler": "searchHub",
+            "input": {
+              "query_text": "Find the source passages.",
+              "tenant_id": "synthetic-tenant-a",
+              "space_ids": [
+                "11111111-1111-4111-8111-111111111111"
+              ],
+              "top_k": 5,
+              "use_vector_rel": true,
+              "use_vector_kw": true,
+              "use_graph": true
+            }
+          }
+        ],
+        "model_calls": 0,
+        "network_attempts": 0,
+        "native_tool_executions": 1
+      }
+    },
+    {
+      "case_id": "stats-scope-and-mcp-envelope",
+      "request": {
+        "action": "stats",
+        "message": "Find the source passages.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        },
+        "tool_args": {
+          "tenant_id": "wrong-tenant",
+          "space_ids": [
+            "22222222-2222-4222-8222-222222222222"
+          ]
+        }
+      },
+      "expected": {
+        "status": "ok",
+        "qualification": "mock_native_contract",
+        "output": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"total_documents\":2,\"total_entities\":7}"
+            }
+          ]
+        },
+        "captured_calls": [
+          {
+            "handler": "getCorpusStats",
+            "input": {
+              "tenant_id": "synthetic-tenant-a",
+              "space_id": "11111111-1111-4111-8111-111111111111",
+              "output_format": "json"
+            }
+          }
+        ],
+        "model_calls": 0,
+        "network_attempts": 0,
+        "native_tool_executions": 1
+      }
+    },
+    {
+      "case_id": "fallback-without-tool",
+      "request": {
+        "action": "fallback",
+        "message": "Find the source passages.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        }
+      },
+      "expected": {
+        "status": "ok",
+        "qualification": "mock_native_contract",
+        "output": null,
+        "captured_calls": [],
+        "model_calls": 0,
+        "network_attempts": 0,
+        "native_tool_executions": 0
+      }
+    },
+    {
+      "case_id": "search-empty-is-not-error",
+      "request": {
+        "action": "search",
+        "message": "Find the source passages.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        },
+        "fixture": {
+          "search": {
+            "documents": [],
+            "blocks": [],
+            "graph_context": ""
+          },
+          "stats": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"total_documents\":2,\"total_entities\":7}"
+              }
+            ]
+          }
+        }
+      },
+      "use_fixture": false,
+      "expected": {
+        "status": "ok",
+        "qualification": "mock_native_contract",
+        "output": {
+          "documents": 0,
+          "blocks": 0,
+          "top_blocks": [],
+          "graph_context": ""
+        },
+        "captured_calls": [
+          {
+            "handler": "searchHub",
+            "input": {
+              "query_text": "Find the source passages.",
+              "tenant_id": "synthetic-tenant-a",
+              "space_ids": [
+                "11111111-1111-4111-8111-111111111111"
+              ],
+              "top_k": 5,
+              "use_vector_rel": true,
+              "use_vector_kw": true,
+              "use_graph": true
+            }
+          }
+        ],
+        "model_calls": 0,
+        "network_attempts": 0,
+        "native_tool_executions": 1
+      }
+    },
+    {
+      "case_id": "missing-tenant",
+      "request": {
+        "action": "search",
+        "message": "Find the source passages.",
+        "context": {
+          "tenant_id": "",
+          "space_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        }
+      },
+      "expected": {
+        "status": "error",
+        "error": "mastra_read_input_failed",
+        "output": null,
+        "captured_calls": [],
+        "model_calls": 0,
+        "network_attempts": 0
+      }
+    },
+    {
+      "case_id": "empty-space",
+      "request": {
+        "action": "search",
+        "message": "Find the source passages.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": []
+        }
+      },
+      "expected": {
+        "status": "error",
+        "error": "mastra_read_input_failed",
+        "output": null,
+        "captured_calls": [],
+        "model_calls": 0,
+        "network_attempts": 0
+      }
+    },
+    {
+      "case_id": "multiple-spaces",
+      "request": {
+        "action": "search",
+        "message": "Find the source passages.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": [
+            "11111111-1111-4111-8111-111111111111",
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        }
+      },
+      "expected": {
+        "status": "error",
+        "error": "mastra_read_input_failed",
+        "output": null,
+        "captured_calls": [],
+        "model_calls": 0,
+        "network_attempts": 0
+      }
+    },
+    {
+      "case_id": "numeric-space",
+      "request": {
+        "action": "search",
+        "message": "Find the source passages.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": [
+            "483"
+          ]
+        }
+      },
+      "expected": {
+        "status": "error",
+        "error": "mastra_read_input_failed",
+        "output": null,
+        "captured_calls": [],
+        "model_calls": 0,
+        "network_attempts": 0
+      }
+    },
+    {
+      "case_id": "graph-outside-pool",
+      "request": {
+        "action": "graph",
+        "message": "Find the source passages.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        }
+      },
+      "expected": {
+        "status": "error",
+        "error": "mastra_read_input_failed",
+        "output": null,
+        "captured_calls": [],
+        "model_calls": 0,
+        "network_attempts": 0
+      }
+    },
+    {
+      "case_id": "annotation-in-request",
+      "request": {
+        "action": "search",
+        "message": "Find the source passages.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        },
+        "reference": {
+          "expected": "search"
+        }
+      },
+      "expected": {
+        "status": "error",
+        "error": "mastra_read_input_failed",
+        "output": null,
+        "captured_calls": [],
+        "model_calls": 0,
+        "network_attempts": 0
+      }
+    }
+  ]
+}

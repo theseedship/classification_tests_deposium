@@ -1,0 +1,17 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "muose/Muose-50M-Decision",
+  "revision": "5afb8eeff127621fea2d66fc63f56798ada12eda",
+  "files": [
+    {
+      "path": "decision_model.py",
+      "size": 2082,
+      "sha256": "e0f3174d8578f643019552364bde9f5038894953d9e159efba05dd64b096ba01"
+    },
+    {
+      "path": "model.py",
+      "size": 7577,
+      "sha256": "7e743f2bdb5534359bb38d951bb98d8d28d9a6d5c04eeb6a7bd81a02e775d6b9"
+    }
+  ]
+}

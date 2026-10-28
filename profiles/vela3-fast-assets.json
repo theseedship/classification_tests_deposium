@@ -1,0 +1,87 @@
+{
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size": 11357
+    },
+    {
+      "path": "README.md",
+      "sha256": "cbf5c8b9f50db93c8a2bd390a0802b2ad552dff3179d4edd03f4481da7e58058",
+      "size": 22482
+    },
+    {
+      "path": "config.json",
+      "sha256": "a85b358ac11b71d780deb09e8a082efddc67938a2eb4fc16d68d8ae888c69d14",
+      "size": 2294
+    },
+    {
+      "path": "configuration_ultrabert.py",
+      "sha256": "823d10bda19f5164da4f79f8f9c01e5ebd7a75569abce78c0a26b7674fc78cd9",
+      "size": 2209
+    },
+    {
+      "path": "decision_index_engine.py",
+      "sha256": "9a475526066d3f550096e1cd39146ab7e6b1e8e00137ad2f3e533a0739698e5e",
+      "size": 4509
+    },
+    {
+      "path": "model.safetensors",
+      "sha256": "2294745881d9a01b7d049133b57e5fed2aec6ae1d34ef1ab9fa16f047fc35c8e",
+      "size": 1521771272
+    },
+    {
+      "path": "modeling_ultrabert.py",
+      "sha256": "6d86b56fbcc634dd2f7e2aa29047062289def1ba7e602b991be1af888dc82072",
+      "size": 33761
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "c8d15bb93015e724f34e04e7bd010bf79c11491c0750ffb6145f8f5ce7c2f7ac",
+      "size": 182
+    },
+    {
+      "path": "smoke_test.py",
+      "sha256": "05c8ec093a4cf479e40f3151e56daa70753329219ab71b3fbfad49203ab96fea",
+      "size": 4271
+    },
+    {
+      "path": "tokenizer.json",
+      "sha256": "38734bb17ef19f84c67b5eb5692bea19801ffd02cb5c5ffc11429e76b0242e08",
+      "size": 3523470
+    },
+    {
+      "path": "tokenizer_config.json",
+      "sha256": "649781df90d51837dd6ba951a89fae07c985a9eacfd781d84002d480c3cb0b6e",
+      "size": 764
+    },
+    {
+      "path": "ub_d3_common.py",
+      "sha256": "ae36592c0fe964af9bba46b55a6eccff484efeb15c8c2fe209149fe285f971a3",
+      "size": 1850
+    },
+    {
+      "path": "vela3_config.json",
+      "sha256": "ee5088605aa5151210fbc12e3f6ee0c9a382dddf90d3a43ac606c0df305d9ff2",
+      "size": 13180
+    },
+    {
+      "path": "vela3_encoder.py",
+      "sha256": "5d6caa187fa29077bcc4c87565881a25cc1e2e126da68fd64785b5969cac84bf",
+      "size": 25295
+    },
+    {
+      "path": "vela3_schema.py",
+      "sha256": "d247f3a3c5638ee820a27712663ec78973c873541e44e12e4492ab7648b3a953",
+      "size": 28655
+    },
+    {
+      "path": "vela3_server.py",
+      "sha256": "fe2b36535341d700d4df6e761baa959ea933627a4ca1883cc7336217e9142f36",
+      "size": 11827
+    }
+  ],
+  "repo_id": "vllm-sr/vela3-fast",
+  "revision": "9e338f39babc622f42e9bd8556398fe2d80d9f13",
+  "schema_version": "deposium.model-assets/v1"
+}

@@ -1,0 +1,6 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "vllm-sr/Decision-2.0-Eos-0.8B-GGUF",
+  "revision": "a02a4cc6a4d637003ceede6f8b3b0bb0125b2d66",
+  "files": [{"path": "Decision-2.0-Eos-0.8B-Q8_0.gguf", "size": 816049472, "sha256": "abc6b5e14fcaa5646399c052fc4a0c7bbe817efccbdee9bbae7e38f193f1af8a"}]
+}

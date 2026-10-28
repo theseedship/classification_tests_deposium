@@ -1,0 +1,667 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "deposium.campaign-summary/v1",
+  "description": "Derived scoring summary with explicit denominators and non-success states. Arithmetic consistency and row identity are runtime checks; zero scored cases cannot have a pass verdict.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "archive_dir",
+    "mode",
+    "qualification",
+    "completion_status",
+    "stack_coverage",
+    "scorer",
+    "metrics",
+    "raw_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "deposium.campaign-summary/v1"
+    },
+    "run_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "archive_dir": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+    },
+    "mode": {
+      "enum": [
+        "run",
+        "resume",
+        "rescore"
+      ]
+    },
+    "qualification": {
+      "enum": [
+        "component_replay",
+        "harness_control",
+        "model_isolated"
+      ]
+    },
+    "completion_status": {
+      "enum": [
+        "interrupted",
+        "complete",
+        "incomplete"
+      ]
+    },
+    "stack_coverage": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/stack_coverage"
+      }
+    },
+    "scorer": {
+      "$ref": "#/$defs/fingerprint"
+    },
+    "metrics": {
+      "$ref": "#/$defs/metrics"
+    },
+    "raw_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "$defs": {
+    "stack_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "path",
+        "case_ids",
+        "supported_contract_ids",
+        "selected",
+        "omission_reason",
+        "recorded_cases",
+        "scored_cases"
+      ],
+      "properties": {
+        "id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "case_ids": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+          },
+          "uniqueItems": true
+        },
+        "supported_contract_ids": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+          },
+          "uniqueItems": true
+        },
+        "selected": {
+          "type": "boolean"
+        },
+        "omission_reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recorded_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scored_cases": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "selected": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "omission_reason": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "omission_reason": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "fingerprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "files",
+        "sha256"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "files": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total_cases",
+        "scored_cases",
+        "passed_cases",
+        "failed_cases",
+        "counts_by_status",
+        "accuracy_over_all",
+        "accuracy_scored",
+        "coverage",
+        "verdict"
+      ],
+      "properties": {
+        "total_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scored_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "passed_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "counts_by_status": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "unsupported",
+            "missing",
+            "error",
+            "timeout",
+            "abstain"
+          ],
+          "properties": {
+            "ok": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unsupported": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missing": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "error": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "timeout": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "abstain": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "accuracy_over_all": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "accuracy_scored": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "verdict": {
+          "enum": [
+            "invalid",
+            "pass",
+            "fail"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "scored_cases": {
+                "const": 0
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "accuracy_scored": {
+                "type": "null"
+              },
+              "verdict": {
+                "const": "invalid"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "passed",
+        "reason"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?:/(?:[^~]|~[01])*)*$"
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "reason": {
+          "enum": [
+            "missing_path",
+            "matched",
+            "mismatch"
+          ]
+        }
+      }
+    },
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "pack",
+        "language",
+        "status",
+        "scored",
+        "passed",
+        "checks",
+        "reason"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "pack": {
+          "enum": [
+            "DOC",
+            "FOLLOWUP",
+            "PRESENTATION",
+            "SOURCES",
+            "EVIDENCE",
+            "CLAIMS",
+            "ROBUSTNESS",
+            "CONTEXT",
+            "EXTRACTION",
+            "PRODUCT",
+            "RESEARCH"
+          ]
+        },
+        "language": {
+          "enum": [
+            "fr",
+            "en",
+            "de",
+            "es",
+            "it",
+            "pt"
+          ]
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "unsupported",
+            "missing",
+            "error",
+            "timeout",
+            "abstain"
+          ]
+        },
+        "scored": {
+          "type": "boolean"
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/check"
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "unsupported",
+                  "missing",
+                  "error",
+                  "timeout"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "scored": {
+                "const": false
+              },
+              "passed": {
+                "const": false
+              },
+              "checks": {
+                "maxItems": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "scored": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total_cases",
+        "scored_cases",
+        "passed_cases",
+        "failed_cases",
+        "counts_by_status",
+        "accuracy_over_all",
+        "accuracy_scored",
+        "coverage",
+        "verdict",
+        "by_pack",
+        "by_language",
+        "rows"
+      ],
+      "properties": {
+        "total_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scored_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "passed_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "counts_by_status": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "unsupported",
+            "missing",
+            "error",
+            "timeout",
+            "abstain"
+          ],
+          "properties": {
+            "ok": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unsupported": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missing": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "error": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "timeout": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "abstain": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "accuracy_over_all": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "accuracy_scored": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "verdict": {
+          "enum": [
+            "invalid",
+            "pass",
+            "fail"
+          ]
+        },
+        "by_pack": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "DOC",
+              "FOLLOWUP",
+              "PRESENTATION",
+              "SOURCES",
+              "EVIDENCE",
+              "CLAIMS",
+              "ROBUSTNESS",
+              "CONTEXT",
+              "EXTRACTION",
+              "PRODUCT",
+              "RESEARCH"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/counts"
+          }
+        },
+        "by_language": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "fr",
+              "en",
+              "de",
+              "es",
+              "it",
+              "pt"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/counts"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/row"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "scored_cases": {
+                "const": 0
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "accuracy_scored": {
+                "type": "null"
+              },
+              "verdict": {
+                "const": "invalid"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "stack_coverage": {
+            "items": {
+              "properties": {
+                "selected": {
+                  "const": false
+                },
+                "omission_reason": {
+                  "const": "model_isolated_only"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

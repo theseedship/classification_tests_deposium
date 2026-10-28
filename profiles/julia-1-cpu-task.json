@@ -1,0 +1,24 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "julia-1-cpu-document-task-v1",
+  "adapter": "julia",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "mcps.document-plan"
+  ],
+  "model": {
+    "repo_id": "SupersonicLabs/Julia-1",
+    "local_dir": "../models/Julia-1-a85b127",
+    "runtime_python": "../.cache/julia-runtime/bin/python",
+    "assets_manifest": "julia-1-assets.json",
+    "prompt_path": "document-task-prompt-v1.json",
+    "runtime_lock": "../runtimes/julia/requirements.lock",
+    "max_length": 1024,
+    "head_length": 512,
+    "threads": 2,
+    "max_rss_mb": 3072
+  },
+  "timeout_seconds": 30,
+  "revision": "a85b127321d580d65176c89ced8273f305745d85",
+  "recordings": null
+}

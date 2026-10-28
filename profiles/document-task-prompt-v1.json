@@ -1,0 +1,24 @@
+{
+  "schema_version": "deposium.document-task-prompt/v1",
+  "input_protocol": "current_equivalent",
+  "question": "Which document task is requested by the latest user message, given the supplied context? Choose one task.",
+  "options": [
+    {
+      "id": "catalog",
+      "description": "Count or list available document names or metadata, without answering a question about their content."
+    },
+    {
+      "id": "stored_summaries",
+      "description": "Show existing document summaries, possibly alongside a document count or list, or with a changed presentation or language."
+    },
+    {
+      "id": "retrieve_answer",
+      "description": "Read or search document content to answer a question, explain relationships, or produce a representation of that content."
+    },
+    {
+      "id": "abstain",
+      "description": "The request and context do not determine any of these document tasks; clarification or a non-document operation is needed."
+    }
+  ],
+  "order": "canonical"
+}

@@ -1,0 +1,2098 @@
+{
+  "schema_version": "deposium.model-source-review/v1",
+  "review_date": "2026-10-28",
+  "publisher_inventory_observed_at": "2026-10-28T20:39:56.022517+00:00",
+  "bench_base_commit": "26a26ffe57e5f98981b744a9673942797a8e8868",
+  "purpose": "Source and storage catalogue, not a benchmark result or a compatibility certification.",
+  "units": {
+    "gib": "bytes / 2**30",
+    "mib": "bytes / 2**20",
+    "ram_note": "File sizes do not predict resident or peak memory; runtime, activations, workspaces, conversion and OS memory are additional."
+  },
+  "initial_inventory_downloaded_model_weights": false,
+  "initial_inventory_sha256": "683c912b239a6d33ea81ecd5a2093fcdc47c8ccb7248571c899ba212b84aa734",
+  "initial_memory_observation": {
+    "MemAvailable_mib": 28529.890625,
+    "MemTotal_mib": 65536.0,
+    "method": "macos_free_inactive_speculative_estimate",
+    "limitation": "Reclaimable-page estimate, not Linux MemAvailable or a GPU allocation measurement",
+    "MemAvailable_gib": 27.861221
+  },
+  "records": [
+    {
+      "repo_id": "vllm-sr/d3-ultra",
+      "revision": "52ba9e7a00402f9560c7fba8c039608e7ddee7fb",
+      "source_url": "https://huggingface.co/vllm-sr/d3-ultra/tree/52ba9e7a00402f9560c7fba8c039608e7ddee7fb",
+      "last_modified": "2026-10-26T16:51:01.000Z",
+      "metadata_snapshot_sha256": "6020d44521c16f1ae91320239047b04c402b7f50b16d5faceda02ef6439ec1a4",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/d3-ultra/revision/52ba9e7a00402f9560c7fba8c039608e7ddee7fb?blobs=true",
+      "architecture": {
+        "model_type": "qwen3_5",
+        "architectures": [
+          "Qwen3_5Model"
+        ],
+        "dtype": "bfloat16",
+        "text_layers": 64,
+        "num_experts": null,
+        "num_experts_per_tok": null,
+        "topology": "Dense Qwen3.5; no MoE expert configuration."
+      },
+      "safetensors_tensor_elements_api": {
+        "parameters": {
+          "BF16": 26085330160
+        },
+        "total": 26085330160
+      },
+      "card_base_model": null,
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 52176025120,
+        "all_weight_files_in_this_repo_gib": 48.59271,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "model-00001-of-00011.safetensors",
+            "size_bytes": 4997471976,
+            "sha256": "58a8a3345ff967d60bb07b6d7518ec00ad6c7576d1693fbbade4d9028b00e8a5",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00002-of-00011.safetensors",
+            "size_bytes": 4965144568,
+            "sha256": "ca4380db3fd1ca76580ed2a045006e94158b08eeb423741728b04c60ab2b06c0",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00003-of-00011.safetensors",
+            "size_bytes": 4933789248,
+            "sha256": "f76dd766ab3900856d7229f32770ef1f4095e866afdff7ed53ad1b0e17f6632e",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00004-of-00011.safetensors",
+            "size_bytes": 4965227496,
+            "sha256": "8badeb33c5c7f6d0cec03cf2a839964bf413a3a66148a70a873bf0668b99fcad",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00005-of-00011.safetensors",
+            "size_bytes": 4974750552,
+            "sha256": "9a3d5f1507ace3ad5ada1d3eb6bf83c04356205286cb78bd38f132a1ae7e2afb",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00006-of-00011.safetensors",
+            "size_bytes": 4924266240,
+            "sha256": "4f6c78980569c9809d9cfe78ba2ef099bc31d16526b69c8cbf7aa3f9a264cef3",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00007-of-00011.safetensors",
+            "size_bytes": 4974750560,
+            "sha256": "171b8cba586f78f76ec14f09cecffbc3bd612f732f351c5ae63569d9d913b5c2",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00008-of-00011.safetensors",
+            "size_bytes": 4902229944,
+            "sha256": "2b1b2f351cbcab8b8c40b1d6acb28b3a1aec9ff64157f8feca582f205a14e83a",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00009-of-00011.safetensors",
+            "size_bytes": 4996786840,
+            "sha256": "4562bf2ee02d4d98b11f5c702e349cd8fed4405d5207595ff74a6733db2485fc",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00010-of-00011.safetensors",
+            "size_bytes": 4902229960,
+            "sha256": "05011d5a27526fcbacd18a7c7c48ee219840fbc99a2c7681b05b93a3bb24bdb9",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00011-of-00011.safetensors",
+            "size_bytes": 2634155256,
+            "sha256": "4e873d792f70ec72b23fd75efaafc1941b496150284471b6e5b68ccbe2af048d",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "readout.safetensors",
+            "size_bytes": 5222480,
+            "sha256": "a60b7a43b4d5698c426338695daf1ce02d6e8c536ce56a980664330246ee88d7",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ]
+      },
+      "external_base": null,
+      "local_evaluation_status_at_review": "not_run_bf16_memory_not_admitted",
+      "local_score": null,
+      "runtime_review": "Native BF16 D3 backbone and separate readout, custom Transformers runtime. Current pin has not been measured locally in this audit.",
+      "parameters_manifest": {
+        "text": 25624600064,
+        "vision": 460730096,
+        "readout": 1305600,
+        "loaded": 26086635760,
+        "readout_dtype": "float32",
+        "backbone_dtype": "bfloat16",
+        "note": "Manifest parameter counts of the reviewed D3 Ultra topology; all three archived configs have the same dense dimensions. This is not an active-parameter MoE count."
+      },
+      "model_manifest_sha256": "9ee89147a8accca45747b3c03558a407f633b76f51bba7a4429d2714a0bab813",
+      "model_manifest_url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/MODEL_MANIFEST.json",
+      "runtime_constraints": {
+        "default_device": "cuda:0 if available else cpu; MPS must be explicit",
+        "mps_hardware_qualification": "not_observed",
+        "backbone_dtype": "bfloat16",
+        "readout_dtype": "float32",
+        "attention_mode": "prefix_bidir",
+        "prompt_layout": "header-v1",
+        "text_question_types": [
+          "choice",
+          "noul",
+          "score"
+        ],
+        "additional_question_types": [
+          "box",
+          "track"
+        ],
+        "validated_length_tokens_per_question": 131072,
+        "requirement_torch": ">=2.8",
+        "requirement_transformers": "==5.17.0",
+        "timing_note": "Source synchronize helper synchronizes CUDA only. Explicit MPS synchronization is needed for meaningful MPS timings."
+      },
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 19611,
+          "sha256": "547a5e39d0312433badccbc3955f8cde7cceaa9161f4f77041e95aef2aa3b7b2",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 3949,
+          "sha256": "f57f7323226d242b0a960b15118ee8e73c87c28ba3556ec7e3dc59578293a523",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/config.json"
+        },
+        {
+          "path": "d3_compose.py",
+          "bytes": 14007,
+          "sha256": "d0bab5e6f400a198d39f4adae3b83a5ef06b64485f968aeca15d65be777be39e",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/d3_compose.py"
+        },
+        {
+          "path": "d3_engine.py",
+          "bytes": 4413,
+          "sha256": "086238942762df45047a32cd9a8e2bedd9b63167eb40be260c776de567979f53",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/d3_engine.py"
+        },
+        {
+          "path": "d3_fast.py",
+          "bytes": 22331,
+          "sha256": "68a1fb9a2c3bde9ac2763bf504decae592ca12722698fbde1b39a31262955535",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/d3_fast.py"
+        },
+        {
+          "path": "d3_format.py",
+          "bytes": 10235,
+          "sha256": "5f3da74306e66224fe414128fa8307d73f58af94ff1eeebacb9825f728d50720",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/d3_format.py"
+        },
+        {
+          "path": "d3_kernels.py",
+          "bytes": 16129,
+          "sha256": "8f7534ca1e1846ebf7c4c73058002f3be4dbf0d5d426f0815150ae0cbe7677bd",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/d3_kernels.py"
+        },
+        {
+          "path": "d3_runtime.py",
+          "bytes": 158635,
+          "sha256": "810f88c0cf538680163a285516818125f3b1f3a04a709046c691e877e00e7118",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/d3_runtime.py"
+        },
+        {
+          "path": "d3_server.py",
+          "bytes": 17705,
+          "sha256": "766a20a69101e36ab0535a1ec683379db422380a83091f0eccd7e82edb6a02de",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/d3_server.py"
+        },
+        {
+          "path": "modeling_d3.py",
+          "bytes": 12538,
+          "sha256": "d77b58c6c7834b7a6312560f88a2303ffe240fa4a4e515676cf90f3eb4b7b9a1",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/modeling_d3.py"
+        },
+        {
+          "path": "pipeline_d3.py",
+          "bytes": 2936,
+          "sha256": "4f9297c7c74e596e9b67df91a1e6823cfada48bf781336f141974ff6a2f1038e",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/pipeline_d3.py"
+        },
+        {
+          "path": "preprocessor_config.json",
+          "bytes": 390,
+          "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/preprocessor_config.json"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 17928,
+          "sha256": "b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27",
+          "url": "https://huggingface.co/vllm-sr/d3-ultra/resolve/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/tokenizer_config.json"
+        }
+      ]
+    },
+    {
+      "repo_id": "vllm-sr/d3-turbo",
+      "revision": "a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb",
+      "source_url": "https://huggingface.co/vllm-sr/d3-turbo/tree/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb",
+      "last_modified": "2026-10-20T15:49:39.000Z",
+      "metadata_snapshot_sha256": "f11541aa118e14b6b302226a31eeb9d16fdd2d6a3f63803052eb220c9b8b306a",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/d3-turbo/revision/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb?blobs=true",
+      "architecture": {
+        "model_type": "qwen3_5",
+        "architectures": [
+          "Qwen3_5Model"
+        ],
+        "dtype": "bfloat16",
+        "text_layers": 64,
+        "num_experts": null,
+        "num_experts_per_tok": null,
+        "topology": "Dense Qwen3.5; no MoE expert configuration."
+      },
+      "safetensors_tensor_elements_api": {
+        "parameters": {
+          "BF16": 26085330160
+        },
+        "total": 26085330160
+      },
+      "card_base_model": null,
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 52176025120,
+        "all_weight_files_in_this_repo_gib": 48.59271,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "model-00001-of-00011.safetensors",
+            "size_bytes": 4997471976,
+            "sha256": "00b716f3f1a39ea3b90caae65bbf418f719e3cbceacbaca4c7931839f9805c21",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00002-of-00011.safetensors",
+            "size_bytes": 4965144568,
+            "sha256": "d5d40d4d0539c70d59f6973f518082ef1ac18d97e02b97c68a872f7960df0285",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00003-of-00011.safetensors",
+            "size_bytes": 4933789248,
+            "sha256": "ba6b896fdbeb9e51e781163cde2696362a1124b645ef6369a9edfec1493e258b",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00004-of-00011.safetensors",
+            "size_bytes": 4965227496,
+            "sha256": "4718e2336336f66dabb79b9884c41763c4593ec79a19aa3303e8f28a5d477c14",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00005-of-00011.safetensors",
+            "size_bytes": 4974750552,
+            "sha256": "43874aea718f7b58caa7f625ce6cf20b64476e6b52cc078075437dc4c316d984",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00006-of-00011.safetensors",
+            "size_bytes": 4924266240,
+            "sha256": "5462f9ccae43bd624cdc5082cf2bb8a679c37a52450f04f88d6be06346c88b5c",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00007-of-00011.safetensors",
+            "size_bytes": 4974750560,
+            "sha256": "8f1afb9d86d4d04ce5ec9c7cf8762e033e9aa0c6142504c386c6c946ffa43cfd",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00008-of-00011.safetensors",
+            "size_bytes": 4902229944,
+            "sha256": "78b9ad3b28161636424629ce801b086997de99db6ee029c802d171c22df42237",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00009-of-00011.safetensors",
+            "size_bytes": 4996786840,
+            "sha256": "e9db166af60db0eb098adca7b5138e849adf561151e9f59198d4991b2ee6ff42",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00010-of-00011.safetensors",
+            "size_bytes": 4902229960,
+            "sha256": "be321ad567a8a68bc8816453ad7982e3f7d0fcc1cf2f5bf5dda2dafcf26978dd",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00011-of-00011.safetensors",
+            "size_bytes": 2634155256,
+            "sha256": "748f1a47e637f123eb9620a340e41ea711b0cfe1e7386353b19182e9f01ec540",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "readout.safetensors",
+            "size_bytes": 5222480,
+            "sha256": "f2579067a488138e2ef00bb3e98989cac7311afbf48700dfad02244e3671f241",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ]
+      },
+      "external_base": null,
+      "local_evaluation_status_at_review": "not_run_current_pin",
+      "local_score": null,
+      "runtime_review": "Native BF16 D3 backbone and separate readout, custom Transformers runtime. Current pin has not been measured locally in this audit.",
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 13345,
+          "sha256": "38191c2e048833334551357e3b0aee003cbf4bc05204444418dcffa3a4d5eadb",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 3949,
+          "sha256": "f57f7323226d242b0a960b15118ee8e73c87c28ba3556ec7e3dc59578293a523",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/config.json"
+        },
+        {
+          "path": "d3_compose.py",
+          "bytes": 14007,
+          "sha256": "d0bab5e6f400a198d39f4adae3b83a5ef06b64485f968aeca15d65be777be39e",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/d3_compose.py"
+        },
+        {
+          "path": "d3_engine.py",
+          "bytes": 4413,
+          "sha256": "086238942762df45047a32cd9a8e2bedd9b63167eb40be260c776de567979f53",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/d3_engine.py"
+        },
+        {
+          "path": "d3_fast.py",
+          "bytes": 22331,
+          "sha256": "68a1fb9a2c3bde9ac2763bf504decae592ca12722698fbde1b39a31262955535",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/d3_fast.py"
+        },
+        {
+          "path": "d3_format.py",
+          "bytes": 9120,
+          "sha256": "5bfc10d47481f7ce18a0ce47a9588fa3d484b5ec1d9b1e762fe6b800d335c693",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/d3_format.py"
+        },
+        {
+          "path": "d3_kernels.py",
+          "bytes": 16129,
+          "sha256": "8f7534ca1e1846ebf7c4c73058002f3be4dbf0d5d426f0815150ae0cbe7677bd",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/d3_kernels.py"
+        },
+        {
+          "path": "d3_runtime.py",
+          "bytes": 154257,
+          "sha256": "ce79977d22c2307f00c03b4c214a21b9fee0dc9ab566ac04adc76524f8380380",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/d3_runtime.py"
+        },
+        {
+          "path": "d3_server.py",
+          "bytes": 17705,
+          "sha256": "766a20a69101e36ab0535a1ec683379db422380a83091f0eccd7e82edb6a02de",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/d3_server.py"
+        },
+        {
+          "path": "modeling_d3.py",
+          "bytes": 12538,
+          "sha256": "d77b58c6c7834b7a6312560f88a2303ffe240fa4a4e515676cf90f3eb4b7b9a1",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/modeling_d3.py"
+        },
+        {
+          "path": "pipeline_d3.py",
+          "bytes": 2936,
+          "sha256": "4f9297c7c74e596e9b67df91a1e6823cfada48bf781336f141974ff6a2f1038e",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/pipeline_d3.py"
+        },
+        {
+          "path": "preprocessor_config.json",
+          "bytes": 390,
+          "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/preprocessor_config.json"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 17928,
+          "sha256": "b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27",
+          "url": "https://huggingface.co/vllm-sr/d3-turbo/resolve/a0f3e9e59ebd1202fe1d4de1c4c0f9a986758cbb/tokenizer_config.json"
+        }
+      ]
+    },
+    {
+      "repo_id": "vllm-sr/d3",
+      "revision": "20f37b9a892acc13d4b07a4f3c4f11b2518c615c",
+      "source_url": "https://huggingface.co/vllm-sr/d3/tree/20f37b9a892acc13d4b07a4f3c4f11b2518c615c",
+      "last_modified": "2026-10-22T16:22:32.000Z",
+      "metadata_snapshot_sha256": "146d35a9e0abd8d9225c5ab3f8cf66b0a5de62f2c8d938066154bb72c205ef01",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/d3/revision/20f37b9a892acc13d4b07a4f3c4f11b2518c615c?blobs=true",
+      "architecture": {
+        "model_type": "qwen3_5",
+        "architectures": [
+          "Qwen3_5Model"
+        ],
+        "dtype": "bfloat16",
+        "text_layers": 64,
+        "num_experts": null,
+        "num_experts_per_tok": null,
+        "topology": "Dense Qwen3.5; no MoE expert configuration."
+      },
+      "safetensors_tensor_elements_api": {
+        "parameters": {
+          "BF16": 26085330160
+        },
+        "total": 26085330160
+      },
+      "card_base_model": "Qwen/Qwen3.8-27B",
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 52176025120,
+        "all_weight_files_in_this_repo_gib": 48.59271,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "model-00001-of-00011.safetensors",
+            "size_bytes": 4997471976,
+            "sha256": "4ecb29a7d1e2d1d0ad97008e5405a11d510a8a712a0b6491928359176fd56029",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00002-of-00011.safetensors",
+            "size_bytes": 4965144568,
+            "sha256": "41dc277e43c9c5734656807da9f856f932338125a68ca6ec16b71dbdd6f97d62",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00003-of-00011.safetensors",
+            "size_bytes": 4933789248,
+            "sha256": "46959de0f2202f7d6c53d122abff46c5f49f53871844eee01d60f4c035080146",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00004-of-00011.safetensors",
+            "size_bytes": 4965227496,
+            "sha256": "946e87b8fa934091dc942622e5b72d16b8eb4d4571cafb2dbe36cb1022ea9275",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00005-of-00011.safetensors",
+            "size_bytes": 4974750552,
+            "sha256": "87c7ce2751c7bf147394aa0413ae5e509907d52e16f59adb4a2db18ee023cef7",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00006-of-00011.safetensors",
+            "size_bytes": 4924266240,
+            "sha256": "e4da6d081a7ef2012413537ef0e9cf6872df07b395cb65c08c05f9f79abb974a",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00007-of-00011.safetensors",
+            "size_bytes": 4974750560,
+            "sha256": "262d7506f49ff1596aff610dccd46f4a33d6d9dab386bc5795c5abcab9a4d683",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00008-of-00011.safetensors",
+            "size_bytes": 4902229944,
+            "sha256": "9e29bd831f8582119505018aeb3047030b698fe71fdd63bb38de2622b85534ed",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00009-of-00011.safetensors",
+            "size_bytes": 4996786840,
+            "sha256": "0f1e3dfda5583dd38d61da22145451c8507ff7858a4293aa1e0e48ff20f9c319",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00010-of-00011.safetensors",
+            "size_bytes": 4902229960,
+            "sha256": "f7a650a697b92b6561355624ae89b1aba2fc7df01572ff92a6531fa1c79cca14",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00011-of-00011.safetensors",
+            "size_bytes": 2634155256,
+            "sha256": "9842116c181985fec72fcb9560f5c9b849800f6322f8304dcc466990758c7355",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "readout.safetensors",
+            "size_bytes": 5222480,
+            "sha256": "5319cbf3ccdc5d3ba348b318d7b54acfc3a861d3ff94b578e787852c8726055a",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ]
+      },
+      "external_base": null,
+      "local_evaluation_status_at_review": "not_run_current_pin",
+      "local_score": null,
+      "runtime_review": "Native BF16 D3 backbone and separate readout, custom Transformers runtime. Current pin has not been measured locally in this audit.",
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 22214,
+          "sha256": "b8167cec1991daf0a1fa7f504a455a92d3564cb6bcb08a43d918cdfdc38bee05",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 3949,
+          "sha256": "7e16284fafd2d54b73c10073c0391bfd6804886ceaf2cbe37fdb62d4c6813dea",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/config.json"
+        },
+        {
+          "path": "d3_engine.py",
+          "bytes": 4413,
+          "sha256": "086238942762df45047a32cd9a8e2bedd9b63167eb40be260c776de567979f53",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/d3_engine.py"
+        },
+        {
+          "path": "d3_fast.py",
+          "bytes": 22331,
+          "sha256": "68a1fb9a2c3bde9ac2763bf504decae592ca12722698fbde1b39a31262955535",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/d3_fast.py"
+        },
+        {
+          "path": "d3_format.py",
+          "bytes": 7008,
+          "sha256": "3badfbc70561bb3f5b8ec16a11d2c455b96ddb32caace0a8a54ca102eae1f3fa",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/d3_format.py"
+        },
+        {
+          "path": "d3_kernels.py",
+          "bytes": 16129,
+          "sha256": "8f7534ca1e1846ebf7c4c73058002f3be4dbf0d5d426f0815150ae0cbe7677bd",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/d3_kernels.py"
+        },
+        {
+          "path": "d3_runtime.py",
+          "bytes": 95611,
+          "sha256": "2d90e93ac06b9ca4a84e0610ab9acfa2d6793ea4b40eec1b4a3da47577bdea37",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/d3_runtime.py"
+        },
+        {
+          "path": "d3_server.py",
+          "bytes": 17705,
+          "sha256": "766a20a69101e36ab0535a1ec683379db422380a83091f0eccd7e82edb6a02de",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/d3_server.py"
+        },
+        {
+          "path": "modeling_d3.py",
+          "bytes": 12079,
+          "sha256": "f8f8db23ff58f1a990ffa24977d744a50e1b4446d02a64c22070967705b6dbef",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/modeling_d3.py"
+        },
+        {
+          "path": "pipeline_d3.py",
+          "bytes": 2936,
+          "sha256": "4f9297c7c74e596e9b67df91a1e6823cfada48bf781336f141974ff6a2f1038e",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/pipeline_d3.py"
+        },
+        {
+          "path": "preprocessor_config.json",
+          "bytes": 390,
+          "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/preprocessor_config.json"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 17928,
+          "sha256": "b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27",
+          "url": "https://huggingface.co/vllm-sr/d3/resolve/20f37b9a892acc13d4b07a4f3c4f11b2518c615c/tokenizer_config.json"
+        }
+      ]
+    },
+    {
+      "repo_id": "vllm-sr/d3-flash",
+      "revision": "13dc1cc8ef23caefa765907e1d764751e5629f7d",
+      "source_url": "https://huggingface.co/vllm-sr/d3-flash/tree/13dc1cc8ef23caefa765907e1d764751e5629f7d",
+      "last_modified": "2026-10-17T15:02:08.000Z",
+      "metadata_snapshot_sha256": "82bcddb423e6d97bf38d4ecf79dcc14f0c47db6dbed3fe210e9c1c53cf09cde0",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/d3-flash/revision/13dc1cc8ef23caefa765907e1d764751e5629f7d?blobs=true",
+      "architecture": {
+        "model_type": "qwen3_5",
+        "architectures": [
+          "Qwen3_5Model"
+        ],
+        "dtype": "bfloat16",
+        "text_layers": 32,
+        "num_experts": null,
+        "num_experts_per_tok": null
+      },
+      "safetensors_tensor_elements_api": {
+        "parameters": {
+          "BF16": 8392695024
+        },
+        "total": 8392695024
+      },
+      "card_base_model": "Qwen/Qwen3.5-9B",
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 16789656976,
+        "all_weight_files_in_this_repo_gib": 15.636587,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "model-00001-of-00004.safetensors",
+            "size_bytes": 4911663824,
+            "sha256": "2c322016b91b1232c0d7628560164560d06d477a3edc3362714635f0e2f5949c",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00002-of-00004.safetensors",
+            "size_bytes": 4987839568,
+            "sha256": "f769650fb747d85132fb321335af7c71fcf3ba95fd1b1e806447e891cb4b0546",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00003-of-00004.safetensors",
+            "size_bytes": 4954726768,
+            "sha256": "c85a0f2f8df221b7864c74e778d802dc22fe1237fe2fa6ea8b81d7b612800a33",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00004-of-00004.safetensors",
+            "size_bytes": 1931248816,
+            "sha256": "d686ef3f6cdeeaad5eedde9d516c29ed1c90a1a322dd002765732869c11fa269",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "readout.safetensors",
+            "size_bytes": 4178000,
+            "sha256": "8bbc9a9df4e1b7df85a80a1091977092b938d8d2d2869dfaeb8fd36063cf322f",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ]
+      },
+      "external_base": null,
+      "local_evaluation_status_at_review": "not_run_current_pin",
+      "local_score": null,
+      "runtime_review": "Native BF16 D3 backbone and separate readout, custom Transformers runtime. Current pin has not been measured locally in this audit.",
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 17430,
+          "sha256": "9297d4c74e21bbebf1d87aa0264dcd696cc874bd2d915f3b977bbcb36ca8ed0e",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 3093,
+          "sha256": "9c3e6eea217964096c7b032285bab6757720a847fbb9d0a04e551d2b1606c0eb",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/config.json"
+        },
+        {
+          "path": "d3_engine.py",
+          "bytes": 4413,
+          "sha256": "086238942762df45047a32cd9a8e2bedd9b63167eb40be260c776de567979f53",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/d3_engine.py"
+        },
+        {
+          "path": "d3_fast.py",
+          "bytes": 22331,
+          "sha256": "68a1fb9a2c3bde9ac2763bf504decae592ca12722698fbde1b39a31262955535",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/d3_fast.py"
+        },
+        {
+          "path": "d3_format.py",
+          "bytes": 7008,
+          "sha256": "3badfbc70561bb3f5b8ec16a11d2c455b96ddb32caace0a8a54ca102eae1f3fa",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/d3_format.py"
+        },
+        {
+          "path": "d3_kernels.py",
+          "bytes": 16129,
+          "sha256": "8f7534ca1e1846ebf7c4c73058002f3be4dbf0d5d426f0815150ae0cbe7677bd",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/d3_kernels.py"
+        },
+        {
+          "path": "d3_runtime.py",
+          "bytes": 95505,
+          "sha256": "adf7f7aa085674b5682e492d8b2e3cc4f11c67b0d153515c742e907e9b550917",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/d3_runtime.py"
+        },
+        {
+          "path": "d3_server.py",
+          "bytes": 17705,
+          "sha256": "766a20a69101e36ab0535a1ec683379db422380a83091f0eccd7e82edb6a02de",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/d3_server.py"
+        },
+        {
+          "path": "modeling_d3.py",
+          "bytes": 12079,
+          "sha256": "f8f8db23ff58f1a990ffa24977d744a50e1b4446d02a64c22070967705b6dbef",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/modeling_d3.py"
+        },
+        {
+          "path": "pipeline_d3.py",
+          "bytes": 2936,
+          "sha256": "4f9297c7c74e596e9b67df91a1e6823cfada48bf781336f141974ff6a2f1038e",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/pipeline_d3.py"
+        },
+        {
+          "path": "preprocessor_config.json",
+          "bytes": 390,
+          "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/preprocessor_config.json"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 16710,
+          "sha256": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+          "url": "https://huggingface.co/vllm-sr/d3-flash/resolve/13dc1cc8ef23caefa765907e1d764751e5629f7d/tokenizer_config.json"
+        }
+      ]
+    },
+    {
+      "repo_id": "vllm-sr/d3-mini",
+      "revision": "bd0090dd758d32ba59ef5c749910a8e87fc4391f",
+      "source_url": "https://huggingface.co/vllm-sr/d3-mini/tree/bd0090dd758d32ba59ef5c749910a8e87fc4391f",
+      "last_modified": "2026-10-17T15:02:32.000Z",
+      "metadata_snapshot_sha256": "cd54bf1f781bac91437b300cd06306af45c63bf44cb518785f04ea043f4953de",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/d3-mini/revision/bd0090dd758d32ba59ef5c749910a8e87fc4391f?blobs=true",
+      "architecture": {
+        "model_type": "qwen3_5",
+        "architectures": [
+          "Qwen3_5Model"
+        ],
+        "dtype": "bfloat16",
+        "text_layers": 32,
+        "num_experts": null,
+        "num_experts_per_tok": null
+      },
+      "safetensors_tensor_elements_api": {
+        "parameters": {
+          "BF16": 4539265536
+        },
+        "total": 4539265536
+      },
+      "card_base_model": "Qwen/Qwen3.5-4B",
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 9081227360,
+        "all_weight_files_in_this_repo_gib": 8.457552,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "model-00001-of-00002.safetensors",
+            "size_bytes": 4973332144,
+            "sha256": "60621cb8c3f90e634b98f0ffaf609159ee2c450630386f09dd5f7fd7938d7598",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model-00002-of-00002.safetensors",
+            "size_bytes": 4105283936,
+            "sha256": "6189569fbe9245030d7ffb0b60a52268b7386e7a85a57aee1274a5178c1cc53d",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "readout.safetensors",
+            "size_bytes": 2611280,
+            "sha256": "d570665c1da72cb9fca7ad7b23a25720eb691362694dd69d4c80c17d7656ed55",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ]
+      },
+      "external_base": null,
+      "local_evaluation_status_at_review": "not_run_current_pin",
+      "local_score": null,
+      "runtime_review": "Native BF16 D3 backbone and separate readout, custom Transformers runtime. Current pin has not been measured locally in this audit.",
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 17368,
+          "sha256": "57e4fcc4c67283573ee1bd201bb87b0ea9b123d0a6938116fcb3dc7294686b43",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 3090,
+          "sha256": "8f5f404a71ecc53c4ff26fc42cb4c778ffacfb4c9623f5e2d51245166d6b5057",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/config.json"
+        },
+        {
+          "path": "d3_engine.py",
+          "bytes": 4413,
+          "sha256": "086238942762df45047a32cd9a8e2bedd9b63167eb40be260c776de567979f53",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/d3_engine.py"
+        },
+        {
+          "path": "d3_fast.py",
+          "bytes": 22331,
+          "sha256": "68a1fb9a2c3bde9ac2763bf504decae592ca12722698fbde1b39a31262955535",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/d3_fast.py"
+        },
+        {
+          "path": "d3_format.py",
+          "bytes": 7008,
+          "sha256": "3badfbc70561bb3f5b8ec16a11d2c455b96ddb32caace0a8a54ca102eae1f3fa",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/d3_format.py"
+        },
+        {
+          "path": "d3_kernels.py",
+          "bytes": 16129,
+          "sha256": "8f7534ca1e1846ebf7c4c73058002f3be4dbf0d5d426f0815150ae0cbe7677bd",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/d3_kernels.py"
+        },
+        {
+          "path": "d3_runtime.py",
+          "bytes": 95505,
+          "sha256": "adf7f7aa085674b5682e492d8b2e3cc4f11c67b0d153515c742e907e9b550917",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/d3_runtime.py"
+        },
+        {
+          "path": "d3_server.py",
+          "bytes": 17705,
+          "sha256": "766a20a69101e36ab0535a1ec683379db422380a83091f0eccd7e82edb6a02de",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/d3_server.py"
+        },
+        {
+          "path": "modeling_d3.py",
+          "bytes": 12079,
+          "sha256": "f8f8db23ff58f1a990ffa24977d744a50e1b4446d02a64c22070967705b6dbef",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/modeling_d3.py"
+        },
+        {
+          "path": "pipeline_d3.py",
+          "bytes": 2936,
+          "sha256": "4f9297c7c74e596e9b67df91a1e6823cfada48bf781336f141974ff6a2f1038e",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/pipeline_d3.py"
+        },
+        {
+          "path": "preprocessor_config.json",
+          "bytes": 390,
+          "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/preprocessor_config.json"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 16710,
+          "sha256": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+          "url": "https://huggingface.co/vllm-sr/d3-mini/resolve/bd0090dd758d32ba59ef5c749910a8e87fc4391f/tokenizer_config.json"
+        }
+      ]
+    },
+    {
+      "repo_id": "vllm-sr/d3-lite",
+      "revision": "03560c26f5199c3c04129a2ccb38960c913635e0",
+      "source_url": "https://huggingface.co/vllm-sr/d3-lite/tree/03560c26f5199c3c04129a2ccb38960c913635e0",
+      "last_modified": "2026-10-17T15:02:38.000Z",
+      "metadata_snapshot_sha256": "5b5a7a0770bc92b09abd21f47bdbd7579a05f494796739e11df16edfb2eb367c",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/d3-lite/revision/03560c26f5199c3c04129a2ccb38960c913635e0?blobs=true",
+      "architecture": {
+        "model_type": "qwen3_5",
+        "architectures": [
+          "Qwen3_5Model"
+        ],
+        "dtype": "bfloat16",
+        "text_layers": 24,
+        "num_experts": null,
+        "num_experts_per_tok": null
+      },
+      "safetensors_tensor_elements_api": {
+        "parameters": {
+          "BF16": 852985920
+        },
+        "total": 852985920
+      },
+      "card_base_model": "Qwen/Qwen3.5-0.8B",
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 1707072248,
+        "all_weight_files_in_this_repo_gib": 1.589835,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "model-00001-of-00001.safetensors",
+            "size_bytes": 1706027688,
+            "sha256": "ca6222dbf2b72899ae45580ed84d26d1f0e69a8de212edda295072000e34a4c2",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "readout.safetensors",
+            "size_bytes": 1044560,
+            "sha256": "fe11cfac5c79b6a83e35b707581b1260214279bb22b003c215c62719186ef629",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ]
+      },
+      "external_base": null,
+      "local_evaluation_status_at_review": "not_run_current_pin",
+      "local_score": null,
+      "runtime_review": "Native BF16 D3 backbone and separate readout, custom Transformers runtime. Current pin has not been measured locally in this audit.",
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 17331,
+          "sha256": "6cc8a41274e59946159e0d4ec92cb4ef8fee7fac3d7fdfbbc8b8d84ec933137a",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 2884,
+          "sha256": "a9071195384e1fc2c68f9fe0fae007a22182ab77eb14fe8228a1a24b37d3cee9",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/config.json"
+        },
+        {
+          "path": "d3_engine.py",
+          "bytes": 4413,
+          "sha256": "086238942762df45047a32cd9a8e2bedd9b63167eb40be260c776de567979f53",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/d3_engine.py"
+        },
+        {
+          "path": "d3_fast.py",
+          "bytes": 22331,
+          "sha256": "68a1fb9a2c3bde9ac2763bf504decae592ca12722698fbde1b39a31262955535",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/d3_fast.py"
+        },
+        {
+          "path": "d3_format.py",
+          "bytes": 7008,
+          "sha256": "3badfbc70561bb3f5b8ec16a11d2c455b96ddb32caace0a8a54ca102eae1f3fa",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/d3_format.py"
+        },
+        {
+          "path": "d3_kernels.py",
+          "bytes": 16129,
+          "sha256": "8f7534ca1e1846ebf7c4c73058002f3be4dbf0d5d426f0815150ae0cbe7677bd",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/d3_kernels.py"
+        },
+        {
+          "path": "d3_runtime.py",
+          "bytes": 95505,
+          "sha256": "adf7f7aa085674b5682e492d8b2e3cc4f11c67b0d153515c742e907e9b550917",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/d3_runtime.py"
+        },
+        {
+          "path": "d3_server.py",
+          "bytes": 17705,
+          "sha256": "766a20a69101e36ab0535a1ec683379db422380a83091f0eccd7e82edb6a02de",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/d3_server.py"
+        },
+        {
+          "path": "modeling_d3.py",
+          "bytes": 12079,
+          "sha256": "f8f8db23ff58f1a990ffa24977d744a50e1b4446d02a64c22070967705b6dbef",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/modeling_d3.py"
+        },
+        {
+          "path": "pipeline_d3.py",
+          "bytes": 2936,
+          "sha256": "4f9297c7c74e596e9b67df91a1e6823cfada48bf781336f141974ff6a2f1038e",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/pipeline_d3.py"
+        },
+        {
+          "path": "preprocessor_config.json",
+          "bytes": 390,
+          "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/preprocessor_config.json"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 16709,
+          "sha256": "49e2b6e395f959f077f1e992b338919c0d4a9732fc6e613995e06557f843500c",
+          "url": "https://huggingface.co/vllm-sr/d3-lite/resolve/03560c26f5199c3c04129a2ccb38960c913635e0/tokenizer_config.json"
+        }
+      ]
+    },
+    {
+      "repo_id": "vllm-sr/vela3-fast",
+      "revision": "9e338f39babc622f42e9bd8556398fe2d80d9f13",
+      "source_url": "https://huggingface.co/vllm-sr/vela3-fast/tree/9e338f39babc622f42e9bd8556398fe2d80d9f13",
+      "last_modified": "2026-10-28T11:05:18.000Z",
+      "metadata_snapshot_sha256": "26a701a46916ab3318abcdb241627c23304e82a74b994f07da6a14d34e89638e",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/vela3-fast/revision/9e338f39babc622f42e9bd8556398fe2d80d9f13?blobs=true",
+      "architecture": {
+        "model_type": "ultrabert",
+        "architectures": [
+          "UltrabertModel"
+        ],
+        "dtype": "float32",
+        "text_layers": 24,
+        "num_experts": null,
+        "num_experts_per_tok": null
+      },
+      "safetensors_tensor_elements_api": {
+        "parameters": {
+          "F32": 380436225
+        },
+        "total": 380436225
+      },
+      "card_base_model": "dmis-lab/UltraBERT-380M",
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 6590709700,
+        "all_weight_files_in_this_repo_gib": 6.138077,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "domain_adapter.safetensors",
+            "size_bytes": 791852816,
+            "sha256": "1aa3f1fdf590a369ba23ebf2b2b5896a0673a007b19597cfc6e7ca3a77cb067c",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "evidence_adapter.safetensors",
+            "size_bytes": 346115788,
+            "sha256": "8aeda02d53ca0f29b1888c567b0e7199dd15ceea0b77faa26448f293840ac774",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "factcheck_adapter.safetensors",
+            "size_bytes": 573711856,
+            "sha256": "fd90e966d466177e4bd2db7701372a98990d34dc9eccc9ec871113c929039b3b",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "feedback_adapter.safetensors",
+            "size_bytes": 573711840,
+            "sha256": "47476aea7f63345dcfe760b547db7d20b95113a47f4f5b2e4638d4013ad77dc1",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "feedback_df_adapter.safetensors",
+            "size_bytes": 573711856,
+            "sha256": "c1d7e153fa6be7cd9aa704cd57077596d23949ea0beb9d6650cc3216021cffbb",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model.safetensors",
+            "size_bytes": 1521771272,
+            "sha256": "2294745881d9a01b7d049133b57e5fed2aec6ae1d34ef1ab9fa16f047fc35c8e",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "ner_adapter.safetensors",
+            "size_bytes": 471945388,
+            "sha256": "387f409c7f954e696c2d95f6b85829e84e6ea8ad52128f2cf1340f7ee7045f8a",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "relation_adapter.safetensors",
+            "size_bytes": 471945396,
+            "sha256": "a448606d98c5f0c5e0e3249ac00465c69f58fa6995555b344e6c1d89b99c4d46",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "router_adapter.safetensors",
+            "size_bytes": 573711912,
+            "sha256": "30c7f350bcc4060b302b26f57d73c965da8e8b75509c1262ae953942b11adac8",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "span_adapter.safetensors",
+            "size_bytes": 346115788,
+            "sha256": "15eb0f11e4261bc6f54e4a6a6cc15951575a510dd1d0bd598e6a6d7a15800fd8",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "span_sets_adapter.safetensors",
+            "size_bytes": 346115788,
+            "sha256": "73c904acf7a765a38fd793b0d5d9d02633f9c5938620c9e063063aa1458cf006",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ],
+        "decision_backbone_only_bytes": 1521771272,
+        "decision_backbone_only_gib": 1.41726
+      },
+      "external_base": null,
+      "local_evaluation_status_at_review": "campaign_in_progress_no_score_published_in_this_catalog",
+      "local_score": null,
+      "runtime_review": "Self-contained UltraBERT decision backbone; CPU F32 / SDPA progressive campaign. Additional task adapters are outside this first campaign.",
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 22482,
+          "sha256": "cbf5c8b9f50db93c8a2bd390a0802b2ad552dff3179d4edd03f4481da7e58058",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast/resolve/9e338f39babc622f42e9bd8556398fe2d80d9f13/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 2294,
+          "sha256": "a85b358ac11b71d780deb09e8a082efddc67938a2eb4fc16d68d8ae888c69d14",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast/resolve/9e338f39babc622f42e9bd8556398fe2d80d9f13/config.json"
+        },
+        {
+          "path": "configuration_ultrabert.py",
+          "bytes": 2209,
+          "sha256": "823d10bda19f5164da4f79f8f9c01e5ebd7a75569abce78c0a26b7674fc78cd9",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast/resolve/9e338f39babc622f42e9bd8556398fe2d80d9f13/configuration_ultrabert.py"
+        },
+        {
+          "path": "decision_index_engine.py",
+          "bytes": 4509,
+          "sha256": "9a475526066d3f550096e1cd39146ab7e6b1e8e00137ad2f3e533a0739698e5e",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast/resolve/9e338f39babc622f42e9bd8556398fe2d80d9f13/decision_index_engine.py"
+        },
+        {
+          "path": "modeling_ultrabert.py",
+          "bytes": 33761,
+          "sha256": "6d86b56fbcc634dd2f7e2aa29047062289def1ba7e602b991be1af888dc82072",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast/resolve/9e338f39babc622f42e9bd8556398fe2d80d9f13/modeling_ultrabert.py"
+        },
+        {
+          "path": "smoke_test.py",
+          "bytes": 4271,
+          "sha256": "05c8ec093a4cf479e40f3151e56daa70753329219ab71b3fbfad49203ab96fea",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast/resolve/9e338f39babc622f42e9bd8556398fe2d80d9f13/smoke_test.py"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 764,
+          "sha256": "649781df90d51837dd6ba951a89fae07c985a9eacfd781d84002d480c3cb0b6e",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast/resolve/9e338f39babc622f42e9bd8556398fe2d80d9f13/tokenizer_config.json"
+        },
+        {
+          "path": "ub_d3_common.py",
+          "bytes": 1850,
+          "sha256": "ae36592c0fe964af9bba46b55a6eccff484efeb15c8c2fe209149fe285f971a3",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast/resolve/9e338f39babc622f42e9bd8556398fe2d80d9f13/ub_d3_common.py"
+        },
+        {
+          "path": "vela3_encoder.py",
+          "bytes": 25295,
+          "sha256": "5d6caa187fa29077bcc4c87565881a25cc1e2e126da68fd64785b5969cac84bf",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast/resolve/9e338f39babc622f42e9bd8556398fe2d80d9f13/vela3_encoder.py"
+        },
+        {
+          "path": "vela3_schema.py",
+          "bytes": 28655,
+          "sha256": "d247f3a3c5638ee820a27712663ec78973c873541e44e12e4492ab7648b3a953",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast/resolve/9e338f39babc622f42e9bd8556398fe2d80d9f13/vela3_schema.py"
+        },
+        {
+          "path": "vela3_server.py",
+          "bytes": 11827,
+          "sha256": "fe2b36535341d700d4df6e761baa959ea933627a4ca1883cc7336217e9142f36",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast/resolve/9e338f39babc622f42e9bd8556398fe2d80d9f13/vela3_server.py"
+        }
+      ]
+    },
+    {
+      "repo_id": "vllm-sr/vela3-fast-vision",
+      "revision": "1e13154c1c2137654c79c4a08b912f0085bf9fe8",
+      "source_url": "https://huggingface.co/vllm-sr/vela3-fast-vision/tree/1e13154c1c2137654c79c4a08b912f0085bf9fe8",
+      "last_modified": "2026-10-28T11:05:19.000Z",
+      "metadata_snapshot_sha256": "4e5d83101494fb26c357830e8a9cefe49bb89c9f2562d6a34047e6e642744500",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/vela3-fast-vision/revision/1e13154c1c2137654c79c4a08b912f0085bf9fe8?blobs=true",
+      "architecture": {
+        "model_type": "ultravbert",
+        "architectures": [
+          "UltraVBertModel"
+        ],
+        "dtype": "bfloat16",
+        "text_layers": 24,
+        "num_experts": null,
+        "num_experts_per_tok": null
+      },
+      "safetensors_tensor_elements_api": {
+        "parameters": {
+          "F32": 254088960
+        },
+        "total": 254088960
+      },
+      "card_base_model": [
+        "athrael-soju/UltraVBERT"
+      ],
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 5713960764,
+        "all_weight_files_in_this_repo_gib": 5.321541,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "backbone_h2.safetensors",
+            "size_bytes": 1016406336,
+            "sha256": "65e0c0284eb8c6e494c058d1988ad1b3d2eab60c368bb3d704e09174d1220bd5",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "backbone_v2.safetensors",
+            "size_bytes": 1016406336,
+            "sha256": "46e65f6e6b906a64e4ad57e2e76957522bd01e2eeb5d8467078b895410d1e0aa",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "box_adapter.safetensors",
+            "size_bytes": 94444476,
+            "sha256": "62d05d58ddbb7f9248dff4e84dc4864c09c78a56e19088cae112ccbd9035fb6b",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "decision_adapter.safetensors",
+            "size_bytes": 2372084,
+            "sha256": "8a8ddc13ccc09ebe41f4200b8685a72a7c19d4567c7c1a85f600b25dad53ae55",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "model.safetensors",
+            "size_bytes": 1016406336,
+            "sha256": "9387cfd5bc53082b6ff634453c6b0cb3123a67e4c197209e308ecfaf7a578900",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "ocr_adapter.safetensors",
+            "size_bytes": 37801156,
+            "sha256": "882f2d71d6aee9d90f75b68d35c6eb74388fa96c1013d959b0ab18fe8b0f9719",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "span_adapter.safetensors",
+            "size_bytes": 94444476,
+            "sha256": "9cbfd04d5960818001c1b6ff7a3f02a5595dd73f3c5d32a256fbe1855f4055bd",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "text/domain_df_adapter.safetensors",
+            "size_bytes": 379989432,
+            "sha256": "5b81662a7428cb84de0d66a848d5ea681e1ec68ff6f2bcf314819c43ffeb89ea",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "text/feedback_df_adapter.safetensors",
+            "size_bytes": 379989432,
+            "sha256": "10511c8bb0075e3450102f2fd017d8c3585cb99dcabafaccc9f7d4bdd0f4dcc9",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "text/model.safetensors",
+            "size_bytes": 611280128,
+            "sha256": "7d724d2d51ed8106393319886911935e8ee5a8ed8d219dc113c18357e02a4ac4",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "text/ner_adapter.safetensors",
+            "size_bytes": 376817544,
+            "sha256": "7d9d72f93d69be1a0a513f7fade2290a655c6c4fcc11e9f0a9bccdc453998518",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "text/router_adapter.safetensors",
+            "size_bytes": 381564700,
+            "sha256": "184c2a90c688d11930a06a90a3be178ef86619f4a92e345b487264741603b0ab",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "text/span_adapter.safetensors",
+            "size_bytes": 306038328,
+            "sha256": "fb6b0bd8864ba804e69bfcbef599a3f587f7b33fdaf1e73f1cb17a937387c4a1",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ]
+      },
+      "external_base": {
+        "repo_id": "athrael-soju/UltraVBERT",
+        "revision": "014dd536e8bb22fcd946e40ec8112f66efffcc53",
+        "source_field": "config.json:uvb.base",
+        "source_url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/config.json",
+        "weights_included_in_repo_total": "Repo contains backbone alternatives; do not sum as a single load."
+      },
+      "local_evaluation_status_at_review": "not_run_current_pin",
+      "local_score": null,
+      "runtime_review": "Vision preview; images, OCR and boxes require distinct datasets and adapter coverage; not covered by text-choice campaign.",
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 21635,
+          "sha256": "6ea707ffad50dbb4aa98dc9e92eb53aeb6d91e984ae707889283ccdca20a19f7",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 2970,
+          "sha256": "96c0a13f682092cb4b7289ec10d54179dd0085bbc988cba269a7b3d1ace1c079",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/config.json"
+        },
+        {
+          "path": "configuration_ultravbert.py",
+          "bytes": 950,
+          "sha256": "97b79ba8cf3d1e96b829441fa06fcc56ed83d3c0d43a89b04661c463cf9bf1cf",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/configuration_ultravbert.py"
+        },
+        {
+          "path": "decision_index_engine.py",
+          "bytes": 2540,
+          "sha256": "2596c225e4252662d76c263cfdce97d09a1413ecb5596d97016c2ed11b905989",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/decision_index_engine.py"
+        },
+        {
+          "path": "image_processing_ultravbert.py",
+          "bytes": 3286,
+          "sha256": "6c41054315f105fabda36d9fcc9d84f1fce84bf0cb4489917360a5dc2544dac9",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/image_processing_ultravbert.py"
+        },
+        {
+          "path": "modeling_ultravbert.py",
+          "bytes": 4646,
+          "sha256": "fdc8e5c3ace4336e0eee7f54366029e3bb7ab347b51cf01372eaa38e3ebae866",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/modeling_ultravbert.py"
+        },
+        {
+          "path": "probe_lib.py",
+          "bytes": 10151,
+          "sha256": "00e74b15f1d4872771bb6a95415212a9ba7159d809a2daffc9a6d30a637c049f",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/probe_lib.py"
+        },
+        {
+          "path": "processor_config.json",
+          "bytes": 723,
+          "sha256": "0657d91d3b77ff66812ae4527aa0fad027dfd532df237e73c5b794cc2fcbac5c",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/processor_config.json"
+        },
+        {
+          "path": "span_decode_v2.py",
+          "bytes": 13738,
+          "sha256": "d2c5f2f446cf12d2f8a24dbf634452477088523b0973e1e07df244c851421efb",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/span_decode_v2.py"
+        },
+        {
+          "path": "text/configuration_ultrabert.py",
+          "bytes": 2209,
+          "sha256": "823d10bda19f5164da4f79f8f9c01e5ebd7a75569abce78c0a26b7674fc78cd9",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/text/configuration_ultrabert.py"
+        },
+        {
+          "path": "text/modeling_ultrabert.py",
+          "bytes": 33761,
+          "sha256": "6d86b56fbcc634dd2f7e2aa29047062289def1ba7e602b991be1af888dc82072",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/text/modeling_ultrabert.py"
+        },
+        {
+          "path": "text/ub_d3_common.py",
+          "bytes": 1850,
+          "sha256": "ae36592c0fe964af9bba46b55a6eccff484efeb15c8c2fe209149fe285f971a3",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/text/ub_d3_common.py"
+        },
+        {
+          "path": "text/vela3_encoder_text.py",
+          "bytes": 25530,
+          "sha256": "ba7fd94f35393383fecce9d3d1ad873957fc71da4d5f824a25b5591ab5c72834",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/text/vela3_encoder_text.py"
+        },
+        {
+          "path": "text/vela3_schema.py",
+          "bytes": 28658,
+          "sha256": "b3a9c20ca9873be3c7a22f2431b1972176905ac5754a8f68615b7309163e0a77",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/text/vela3_schema.py"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 592,
+          "sha256": "5c983bf0fa140fd6005da8b8239df4de0c85243e08be553896be2527cad8186f",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/tokenizer_config.json"
+        },
+        {
+          "path": "uvb_core.py",
+          "bytes": 10110,
+          "sha256": "973a990aee3ec5968ca1f8d321edf6add2bd92e18cd4939eeb0b9c888fed5a58",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/uvb_core.py"
+        },
+        {
+          "path": "vela3_encoder.py",
+          "bytes": 4863,
+          "sha256": "60b6254a6e186b12afc312913971700faf46c26d6abd56079198a73b00843533",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/vela3_encoder.py"
+        },
+        {
+          "path": "vela3_server.py",
+          "bytes": 11827,
+          "sha256": "fe2b36535341d700d4df6e761baa959ea933627a4ca1883cc7336217e9142f36",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/vela3_server.py"
+        },
+        {
+          "path": "vela3v_di_engine.py",
+          "bytes": 3711,
+          "sha256": "2e7a07bab89ad376bd52d5a9b1058b1414d6e363be60af95d8701a478f9f76a0",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/vela3v_di_engine.py"
+        },
+        {
+          "path": "vela3v_encoder.py",
+          "bytes": 9731,
+          "sha256": "2398a40745281624c14598f486846999068de4ac1486fec36c3d8e868908c2ed",
+          "url": "https://huggingface.co/vllm-sr/vela3-fast-vision/resolve/1e13154c1c2137654c79c4a08b912f0085bf9fe8/vela3v_encoder.py"
+        }
+      ]
+    },
+    {
+      "repo_id": "vllm-sr/vela3-lite",
+      "revision": "2ac29e42ecec3d067c4cb991bb5e6a933ea21fb1",
+      "source_url": "https://huggingface.co/vllm-sr/vela3-lite/tree/2ac29e42ecec3d067c4cb991bb5e6a933ea21fb1",
+      "last_modified": "2026-10-28T11:05:22.000Z",
+      "metadata_snapshot_sha256": "d56a5df5a7f2b982e0162a22589d2fe3636b4608d65f5f693ba73631ef04ed4f",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/vela3-lite/revision/2ac29e42ecec3d067c4cb991bb5e6a933ea21fb1?blobs=true",
+      "architecture": {
+        "model_type": "qwen3_5",
+        "architectures": [
+          "Qwen3_5Model"
+        ],
+        "dtype": "bfloat16",
+        "text_layers": 24,
+        "num_experts": null,
+        "num_experts_per_tok": null
+      },
+      "safetensors_tensor_elements_api": null,
+      "card_base_model": [
+        "vllm-sr/d3-lite"
+      ],
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 222450048,
+        "all_weight_files_in_this_repo_gib": 0.207173,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "decision_df_lora.safetensors",
+            "size_bytes": 20476992,
+            "sha256": "2c156cfcd29823b9c6f4d23c4e6469d7b22ab78505a3d5174208d2b22c4e8453",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "decision_fc_lora.safetensors",
+            "size_bytes": 20477032,
+            "sha256": "071934ea85c7399f5bb8aacbdb35f4e7f602e5f5b3308216b38708f7c0dfa580",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "decision_hz_lora.safetensors",
+            "size_bytes": 20477032,
+            "sha256": "23f78fe3d43c2f9a130af91a47985bb7b1d3c12c1dfd8c1fe1da760c8b7f1185",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "decision_lora.safetensors",
+            "size_bytes": 20476960,
+            "sha256": "c01f1cacfe606cb9600459254c97f96a1e3e6356c4dec1f74fbbb36ace9f3535",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "image_halu_head.safetensors",
+            "size_bytes": 4480188,
+            "sha256": "f88125097a4c8d3fdb5197e8482242a9831c9363b41b4a64bfea3457a8e41ee4",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "image_halu_lora.safetensors",
+            "size_bytes": 20462560,
+            "sha256": "8a8c82e60b78f39007347134cc10e8c693c6f8ad9619a52f65bc0b60726809cd",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "ner_head.safetensors",
+            "size_bytes": 4480204,
+            "sha256": "f25e2272da482a1214361d8d1ace58d3069d95ee859acb0c374f796b1c234c44",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "ner_lora.safetensors",
+            "size_bytes": 61233592,
+            "sha256": "aadcdbc0dc7bc5f464cdf6c8fa3671e7f1cc69b9b275373b88db186a86d31a8c",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "relation_head.safetensors",
+            "size_bytes": 4480204,
+            "sha256": "f1b64e1e2d32b37c27058911ac9df145540c08518c38543d2968deda95a7688e",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "relation_lora.safetensors",
+            "size_bytes": 20462584,
+            "sha256": "5352dc1d0ee6d859b82756baafc522c9dd0fa4f20ee5d2f3c31234327d1ab118",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "span_head.safetensors",
+            "size_bytes": 4480164,
+            "sha256": "9abec87ef24a0b1b3101ed1a4245859186a581a4efed49c5ce2c7a945f64b14f",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "span_lora.safetensors",
+            "size_bytes": 20462536,
+            "sha256": "11cc6312d4e5862bb665d71d14aa4887499cc23a956e4069fc837afaca8116be",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ]
+      },
+      "external_base": {
+        "repo_id": "vllm-sr/d3-lite",
+        "revision": "9c10703193afc7c7d28c88201c0364bfbbf58320",
+        "config_source_url": "https://huggingface.co/vllm-sr/vela3-lite/resolve/2ac29e42ecec3d067c4cb991bb5e6a933ea21fb1/vela3_config.json",
+        "config_sha256": "aa3508dfbf7942be09d35624ba64bd934bfa89513e10831cd141a43e3ebce96e",
+        "config_size_bytes": 12958,
+        "source_field": "base.repo_id / base.revision",
+        "weights_included_in_repo_total": false,
+        "pinned_base_weight_bytes": null,
+        "note": "The loader uses this exact base revision. It is different from the current d3 snapshot catalogued here. Pinned base weights were not downloaded or remeasured by this audit."
+      },
+      "local_evaluation_status_at_review": "not_run_current_pin",
+      "local_score": null,
+      "runtime_review": "Own Vela adapters plus separately loaded pinned D3 base and native custom runtime; not a standalone checkpoint.",
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 22639,
+          "sha256": "6fa62382041c717572296d70905ab6f713b6db85b15a493d2d2a1d1186d0636f",
+          "url": "https://huggingface.co/vllm-sr/vela3-lite/resolve/2ac29e42ecec3d067c4cb991bb5e6a933ea21fb1/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 2737,
+          "sha256": "c6bf4eb4102e97a8464d8fabd364b5bf47e3cb9ee58f487d359207077bfae3d2",
+          "url": "https://huggingface.co/vllm-sr/vela3-lite/resolve/2ac29e42ecec3d067c4cb991bb5e6a933ea21fb1/config.json"
+        },
+        {
+          "path": "modeling_vela3.py",
+          "bytes": 26058,
+          "sha256": "a7c82aa674b6c4ab4a669519dc1de4e22808df8871f697bcecfcb4d9cf161a70",
+          "url": "https://huggingface.co/vllm-sr/vela3-lite/resolve/2ac29e42ecec3d067c4cb991bb5e6a933ea21fb1/modeling_vela3.py"
+        },
+        {
+          "path": "span_decode_v2.py",
+          "bytes": 13738,
+          "sha256": "d2c5f2f446cf12d2f8a24dbf634452477088523b0973e1e07df244c851421efb",
+          "url": "https://huggingface.co/vllm-sr/vela3-lite/resolve/2ac29e42ecec3d067c4cb991bb5e6a933ea21fb1/span_decode_v2.py"
+        },
+        {
+          "path": "vela3_adapters.py",
+          "bytes": 3353,
+          "sha256": "eb69e58c18593527a0eb0bade7bc05eec315f3039fe92e1c500ba9c5f0a36d31",
+          "url": "https://huggingface.co/vllm-sr/vela3-lite/resolve/2ac29e42ecec3d067c4cb991bb5e6a933ea21fb1/vela3_adapters.py"
+        },
+        {
+          "path": "vela3_labeldef.py",
+          "bytes": 8053,
+          "sha256": "b7fcefdd1a0b3e8ac22ac12338c72e76925688a989b5af6c70a104fa70122a39",
+          "url": "https://huggingface.co/vllm-sr/vela3-lite/resolve/2ac29e42ecec3d067c4cb991bb5e6a933ea21fb1/vela3_labeldef.py"
+        },
+        {
+          "path": "vela3_span.py",
+          "bytes": 12283,
+          "sha256": "97d2448765a7ee5411dff44c601c3a073fdad9a9921f9818bac4135916081c20",
+          "url": "https://huggingface.co/vllm-sr/vela3-lite/resolve/2ac29e42ecec3d067c4cb991bb5e6a933ea21fb1/vela3_span.py"
+        }
+      ]
+    },
+    {
+      "repo_id": "vllm-sr/vela3-mini",
+      "revision": "5227b8a0f2e86df53035b98dc45b21ecd8a8bc00",
+      "source_url": "https://huggingface.co/vllm-sr/vela3-mini/tree/5227b8a0f2e86df53035b98dc45b21ecd8a8bc00",
+      "last_modified": "2026-10-28T11:05:22.000Z",
+      "metadata_snapshot_sha256": "6bda0195c1344d71a6d95f20259d73c8e5b614b6e3787bc8d68411c0272e3d6b",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/vela3-mini/revision/5227b8a0f2e86df53035b98dc45b21ecd8a8bc00?blobs=true",
+      "architecture": {
+        "model_type": "qwen3_5",
+        "architectures": [
+          "Qwen3_5Model"
+        ],
+        "dtype": "bfloat16",
+        "text_layers": 32,
+        "num_experts": null,
+        "num_experts_per_tok": null
+      },
+      "safetensors_tensor_elements_api": null,
+      "card_base_model": [
+        "vllm-sr/d3-mini"
+      ],
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 1142068240,
+        "all_weight_files_in_this_repo_gib": 1.063634,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "decision_df_lora.safetensors",
+            "size_bytes": 121937440,
+            "sha256": "2455f8bd69170bde42b8fdc3511281829642c70df148e41755561a8cd0badbb4",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "decision_lora.safetensors",
+            "size_bytes": 121937304,
+            "sha256": "ebdd12efa205265ae756f3c3aeec13c8f98cb00b89fb348c3c66607f81bbaa7a",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "decision_optin_lora.safetensors",
+            "size_bytes": 121937416,
+            "sha256": "52992183539cf7ae5fbd6ce453615eef069fc76bd38c5b1f24d420c3e75132b0",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "image_halu_head.safetensors",
+            "size_bytes": 11195524,
+            "sha256": "097a731801ee306709d72184d9e27ff0d13cb3e47533bf58be38786e7529a1a5",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "image_halu_lora.safetensors",
+            "size_bytes": 121917432,
+            "sha256": "20f0a98f5714c4ede7ea86e312ddbaa463a64d56c43d90561ec35f29b178d747",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "ner_head.safetensors",
+            "size_bytes": 11195612,
+            "sha256": "03dff7640e6fec1ad8ce8cd4af14e2a4e849615d7c296e931e80520a98cb4a39",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "ner_lora.safetensors",
+            "size_bytes": 365721808,
+            "sha256": "815a221cba6799ab104ac5725be73e9e8a6589354f0d6082b53ebd61a6dfe3fd",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "relation_head.safetensors",
+            "size_bytes": 11195452,
+            "sha256": "ae3d69387d4853cd0eb7dc80f84282946ee25f5b8eaa23e10af8ed9a2d5a4a1e",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "relation_lora.safetensors",
+            "size_bytes": 121917360,
+            "sha256": "45ca3ef715bbb4f35c5576915702004c9aad303251c24c6468eeb96ac65bce18",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "span_head.safetensors",
+            "size_bytes": 11195452,
+            "sha256": "a06c85629cbe94c888bd9203cccafbaf1ede11f1864f9da4fc1ed4233c037d63",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "span_lora.safetensors",
+            "size_bytes": 121917440,
+            "sha256": "2ff18ab7c99a4a3c59bba4941e23c179d859690d62579de529828a07183746a7",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ]
+      },
+      "external_base": {
+        "repo_id": "vllm-sr/d3-mini",
+        "revision": "566da0ea398e27184472add700499245ed09af35",
+        "config_source_url": "https://huggingface.co/vllm-sr/vela3-mini/resolve/5227b8a0f2e86df53035b98dc45b21ecd8a8bc00/vela3_config.json",
+        "config_sha256": "7488b44a2eb22013b332335d71f7cf6d2091a543c2b4c9c13be11fa5750baa15",
+        "config_size_bytes": 12798,
+        "source_field": "base.repo_id / base.revision",
+        "weights_included_in_repo_total": false,
+        "pinned_base_weight_bytes": null,
+        "note": "The loader uses this exact base revision. It is different from the current d3 snapshot catalogued here. Pinned base weights were not downloaded or remeasured by this audit."
+      },
+      "local_evaluation_status_at_review": "not_run_current_pin",
+      "local_score": null,
+      "runtime_review": "Own Vela adapters plus separately loaded pinned D3 base and native custom runtime; not a standalone checkpoint.",
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 21954,
+          "sha256": "b38977f604b6ce3d814a3d021762fd4618e02790b3912b6bdf2f93d09c635c6e",
+          "url": "https://huggingface.co/vllm-sr/vela3-mini/resolve/5227b8a0f2e86df53035b98dc45b21ecd8a8bc00/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 2943,
+          "sha256": "1859126a9061dd4f8eae29a79d8ebeb7a5b9ac7eb1cf7ca91422a433ee7547e6",
+          "url": "https://huggingface.co/vllm-sr/vela3-mini/resolve/5227b8a0f2e86df53035b98dc45b21ecd8a8bc00/config.json"
+        },
+        {
+          "path": "modeling_vela3.py",
+          "bytes": 25292,
+          "sha256": "2842509459d9e56e0576bc81b1262a6a0d0b437ac5d23c112e5cb22f2e76ea48",
+          "url": "https://huggingface.co/vllm-sr/vela3-mini/resolve/5227b8a0f2e86df53035b98dc45b21ecd8a8bc00/modeling_vela3.py"
+        },
+        {
+          "path": "span_decode_v2.py",
+          "bytes": 13738,
+          "sha256": "d2c5f2f446cf12d2f8a24dbf634452477088523b0973e1e07df244c851421efb",
+          "url": "https://huggingface.co/vllm-sr/vela3-mini/resolve/5227b8a0f2e86df53035b98dc45b21ecd8a8bc00/span_decode_v2.py"
+        },
+        {
+          "path": "vela3_adapters.py",
+          "bytes": 3353,
+          "sha256": "eb69e58c18593527a0eb0bade7bc05eec315f3039fe92e1c500ba9c5f0a36d31",
+          "url": "https://huggingface.co/vllm-sr/vela3-mini/resolve/5227b8a0f2e86df53035b98dc45b21ecd8a8bc00/vela3_adapters.py"
+        },
+        {
+          "path": "vela3_labeldef.py",
+          "bytes": 8053,
+          "sha256": "b7fcefdd1a0b3e8ac22ac12338c72e76925688a989b5af6c70a104fa70122a39",
+          "url": "https://huggingface.co/vllm-sr/vela3-mini/resolve/5227b8a0f2e86df53035b98dc45b21ecd8a8bc00/vela3_labeldef.py"
+        },
+        {
+          "path": "vela3_span.py",
+          "bytes": 12283,
+          "sha256": "97d2448765a7ee5411dff44c601c3a073fdad9a9921f9818bac4135916081c20",
+          "url": "https://huggingface.co/vllm-sr/vela3-mini/resolve/5227b8a0f2e86df53035b98dc45b21ecd8a8bc00/vela3_span.py"
+        }
+      ]
+    },
+    {
+      "repo_id": "vllm-sr/vela3-flash",
+      "revision": "47c6eaaef64e87a06a95767920e8357e5f5036f9",
+      "source_url": "https://huggingface.co/vllm-sr/vela3-flash/tree/47c6eaaef64e87a06a95767920e8357e5f5036f9",
+      "last_modified": "2026-10-28T11:05:23.000Z",
+      "metadata_snapshot_sha256": "b3d0a755f5996cd88b3436c80de9c987bd3313f9f9dc393098bfc8115cb97cd2",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/vela3-flash/revision/47c6eaaef64e87a06a95767920e8357e5f5036f9?blobs=true",
+      "architecture": {
+        "model_type": "qwen3_5",
+        "architectures": [
+          "Qwen3_5Model"
+        ],
+        "dtype": "bfloat16",
+        "text_layers": 32,
+        "num_experts": null,
+        "num_experts_per_tok": null
+      },
+      "safetensors_tensor_elements_api": null,
+      "card_base_model": [
+        "vllm-sr/d3-flash"
+      ],
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 4031242384,
+        "all_weight_files_in_this_repo_gib": 3.754387,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "decision_df_lora.safetensors",
+            "size_bytes": 240689128,
+            "sha256": "713622285c348d885ffdd9b6199cd8540f6435d172b2048a04239a7ee42cbb4f",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "decision_lora.safetensors",
+            "size_bytes": 240689096,
+            "sha256": "369df81e576fd54ef3c98c5f48fca88892f2bd38c72b159c91348eb410e72b5e",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "image_halu_head.safetensors",
+            "size_bytes": 17910988,
+            "sha256": "e6ec4981046337e0e7e1bf9696ce15d281bdd691188f1adb33e6a8d53466ff0d",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "image_halu_lora.safetensors",
+            "size_bytes": 240668960,
+            "sha256": "64d5b39a3997b0263d56e737878e3c4937177fefc30f83d5649880a88433455b",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "labeldef_lm_head.safetensors",
+            "size_bytes": 2034237664,
+            "sha256": "3d43ed7f6b0af94195d6ea687a59141384a4fba5a3756016aade8c9c0c208662",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "ner_head.safetensors",
+            "size_bytes": 17911004,
+            "sha256": "cc710bdeb492c51564600ff09b645bce2b716d1fff76e810249b0926dd2e49fe",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "ner_lora.safetensors",
+            "size_bytes": 721975664,
+            "sha256": "3272c03b55df4927aa733a2b5dc45af1b4474cf2034924b6a8c45a084513b9a7",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "relation_head.safetensors",
+            "size_bytes": 17911004,
+            "sha256": "8bf595b1d23ea1f6d7dc6f751322dad6ed81b86bf2f0c9669d169aec24013cc2",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "relation_lora.safetensors",
+            "size_bytes": 240668976,
+            "sha256": "180701270272b6ad94e1048027e026c15cddab85da9e7a32c7491ed94ad5e87f",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "span_head.safetensors",
+            "size_bytes": 17910964,
+            "sha256": "e5e74fe176bfd580f86448a152c7a8e9d278645baaf155e5f2f0ee3b766c8a61",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "span_lora.safetensors",
+            "size_bytes": 240668936,
+            "sha256": "d1c684f81bd9f4d9d2c749120162f26482a9e05984ca8865652a5ec3c18a109d",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ]
+      },
+      "external_base": {
+        "repo_id": "vllm-sr/d3-flash",
+        "revision": "8b35c853b90e777595ec36bacae820fe08ea077a",
+        "config_source_url": "https://huggingface.co/vllm-sr/vela3-flash/resolve/47c6eaaef64e87a06a95767920e8357e5f5036f9/vela3_config.json",
+        "config_sha256": "9c14b2d82a95f33eb2c094f301a2f33450205b67e5cdd3cf6082e1fd827847ae",
+        "config_size_bytes": 12173,
+        "source_field": "base.repo_id / base.revision",
+        "weights_included_in_repo_total": false,
+        "pinned_base_weight_bytes": null,
+        "note": "The loader uses this exact base revision. It is different from the current d3 snapshot catalogued here. Pinned base weights were not downloaded or remeasured by this audit."
+      },
+      "local_evaluation_status_at_review": "not_run_current_pin",
+      "local_score": null,
+      "runtime_review": "Own Vela adapters plus separately loaded pinned D3 base and native custom runtime; not a standalone checkpoint.",
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 21706,
+          "sha256": "8e4a327ee3b504936828c8a2ce4f50bd4b5c39bfa5de90500a0c0811efda5ab9",
+          "url": "https://huggingface.co/vllm-sr/vela3-flash/resolve/47c6eaaef64e87a06a95767920e8357e5f5036f9/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 2946,
+          "sha256": "089b20e6da48568c939165a97598c199ee2329f700fae59a14f65c27e7bd68d0",
+          "url": "https://huggingface.co/vllm-sr/vela3-flash/resolve/47c6eaaef64e87a06a95767920e8357e5f5036f9/config.json"
+        },
+        {
+          "path": "modeling_vela3.py",
+          "bytes": 25897,
+          "sha256": "923d92213cbe0ae47dfe1bcc1077c332ff9bb66aa054e6ec21d6bd54990232cd",
+          "url": "https://huggingface.co/vllm-sr/vela3-flash/resolve/47c6eaaef64e87a06a95767920e8357e5f5036f9/modeling_vela3.py"
+        },
+        {
+          "path": "span_decode_v2.py",
+          "bytes": 13738,
+          "sha256": "d2c5f2f446cf12d2f8a24dbf634452477088523b0973e1e07df244c851421efb",
+          "url": "https://huggingface.co/vllm-sr/vela3-flash/resolve/47c6eaaef64e87a06a95767920e8357e5f5036f9/span_decode_v2.py"
+        },
+        {
+          "path": "vela3_adapters.py",
+          "bytes": 3353,
+          "sha256": "eb69e58c18593527a0eb0bade7bc05eec315f3039fe92e1c500ba9c5f0a36d31",
+          "url": "https://huggingface.co/vllm-sr/vela3-flash/resolve/47c6eaaef64e87a06a95767920e8357e5f5036f9/vela3_adapters.py"
+        },
+        {
+          "path": "vela3_labeldef.py",
+          "bytes": 8053,
+          "sha256": "b7fcefdd1a0b3e8ac22ac12338c72e76925688a989b5af6c70a104fa70122a39",
+          "url": "https://huggingface.co/vllm-sr/vela3-flash/resolve/47c6eaaef64e87a06a95767920e8357e5f5036f9/vela3_labeldef.py"
+        },
+        {
+          "path": "vela3_span.py",
+          "bytes": 12283,
+          "sha256": "97d2448765a7ee5411dff44c601c3a073fdad9a9921f9818bac4135916081c20",
+          "url": "https://huggingface.co/vllm-sr/vela3-flash/resolve/47c6eaaef64e87a06a95767920e8357e5f5036f9/vela3_span.py"
+        }
+      ]
+    },
+    {
+      "repo_id": "vllm-sr/vela3-turbo",
+      "revision": "575ec6f89afc8b7b0f3f1f7b12bccfc8d292ddb6",
+      "source_url": "https://huggingface.co/vllm-sr/vela3-turbo/tree/575ec6f89afc8b7b0f3f1f7b12bccfc8d292ddb6",
+      "last_modified": "2026-10-28T11:05:23.000Z",
+      "metadata_snapshot_sha256": "4e4bc1f0d2f7d48f6ba43d89fe23e32873e07e9628669cb4e9d8302b862ca6eb",
+      "metadata_source_url": "https://huggingface.co/api/models/vllm-sr/vela3-turbo/revision/575ec6f89afc8b7b0f3f1f7b12bccfc8d292ddb6?blobs=true",
+      "architecture": {
+        "model_type": "qwen3_5",
+        "architectures": [
+          "Qwen3_5Model"
+        ],
+        "dtype": "bfloat16",
+        "text_layers": 64,
+        "num_experts": null,
+        "num_experts_per_tok": null
+      },
+      "safetensors_tensor_elements_api": null,
+      "card_base_model": [
+        "vllm-sr/d3-turbo"
+      ],
+      "storage": {
+        "all_weight_files_in_this_repo_bytes": 6159700524,
+        "all_weight_files_in_this_repo_gib": 5.736668,
+        "scope": "Sum of repository weight files. Includes task adapters and alternative variants; excludes separately hosted bases. This is storage metadata, not resident or peak memory.",
+        "weight_files": [
+          {
+            "path": "decision_df_lora.safetensors",
+            "size_bytes": 870400216,
+            "sha256": "05b8d0cf65b4292a9c2764b8316d53a66f813b8f6742b78d1f75c7c3aa36167e",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "decision_lora.safetensors",
+            "size_bytes": 870400176,
+            "sha256": "f6ceb0a0e0ea66d95db7d32ebd0a01631f2596870ebeb52d83300e2f2fef68b6",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "ner_head.safetensors",
+            "size_bytes": 22387932,
+            "sha256": "8bc4c9848358782594e5f508bec047c1e49b9049429d13137672d68e1be6d87a",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "ner_lora.safetensors",
+            "size_bytes": 2611017504,
+            "sha256": "fd9d297b4cc07fb35e45636a3e926137f2e1d7b464abdb48ba088a50d3d6f65a",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "relation_head.safetensors",
+            "size_bytes": 22387932,
+            "sha256": "b3ec955d3a2144eb5b2359dc7ed3a3f53373ae7eb55cfcad974d81d8c6b02531",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "relation_lora.safetensors",
+            "size_bytes": 870359456,
+            "sha256": "c61459f28b85f6c5c4fa25fcb850b501400312cefb4e0bba1125ab7c5635a64d",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "span_head.safetensors",
+            "size_bytes": 22387892,
+            "sha256": "5b450a2b20d077f385b7c06042ff06c86797f05692f8b84755032920349f4dd1",
+            "verification": "publisher_lfs_metadata_only"
+          },
+          {
+            "path": "span_lora.safetensors",
+            "size_bytes": 870359416,
+            "sha256": "94a02a79c37c1a7d53d3e9771b31515c94af19011e2a75c1c51ea37196b26383",
+            "verification": "publisher_lfs_metadata_only"
+          }
+        ]
+      },
+      "external_base": {
+        "repo_id": "vllm-sr/d3-turbo",
+        "revision": "da17b5d0c860f7e5be6e2afebe67228b4bd24d0c",
+        "config_source_url": "https://huggingface.co/vllm-sr/vela3-turbo/resolve/575ec6f89afc8b7b0f3f1f7b12bccfc8d292ddb6/vela3_config.json",
+        "config_sha256": "7d37c276ba35b15aab9a91ff2cdb5bf5eb57973b07e7bef187b5b551ca39c8b0",
+        "config_size_bytes": 11716,
+        "source_field": "base.repo_id / base.revision",
+        "weights_included_in_repo_total": false,
+        "pinned_base_weight_bytes": null,
+        "note": "The loader uses this exact base revision. It is different from the current d3 snapshot catalogued here. Pinned base weights were not downloaded or remeasured by this audit."
+      },
+      "local_evaluation_status_at_review": "not_run_current_pin",
+      "local_score": null,
+      "runtime_review": "Own Vela adapters plus separately loaded pinned D3 base and native custom runtime; not a standalone checkpoint.",
+      "archived_source_files": [
+        {
+          "path": "README.md",
+          "bytes": 21872,
+          "sha256": "ddfe0ac13f44cd9abbacd4524e580410a308ad749c583f7597e05cf0cf189de0",
+          "url": "https://huggingface.co/vllm-sr/vela3-turbo/resolve/575ec6f89afc8b7b0f3f1f7b12bccfc8d292ddb6/README.md"
+        },
+        {
+          "path": "config.json",
+          "bytes": 3802,
+          "sha256": "8fa1f8e03f3a39e6cfc808db1151163fe1118a8e7a89cd040573814680b7f4ed",
+          "url": "https://huggingface.co/vllm-sr/vela3-turbo/resolve/575ec6f89afc8b7b0f3f1f7b12bccfc8d292ddb6/config.json"
+        },
+        {
+          "path": "modeling_vela3.py",
+          "bytes": 29754,
+          "sha256": "792f5458e868bb57190ed256ef38993d1ea64969d72bb4965e3fb737e465239d",
+          "url": "https://huggingface.co/vllm-sr/vela3-turbo/resolve/575ec6f89afc8b7b0f3f1f7b12bccfc8d292ddb6/modeling_vela3.py"
+        },
+        {
+          "path": "span_decode_v2.py",
+          "bytes": 13738,
+          "sha256": "d2c5f2f446cf12d2f8a24dbf634452477088523b0973e1e07df244c851421efb",
+          "url": "https://huggingface.co/vllm-sr/vela3-turbo/resolve/575ec6f89afc8b7b0f3f1f7b12bccfc8d292ddb6/span_decode_v2.py"
+        },
+        {
+          "path": "vela3_adapters.py",
+          "bytes": 3353,
+          "sha256": "eb69e58c18593527a0eb0bade7bc05eec315f3039fe92e1c500ba9c5f0a36d31",
+          "url": "https://huggingface.co/vllm-sr/vela3-turbo/resolve/575ec6f89afc8b7b0f3f1f7b12bccfc8d292ddb6/vela3_adapters.py"
+        },
+        {
+          "path": "vela3_labeldef.py",
+          "bytes": 8053,
+          "sha256": "b7fcefdd1a0b3e8ac22ac12338c72e76925688a989b5af6c70a104fa70122a39",
+          "url": "https://huggingface.co/vllm-sr/vela3-turbo/resolve/575ec6f89afc8b7b0f3f1f7b12bccfc8d292ddb6/vela3_labeldef.py"
+        },
+        {
+          "path": "vela3_span.py",
+          "bytes": 12283,
+          "sha256": "97d2448765a7ee5411dff44c601c3a073fdad9a9921f9818bac4135916081c20",
+          "url": "https://huggingface.co/vllm-sr/vela3-turbo/resolve/575ec6f89afc8b7b0f3f1f7b12bccfc8d292ddb6/vela3_span.py"
+        }
+      ]
+    }
+  ],
+  "historical_control": {
+    "repo_id": "ggml-org/vllm-d3-GGUF",
+    "revision": "de9670136f5ddd83e677c89ce041d5b9bb3b0dcb",
+    "file": "vllm-d3-Q4_K_M.gguf",
+    "size_bytes": 19403686112,
+    "sha256": "a5a341e8611dc5d916c8f4c693dbef4a68e57eb17d37914fd56dcb5a9221eb2d",
+    "bases_agreement": "128/132",
+    "mastra_provisional_agreement": "24/24",
+    "peak_process_group_rss_gib": 18.81,
+    "report": "../../NATIVE_DECISION_RESULTS_20261016.md",
+    "note": "Historical model-isolated campaign. Not D3 Ultra, D3 Turbo, or the current D3 GGUF revision."
+  },
+  "current_d3_gguf_metadata": {
+    "repo_id": "ggml-org/vllm-d3-GGUF",
+    "revision": "992fe43f6e2f6e623f9c0c10ab9667c0ea56ed47",
+    "file": "vllm-d3-Q4_K_M.gguf",
+    "size_bytes": 19403686208,
+    "sha256": "2b6823fe1f1e2866f313b21922304d3a8037cceb1d68274ca258292832505009",
+    "local_status": "not_run",
+    "note": "File differs by 96 bytes and SHA from the historical control. This alone does not establish whether tensor values changed.",
+    "source_url": "https://huggingface.co/ggml-org/vllm-d3-GGUF/tree/992fe43f6e2f6e623f9c0c10ab9667c0ea56ed47"
+  },
+  "ultra_quantization_review": {
+    "search_date": "2026-10-28",
+    "official_ultra_gguf_or_mlx_found": false,
+    "absence_scope": "Public HF model search and quantized children reviewed on this date; not proof of global absence.",
+    "repo_id": "evanrodgers/d3-ultra-W4A16-GPTQ",
+    "revision": "239d3979a72632ea78596c0a34a09bb06305181e",
+    "source_url": "https://huggingface.co/evanrodgers/d3-ultra-W4A16-GPTQ/tree/239d3979a72632ea78596c0a34a09bb06305181e",
+    "format": "compressed-tensors pack-quantized W4A16 GPTQ, symmetric INT4 group128",
+    "all_weight_bytes": 16065797408,
+    "all_weight_gib": 14.96244,
+    "weights": [
+      {
+        "path": "model.safetensors",
+        "size_bytes": 16060574928,
+        "sha256": "deb2ec63cd62218cc9bc758db63351e01ba55a575e0608f5e13b142032872053"
+      },
+      {
+        "path": "readout.safetensors",
+        "size_bytes": 5222480,
+        "sha256": "a60b7a43b4d5698c426338695daf1ce02d6e8c536ce56a980664330246ee88d7"
+      }
+    ],
+    "compatibility_note": "Publisher reports NVIDIA GPU with a packed d3q loader not included in this repo; direct Transformers loading dequantizes back to BF16. MPS/MLX/GGUF support not demonstrated. Not an admitted Mac runtime.",
+    "local_status": "not_run"
+  },
+  "publisher_evaluation_claims": {
+    "private_sr_text": {
+      "requests": 10411,
+      "questions": 73495,
+      "score_ultra": 87.2,
+      "score_turbo": 83.1,
+      "score_d3": 81.4,
+      "source": "https://huggingface.co/vllm-sr/d3-ultra/blob/52ba9e7a00402f9560c7fba8c039608e7ddee7fb/README.md",
+      "note": "Private publisher protocol, not our corpus or a reproduction."
+    },
+    "private_sr_box": {
+      "questions": 5678,
+      "images": 4984,
+      "ten_domain_mean_ultra": 58.2,
+      "ten_domain_mean_turbo": 60.0,
+      "note": "Private publisher Box IoU>=0.5; Turbo remains ahead on this aggregate."
+    },
+    "public_decision_index": {
+      "source": "https://huggingface.co/datasets/multimodalart/decision-index-leaderboard",
+      "observed_date": "2026-10-28",
+      "ultra_full": 70.18,
+      "ultra_evaluated_revision": "37fee01926f3de396620e794201b074fb427ac2d",
+      "ultra_latest_reviewed_revision": "52ba9e7a00402f9560c7fba8c039608e7ddee7fb",
+      "turbo_full": 67.31,
+      "d3_v3_1_0_full": 67.15,
+      "note": "Public board differs from private SR-Text and this benchmark. Ultra evaluated pin is not the latest reviewed pin; no rank claim."
+    }
+  },
+  "archived_sources_note": "Hashes document the captured source files; archive membership is not proof of execution, qualification, or a line-by-line semantic audit."
+}

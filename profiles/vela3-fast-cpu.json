@@ -1,0 +1,27 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "vela3-fast-cpu-f32-v1",
+  "adapter": "vela3_fast",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "revision": "9e338f39babc622f42e9bd8556398fe2d80d9f13",
+  "recordings": null,
+  "timeout_seconds": 30,
+  "model": {
+    "repo_id": "vllm-sr/vela3-fast",
+    "local_dir": "../models/vela3-fast-9e338f3",
+    "runtime_python": "../results/.toolchains/vela3-python/bin/python",
+    "assets_manifest": "vela3-fast-assets.json",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "runtime_lock": "../runtimes/vela3-fast/runtime.lock",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 8192,
+    "min_free_mb": 8192,
+    "device": "cpu",
+    "dtype": "float32",
+    "backend": "sdpa"
+  }
+}

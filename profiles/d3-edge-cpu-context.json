@@ -1,0 +1,23 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "d3-edge-cpu-context-v1",
+  "adapter": "d3",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "model": {
+    "repo_id": "vllm-sr/d3-edge",
+    "local_dir": "../models/d3-edge-18d61df",
+    "runtime_python": "../.cache/d3-runtime/bin/python",
+    "assets_manifest": "d3-edge-assets.json",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "runtime_lock": "../runtimes/d3/runtime.lock",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 6144
+  },
+  "timeout_seconds": 60,
+  "revision": "18d61df78684675463af9ae732872478845c5a79",
+  "recordings": null
+}

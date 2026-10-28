@@ -1,0 +1,142 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "Knowledgator/GLiClass",
+  "revision": "6a00f8067648f25aa0f4f477d167c5f391cb4165",
+  "files": [
+    {
+      "path": "LICENSE",
+      "size": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "README.md",
+      "size": 12165,
+      "sha256": "c58e3eaf8020ea4d8ce12b1c1ba7ede55e0ebd6ce94b98a82e1965c8e867a7bd"
+    },
+    {
+      "path": "gliclass/__init__.py",
+      "size": 500,
+      "sha256": "e934586720308cac00fa6c180cb1396cfa53b1720bebb2ab769c2936f8d01f59"
+    },
+    {
+      "path": "gliclass/calibration.py",
+      "size": 21886,
+      "sha256": "e25c9d714d2d0f16873034b088a1aff19ae46d44f5d6f8162ac60884a38abf01"
+    },
+    {
+      "path": "gliclass/config.py",
+      "size": 10414,
+      "sha256": "c84fc9f17d2d24e1722b446b0edffdd46f20ce4de0c6d9ccb382f05ea6dce407"
+    },
+    {
+      "path": "gliclass/data_processing.py",
+      "size": 23753,
+      "sha256": "551865c4305df2d588a302bc0895769c1d85d3c901b4513a26f526f59dced86d"
+    },
+    {
+      "path": "gliclass/layers.py",
+      "size": 10366,
+      "sha256": "ae00e69489e6f7b3ddee781034bab0ae285b07cc28da72c2c97f4ff1a9f6c48d"
+    },
+    {
+      "path": "gliclass/loss_functions.py",
+      "size": 3851,
+      "sha256": "0435924c6efc1d2b2905badc9e6e1512b636fbd8d566675e80b89364ec9a0d33"
+    },
+    {
+      "path": "gliclass/model.py",
+      "size": 77042,
+      "sha256": "898f9c8b1e8b825678c8a559a129aefc6f30b6b1ac8c135094a5460855f9d872"
+    },
+    {
+      "path": "gliclass/multimodal.py",
+      "size": 7113,
+      "sha256": "6efdb3d407a3a922047b1f212d1d472f4ca74aff1646b9ff6f67c7cb784637f1"
+    },
+    {
+      "path": "gliclass/ops.py",
+      "size": 1296,
+      "sha256": "022229eba8b1bc1795bbe979637135e1a45d865831b3975687dc8f6bed4db0e4"
+    },
+    {
+      "path": "gliclass/pipeline.py",
+      "size": 57777,
+      "sha256": "62ea16b4f4e9644b0ea72a7e580f2f35b38b62047fb6193e8726ca350a216b43"
+    },
+    {
+      "path": "gliclass/poolings.py",
+      "size": 3154,
+      "sha256": "fdd98ddb1988ce718e538340be97a4a434dc7a33758c9c7584a2c10b49804b8b"
+    },
+    {
+      "path": "gliclass/scorers.py",
+      "size": 21550,
+      "sha256": "736823ffda20d67e13693f417663427cb5113da16f51b20f4b4780c5c3286cdb"
+    },
+    {
+      "path": "gliclass/serve/__init__.py",
+      "size": 407,
+      "sha256": "680a1b80bff75cef78c1b845e53404c0773fde6166d68f4a3a786734da6f0ff1"
+    },
+    {
+      "path": "gliclass/serve/__main__.py",
+      "size": 13413,
+      "sha256": "ea5cce591f3dc1e7d454c3199bfd573e89296a72bc1b2e692a1528120e62b1f1"
+    },
+    {
+      "path": "gliclass/serve/client.py",
+      "size": 4141,
+      "sha256": "a863fadef69959d4042244dc9cfc62d94a9c8785de0f45a1dd74ce41ab16a0e4"
+    },
+    {
+      "path": "gliclass/serve/config.py",
+      "size": 5479,
+      "sha256": "e55e637ca1b9c4ca8ba18bebb31e0ef51b327978d40d7c7329720a5148c9bac2"
+    },
+    {
+      "path": "gliclass/serve/memory.py",
+      "size": 5778,
+      "sha256": "8d4e0685c4ec28d5039320b2626379b0af00479b9a6c225c7bb501752325c92a"
+    },
+    {
+      "path": "gliclass/serve/server.py",
+      "size": 25327,
+      "sha256": "8f827e232b459717b09d2ea076640fd1c601d8815a1957e5a4d6d539fb5660ba"
+    },
+    {
+      "path": "gliclass/streaming/__init__.py",
+      "size": 680,
+      "sha256": "8c7d2d3f3e0edeb0c0b4790bc13c5bb6a4f34e18d9e6ce8215188fd7ca1ded51"
+    },
+    {
+      "path": "gliclass/streaming/cache.py",
+      "size": 20001,
+      "sha256": "92708829f70a925d345a2deb372ebf63ef880711adf1f6ad31828dae0b547793"
+    },
+    {
+      "path": "gliclass/streaming/pipeline.py",
+      "size": 23166,
+      "sha256": "7971bed0671818fbc977e2f88f0ef5cf61e203ddb0bf00f59b8237e3e49dc1a7"
+    },
+    {
+      "path": "gliclass/streaming/strategies.py",
+      "size": 3207,
+      "sha256": "377ab20ad55cb90d2bae40f2959504c78d992454158717f63e7e046851ebcba6"
+    },
+    {
+      "path": "gliclass/training.py",
+      "size": 41600,
+      "sha256": "f17f6045d100544e549aab31cea637c03676889fcd4c6fe2bd980a355f264b5c"
+    },
+    {
+      "path": "gliclass/utils.py",
+      "size": 3932,
+      "sha256": "70c7c14af47e62aaeef1189f23ac8cbf9698447442768bc9721b8d7db55d32cd"
+    },
+    {
+      "path": "pyproject.toml",
+      "size": 4544,
+      "sha256": "9fcf0e6ad5e47c0f66273e23ae4a8a02f2f1a98bb7373251464467221968a156"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "noma-cpu-context-v1",
+  "adapter": "noma",
+  "qualification": "model_isolated",
+  "capabilities": ["bench.context-choice"],
+  "model": {
+    "repo_id": "BlackdromeAILabs/noma",
+    "source_revision": "8cfda260d8af88c18b1de1852e13dcbe9958042f",
+    "local_dir": "../models/noma-fac0429",
+    "source_dir": "../.cache/noma-source-8cfda260-lf",
+    "runtime_python": "../.cache/decision2-runtime/bin/python",
+    "assets_manifest": "noma-assets.json",
+    "source_manifest": "noma-source-assets.json",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "runtime_lock": "../runtimes/decision2/requirements.lock",
+    "max_length": 1024,
+    "threads": 2,
+    "max_rss_mb": 8192
+  },
+  "timeout_seconds": 30,
+  "revision": "fac0429688a137ce451a27ad34d05e9fd47fb624",
+  "recordings": null
+}

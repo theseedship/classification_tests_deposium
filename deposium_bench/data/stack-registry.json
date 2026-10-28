@@ -1,0 +1,895 @@
+{
+  "schema_version": "deposium.stack-registry/v1",
+  "components": [
+    {
+      "id": "deposium_MCPs",
+      "path": "deposium_MCPs",
+      "owner": "theseedship/deposium_MCPs",
+      "role": "Décisions, arbitrage des sources, recherche, preuves et orchestration de la réponse.",
+      "packs": [
+        "DOC",
+        "FOLLOWUP",
+        "PRESENTATION",
+        "SOURCES",
+        "EVIDENCE",
+        "CLAIMS",
+        "ROBUSTNESS",
+        "CONTEXT"
+      ],
+      "contracts": [
+        {
+          "id": "mcps.document-plan",
+          "entrypoint": {
+            "path": "src/services/chat-document-request-plan.ts",
+            "symbol": "normalizeChatDocumentRequest"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "B"
+          ],
+          "adapter_status": "available",
+          "assertions": [
+            "Préserver opérations, couverture, langue et format comme axes distincts du contrat chat-document-request/v1.",
+            "Ne pas transformer compte ou liste en synthèse d’un sous-ensemble de passages."
+          ],
+          "tests": [
+            "tests/unit/services/chat-document-request-plan.test.ts"
+          ]
+        },
+        {
+          "id": "mcps.document-followup",
+          "entrypoint": {
+            "path": "src/services/chat-document-selection.ts",
+            "symbol": "resolveDocumentFollowUp"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "B"
+          ],
+          "adapter_status": "available",
+          "assertions": [
+            "Résoudre une ancre validée et les IDs associés; clarifier les références absentes ou ambiguës.",
+            "Ne jamais déduire une autorisation d’accès de la sélection ou de la confiance du candidat."
+          ],
+          "tests": [
+            "tests/unit/services/chat-document-selection.test.ts"
+          ]
+        },
+        {
+          "id": "mcps.canonical-document-read",
+          "entrypoint": {
+            "path": "src/services/chat-document-read.ts",
+            "symbol": "readChatDocuments"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "B"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Utiliser le même inventaire autorisé pour compte, liste et résumés stockés.",
+            "Distinguer total, page affichée, résumé absent et provenance; expliciter les dépendances injectées."
+          ],
+          "tests": [
+            "tests/unit/services/chat-document-read.test.ts"
+          ]
+        },
+        {
+          "id": "mcps.scope-dispatch",
+          "entrypoint": {
+            "path": "src/services/scope-dispatcher.ts",
+            "symbol": "buildScopeDispatchDecision"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "B"
+          ],
+          "adapter_status": "available",
+          "assertions": [
+            "Conserver les choix explicites et limiter la route aux sources disponibles.",
+            "Distinguer source de réponse, profondeur de recherche et clarification."
+          ],
+          "tests": [
+            "tests/unit/services/scope-dispatcher.test.ts"
+          ]
+        },
+        {
+          "id": "mcps.semantic-source-route",
+          "entrypoint": {
+            "path": "src/services/source-route-resolver.ts",
+            "symbol": "resolveSemanticSourceRoute"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "B"
+          ],
+          "adapter_status": "available",
+          "assertions": [
+            "Arbitrer le besoin sémantique avec les capacités et choix explicites.",
+            "Un connecteur désactivé ou refusé reste inéligible indépendamment de la prédiction."
+          ],
+          "tests": [
+            "tests/unit/services/source-route-resolver.test.ts"
+          ]
+        },
+        {
+          "id": "mcps.search",
+          "entrypoint": {
+            "path": "src/tools/search.ts",
+            "symbol": "searchHub"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "B"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Tracer les IDs et preuves attendues avant et après fusion, reranking et packing.",
+            "Distinguer proximité thématique, appui, contradiction et absence de preuve sur un pool identifié."
+          ],
+          "tests": [
+            "tests/integration/rag-eval/evaluate-extended.ts"
+          ]
+        },
+        {
+          "id": "mcps.evidence-attribution",
+          "entrypoint": {
+            "path": "src/runtime/ops/evidence-attribution.ts",
+            "symbol": "evidenceAttributionOp"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "B"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Évaluer les claims exacts avec leurs unités citées et spans valides.",
+            "Conserver contradiction, insuffisance et ambiguïté; ne pas présenter une observation shadow comme validation du résultat visible."
+          ],
+          "tests": [
+            "tests/unit/runtime/ops/evidence-attribution.test.ts"
+          ]
+        }
+      ],
+      "notes": "Quatre bridges de fonctions disponibles pour le replay A : document-plan, document-followup, scope-dispatch et semantic-source-route. Corpus FR/EN exploratoire, annotations non revues humainement. Niveaux B/C restent des cibles, sans qualification. Le replay isolé ne qualifie ni /api/chat-stream ni les droits ni le produit; mcps.search reste unsupported. Le harness RAG requiert ses services et defaults explicites, dont Guardian none; attribution conditionnelle et désactivée par défaut dans les modes audités."
+    },
+    {
+      "id": "deposium_solid",
+      "path": "deposium_solid",
+      "owner": "theseedship/deposium_solid",
+      "role": "Contexte envoyé, streaming, remplacement canonique, rendu et persistance.",
+      "packs": [
+        "FOLLOWUP",
+        "PRESENTATION",
+        "CONTEXT",
+        "PRODUCT"
+      ],
+      "contracts": [
+        {
+          "id": "solid.chat-stream",
+          "entrypoint": {
+            "path": "src/routes/api/mcp/chat-stream.ts"
+          },
+          "kind": "http",
+          "levels": [
+            "B",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Conserver historique, choix explicites et sélection dans le contexte envoyé.",
+            "Vérifier état terminal SSE et cohérence entre résultat visible et résultat persisté."
+          ],
+          "tests": [
+            "tests/e2e/chat-stream-sse.spec.ts"
+          ]
+        },
+        {
+          "id": "solid.answer-replacement",
+          "entrypoint": {
+            "path": "src/features/chat/services/answer-replacement-guard.ts",
+            "symbol": "shouldApplyAnswerReplacement"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Vérifier adoption ou rejet d’un remplacement canonique avec les conditions de la garde.",
+            "Mesurer la fidélité du résultat visible séparément de la réussite de la garde."
+          ],
+          "tests": [
+            "src/features/chat/services/answer-replacement-guard.test.ts"
+          ]
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. Les tests SSE peuvent revenir sur 402/429 avant assertions. La garde du remplacement ne constitue pas un oracle de fidélité; le profil d’embedding doit être qualifié séparément."
+    },
+    {
+      "id": "deposium_desktop",
+      "path": "deposium_desktop",
+      "owner": "theseedship/deposium_desktop",
+      "role": "Shell, sidecars et pipeline d’ingestion.",
+      "packs": [
+        "EXTRACTION",
+        "PRODUCT"
+      ],
+      "contracts": [
+        {
+          "id": "desktop.shell-bootstrap",
+          "entrypoint": {
+            "path": "shell/src/bun/index.ts"
+          },
+          "kind": "bootstrap",
+          "levels": [
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Identifier origine chargée et sidecars réellement exécutés.",
+            "Ne pas déduire un chat local autonome de la seule présence de sidecars."
+          ],
+          "tests": []
+        },
+        {
+          "id": "desktop.cutting",
+          "entrypoint": {
+            "path": "runtime/pipeline/src/cutting/run.ts",
+            "symbol": "runCutting"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Rejouer le découpage avec ports et fixtures identifiés.",
+            "Distinguer conversion, découpage et résultat produit; conserver les sorties et provenances attendues."
+          ],
+          "tests": [
+            "runtime/pipeline/test/r25a-cutting.test.ts",
+            "runtime/pipeline/test/golden/harness.ts"
+          ]
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. Le shell charge une origine web distante par défaut au relevé documentaire. Les goldens ne doivent pas être régénérés pour obtenir un résultat favorable."
+    },
+    {
+      "id": "deposium_CLI",
+      "path": "deposium_CLI",
+      "owner": "theseedship/deposium_CLI",
+      "role": "Commandes explicites, contexte conversationnel et rendu du flux terminal.",
+      "packs": [
+        "SOURCES",
+        "FOLLOWUP",
+        "CONTEXT",
+        "PRODUCT"
+      ],
+      "contracts": [
+        {
+          "id": "cli.mcp-transport",
+          "entrypoint": {
+            "path": "src/client/mcp-client.ts"
+          },
+          "kind": "http",
+          "levels": [
+            "B",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Identifier le transport /api/cli/mcp et le chemin de chat réellement choisi entre Edge et MCPs.",
+            "Conserver contexte, choix de source et événements terminal sans déduire une qualification serveur des événements simulés."
+          ],
+          "tests": [
+            "src/__tests__/chat-hitl.test.ts"
+          ]
+        },
+        {
+          "id": "cli.chat-turn",
+          "entrypoint": {
+            "path": "src/chat.ts"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Rejouer un tour avec clarification et reprise HITL, puis vérifier le rendu terminal.",
+            "Distinguer événements simulés et vraie réponse canonique serveur."
+          ],
+          "tests": [
+            "src/__tests__/chat-hitl.test.ts"
+          ]
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. Le test HITL traite un vrai tour avec événements simulés; il ne qualifie pas la chaîne serveur."
+    },
+    {
+      "id": "deposium_edge_runtime",
+      "path": "deposium_edge_runtime",
+      "owner": "theseedship/deposium_edge_runtime",
+      "role": "Authentification, transport et routes de décision Edge distinctes.",
+      "packs": [
+        "SOURCES",
+        "ROBUSTNESS",
+        "PRODUCT"
+      ],
+      "contracts": [
+        {
+          "id": "edge.chat-stream",
+          "entrypoint": {
+            "path": "supabase/functions/chat-stream/index.ts"
+          },
+          "kind": "http",
+          "levels": [
+            "B",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Préserver authentification et contrat de transport indépendamment des prédictions.",
+            "Tracer erreurs, annulation et état terminal avec les dépendances du fetch identifiées."
+          ],
+          "tests": [
+            "supabase/functions/chat-stream/index.test.ts"
+          ]
+        },
+        {
+          "id": "edge.query",
+          "entrypoint": {
+            "path": "supabase/functions/query/index.ts"
+          },
+          "kind": "http",
+          "levels": [
+            "B",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Identifier route et paramètres de classification réellement traversés pour /query.",
+            "Ne pas fusionner /query et /chat-stream en une baseline sans traces de leurs arbitrages."
+          ],
+          "tests": []
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. Les tests de flux simulent fetch; le runtime Deno et ses dépendances doivent être verrouillés lors de la campagne, sans se fier à deno.json qui désactive le lock."
+    },
+    {
+      "id": "deposium_supabase",
+      "path": "deposium_supabase",
+      "owner": "theseedship/deposium_supabase",
+      "role": "Images et bootstrap des données et droits.",
+      "packs": [
+        "DOC",
+        "SOURCES",
+        "PRODUCT"
+      ],
+      "contracts": [
+        {
+          "id": "supabase.data-bootstrap",
+          "entrypoint": {
+            "path": "db/scripts/11-deposium-api-keys.sql"
+          },
+          "kind": "bootstrap",
+          "levels": [
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Identifier migrations et schéma effectivement appliqués dans un espace de recette isolé.",
+            "Contrôler accès et identité de façon déterministe; ne pas déduire le schéma courant des scripts de bootstrap."
+          ],
+          "tests": []
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. Aucun harness SQL/RLS de recette repéré. Les scripts de bootstrap ciblent un PGDATA vide et ne décrivent pas les migrations effectivement exécutées."
+    },
+    {
+      "id": "deposium_rust_worker",
+      "path": "deposium_rust_worker",
+      "owner": "theseedship/deposium_rust_worker",
+      "role": "Ingestion, backfill et stockage/recherche vectorielle.",
+      "packs": [
+        "EXTRACTION",
+        "EVIDENCE",
+        "PRODUCT"
+      ],
+      "contracts": [
+        {
+          "id": "worker.ingestion",
+          "entrypoint": {
+            "path": "src/consumer.rs",
+            "symbol": "consumer_loop"
+          },
+          "kind": "function",
+          "levels": [
+            "B",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Tracer ingestion, erreurs et état des documents sans perdre les identifiants et la provenance.",
+            "Distinguer frontières HTTP simulées, Redis isolé et services réels."
+          ],
+          "tests": [
+            "scripts/test-with-isolated-redis.sh",
+            "tests/integration.rs"
+          ]
+        },
+        {
+          "id": "worker.vector-search",
+          "entrypoint": {
+            "path": "src/turbovec_routes.rs",
+            "symbol": "router"
+          },
+          "kind": "http",
+          "levels": [
+            "A",
+            "B",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Mesurer recall sur un holdout identifié et vérifier IDs, tenant et profil d’embedding.",
+            "Identifier bibliothèque et features réellement compilées avant toute comparaison de vecteurs."
+          ],
+          "tests": [
+            "tests/integration.rs",
+            "benches/holdout_recall.rs"
+          ]
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. Le worker dépend de turbovec 1.0.0 de crates.io au relevé; il ne consomme pas le fork sous-module homonyme. Redis isolé requiert Docker et une image; aucune exécution n’est revendiquée."
+    },
+    {
+      "id": "deposium_not_stirling",
+      "path": "deposium_not_stirling",
+      "owner": "theseedship/deposium_not_stirling",
+      "role": "Conversion PDF, Office, image et tabulaire.",
+      "packs": [
+        "EXTRACTION"
+      ],
+      "contracts": [
+        {
+          "id": "not-stirling.pdf-pages",
+          "entrypoint": {
+            "path": "src/routes/deposium.rs",
+            "symbol": "pdf_pages_zip"
+          },
+          "kind": "http",
+          "levels": [
+            "A",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Vérifier pages et manifeste du ZIP sur des documents autorisés.",
+            "Une dépendance PDFium/OCR/LibreOffice absente ou un retour anticipé ne qualifie pas la conversion."
+          ],
+          "tests": [
+            "tests/deposium_pages_test.rs",
+            "tests/common/mod.rs"
+          ]
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. Les capacités dépendent de PDFium, OCR ou LibreOffice. Pour qualifier PDFium, activer REQUIRE_PDFIUM=1 et vérifier que les cas ont effectivement tourné."
+    },
+    {
+      "id": "deposium-turbov3",
+      "path": "deposium-turbov3",
+      "owner": "theseedship/deposium-turbov3",
+      "role": "Embedding et reranking; compatibilité des profils vectoriels.",
+      "packs": [
+        "EVIDENCE",
+        "ROBUSTNESS"
+      ],
+      "contracts": [
+        {
+          "id": "turbov3.embeddings",
+          "entrypoint": {
+            "path": "src/routes/embeddings.rs",
+            "symbol": "router"
+          },
+          "kind": "http",
+          "levels": [
+            "A",
+            "B"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Enregistrer modèle, profil, dimension et runtime effectivement chargés.",
+            "Exiger un espace vectoriel compatible entre requête et index; une dimension identique ne suffit pas."
+          ],
+          "tests": [
+            "tests/integration.rs"
+          ]
+        },
+        {
+          "id": "turbov3.rerank",
+          "entrypoint": {
+            "path": "src/routes/rerank.rs",
+            "symbol": "router"
+          },
+          "kind": "http",
+          "levels": [
+            "A",
+            "B"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Vérifier correspondance des indices, scores et top-k avec le pool et les fenêtres fournis.",
+            "Comparer recall, qualité et coût à candidats identiques, sans déduire un support sémantique universel du score de pertinence."
+          ],
+          "tests": [
+            "tests/integration.rs",
+            "scripts/bench-rerank.py"
+          ]
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. Les tests de routers/validation peuvent fonctionner sans poids. Le benchmark rerank requiert serveur et modèle identifiés; aucune qualité ni mesure de ressources n’est livrée par l’inventaire."
+    },
+    {
+      "id": "deposium-tantivy",
+      "path": "deposium-tantivy",
+      "owner": "theseedship/deposium-tantivy",
+      "role": "Recherche lexicale par tenant et langue.",
+      "packs": [
+        "EVIDENCE"
+      ],
+      "contracts": [
+        {
+          "id": "tantivy.search",
+          "entrypoint": {
+            "path": "src/routes.rs",
+            "symbol": "search_handler"
+          },
+          "kind": "http",
+          "levels": [
+            "A",
+            "B"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Vérifier isolation des tenants et recherche sur les langues et index déclarés.",
+            "Mesurer recall sur le corpus de campagne séparément des validations HTTP sur index temporaires."
+          ],
+          "tests": [
+            "tests/http_integration.rs"
+          ]
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. SearchRequest est défini dans src/models.rs. Le router réel et les répertoires temporaires des tests ne qualifient pas le recall du corpus produit."
+    },
+    {
+      "id": "deposium-turbovec",
+      "path": "deposium-turbovec",
+      "owner": "theseedship/turbovec",
+      "role": "Fork expérimental de bibliothèque vectorielle, distinct du runtime du worker.",
+      "packs": [
+        "EVIDENCE"
+      ],
+      "contracts": [
+        {
+          "id": "turbovec-fork.index-search",
+          "entrypoint": {
+            "path": "turbovec/src/lib.rs",
+            "symbol": "TurboQuantIndex"
+          },
+          "kind": "library",
+          "levels": [
+            "A"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Vérifier alignement des IDs et résultats pour l’index et ses opérations.",
+            "Nommer séparément la comparaison du fork et celle de la bibliothèque réellement compilée dans le worker; enregistrer les features BLAS."
+          ],
+          "tests": [
+            "turbovec/tests/id_map.rs"
+          ]
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. Le manifeste du fork déclare 0.2.0 au relevé; ce n’est pas la dépendance turbovec 1.0.0 de crates.io verrouillée dans le worker."
+    },
+    {
+      "id": "deposium-inference",
+      "path": "deposium-inference",
+      "owner": "theseedship/deposium-inference",
+      "role": "Transport d’inférence et résolution des backends pour candidats et génération.",
+      "packs": [
+        "ROBUSTNESS",
+        "PRODUCT"
+      ],
+      "contracts": [
+        {
+          "id": "inference.api",
+          "entrypoint": {
+            "path": "src/api.rs",
+            "symbol": "router"
+          },
+          "kind": "http",
+          "levels": [
+            "A",
+            "B",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Enregistrer endpoint, modèle résolu et runtime réel avant d’évaluer un candidat.",
+            "Distinguer disponibilité, latence, erreur et timeout de la qualité de la sortie."
+          ],
+          "tests": [
+            "scripts/bench-completions-latency.py"
+          ]
+        },
+        {
+          "id": "inference.proxy",
+          "entrypoint": {
+            "path": "src/proxy.rs"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "B",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Conserver résolution du modèle, transfert de flux et état d’erreur.",
+            "Ne pas qualifier un backend réel à partir du circuit breaker testé sur un flux synthétique."
+          ],
+          "tests": [
+            "src/backend/openai_proxy.rs"
+          ]
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. Les API compatibles Ollama/OpenAI sont des transports. Le circuit breaker comporte des tests synthétiques; la mesure de latence requiert un vrai backend."
+    },
+    {
+      "id": "deposium_geoai",
+      "path": "deposium_geoai",
+      "owner": "theseedship/deposium_geoai",
+      "role": "Outils géospatiaux, climat et patterns spécialisés.",
+      "packs": [
+        "SOURCES",
+        "EVIDENCE",
+        "EXTRACTION"
+      ],
+      "contracts": [
+        {
+          "id": "geoai.server",
+          "entrypoint": {
+            "path": "src/server.py",
+            "symbol": "main"
+          },
+          "kind": "bootstrap",
+          "levels": [
+            "B",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Vérifier outils réellement exécutés avec leurs données et gate connecteur MCPs.",
+            "Distinguer enregistrement d’un outil et acquisition réussie de preuves autorisées."
+          ],
+          "tests": [
+            "tests/test_resources.py"
+          ]
+        },
+        {
+          "id": "geoai.patterns",
+          "entrypoint": {
+            "path": "src/tools/patterns.py",
+            "symbol": "register_pattern_tools"
+          },
+          "kind": "function",
+          "levels": [
+            "A",
+            "B"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Qualifier le contrat so4gp avec dépendances, paramètres et données identifiés.",
+            "Conserver explicitement tests omis et capacités indisponibles si l’extra optionnel manque."
+          ],
+          "tests": [
+            "tests/test_so4gp_contract.py"
+          ]
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. STAC, stockage et données dépendent de l’outil; les tests so4gp peuvent être omis si l’extra manque. Aucun connecteur actif n’est déduit de sa présence dans le code."
+    },
+    {
+      "id": "deposium_mindsdb",
+      "path": "deposium_mindsdb",
+      "owner": "theseedship/deposium_mindsdb",
+      "role": "Ancien dépôt image/config, capacité spécialisée optionnelle.",
+      "packs": [
+        "SOURCES",
+        "EVIDENCE"
+      ],
+      "contracts": [
+        {
+          "id": "mindsdb.legacy-bootstrap",
+          "entrypoint": {
+            "path": "Dockerfile"
+          },
+          "kind": "bootstrap",
+          "levels": [
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Documenter explicitement une éventuelle campagne ciblant cette image legacy et son digest réel.",
+            "Rattacher séparément le gate et l’intégration MCPs; ne pas présenter ce bootstrap comme baseline active."
+          ],
+          "tests": []
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. README.md déclare ce dépôt orphelin et non utilisé en production; le Dockerfile utilise latest. Compose commente le service au relevé. L’image locale et l’intégration MCPs vivent ailleurs; aucun harness repéré."
+    },
+    {
+      "id": "deposium_web_acquisition",
+      "path": "deposium_web_acquisition",
+      "owner": "theseedship/deposium_web_acquisition",
+      "role": "Acquisition web, provenance et contrôles de fetch.",
+      "packs": [
+        "SOURCES",
+        "EVIDENCE",
+        "ROBUSTNESS"
+      ],
+      "contracts": [
+        {
+          "id": "web-acquisition.fetch",
+          "entrypoint": {
+            "path": "src/deposium_web_acquisition/app.py",
+            "symbol": "fetch"
+          },
+          "kind": "http",
+          "levels": [
+            "B",
+            "C"
+          ],
+          "adapter_status": "planned",
+          "assertions": [
+            "Vérifier le contrat /v1/fetch, provenance et refus SSRF indépendamment des prédictions.",
+            "Distinguer mode HTTP testé et modes dynamic/stealth nécessitant un navigateur."
+          ],
+          "tests": [
+            "tests/test_api.py",
+            "tests/test_ssrf.py"
+          ]
+        }
+      ],
+      "notes": "Assertions : exigences de futurs cas, sans corpus livré. Niveaux : cibles potentielles, sans preuve A/B/C. Aucun bridge du banc disponible. FetchRequest et FetchResult sont définis dans src/deposium_web_acquisition/models.py. TestClient et serveur local ne qualifient pas les modes navigateur."
+    }
+  ],
+  "external_dependencies": [
+    {
+      "id": "parent-orchestration",
+      "kind": "orchestration",
+      "description": "Compose, overrides, réseaux, volumes et sources de build du parent deposium-local; requis selon les composants sélectionnés en campagne B/C, sans démarrage automatique.",
+      "required_by": [
+        "deposium_MCPs",
+        "deposium_solid",
+        "deposium_desktop",
+        "deposium_CLI",
+        "deposium_edge_runtime",
+        "deposium_supabase",
+        "deposium_rust_worker",
+        "deposium_not_stirling",
+        "deposium-turbov3",
+        "deposium-tantivy",
+        "deposium-inference",
+        "deposium_geoai",
+        "deposium_mindsdb",
+        "deposium_web_acquisition"
+      ]
+    },
+    {
+      "id": "redis",
+      "kind": "cache-and-queue",
+      "description": "Redis isolé pour ingestion, coordination et caches selon le parcours; version et données de recette à figer.",
+      "required_by": [
+        "deposium_MCPs",
+        "deposium_rust_worker"
+      ]
+    },
+    {
+      "id": "rabbitmq",
+      "kind": "queue",
+      "description": "Broker référencé par la sonde Edge /health-check; dépendance de ce contrôle seulement, pas prérequis déduit des routes chat/query. Présence et utilisation runtime à vérifier pour la campagne.",
+      "required_by": [
+        "deposium_edge_runtime"
+      ]
+    },
+    {
+      "id": "postgresql-supabase",
+      "kind": "database",
+      "description": "Données, droits et migrations de recette réellement appliqués; bootstrap seul insuffisant.",
+      "required_by": [
+        "deposium_MCPs",
+        "deposium_solid",
+        "deposium_edge_runtime",
+        "deposium_supabase",
+        "deposium_rust_worker"
+      ]
+    },
+    {
+      "id": "object-storage",
+      "kind": "storage",
+      "description": "Stockage objet et manifestes de documents autorisés; backend, données et configuration de recette à identifier.",
+      "required_by": [
+        "deposium_MCPs",
+        "deposium_rust_worker",
+        "deposium_geoai"
+      ]
+    },
+    {
+      "id": "n8n-workflows",
+      "kind": "workflow",
+      "description": "n8n et workflows d’ingestion identifiés par révision/hash. CLIP sert uniquement à la complexité des images dans n8n; aucun workflow actif déduit d’un export historique.",
+      "required_by": [
+        "deposium_rust_worker"
+      ]
+    },
+    {
+      "id": "n8n-vlm",
+      "kind": "optional-service",
+      "description": "Éventuel service visuel hors des 15 sous-modules, à rattacher par révision/hash uniquement si la campagne le sollicite.",
+      "required_by": [
+        "deposium_rust_worker"
+      ]
+    },
+    {
+      "id": "inference-providers",
+      "kind": "provider",
+      "description": "Backends distants ou locaux et modèles réellement chargés, avec prérequis et limites déclarés explicitement avant campagne; aucun appel lors du préflight.",
+      "required_by": [
+        "deposium_MCPs",
+        "deposium-inference",
+        "deposium-turbov3"
+      ]
+    },
+    {
+      "id": "remote-connectors",
+      "kind": "provider",
+      "description": "Connecteurs et données distants autorisés selon outils sollicités; activation et consentement demeurent déterministes.",
+      "required_by": [
+        "deposium_MCPs",
+        "deposium_geoai",
+        "deposium_web_acquisition"
+      ]
+    },
+    {
+      "id": "conversion-runtimes",
+      "kind": "runtime",
+      "description": "PDFium, OCR et LibreOffice selon capacité; dépendance absente distincte d’une conversion qualifiée.",
+      "required_by": [
+        "deposium_not_stirling"
+      ]
+    },
+    {
+      "id": "browser-runtime",
+      "kind": "runtime",
+      "description": "Navigateur pour parcours Solid et modes web dynamic/stealth; configuration et révision à enregistrer séparément des tests HTTP.",
+      "required_by": [
+        "deposium_solid",
+        "deposium_web_acquisition"
+      ]
+    }
+  ]
+}

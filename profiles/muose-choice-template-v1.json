@@ -1,0 +1,10 @@
+{
+  "schema_version": "deposium.muose-choice-template/v1",
+  "repo_id": "muose/Muose-50M-Decision",
+  "revision": "5afb8eeff127621fea2d66fc63f56798ada12eda",
+  "format": "STATE:\n{context}\n\nINSTRUCTIONS:\n{question}\n\nCRITERION:\n{description}",
+  "criterion_mode": "one_independent_sequence_per_option",
+  "order": "as_supplied",
+  "id_visibility": "opaque_ids_excluded",
+  "max_length": 512
+}

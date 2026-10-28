@@ -1,0 +1,57 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "BlackdromeAILabs/noma",
+  "revision": "fac0429688a137ce451a27ad34d05e9fd47fb624",
+  "files": [
+    {
+      "path": "LICENSE",
+      "size": 17099,
+      "sha256": "9221c2f936159b8446d329249fb4c0f25be510f447383a0f13336ac7985668a3"
+    },
+    {
+      "path": "NOTICE",
+      "size": 394,
+      "sha256": "74ac7743bc619a08456d8db2a4a81d3057c50bef041c4f0532ea0b67a9c13c03"
+    },
+    {
+      "path": "README.md",
+      "size": 6862,
+      "sha256": "c4e7f6d2d1dd7b3141d1414385fe7efae6681113bdd417450eac3eebcff71d48"
+    },
+    {
+      "path": "SHA256SUMS",
+      "size": 1506,
+      "sha256": "662f7b0858c873862820a1f37f153bbf89d8c0e984b3e951affbfd0ae6307e48"
+    },
+    {
+      "path": "backbone_config.json",
+      "size": 1600,
+      "sha256": "36a15369eea5e3edbde50275acf430e5f5e0e17659df0f78e198a44a3df006d5"
+    },
+    {
+      "path": "chat_template.jinja",
+      "size": 7756,
+      "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+    },
+    {
+      "path": "model.safetensors",
+      "size": 5382147364,
+      "sha256": "74319701dde4fd0a2c9cfaea0cbeaf475ccf8059993b8b936434fbb432389671"
+    },
+    {
+      "path": "noma_config.json",
+      "size": 218,
+      "sha256": "0da8623fed6dbde4071bbc7319662e3bb26a10523cd45201dbd72a6661cc1b5b"
+    },
+    {
+      "path": "tokenizer.json",
+      "size": 19990993,
+      "sha256": "102d60215803f865c276db1a5f58c9c9da85822305e49a52bdae4804bab74672"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "size": 1128,
+      "sha256": "8671bed7c852ce9e661be94f179a7b4ffd091c2a65aea0363e5501c20318ee45"
+    }
+  ]
+}

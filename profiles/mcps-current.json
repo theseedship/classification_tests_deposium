@@ -1,0 +1,11 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "mcps-current-component-replay",
+  "adapter": "mcps",
+  "qualification": "component_replay",
+  "capabilities": ["mcps.document-plan", "mcps.document-followup", "mcps.scope-dispatch", "mcps.semantic-source-route"],
+  "model": null,
+  "timeout_seconds": 15,
+  "revision": "391be12078b1f3daa24a50c31c3a39eb72d7fb94",
+  "recordings": null
+}

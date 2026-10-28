@@ -1,0 +1,186 @@
+{
+  "schema_version": "deposium.mastra-planner-contracts/v0",
+  "qualification": "scripted_provider_not_model_prediction",
+  "backend_fixture": {
+    "search": {
+      "documents": [
+        {
+          "id": "fixture-doc-1"
+        },
+        {
+          "id": "fixture-doc-2"
+        }
+      ],
+      "blocks": [
+        {
+          "text": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "doc_id": "fixture-doc-1",
+          "page": 2
+        },
+        {
+          "text": "Synthetic passage 2.",
+          "doc_id": "fixture-doc-2",
+          "page": 2
+        },
+        {
+          "text": "Synthetic passage 3.",
+          "doc_id": "fixture-doc-2",
+          "page": 3
+        },
+        {
+          "text": "Synthetic passage 4.",
+          "doc_id": "fixture-doc-2",
+          "page": 4
+        },
+        {
+          "text": "Synthetic passage 5.",
+          "doc_id": "fixture-doc-2",
+          "page": 5
+        },
+        {
+          "text": "Synthetic passage 6.",
+          "doc_id": "fixture-doc-2",
+          "page": 6
+        }
+      ],
+      "graph_context": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
+    },
+    "stats": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"total_documents\":2,\"total_entities\":7}"
+        }
+      ]
+    }
+  },
+  "controls": [
+    {
+      "case_id": "planner-search-capture",
+      "request": {
+        "message": "Inspect the synthetic corpus.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        },
+        "provider_fixture": {
+          "kind": "tool_call",
+          "tool_name": "deposium_search",
+          "arguments": {
+            "query_text": "Find the source passages.",
+            "top_k": 5,
+            "tenant_id": "wrong-tenant",
+            "space_ids": [
+              "22222222-2222-4222-8222-222222222222"
+            ]
+          }
+        }
+      },
+      "expected": {
+        "status": "ok",
+        "qualification": "mock_native_planner_contract",
+        "mode": "full_native_pool_capture",
+        "comparable_to_three_label_candidate": false,
+        "cases_scored": 0,
+        "captured_calls": [
+          {
+            "handler": "searchHub",
+            "input": {
+              "query_text": "Find the source passages.",
+              "tenant_id": "synthetic-tenant-a",
+              "space_ids": [
+                "11111111-1111-4111-8111-111111111111"
+              ],
+              "top_k": 5,
+              "use_vector_rel": true,
+              "use_vector_kw": true,
+              "use_graph": true
+            }
+          }
+        ],
+        "native_tool_executions": 1,
+        "scripted_provider_requests": 1,
+        "real_provider_calls": 0,
+        "network_attempts": 0
+      }
+    },
+    {
+      "case_id": "planner-stats-capture",
+      "request": {
+        "message": "Inspect the synthetic corpus.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        },
+        "provider_fixture": {
+          "kind": "tool_call",
+          "tool_name": "deposium_analyze",
+          "arguments": {
+            "tenant_id": "wrong-tenant",
+            "space_ids": [
+              "22222222-2222-4222-8222-222222222222"
+            ]
+          }
+        }
+      },
+      "expected": {
+        "status": "ok",
+        "qualification": "mock_native_planner_contract",
+        "mode": "full_native_pool_capture",
+        "comparable_to_three_label_candidate": false,
+        "cases_scored": 0,
+        "captured_calls": [
+          {
+            "handler": "getCorpusStats",
+            "input": {
+              "tenant_id": "synthetic-tenant-a",
+              "space_id": "11111111-1111-4111-8111-111111111111",
+              "output_format": "json"
+            }
+          }
+        ],
+        "native_tool_executions": 1,
+        "scripted_provider_requests": 1,
+        "real_provider_calls": 0,
+        "network_attempts": 0
+      }
+    },
+    {
+      "case_id": "planner-text-stop-capture",
+      "request": {
+        "message": "Inspect the synthetic corpus.",
+        "context": {
+          "tenant_id": "synthetic-tenant-a",
+          "space_ids": [
+            "11111111-1111-4111-8111-111111111111"
+          ]
+        },
+        "provider_fixture": {
+          "kind": "text",
+          "text": "Scripted text stop."
+        }
+      },
+      "expected": {
+        "status": "ok",
+        "qualification": "mock_native_planner_contract",
+        "mode": "full_native_pool_capture",
+        "comparable_to_three_label_candidate": false,
+        "cases_scored": 0,
+        "output": {
+          "kind": "text_stop",
+          "text": "Scripted text stop.",
+          "fallback_equivalent": false
+        },
+        "captured_calls": [],
+        "native_tool_executions": 0,
+        "scripted_provider_requests": 1,
+        "real_provider_calls": 0,
+        "network_attempts": 0
+      }
+    }
+  ]
+}

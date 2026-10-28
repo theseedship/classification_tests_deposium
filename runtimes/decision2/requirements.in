@@ -1,0 +1,4 @@
+# Isolated CPU pilot. Keep older Julia/GLiNER environments unchanged.
+torch @ https://download-r2.pytorch.org/whl/cpu/torch-2.14.0%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=a09987c95ec4cffdb6df798d3d641558110a334cfccce22f2f046d83142bc260
+transformers==5.17.0
+safetensors==0.8.0

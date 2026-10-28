@@ -1,0 +1,286 @@
+{
+  "schema_version": "deposium.mastra-native-contract-evidence/v0",
+  "observed_date": "2026-10-02",
+  "archive": "results/mastra-native-contracts-002",
+  "summary": {
+    "schema_version": "deposium.mastra-native-contract-check/v0",
+    "qualification": "real_wrappers_mock_backends_no_planner",
+    "controls": 10,
+    "controls_passed": 10,
+    "contract_status": "matched",
+    "cases_scored": 0,
+    "model_calls": 0,
+    "semantic_evaluation_status": "not_run",
+    "service_status": "not_observed",
+    "source": {
+      "revision": "391be12078b1f3daa24a50c31c3a39eb72d7fb94",
+      "source_kind": "committed_file_snapshot",
+      "files_sha256": {
+        "src/agents/deposium-agent.ts": "e44e04e585fa3601955057a10a5b3c0f03ca80d6ae3363baf4a1209c77b735b1",
+        "src/agents/use-mastra-transport.ts": "6bc6da68d1aedaa27b0d87cc8d51c08545673ceaa85e946bd7f99f79eb74ac02",
+        "src/services/explicit-no-info-answer.ts": "5d1d3dd56cf42c19e825e9d9aaba2547dc274de89dc32db9b63f50083d8e39f5",
+        "src/utils/mcp-logger.ts": "7aeb61f30612c76afd3b83656a0164df9f4e70abd6e1a3ca0d03ef9a2d16f58f",
+        "src/utils/trace-context.ts": "de543f9d5e199a662fe09a1222b266e0d7106b0a670621100abb37665315e3b9",
+        "package.json": "ef76eeffbfe8435738dff86cc6572342305173147615c14cebc4025bd0e3c7f6",
+        "package-lock.json": "b73f05356bbfa49fd394990cf01a0d5b8fd64938d35554032345465dbd43af51"
+      },
+      "installed_dependencies": "shared_read_only_not_a_frozen_closure",
+      "application_worktree_executed": false
+    },
+    "files_sha256": {
+      "controls.json": "9d31a6bf8837bcb56dc26d443bf18b3fbeadcf7388aaeeb6ad2771055efffb43",
+      "results.jsonl": "7f5f21ea98072d1bb07ea16874e4dc701ca8e58496f58f83d8ed57a51fea66c5",
+      "stack-registry.json": "d9cd33a36b5d326a5b51135732d5fb44d26828b879f0af83b2b6f30de6610bb6"
+    },
+    "stack_registry_sha256": "d9cd33a36b5d326a5b51135732d5fb44d26828b879f0af83b2b6f30de6610bb6",
+    "bench_files_sha256": {
+      "deposium_bench/mastra_pilot.py": "55dc144483b81e1fd625f10ca89c978bcf6331efd7b4a996c64e5c680e73b2ac",
+      "bridges/mastra-read-pilot.mjs": "c6c8afb2fb81045bebe4a27915791720b92e1ebd5362a1b483c02ec2d4259773"
+    },
+    "components": [
+      {
+        "id": "deposium_MCPs",
+        "qualification": "mock_backends"
+      },
+      {
+        "id": "deposium_solid",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium_desktop",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium_CLI",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium_edge_runtime",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium_supabase",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium_rust_worker",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium_not_stirling",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium-turbov3",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium-tantivy",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium-turbovec",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium-inference",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium_geoai",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium_mindsdb",
+        "qualification": "not_exercised"
+      },
+      {
+        "id": "deposium_web_acquisition",
+        "qualification": "not_exercised"
+      }
+    ],
+    "limits": [
+      "No model selection or planner generation was performed.",
+      "searchHub and getCorpusStats are simulated, including returned counts and passages.",
+      "Caller scope is synthetic; no authentication, database isolation or live service is qualified.",
+      "Cold process duration is not decision latency or a speed-up measurement."
+    ]
+  },
+  "controls": [
+    {
+      "case_id": "search-scope-and-output-bounds",
+      "status": "ok",
+      "error": null,
+      "contract_check": {
+        "passed": true,
+        "checks": {
+          "status": true,
+          "qualification": true,
+          "output": true,
+          "captured_calls": true,
+          "model_calls": true,
+          "network_attempts": true,
+          "native_tool_executions": true
+        }
+      },
+      "selection_scored": false
+    },
+    {
+      "case_id": "stats-scope-and-mcp-envelope",
+      "status": "ok",
+      "error": null,
+      "contract_check": {
+        "passed": true,
+        "checks": {
+          "status": true,
+          "qualification": true,
+          "output": true,
+          "captured_calls": true,
+          "model_calls": true,
+          "network_attempts": true,
+          "native_tool_executions": true
+        }
+      },
+      "selection_scored": false
+    },
+    {
+      "case_id": "fallback-without-tool",
+      "status": "ok",
+      "error": null,
+      "contract_check": {
+        "passed": true,
+        "checks": {
+          "status": true,
+          "qualification": true,
+          "output": true,
+          "captured_calls": true,
+          "model_calls": true,
+          "network_attempts": true,
+          "native_tool_executions": true
+        }
+      },
+      "selection_scored": false
+    },
+    {
+      "case_id": "search-empty-is-not-error",
+      "status": "ok",
+      "error": null,
+      "contract_check": {
+        "passed": true,
+        "checks": {
+          "status": true,
+          "qualification": true,
+          "output": true,
+          "captured_calls": true,
+          "model_calls": true,
+          "network_attempts": true,
+          "native_tool_executions": true
+        }
+      },
+      "selection_scored": false
+    },
+    {
+      "case_id": "missing-tenant",
+      "status": "error",
+      "error": "mastra_read_input_failed",
+      "contract_check": {
+        "passed": true,
+        "checks": {
+          "status": true,
+          "error": true,
+          "output": true,
+          "captured_calls": true,
+          "model_calls": true,
+          "network_attempts": true
+        }
+      },
+      "selection_scored": false
+    },
+    {
+      "case_id": "empty-space",
+      "status": "error",
+      "error": "mastra_read_input_failed",
+      "contract_check": {
+        "passed": true,
+        "checks": {
+          "status": true,
+          "error": true,
+          "output": true,
+          "captured_calls": true,
+          "model_calls": true,
+          "network_attempts": true
+        }
+      },
+      "selection_scored": false
+    },
+    {
+      "case_id": "multiple-spaces",
+      "status": "error",
+      "error": "mastra_read_input_failed",
+      "contract_check": {
+        "passed": true,
+        "checks": {
+          "status": true,
+          "error": true,
+          "output": true,
+          "captured_calls": true,
+          "model_calls": true,
+          "network_attempts": true
+        }
+      },
+      "selection_scored": false
+    },
+    {
+      "case_id": "numeric-space",
+      "status": "error",
+      "error": "mastra_read_input_failed",
+      "contract_check": {
+        "passed": true,
+        "checks": {
+          "status": true,
+          "error": true,
+          "output": true,
+          "captured_calls": true,
+          "model_calls": true,
+          "network_attempts": true
+        }
+      },
+      "selection_scored": false
+    },
+    {
+      "case_id": "graph-outside-pool",
+      "status": "error",
+      "error": "mastra_read_input_failed",
+      "contract_check": {
+        "passed": true,
+        "checks": {
+          "status": true,
+          "error": true,
+          "output": true,
+          "captured_calls": true,
+          "model_calls": true,
+          "network_attempts": true
+        }
+      },
+      "selection_scored": false
+    },
+    {
+      "case_id": "annotation-in-request",
+      "status": "error",
+      "error": "mastra_read_input_failed",
+      "contract_check": {
+        "passed": true,
+        "checks": {
+          "status": true,
+          "error": true,
+          "output": true,
+          "captured_calls": true,
+          "model_calls": true,
+          "network_attempts": true
+        }
+      },
+      "selection_scored": false
+    }
+  ],
+  "note": "Compact evidence; raw requests/responses remain in the local archive. No model or live service qualification."
+}

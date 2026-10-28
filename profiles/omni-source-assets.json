@@ -1,0 +1,32 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "LiquidAI/d1-omni-600M",
+  "revision": "414f8d6438174f5b2133a9c21a478fc42625e308",
+  "files": [
+    {
+      "path": "audio.py",
+      "size": 11829,
+      "sha256": "c5ff09d52d6a079e79d0505c89dbd0582ba2bc9abf2b26595d8d5b1d0c347bdf"
+    },
+    {
+      "path": "encoder.py",
+      "size": 7732,
+      "sha256": "5f2e20319ee42a7367febf06c7653d7b3f9b28ef99a64cb9ec7739563dcfcffe"
+    },
+    {
+      "path": "modeling_d1.py",
+      "size": 8655,
+      "sha256": "2b71a5c909ec5d3aa6307378a41a0fd24af1e17d5c1c1f8d510582147051a686"
+    },
+    {
+      "path": "prompt.py",
+      "size": 6309,
+      "sha256": "a6b29a55ec8345f1fc1fdbfcc4b64d80d473dc4316f095a62c51cb6cce1194cf"
+    },
+    {
+      "path": "vision.py",
+      "size": 5233,
+      "sha256": "43ad71029f82e20fd26b97574627773d47639d7a3742c8b04fe5bf55f41c4c28"
+    }
+  ]
+}

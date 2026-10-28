@@ -1,0 +1,47 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "muose/Muose-50M-Decision",
+  "revision": "5afb8eeff127621fea2d66fc63f56798ada12eda",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "size": 1519,
+      "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+    },
+    {
+      "path": "README.md",
+      "size": 2802,
+      "sha256": "2a3268033869cc811a5c192a9d09920a4ed004e9c679f5e8d0aad5eb21bd1ee9"
+    },
+    {
+      "path": "config.json",
+      "size": 556,
+      "sha256": "e08acb934be8c02767197a561e92b47501e9ca85a1381081e98467ae92cc3b7b"
+    },
+    {
+      "path": "decision_model.py",
+      "size": 2082,
+      "sha256": "e0f3174d8578f643019552364bde9f5038894953d9e159efba05dd64b096ba01"
+    },
+    {
+      "path": "merges.txt",
+      "size": 217070,
+      "sha256": "4cc053b0552311c2a05ccd4451295fec8747d8d00c1ec37d87d1181b2a128f5b"
+    },
+    {
+      "path": "model.py",
+      "size": 7577,
+      "sha256": "7e743f2bdb5534359bb38d951bb98d8d28d9a6d5c04eeb6a7bd81a02e775d6b9"
+    },
+    {
+      "path": "model.safetensors",
+      "size": 203051616,
+      "sha256": "3d81f0712ea1e9495a5996258dbc9a41e2fc2e1912dd87464683b20950e5c76f"
+    },
+    {
+      "path": "vocab.json",
+      "size": 374931,
+      "sha256": "8c7e0f4021640cb024648d11831329b98a9f3f7c8ca340aa9915ae5a11746747"
+    }
+  ]
+}

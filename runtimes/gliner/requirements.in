@@ -1,0 +1,7 @@
+# Isolated CPU runtime; no CUDA dependencies and no changes to Julia's environment.
+torch @ https://download-r2.pytorch.org/whl/cpu/torch-2.14.0%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=a09987c95ec4cffdb6df798d3d641558110a334cfccce22f2f046d83142bc260
+gliner2[local]==2.0.0
+# GLiNER2 2.0.0 officially constrains Transformers below 5.
+transformers<5
+# Required by Transformers 4.x exception handling during tokenizer compatibility loading.
+protobuf<7

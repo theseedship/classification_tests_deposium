@@ -1,0 +1,19 @@
+{
+  "schema_version": "deposium.modernjev-choice-projection/v1",
+  "repo_id": "MaziyarPanahi/ModernJEV-Decide-Preview",
+  "revision": "d5b398ed03de073a00bc4e53acf53afda409445e",
+  "state": {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "context"
+      }
+    ],
+    "available_tools": []
+  },
+  "question": "question",
+  "criteria": "ordered_descriptions_as_native_list",
+  "opaque_ids_visible": false,
+  "candidate_batch_size": 1,
+  "max_length": 4096
+}

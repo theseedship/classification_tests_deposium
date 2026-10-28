@@ -1,0 +1,26 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "indecis-bekko-open-cpu-context-v1",
+  "adapter": "indecis",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "revision": "c721113d59a1d91b447450324f51c4b3332c924a",
+  "recordings": null,
+  "timeout_seconds": 30,
+  "model": {
+    "repo_id": "hotchpotch/bekko-embedding-v1-a8m",
+    "local_dir": "../models/bekko-embedding-v1-a8m-c721113",
+    "assets_manifest": "indecis-assets.json",
+    "prompt_path": "indecis-choice-prompt-v1.json",
+    "source_dir": "../.cache/indecis-source",
+    "source_manifest": "../runtimes/indecis/indecis-source-manifest.json",
+    "source_revision": "339e191405ac9be90f6857f810f478b3312b7f35",
+    "worker_binary": "../.cache/indecis-runtime/indecis-worker",
+    "build_manifest": "../runtimes/indecis/indecis-build-manifest.json",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 3072
+  }
+}

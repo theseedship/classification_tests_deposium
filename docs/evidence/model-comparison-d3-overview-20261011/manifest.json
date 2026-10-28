@@ -1,0 +1,10 @@
+{
+  "current_json_sha256": "971feed2559030d565320729f05331cbc8ddc0bec3e4e25992e09b17a256fe54",
+  "models": 17,
+  "producer_sha256": "7a62ba96a9206c92f5c958c2f502d730be5a33168fa914b881fa773e936bd546",
+  "report_sha256": "f5d94a53d8ad1f0ba12d11e2dda7550eabdb0a7c97cad33523ab54948615a6b8",
+  "schema_version": "deposium.composed-comparison/v1",
+  "scope": "aggregate_only_no_raw_archive_verification",
+  "sol_json_sha256": "6659ab61c392c0123eb46350595181ba5f2e6530b59713a21847f755ea4fe97c",
+  "vela_json_sha256": "53054c718cae191d117eb0afe7e84a2657ef9f73a1b922ab34a27d6801dd7c07"
+}

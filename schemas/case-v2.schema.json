@@ -1,0 +1,426 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "deposium.case/v2",
+  "description": "One research context-choice record. Runtime additionally verifies oracle semantics, unique option IDs and descriptions, referenced contracts, split isolation, token arithmetic and hashes; JSON Schema cannot establish these cross-record or computed invariants.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "scenario_id",
+    "translation_family",
+    "document_ids",
+    "split",
+    "language",
+    "pack",
+    "contract_id",
+    "input",
+    "reference",
+    "evaluation"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "deposium.case/v2"
+    },
+    "case_id": {
+      "$ref": "#/$defs/text"
+    },
+    "scenario_id": {
+      "$ref": "#/$defs/text"
+    },
+    "translation_family": {
+      "$ref": "#/$defs/text"
+    },
+    "document_ids": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/text"
+      },
+      "uniqueItems": true
+    },
+    "split": {
+      "enum": [
+        "train",
+        "calibration",
+        "test"
+      ]
+    },
+    "language": {
+      "enum": [
+        "fr",
+        "en",
+        "de",
+        "es",
+        "it",
+        "pt"
+      ]
+    },
+    "pack": {
+      "const": "RESEARCH"
+    },
+    "contract_id": {
+      "const": "bench.context-choice"
+    },
+    "input": {
+      "$ref": "#/$defs/context_choice_input"
+    },
+    "reference": {
+      "$ref": "#/$defs/reference"
+    },
+    "evaluation": {
+      "$ref": "#/$defs/evaluation"
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assertions",
+        "abstention_allowed",
+        "rationale"
+      ],
+      "properties": {
+        "assertions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "op",
+              "value"
+            ],
+            "properties": {
+              "path": {
+                "const": "/choice_id"
+              },
+              "op": {
+                "const": "equals"
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            }
+          }
+        },
+        "abstention_allowed": {
+          "const": false
+        },
+        "rationale": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "assertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "op",
+        "value"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?:/(?:[^~]|~[01])*)*$"
+        },
+        "op": {
+          "enum": [
+            "equals",
+            "one_of",
+            "set_equals"
+          ]
+        },
+        "value": {}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "one_of"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "array",
+                "minItems": 1,
+                "items": {}
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "set_equals"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "array",
+                "minItems": 0,
+                "items": {}
+              }
+            }
+          }
+        }
+      ]
+    },
+    "choice_option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "length": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_tokens",
+        "actual_tokens",
+        "content_tokens",
+        "head_tokens",
+        "padded_tokens",
+        "position",
+        "order",
+        "tokenizer_sha256",
+        "tokenizer_revision",
+        "base_input_sha256",
+        "generator_version",
+        "within_target"
+      ],
+      "properties": {
+        "target_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 131072
+        },
+        "actual_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 131072
+        },
+        "content_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 131072
+        },
+        "head_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 131072
+        },
+        "padded_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 131072
+        },
+        "position": {
+          "enum": [
+            "start",
+            "middle",
+            "end"
+          ]
+        },
+        "order": {
+          "enum": [
+            "original",
+            "reversed"
+          ]
+        },
+        "tokenizer_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "tokenizer_revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "base_input_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "generator_version": {
+          "const": "deposium.length-generator/v1"
+        },
+        "within_target": {
+          "type": "boolean"
+        }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain",
+        "difficulty",
+        "base_case_id",
+        "related_contract_ids",
+        "review",
+        "task_type",
+        "oracle",
+        "length"
+      ],
+      "properties": {
+        "domain": {
+          "enum": [
+            "documentary",
+            "mathematics",
+            "chemistry"
+          ]
+        },
+        "difficulty": {
+          "enum": [
+            "D1",
+            "D2",
+            "D3"
+          ]
+        },
+        "base_case_id": {
+          "$ref": "#/$defs/text"
+        },
+        "related_contract_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "review": {
+          "const": "agent_only"
+        },
+        "task_type": {
+          "$ref": "#/$defs/text"
+        },
+        "oracle": {
+          "$ref": "#/$defs/research_oracle"
+        },
+        "length": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/length"
+            }
+          ]
+        }
+      }
+    },
+    "context_choice_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context",
+        "question",
+        "options"
+      ],
+      "properties": {
+        "context": {
+          "type": "string"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/choice_option"
+          }
+        }
+      }
+    },
+    "research_oracle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "params",
+        "choices",
+        "base_input"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "absolute_square",
+            "balance",
+            "cancel_domain",
+            "chain_derivative",
+            "dimension_ratio",
+            "formula_atoms",
+            "function_composition",
+            "human_reference",
+            "hydrate_mass_fraction",
+            "insufficient_functions",
+            "insufficient_linear",
+            "insufficient_structure",
+            "insufficient_volume",
+            "limiting_reaction",
+            "matrix_shape",
+            "neutral_ratio",
+            "polynomial_remainder",
+            "polynomial_square",
+            "quantity_program",
+            "rational_equation",
+            "rational_program"
+          ]
+        },
+        "params": {
+          "type": "object",
+          "minProperties": 1
+        },
+        "choices": {
+          "type": "object",
+          "minProperties": 2,
+          "maxProperties": 20,
+          "propertyNames": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "additionalProperties": {}
+        },
+        "base_input": {
+          "$ref": "#/$defs/context_choice_input"
+        }
+      }
+    }
+  }
+}
