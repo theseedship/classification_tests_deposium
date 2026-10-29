@@ -87,9 +87,9 @@ unsuccessful cases are not removed from the total. Technical `unsupported`,
 
 The first operation is fixed by this fixture. This slice tests a response-to-
 argument binding and one next-call proposal, not arbitrary workflow discovery,
-retries or stopping. Bounded adaptive feedback is the later
-[#12](https://github.com/theseedship/classification_tests_deposium/issues/12)
-task. Real-model structured-output paths remain separately unqualified.
+retries or stopping. Bounded feedback is covered by the separate
+[#12 episode fixture](../tool-episodes-v1/README.md).
+Real-model structured-output paths remain separately unqualified.
 
 ## Validate and execute the control
 

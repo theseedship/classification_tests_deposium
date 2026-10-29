@@ -1,6 +1,6 @@
 # Campaign status and next steps
 
-**Checkpoint: 29 October 2026.** This is the current work-order page; the
+**Checkpoint: 30 October 2026.** This is the current work-order page; the
 [public issue roadmap](https://github.com/theseedship/classification_tests_deposium/issues/19)
 tracks contributions. Use [Results and coverage](RESULTS.md#coverage-overview)
 for measured outcomes and untested cells, and the [protocol](PROTOCOL.md) for
@@ -26,10 +26,13 @@ and bounded agent reviews strengthen the checks without assigning expert forms
 to the maintainer. Human review stays a separate, explicitly pending audit.
 The initial #10 [discovery/selection fixture](../datasets/tool-discovery-v1/README.md)
 was delivered by merged PR #29. The initial #11
-[argument-execution fixture](../datasets/tool-arguments-v1/README.md) is ready
-for review: four FR/EN training cases and actual lookup/sum receipts, with zero
-real model results. The next implementation step is #12's bounded feedback
-loop. Broad model reruns need not precede these offline checks.
+[argument-execution fixture](../datasets/tool-arguments-v1/README.md) was delivered
+by merged PR #30: four training cases with actual lookup/sum receipts. The #12
+[episode fixture](../datasets/tool-episodes-v1/README.md) adds 14 training controls
+with actual feedback, including four successful task results and ten justified
+stops/clarifications. These remain synthetic harness checks with zero real-model
+results. Next, qualify one candidate's output path and a small bounded canary
+before broader comparisons; freeze fresh held-out families before a campaign.
 
 | Work | Prerequisite and next action | Exit criterion |
 |---|---|---|
@@ -37,8 +40,8 @@ loop. Broad model reruns need not precede these offline checks.
 | [#8 — Human reference review](https://github.com/theseedship/classification_tests_deposium/issues/8) **packet ready; humans pending** | Use the [prepared pilot](REFERENCE_REVIEW_PILOT.md) and agree a small assignment with a human reviewer. Physics laws/units, FR/EN, evidence labels/conflicts and both passage views are available for incremental review. No reviewer is assigned by this repository. | Real human annotations, disagreements and adjudication remain outstanding; record actual scope and exposure. Preparation alone is not completed human review. |
 | [#9 — New contract and fresh scenarios](https://github.com/theseedship/classification_tests_deposium/issues/9) **initial contribution delivered** | The [bounded proposal contract](TOOL_PLAN_CONTRACT_V1.md), runtime output audit and [12-family proposal](../datasets/tool-plan-pilot-v1/README.md) provide the initial offline slice. Only one train family is materialized (two FR/EN cases); no held-out cases or model campaigns. | Recorded shared-engine success and empty/wrong/malformed/overcalling/premature-success controls are implemented. v1 choice datasets remain unchanged. Review and freeze any expansion before inference; a recorded control is not a model result. |
 | [#10 — Discovery and tool selection](https://github.com/theseedship/classification_tests_deposium/issues/10) **initial fixture delivered** | The [contract/metrics](TOOL_DISCOVERY_CONTRACT_V1.md) and 12-case FR/EN pack are merged. Distinguish plugin, capability and tool IDs, shortlist recall and final sufficient/minimal sets. | Recorded controls cover alternatives and semantic nonselection. No real model output path or tool execution is qualified. |
-| [#11 — Arguments and artifact dependencies](https://github.com/theseedship/classification_tests_deposium/issues/11) **initial execution fixture ready for review** | Review the [four-case training fixture](../datasets/tool-arguments-v1/README.md) and [bounded contract](TOOL_ARGUMENTS_CONTRACT_V1.md), which bind a proposal to an actual lookup artifact before running a guarded sum. | Actual receipts, independent argument/scope/unit/binding guards and separate stage metrics are implemented; zero real model or live application qualification. |
-| [#12 — Bounded tool episodes](https://github.com/theseedship/classification_tests_deposium/issues/12) | After #9/#11 and a supported candidate output format, execute two or three deterministic synthetic tools and feed back actual observations. | Archived success/failure traces; explicit retry/step/call/time bounds; separate selection, arguments, dependencies, result and stopping metrics. Offline fixtures remain distinct from model campaigns. |
+| [#11 — Arguments and artifact dependencies](https://github.com/theseedship/classification_tests_deposium/issues/11) **initial execution fixture delivered** | Use the [four-case training fixture](../datasets/tool-arguments-v1/README.md) and [bounded contract](TOOL_ARGUMENTS_CONTRACT_V1.md), which bind a proposal to an actual lookup artifact before running a guarded sum. | Actual receipts, independent argument/scope/unit/binding guards and separate stage metrics are implemented; zero real model or live application qualification. |
+| [#12 — Bounded tool episodes](https://github.com/theseedship/classification_tests_deposium/issues/12) **initial execution fixture delivered** | Use the [14-case training pack](../datasets/tool-episodes-v1/README.md) and [contract](TOOL_EPISODES_CONTRACT_V1.md): actual observations, bounded retry/step/call/time checks and sealed traces. | Separate selection, arguments, dependencies, execution, result and stopping metrics. Scripted positive handling is 14/14; successful task results are 4/14 overall, 4/4 eligible. No real-model or live application qualification. |
 | [#13 — Passage order and evidence retention](https://github.com/theseedship/classification_tests_deposium/issues/13) **in parallel** | Freeze matched pools, four rotations, both views, task projections and physical-call reuse; #8 review informs interpretation. | Order/evidence retention metrics and denominators, calibrated without test tuning; existing v1 and rotation-zero evidence preserved. |
 | [#14 — Remaining frozen-cohort runtimes](https://github.com/theseedship/classification_tests_deposium/issues/14) | Prepare independent platform/runtime preflights; run only the next admitted candidate in the [frozen sequence](CAPABILITY_CAMPAIGN_PLAN.md). | Pinned runtime/helper and admission evidence, then separate fresh anchor/capability archives. Refusal stays a preflight result, not a model score. |
 | [#15 — Clef 27B envelope](https://github.com/theseedship/classification_tests_deposium/issues/15) | Prepare a dedicated native identity and resource envelope; the Flash launcher is not a generic large-model override. | Offline refusal controls and actual supported native choices; 24 GiB RSS plus 8 GiB reserve admission guard before any inference. Clef 27B and historical D3 27B remain distinct. |
@@ -70,9 +73,10 @@ and the hosted Turbo path remain unexecuted here. A publisher score, runtime
 installation or successful canary is not a benchmark result.
 
 The [harness coverage table](RESULTS.md#harness-coverage) separates existing
-closed-choice/fixture checks from discovery, executable arguments, real tool
-feedback, allocation and end-to-end answer quality. These missing capabilities
-motivate #9–#18; more closed-choice model runs alone cannot qualify them.
+closed-choice model observations from scripted discovery, executable arguments
+and bounded feedback fixtures. Real-model output generation on those new
+contracts, application replay, allocation and end-to-end answer quality remain
+unqualified; more closed-choice runs alone cannot qualify them.
 
 ## Validation matrix
 
@@ -82,7 +86,7 @@ No model inference or paid API was part of the offline checks.
 
 | Scope | Recorded result | Interpretation |
 |---|---|---|
-| Linux / Python 3.12, executable-argument fixture and the shared core | 939 tests: 908 passed, 31 optional skips, no failures or errors. Executed without network in the local validation image, with a read-only source mount and temporary results storage. | Current offline implementation check; skipped optional integrations remain unqualified. It is not model inference or human review. |
+| Linux / Python 3.12, bounded episode fixture and the shared core | 965 tests: 934 passed, 31 optional skips, no failures or errors. Executed without network in the local validation image, with a read-only source mount and temporary results storage. | Current offline implementation check; skipped optional integrations remain unqualified. It is not model inference or human review. |
 | Historical frozen campaign code, 29 October 2026 | 817 tests: 786 passed, 31 optional skips, no failures. | Historical code checkpoint only; **not the current checkout's global PASS**. |
 | macOS / Python 3.13, core checks | Registry, context/physics cases, capability/passage corpora and generated result views validated at the prior checkpoint. | Data/contract/export checks, not inference or human review. |
 | macOS / Python 3.13, targeted native/campaign/scoring suite | 182 tests: 180 passed, two optional skips. | Targeted implementation verification only. |

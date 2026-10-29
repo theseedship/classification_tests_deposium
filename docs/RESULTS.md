@@ -82,7 +82,7 @@ A missing model observation and a missing harness capability are different gaps.
 | Versioned task contract beyond supplied proposals | fixture_only | [Bounded contract](TOOL_PLAN_CONTRACT_V1.md) and two recorded FR/EN training controls; no qualified model output path, model result or executed tools. | [#9](https://github.com/theseedship/classification_tests_deposium/issues/9) |
 | Open catalogue discovery and sufficient tool sets | fixture_only | [Tool-discovery contract](TOOL_DISCOVERY_CONTRACT_V1.md): 12 FR/EN cases, separate shortlist/final-set metrics and recorded controls; no qualified model output path, model result or executed tools. | [#10](https://github.com/theseedship/classification_tests_deposium/issues/10) |
 | Executable arguments and artifact bindings | fixture_only | [Argument-execution contract](TOOL_ARGUMENTS_CONTRACT_V1.md): four FR/EN training cases, actual bounded lookup/sum and artifact guards; no qualified real-model output path or application integration. | [#11](https://github.com/theseedship/classification_tests_deposium/issues/11) |
-| Bounded episodes with executed tools and feedback | not_implemented | Fixed observation choices do not implement a multi-turn execution loop. | [#12](https://github.com/theseedship/classification_tests_deposium/issues/12) |
+| Bounded episodes with executed tools and feedback | fixture_only | [Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics; four task results, zero real-model or application qualification. | [#12](https://github.com/theseedship/classification_tests_deposium/issues/12) |
 | Order robustness and evidence retention | partial_coverage | Historical four-rotation ranking exists; new Flash classifications cover rotation 0 only. | [#13](https://github.com/theseedship/classification_tests_deposium/issues/13) |
 | Remaining cohort on new packs | not_run | Historical context scores cannot fill new task cells. | [#14](https://github.com/theseedship/classification_tests_deposium/issues/14) |
 | Clef 27B candidate envelope | not_run | Separate runtime/resource qualification is required. | [#15](https://github.com/theseedship/classification_tests_deposium/issues/15) |
@@ -90,7 +90,7 @@ A missing model observation and a missing harness capability are different gaps.
 | Pinned application harness integration | not_implemented | An integration registry or isolated model run does not establish live application behavior. | [#17](https://github.com/theseedship/classification_tests_deposium/issues/17) |
 | Evidence-to-answer generation and citation fidelity | not_implemented | No complete retrieval-to-answer campaign is qualified. | [#18](https://github.com/theseedship/classification_tests_deposium/issues/18) |
 
-The next sequence is [the task contract #9](https://github.com/theseedship/classification_tests_deposium/issues/9), then discovery/arguments/episodes as their dependencies become executable. Cohort reruns do not resolve these harness gaps. See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.
+The initial contract, discovery, arguments and episode fixtures are implemented as scripted controls. Next, qualify a candidate output path and a bounded canary; freeze fresh held-out families before broader model campaigns. See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.
 
 ## Updated task rankings
 

@@ -10048,13 +10048,13 @@
         "status": "fixture_only"
       },
       {
-        "boundary": "Fixed observation choices do not implement a multi-turn execution loop.",
+        "boundary": "[Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics; four task results, zero real-model or application qualification.",
         "capability": "Bounded episodes with executed tools and feedback",
         "id": "episodes",
         "issues": [
           "https://github.com/theseedship/classification_tests_deposium/issues/12"
         ],
-        "status": "not_implemented"
+        "status": "fixture_only"
       },
       {
         "boundary": "Historical four-rotation ranking exists; new Flash classifications cover rotation 0 only.",
@@ -14524,7 +14524,7 @@
       "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
       "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
       "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
-      "scripts/build-full-results.py": "25687dd24fe55e1ae14aff2107f3b1524858483e0eef2a979d38dcdee8896c5e",
+      "scripts/build-full-results.py": "179554ae902250d1a7b00cd8e8e2237698be91dfcac1b877d9e1eaf6e9e61671",
       "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
       "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
       "scripts/consolidated-campaigns.py": "71b2c6972e1da1dca58f28e2514a30cb02e98d14ce18c85a3a5fc1fd2a4ea2f0"
@@ -101216,7 +101216,7 @@
     "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
     "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
     "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
-    "scripts/build-full-results.py": "25687dd24fe55e1ae14aff2107f3b1524858483e0eef2a979d38dcdee8896c5e",
+    "scripts/build-full-results.py": "179554ae902250d1a7b00cd8e8e2237698be91dfcac1b877d9e1eaf6e9e61671",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
     "scripts/consolidated-campaigns.py": "71b2c6972e1da1dca58f28e2514a30cb02e98d14ce18c85a3a5fc1fd2a4ea2f0"

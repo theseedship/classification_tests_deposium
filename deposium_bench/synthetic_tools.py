@@ -15,7 +15,7 @@ def canonical(value):
                       ensure_ascii=True, allow_nan=False).encode()
 
 
-def validate_fixture(scope_id, dataset):
+def validate_fixture(scope_id, dataset, *, allow_empty=False):
     def text(value):
         return (isinstance(value, str) and 0 < len(value) <= 128
                 and value.strip() and not any(ord(c) < 32 for c in value))
@@ -27,25 +27,26 @@ def validate_fixture(scope_id, dataset):
     if dataset["unit"] not in {"EUR", "USD", "kg", "m"}:
         raise ToolError("invalid_fixture_unit")
     values = dataset["values"]
-    if (not isinstance(values, list) or not 1 <= len(values) <= 32
+    if (type(allow_empty) is not bool or not isinstance(values, list) or not (0 if allow_empty else 1) <= len(values) <= 32
             or any(type(v) is not int or abs(v) > 10**9 for v in values)):
         raise ToolError("invalid_fixture_values")
 
 
-def artifact_id(task_input):
+def artifact_id(task_input, *, allow_empty=False):
     """Public content-addressing rule; this computes an ID, not a tool call."""
-    validate_fixture(task_input["scope_id"], task_input["dataset"])
+    validate_fixture(task_input["scope_id"], task_input["dataset"], allow_empty=allow_empty)
     payload = {"scope_id": task_input["scope_id"], "dataset": task_input["dataset"]}
     return "artifact:" + hashlib.sha256(canonical(payload)).hexdigest()
 
 
 class FixtureStore:
     """Case-local artifact store; no filesystem, network, code evaluation or RNG."""
-    def __init__(self, task_input, max_calls=2):
-        validate_fixture(task_input["scope_id"], task_input["dataset"])
+    def __init__(self, task_input, max_calls=2, *, allow_empty=False):
+        validate_fixture(task_input["scope_id"], task_input["dataset"], allow_empty=allow_empty)
         if type(max_calls) is not int or not 1 <= max_calls <= 8:
             raise ToolError("invalid_call_budget")
         self.task = deepcopy(task_input)
+        self.allow_empty = allow_empty
         self.max_calls, self.calls, self.trace = max_calls, 0, []
         self.artifacts = {}
 
@@ -57,7 +58,7 @@ class FixtureStore:
     def lookup(self):
         self._admit()
         data = self.task["dataset"]
-        artifact = {"artifact_id": artifact_id(self.task), "scope_id": self.task["scope_id"],
+        artifact = {"artifact_id": artifact_id(self.task, allow_empty=self.allow_empty), "scope_id": self.task["scope_id"],
                     **deepcopy(data)}
         self.artifacts[artifact["artifact_id"]] = artifact
         receipt = {"tool_id": "fixture.lookup", "tool_call": self.calls, "status": "ok",

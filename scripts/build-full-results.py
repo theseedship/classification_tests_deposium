@@ -567,8 +567,8 @@ def build_coverage(observations, campaigns, others, inputs):
          "[Tool-discovery contract](TOOL_DISCOVERY_CONTRACT_V1.md): 12 FR/EN cases, separate shortlist/final-set metrics and recorded controls; no qualified model output path, model result or executed tools.", [10]),
         ("arguments", "Executable arguments and artifact bindings", "fixture_only",
          "[Argument-execution contract](TOOL_ARGUMENTS_CONTRACT_V1.md): four FR/EN training cases, actual bounded lookup/sum and artifact guards; no qualified real-model output path or application integration.", [11]),
-        ("episodes", "Bounded episodes with executed tools and feedback", "not_implemented",
-         "Fixed observation choices do not implement a multi-turn execution loop.", [12]),
+        ("episodes", "Bounded episodes with executed tools and feedback", "fixture_only",
+         "[Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics; four task results, zero real-model or application qualification.", [12]),
         ("order_retention", "Order robustness and evidence retention", "partial_coverage",
          "Historical four-rotation ranking exists; new Flash classifications cover rotation 0 only.", [13]),
         ("cohort", "Remaining cohort on new packs", "not_run",
@@ -677,9 +677,9 @@ def render_coverage(coverage):
     for row in coverage["harness"]:
         links = ", ".join(f"[#{url.rsplit('/', 1)[1]}]({url})" for url in row["issues"]) or "—"
         lines.append(f"| {row['capability']} | {row['status']} | {row['boundary']} | {links} |")
-    lines += ["", "The next sequence is [the task contract #9](" + ISSUES + "9), then discovery/arguments/episodes "
-              "as their dependencies become executable. Cohort reruns do not resolve these harness gaps. "
-              "See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.", ""]
+    lines += ["", "The initial contract, discovery, arguments and episode fixtures are implemented as scripted controls. "
+              "Next, qualify a candidate output path and a bounded canary; freeze fresh held-out families "
+              "before broader model campaigns. See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.", ""]
     return lines
 
 

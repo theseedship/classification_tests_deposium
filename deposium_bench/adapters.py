@@ -90,7 +90,7 @@ def _validate_profile(profile: dict) -> None:
     if profile["schema_version"] != "deposium.candidate/v1" or not isinstance(profile["profile_id"], str) or not profile["profile_id"].strip():
         raise AdapterError("Invalid candidate profile identity.")
     adapter = profile["adapter"]
-    if not isinstance(adapter, str) or adapter not in {"mcps", "mcps_resident", "recorded", "fixture_arguments", "julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
+    if not isinstance(adapter, str) or adapter not in {"mcps", "mcps_resident", "recorded", "fixture_arguments", "fixture_episode", "julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
         raise AdapterError("Unknown candidate adapter.")
     capabilities = profile["capabilities"]
     allowed = set(CONTRACTS) | ({"mcps.search"} if adapter == "recorded" else set())
@@ -98,6 +98,8 @@ def _validate_profile(profile: dict) -> None:
         allowed.update({"bench.tool-plan", "bench.tool-discovery"})
     if adapter == "fixture_arguments":
         allowed = {"bench.tool-arguments"}
+    if adapter == "fixture_episode":
+        allowed = {"bench.tool-episode"}
     if adapter in {"julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast", "recorded"}:
         allowed.add("bench.context-choice")
     if (not isinstance(capabilities, list) or not capabilities
@@ -107,6 +109,8 @@ def _validate_profile(profile: dict) -> None:
     timeout = profile["timeout_seconds"]
     if isinstance(timeout, bool) or not isinstance(timeout, (int, float)) or not math.isfinite(timeout) or timeout <= 0:
         raise AdapterError("Candidate timeout must be finite and positive.")
+    if adapter == "fixture_episode" and timeout < 1:
+        raise AdapterError("Fixture episode profiles require at least the bounded one-second envelope.")
     if adapter == "julia":
         from .julia_adapter import validate_model_profile
         validate_model_profile(profile)
@@ -434,6 +438,9 @@ def create_adapter(profile: dict, profile_path: str | Path, stack_root: str | Pa
     _validate_profile(profile)
     profile = copy.deepcopy(profile)
     path = Path(profile_path).resolve()
+    if profile["adapter"] == "fixture_episode":
+        from .tool_episodes import FixtureEpisodeAdapter
+        return FixtureEpisodeAdapter(profile, path, recordings_data)
     if profile["adapter"] == "fixture_arguments":
         from .tool_arguments import FixtureArgumentsAdapter
         return FixtureArgumentsAdapter(profile, path, recordings_data)

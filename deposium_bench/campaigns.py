@@ -82,7 +82,7 @@ def _source_fingerprint() -> dict:
 def _scorer_fingerprint() -> dict:
     root = Path(__file__).parent
     files = {name: _hash((root / name).read_bytes()) for name in
-             ("scoring.py", "cases.py", "tool_plan.py", "tool_discovery.py", "tool_arguments.py", "synthetic_tools.py", "research_corpus.py", "physics_corpus.py", "capability_corpus.py", "choice_protocol.py",
+             ("scoring.py", "cases.py", "tool_plan.py", "tool_discovery.py", "tool_arguments.py", "tool_episodes.py", "synthetic_tools.py", "research_corpus.py", "physics_corpus.py", "capability_corpus.py", "choice_protocol.py",
               "lengths.py", "data/context-distractors.json")}
     from .capability_corpus import SOURCE_FILES
     for name in SOURCE_FILES:
@@ -113,7 +113,7 @@ def _limit(value: int | None) -> None:
 def _prepare_profile(profile_path: Path) -> tuple[dict, str, bytes | None]:
     profile, digest = load_profile(profile_path)
     recordings = None
-    if profile["adapter"] in {"recorded", "fixture_arguments"}:
+    if profile["adapter"] in {"recorded", "fixture_arguments", "fixture_episode"}:
         recordings = (profile_path.parent / profile["recordings"]).read_bytes()
         profile = {**profile, "recordings": "recordings.jsonl"}
     elif profile["adapter"] in {"julia", "gliner", "decision2", "vela2", "d3"}:
@@ -237,7 +237,8 @@ def _manifest(cases: list[dict], dataset: bytes, profile: dict, source_profile_h
         "created_at": datetime.now(timezone.utc).isoformat(), "mode": mode,
         "qualification": profile["qualification"],
         "proof_level": "harness_control" if profile["qualification"] == "harness_control" else "A",
-        "input_protocol": ("fixture_arguments_control" if profile["adapter"] == "fixture_arguments" else
+        "input_protocol": ("fixture_episode_control" if profile["adapter"] == "fixture_episode" else
+                           "fixture_arguments_control" if profile["adapter"] == "fixture_arguments" else
                            "recorded_control" if profile["adapter"] == "recorded" else
                            "context_choice" if "bench.context-choice" in profile["capabilities"] else "current_equivalent"),
         "dataset_sha256": _hash(dataset), "profile_sha256": _hash(_encode(profile)),
@@ -397,6 +398,25 @@ def render_report(summary: dict) -> str:
         lines += ["", f"Observed tool calls: {arguments['tool_calls_observed']}; "
                   f"cases with retained execution traces: {arguments['cases_with_execution_trace']} / {total}. "
                   "An absent trace is unobserved execution, not proof of zero calls."]
+    episode = metrics.get("task_metrics", {}).get("bench.tool-episode")
+    if episode is not None:
+        total = episode["eligible_cases"]
+        lines += ["", "## Synthetic tool episodes", "",
+                  "Scripted policies receive actual fixture observations after each executed call. "
+                  "This control does not qualify a model or product.", "",
+                  f"Procedure correctness: {episode['procedure_correct_cases']} / {total}; "
+                  f"task success: {episode['task_success_cases']} / {total} overall, "
+                  f"{episode['task_success_cases']} / {episode['task_success_eligible_cases']} success-eligible cases.",
+                  "", "| Stage | Correct / source-eligible cases |", "|---|---:|"]
+        for stage in ("tool", "arguments", "binding", "execution", "result", "stopping", "budget"):
+            lines.append(f"| {stage} | {episode[stage + '_correct_cases']} / {episode[stage + '_eligible_cases']} |")
+        lines += ["", f"Observed policy invocations: {episode['policy_steps_observed']}; "
+                  f"tool attempts: {episode['tool_call_attempts_observed']}; "
+                  f"actual tool calls: {episode['tool_calls_observed']} "
+                  f"({episode['tool_status_counts']['ok']} ok, "
+                  f"{episode['tool_status_counts']['controlled_error']} controlled errors). "
+                  f"Cases with validated retained traces: {episode['cases_with_execution_trace']} / {total}. "
+                  "Missing or invalid traces leave execution unobserved; they do not establish zero calls."]
     lines += ["", "## Cas à examiner", ""]
     for row in metrics["rows"]:
         if not row["passed"]:
@@ -501,7 +521,7 @@ def _archive(archive_dir: str | Path) -> tuple[Path, dict, list[dict], list[dict
     profile, profile_hash = parse_profile(payloads["profile.json"])
     if profile_hash != manifest.get("profile_sha256"):
         raise CampaignError("Archived candidate profile differs from its manifest.")
-    if profile["adapter"] in {"recorded", "fixture_arguments"}:
+    if profile["adapter"] in {"recorded", "fixture_arguments", "fixture_episode"}:
         if (profile["recordings"] != "recordings.jsonl" or "recordings.jsonl" not in payloads or
                 _hash(payloads["recordings.jsonl"]) !=
                 manifest.get("adapter_provenance", {}).get("recordings_sha256")):

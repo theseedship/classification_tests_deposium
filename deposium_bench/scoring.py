@@ -56,6 +56,12 @@ def score_case(case: dict, result: dict) -> dict:
             validate_receipt(case["input"], output)
         except (CaseError, KeyError, TypeError):
             return {"scored": True, "passed": False, "checks": [], "reason": "invalid_tool_arguments_receipt"}
+    if case["contract_id"] == "bench.tool-episode":
+        from .tool_episodes import validate_receipt
+        try:
+            validate_receipt(case["input"], output)
+        except (CaseError, KeyError, TypeError):
+            return {"scored": True, "passed": False, "checks": [], "reason": "invalid_tool_episode_receipt"}
     if case["contract_id"] == "bench.tool-discovery":
         from .tool_discovery import score_output
         return score_output(case, output)
@@ -132,5 +138,8 @@ def summarize(cases: list[dict], results: list[dict]) -> dict:
         report["task_metrics"] = {CONTRACT: summarize_metrics(cases, rows)}
     if any(case["contract_id"] == "bench.tool-arguments" for case in cases):
         from .tool_arguments import CONTRACT, summarize_metrics
+        report.setdefault("task_metrics", {})[CONTRACT] = summarize_metrics(cases, rows, results)
+    if any(case["contract_id"] == "bench.tool-episode" for case in cases):
+        from .tool_episodes import CONTRACT, summarize_metrics
         report.setdefault("task_metrics", {})[CONTRACT] = summarize_metrics(cases, rows, results)
     return report
