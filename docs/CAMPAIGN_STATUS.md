@@ -67,7 +67,7 @@ No model inference or paid API was part of the offline checks.
 
 | Scope | Recorded result | Interpretation |
 |---|---|---|
-| Linux, full offline suite | Reference environment; no fresh Linux run recorded for this documentation change. | A macOS targeted run cannot substitute for Linux full-suite evidence. |
+| Linux / Python 3.12, full offline suite for this documentation/coverage change | 868 tests: 837 passed, 31 optional skips, no failures or errors. Executed without network in the local validation image, with a read-only source mount and temporary results storage. | Current offline implementation check for this change; skipped optional integrations remain unqualified. It is not model inference or human review. |
 | Historical frozen campaign code, 29 October 2026 | 817 tests: 786 passed, 31 optional skips, no failures. | Historical code checkpoint only; **not the current checkout's global PASS**. |
 | macOS / Python 3.13, core checks | Registry, context/physics cases, capability/passage corpora and generated result views validated at the prior checkpoint. | Data/contract/export checks, not inference or human review. |
 | macOS / Python 3.13, targeted native/campaign/scoring suite | 182 tests: 180 passed, two optional skips. | Targeted implementation verification only. |
