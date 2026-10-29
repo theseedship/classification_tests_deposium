@@ -1,5 +1,20 @@
 {
   "candidate_model_cases": 0,
+  "campaign_schema_followup": {
+    "date": "2026-10-30",
+    "executed_benchmark_commit": "9573e5097242fd1027b40a431df28750810ca73f",
+    "actual_manifest_validation": "passed_for_tool_plan_and_tool_discovery",
+    "restriction": "recorded_adapter_harness_control_model_null_only",
+    "false_provenance_controls": "rejected",
+    "offline_linux_suite": {
+      "tests": 922,
+      "passed": 891,
+      "skipped": 31,
+      "errors": 0,
+      "failures": 0
+    },
+    "original_control_archives": "unchanged"
+  },
   "offline_linux_suite": {
     "tests": 921,
     "passed": 890,
