@@ -535,7 +535,13 @@ def validate_oracle(case):
     """
     try:
         evaluation = case["evaluation"]
-        base = _base_index()[evaluation["base_case_id"]]
+        if evaluation["base_case_id"].startswith("ccv1-"):
+            from .capability_corpus import canonical_case
+            base = canonical_case(evaluation["base_case_id"])
+            if evaluation["length"] is not None:
+                raise ValueError("Capability catalogue variants are frozen bases, not token-length variants.")
+        else:
+            base = _base_index()[evaluation["base_case_id"]]
         oracle = evaluation["oracle"]
         if oracle != base["evaluation"]["oracle"]:
             raise ValueError("Oracle or base-input snapshot was modified.")

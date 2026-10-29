@@ -57,6 +57,32 @@ this pack. Report agreement counts with this qualification; do not present them
 as validated routing accuracy. Separate search, statistics, and fallback results,
 since a good total can hide failures on fallback.
 
+### Complementary capability and workflow choices
+
+The [capability-choice pack](../datasets/capability-choice-v1/README.md) adds
+192 cases in 48 synthetic FR/EN families: capability/tool-set proposals,
+arguments and dependencies, and next steps after fixed tool observations.
+Every family has compact (eight cards) and expanded (32 cards) catalogue views.
+These variants share a split and reference; they are correlated observations.
+There are 48 train, 48 calibration and 96 test cases. Choice positions are
+balanced within split, language and catalogue view.
+
+It uses the shared context-choice engine and exact scorer. The candidate
+chooses among four proposals, with authored references pending human review.
+A correct proposal does not establish open-set discovery recall, executable
+arguments, valid access, tool execution or task success. A fixed observation
+does not test an adaptive multi-turn loop. D1/D2/D3 remain authored strata;
+they do not label the useful model size. The corpus is validated, with no real
+model campaign run yet.
+
+For a complementary or global series, retain a new archive for every dataset
+and model/runtime pair. Keep the historical 132-case results separate, report
+test-only scores and coverage, and preserve task/use-case/catalogue breakdowns.
+Never append cases to an old archive or present old predictions as results for
+the new tasks. Source and scorer fingerprints include the capability corpus
+code and its four source files; older archives may require an explicit derived
+rescore under a changed scorer. A rescore does not create new inference or timing.
+
 ### Retrieved passages and evidence
 
 The [passage-evidence pack](../datasets/passage-evidence-v1/README.md) contains

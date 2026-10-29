@@ -82,8 +82,12 @@ def _source_fingerprint() -> dict:
 def _scorer_fingerprint() -> dict:
     root = Path(__file__).parent
     files = {name: _hash((root / name).read_bytes()) for name in
-             ("scoring.py", "cases.py", "research_corpus.py", "choice_protocol.py",
+             ("scoring.py", "cases.py", "research_corpus.py", "capability_corpus.py", "choice_protocol.py",
               "lengths.py", "data/context-distractors.json")}
+    from .capability_corpus import SOURCE_FILES
+    for name in SOURCE_FILES:
+        relative = "datasets/capability-choice-v1/" + name
+        files[relative] = _hash((root.parent / relative).read_bytes())
     return {"version": SCORER_VERSION, "files": files, "sha256": _hash(_encode(files))}
 
 

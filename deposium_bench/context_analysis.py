@@ -11,7 +11,8 @@ import statistics
 from . import campaigns
 from .scoring import STATUSES, summarize
 
-DIMENSIONS = ("domain", "language", "difficulty", "target", "position", "order", "split")
+DIMENSIONS = ("domain", "language", "difficulty", "target", "position", "order", "split",
+              "benchmark_pack", "task_type", "use_case", "catalogue_variant")
 OVERFLOW_ERRORS = {"julia_context_overflow", "julia_head_overflow", "julia_option_overflow",
                    "gliner_context_overflow", "decision2_context_overflow", "noma_context_overflow", "laya_context_overflow",
                    "indecis_context_overflow", "indecis_option_overflow", "small_model_context_overflow",
@@ -134,6 +135,7 @@ def analyze_context(run_path: str | Path, output_dir: str | Path) -> dict:
     rows = []
     for case, score in zip(cases, scores["rows"]):
         metadata = case.get("evaluation", {})
+        params = metadata.get("oracle", {}).get("params", {})
         length = metadata.get("length")
         record = indexed.get(case["case_id"])
         error = record.get("error") if record else None
@@ -143,6 +145,10 @@ def analyze_context(run_path: str | Path, output_dir: str | Path) -> dict:
         row = {"case_id": case["case_id"], "base_case_id": metadata.get("base_case_id", case["case_id"]),
                "translation_family": case["translation_family"], "scenario_id": case["scenario_id"],
                "split": case["split"], "domain": metadata.get("domain", "unannotated"),
+               "benchmark_pack": params.get("benchmark_pack", "context-choice-v1" if metadata else "legacy_typed_decisions"),
+               "task_type": metadata.get("task_type", "unannotated"),
+               "use_case": params.get("use_case", "not_annotated"),
+               "catalogue_variant": params.get("catalogue_variant", "not_applicable"),
                "language": case["language"], "difficulty": metadata.get("difficulty", "unannotated"),
                "target": str(length["target_tokens"]) if length else "base",
                "position": length["position"] if length else "base",
@@ -223,8 +229,8 @@ def analyze_context(run_path: str | Path, output_dir: str | Path) -> dict:
                  for field in ("provider_input_tokens", "provider_output_tokens")],
                "Provider usage is post-hoc; server timings, RSS, native token counts and truncation are not inferred.",
                "", "Detailed cells (split retained):", "",
-               "| Domain | Language | Difficulty | Target | Position | Order | Split | Scored / total | Passed / total | Families |",
-               "|---|---|---|---|---|---|---|---|---|---|"]
+               "| " + " | ".join(field.replace("_", " ").title() for field in DIMENSIONS) + " | Scored / total | Passed / total | Families |",
+               "|" + "---|" * (len(DIMENSIONS) + 3)]
     for cell in cells:
         labels = " | ".join(str(cell["dimensions"][field]).replace("|", "\\|") for field in DIMENSIONS)
         report.append(f"| {labels} | {cell['scored_cases']} / {cell['total_cases']} | "

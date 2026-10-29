@@ -35,11 +35,13 @@ checks remain outside candidate predictions.
 
 The benchmark isolates steps inside RAG; it does not currently qualify a full
 retrieval-to-answer system, citation fidelity, or user-visible product behavior.
-The [next experiment](docs/INTENT_AND_MODEL_ROUTING.md) broadens the small
-search/statistics/fallback pack to capability discovery, plugin and MCP-tool sets,
-arguments, dependent calls, and observation-driven execution loops. Synthetic
-geospatial, web, and open-data scenarios make these needs concrete. Difficulty
-prediction and model assignment are evaluated separately from tool selection.
+The complementary [capability-choice pack](datasets/capability-choice-v1/README.md)
+adds 192 synthetic choices about capability/tool sets, arguments, dependencies,
+clarification, and next steps after fixed observations. It includes geospatial,
+web, open-data and local-document scenarios, with compact and expanded catalogues.
+It has **no real model results yet**. The [next harness stages](docs/INTENT_AND_MODEL_ROUTING.md)
+cover free-form tool selection and complete execution loops. Difficulty prediction
+and model assignment remain a separate axis.
 
 ## Quick start: no weights, API keys, Docker, or services
 
@@ -55,6 +57,7 @@ python3 -m deposium_bench validate-cases \
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
+python3 -m deposium_bench.capability_corpus --check
 python3 scripts/build-full-results.py --check
 ```
 
@@ -66,7 +69,7 @@ dependencies are unavailable. A skipped check is not a successful integration.
 Linux is the reference environment for the full offline unit suite. Campaign
 reports document model-specific macOS checks and inference qualifications.
 The public snapshot was checked on 29 October 2026 in a clean clone without
-local private files: **778 tests, 747 passed, 31 optional skips**, no failures.
+local private files: **793 tests, 762 passed, 31 optional skips**, no failures.
 No model weights or external services were required. Run the unit suite separately:
 
 ```bash
@@ -79,6 +82,7 @@ python3 -m unittest discover -s tests -v
 |---|---|---|
 | [Context choice](datasets/context-choice-v1/README.md) | 132 cases, 66 FR/EN families; documentary tasks, mathematics, chemistry | Scored exploratory decisions; 36 train / 30 calibration / 66 test cases. |
 | [First tool choice](datasets/mastra-read-pilot-v0/README.md) | 24 cases, 12 FR/EN families; search / statistics / fallback | Provisional agreement; zero human-approved references and zero semantically qualified cases. |
+| [Capability and workflow choices](datasets/capability-choice-v1/README.md) | 192 cases, 48 FR/EN families × 8/32-card catalogues; selection, arguments, fixed-observation next steps | Runnable complementary corpus; agent references pending human review; **no real model campaign yet**. |
 | [Passage evidence](datasets/passage-evidence-v1/README.md) | 1,536 cases from 24 synthetic families; FR, EN, DE, ES, IT, PT | Ranking, relevance, claim support, answerability; four passage orders and two views are correlated variants. |
 | [Typed decisions](datasets/decisions-v1/README.md) | 36 cases, 18 FR/EN families | Contract and fixture controls; component replay needs application sources. |
 | [Document tasks](datasets/document-task-v1/README.md) | 14 cases, seven families | Historical projection of the typed-decision pack, not another independent corpus. |

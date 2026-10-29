@@ -21,7 +21,8 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
 | First tool proposal | 24 search / statistics / fallback choices | Provisional agreement only; no tool execution; **0 semantically qualified cases** |
 | Physics | No dedicated pack | **Not run** |
 | Passage ranking, relevance, support, answerability | Separate fixed-passage campaigns | [Full tables and coverage](leaderboard/other-benchmarks.md) |
-| General plugin/MCP selection, execution loop, difficulty prediction, adaptive model routing | Proposed feature | **Not run**; [experiment design](INTENT_AND_MODEL_ROUTING.md) |
+| Capability/tool-set, argument and fixed-observation choices | [New 192-case complementary pack](../datasets/capability-choice-v1/README.md) | Corpus validated; **no real model campaign yet** |
+| Free-form plugin/MCP selection, complete execution loop, difficulty prediction, adaptive model routing | Future harness stages | **Not run**; [experiment design](INTENT_AND_MODEL_ROUTING.md) |
 | End-to-end RAG and generated-answer quality | No campaign qualified here | **Not run** |
 
 ## Model quality
