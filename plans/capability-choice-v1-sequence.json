@@ -1,7 +1,9 @@
 {
   "schema_version": "deposium.capability-campaign-plan/v1",
   "plan_id": "capability-choice-v1-initial-20261029",
-  "status": "planned_not_executed",
+  "status": "partially_executed",
+  "completed_candidates": 1,
+  "planned_candidates": 7,
   "selection_basis": "Highest historical all-case correct count within known recorded size classes; native Q8 Flash selected from a tie; GLiClass9B added as a different-family held-out-test counterpoint. This does not predict new-pack performance.",
   "dataset": {
     "path": "datasets/capability-choice-v1/cases.jsonl",
@@ -70,7 +72,7 @@
       "asset_manifest": "profiles/d3-flash-q8-assets.json",
       "historical_profile": null,
       "preparation_required": "prepare_supervised_dataset_session",
-      "target_runtime_status": "must_be_pinned_and_observed_before_campaign",
+      "target_runtime_status": "observed_flash_q8_metal_20261029",
       "historical_scores": {
         "all_correct": 124,
         "all_total": 132,
@@ -102,8 +104,17 @@
           "unreported_calls": 132
         }
       },
-      "execution_status": "not_run",
-      "cases_scored": 0,
+      "execution_status": "completed",
+      "cases_scored": 192,
+      "execution_evidence": {
+        "report": "docs/CAPABILITY_FLASH_RESULTS_20261029.md",
+        "aggregate": "docs/evidence/capability-flash-20261029/analysis.json",
+        "bench_revision": "7e61b6d4660bae81ca97d06d464fb02fac4ec4ef",
+        "capability": {"correct": 192, "scored": 192, "total": 192, "test_correct": 96, "test_total": 96},
+        "fresh_context_anchor": {"correct": 124, "scored": 132, "total": 132, "test_correct": 61, "test_total": 66},
+        "technical_canary": {"valid_decisions": 12, "total": 12, "included_in_quality_denominators": false},
+        "qualification": "isolated synthetic closed choices; pending human reference review; no executed tools or product qualification"
+      },
       "current_execution_protocol": "docs/CAPABILITY_NATIVE_PROTOCOL_20261029.md",
       "planned_execution_envelope": {
         "rss_limit_mib": 18432,
@@ -523,5 +534,6 @@
     "Vela3 specialized adapters require their own task contracts and scorers.",
     "Free-form tool sets, executable arguments, adaptive MCP episodes and empirical model-routing policies are separate harness work."
   ],
-  "plan_revision": 2
+  "plan_revision": 3,
+  "revision_note": "Execution status updated after the first Flash Q8 campaign. The cohort, order, references and execution protocol are unchanged from revision 2, which was frozen before predictions."
 }

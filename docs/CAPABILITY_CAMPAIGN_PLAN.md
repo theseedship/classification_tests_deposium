@@ -1,7 +1,10 @@
 # Progressive capability-choice campaign
 
-**Status: planned, not executed — 29 October 2026.** Start with seven selected
-model/runtime candidates, rather than rerunning the entire historical inventory.
+**Status: partially executed, 1 of 7 candidates — 29 October 2026.**
+[D3 Flash Q8/Metal](CAPABILITY_FLASH_RESULTS_20261029.md) completed the new pack
+at **192/192, test 96/96**, plus a separate fresh anchor at **124/132, test 61/66**.
+Its 12-case technical canary is separate from both quality denominators.
+The six remaining candidates are `not_run`; the original cohort and order stay fixed.
 The [machine-readable sequence](../plans/capability-choice-v1-sequence.json)
 pins the dataset, selection evidence, model identities, asset manifests, order
 and calibration canary. Reading it performs no inference, download or service action.
@@ -136,6 +139,12 @@ with missing cases retained in the full denominator. `unsupported`, `missing`,
 clarification or stopping choices. Resume/rescore retains the original archive;
 older archives may require an explicit derived rescore after scorer changes.
 
+For Flash Q8, the completed phases and their coverage are in the
+[dated report](CAPABILITY_FLASH_RESULTS_20261029.md) and
+[aggregate](evidence/capability-flash-20261029/analysis.json). A perfect score
+on four-proposal synthetic choices is a measurement ceiling, not a qualification
+of general capability discovery, executable arguments or a product workflow.
+
 The seven-candidate plan represents **1,344 new-pack decisions + 924 anchor
 decisions**, plus 84 canary decisions if each canary is run once. These are
 planned volumes, not executed calls. Calibration repeats and diagnostics are
@@ -175,4 +184,5 @@ chosen sub-1B quality representative.
 Keep Ultra/Turbo, GLiClass 27B and other new releases outside this initial queue
 until their model/runtime/resource audits are complete. This avoids changing
 weights, runtime and task coverage simultaneously while testing the initial
-size/quality intuition. No new inference is claimed here.
+size/quality intuition. Only the first Flash Q8 candidate has been executed;
+this plan does not claim results for the remaining cohort.

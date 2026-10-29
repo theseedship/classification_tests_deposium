@@ -1,0 +1,11 @@
+phase,split,families,variants_per_family,all_scored,all_correct,none_correct,some_correct
+canary,all,3,4,3,3,0,0
+canary,calibration,3,4,3,3,0,0
+anchor,all,66,2,66,61,3,2
+anchor,train,18,2,18,16,1,1
+anchor,calibration,15,2,15,15,0,0
+anchor,test,33,2,33,30,2,1
+capability,all,48,4,48,48,0,0
+capability,train,12,4,12,12,0,0
+capability,calibration,12,4,12,12,0,0
+capability,test,24,4,24,24,0,0
