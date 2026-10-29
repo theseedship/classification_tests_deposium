@@ -1,0 +1,13 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "tool-plan-control",
+  "adapter": "recorded",
+  "qualification": "harness_control",
+  "capabilities": [
+    "bench.tool-plan"
+  ],
+  "model": null,
+  "timeout_seconds": 15,
+  "revision": null,
+  "recordings": "../fixtures/tool-plan-control.jsonl"
+}
