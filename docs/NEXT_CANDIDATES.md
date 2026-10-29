@@ -1,5 +1,12 @@
 # Prochains candidats et rôle des classements publics
 
+**Current complementary campaign plan — 29 October 2026:** the
+[English staged plan](CAPABILITY_CAMPAIGN_PLAN.md) selects six known-size
+historical class representatives plus GLiClass 9B as a family counterpoint for
+the new 192-case capability pack. It records preparation gates, an exact
+calibration canary, and separate 132/192 archives. It is planned, not executed;
+the dated candidate inventory below remains historical context.
+
 ## Actualisation Decision 3 / Vela 3 — 28 octobre 2026
 
 [Audit et catalogue épinglé](DECISION3_VELA3_REVIEW_20261028.md) : aucun Ultra ou

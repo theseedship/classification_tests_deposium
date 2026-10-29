@@ -17,6 +17,7 @@ quality. The 132-case totals mix splits; test-only results are separate.
 
 **[Full results: all models, tasks, speed and memory](docs/RESULTS.md)** ·
 [Evaluation protocol](docs/PROTOCOL.md) · [Datasets](datasets/) ·
+[Progressive campaign plan](docs/CAPABILITY_CAMPAIGN_PLAN.md) ·
 [Tool/MCP and model-routing proposal](docs/INTENT_AND_MODEL_ROUTING.md)
 
 ## What is this useful for?
