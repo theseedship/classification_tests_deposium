@@ -18,9 +18,10 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
 |---|---|---|
 | Documentary text and choices | 76 context-dependent choices | Scored exploratory decisions |
 | Mathematics / chemistry | 28 / 28 constrained choices | Scored synthetic probes, not expert scientific qualification |
+| Clef Flash Q8 context, capabilities and physics | Separate 132-, 192- and 48-case packs | [Completed direct Metal campaign and D3 comparison](CLEF_FLASH_RESULTS_20261029.md); separate from the 28 historical rows |
 | First tool proposal | 24 search / statistics / fallback choices | Provisional agreement only; no tool execution; **0 semantically qualified cases** |
 | Physics | [48 synthetic choices](../datasets/physics-choice-v1/README.md), 24 FR/EN families | [Flash Q8/direct Metal: 39/48, test 32/36](PHYSICS_FLASH_RESULTS_20261029.md); reported separately, human review pending |
-| Passage ranking, relevance, support, answerability | Separate fixed-passage campaigns | [Full tables and coverage](leaderboard/other-benchmarks.md) |
+| Passage ranking, relevance, support, answerability | Separate fixed-passage campaigns | [Full tables and coverage](leaderboard/other-benchmarks.md); [D3 Flash evidence observation](PASSAGE_FLASH_RESULTS_20261029.md) and [matched Clef comparison](PASSAGE_CLEF_RESULTS_20261029.md), reported separately |
 | Capability/tool-set, argument and fixed-observation choices | [192-case complementary pack](../datasets/capability-choice-v1/README.md) | [First D3 Flash Q8/Metal campaign and fresh context anchor](CAPABILITY_FLASH_RESULTS_20261029.md), reported separately from the 28 historical rows; no tool execution or product qualification |
 | Free-form plugin/MCP selection, complete execution loop, difficulty prediction, adaptive model routing | Future harness stages | **Not run**; [experiment design](INTENT_AND_MODEL_ROUTING.md) |
 | End-to-end RAG and generated-answer quality | No campaign qualified here | **Not run** |

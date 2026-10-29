@@ -7,6 +7,17 @@ Son [protocole](../../docs/PASSAGE_EVIDENCE_DATASET.md) distingue classement,
 pertinence, soutien d'affirmations et possibilité de répondre.
 Les cas portent 2 304 affirmations candidates et 9 216 jugements d'appui par passage.
 
+La campagne distincte [D3 Flash Q8/Metal du 29 octobre](../../docs/PASSAGE_FLASH_RESULTS_20261029.md)
+mesure 128 pools test, rotation 0 : pertinence 252/512, soutien 460/768,
+possibilité de répondre 122/128, tous scorés. L'amélioration de la suffisance
+ne résout pas les confusions entre preuve insuffisante et réfutation ; les
+références synthétiques restent inchangées et sans revue humaine.
+
+La comparaison [Clef Flash Q8 sur les mêmes entrées](../../docs/PASSAGE_CLEF_RESULTS_20261029.md)
+mesure pertinence 261/512, soutien 446/768 et possibilité de répondre 109/128,
+avec couverture complète. Clef accepte 12/16 pools annotés contradictoires comme
+répondables ; le rapport conserve les confusions et résultats appariés avec D3.
+
 ## Couverture
 
 | Axe | Contenu |

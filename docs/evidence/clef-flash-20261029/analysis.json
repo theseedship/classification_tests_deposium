@@ -1,0 +1,4515 @@
+{
+  "schema_version": "deposium.clef-flash-public/v1",
+  "report_date": "2026-10-29",
+  "reference_review": "agent_only_pending_human",
+  "execution_scope": "isolated_direct_upstream_llama_cpp_no_application_gateway",
+  "model": {
+    "model_repo_id": "ggml-org/Clef-Flash-GGUF",
+    "model_revision": "6e2a164d70aae2af7fce86005da3f91805565b1d",
+    "model_file": "Clef-Flash-Q8_0.gguf",
+    "model_sha256": "25f801e2a27610b0ccc0cb1558d7eda3d7a304e34e2c4a04e3079357ff7d906e",
+    "upstream_source": {
+      "repo_id": "Cloudflare/clef-flash",
+      "observed_revision": "f0b7d3cd65296abfe459e6c228b618f5d8b26d2f",
+      "conversion_source_revision": "not_attested"
+    }
+  },
+  "runtime": {
+    "schema_version": "deposium.upstream-runtime/v1",
+    "repository": "https://github.com/ggml-org/llama.cpp.git",
+    "revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+    "source_tree": "b537a082cb9b23737fac2cfa9e73a178bf8e747d",
+    "source_worktree": "clean",
+    "binary_sha256": "d6ec60cbb70b61572c0f33305b6839952445fa35b9ee2f1355b71216ab28ada1",
+    "build_cache_sha256": "9729139773b4f384536f0cf31715ec7be1c3ab6f23b63cbd02da125107cd78b5",
+    "build_log_sha256": "e998d25811c252adf2f7b158877708df91f3aef2cf92ec56121e9f7929b2e444",
+    "cmake_version": "3.31.6",
+    "shared_libraries": false,
+    "requested_backend": "metal",
+    "build_parallelism": 2
+  },
+  "host": {
+    "device": "Apple M5 Pro",
+    "total_unified_memory_gib": 64
+  },
+  "envelope": {
+    "context": 4096,
+    "batch": 4096,
+    "microbatch": 4096,
+    "parallel": 1,
+    "per_call_timeout_seconds": 30,
+    "rss_limit_mib": 18432,
+    "reserve_mib": 8192,
+    "watcher_interval_ms": 250,
+    "automatic_retries": 0,
+    "backend_fallback": false
+  },
+  "preparation": {
+    "within_limit_dataset_inputs": 372,
+    "three_choice_controls_prepared": 1,
+    "overflow_controls_rejected": 1,
+    "token_min": 183,
+    "token_max": 1265,
+    "inference_performed": false,
+    "helper_sha256": "42ea3604621a346818bbc27a55488ad411fbb508326d178226305638f3d4e97b",
+    "helper_build_manifest_sha256": "0470c385a233ec1cf8051dd3073b42e8afd4652bf5681666cfab2cc865ea3072"
+  },
+  "preparation_resources": {
+    "rss_peak_mib": 177.4375,
+    "min_available_mib": 26286.859375,
+    "stop_reason": null
+  },
+  "source": {
+    "public_base_commit": "501f0963077a787dfea6168330dde9754affd3e7",
+    "plan_sha256": "e18be94b2d4727d1a78e0c68952e34c472fd45105e6691731d912fa6615c018b",
+    "protocol_sha256": "afe9b28b1944a4c003607dceb4da72356941fd5774a7ed850e4c0b0b2b74d4ae",
+    "supervisor_sha256": "b9c3fb63f87cbac767d945d0419d7ceea74b79519a0622e76b298ee65ae0f8e9",
+    "preparation_seal_sha256": "aaa3ec84d1796537a5e41ceec466ce334e9580549667bc31235fdae88b88a2cb",
+    "pre_inference_freeze_sha256": "ee619c9833abc29e37eef2d3c20f26eac9d4192434eab587499214728af6f835",
+    "aggregate_producer_sha256": "3ae6f462ae5436d25232d585148e267b4dd6f0140cd3263e813d4fa8d52d9003"
+  },
+  "phases": {
+    "canary": {
+      "counts": {
+        "total_cases": 12,
+        "scored_cases": 12,
+        "passed_cases": 12,
+        "independent_families": 3,
+        "counts_by_status": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 12,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "counts_by_split": {
+          "calibration": {
+            "passed_cases": 12,
+            "scored_cases": 12,
+            "total_cases": 12
+          }
+        }
+      },
+      "groups": {
+        "split": {
+          "calibration": {
+            "total_cases": 12,
+            "scored_cases": 12,
+            "passed_cases": 12,
+            "independent_families": 3,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 12
+              }
+            }
+          }
+        },
+        "domain": {
+          "documentary": {
+            "total_cases": 12,
+            "scored_cases": 12,
+            "passed_cases": 12,
+            "independent_families": 3,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 12
+              }
+            }
+          }
+        },
+        "language": {
+          "en": {
+            "total_cases": 6,
+            "scored_cases": 6,
+            "passed_cases": 6,
+            "independent_families": 3,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 6,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 6
+              }
+            }
+          },
+          "fr": {
+            "total_cases": 6,
+            "scored_cases": 6,
+            "passed_cases": 6,
+            "independent_families": 3,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 6,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 6
+              }
+            }
+          }
+        },
+        "difficulty": {
+          "D1": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "D2": {
+            "total_cases": 8,
+            "scored_cases": 8,
+            "passed_cases": 8,
+            "independent_families": 2,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 8,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              }
+            }
+          }
+        },
+        "task_type": {
+          "capability.arguments.argument-binding": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.clarify-after-partial": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.selection.single-tool": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          }
+        },
+        "catalogue_variant": {
+          "compact": {
+            "total_cases": 6,
+            "scored_cases": 6,
+            "passed_cases": 6,
+            "independent_families": 3,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 6,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 6
+              }
+            }
+          },
+          "expanded": {
+            "total_cases": 6,
+            "scored_cases": 6,
+            "passed_cases": 6,
+            "independent_families": 3,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 6,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 6
+              }
+            }
+          }
+        },
+        "use_case": {
+          "geospatial": {
+            "total_cases": 8,
+            "scored_cases": 8,
+            "passed_cases": 8,
+            "independent_families": 2,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 8,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              }
+            }
+          },
+          "web": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          }
+        },
+        "track": {
+          "arguments": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "ok": 4,
+              "unsupported": 0,
+              "missing": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "total_cases": 4,
+                "scored_cases": 4,
+                "passed_cases": 4
+              }
+            }
+          },
+          "observations": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "ok": 4,
+              "unsupported": 0,
+              "missing": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "total_cases": 4,
+                "scored_cases": 4,
+                "passed_cases": 4
+              }
+            }
+          },
+          "selection": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "ok": 4,
+              "unsupported": 0,
+              "missing": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "total_cases": 4,
+                "scored_cases": 4,
+                "passed_cases": 4
+              }
+            }
+          }
+        }
+      },
+      "families": {
+        "total": 3,
+        "all_variants_correct": 3,
+        "mixed_correctness": 0,
+        "no_variant_correct": 0,
+        "choice_agreement": 3
+      },
+      "test_families": {
+        "total": 0,
+        "all_variants_correct": 0,
+        "mixed_correctness": 0,
+        "no_variant_correct": 0,
+        "choice_agreement": 0
+      },
+      "latency_ms": {
+        "count": 12,
+        "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+        "max": 1033.1229170260485,
+        "median": 606.803229500656,
+        "min": 378.6752090090886,
+        "p95": 1033.1229170260485
+      },
+      "http_latency_ms": {
+        "count": 12,
+        "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+        "max": 1032.8683339757845,
+        "median": 606.5262709889794,
+        "min": 378.457459009951,
+        "p95": 1032.8683339757845
+      },
+      "resources": {
+        "sampled_group_rss_peak_mib": 10742.875,
+        "min_available_mib": 21112.03125,
+        "stop_reason": null,
+        "scope": "whole fresh session, including startup, controls and excluded warm-up; not per-response or total GPU allocation"
+      },
+      "actual_backend": {
+        "kind": "metal",
+        "offloaded_layers": 33,
+        "total_layers": 33,
+        "decision_type": "clef"
+      },
+      "preparation_count_matches": 12,
+      "native_truncation_receipts": {
+        "true": 0,
+        "false": 0,
+        "unknown": 12
+      },
+      "physical_forward_receipts": {
+        "true": 0,
+        "false": 0,
+        "unknown": 12
+      },
+      "included_in_full_pack_quality_denominator": false,
+      "identity": {
+        "dataset_sha256": "e77df10a645b48268ba7efc74c9cbf874491e030153ba81f5585e5d79e79f0c7",
+        "scorer_sha256": "9db9c9fedd71c4052d8506c30b9905512ad0681a4d994282e9a2613dbd2735a1",
+        "benchmark_source_sha256": "d4405521c201106d7939e422ca473533a0ec9ac91b6286283a2d7b2d02861dc0",
+        "outer_seal_sha256": "1a70e880139d73d689926f50c8ac6708336f4befba886b2e8b536a1e862ad043",
+        "raw_sha256": "d6eef075bcb5ffbab9d5745d6bedd933c02fe77ff981a613a03d65758e96d084",
+        "analysis_sha256": "b36a425e8c8c872615ef603f7f063e11ace837e6f248951f56bc85331439a92e"
+      }
+    },
+    "context": {
+      "counts": {
+        "total_cases": 132,
+        "scored_cases": 132,
+        "passed_cases": 110,
+        "independent_families": 66,
+        "counts_by_status": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 132,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "counts_by_split": {
+          "calibration": {
+            "passed_cases": 26,
+            "scored_cases": 30,
+            "total_cases": 30
+          },
+          "test": {
+            "passed_cases": 59,
+            "scored_cases": 66,
+            "total_cases": 66
+          },
+          "train": {
+            "passed_cases": 25,
+            "scored_cases": 36,
+            "total_cases": 36
+          }
+        }
+      },
+      "groups": {
+        "split": {
+          "calibration": {
+            "total_cases": 30,
+            "scored_cases": 30,
+            "passed_cases": 26,
+            "independent_families": 15,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 30,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 26,
+                "scored_cases": 30,
+                "total_cases": 30
+              }
+            }
+          },
+          "test": {
+            "total_cases": 66,
+            "scored_cases": 66,
+            "passed_cases": 59,
+            "independent_families": 33,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 66,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 59,
+                "scored_cases": 66,
+                "total_cases": 66
+              }
+            }
+          },
+          "train": {
+            "total_cases": 36,
+            "scored_cases": 36,
+            "passed_cases": 25,
+            "independent_families": 18,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 36,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 25,
+                "scored_cases": 36,
+                "total_cases": 36
+              }
+            }
+          }
+        },
+        "domain": {
+          "chemistry": {
+            "total_cases": 28,
+            "scored_cases": 28,
+            "passed_cases": 22,
+            "independent_families": 14,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 28,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 6,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 12,
+                "scored_cases": 14,
+                "total_cases": 14
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 6,
+                "total_cases": 6
+              }
+            }
+          },
+          "documentary": {
+            "total_cases": 76,
+            "scored_cases": 76,
+            "passed_cases": 63,
+            "independent_families": 38,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 76,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 12,
+                "scored_cases": 14,
+                "total_cases": 14
+              },
+              "test": {
+                "passed_cases": 34,
+                "scored_cases": 38,
+                "total_cases": 38
+              },
+              "train": {
+                "passed_cases": 17,
+                "scored_cases": 24,
+                "total_cases": 24
+              }
+            }
+          },
+          "mathematics": {
+            "total_cases": 28,
+            "scored_cases": 28,
+            "passed_cases": 25,
+            "independent_families": 14,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 28,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 13,
+                "scored_cases": 14,
+                "total_cases": 14
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 6,
+                "total_cases": 6
+              }
+            }
+          }
+        },
+        "language": {
+          "en": {
+            "total_cases": 66,
+            "scored_cases": 66,
+            "passed_cases": 55,
+            "independent_families": 66,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 66,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 13,
+                "scored_cases": 15,
+                "total_cases": 15
+              },
+              "test": {
+                "passed_cases": 30,
+                "scored_cases": 33,
+                "total_cases": 33
+              },
+              "train": {
+                "passed_cases": 12,
+                "scored_cases": 18,
+                "total_cases": 18
+              }
+            }
+          },
+          "fr": {
+            "total_cases": 66,
+            "scored_cases": 66,
+            "passed_cases": 55,
+            "independent_families": 66,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 66,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 13,
+                "scored_cases": 15,
+                "total_cases": 15
+              },
+              "test": {
+                "passed_cases": 29,
+                "scored_cases": 33,
+                "total_cases": 33
+              },
+              "train": {
+                "passed_cases": 13,
+                "scored_cases": 18,
+                "total_cases": 18
+              }
+            }
+          }
+        },
+        "difficulty": {
+          "D1": {
+            "total_cases": 40,
+            "scored_cases": 40,
+            "passed_cases": 36,
+            "independent_families": 20,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 40,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 19,
+                "scored_cases": 20,
+                "total_cases": 20
+              },
+              "train": {
+                "passed_cases": 9,
+                "scored_cases": 12,
+                "total_cases": 12
+              }
+            }
+          },
+          "D2": {
+            "total_cases": 40,
+            "scored_cases": 40,
+            "passed_cases": 36,
+            "independent_families": 20,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 40,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 7,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 19,
+                "scored_cases": 20,
+                "total_cases": 20
+              },
+              "train": {
+                "passed_cases": 10,
+                "scored_cases": 12,
+                "total_cases": 12
+              }
+            }
+          },
+          "D3": {
+            "total_cases": 52,
+            "scored_cases": 52,
+            "passed_cases": 38,
+            "independent_families": 26,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 52,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 11,
+                "scored_cases": 14,
+                "total_cases": 14
+              },
+              "test": {
+                "passed_cases": 21,
+                "scored_cases": 26,
+                "total_cases": 26
+              },
+              "train": {
+                "passed_cases": 6,
+                "scored_cases": 12,
+                "total_cases": 12
+              }
+            }
+          }
+        },
+        "task_type": {
+          "aliquot-and-mix": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 0,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "ambiguous-selection": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "atoms-and-charge": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "cancel-keep-domain": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-active-inventory": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-catalog-not-source-count": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-corrected-request": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-count-and-names": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 1,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 1,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-distinct-identities": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-metadata-owners": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-metadata-table-language": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-negative-summary": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-quoted-summary-command": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-scope-after-interlude": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 1,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 1,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-selected-titles": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "catalog-selection-reuse": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 0,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "chain-derivative": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "combustion-balance": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "conditional-probability": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "conserved-dilution": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "extraneous-equation-root": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 0,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "formula-not-structure": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "fraction-addition": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "function-types": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "group-atom-count": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "hydrate-water-fraction": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "ionic-neutrality": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "limiting-reactant": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 0,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "matrix-product": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "missing-final-volume": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "molar-concentration": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "nested-complex-count": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "polynomial-remainder": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "precipitate-mass": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 0,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "principal-root": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "quantity-dimension": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 1,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 1,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-content-date": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 1,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 1,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-content-exact-clause": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-content-explanation": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 1,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 1,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-content-filtered-list": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-content-not-summary": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-content-refutation": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 0,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-content-total-unit": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-distant-report-reference": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-followup-cause": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-quoted-instruction-content": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 1,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 1,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-relations-mermaid": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "retrieve_answer-stale-summary-check": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "square-expansion": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-cached-descriptions": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-do-not-reread": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-existing-per-file": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-inherit-summary-constraint": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-language-followup": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-quotation-not-budget-question": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-remaining-summaries": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-resume-after-content": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 1,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 1,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-summary-bundle": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-summary-count-title": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 0,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-translate-summary-table": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "stored_summaries-validated-abstracts": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "transpose-chain": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "unanchored-language": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 1,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 1,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "underdetermined-linear": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "unknown-function-values": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "water-balance": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          }
+        },
+        "catalogue_variant": {
+          "not_applicable": {
+            "total_cases": 132,
+            "scored_cases": 132,
+            "passed_cases": 110,
+            "independent_families": 66,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 132,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 26,
+                "scored_cases": 30,
+                "total_cases": 30
+              },
+              "test": {
+                "passed_cases": 59,
+                "scored_cases": 66,
+                "total_cases": 66
+              },
+              "train": {
+                "passed_cases": 25,
+                "scored_cases": 36,
+                "total_cases": 36
+              }
+            }
+          }
+        },
+        "use_case": {
+          "not_annotated": {
+            "total_cases": 132,
+            "scored_cases": 132,
+            "passed_cases": 110,
+            "independent_families": 66,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 132,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 26,
+                "scored_cases": 30,
+                "total_cases": 30
+              },
+              "test": {
+                "passed_cases": 59,
+                "scored_cases": 66,
+                "total_cases": 66
+              },
+              "train": {
+                "passed_cases": 25,
+                "scored_cases": 36,
+                "total_cases": 36
+              }
+            }
+          }
+        }
+      },
+      "families": {
+        "total": 66,
+        "all_variants_correct": 51,
+        "mixed_correctness": 8,
+        "no_variant_correct": 7,
+        "choice_agreement": 56
+      },
+      "test_families": {
+        "total": 33,
+        "all_variants_correct": 27,
+        "mixed_correctness": 5,
+        "no_variant_correct": 1,
+        "choice_agreement": 28
+      },
+      "latency_ms": {
+        "count": 132,
+        "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+        "max": 299.7562919917982,
+        "median": 196.76066699321382,
+        "min": 189.28187500569038,
+        "p95": 219.80870800325647
+      },
+      "http_latency_ms": {
+        "count": 132,
+        "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+        "max": 299.48991700075567,
+        "median": 196.39931251003873,
+        "min": 189.12808402092196,
+        "p95": 219.36937497230247
+      },
+      "resources": {
+        "sampled_group_rss_peak_mib": 9788.90625,
+        "min_available_mib": 21517.21875,
+        "stop_reason": null,
+        "scope": "whole fresh session, including startup, controls and excluded warm-up; not per-response or total GPU allocation"
+      },
+      "actual_backend": {
+        "kind": "metal",
+        "offloaded_layers": 33,
+        "total_layers": 33,
+        "decision_type": "clef"
+      },
+      "preparation_count_matches": 132,
+      "native_truncation_receipts": {
+        "true": 0,
+        "false": 0,
+        "unknown": 132
+      },
+      "physical_forward_receipts": {
+        "true": 0,
+        "false": 0,
+        "unknown": 132
+      },
+      "included_in_full_pack_quality_denominator": true,
+      "identity": {
+        "dataset_sha256": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+        "scorer_sha256": "9db9c9fedd71c4052d8506c30b9905512ad0681a4d994282e9a2613dbd2735a1",
+        "benchmark_source_sha256": "d4405521c201106d7939e422ca473533a0ec9ac91b6286283a2d7b2d02861dc0",
+        "outer_seal_sha256": "d553ed822c087620deac8aa73514f3bc749599be680ca8927258390e966a54a2",
+        "raw_sha256": "4bfc8c4d14ba5f9c8ed4cee0aec30ae80e671d17e853433aa52c64f4da52b64b",
+        "analysis_sha256": "02c66a1741bb9ef9293c65569529f7a45b6dfa02f3e547b13164a8adcfcb8fa4"
+      }
+    },
+    "capability": {
+      "counts": {
+        "total_cases": 192,
+        "scored_cases": 192,
+        "passed_cases": 192,
+        "independent_families": 48,
+        "counts_by_status": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 192,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "counts_by_split": {
+          "calibration": {
+            "passed_cases": 48,
+            "scored_cases": 48,
+            "total_cases": 48
+          },
+          "test": {
+            "passed_cases": 96,
+            "scored_cases": 96,
+            "total_cases": 96
+          },
+          "train": {
+            "passed_cases": 48,
+            "scored_cases": 48,
+            "total_cases": 48
+          }
+        }
+      },
+      "groups": {
+        "split": {
+          "calibration": {
+            "total_cases": 48,
+            "scored_cases": 48,
+            "passed_cases": 48,
+            "independent_families": 12,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 48,
+                "scored_cases": 48,
+                "total_cases": 48
+              }
+            }
+          },
+          "test": {
+            "total_cases": 96,
+            "scored_cases": 96,
+            "passed_cases": 96,
+            "independent_families": 24,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 96,
+                "scored_cases": 96,
+                "total_cases": 96
+              }
+            }
+          },
+          "train": {
+            "total_cases": 48,
+            "scored_cases": 48,
+            "passed_cases": 48,
+            "independent_families": 12,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 48,
+                "scored_cases": 48,
+                "total_cases": 48
+              }
+            }
+          }
+        },
+        "domain": {
+          "documentary": {
+            "total_cases": 192,
+            "scored_cases": 192,
+            "passed_cases": 192,
+            "independent_families": 48,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 48,
+                "scored_cases": 48,
+                "total_cases": 48
+              },
+              "test": {
+                "passed_cases": 96,
+                "scored_cases": 96,
+                "total_cases": 96
+              },
+              "train": {
+                "passed_cases": 48,
+                "scored_cases": 48,
+                "total_cases": 48
+              }
+            }
+          }
+        },
+        "language": {
+          "en": {
+            "total_cases": 96,
+            "scored_cases": 96,
+            "passed_cases": 96,
+            "independent_families": 48,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 24,
+                "scored_cases": 24,
+                "total_cases": 24
+              },
+              "test": {
+                "passed_cases": 48,
+                "scored_cases": 48,
+                "total_cases": 48
+              },
+              "train": {
+                "passed_cases": 24,
+                "scored_cases": 24,
+                "total_cases": 24
+              }
+            }
+          },
+          "fr": {
+            "total_cases": 96,
+            "scored_cases": 96,
+            "passed_cases": 96,
+            "independent_families": 48,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 24,
+                "scored_cases": 24,
+                "total_cases": 24
+              },
+              "test": {
+                "passed_cases": 48,
+                "scored_cases": 48,
+                "total_cases": 48
+              },
+              "train": {
+                "passed_cases": 24,
+                "scored_cases": 24,
+                "total_cases": 24
+              }
+            }
+          }
+        },
+        "difficulty": {
+          "D1": {
+            "total_cases": 52,
+            "scored_cases": 52,
+            "passed_cases": 52,
+            "independent_families": 13,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 52,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              },
+              "test": {
+                "passed_cases": 32,
+                "scored_cases": 32,
+                "total_cases": 32
+              },
+              "train": {
+                "passed_cases": 16,
+                "scored_cases": 16,
+                "total_cases": 16
+              }
+            }
+          },
+          "D2": {
+            "total_cases": 84,
+            "scored_cases": 84,
+            "passed_cases": 84,
+            "independent_families": 21,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 84,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 32,
+                "scored_cases": 32,
+                "total_cases": 32
+              },
+              "test": {
+                "passed_cases": 24,
+                "scored_cases": 24,
+                "total_cases": 24
+              },
+              "train": {
+                "passed_cases": 28,
+                "scored_cases": 28,
+                "total_cases": 28
+              }
+            }
+          },
+          "D3": {
+            "total_cases": 56,
+            "scored_cases": 56,
+            "passed_cases": 56,
+            "independent_families": 14,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 56,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 12
+              },
+              "test": {
+                "passed_cases": 40,
+                "scored_cases": 40,
+                "total_cases": 40
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          }
+        },
+        "task_type": {
+          "capability.arguments.argument-binding": {
+            "total_cases": 20,
+            "scored_cases": 20,
+            "passed_cases": 20,
+            "independent_families": 5,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 20,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 12
+              },
+              "test": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              }
+            }
+          },
+          "capability.arguments.clarification": {
+            "total_cases": 12,
+            "scored_cases": 12,
+            "passed_cases": 12,
+            "independent_families": 3,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              },
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.arguments.dependency-order": {
+            "total_cases": 12,
+            "scored_cases": 12,
+            "passed_cases": 12,
+            "independent_families": 3,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 12
+              }
+            }
+          },
+          "capability.arguments.resource-choice": {
+            "total_cases": 12,
+            "scored_cases": 12,
+            "passed_cases": 12,
+            "independent_families": 3,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.arguments.scope-guard": {
+            "total_cases": 8,
+            "scored_cases": 8,
+            "passed_cases": 8,
+            "independent_families": 2,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 8,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              }
+            }
+          },
+          "capability.observations.clarify-after-partial": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.clarify-provenance": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.empty-result": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.ignore-observation-instructions": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.next-tool": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.next-tool-binding": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.no-success-without-artifact": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.partial-answer": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.refresh-schema-after-error": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.repair-prerequisite": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.retry": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.stop-budget-exhausted": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.stop-cancelled": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.stop-incomparable": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.stop-sufficient-evidence": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.observations.stop-unavailable": {
+            "total_cases": 4,
+            "scored_cases": 4,
+            "passed_cases": 4,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.selection.multi-tool": {
+            "total_cases": 40,
+            "scored_cases": 40,
+            "passed_cases": 40,
+            "independent_families": 10,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 40,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 24,
+                "scored_cases": 24,
+                "total_cases": 24
+              },
+              "train": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              }
+            }
+          },
+          "capability.selection.single-tool": {
+            "total_cases": 16,
+            "scored_cases": 16,
+            "passed_cases": 16,
+            "independent_families": 4,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              },
+              "test": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "capability.selection.source-choice": {
+            "total_cases": 8,
+            "scored_cases": 8,
+            "passed_cases": 8,
+            "independent_families": 2,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 8,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          }
+        },
+        "catalogue_variant": {
+          "compact": {
+            "total_cases": 96,
+            "scored_cases": 96,
+            "passed_cases": 96,
+            "independent_families": 48,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 24,
+                "scored_cases": 24,
+                "total_cases": 24
+              },
+              "test": {
+                "passed_cases": 48,
+                "scored_cases": 48,
+                "total_cases": 48
+              },
+              "train": {
+                "passed_cases": 24,
+                "scored_cases": 24,
+                "total_cases": 24
+              }
+            }
+          },
+          "expanded": {
+            "total_cases": 96,
+            "scored_cases": 96,
+            "passed_cases": 96,
+            "independent_families": 48,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 24,
+                "scored_cases": 24,
+                "total_cases": 24
+              },
+              "test": {
+                "passed_cases": 48,
+                "scored_cases": 48,
+                "total_cases": 48
+              },
+              "train": {
+                "passed_cases": 24,
+                "scored_cases": 24,
+                "total_cases": 24
+              }
+            }
+          }
+        },
+        "use_case": {
+          "cross_source": {
+            "total_cases": 28,
+            "scored_cases": 28,
+            "passed_cases": 28,
+            "independent_families": 7,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 28,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 16,
+                "scored_cases": 16,
+                "total_cases": 16
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            }
+          },
+          "geospatial": {
+            "total_cases": 52,
+            "scored_cases": 52,
+            "passed_cases": 52,
+            "independent_families": 13,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 52,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 12
+              },
+              "test": {
+                "passed_cases": 28,
+                "scored_cases": 28,
+                "total_cases": 28
+              },
+              "train": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 12
+              }
+            }
+          },
+          "local_rag": {
+            "total_cases": 32,
+            "scored_cases": 32,
+            "passed_cases": 32,
+            "independent_families": 8,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "train": {
+                "passed_cases": 16,
+                "scored_cases": 16,
+                "total_cases": 16
+              }
+            }
+          },
+          "open_data": {
+            "total_cases": 48,
+            "scored_cases": 48,
+            "passed_cases": 48,
+            "independent_families": 12,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 12
+              },
+              "test": {
+                "passed_cases": 28,
+                "scored_cases": 28,
+                "total_cases": 28
+              },
+              "train": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              }
+            }
+          },
+          "web": {
+            "total_cases": 32,
+            "scored_cases": 32,
+            "passed_cases": 32,
+            "independent_families": 8,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 16,
+                "scored_cases": 16,
+                "total_cases": 16
+              },
+              "train": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              }
+            }
+          }
+        },
+        "track": {
+          "arguments": {
+            "total_cases": 64,
+            "scored_cases": 64,
+            "passed_cases": 64,
+            "independent_families": 16,
+            "counts_by_status": {
+              "ok": 64,
+              "unsupported": 0,
+              "missing": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "total_cases": 16,
+                "scored_cases": 16,
+                "passed_cases": 16
+              },
+              "test": {
+                "total_cases": 32,
+                "scored_cases": 32,
+                "passed_cases": 32
+              },
+              "train": {
+                "total_cases": 16,
+                "scored_cases": 16,
+                "passed_cases": 16
+              }
+            }
+          },
+          "observations": {
+            "total_cases": 64,
+            "scored_cases": 64,
+            "passed_cases": 64,
+            "independent_families": 16,
+            "counts_by_status": {
+              "ok": 64,
+              "unsupported": 0,
+              "missing": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "total_cases": 16,
+                "scored_cases": 16,
+                "passed_cases": 16
+              },
+              "test": {
+                "total_cases": 32,
+                "scored_cases": 32,
+                "passed_cases": 32
+              },
+              "train": {
+                "total_cases": 16,
+                "scored_cases": 16,
+                "passed_cases": 16
+              }
+            }
+          },
+          "selection": {
+            "total_cases": 64,
+            "scored_cases": 64,
+            "passed_cases": 64,
+            "independent_families": 16,
+            "counts_by_status": {
+              "ok": 64,
+              "unsupported": 0,
+              "missing": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "total_cases": 16,
+                "scored_cases": 16,
+                "passed_cases": 16
+              },
+              "test": {
+                "total_cases": 32,
+                "scored_cases": 32,
+                "passed_cases": 32
+              },
+              "train": {
+                "total_cases": 16,
+                "scored_cases": 16,
+                "passed_cases": 16
+              }
+            }
+          }
+        }
+      },
+      "families": {
+        "total": 48,
+        "all_variants_correct": 48,
+        "mixed_correctness": 0,
+        "no_variant_correct": 0,
+        "choice_agreement": 48
+      },
+      "test_families": {
+        "total": 24,
+        "all_variants_correct": 24,
+        "mixed_correctness": 0,
+        "no_variant_correct": 0,
+        "choice_agreement": 24
+      },
+      "latency_ms": {
+        "count": 192,
+        "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+        "max": 1056.0515419929288,
+        "median": 616.9076665100874,
+        "min": 373.7033329962287,
+        "p95": 953.5138339851983
+      },
+      "http_latency_ms": {
+        "count": 192,
+        "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+        "max": 1055.8155409817118,
+        "median": 616.699083489948,
+        "min": 373.45024998649023,
+        "p95": 953.2680840056855
+      },
+      "resources": {
+        "sampled_group_rss_peak_mib": 10852.15625,
+        "min_available_mib": 21200.953125,
+        "stop_reason": null,
+        "scope": "whole fresh session, including startup, controls and excluded warm-up; not per-response or total GPU allocation"
+      },
+      "actual_backend": {
+        "kind": "metal",
+        "offloaded_layers": 33,
+        "total_layers": 33,
+        "decision_type": "clef"
+      },
+      "preparation_count_matches": 192,
+      "native_truncation_receipts": {
+        "true": 0,
+        "false": 0,
+        "unknown": 192
+      },
+      "physical_forward_receipts": {
+        "true": 0,
+        "false": 0,
+        "unknown": 192
+      },
+      "included_in_full_pack_quality_denominator": true,
+      "identity": {
+        "dataset_sha256": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+        "scorer_sha256": "9db9c9fedd71c4052d8506c30b9905512ad0681a4d994282e9a2613dbd2735a1",
+        "benchmark_source_sha256": "d4405521c201106d7939e422ca473533a0ec9ac91b6286283a2d7b2d02861dc0",
+        "outer_seal_sha256": "e8017ee9f05bbfaf8b65db0226c98236e659f89a7f13d48383a27f3e432c1484",
+        "raw_sha256": "35500aab4516bb63a909edb02610e3aeced2cb9bb8109a247f202df1d5e248ca",
+        "analysis_sha256": "2b4c7ed810edc74a8f0859a4e6402cd0ff4f4de03483ee85dc01c72b02833469"
+      }
+    },
+    "physics": {
+      "counts": {
+        "total_cases": 48,
+        "scored_cases": 48,
+        "passed_cases": 41,
+        "independent_families": 24,
+        "counts_by_status": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 48,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "counts_by_split": {
+          "calibration": {
+            "passed_cases": 10,
+            "scored_cases": 12,
+            "total_cases": 12
+          },
+          "test": {
+            "passed_cases": 31,
+            "scored_cases": 36,
+            "total_cases": 36
+          }
+        }
+      },
+      "groups": {
+        "split": {
+          "calibration": {
+            "total_cases": 12,
+            "scored_cases": 12,
+            "passed_cases": 10,
+            "independent_families": 6,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 10,
+                "scored_cases": 12,
+                "total_cases": 12
+              }
+            }
+          },
+          "test": {
+            "total_cases": 36,
+            "scored_cases": 36,
+            "passed_cases": 31,
+            "independent_families": 18,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 36,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 31,
+                "scored_cases": 36,
+                "total_cases": 36
+              }
+            }
+          }
+        },
+        "domain": {
+          "physics": {
+            "total_cases": 48,
+            "scored_cases": 48,
+            "passed_cases": 41,
+            "independent_families": 24,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 10,
+                "scored_cases": 12,
+                "total_cases": 12
+              },
+              "test": {
+                "passed_cases": 31,
+                "scored_cases": 36,
+                "total_cases": 36
+              }
+            }
+          }
+        },
+        "language": {
+          "en": {
+            "total_cases": 24,
+            "scored_cases": 24,
+            "passed_cases": 21,
+            "independent_families": 24,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 24,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 5,
+                "scored_cases": 6,
+                "total_cases": 6
+              },
+              "test": {
+                "passed_cases": 16,
+                "scored_cases": 18,
+                "total_cases": 18
+              }
+            }
+          },
+          "fr": {
+            "total_cases": 24,
+            "scored_cases": 24,
+            "passed_cases": 20,
+            "independent_families": 24,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 24,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 5,
+                "scored_cases": 6,
+                "total_cases": 6
+              },
+              "test": {
+                "passed_cases": 15,
+                "scored_cases": 18,
+                "total_cases": 18
+              }
+            }
+          }
+        },
+        "difficulty": {
+          "D1": {
+            "total_cases": 16,
+            "scored_cases": 16,
+            "passed_cases": 16,
+            "independent_families": 8,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              },
+              "test": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 12
+              }
+            }
+          },
+          "D2": {
+            "total_cases": 16,
+            "scored_cases": 16,
+            "passed_cases": 14,
+            "independent_families": 8,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              },
+              "test": {
+                "passed_cases": 10,
+                "scored_cases": 12,
+                "total_cases": 12
+              }
+            }
+          },
+          "D3": {
+            "total_cases": 16,
+            "scored_cases": 16,
+            "passed_cases": 11,
+            "independent_families": 8,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 4,
+                "total_cases": 4
+              },
+              "test": {
+                "passed_cases": 9,
+                "scored_cases": 12,
+                "total_cases": 12
+              }
+            }
+          }
+        },
+        "task_type": {
+          "accelerated-distance": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "accelerated-velocity": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "capacitor-energy": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 1,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 1,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "echo-distance": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "electrical-power": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "heat-energy": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "hydrostatic-pressure": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "inelastic-collision": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "isobaric-gas": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "joule-energy": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 0,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "kinetic-energy": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "lift-efficiency": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 0,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "missing-capacity": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "missing-mass": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "opposed-forces": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "parallel-resistance": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "period": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "potential-energy": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "series-current": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "spring-energy": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "thermal-mixing": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 0,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "thin-lens": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "uniform-distance": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          },
+          "wave-speed": {
+            "total_cases": 2,
+            "scored_cases": 2,
+            "passed_cases": 2,
+            "independent_families": 1,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 2
+              }
+            }
+          }
+        },
+        "catalogue_variant": {
+          "not_applicable": {
+            "total_cases": 48,
+            "scored_cases": 48,
+            "passed_cases": 41,
+            "independent_families": 24,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 10,
+                "scored_cases": 12,
+                "total_cases": 12
+              },
+              "test": {
+                "passed_cases": 31,
+                "scored_cases": 36,
+                "total_cases": 36
+              }
+            }
+          }
+        },
+        "use_case": {
+          "not_annotated": {
+            "total_cases": 48,
+            "scored_cases": 48,
+            "passed_cases": 41,
+            "independent_families": 24,
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 10,
+                "scored_cases": 12,
+                "total_cases": 12
+              },
+              "test": {
+                "passed_cases": 31,
+                "scored_cases": 36,
+                "total_cases": 36
+              }
+            }
+          }
+        }
+      },
+      "families": {
+        "total": 24,
+        "all_variants_correct": 20,
+        "mixed_correctness": 1,
+        "no_variant_correct": 3,
+        "choice_agreement": 23
+      },
+      "test_families": {
+        "total": 18,
+        "all_variants_correct": 15,
+        "mixed_correctness": 1,
+        "no_variant_correct": 2,
+        "choice_agreement": 17
+      },
+      "latency_ms": {
+        "count": 48,
+        "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+        "max": 220.28425001190044,
+        "median": 196.69399948907085,
+        "min": 190.81233302131295,
+        "p95": 211.70658300979994
+      },
+      "http_latency_ms": {
+        "count": 48,
+        "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+        "max": 220.0856669805944,
+        "median": 196.49731199024245,
+        "min": 190.6282919808291,
+        "p95": 211.40354199451394
+      },
+      "resources": {
+        "sampled_group_rss_peak_mib": 9781.78125,
+        "min_available_mib": 21749.0625,
+        "stop_reason": null,
+        "scope": "whole fresh session, including startup, controls and excluded warm-up; not per-response or total GPU allocation"
+      },
+      "actual_backend": {
+        "kind": "metal",
+        "offloaded_layers": 33,
+        "total_layers": 33,
+        "decision_type": "clef"
+      },
+      "preparation_count_matches": 48,
+      "native_truncation_receipts": {
+        "true": 0,
+        "false": 0,
+        "unknown": 48
+      },
+      "physical_forward_receipts": {
+        "true": 0,
+        "false": 0,
+        "unknown": 48
+      },
+      "included_in_full_pack_quality_denominator": true,
+      "identity": {
+        "dataset_sha256": "e21cd2e0f4e35465b56158ba1fa07c8d8203be81a969c6edf4b7630d2f0d7307",
+        "scorer_sha256": "9db9c9fedd71c4052d8506c30b9905512ad0681a4d994282e9a2613dbd2735a1",
+        "benchmark_source_sha256": "d4405521c201106d7939e422ca473533a0ec9ac91b6286283a2d7b2d02861dc0",
+        "outer_seal_sha256": "f80bc5f685b10425d4f910d5d25c0a0404f81a1afa537477b3bfa7c5b0842ac4",
+        "raw_sha256": "305adad70128e950b1643a957e5b6ecd0177a88113637ee93bd61bd392ad3a39",
+        "analysis_sha256": "fa7944c52c2627497f60113308e5681eb0010c1d22af73cda1053fed41fa9f69"
+      }
+    }
+  },
+  "paired_with_d3_flash_direct": {
+    "context_all": {
+      "total": 132,
+      "families": 66,
+      "both_correct": 107,
+      "d3_only_correct": 17,
+      "clef_only_correct": 3,
+      "both_incorrect": 5,
+      "d3_analysis_sha256": "53003145b2ce0ccdd739e558b18901a700a13dbbfe893ee6bb60b880a9e4b810",
+      "clef_analysis_sha256": "02c66a1741bb9ef9293c65569529f7a45b6dfa02f3e547b13164a8adcfcb8fa4"
+    },
+    "context_test": {
+      "total": 66,
+      "families": 33,
+      "both_correct": 56,
+      "d3_only_correct": 5,
+      "clef_only_correct": 3,
+      "both_incorrect": 2,
+      "d3_analysis_sha256": "53003145b2ce0ccdd739e558b18901a700a13dbbfe893ee6bb60b880a9e4b810",
+      "clef_analysis_sha256": "02c66a1741bb9ef9293c65569529f7a45b6dfa02f3e547b13164a8adcfcb8fa4"
+    },
+    "physics_all": {
+      "total": 48,
+      "families": 24,
+      "both_correct": 37,
+      "d3_only_correct": 2,
+      "clef_only_correct": 4,
+      "both_incorrect": 5,
+      "d3_analysis_sha256": "be62ed01f34b572aa076a1f99a25f7d2b3c76741fa0cb5efc2c25fddb4019abb",
+      "clef_analysis_sha256": "fa7944c52c2627497f60113308e5681eb0010c1d22af73cda1053fed41fa9f69"
+    },
+    "physics_test": {
+      "total": 36,
+      "families": 18,
+      "both_correct": 30,
+      "d3_only_correct": 2,
+      "clef_only_correct": 1,
+      "both_incorrect": 3,
+      "d3_analysis_sha256": "be62ed01f34b572aa076a1f99a25f7d2b3c76741fa0cb5efc2c25fddb4019abb",
+      "clef_analysis_sha256": "fa7944c52c2627497f60113308e5681eb0010c1d22af73cda1053fed41fa9f69"
+    }
+  },
+  "limitations": [
+    "Synthetic agent-authored references pending human review; no product qualification.",
+    "GGUF conversion exact Cloudflare source revision is not attested; BF16/PyTorch not evaluated.",
+    "Canary and prepared-input warm-ups excluded from full-pack denominators; no pooled accuracy.",
+    "Family, language and catalogue variants are correlated; no independent-sample confidence interval.",
+    "Input-count agreement is not live token-ID/head-order comparison; truncation/forward receipts remain unknown.",
+    "Single-pass adapter latency after warm-up excludes loading; no controlled speed ranking.",
+    "Prior D3 capability observation used a different binary and application gateway; compare accuracy separately from runtime.",
+    "Raw outputs, path-bearing receipts and source captures are retained only in ignored local archives."
+  ]
+}

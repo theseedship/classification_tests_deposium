@@ -8,6 +8,11 @@ References are agent-authored and pending human review. The first
 reached **192/192, including 96/96 test cases**, on 29 October 2026.
 **Zero cases are semantically qualified; no application or tool execution is tested.**
 
+The separate [Clef Flash Q8/Metal campaign](../../docs/CLEF_FLASH_RESULTS_20261029.md)
+also reached **192/192, test 96/96**, on the unchanged pack, with separate
+context and physics observations. Its addition does not change the original
+seven-candidate capability sequence or the dataset's generation-time manifest.
+
 The perfect score is a ceiling on these four-proposal synthetic choices, not
 evidence of general tool discovery or executable workflows. The dated report
 keeps the fresh 132-case context anchor and 12-case technical canary separate.

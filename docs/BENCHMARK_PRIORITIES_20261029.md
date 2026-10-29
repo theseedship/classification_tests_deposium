@@ -59,6 +59,12 @@ to fill a larger table.
 
 ## 3. Strengthen evidence assessment
 
+The separate [Clef Flash Q8 campaign](CLEF_FLASH_RESULTS_20261029.md) is now
+complete: context 110/132 (test 59/66), capability 192/192 (test 96/96), physics
+41/48 (test 31/36). Its capability ceiling reinforces the value of the evidence
+comparison below. Clef was an additional candidate; the original seven-model
+sequence remains unchanged. Clef 27B is still unexecuted.
+
 The [balanced passage ranking results](leaderboard/other-benchmarks.md) already
 include four passage rotations over 512 test variants. Evidence assessment is
 a separate gap: D3-lite support is 443/768 and answerability 88/128 on the
@@ -76,6 +82,22 @@ current remote endpoint or price is assumed from a historical Jev report.
 **Completion evidence:** complete task-specific observations, class/error
 breakdowns, retained missing cases and a comparison on matching inputs.
 Extending the evidence tasks has priority over another general model leaderboard.
+
+**Stronger observation completed:** [D3 Flash Q8/Metal](PASSAGE_FLASH_RESULTS_20261029.md)
+scored relevance 252/512, support 460/768 and answerability 122/128 on the
+same 128 rotation-zero test pools, all scored. Answerability improves over
+historical D3-lite's 88/128, but support gains only 17 decisions and its macro
+class score decreases. Its v1 labels and previous archives remain unchanged;
+the subsequent Clef comparison is recorded below, with human review of
+insufficient/refuted distinctions still pending.
+
+**Matched Clef observation completed:** [Clef Flash Q8/Metal](PASSAGE_CLEF_RESULTS_20261029.md)
+scored relevance 261/512, support 446/768 and answerability 109/128 on identical
+task inputs, with 728/728 physical calls valid and a separate fresh context
+anchor. It accepts 12/16 conflicting pools as answerable; the overall score
+does not qualify conflict handling. Both Flash observations and their paired
+class errors are now archived. Human semantic review and new held-out scenarios
+remain open; the frozen v1 references and original cohort are unchanged.
 
 ## 4. Build executable arguments and bounded episodes
 
