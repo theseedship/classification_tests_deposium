@@ -63,7 +63,8 @@
           "mcps.semantic-source-route",
           "mcps.search",
           "bench.context-choice",
-          "bench.tool-plan"
+          "bench.tool-plan",
+          "bench.tool-discovery"
         ]
       },
       "uniqueItems": true
@@ -972,6 +973,27 @@
           "capabilities": {
             "contains": {
               "const": "bench.tool-plan"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adapter": {
+            "const": "recorded"
+          },
+          "qualification": {
+            "const": "harness_control"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "capabilities": {
+            "contains": {
+              "const": "bench.tool-discovery"
             }
           }
         }

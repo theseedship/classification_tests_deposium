@@ -1,0 +1,13 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "tool-discovery-control",
+  "adapter": "recorded",
+  "qualification": "harness_control",
+  "capabilities": [
+    "bench.tool-discovery"
+  ],
+  "model": null,
+  "timeout_seconds": 15,
+  "revision": null,
+  "recordings": "../fixtures/tool-discovery-control.jsonl"
+}

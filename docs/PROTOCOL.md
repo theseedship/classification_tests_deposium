@@ -59,7 +59,9 @@ report separates source/oracle consistency and scripted scorer controls,
 states actual denominators and keeps semantic/human review qualifications
 explicit. It performs no candidate inference, model download or paid API call.
 The [dated command output](evidence/reference-grid-check-20261029.json) records
-the exact source hashes, Python version and tested control scopes. The
+the exact source hashes, Python version and tested control scopes before the
+discovery extension. The current command also checks the new discovery pack;
+the earlier report remains unchanged as historical evidence. The
 [dated agent-review evidence](evidence/agent-reference-review-20261029.json)
 separately records eight physics cases and sixteen passage pools: 184 label
 comparisons, all matching the authored references in this sample. This is an
@@ -161,6 +163,41 @@ output path is qualified and no tools or numeric computation are executed.
 The 12-family expansion is a proposal, not a materialized test set. Keep this
 fixture outside model rankings; executable argument values and adaptive
 episodes require the later contracts and actual execution evidence.
+
+### Catalogue discovery and tool-set selection
+
+The [tool-discovery pack](../datasets/tool-discovery-v1/README.md) adds six
+synthetic FR/EN families (12 cases), with two families assigned to each split.
+The input exposes a bounded catalogue, a request and a shortlist limit; plugin,
+capability and tool IDs are distinct. Eligibility and availability are fixed
+fixture facts and deterministic guards, independent of the candidate's choice.
+
+The output separates a shortlist of **tool IDs** from a final unordered tool
+set and the semantic decision `select`, `clarify` or `no_suitable`. A correct
+nonselection can contain no tools; an empty output or empty `select` cannot
+pass. Alternative minimal sufficient sets remain hidden in the reference.
+
+Report shortlist recall/precision at the declared tool level and limit,
+separately from final-set sufficiency, exact minimal-set success and unnecessary
+selections. Match the best valid alternative; do not require the union of all
+equivalent solutions. A final superset can be sufficient while failing minimal
+success. Missing and failed outputs stay in the eligible denominators;
+inapplicable metrics are null rather than a fabricated perfect score. The
+[versioned contract](TOOL_DISCOVERY_CONTRACT_V1.md) defines the exact formulas.
+
+The [dated offline evidence](evidence/tool-discovery-offline-20261029.json)
+records 12/12 passing scripted cases and a separate expected failing superset
+control (11/12, with all cases scored). Both controls retain six sufficient
+select sets, while the excessive control has only five minimal sets and one
+unnecessary tool. These receipts qualify the harness and accounting only;
+they add no real-model observation to the ranking.
+
+This slice uses the shared case/adapter/campaign/scoring path and a recorded
+`harness_control` profile. Real model profiles cannot advertise the contract
+until their output path is qualified. No arguments or tools execute, and
+selecting a dependent pair checks its membership, not execution order or
+artifact values. Those remain #11/#12. Existing v1 packs and model results
+are preserved; the new scorer fingerprint identifies the additive task code.
 
 ### Retrieved passages and evidence
 

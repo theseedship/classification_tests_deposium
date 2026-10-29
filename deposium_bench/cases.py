@@ -103,7 +103,7 @@ def validate_cases(cases: Any) -> list[dict]:
                  for contract in component["contracts"]}
     # Benchmark-native task, deliberately separate from the application stack
     # inventory: a recorded plan fixture cannot qualify an application service.
-    native_contracts = {"bench.tool-plan": ["PRODUCT"]}
+    native_contracts = {"bench.tool-plan": ["PRODUCT"], "bench.tool-discovery": ["PRODUCT"]}
     seen: set[str] = set()
     partitions: dict[tuple[str, str], str] = {}
     keys = {"schema_version", "case_id", "scenario_id", "translation_family", "document_ids",
@@ -181,6 +181,9 @@ def validate_cases(cases: Any) -> list[dict]:
             raise CaseError("reference: assertions contain no substantive expectation")
         if case["contract_id"] == "bench.tool-plan":
             from .tool_plan import validate_case
+            validate_case(case)
+        if case["contract_id"] == "bench.tool-discovery":
+            from .tool_discovery import validate_case
             validate_case(case)
         if research:
             from .research_corpus import validate_oracle

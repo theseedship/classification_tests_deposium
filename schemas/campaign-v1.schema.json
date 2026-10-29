@@ -532,7 +532,9 @@
               "mcps.scope-dispatch",
               "mcps.semantic-source-route",
               "mcps.search",
-              "bench.context-choice"
+              "bench.context-choice",
+              "bench.tool-plan",
+              "bench.tool-discovery"
             ]
           },
           "uniqueItems": true
@@ -1056,6 +1058,24 @@
         }
       },
       "allOf": [
+        {
+          "if": {
+            "properties": {
+              "capabilities": {
+                "contains": {
+                  "enum": ["bench.tool-plan", "bench.tool-discovery"]
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "adapter": {"const": "recorded"},
+              "qualification": {"const": "harness_control"},
+              "model": {"type": "null"}
+            }
+          }
+        },
         {
           "if": {
             "properties": {

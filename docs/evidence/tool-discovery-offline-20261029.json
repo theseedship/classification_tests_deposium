@@ -1,0 +1,461 @@
+{
+  "candidate_model_cases": 0,
+  "campaign_schema_followup": {
+    "date": "2026-10-30",
+    "executed_benchmark_commit": "9573e5097242fd1027b40a431df28750810ca73f",
+    "actual_manifest_validation": "passed_for_tool_plan_and_tool_discovery",
+    "restriction": "recorded_adapter_harness_control_model_null_only",
+    "false_provenance_controls": "rejected",
+    "offline_linux_suite": {
+      "tests": 922,
+      "passed": 891,
+      "skipped": 31,
+      "errors": 0,
+      "failures": 0
+    },
+    "original_control_archives": "unchanged"
+  },
+  "offline_linux_suite": {
+    "tests": 921,
+    "passed": 890,
+    "skipped": 31,
+    "failures": 0,
+    "errors": 0,
+    "python": "3.12",
+    "network": "disabled",
+    "source_mount": "read_only",
+    "source_benchmark_commit": "a731e88d5e69aef0f60c6cb79a038811c701a86d",
+    "qualification": "offline_implementation_only"
+  },
+  "controls": {
+    "positive": {
+      "completion_status": "complete",
+      "counts_by_status": {
+        "abstain": 0,
+        "error": 0,
+        "missing": 0,
+        "ok": 12,
+        "timeout": 0,
+        "unsupported": 0
+      },
+      "expected_verdict": "pass",
+      "fingerprints": {
+        "archive_seal_sha256": "6fc12b4f27c7cc97640bd84abf8ecd12e33cccc850b9a71a28c03ed1f52ccd17",
+        "bench_source_sha256": "7a41c975de7f93270792818e24dea3e58011dbd7703f77792d6e17f4f27ff113",
+        "dataset_sha256": "7ba984e2df5ad762aed552b846dcf1dcc3e3ede61aa000a6848c59ee04a5df10",
+        "profile_sha256": "b254a51f7abf388fba00ffd30832b6239f704ff3d43f3bf51440351bbd9fa6c3",
+        "raw_sha256": "9d6d8d5492bf694e791408ef4d305000f56ea94cd6b87330833f0447db9ef31c",
+        "recordings_sha256": "bb75d0ce7c85d3e6aee5a56c99d024908275e48e585b438c5a342158d6abc899",
+        "scorer_sha256": "303b51cfa560ad6da452e4cd9b8cc3f2182dc01783a8fef5bdcf07bccaaec72c",
+        "source_profile_sha256": "92901d205f4ba9e8fe70fb31852fbdd534d61446fc5412d5e6987e251d293e7c"
+      },
+      "mutation": null,
+      "passed_cases": 12,
+      "scored_cases": 12,
+      "task_metrics": {
+        "by_language": {
+          "en": {
+            "eligible_select_cases": 3,
+            "final_minimal_cases": 3,
+            "final_minimal_over_all_eligible": 1.0,
+            "final_precision_over_all_eligible": 1.0,
+            "final_precision_sum": 3.0,
+            "final_recall_over_all_eligible": 1.0,
+            "final_recall_sum": 3.0,
+            "final_sufficient_cases": 3,
+            "final_sufficient_over_all_eligible": 1.0,
+            "level": "tool_id",
+            "observed_select_cases": 3,
+            "schema_version": "deposium.tool-discovery-metrics/v1",
+            "scored_cases": 6,
+            "shortlist_limits": {
+              "4": 6
+            },
+            "shortlist_precision_over_all_eligible": 0.7222222222222222,
+            "shortlist_precision_sum": 2.1666666666666665,
+            "shortlist_recall_over_all_eligible": 1.0,
+            "shortlist_recall_sum": 3.0,
+            "total_cases": 6,
+            "unnecessary_tools_mean_observed": 0.0,
+            "unnecessary_tools_sum": 0
+          },
+          "fr": {
+            "eligible_select_cases": 3,
+            "final_minimal_cases": 3,
+            "final_minimal_over_all_eligible": 1.0,
+            "final_precision_over_all_eligible": 1.0,
+            "final_precision_sum": 3.0,
+            "final_recall_over_all_eligible": 1.0,
+            "final_recall_sum": 3.0,
+            "final_sufficient_cases": 3,
+            "final_sufficient_over_all_eligible": 1.0,
+            "level": "tool_id",
+            "observed_select_cases": 3,
+            "schema_version": "deposium.tool-discovery-metrics/v1",
+            "scored_cases": 6,
+            "shortlist_limits": {
+              "4": 6
+            },
+            "shortlist_precision_over_all_eligible": 0.611111111111111,
+            "shortlist_precision_sum": 1.8333333333333333,
+            "shortlist_recall_over_all_eligible": 1.0,
+            "shortlist_recall_sum": 3.0,
+            "total_cases": 6,
+            "unnecessary_tools_mean_observed": 0.0,
+            "unnecessary_tools_sum": 0
+          }
+        },
+        "by_split": {
+          "calibration": {
+            "eligible_select_cases": 2,
+            "final_minimal_cases": 2,
+            "final_minimal_over_all_eligible": 1.0,
+            "final_precision_over_all_eligible": 1.0,
+            "final_precision_sum": 2.0,
+            "final_recall_over_all_eligible": 1.0,
+            "final_recall_sum": 2.0,
+            "final_sufficient_cases": 2,
+            "final_sufficient_over_all_eligible": 1.0,
+            "level": "tool_id",
+            "observed_select_cases": 2,
+            "schema_version": "deposium.tool-discovery-metrics/v1",
+            "scored_cases": 4,
+            "shortlist_limits": {
+              "4": 4
+            },
+            "shortlist_precision_over_all_eligible": 0.75,
+            "shortlist_precision_sum": 1.5,
+            "shortlist_recall_over_all_eligible": 1.0,
+            "shortlist_recall_sum": 2.0,
+            "total_cases": 4,
+            "unnecessary_tools_mean_observed": 0.0,
+            "unnecessary_tools_sum": 0
+          },
+          "test": {
+            "eligible_select_cases": 2,
+            "final_minimal_cases": 2,
+            "final_minimal_over_all_eligible": 1.0,
+            "final_precision_over_all_eligible": 1.0,
+            "final_precision_sum": 2.0,
+            "final_recall_over_all_eligible": 1.0,
+            "final_recall_sum": 2.0,
+            "final_sufficient_cases": 2,
+            "final_sufficient_over_all_eligible": 1.0,
+            "level": "tool_id",
+            "observed_select_cases": 2,
+            "schema_version": "deposium.tool-discovery-metrics/v1",
+            "scored_cases": 4,
+            "shortlist_limits": {
+              "4": 4
+            },
+            "shortlist_precision_over_all_eligible": 0.41666666666666663,
+            "shortlist_precision_sum": 0.8333333333333333,
+            "shortlist_recall_over_all_eligible": 1.0,
+            "shortlist_recall_sum": 2.0,
+            "total_cases": 4,
+            "unnecessary_tools_mean_observed": 0.0,
+            "unnecessary_tools_sum": 0
+          },
+          "train": {
+            "eligible_select_cases": 2,
+            "final_minimal_cases": 2,
+            "final_minimal_over_all_eligible": 1.0,
+            "final_precision_over_all_eligible": 1.0,
+            "final_precision_sum": 2.0,
+            "final_recall_over_all_eligible": 1.0,
+            "final_recall_sum": 2.0,
+            "final_sufficient_cases": 2,
+            "final_sufficient_over_all_eligible": 1.0,
+            "level": "tool_id",
+            "observed_select_cases": 2,
+            "schema_version": "deposium.tool-discovery-metrics/v1",
+            "scored_cases": 4,
+            "shortlist_limits": {
+              "4": 4
+            },
+            "shortlist_precision_over_all_eligible": 0.8333333333333333,
+            "shortlist_precision_sum": 1.6666666666666665,
+            "shortlist_recall_over_all_eligible": 1.0,
+            "shortlist_recall_sum": 2.0,
+            "total_cases": 4,
+            "unnecessary_tools_mean_observed": 0.0,
+            "unnecessary_tools_sum": 0
+          }
+        },
+        "eligible_select_cases": 6,
+        "final_minimal_cases": 6,
+        "final_minimal_over_all_eligible": 1.0,
+        "final_precision_over_all_eligible": 1.0,
+        "final_precision_sum": 6.0,
+        "final_recall_over_all_eligible": 1.0,
+        "final_recall_sum": 6.0,
+        "final_sufficient_cases": 6,
+        "final_sufficient_over_all_eligible": 1.0,
+        "level": "tool_id",
+        "observed_select_cases": 6,
+        "schema_version": "deposium.tool-discovery-metrics/v1",
+        "scored_cases": 12,
+        "shortlist_limits": {
+          "4": 12
+        },
+        "shortlist_precision_over_all_eligible": 0.6666666666666666,
+        "shortlist_precision_sum": 4.0,
+        "shortlist_recall_over_all_eligible": 1.0,
+        "shortlist_recall_sum": 6.0,
+        "total_cases": 12,
+        "unnecessary_tools_mean_observed": 0.0,
+        "unnecessary_tools_sum": 0
+      },
+      "total_cases": 12,
+      "verdict": "pass"
+    },
+    "superset": {
+      "completion_status": "complete",
+      "counts_by_status": {
+        "abstain": 0,
+        "error": 0,
+        "missing": 0,
+        "ok": 12,
+        "timeout": 0,
+        "unsupported": 0
+      },
+      "expected_verdict": "fail",
+      "fingerprints": {
+        "archive_seal_sha256": "b6f0bd6757546b83b745ba74954093e11450ded41b97ddaf55962e592a0be939",
+        "bench_source_sha256": "7a41c975de7f93270792818e24dea3e58011dbd7703f77792d6e17f4f27ff113",
+        "dataset_sha256": "7ba984e2df5ad762aed552b846dcf1dcc3e3ede61aa000a6848c59ee04a5df10",
+        "profile_sha256": "97f30195841ceaea9d62ba8773dc100f0f5e60f5c9b63e0b6606edef8477dfb6",
+        "raw_sha256": "29c8878997b07352d5fc7b863c9d2a110ed9da28898a933e0997b4f0cfaa7600",
+        "recordings_sha256": "dbfb33d5f4d1808c6353b6d3685561a70d16d483ffc5ab16c8297d07aead4494",
+        "scorer_sha256": "303b51cfa560ad6da452e4cd9b8cc3f2182dc01783a8fef5bdcf07bccaaec72c",
+        "source_profile_sha256": "8e1ad33e0a298e966a9fd2e71ff60cdff58589b43852bef6ba4a16e50b76c999"
+      },
+      "mutation": "Add one already-shortlisted distractor to the first final set; all other responses are unchanged.",
+      "passed_cases": 11,
+      "scored_cases": 12,
+      "task_metrics": {
+        "by_language": {
+          "en": {
+            "eligible_select_cases": 3,
+            "final_minimal_cases": 3,
+            "final_minimal_over_all_eligible": 1.0,
+            "final_precision_over_all_eligible": 1.0,
+            "final_precision_sum": 3.0,
+            "final_recall_over_all_eligible": 1.0,
+            "final_recall_sum": 3.0,
+            "final_sufficient_cases": 3,
+            "final_sufficient_over_all_eligible": 1.0,
+            "level": "tool_id",
+            "observed_select_cases": 3,
+            "schema_version": "deposium.tool-discovery-metrics/v1",
+            "scored_cases": 6,
+            "shortlist_limits": {
+              "4": 6
+            },
+            "shortlist_precision_over_all_eligible": 0.7222222222222222,
+            "shortlist_precision_sum": 2.1666666666666665,
+            "shortlist_recall_over_all_eligible": 1.0,
+            "shortlist_recall_sum": 3.0,
+            "total_cases": 6,
+            "unnecessary_tools_mean_observed": 0.0,
+            "unnecessary_tools_sum": 0
+          },
+          "fr": {
+            "eligible_select_cases": 3,
+            "final_minimal_cases": 2,
+            "final_minimal_over_all_eligible": 0.6666666666666666,
+            "final_precision_over_all_eligible": 0.8333333333333334,
+            "final_precision_sum": 2.5,
+            "final_recall_over_all_eligible": 1.0,
+            "final_recall_sum": 3.0,
+            "final_sufficient_cases": 3,
+            "final_sufficient_over_all_eligible": 1.0,
+            "level": "tool_id",
+            "observed_select_cases": 3,
+            "schema_version": "deposium.tool-discovery-metrics/v1",
+            "scored_cases": 6,
+            "shortlist_limits": {
+              "4": 6
+            },
+            "shortlist_precision_over_all_eligible": 0.611111111111111,
+            "shortlist_precision_sum": 1.8333333333333333,
+            "shortlist_recall_over_all_eligible": 1.0,
+            "shortlist_recall_sum": 3.0,
+            "total_cases": 6,
+            "unnecessary_tools_mean_observed": 0.3333333333333333,
+            "unnecessary_tools_sum": 1
+          }
+        },
+        "by_split": {
+          "calibration": {
+            "eligible_select_cases": 2,
+            "final_minimal_cases": 1,
+            "final_minimal_over_all_eligible": 0.5,
+            "final_precision_over_all_eligible": 0.75,
+            "final_precision_sum": 1.5,
+            "final_recall_over_all_eligible": 1.0,
+            "final_recall_sum": 2.0,
+            "final_sufficient_cases": 2,
+            "final_sufficient_over_all_eligible": 1.0,
+            "level": "tool_id",
+            "observed_select_cases": 2,
+            "schema_version": "deposium.tool-discovery-metrics/v1",
+            "scored_cases": 4,
+            "shortlist_limits": {
+              "4": 4
+            },
+            "shortlist_precision_over_all_eligible": 0.75,
+            "shortlist_precision_sum": 1.5,
+            "shortlist_recall_over_all_eligible": 1.0,
+            "shortlist_recall_sum": 2.0,
+            "total_cases": 4,
+            "unnecessary_tools_mean_observed": 0.5,
+            "unnecessary_tools_sum": 1
+          },
+          "test": {
+            "eligible_select_cases": 2,
+            "final_minimal_cases": 2,
+            "final_minimal_over_all_eligible": 1.0,
+            "final_precision_over_all_eligible": 1.0,
+            "final_precision_sum": 2.0,
+            "final_recall_over_all_eligible": 1.0,
+            "final_recall_sum": 2.0,
+            "final_sufficient_cases": 2,
+            "final_sufficient_over_all_eligible": 1.0,
+            "level": "tool_id",
+            "observed_select_cases": 2,
+            "schema_version": "deposium.tool-discovery-metrics/v1",
+            "scored_cases": 4,
+            "shortlist_limits": {
+              "4": 4
+            },
+            "shortlist_precision_over_all_eligible": 0.41666666666666663,
+            "shortlist_precision_sum": 0.8333333333333333,
+            "shortlist_recall_over_all_eligible": 1.0,
+            "shortlist_recall_sum": 2.0,
+            "total_cases": 4,
+            "unnecessary_tools_mean_observed": 0.0,
+            "unnecessary_tools_sum": 0
+          },
+          "train": {
+            "eligible_select_cases": 2,
+            "final_minimal_cases": 2,
+            "final_minimal_over_all_eligible": 1.0,
+            "final_precision_over_all_eligible": 1.0,
+            "final_precision_sum": 2.0,
+            "final_recall_over_all_eligible": 1.0,
+            "final_recall_sum": 2.0,
+            "final_sufficient_cases": 2,
+            "final_sufficient_over_all_eligible": 1.0,
+            "level": "tool_id",
+            "observed_select_cases": 2,
+            "schema_version": "deposium.tool-discovery-metrics/v1",
+            "scored_cases": 4,
+            "shortlist_limits": {
+              "4": 4
+            },
+            "shortlist_precision_over_all_eligible": 0.8333333333333333,
+            "shortlist_precision_sum": 1.6666666666666665,
+            "shortlist_recall_over_all_eligible": 1.0,
+            "shortlist_recall_sum": 2.0,
+            "total_cases": 4,
+            "unnecessary_tools_mean_observed": 0.0,
+            "unnecessary_tools_sum": 0
+          }
+        },
+        "eligible_select_cases": 6,
+        "final_minimal_cases": 5,
+        "final_minimal_over_all_eligible": 0.8333333333333334,
+        "final_precision_over_all_eligible": 0.9166666666666666,
+        "final_precision_sum": 5.5,
+        "final_recall_over_all_eligible": 1.0,
+        "final_recall_sum": 6.0,
+        "final_sufficient_cases": 6,
+        "final_sufficient_over_all_eligible": 1.0,
+        "level": "tool_id",
+        "observed_select_cases": 6,
+        "schema_version": "deposium.tool-discovery-metrics/v1",
+        "scored_cases": 12,
+        "shortlist_limits": {
+          "4": 12
+        },
+        "shortlist_precision_over_all_eligible": 0.6666666666666666,
+        "shortlist_precision_sum": 4.0,
+        "shortlist_recall_over_all_eligible": 1.0,
+        "shortlist_recall_sum": 6.0,
+        "total_cases": 12,
+        "unnecessary_tools_mean_observed": 0.16666666666666666,
+        "unnecessary_tools_sum": 1
+      },
+      "total_cases": 12,
+      "verdict": "fail"
+    }
+  },
+  "dataset": {
+    "cases": 12,
+    "cases_per_split": 4,
+    "families": 6,
+    "languages": [
+      "fr",
+      "en"
+    ],
+    "path": "datasets/tool-discovery-v1/cases.jsonl",
+    "review": "agent_authored_pending_human",
+    "select_cases_per_split": 2,
+    "sha256": "7ba984e2df5ad762aed552b846dcf1dcc3e3ede61aa000a6848c59ee04a5df10"
+  },
+  "date": "2026-10-29",
+  "executed_benchmark_commit": "a731e88d5e69aef0f60c6cb79a038811c701a86d",
+  "human_judgments": 0,
+  "limitations": [
+    "Scripted recorded outputs test the shared harness and metric rules, not a real model.",
+    "No tool, generated arguments, artifact values or feedback loop execute.",
+    "References and translations are agent-authored, not human-approved.",
+    "The shortlists deliberately contain permitted distractors; their precision can be below one despite correct minimal final decisions.",
+    "The expected failing superset retains all 12 scored cases and its original sealed archive.",
+    "These are public aggregates only. Original raw archives and runtime-specific temporary profiles remain outside Git.",
+    "Ranking scorer controls are outside the reference-grid command scope; existing historical reports remain unchanged."
+  ],
+  "qualification": "harness_control",
+  "reference_grid_check": {
+    "choice_case_envelopes": 386,
+    "empty_controls": 772,
+    "positive_controls": 390,
+    "runtime": {
+      "implementation": "cpython",
+      "python": "3.12.12"
+    },
+    "sources_sha256": {
+      "datasets/capability-choice-v1/cases.jsonl": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+      "datasets/capability-choice-v1/manifest.json": "252f727631584fc15501a840a5697c9060516626d573ee93d55966cfb012e06d",
+      "datasets/context-choice-v1/cases.jsonl": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+      "datasets/context-choice-v1/manifest.json": "937f3f52242093806cf7804845972dcdb2d7fe1a1e34dcee18b29250f6caa64b",
+      "datasets/passage-evidence-v1/cases.jsonl": "35a8b8982d12959985218b5bc6e10e932ba30970bd7ab9a81c6f10d17a7fe476",
+      "datasets/passage-evidence-v1/manifest.json": "6d89c4b9ce9ab37eac8c66e0540a7c154009cf23a9321b69cbd1abfef384eb89",
+      "datasets/physics-choice-v1/cases.jsonl": "e21cd2e0f4e35465b56158ba1fa07c8d8203be81a969c6edf4b7630d2f0d7307",
+      "datasets/physics-choice-v1/manifest.json": "543676833aedaee264623e1c1afd5fe96bfc983756c20bf520d8cf1f45ab2971",
+      "datasets/tool-discovery-v1/cases.jsonl": "7ba984e2df5ad762aed552b846dcf1dcc3e3ede61aa000a6848c59ee04a5df10",
+      "datasets/tool-discovery-v1/manifest.json": "9fd0961a096a4b699307ffd533bf01f0d8ef1b477b50839b2d427f6dd2257bd2",
+      "datasets/tool-plan-pilot-v1/cases.jsonl": "95c1098bed1bce3bf014dc3933afa1d872226277ef7d4b6ae2588cbbe59d958e",
+      "datasets/tool-plan-pilot-v1/manifest.json": "7b25a4ae3818eb2d85714834c64d9ca9dc8fe1ad2f6ea165923be76604533dd6",
+      "deposium_bench/capability_corpus.py": "e954abb30a5230cc12169000019493e2bd8c81232a2982ee656836801b8d9a05",
+      "deposium_bench/cases.py": "edaa33a1c5511e0c14b18cdf14ae74e6037091d7f6929e8a26a992ecfede1c41",
+      "deposium_bench/choice_protocol.py": "cbc990434887ddedc4df5f20c416cb64e073ecb5c7a4b4d93321d79f9ea8728f",
+      "deposium_bench/passage_corpus.py": "dc9437c98d9b436d7f71c5b6a125f6f60f01f08617e9fc45a757bdf0b4bb4379",
+      "deposium_bench/passage_dataset.py": "15b8a117a197129a8ae88e253f64e878e34bb60d5a3cd9747d6ec0b0496298a0",
+      "deposium_bench/physics_corpus.py": "d05f0451c5d275294f2c317c142fa5b8946582dc09dc16c140424999f0cb26bf",
+      "deposium_bench/registry.py": "2d70f741a287e4c5a435ca7fc20578140b16631af4c92e2b9fa353cb1d4f75e0",
+      "deposium_bench/research_corpus.py": "4daa9e5abf8fad1085de2051e6b2d4aabed49eb199283302306805a1b4261433",
+      "deposium_bench/scoring.py": "67369acfa4974459e9d9aa81406559abd20d9c86242bea0c3ac1c5e6fb305b87",
+      "deposium_bench/tool_discovery.py": "70fc59c8d030bee64aed09ad8b9dc8283b17515a45f4c8b7cc8cc1313a474b68",
+      "deposium_bench/tool_plan.py": "754c5f6a09cf8be6dab7c44551c905565b2f5be92b54aad97ab40f8c6280d1ea",
+      "plans/reference-review-pilot-v1.json": "e99de7e9d3ef4ce1f999645f14080e34ee36cafc4f8ce91850022bbbb830c447",
+      "scripts/check-reference-grids.py": "4fac71586e06d1e2c607c2de16230262949864d3b8732604470f5f264805e4e1"
+    },
+    "status": "implementation_checks_passed",
+    "unscored_controls": 1544,
+    "wrong_controls": 1144
+  },
+  "schema_version": "deposium.tool-discovery-offline-evidence/v1",
+  "tool_executions": 0
+}

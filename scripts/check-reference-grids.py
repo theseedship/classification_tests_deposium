@@ -23,6 +23,7 @@ from deposium_bench import passage_dataset as passages
 from deposium_bench.cases import load_cases
 from deposium_bench.scoring import SCORER_VERSION, score_case, summarize
 from deposium_bench.tool_plan import validate_output
+from deposium_bench.tool_discovery import OUTPUT_VERSION as DISCOVERY_OUTPUT, validate_output as validate_discovery_output
 
 
 class AuditError(ValueError):
@@ -83,6 +84,29 @@ def check_choice_pack(cases, *, source, digest, reference_check):
             bad_value["calls"][0]["arguments"]["field"] = "quantity"
             validate_output(bad_value, case["input"])
             control(case, bad_value, False)
+            wrong += 2
+        elif case["contract_id"] == "bench.tool-discovery":
+            require(len(assertion) == 1 and assertion[0]["path"] == "/selection"
+                    and assertion[0]["op"] == "one_of", f"{source}: unsupported discovery reference")
+            for selection in assertion[0]["value"]:
+                proposal = {"schema_version": DISCOVERY_OUTPUT,
+                            "shortlist": list(selection["tool_ids"]),
+                            "selection": deepcopy(selection)}
+                control(case, proposal, True)
+                positive += 1
+            if assertion[0]["value"][0]["decision"] == "select":
+                wrong_selection = {"decision": "clarify", "tool_ids": [], "reason": "missing_information"}
+            else:
+                available = [t["tool_id"] for t in case["input"]["catalogue"] if t["eligible"] and t["available"]]
+                require(bool(available), f"{source}: missing typed negative control")
+                wrong_selection = {"decision": "select", "tool_ids": available[:1], "reason": "ready"}
+            bad = {"schema_version": DISCOVERY_OUTPUT,
+                   "shortlist": list(wrong_selection["tool_ids"]), "selection": wrong_selection}
+            validate_discovery_output(bad, case["input"])
+            control(case, bad, False)
+            bad = deepcopy(proposal)
+            bad["selection"]["decision"] = "success"
+            control(case, bad, False)
             wrong += 2
         else:
             raise AuditError(f"{source}: unqualified audit contract")
@@ -194,6 +218,7 @@ def audit(root=ROOT):
         ("physics-choice-v1", 48, "programmatic_oracle_consistency"),
         ("capability-choice-v1", 192, "frozen_agent_reference_consistency"),
         ("tool-plan-pilot-v1", 2, "frozen_agent_alternative_plan_consistency"),
+        ("tool-discovery-v1", 12, "frozen_agent_minimal_set_reference_consistency"),
     )
     packs, hashes = [], {}
     for name, expected_count, kind in specs:
@@ -232,7 +257,7 @@ def audit(root=ROOT):
     # separately from data read through the testable root parameter.
     for name in ("cases.py", "scoring.py", "research_corpus.py", "physics_corpus.py",
                  "capability_corpus.py", "tool_plan.py", "passage_dataset.py",
-                 "passage_corpus.py", "choice_protocol.py", "registry.py"):
+                 "passage_corpus.py", "choice_protocol.py", "registry.py", "tool_discovery.py"):
         relative = "deposium_bench/" + name
         hashes[relative] = sha256(ROOT / relative)
     hashes["scripts/check-reference-grids.py"] = sha256(Path(__file__))

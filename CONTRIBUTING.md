@@ -18,6 +18,8 @@ python3 -m deposium_bench validate-cases \
   --dataset datasets/context-choice-v1/cases.jsonl
 python3 -m deposium_bench validate-cases \
   --dataset datasets/physics-choice-v1/cases.jsonl
+python3 -m deposium_bench validate-cases \
+  --dataset datasets/tool-discovery-v1/cases.jsonl
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
@@ -28,15 +30,16 @@ python3 scripts/check-reference-grids.py
 
 Each command should exit `0`. The expected signals are:
 
-| Check | Expected meaning |
-|---|---|
-| Registry | Contracts are structurally valid; this does not contact or qualify services. |
-| Context / physics cases | Valid corpus, respectively 132 / 48 cases; no candidate inference. |
-| First-tool cases | Valid 24-case proposal pack; references remain provisional. |
-| Passage dataset / corpus | Valid 1,536-case corpus and no difference from the frozen generated corpus. |
-| Capability corpus | No difference from the frozen 192-case corpus. |
-| Full results | No difference between tracked generated tables/exports and their declared public sources. |
-| Reference grids | Shared validators and scripted scorer controls pass with explicit denominators; no candidate inference or claim that every authored answer is true. |
+| Check | Expected signal | Expected meaning |
+|---|---|---|
+| Registry | `status: valid`, `evaluation_status: not_run` | Contracts are structurally valid; this does not contact or qualify services. |
+| Context / physics cases | `status: valid`, case count and hash | Valid corpus, respectively 132 / 48 cases; no candidate inference. |
+| Tool-discovery cases | `status: valid`, `cases: 12` | FR/EN catalogue-selection pack; recorded controls only, no qualified model or executed tool. |
+| First-tool cases | `status: valid_review_corpus`, `cases_scored: 0` | Valid 24-case proposal pack; references remain provisional. |
+| Passage dataset / corpus | `status: valid`; `Dataset regeneration matches` | Valid 1,536-case corpus and no difference from the frozen generated corpus. |
+| Capability corpus | `status: valid_frozen_corpus`, `cases_scored: 0` | No difference from the frozen 192-case corpus. |
+| Full results | `views current` | Tracked generated tables/exports match their declared public sources. |
+| Reference grids | `status: implementation_checks_passed` | Shared validators and scripted controls pass with explicit denominators; no inference or proof that every authored answer is true. |
 
 A failing `--check` is a discrepancy to inspect. Do not regenerate a frozen
 corpus or change a reference merely to clear a failure. For intentional result
@@ -73,12 +76,19 @@ known failures/errors also present on its compared public base. Do not present
 that as a full macOS PASS or reuse a historical test count as current evidence.
 Report your OS, Python version, commands, failures and skips with your change.
 
+For a failing check, include the public commit SHA, exact command and exit code,
+plus a short redacted diagnostic. Compare full-suite failure identifiers on the
+same public base before attributing a platform failure to a patch. Exclude local
+paths, credentials and private data from diagnostics; a successful validation
+still does not mean a real model campaign ran.
+
 ## A small first pull request
 
 Choose one bounded issue from the
 [roadmap](https://github.com/theseedship/classification_tests_deposium/issues/19),
 describe the behavior being checked, and keep the change within the shared
-engine or documentation. Useful first changes include an explicit untested
+engine or documentation. Read its discussion and existing pull requests before
+editing to avoid overlapping work. Useful first changes include an explicit untested
 capability label, a malformed-output scorer control, or one deterministic
 success/failure fixture for a reviewed contract. Human reference review is a
 distinct contribution tracked by
@@ -112,3 +122,8 @@ It checks **Git's index only**, including ignored paths and common secret/path
 patterns; it is not proof that content is safe. Unstaged changes and untracked
 files are outside its scope. Review provenance and the actual staged diff as
 well, then include the relevant validation results and limits in the PR.
+State any material AI assistance alongside the checks and their limitations.
+
+The expected-output signals and diagnostic guidance incorporate the external
+contribution in [PR #23](https://github.com/theseedship/classification_tests_deposium/pull/23)
+by [ungaaaabungaaa](https://github.com/ungaaaabungaaa), adapted to the current guide.

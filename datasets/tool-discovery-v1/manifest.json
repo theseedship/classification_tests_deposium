@@ -1,0 +1,116 @@
+{
+  "schema_version": "deposium.tool-discovery-manifest/v1",
+  "dataset_id": "tool-discovery-v1",
+  "contract_id": "bench.tool-discovery",
+  "created_date": "2026-10-29",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "7ba984e2df5ad762aed552b846dcf1dcc3e3ede61aa000a6848c59ee04a5df10",
+  "catalogue_file": "catalogue.json",
+  "catalogue_sha256": "cee6ef67abc523726486a113031ecbf598bd23da917b6214a0b1f09705fb3b13",
+  "case_count": 12,
+  "family_count": 6,
+  "catalogue_tool_count": 12,
+  "counts_by_split": {
+    "calibration": 4,
+    "train": 4,
+    "test": 4
+  },
+  "families_by_split": {
+    "calibration": 2,
+    "train": 2,
+    "test": 2
+  },
+  "counts_by_language": {
+    "fr": 6,
+    "en": 6
+  },
+  "counts_by_decision": {
+    "select": 6,
+    "no_suitable": 4,
+    "clarify": 2
+  },
+  "counts_by_reason": {
+    "ready": 6,
+    "no_capability": 2,
+    "missing_information": 2,
+    "unavailable": 2
+  },
+  "shortlist_level": "tool",
+  "shortlist_limit": 4,
+  "review": "agent_only_pending_human",
+  "evidence_level": "harness_control_only",
+  "model_campaign_status": "not_run",
+  "model_cases_scored": 0,
+  "tool_executions": 0,
+  "provenance": "New agent-authored synthetic scenario families and translations, fixed before any model prediction. No production documents, conversations, application inventory or operational snapshots.",
+  "families": [
+    {
+      "family_id": "discovery-d001-fr-en",
+      "scenario_id": "discovery-d001",
+      "scenario_type": "single_tool",
+      "split": "calibration",
+      "case_ids": [
+        "d001-fr",
+        "d001-en"
+      ]
+    },
+    {
+      "family_id": "discovery-d002-fr-en",
+      "scenario_id": "discovery-d002",
+      "scenario_type": "dependent_tool_set",
+      "split": "train",
+      "case_ids": [
+        "d002-fr",
+        "d002-en"
+      ]
+    },
+    {
+      "family_id": "discovery-d003-fr-en",
+      "scenario_id": "discovery-d003",
+      "scenario_type": "alternative_sufficient_sets",
+      "split": "test",
+      "case_ids": [
+        "d003-fr",
+        "d003-en"
+      ]
+    },
+    {
+      "family_id": "discovery-d004-fr-en",
+      "scenario_id": "discovery-d004",
+      "scenario_type": "no_suitable_capability",
+      "split": "train",
+      "case_ids": [
+        "d004-fr",
+        "d004-en"
+      ]
+    },
+    {
+      "family_id": "discovery-d005-fr-en",
+      "scenario_id": "discovery-d005",
+      "scenario_type": "missing_required_information",
+      "split": "calibration",
+      "case_ids": [
+        "d005-fr",
+        "d005-en"
+      ]
+    },
+    {
+      "family_id": "discovery-d006-fr-en",
+      "scenario_id": "discovery-d006",
+      "scenario_type": "advertised_but_unavailable",
+      "split": "test",
+      "case_ids": [
+        "d006-fr",
+        "d006-en"
+      ]
+    }
+  ],
+  "limits": [
+    "Assigned test splits do not establish unseen structural generalization or human review.",
+    "Languages share scenario semantics; the 12 cases are six correlated FR/EN families.",
+    "The shared catalogue and simple task structures are reused across splits.",
+    "Selection contains no executable arguments, actual artifact values, tool order or execution feedback.",
+    "Eligibility and availability flags are deterministic synthetic fixture inputs, not evidence of application access controls or active services."
+  ],
+  "split_design": "One select and one nonselection family per split, fixed before publication or model inference; the related lookup-to-sum pattern remains in train."
+}
