@@ -1,11 +1,12 @@
 # Campaign archive
 
-**Start with [Full results](RESULTS.md)** for the complete English comparison:
-30 context model/runtime observations, including Clef Flash Q8 and direct
-upstream D3 Flash Q8, all context domains, separate capability/physics/evidence
-rankings, provisional tool proposals, speed and separate memory measurements.
-The [other benchmark tables](leaderboard/other-benchmarks.md) cover passage
-ranking, evidence, longer contexts, repeated timing, and the initial pilot.
+**This page is the archive, not the current work queue.** Start with
+[Results and coverage](RESULTS.md#coverage-overview) for the English model/task
+matrix, explicit untested cells, task-specific rankings, speed and memory.
+[Campaign status](CAMPAIGN_STATUS.md) holds current issue dependencies and exit
+criteria; the [protocol](PROTOCOL.md) defines method and evaluation boundaries.
+The [other benchmark tables](leaderboard/other-benchmarks.md) retain passage
+ranking, evidence, longer-context and timing observations.
 
 This archive preserves dated protocols and source exports. Older eleven- and
 nineteen-observation tables remain historical snapshots rather than the current

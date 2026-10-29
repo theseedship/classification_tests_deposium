@@ -1,7 +1,7 @@
 # Full results
 
-[README](../README.md) · [Quality](#model-quality) · [Language and task complexity](#language-and-task-complexity) ·
-[Updated task rankings](#updated-task-rankings) · [New capability tests](#complementary-capability-campaign-29-october-2026) · [Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·
+[README](../README.md) · [Coverage overview](#coverage-overview) · [Harness coverage](#harness-coverage) · [Quality](#model-quality) ·
+[Updated task rankings](#updated-task-rankings) · [Language and task complexity](#language-and-task-complexity) · [Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·
 [Other evaluated protocols](#other-evaluated-protocols) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)
 
 **30 context model/runtime observations through 29 October 2026**: 28 historical observations plus Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.
@@ -12,19 +12,85 @@ quantizations and devices remain separate. Rendering this page does not rerun or
 The ranking uses all 132 cases (train + calibration + test); the separate test column uses 66 cases.
 FR/EN translations form 66 families. Differences of a few answers do not establish a general model ranking.
 
-## What was actually tested?
+## Coverage overview
 
-| Task | Common input and denominator | Status |
-|---|---|---|
-| Documentary text and choices | 76 context-dependent choices | Scored exploratory decisions |
-| Mathematics / chemistry | 28 / 28 constrained choices | Scored synthetic probes, not expert scientific qualification |
-| Clef Flash Q8 context, capabilities and physics | Separate 132-, 192- and 48-case packs | Included in the context table and updated task rankings below; [report](CLEF_FLASH_RESULTS_20261029.md) |
-| First tool proposal | 24 search / statistics / fallback choices | Provisional agreement only; no tool execution; **0 semantically qualified cases** |
-| Physics | [48 synthetic choices](../datasets/physics-choice-v1/README.md), 24 FR/EN families | [Flash Q8/direct Metal: 39/48, test 32/36](PHYSICS_FLASH_RESULTS_20261029.md); reported separately, human review pending |
-| Passage ranking, relevance, support, answerability | Separate fixed-passage campaigns | [Full tables and coverage](leaderboard/other-benchmarks.md); [D3 Flash evidence observation](PASSAGE_FLASH_RESULTS_20261029.md) and [matched Clef comparison](PASSAGE_CLEF_RESULTS_20261029.md), reported separately |
-| Capability/tool-set, argument and fixed-observation choices | [192-case complementary pack](../datasets/capability-choice-v1/README.md) | [First D3 Flash Q8/Metal campaign and fresh context anchor](CAPABILITY_FLASH_RESULTS_20261029.md), reported separately from the 28 historical rows; no tool execution or product qualification |
-| Free-form plugin/MCP selection, complete execution loop, difficulty prediction, adaptive model routing | Future harness stages | **Not run**; [experiment design](INTENT_AND_MODEL_ROUTING.md) |
-| End-to-end RAG and generated-answer quality | No campaign qualified here | **Not run** |
+**Execution coverage, not accuracy.** Each cell is `complete`, `partial`, or `not_run`, followed by scored/valid decisions over the planned denominator when observed. All references remain **review_pending**, independently of execution. No overall accuracy combines these tasks.
+
+`not_run` means no matching public observation; it does not mean unsupported or zero accuracy. A source with no attempted answerability decisions explicitly shows `not_run 0/128`. Unreported measurements remain NR in the [speed and memory table](#speed-and-memory). Recorded `missing`, `unsupported`, `error`, `timeout`, and `abstain` outcomes remain separate in the [coverage CSV](leaderboard/coverage.csv) and [JSON](leaderboard/coverage.json).
+
+### Context model/runtime observations
+
+The 30 rows below preserve quantization and runtime identities. **Metal gateway** and **direct Metal** are different paths; scores and task rankings follow below. Context/132 contains text/76, mathematics/28 and chemistry/28; [their scores and held-out test results](#model-quality) remain separate.
+
+| Model / runtime observation | Size | Context /132 | Tool proposal /24 | Capability /192 | Physics /48 | Relevance R0 /512 | Support R0 /768 | Answerability R0 /128 | Relevance R0–3 /2048 | Ranking R0–3 /512 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| D3 historical · Q4 Metal | 27B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 flash · Q8 Metal (gateway) | 9B class | complete 132/132 | complete 24/24 | complete 192/192 | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 flash · Q8 direct Metal | 9B class | complete 132/132 | not_run | not_run | complete 48/48 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
+| D3 flash · CPU | 8.393B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Jev 1.13 · HTTP API | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 flash · Q4 Metal | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 mini · CPU | 4.539B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 nano · CPU | 2.213B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| GLiClass v4 9B · BF16 MPS | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Clef Flash · Q8 direct Metal | 9B class | complete 132/132 | not_run | complete 192/192 | complete 48/48 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
+| Vela 2.0 4B · CPU | 4.211B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Decision 2.0 Nox 4B · CPU | 4.208B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Liquid d1-3B · CPU | 3.123B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Noma · CPU | ~2.67B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 lite · CPU | 0.853B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Decision 2.0 Sol 2B · CPU | 2B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Vela 2.0 0.8B · CPU | 0.755B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Decision 2.0 Eos 0.8B · CPU | 0.8B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Decision 2.0 Eos 0.8B · Q8 Metal | 0.8B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 edge · CPU | 0.594B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Decision 2.0 Kai 0.6B · CPU | 0.6B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Vela 2.0 0.3B · CPU | 0.309B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| GLiNER2.5-multi-Decide · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Vela 3.0 fast · decision only · CPU | 0.380B decision backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Laya multilingual · CPU | 322M declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Julia-1 · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Liquid d1-omni-600M · CPU | 600M class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Indecis · untrained open mode · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| ModernJEV-Decide-Preview · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Muose-50M-Decision · CPU | 50M class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+
+### Passage-only observations and ranking methods
+
+These do not add context models. D3-lite's passage session has a different runtime/settings identity fingerprint from its historical context session. Jev 1.14 is distinct from context Jev 1.13. BGE and tie-break methods are ranking observations, not newly evaluated context models.
+
+| Model / method | Relevance R0 /512 | Support R0 /768 | Answerability R0 /128 | Relevance R0–3 /2048 | Ranking R0–3 /512 |
+|---|---|---|---|---|---|
+| D3 lite · CPU passage session | complete 512/512 | complete 768/768 | complete 128/128 | complete 2048/2048 | complete 512/512 |
+| Jev 1.14 · HTTP API | not_run | partial 514/768 | not_run 0/128 | complete 2048/2048 | complete 512/512 |
+| BGE v2-m3 · INT8 CPU | not_run | not_run | not_run | not_run | complete 512/512 |
+| D3 lite + BGE tie-break · CPU | not_run | not_run | not_run | not_run | complete 512/512 |
+| Jev 1.14 + BGE tie-break | not_run | not_run | not_run | not_run | complete 512/512 |
+
+R0 means rotation 0 (128 pools, eight families, two correlated views). Relevance/512 and replayed relevance/2048 have different protocols; neither is ranking/512. Ranking cells cover 512 pools over four balanced rotations; nDCG@1 is defined on 480/480 eligible pools. D3-lite/Jev ranking replays existing relevance decisions; rotations add no model calls. Tie-break rows are offline combined methods, with projected sequential cost rather than a measured integrated pipeline. [Ranking scores, controls and evidence retention](#passage-ranking-and-evidence) remain separate from classification.
+
+The 24-case tool column reports valid provisional proposals: **zero human-approved references and zero semantically qualified cases**. Complete coverage does not qualify routing or tool execution. See [task-specific rankings](#updated-task-rankings), [historical context quality](#model-quality), [full task CSV](leaderboard/task-breakdown.csv), and the dated [D3 capability report](CAPABILITY_FLASH_RESULTS_20261029.md) for scores and source details.
+
+## Harness coverage
+
+A missing model observation and a missing harness capability are different gaps. The global boundaries below apply to every model; they are not model `unsupported` outcomes. [Reference review #8](https://github.com/theseedship/classification_tests_deposium/issues/8) remains pending even where execution is complete.
+
+| Capability | Harness / campaign status | What remains unqualified | Next issue |
+|---|---|---|---|
+| Closed context, first-tool, capability and physics choices | implemented | Observed only on supplied alternatives; tool/24 remains provisional and executes no tool. | — |
+| Fixed-pool relevance, support, answerability and ranking | implemented | Separate rotation/metric scopes above; no live retrieval or final answers. | — |
+| Versioned task contract beyond supplied proposals | not_implemented | Contract and offline fixture are prerequisites for new campaigns. | [#9](https://github.com/theseedship/classification_tests_deposium/issues/9) |
+| Open catalogue discovery and sufficient tool sets | not_implemented | Four-proposal capability selection does not establish discovery recall. | [#10](https://github.com/theseedship/classification_tests_deposium/issues/10) |
+| Free-form executable arguments and artifact bindings | not_implemented | Selecting a supplied argument proposal does not execute or validate generated values. | [#11](https://github.com/theseedship/classification_tests_deposium/issues/11) |
+| Bounded episodes with executed tools and feedback | not_implemented | Fixed observation choices do not implement a multi-turn execution loop. | [#12](https://github.com/theseedship/classification_tests_deposium/issues/12) |
+| Order robustness and evidence retention | partial_coverage | Historical four-rotation ranking exists; new Flash classifications cover rotation 0 only. | [#13](https://github.com/theseedship/classification_tests_deposium/issues/13) |
+| Remaining cohort on new packs | not_run | Historical context scores cannot fill new task cells. | [#14](https://github.com/theseedship/classification_tests_deposium/issues/14) |
+| Clef 27B candidate envelope | not_run | Separate runtime/resource qualification is required. | [#15](https://github.com/theseedship/classification_tests_deposium/issues/15) |
+| Empirical small/large allocation and replay | not_implemented | Authored difficulty strata and confidence are not model-size ground truth. | [#16](https://github.com/theseedship/classification_tests_deposium/issues/16) |
+| Pinned application harness integration | not_implemented | An integration registry or isolated model run does not establish live application behavior. | [#17](https://github.com/theseedship/classification_tests_deposium/issues/17) |
+| Evidence-to-answer generation and citation fidelity | not_implemented | No complete retrieval-to-answer campaign is qualified. | [#18](https://github.com/theseedship/classification_tests_deposium/issues/18) |
+
+The next sequence is [the task contract #9](https://github.com/theseedship/classification_tests_deposium/issues/9), then discovery/arguments/episodes as their dependencies become executable. Cohort reruns do not resolve these harness gaps. See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.
 
 ## Updated task rankings
 
@@ -113,34 +179,6 @@ Physical-call timings are kept separate from reused logical decisions; session R
 | D3 Flash Q8 · direct Metal | physics | 48 | 193.7 | 202.1 | 9.36 |
 
 [Campaign summary CSV](leaderboard/campaigns.csv) and [task breakdown CSV](leaderboard/task-breakdown.csv) contain denominators, statuses and all exported groups. Ranking/nDCG, longer contexts and repeated timing retain their separate protocols in [other campaigns](leaderboard/other-benchmarks.md). Clef 27B and the six remaining original cohort candidates remain unrun on the new packs.
-
-## Complementary capability campaign: 29 October 2026
-
-**D3 Flash Q8**, nominal 9B class, llama.cpp / Metal. The two full packs have separate denominators; canary calls are excluded.
-References remain agent-authored and pending human review. A perfect closed-choice score does not qualify tool execution or product behavior.
-
-| Pack / track | Correct / all | Scored / all | Test correct / all |
-|---|---:|---:|---:|
-| Fresh context anchor | 124/132 | 132/132 | 61/66 |
-| Capability pack | 192/192 | 192/192 | 96/96 |
-| Capability selection | 64/64 | 64/64 | 32/32 |
-| Arguments and dependencies | 64/64 | 64/64 | 32/32 |
-| Next step after fixed observations | 64/64 | 64/64 | 32/32 |
-
-The three track rows partition the 192-case pack; they are not additional cases. The fresh anchor has 66 FR/EN families. The new pack's 192 language/catalogue variants belong to 48 families, including 24 test families.
-
-| Pack | French correct / all | English correct / all | 8-card correct / all | 32-card correct / all |
-|---|---:|---:|---:|---:|
-| Fresh context anchor | 62/66 | 62/66 | Not applicable | Not applicable |
-| Capability pack | 96/96 | 96/96 | 96/96 | 96/96 |
-
-| Pack | Timed successful calls / all | Adapter median ms | Adapter p95 ms | Session group RSS GiB |
-|---|---:|---:|---:|---:|
-| Fresh context anchor | 132/132 | 196.3 | 204.3 | 9.38 |
-| Capability pack | 192/192 | 576.9 | 985.8 | 9.48 |
-
-Timings follow each session's synthetic warm-up and describe one pass; loading/startup is excluded. RSS is the sampled owned process-group peak over startup, smoke and that pack, not per-case RSS or total unified GPU memory. GPU allocation was unreported. Catalogue variants are correlated.
-[Full campaign report](CAPABILITY_FLASH_RESULTS_20261029.md) · [Groups, pairs and source evidence](evidence/capability-flash-20261029/analysis.json). Historical source exports remain unchanged; the consolidated context ranks below include the new observations.
 
 ## Model quality
 
@@ -453,6 +491,7 @@ separate historical observations.
 ## Every task and downloadable data
 
 - [Model summary CSV](leaderboard/models.csv): all 30 context observations, model sizes, runtimes, quality, latency, and separate resource measurements.
+- [Coverage CSV](leaderboard/coverage.csv) and [coverage JSON](leaderboard/coverage.json): every observation × task cell, explicit execution and review status, protocol denominator, source, and unobserved fields.
 - [Campaign summary CSV](leaderboard/campaigns.csv): independent capability, physics and passage rankings, coverage, test scores, class macro scores and measured resource scopes.
 - [Task breakdown CSV](leaderboard/task-breakdown.csv): exported context task types/subtypes, domains, languages, splits and difficulty; tool-choice subgroups; plus capability, physics and passage groups, with task-specific denominators.
 - [Full structured results](leaderboard/results.json): identities, revisions, model/runtime settings, counts, statuses, all groups, source seals, and input-file SHA-256 hashes.

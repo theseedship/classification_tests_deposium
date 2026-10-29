@@ -181,15 +181,17 @@ class FullResultsTests(unittest.TestCase):
                           capability["groups"]["split"]["test"]["families"]), (66, 48, 24))
         self.assertIn(results.CAPABILITY, self.data["sources_sha256"])
         rendered = results.render(self.data)
-        for text in ("nominal 9B class", "llama.cpp / Metal",
-                     "| Fresh context anchor | 124/132 | 132/132 | 61/66 |",
-                     "| Capability pack | 192/192 | 192/192 | 96/96 |",
-                     "| Capability selection | 64/64 | 64/64 | 32/32 |",
-                     "| Capability pack | 96/96 | 96/96 | 96/96 | 96/96 |",
-                     "| Capability pack | 192/192 | 576.9 | 985.8 | 9.48 |",
-                     "canary calls are excluded", "sampled owned process-group peak",
-                     "New capability tests", "66 FR/EN families", "48 families, including 24 test families"):
+        for text in ("| 1 | 1 | D3 Flash Q8 · gateway Metal | 192/192 | 192/192 | 96/96 |",
+                     "| D3 Flash Q8 · gateway Metal | Capability selection | 64/64 | 32/32 |",
+                     "| D3 Flash Q8 · gateway Metal | capability | 192 | 576.9 | 985.8 | 9.48 |",
+                     "Canaries and repeated context anchors do not add quality cases",
+                     "[D3 capability report](CAPABILITY_FLASH_RESULTS_20261029.md)",
+                     "## Coverage overview", "66 families"):
             self.assertIn(text, rendered)
+        self.assertNotIn("## Complementary capability campaign", rendered)
+        # Fine-grained language/catalogue data remain in the structured download.
+        structured = json.loads(results.outputs(self.data)["docs/leaderboard/results.json"])
+        self.assertEqual(structured["capability_campaign"], campaign)
 
     def test_new_campaign_rejects_inconsistent_groups_identity_dataset_and_resource_scope(self):
         mutations = [
@@ -435,7 +437,8 @@ class FullResultsTests(unittest.TestCase):
         self.assertEqual(first, results.outputs(results.build(self.root)))
         self.assertEqual(set(first), {"docs/RESULTS.md", "docs/leaderboard/models.csv",
                                       "docs/leaderboard/task-breakdown.csv", "docs/leaderboard/results.json",
-                                      "docs/leaderboard/campaigns.csv"})
+                                      "docs/leaderboard/campaigns.csv", "docs/leaderboard/coverage.csv",
+                                      "docs/leaderboard/coverage.json"})
         code = (
             "import hashlib,json,pathlib,runpy,sys;root=pathlib.Path(sys.argv[1]);"
             "m=runpy.run_path(str(root/'scripts/build-full-results.py'));"
@@ -495,6 +498,106 @@ class FullResultsTests(unittest.TestCase):
         self.assertEqual(unrun["counts"]["statuses"]["missing"], 128)
         self.assertEqual(rows["passage_relevance_four_rotations", "Jev114"]["counts"]["total"], 2048)
         self.assertNotIn(("passage_relevance", "Jev114"), rows)
+
+    def test_coverage_matrix_keeps_runtime_boundaries_and_actual_missing_examples(self):
+        coverage = self.data["coverage"]
+        rows = {r["id"]: r for r in coverage["observations"]}
+        self.assertEqual({k for k, r in rows.items() if r["context_observation"]}, EXPECTED_LABELS)
+        self.assertEqual(len(rows), 35)
+        self.assertEqual({len(r["cells"]) for r in rows.values()}, {9})
+        gateway, direct = rows["D3FlashQ8"]["cells"], rows["D3FlashQ8Upstream"]["cells"]
+        self.assertEqual(gateway["capability"]["status"], "complete")
+        self.assertEqual(direct["capability"]["status"], "not_run")
+        self.assertEqual(gateway["physics"]["status"], "not_run")
+        self.assertEqual(direct["physics"]["status"], "complete")
+        # Same model name/weights do not merge different runtime fingerprints.
+        self.assertEqual(rows["D3lite"]["cells"]["passage_relevance"]["status"], "not_run")
+        self.assertEqual(rows["D3litePassage"]["cells"]["passage_relevance"]["scored_or_valid"], 512)
+        self.assertEqual(rows["Jev"]["cells"]["passage_support"]["status"], "not_run")
+        partial = rows["Jev114"]["cells"]["passage_support"]
+        self.assertEqual((partial["status"], partial["scored_or_valid"], partial["total"]), ("partial", 514, 768))
+        self.assertEqual((partial["outcomes"]["error"], partial["outcomes"]["missing"]), (2, 252))
+        explicit = rows["Jev114"]["cells"]["passage_answerability"]
+        absent = rows["ClefFlashQ8"]["cells"]["tool_proposal"]
+        self.assertEqual((explicit["status"], explicit["scored_or_valid"], explicit["evidence_present"]),
+                         ("not_run", 0, True))
+        self.assertIsNone(explicit["numerator"])
+        self.assertEqual(explicit["outcomes"]["missing"], 128)
+        self.assertEqual((absent["status"], absent["evidence_present"]), ("not_run", False))
+        for field in ("scored_or_valid", "numerator", "outcomes", "source"):
+            self.assertIsNone(absent[field])
+        self.assertEqual(absent["metric"], "provisional_agreement")
+        self.assertTrue(direct["physics"]["review_pending"])
+        self.assertTrue(absent["review_pending"])
+        self.assertEqual({c["status"] for r in rows.values() for c in r["cells"].values()},
+                         {"complete", "partial", "not_run"})
+        rendered = results.render(self.data)
+        self.assertLess(rendered.index("## Coverage overview"), rendered.index("## Updated task rankings"))
+        csv_rows = list(csv.DictReader(io.StringIO(results.outputs(self.data)["docs/leaderboard/coverage.csv"])))
+        self.assertEqual(len(csv_rows), 35 * 9)
+        blank = next(r for r in csv_rows if r["observation"] == "ClefFlashQ8" and r["task"] == "tool_proposal")
+        self.assertEqual((blank["scored_or_valid"], blank["unsupported"], blank["review_pending"]), ("", "", "True"))
+
+    def test_coverage_ranking_is_not_classification_or_a_different_rotation_denominator(self):
+        rows = {r["id"]: r["cells"] for r in self.data["coverage"]["observations"]}
+        for key in ("D3litePassage", "Jev114"):
+            self.assertEqual(rows[key]["passage_relevance_four_rotations"]["total"], 2048)
+            ranking = rows[key]["passage_ranking"]
+            self.assertEqual((ranking["total"], ranking["metric_defined"], ranking["metric_eligible"]), (512, 480, 480))
+            self.assertEqual(ranking["metric"], "ndcg@1")
+            self.assertIsNone(ranking["numerator"])
+        self.assertEqual(rows["Jev114"]["passage_relevance"]["status"], "not_run")
+        self.assertEqual(rows["ClefFlashQ8"]["passage_ranking"]["status"], "not_run")
+
+    def test_harness_gaps_are_global_and_do_not_invent_model_unsupported_results(self):
+        harness = {r["id"]: r for r in self.data["coverage"]["harness"]}
+        for key, issue in (("task_contract", 9), ("discovery", 10), ("arguments", 11),
+                           ("episodes", 12), ("small_large", 16), ("application", 17), ("rag_final", 18)):
+            self.assertEqual(harness[key]["status"], "not_implemented")
+            self.assertEqual(harness[key]["issues"], [results.ISSUES + str(issue)])
+        self.assertEqual(harness["order_retention"]["status"], "partial_coverage")
+        self.assertTrue(self.data["coverage"]["review_pending"])
+        for row in self.data["coverage"]["observations"]:
+            self.assertNotIn("discovery", row["cells"])
+            self.assertNotIn("episodes", row["cells"])
+            self.assertNotIn("rag_final", row["cells"])
+
+    def test_coverage_rejects_zero_scored_and_inconsistent_denominators(self):
+        zero = {"correct": 0, "scored": 0, "total": 48,
+                "statuses": {s: (48 if s == "error" else 0) for s in results.STATUS_KEYS}}
+        with self.assertRaisesRegex(results.ResultError, "zero scored"):
+            results.coverage_cell(zero, 48, "synthetic-public-source.json")
+        with self.assertRaisesRegex(results.ResultError, "denominator"):
+            results.coverage_cell(zero, 47, "synthetic-public-source.json")
+        observed = {"correct": 41, "scored": 48, "total": 48,
+                    "statuses": {s: (48 if s == "ok" else 0) for s in results.STATUS_KEYS}}
+        with self.assertRaisesRegex(results.ResultError, "lacks a source"):
+            results.coverage_cell(observed, 48)
+        # Unsupported is a recorded outcome only, never the label for a missing task.
+        observed.update(scored=47)
+        observed["statuses"].update(ok=47, unsupported=1)
+        cell = results.coverage_cell(observed, 48, "synthetic-public-source.json")
+        self.assertEqual((cell["status"], cell["outcomes"]["unsupported"]), ("partial", 1))
+
+    def test_coverage_rejects_ranking_protocol_metric_and_source_mismatches(self):
+        path = results.OTHER_SOURCES["passage_order"]
+        mutations = [
+            lambda a: a.update(cases=511),
+            lambda a: a.update(rotations=[0]),
+            lambda a: a["source"].update(choice_seal_sha256="a" * 64),
+            lambda a: a["baseline_profile"].update(running_binary_sha256="a" * 64),
+            lambda a: a["rankings"]["replacement"]["metrics"]["ndcg@1"].update(eligible_cases=512),
+            lambda a: a["rankings"]["replacement"].update(scored_cases=0),
+            lambda a: a["relevance_scores"].update(total_cases=2047),
+        ]
+        for mutation in mutations:
+            with self.subTest(mutation=mutation), self.changed_json(path, mutation):
+                with self.assertRaises(results.ResultError):
+                    results.build(self.root)
+        cpu = "docs/evidence/passage-cpu-20261015/analysis.json"
+        with self.changed_json(cpu, lambda a: a["choice_model"].update(model_revision="a" * 40)):
+            with self.assertRaisesRegex(results.ResultError, "passage model identity mismatch"):
+                results.build(self.root)
 
     def test_recent_campaigns_fail_closed_on_identity_counts_macro_and_confusion_drift(self):
         clef = "docs/evidence/clef-flash-20261029/analysis.json"
