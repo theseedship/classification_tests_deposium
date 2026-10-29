@@ -407,9 +407,11 @@ def build(root=ROOT):
             summary.pop("original_rotation_zero", None)
         others[key] = {"source": path, "summary": summary,
                        "scope": "Published overall, per-target or balanced-ranking summaries; detailed cross-groups, rotations and per-case rows remain in the linked source"}
+    coverage = build_coverage(rows, campaign_rows, others, inputs)
     inputs.read("scripts/build-full-results.py")
+    coverage["sources_sha256"] = dict(sorted(inputs.hashes.items()))
     return {"schema_version": "deposium.public-results/v1", "observations": rows,
-            "campaigns": campaign_rows, "historical_context_observations": len(base),
+            "campaigns": campaign_rows, "coverage": coverage, "historical_context_observations": len(base),
             "other_campaigns": others, "other_benchmarks_markdown": other_guide,
             "capability_campaign": complementary,
             "scope": "aggregate_presentation_only_no_inference_or_raw_archive_verification",
@@ -418,12 +420,267 @@ def build(root=ROOT):
             "sources_sha256": dict(sorted(inputs.hashes.items()))}
 
 
+COVERAGE_TASKS = (
+    ("context", "Context", 132, "context-choice-v1; all splits; test=66"),
+    ("tool_proposal", "Tool proposal", 24, "mastra-read-pilot-v0; provisional agreement; zero qualified cases"),
+    ("capability", "Capability", 192, "capability-choice-v1; four supplied proposals; test=96"),
+    ("physics", "Physics", 48, "physics-choice-v1; calibration+test; test=36"),
+    ("passage_relevance", "Relevance R0", 512, "passage-evidence-v1; test; rotation 0; 128 pools"),
+    ("passage_support", "Support R0", 768, "passage-evidence-v1; test; rotation 0; 128 pools"),
+    ("passage_answerability", "Answerability R0", 128, "passage-evidence-v1; test; rotation 0; 128 pools"),
+    ("passage_relevance_four_rotations", "Relevance R0–3", 2048,
+     "passage-evidence-v1; four replayed rotations; 512 pools; not independent calls"),
+    ("passage_ranking", "Ranking R0–3", 512,
+     "passage-evidence-v1; four balanced rotations; nDCG@1 defined/eligible=480/480; 512 total pools"),
+)
+ISSUES = "https://github.com/theseedship/classification_tests_deposium/issues/"
+
+
+def coverage_cell(counts, total, source=None, *, metric="correct_choice", statuses=None):
+    """Execution coverage is independent of accuracy and reference approval."""
+    empty = {"status": "not_run", "source": None, "evidence_present": False,
+             "scored_or_valid": None, "total": total, "numerator": None,
+             "metric": metric, "outcomes": None, "review_pending": True}
+    if counts is None:
+        return empty
+    n = counts["valid_decisions" if metric == "provisional_agreement" else "scored"]
+    correct = counts["agreement_count" if metric == "provisional_agreement" else "correct"]
+    outcomes = statuses if statuses is not None else counts["statuses"]
+    require(counts["total"] == total and all(type(v) is int for v in (n, correct))
+            and 0 <= correct <= n <= total, "coverage: inconsistent denominator")
+    require(set(outcomes) == STATUS_KEYS and all(type(v) is int and v >= 0 for v in outcomes.values())
+            and sum(outcomes.values()) == total and n == outcomes["ok"] + outcomes["abstain"],
+            "coverage: inconsistent outcomes")
+    require(source is not None, "coverage: observed result lacks a source")
+    require(n > 0 or outcomes["missing"] == total, "coverage: zero scored campaign")
+    return {**empty, "status": "complete" if n == total else "partial" if n else "not_run",
+            "source": source, "evidence_present": True, "scored_or_valid": n,
+            "numerator": correct if n else None, "outcomes": dict(outcomes)}
+
+
+def build_coverage(observations, campaigns, others, inputs):
+    """Join exact public observation identities; never fill a gap by model name."""
+    totals = {key: total for key, _, total, _ in COVERAGE_TASKS}
+    def unobserved():
+        return {key: coverage_cell(None, total, metric="provisional_agreement" if key == "tool_proposal"
+                                   else "ndcg@1" if key == "passage_ranking" else "correct_choice")
+                for key, total in totals.items()}
+    by_id = {}
+    for row in observations:
+        meta = row["metadata"]
+        cells = unobserved()
+        cells["context"] = coverage_cell(row["context"]["counts"], 132, meta["source_analysis"])
+        if row["tool_proposal"] is not None:
+            tool = row["tool_proposal"]
+            cells["tool_proposal"] = coverage_cell(tool["counts"], 24, meta["source_analysis"],
+                                                  metric="provisional_agreement", statuses=tool["statuses"])
+        by_id[row["id"]] = {"id": row["id"], "model": meta["display_name"],
+                            "size": meta["model_size"]["label"], "runtime": meta["runtime_group"],
+                            "context_observation": True, "cells": cells}
+
+    # These are separate runtime fingerprints, not additional context models.
+    supplemental = (
+        ("D3litePassage", "D3 lite · CPU passage session", "0.853B backbone", "historical_cpu"),
+        ("Jev114", "Jev 1.14 · HTTP API", "Unreported", "remote_api"),
+        ("BGEPassage", "BGE v2-m3 · INT8 CPU", "Unreported", "native_cpu_reranker"),
+        ("D3liteBGE", "D3 lite + BGE tie-break · CPU", "Two-model method", "offline_ranking_projection"),
+        ("Jev114BGE", "Jev 1.14 + BGE tie-break", "Two-model method", "offline_ranking_projection"),
+    )
+    for key, model, size, runtime in supplemental:
+        by_id[key] = {"id": key, "model": model, "size": size, "runtime": runtime,
+                      "context_observation": False,
+                      "cells": unobserved()}
+    context_ids = {r["id"]: r for r in observations}
+    cpu = inputs.load(EVIDENCE + "passage-cpu-20261015/analysis.json")
+    require(all(cpu["choice_model"][key] == context_ids["D3lite"]["identity"][key]
+                for key in ("model_repo_id", "model_revision")),
+            "coverage: D3-lite passage model identity mismatch")
+    require(cpu["choice_model"]["identity_sha256"] != context_ids["D3lite"]["identity"]["identity_sha256"],
+            "coverage: D3-lite passage/context identity boundary changed; review join")
+    for row in campaigns:
+        target = "D3litePassage" if row["observation"] == "D3lite" else row["observation"]
+        require(target in by_id and row["task"] in totals, "coverage: unknown campaign observation/task")
+        if target in {"D3FlashQ8Upstream", "ClefFlashQ8"}:
+            expected = context_ids[target]["identity"]
+            identity = row.get("model_identity", row["identity"])
+            require(all(identity.get(k) == expected.get(k) for k in
+                        ("model_repo_id", "model_revision", "model_assets_sha256"))
+                    and all(identity.get("runtime", {}).get(k) == v for k, v in expected["runtime"].items()),
+                    f"coverage: campaign/context runtime identity mismatch: {target}/{row['task']}")
+        cell = by_id[target]["cells"][row["task"]]
+        require(not cell["evidence_present"], "coverage: duplicate task observation")
+        by_id[target]["cells"][row["task"]] = coverage_cell(row["counts"], totals[row["task"]], row["source"])
+
+    # Ranking is a distinct task, including derived class-order and tie-break methods.
+    order = others["passage_order"]["summary"]
+    jev_path = EVIDENCE + "passage-jev-20261015/analysis.json"
+    jev = inputs.load(jev_path)
+    require(order["source"]["choice_seal_sha256"] == cpu["source"]["choice_seal_sha256"],
+            "coverage: ranking/classification source mismatch")
+    require(jev["jev_http"]["returned_model"] == "jev-1.14.0"
+            and context_ids["Jev"]["identity"]["model_id"] == "jev-1.13.0",
+            "coverage: Jev version boundary changed; review join")
+    require(order["baseline_profile"]["running_binary_sha256"] == jev["baseline_profile"]["cpu_binary_sha256"]
+            and order["source"]["balanced_baseline_seal_sha256"] == jev["source"]["balanced_baseline_seal_sha256"],
+            "coverage: ranking baseline source mismatch")
+    for data in (order, jev):
+        require(data["dataset_sha256"] == cpu["dataset_sha256"] and data["cases"] == 512
+                and data["rotations"] == [0, 1, 2, 3] and data["families"] == 8 and data["split"] == "test",
+                "coverage: ranking protocol mismatch")
+    replay = order["relevance_scores"]
+    numerator = replay["accuracy_over_all"] * replay["total_cases"]
+    require(type(numerator) in (int, float) and math.isfinite(numerator)
+            and abs(numerator - round(numerator)) < 1e-9, "coverage: nonintegral replay numerator")
+    by_id["D3litePassage"]["cells"]["passage_relevance_four_rotations"] = coverage_cell(
+        {"correct": round(numerator), "scored": replay["scored_cases"], "total": replay["total_cases"],
+         "statuses": replay["counts_by_status"]}, 2048, others["passage_order"]["source"])
+    for target, data, method, source in (
+        ("D3litePassage", order, "replacement", others["passage_order"]["source"]),
+        ("BGEPassage", order, "baseline", others["passage_order"]["source"]),
+        ("D3liteBGE", order, "complement", others["passage_order"]["source"]),
+        ("Jev114", jev, "replacement", jev_path), ("Jev114BGE", jev, "complement", jev_path),
+    ):
+        score = data["rankings"][method]
+        counts = {"correct": 0, "scored": score["scored_cases"], "total": score["total_cases"],
+                  "statuses": score["counts_by_status"]}
+        cell = coverage_cell(counts, 512, source, metric="ndcg@1")
+        metric = score["metrics"]["ndcg@1"]
+        require(type(metric["defined_cases"]) is int and type(metric["eligible_cases"]) is int
+                and 0 < metric["defined_cases"] <= metric["eligible_cases"] == 480
+                and metric["defined_cases"] <= score["scored_cases"]
+                and metric["total_cases"] == 512, "coverage: ranking metric denominator mismatch")
+        value = metric["mean_over_eligible_missing_zero"]
+        require(type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 1,
+                "coverage: invalid ranking metric")
+        cell.update(numerator=None, metric_value=value, metric_defined=metric["defined_cases"],
+                    metric_eligible=metric["eligible_cases"])
+        by_id[target]["cells"]["passage_ranking"] = cell
+
+    harness = [
+        ("closed_choices", "Closed context, first-tool, capability and physics choices", "implemented",
+         "Observed only on supplied alternatives; tool/24 remains provisional and executes no tool.", []),
+        ("passage_tasks", "Fixed-pool relevance, support, answerability and ranking", "implemented",
+         "Separate rotation/metric scopes above; no live retrieval or final answers.", []),
+        ("task_contract", "Versioned task contract beyond supplied proposals", "not_implemented",
+         "Contract and offline fixture are prerequisites for new campaigns.", [9]),
+        ("discovery", "Open catalogue discovery and sufficient tool sets", "not_implemented",
+         "Four-proposal capability selection does not establish discovery recall.", [10]),
+        ("arguments", "Free-form executable arguments and artifact bindings", "not_implemented",
+         "Selecting a supplied argument proposal does not execute or validate generated values.", [11]),
+        ("episodes", "Bounded episodes with executed tools and feedback", "not_implemented",
+         "Fixed observation choices do not implement a multi-turn execution loop.", [12]),
+        ("order_retention", "Order robustness and evidence retention", "partial_coverage",
+         "Historical four-rotation ranking exists; new Flash classifications cover rotation 0 only.", [13]),
+        ("cohort", "Remaining cohort on new packs", "not_run",
+         "Historical context scores cannot fill new task cells.", [14]),
+        ("large_envelope", "Clef 27B candidate envelope", "not_run",
+         "Separate runtime/resource qualification is required.", [15]),
+        ("small_large", "Empirical small/large allocation and replay", "not_implemented",
+         "Authored difficulty strata and confidence are not model-size ground truth.", [16]),
+        ("application", "Pinned application harness integration", "not_implemented",
+         "An integration registry or isolated model run does not establish live application behavior.", [17]),
+        ("rag_final", "Evidence-to-answer generation and citation fidelity", "not_implemented",
+         "No complete retrieval-to-answer campaign is qualified.", [18]),
+    ]
+    return {"schema_version": "deposium.public-coverage/v1", "review_pending": True,
+            "tasks": [{"id": k, "label": label, "total": total, "protocol": protocol}
+                      for k, label, total, protocol in COVERAGE_TASKS],
+            "observations": list(by_id.values()),
+            "harness": [{"id": k, "capability": label, "status": status, "boundary": boundary,
+                         "issues": [ISSUES + str(n) for n in issues]}
+                        for k, label, status, boundary, issues in harness]}
+
+
 def csv_text(records):
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(stream, fieldnames=list(records[0]), lineterminator="\n")
     writer.writeheader()
     writer.writerows(records)
     return stream.getvalue()
+
+
+def coverage_csv_rows(coverage):
+    records = []
+    for row in coverage["observations"]:
+        for task in coverage["tasks"]:
+            cell = row["cells"][task["id"]]
+            records.append({"observation": row["id"], "model": row["model"], "size": row["size"],
+                            "runtime": row["runtime"], "context_observation": row["context_observation"],
+                            "task": task["id"], "protocol": task["protocol"],
+                            **{k: cell.get(k) for k in ("status", "evidence_present", "review_pending",
+                               "scored_or_valid", "total", "metric", "numerator", "metric_value",
+                               "metric_defined", "metric_eligible", "source")},
+                            **{s: cell["outcomes"].get(s) if cell["outcomes"] is not None else None
+                               for s in sorted(STATUS_KEYS)}})
+    return records
+
+
+def render_coverage(coverage):
+    def cell_text(cell):
+        status, n, total = cell["status"], cell["scored_or_valid"], cell["total"]
+        if status == "not_run":
+            return "not_run" + (f" 0/{total}" if cell["evidence_present"] else "")
+        return f"{status} {n}/{total}"
+    tasks = coverage["tasks"]
+    lines = ["## Coverage overview", "",
+             "**Execution coverage, not accuracy.** Each cell is `complete`, `partial`, or `not_run`, "
+             "followed by scored/valid decisions over the planned denominator when observed. "
+             "All references remain **review_pending**, independently of execution. "
+             "No overall accuracy combines these tasks.", "",
+             "`not_run` means no matching public observation; it does not mean unsupported or zero accuracy. "
+             "A source with no attempted answerability decisions explicitly shows `not_run 0/128`. "
+             "Unreported measurements remain NR in the [speed and memory table](#speed-and-memory). "
+             "Recorded `missing`, `unsupported`, `error`, `timeout`, and `abstain` outcomes remain separate in the "
+             "[coverage CSV](leaderboard/coverage.csv) and [JSON](leaderboard/coverage.json).", "",
+             "### Context model/runtime observations", "",
+             "The 30 rows below preserve quantization and runtime identities. **Metal gateway** and "
+             "**direct Metal** are different paths; scores and task rankings follow below. "
+             "Context/132 contains text/76, mathematics/28 and chemistry/28; "
+             "[their scores and held-out test results](#model-quality) remain separate.", "",
+             "| Model / runtime observation | Size | " + " | ".join(f"{t['label']} /{t['total']}" for t in tasks) + " |",
+             "|---|---|" + "---|" * len(tasks)]
+    for row in coverage["observations"]:
+        if not row["context_observation"]:
+            continue
+        label = row["model"]
+        if row["id"] == "D3FlashQ8":
+            label += " (gateway)"
+        lines.append(f"| {label} | {row['size'] or 'NR'} | " +
+                     " | ".join(cell_text(row["cells"][t["id"]]) for t in tasks) + " |")
+    lines += ["", "### Passage-only observations and ranking methods", "",
+              "These do not add context models. D3-lite's passage session has a different runtime/settings "
+              "identity fingerprint from its historical context session. Jev 1.14 is distinct from context "
+              "Jev 1.13. BGE and tie-break methods are ranking observations, not newly evaluated context models.", "",
+              "| Model / method | " + " | ".join(f"{t['label']} /{t['total']}" for t in tasks[4:]) + " |",
+              "|---|" + "---|" * len(tasks[4:])]
+    for row in coverage["observations"]:
+        if row["context_observation"]:
+            continue
+        lines.append(f"| {row['model']} | " + " | ".join(cell_text(row["cells"][t["id"]]) for t in tasks[4:]) + " |")
+    lines += ["", "R0 means rotation 0 (128 pools, eight families, two correlated views). "
+              "Relevance/512 and replayed relevance/2048 have different protocols; neither is ranking/512. "
+              "Ranking cells cover 512 pools over four balanced rotations; nDCG@1 is defined on 480/480 eligible pools. "
+              "D3-lite/Jev ranking replays existing relevance decisions; rotations add no model calls. "
+              "Tie-break rows are offline combined methods, with projected sequential cost rather than a measured integrated pipeline. "
+              "[Ranking scores, controls and evidence retention](#passage-ranking-and-evidence) remain separate from classification.", "",
+              "The 24-case tool column reports valid provisional proposals: **zero human-approved references "
+              "and zero semantically qualified cases**. Complete coverage does not qualify routing or tool execution. "
+              "See [task-specific rankings](#updated-task-rankings), [historical context quality](#model-quality), "
+              "[full task CSV](leaderboard/task-breakdown.csv), and the dated "
+              "[D3 capability report](CAPABILITY_FLASH_RESULTS_20261029.md) for scores and source details.", "",
+              "## Harness coverage", "",
+              "A missing model observation and a missing harness capability are different gaps. "
+              "The global boundaries below apply to every model; they are not model `unsupported` outcomes. "
+              "[Reference review #8](" + ISSUES + "8) remains pending even where execution is complete.", "",
+              "| Capability | Harness / campaign status | What remains unqualified | Next issue |",
+              "|---|---|---|---|"]
+    for row in coverage["harness"]:
+        links = ", ".join(f"[#{url.rsplit('/', 1)[1]}]({url})" for url in row["issues"]) or "—"
+        lines.append(f"| {row['capability']} | {row['status']} | {row['boundary']} | {links} |")
+    lines += ["", "The next sequence is [the task contract #9](" + ISSUES + "9), then discovery/arguments/episodes "
+              "as their dependencies become executable. Cohort reruns do not resolve these harness gaps. "
+              "See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.", ""]
+    return lines
 
 
 def flat_rows(data):
@@ -568,52 +825,6 @@ def render_campaign_rankings(data):
     return lines
 
 
-def render_capability(campaign):
-    def ratio(count, key="correct"):
-        return f"{count[key]}/{count['total']}"
-    phases = campaign["phases"]
-    lines = ["## Complementary capability campaign: 29 October 2026", "",
-             f"**{campaign['model']}**, nominal {campaign['nominal_size']}, {campaign['runtime']}. "
-             "The two full packs have separate denominators; canary calls are excluded.",
-             "References remain agent-authored and pending human review. A perfect closed-choice score "
-             "does not qualify tool execution or product behavior.", "",
-             "| Pack / track | Correct / all | Scored / all | Test correct / all |",
-             "|---|---:|---:|---:|"]
-    for phase, label in (("anchor", "Fresh context anchor"), ("capability", "Capability pack")):
-        count = phases[phase]["counts"]
-        lines.append(f"| {label} | {ratio(count)} | {ratio(count, 'scored')} | {ratio(count['by_split']['test'])} |")
-    for track, label in (("selection", "Capability selection"), ("arguments", "Arguments and dependencies"),
-                         ("observations", "Next step after fixed observations")):
-        count = phases["capability"]["groups"]["track"][track]
-        lines.append(f"| {label} | {ratio(count)} | {ratio(count, 'scored')} | {ratio(count['by_split']['test'])} |")
-    lines += ["", "The three track rows partition the 192-case pack; they are not additional cases. "
-              f"The fresh anchor has {phases['anchor']['counts']['families']} FR/EN families. "
-              f"The new pack's 192 language/catalogue variants belong to {phases['capability']['counts']['families']} "
-              f"families, including {phases['capability']['groups']['split']['test']['families']} test families.", "",
-              "| Pack | French correct / all | English correct / all | 8-card correct / all | 32-card correct / all |",
-              "|---|---:|---:|---:|---:|"]
-    for phase, label in (("anchor", "Fresh context anchor"), ("capability", "Capability pack")):
-        groups = phases[phase]["groups"]
-        catalogue = groups.get("catalogue_variant", {})
-        lines.append(f"| {label} | {ratio(groups['language']['fr'])} | {ratio(groups['language']['en'])} | "
-                     f"{ratio(catalogue['compact']) if catalogue else 'Not applicable'} | "
-                     f"{ratio(catalogue['expanded']) if catalogue else 'Not applicable'} |")
-    lines += ["", "| Pack | Timed successful calls / all | Adapter median ms | Adapter p95 ms | Session group RSS GiB |",
-              "|---|---:|---:|---:|---:|"]
-    for phase, label in (("anchor", "Fresh context anchor"), ("capability", "Capability pack")):
-        item = phases[phase]
-        timing = item["adapter_ms"]
-        lines.append(f"| {label} | {timing['count']}/{item['counts']['total']} | {number(timing['median'])} | "
-                     f"{number(timing['p95'])} | {number(item['session_group_peak_rss_mib'] / 1024, 2)} |")
-    lines += ["", "Timings follow each session's synthetic warm-up and describe one pass; loading/startup is excluded. "
-              "RSS is the sampled owned process-group peak over startup, smoke and that pack, not per-case RSS "
-              "or total unified GPU memory. GPU allocation was unreported. Catalogue variants are correlated.",
-              f"[Full campaign report]({campaign['report']}) · "
-              "[Groups, pairs and source evidence](evidence/capability-flash-20261029/analysis.json). "
-              "Historical source exports remain unchanged; the consolidated context ranks below include the new observations.", ""]
-    return lines
-
-
 def render_other_protocols(text):
     """Include the tracked legacy tables, fixing links relative to docs/RESULTS.md."""
     sections = re.split(r"(?m)(?=^## )", text)
@@ -637,8 +848,8 @@ def render_other_protocols(text):
 
 
 def render(data):
-    lines = ["# Full results", "", "[README](../README.md) · [Quality](#model-quality) · [Language and task complexity](#language-and-task-complexity) ·",
-             "[Updated task rankings](#updated-task-rankings) · [New capability tests](#complementary-capability-campaign-29-october-2026) · "
+    lines = ["# Full results", "", "[README](../README.md) · [Coverage overview](#coverage-overview) · [Harness coverage](#harness-coverage) · [Quality](#model-quality) ·",
+             "[Updated task rankings](#updated-task-rankings) · [Language and task complexity](#language-and-task-complexity) · "
              "[Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·",
              "[Other evaluated protocols](#other-evaluated-protocols) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
              f"**{len(data['observations'])} context model/runtime observations through 29 October 2026**: 28 historical observations plus Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.",
@@ -646,20 +857,9 @@ def render(data):
              "quantizations and devices remain separate. Rendering this page does not rerun or rescore models.", "",
              "**Exploratory evidence:** synthetic, agent-authored references and translations await human review.",
              "The ranking uses all 132 cases (train + calibration + test); the separate test column uses 66 cases.",
-             "FR/EN translations form 66 families. Differences of a few answers do not establish a general model ranking.", "",
-             "## What was actually tested?", "",
-             "| Task | Common input and denominator | Status |", "|---|---|---|",
-             "| Documentary text and choices | 76 context-dependent choices | Scored exploratory decisions |",
-             "| Mathematics / chemistry | 28 / 28 constrained choices | Scored synthetic probes, not expert scientific qualification |",
-             "| Clef Flash Q8 context, capabilities and physics | Separate 132-, 192- and 48-case packs | Included in the context table and updated task rankings below; [report](CLEF_FLASH_RESULTS_20261029.md) |",
-             "| First tool proposal | 24 search / statistics / fallback choices | Provisional agreement only; no tool execution; **0 semantically qualified cases** |",
-             "| Physics | [48 synthetic choices](../datasets/physics-choice-v1/README.md), 24 FR/EN families | [Flash Q8/direct Metal: 39/48, test 32/36](PHYSICS_FLASH_RESULTS_20261029.md); reported separately, human review pending |",
-             "| Passage ranking, relevance, support, answerability | Separate fixed-passage campaigns | [Full tables and coverage](leaderboard/other-benchmarks.md); [D3 Flash evidence observation](PASSAGE_FLASH_RESULTS_20261029.md) and [matched Clef comparison](PASSAGE_CLEF_RESULTS_20261029.md), reported separately |",
-             "| Capability/tool-set, argument and fixed-observation choices | [192-case complementary pack](../datasets/capability-choice-v1/README.md) | [First D3 Flash Q8/Metal campaign and fresh context anchor](CAPABILITY_FLASH_RESULTS_20261029.md), reported separately from the 28 historical rows; no tool execution or product qualification |",
-             "| Free-form plugin/MCP selection, complete execution loop, difficulty prediction, adaptive model routing | Future harness stages | **Not run**; [experiment design](INTENT_AND_MODEL_ROUTING.md) |",
-             "| End-to-end RAG and generated-answer quality | No campaign qualified here | **Not run** |", ""]
+             "FR/EN translations form 66 families. Differences of a few answers do not establish a general model ranking.", ""]
+    lines += render_coverage(data["coverage"])
     lines += render_campaign_rankings(data)
-    lines += render_capability(data["capability_campaign"])
     lines += ["## Model quality", "",
              "Each score is **correct / all cases** in its column, retaining failures in the denominator.",
              "Tool is **agreement / 24 provisional proposals**, not routing accuracy. Full scored/valid counts and separate",
@@ -722,6 +922,7 @@ def render(data):
     lines += [
               "## Every task and downloadable data", "",
               f"- [Model summary CSV](leaderboard/models.csv): all {len(data['observations'])} context observations, model sizes, runtimes, quality, latency, and separate resource measurements.",
+              "- [Coverage CSV](leaderboard/coverage.csv) and [coverage JSON](leaderboard/coverage.json): every observation × task cell, explicit execution and review status, protocol denominator, source, and unobserved fields.",
               "- [Campaign summary CSV](leaderboard/campaigns.csv): independent capability, physics and passage rankings, coverage, test scores, class macro scores and measured resource scopes.",
               "- [Task breakdown CSV](leaderboard/task-breakdown.csv): exported context task types/subtypes, domains, languages, splits and difficulty; tool-choice subgroups; plus capability, physics and passage groups, with task-specific denominators.",
               "- [Full structured results](leaderboard/results.json): identities, revisions, model/runtime settings, counts, statuses, all groups, source seals, and input-file SHA-256 hashes.",
@@ -743,6 +944,8 @@ def render(data):
 def outputs(data):
     models, tasks = flat_rows(data)
     return {"docs/RESULTS.md": render(data), "docs/leaderboard/models.csv": csv_text(models),
+            "docs/leaderboard/coverage.csv": csv_text(coverage_csv_rows(data["coverage"])),
+            "docs/leaderboard/coverage.json": json.dumps(data["coverage"], ensure_ascii=False, sort_keys=True, indent=2, allow_nan=False) + "\n",
             "docs/leaderboard/campaigns.csv": csv_text(campaign_csv_rows(data)),
             "docs/leaderboard/task-breakdown.csv": csv_text(tasks),
             "docs/leaderboard/results.json": json.dumps(data, ensure_ascii=False, sort_keys=True, indent=2, allow_nan=False) + "\n"}

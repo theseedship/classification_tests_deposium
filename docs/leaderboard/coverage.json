@@ -1,0 +1,4582 @@
+{
+  "harness": [
+    {
+      "boundary": "Observed only on supplied alternatives; tool/24 remains provisional and executes no tool.",
+      "capability": "Closed context, first-tool, capability and physics choices",
+      "id": "closed_choices",
+      "issues": [],
+      "status": "implemented"
+    },
+    {
+      "boundary": "Separate rotation/metric scopes above; no live retrieval or final answers.",
+      "capability": "Fixed-pool relevance, support, answerability and ranking",
+      "id": "passage_tasks",
+      "issues": [],
+      "status": "implemented"
+    },
+    {
+      "boundary": "Contract and offline fixture are prerequisites for new campaigns.",
+      "capability": "Versioned task contract beyond supplied proposals",
+      "id": "task_contract",
+      "issues": [
+        "https://github.com/theseedship/classification_tests_deposium/issues/9"
+      ],
+      "status": "not_implemented"
+    },
+    {
+      "boundary": "Four-proposal capability selection does not establish discovery recall.",
+      "capability": "Open catalogue discovery and sufficient tool sets",
+      "id": "discovery",
+      "issues": [
+        "https://github.com/theseedship/classification_tests_deposium/issues/10"
+      ],
+      "status": "not_implemented"
+    },
+    {
+      "boundary": "Selecting a supplied argument proposal does not execute or validate generated values.",
+      "capability": "Free-form executable arguments and artifact bindings",
+      "id": "arguments",
+      "issues": [
+        "https://github.com/theseedship/classification_tests_deposium/issues/11"
+      ],
+      "status": "not_implemented"
+    },
+    {
+      "boundary": "Fixed observation choices do not implement a multi-turn execution loop.",
+      "capability": "Bounded episodes with executed tools and feedback",
+      "id": "episodes",
+      "issues": [
+        "https://github.com/theseedship/classification_tests_deposium/issues/12"
+      ],
+      "status": "not_implemented"
+    },
+    {
+      "boundary": "Historical four-rotation ranking exists; new Flash classifications cover rotation 0 only.",
+      "capability": "Order robustness and evidence retention",
+      "id": "order_retention",
+      "issues": [
+        "https://github.com/theseedship/classification_tests_deposium/issues/13"
+      ],
+      "status": "partial_coverage"
+    },
+    {
+      "boundary": "Historical context scores cannot fill new task cells.",
+      "capability": "Remaining cohort on new packs",
+      "id": "cohort",
+      "issues": [
+        "https://github.com/theseedship/classification_tests_deposium/issues/14"
+      ],
+      "status": "not_run"
+    },
+    {
+      "boundary": "Separate runtime/resource qualification is required.",
+      "capability": "Clef 27B candidate envelope",
+      "id": "large_envelope",
+      "issues": [
+        "https://github.com/theseedship/classification_tests_deposium/issues/15"
+      ],
+      "status": "not_run"
+    },
+    {
+      "boundary": "Authored difficulty strata and confidence are not model-size ground truth.",
+      "capability": "Empirical small/large allocation and replay",
+      "id": "small_large",
+      "issues": [
+        "https://github.com/theseedship/classification_tests_deposium/issues/16"
+      ],
+      "status": "not_implemented"
+    },
+    {
+      "boundary": "An integration registry or isolated model run does not establish live application behavior.",
+      "capability": "Pinned application harness integration",
+      "id": "application",
+      "issues": [
+        "https://github.com/theseedship/classification_tests_deposium/issues/17"
+      ],
+      "status": "not_implemented"
+    },
+    {
+      "boundary": "No complete retrieval-to-answer campaign is qualified.",
+      "capability": "Evidence-to-answer generation and citation fidelity",
+      "id": "rag_final",
+      "issues": [
+        "https://github.com/theseedship/classification_tests_deposium/issues/18"
+      ],
+      "status": "not_implemented"
+    }
+  ],
+  "observations": [
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 128,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/native-model-comparison-20261016/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 24,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/native-model-comparison-20261016/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "D3Q4",
+      "model": "D3 historical · Q4 Metal",
+      "runtime": "apple_metal_native",
+      "size": "27B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 192,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
+          "source": "docs/evidence/capability-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 124,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/native-model-comparison-20261016/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 20,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/native-model-comparison-20261016/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "D3FlashQ8",
+      "model": "D3 flash · Q8 Metal",
+      "runtime": "apple_metal_native",
+      "size": "9B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 124,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/physics-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 122,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 128,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 128,
+          "source": "docs/evidence/passage-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 252,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/passage-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 460,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 768,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 768,
+          "source": "docs/evidence/passage-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 39,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/physics-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "D3FlashQ8Upstream",
+      "model": "D3 flash · Q8 direct Metal",
+      "runtime": "apple_metal_upstream",
+      "size": "9B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 124,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-d3-larger-20261011/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 20,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-d3-larger-20261011/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "D3flash",
+      "model": "D3 flash · CPU",
+      "runtime": "historical_cpu",
+      "size": "8.393B backbone"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 123,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 20,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Jev",
+      "model": "Jev 1.13 · HTTP API",
+      "runtime": "remote_api",
+      "size": null
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 122,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/native-model-comparison-20261016/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 21,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/native-model-comparison-20261016/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "D3FlashQ4",
+      "model": "D3 flash · Q4 Metal",
+      "runtime": "apple_metal_native",
+      "size": "9B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 119,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-d3-larger-20261011/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 20,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-d3-larger-20261011/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "D3mini",
+      "model": "D3 mini · CPU",
+      "runtime": "historical_cpu",
+      "size": "4.539B backbone"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 117,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-d3-20261011/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 18,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-d3-20261011/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "D3nano",
+      "model": "D3 nano · CPU",
+      "runtime": "historical_cpu",
+      "size": "2.213B backbone"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 117,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/gliclass-model-comparison-20261017/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 20,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/gliclass-model-comparison-20261017/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "GLiClass9B",
+      "model": "GLiClass v4 9B · BF16 MPS",
+      "runtime": "apple_mps",
+      "size": "9B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 192,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
+          "source": "docs/evidence/clef-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 110,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/clef-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 109,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 128,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 128,
+          "source": "docs/evidence/passage-clef-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 261,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/passage-clef-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 446,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 768,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 768,
+          "source": "docs/evidence/passage-clef-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 41,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/clef-flash-20261029/analysis.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "ClefFlashQ8",
+      "model": "Clef Flash · Q8 direct Metal",
+      "runtime": "apple_metal_upstream",
+      "size": "9B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 106,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 18,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Vela4",
+      "model": "Vela 2.0 4B · CPU",
+      "runtime": "historical_cpu",
+      "size": "4.211B"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 103,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 18,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Nox",
+      "model": "Decision 2.0 Nox 4B · CPU",
+      "runtime": "historical_cpu",
+      "size": "4.208B"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 101,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 16,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Liquid3",
+      "model": "Liquid d1-3B · CPU",
+      "runtime": "historical_cpu",
+      "size": "3.123B"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 98,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 18,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Noma",
+      "model": "Noma · CPU",
+      "runtime": "historical_cpu",
+      "size": "~2.67B declared"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 95,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-d3-20261011/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 19,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-d3-20261011/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "D3lite",
+      "model": "D3 lite · CPU",
+      "runtime": "historical_cpu",
+      "size": "0.853B backbone"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 93,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261010-sol/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 19,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261010-sol/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Sol",
+      "model": "Decision 2.0 Sol 2B · CPU",
+      "runtime": "historical_cpu",
+      "size": "2B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 79,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-vela2-20261011/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 14,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-vela2-20261011/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Vela08",
+      "model": "Vela 2.0 0.8B · CPU",
+      "runtime": "historical_cpu",
+      "size": "0.755B declared"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 77,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 19,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Eos",
+      "model": "Decision 2.0 Eos 0.8B · CPU",
+      "runtime": "historical_cpu",
+      "size": "0.8B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 77,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/native-model-comparison-20261016/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 19,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/native-model-comparison-20261016/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "EosQ8",
+      "model": "Decision 2.0 Eos 0.8B · Q8 Metal",
+      "runtime": "apple_metal_native",
+      "size": "0.8B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 74,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-d3-20261011/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 18,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-d3-20261011/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "D3edge",
+      "model": "D3 edge · CPU",
+      "runtime": "historical_cpu",
+      "size": "0.594B backbone"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 70,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 16,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Kai",
+      "model": "Decision 2.0 Kai 0.6B · CPU",
+      "runtime": "historical_cpu",
+      "size": "0.6B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 65,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-vela2-20261011/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 18,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-vela2-20261011/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Vela03",
+      "model": "Vela 2.0 0.3B · CPU",
+      "runtime": "historical_cpu",
+      "size": "0.309B declared"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 59,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 12,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "GLiNER",
+      "model": "GLiNER2.5-multi-Decide · CPU",
+      "runtime": "historical_cpu",
+      "size": null
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 57,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/vela3-fast-20261028/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 18,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/vela3-fast-20261028/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Vela3Fast",
+      "model": "Vela 3.0 fast · decision only · CPU",
+      "runtime": "cpu_new",
+      "size": "0.380B decision backbone"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 56,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 10,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Laya",
+      "model": "Laya multilingual · CPU",
+      "runtime": "historical_cpu",
+      "size": "322M declared"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 52,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 11,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Julia",
+      "model": "Julia-1 · CPU",
+      "runtime": "historical_cpu",
+      "size": null
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 51,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 16,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Omni",
+      "model": "Liquid d1-omni-600M · CPU",
+      "runtime": "historical_cpu",
+      "size": "600M class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 44,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 11,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Indecis",
+      "model": "Indecis · untrained open mode · CPU",
+      "runtime": "historical_cpu",
+      "size": null
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 42,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 8,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "ModernJEV",
+      "model": "ModernJEV-Decide-Preview · CPU",
+      "runtime": "historical_cpu",
+      "size": null
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 41,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 10,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "id": "Muose",
+      "model": "Muose-50M-Decision · CPU",
+      "runtime": "historical_cpu",
+      "size": "50M class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 88,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 128,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 128,
+          "source": "docs/evidence/passage-cpu-20261015/analysis.json",
+          "status": "complete",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": true,
+          "metric": "ndcg@1",
+          "metric_defined": 480,
+          "metric_eligible": 480,
+          "metric_value": 0.7010912698412698,
+          "numerator": null,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/passage-order-control-20261015/analysis.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 229,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/passage-cpu-20261015/analysis.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 916,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 2048,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 2048,
+          "source": "docs/evidence/passage-order-control-20261015/analysis.json",
+          "status": "complete",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 443,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 768,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 768,
+          "source": "docs/evidence/passage-cpu-20261015/analysis.json",
+          "status": "complete",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": false,
+      "id": "D3litePassage",
+      "model": "D3 lite · CPU passage session",
+      "runtime": "historical_cpu",
+      "size": "0.853B backbone"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 128,
+            "ok": 0,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 0,
+          "source": "docs/evidence/passage-jev-20261015/analysis.json",
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": true,
+          "metric": "ndcg@1",
+          "metric_defined": 480,
+          "metric_eligible": 480,
+          "metric_value": 0.8395833333333333,
+          "numerator": null,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/passage-jev-20261015/analysis.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 1260,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 2048,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 2048,
+          "source": "docs/evidence/passage-jev-20261015/analysis.json",
+          "status": "complete",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 394,
+          "outcomes": {
+            "abstain": 0,
+            "error": 2,
+            "missing": 252,
+            "ok": 514,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 514,
+          "source": "docs/evidence/passage-jev-20261015/analysis.json",
+          "status": "partial",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": false,
+      "id": "Jev114",
+      "model": "Jev 1.14 · HTTP API",
+      "runtime": "remote_api",
+      "size": "Unreported"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": true,
+          "metric": "ndcg@1",
+          "metric_defined": 480,
+          "metric_eligible": 480,
+          "metric_value": 0.9222222222222223,
+          "numerator": null,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/passage-order-control-20261015/analysis.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": false,
+      "id": "BGEPassage",
+      "model": "BGE v2-m3 · INT8 CPU",
+      "runtime": "native_cpu_reranker",
+      "size": "Unreported"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": true,
+          "metric": "ndcg@1",
+          "metric_defined": 480,
+          "metric_eligible": 480,
+          "metric_value": 0.9222222222222223,
+          "numerator": null,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/passage-order-control-20261015/analysis.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": false,
+      "id": "D3liteBGE",
+      "model": "D3 lite + BGE tie-break · CPU",
+      "runtime": "offline_ranking_projection",
+      "size": "Two-model method"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": true,
+          "metric": "ndcg@1",
+          "metric_defined": 480,
+          "metric_eligible": 480,
+          "metric_value": 0.9111111111111111,
+          "numerator": null,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/passage-jev-20261015/analysis.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": false,
+      "id": "Jev114BGE",
+      "model": "Jev 1.14 + BGE tie-break",
+      "runtime": "offline_ranking_projection",
+      "size": "Two-model method"
+    }
+  ],
+  "review_pending": true,
+  "schema_version": "deposium.public-coverage/v1",
+  "sources_sha256": {
+    "docs/CLEF_FLASH_RESULTS_20261029.md": "14a601bc4c7adca721b1b67beafe8aeb10d1f0ea0bdc11c788e8d343177b67cd",
+    "docs/CLEF_NATIVE_PROTOCOL_20261029.md": "afe9b28b1944a4c003607dceb4da72356941fd5774a7ed850e4c0b0b2b74d4ae",
+    "docs/D3_CPU_PILOT.md": "f1efc01e7e839921d65ba87e6e8dc69ab897a98934ac77ef55792a9e852ea13f",
+    "docs/D3_LARGER_CPU_PILOT.md": "fff448300435de571ec4372ca3c2216b1baf53dc50d616af68a369b3ee01adc5",
+    "docs/GLICLASS_V4_RESULTS_20261017.md": "9b2795a6c3a90b05ca7dbf8ede7d950873dfb7637fc097f79405d72bc01d065d",
+    "docs/GLINER_PILOT.md": "70d485a2a84cde3fd039398a8d35c250fc6368fed16138ed1987342d39c0439c",
+    "docs/INDECIS_PILOT.md": "7f2c1b72608d86166832837313c40e7f016558bd9a98c11f589ae3426602db71",
+    "docs/JEV_PILOT.md": "15a62dfb4f319e105a0c1fcfc3d18f93f79730d12cf33f0663fab65230d5756c",
+    "docs/JULIA_RESULTS.md": "6e595509fc84a2c64a33d503f4fa9fd3016e5d00692cb4ac24d8c2185f0fb34a",
+    "docs/LARGER_CPU_PILOT_20261011.md": "b095b9fd3a3fe6f1efe66ab717aa1cb437ba1c87c82d979d348051f05eda2003",
+    "docs/LARGER_DECISION_MODELS_PILOT.md": "4082dd256afe3e5c2196ac8af35690bbbd54390547b39ae5691f5fd89dbc2fb5",
+    "docs/LAYA_RESULTS.md": "1d1c8993f427f82883e8de89462ba124872e182b6e41fcc76d7655ac3a059cd3",
+    "docs/NATIVE_DECISION_RESULTS_20261016.md": "3501cf9d35c175c7022dcb7b1e87f03ad2aea1b0da4d020920603a29b599ada9",
+    "docs/PASSAGE_CLEF_RESULTS_20261029.md": "5af3733e7a59461fd64a0a27e5eca15a8c1b68475fde71f1ac0c284db91ddb60",
+    "docs/PASSAGE_CPU_RESULTS_20261015.md": "32325371aa205b06321763bf40f4bcb17a3d42dcb8f52aae3610c8c3a522c3c5",
+    "docs/PASSAGE_FLASH_RESULTS_20261029.md": "cf376c533151ac8e2427fb13f8b4229e439556b514f9e128c83668ec16dbbd67",
+    "docs/PASSAGE_JEV_RESULTS_20261015.md": "ba48c94fe882498e397b0bf7b7c5d07da3edb776403526e8bdab4cde67710848",
+    "docs/PHYSICS_FLASH_RESULTS_20261029.md": "356dfd041f7d4646235767601f5272f446f814b4448712910f37c6056d546819",
+    "docs/VELA2_PILOT.md": "6743665f0102fe20a5c51810c880b7a3d87d0cd1bb69a7927b55397f32deaf40",
+    "docs/VELA3_FAST_RESULTS_20261028.md": "6cad54a1cd023ec2abd554cb099d881959ef9061c90dc47cf027de52c01a0101",
+    "docs/evidence/capability-flash-20261029/analysis.json": "df15bea59de4a762655dc601eb4cdad88a368977b4c65c688b0cfc2b95931a80",
+    "docs/evidence/clef-flash-20261029/analysis.json": "a1b5b8124d8fa2097eb6d603b5bb88bd4306481764ed0438742b6fbbdf9390eb",
+    "docs/evidence/gliclass-model-comparison-20261017/analysis.json": "62e3280544704ede362a8be9d8be4244dc34935a4a30dbe8d4f2bbcad8fd354a",
+    "docs/evidence/gliclass-model-comparison-20261017/gliclass-session.json": "938b445cac5d50ddde7776c43dad22e0ac9e8c4e14246db73232f3a00fb19639",
+    "docs/evidence/length-comparison-20261004/analysis.json": "48311eb6272d28dc4e5d607dfbc09bd77d35d6ef399075bb696115cd257c5f9e",
+    "docs/evidence/model-comparison-complete-20261004/analysis.json": "810bdfe62c52e1c2f7c00d98beb31b970cd958a51b0cdc0832f3e3e5877fcca1",
+    "docs/evidence/model-comparison-complete-20261010-sol/analysis.json": "6659ab61c392c0123eb46350595181ba5f2e6530b59713a21847f755ea4fe97c",
+    "docs/evidence/model-comparison-complete-20261010/analysis.json": "cd8b34aa95aeba2f3aabb50a2d91da133affc7fbf965123487e24d2c4492f422",
+    "docs/evidence/model-comparison-d3-20261011/analysis.json": "971feed2559030d565320729f05331cbc8ddc0bec3e4e25992e09b17a256fe54",
+    "docs/evidence/model-comparison-d3-larger-20261011/analysis.json": "81d9a80fc50bb97c88562a009165aa997434bea7f55a94a39f5fa8a400bb3cf2",
+    "docs/evidence/model-comparison-d3-larger-overview-20261011/manifest.json": "5cc6133e80c470d783b331adc4df03e16ec3efb79cfae06f02eb01af1c5d21f9",
+    "docs/evidence/model-comparison-d3-larger-overview-20261011/report.md": "9bce462445679f46a26d051e455de25e8f00f152a2075a9d5f62f7459485ecc0",
+    "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json": "17220514d426ab5cc0b67f02e65cfd39fa6ff64687710050caebde72aac53aa0",
+    "docs/evidence/model-comparison-vela2-20261011/analysis.json": "53054c718cae191d117eb0afe7e84a2657ef9f73a1b922ab34a27d6801dd7c07",
+    "docs/evidence/native-model-comparison-20261016/analysis.json": "ac43fd80b66f3b430877c2e6f3beb9c3aa06a9236d008218c18481dafb92d12c",
+    "docs/evidence/native-model-comparison-20261016/native-sessions.json": "3cc71489bd8c826870e3efb5354999a91bbda1eed6fd3eb8670ac61ec161bd95",
+    "docs/evidence/passage-clef-flash-20261029/analysis.json": "9e47fd81818a66070f88c8213dbd82ebc399fe7a755627c440574536703d5c22",
+    "docs/evidence/passage-cpu-20261015/analysis.json": "f0d643f4e9a49ceeeaa9a8ee065e2121dae94a312a08b8f237cd524496fdd657",
+    "docs/evidence/passage-flash-20261029/analysis.json": "f49d97593d7346c013608e74e77c07c791237d97e5f580b1ae591f2a119b3ebf",
+    "docs/evidence/passage-jev-20261015/analysis.json": "0c857281115a4a4fde627d708904c3eea9015f15c1973ffe1489ebfeeb756a97",
+    "docs/evidence/passage-order-control-20261015/analysis.json": "c51e9c27a32c721efcf4be7353fbb12c7dfa897727533d2aa5e12689c30925d3",
+    "docs/evidence/physics-flash-20261029/analysis.json": "b7675cb4a17cf92ef66bc2107ace0d48dbcd37a37d676e1b0e3a280cc165ec56",
+    "docs/evidence/timing-comparison-20261004/analysis.json": "eb8c5babe3dac5033291bd118b761e0e84b5aceb4c3b73b8ad0e429c2db65942",
+    "docs/evidence/vela3-fast-20261028/analysis.json": "83c06bdf377353541aba7944231654f3c794f19ab17016de99e3b0fdba70ae4e",
+    "docs/leaderboard/model-metadata.json": "2607c78e1a447e71d180774d464df4003422ce1855b4d76eb9da1e654926b6bc",
+    "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
+    "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
+    "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
+    "profiles/decision2-eos-assets.json": "31675c97916270d1744f9ea2446f591bc04165ef531bc2a12aedd159f16e3d1c",
+    "profiles/decision2-kai-assets.json": "88a103ac103b1c21a9b8aca6cb3caba6d807a588a390d42d6c0ae5da1aea101d",
+    "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
+    "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
+    "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
+    "scripts/build-full-results.py": "269aca112e5a9b567ccec881dbe4e6720dd9a283d628cdb12b172626c4901cec",
+    "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
+    "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
+    "scripts/consolidated-campaigns.py": "71b2c6972e1da1dca58f28e2514a30cb02e98d14ce18c85a3a5fc1fd2a4ea2f0"
+  },
+  "tasks": [
+    {
+      "id": "context",
+      "label": "Context",
+      "protocol": "context-choice-v1; all splits; test=66",
+      "total": 132
+    },
+    {
+      "id": "tool_proposal",
+      "label": "Tool proposal",
+      "protocol": "mastra-read-pilot-v0; provisional agreement; zero qualified cases",
+      "total": 24
+    },
+    {
+      "id": "capability",
+      "label": "Capability",
+      "protocol": "capability-choice-v1; four supplied proposals; test=96",
+      "total": 192
+    },
+    {
+      "id": "physics",
+      "label": "Physics",
+      "protocol": "physics-choice-v1; calibration+test; test=36",
+      "total": 48
+    },
+    {
+      "id": "passage_relevance",
+      "label": "Relevance R0",
+      "protocol": "passage-evidence-v1; test; rotation 0; 128 pools",
+      "total": 512
+    },
+    {
+      "id": "passage_support",
+      "label": "Support R0",
+      "protocol": "passage-evidence-v1; test; rotation 0; 128 pools",
+      "total": 768
+    },
+    {
+      "id": "passage_answerability",
+      "label": "Answerability R0",
+      "protocol": "passage-evidence-v1; test; rotation 0; 128 pools",
+      "total": 128
+    },
+    {
+      "id": "passage_relevance_four_rotations",
+      "label": "Relevance R0–3",
+      "protocol": "passage-evidence-v1; four replayed rotations; 512 pools; not independent calls",
+      "total": 2048
+    },
+    {
+      "id": "passage_ranking",
+      "label": "Ranking R0–3",
+      "protocol": "passage-evidence-v1; four balanced rotations; nDCG@1 defined/eligible=480/480; 512 total pools",
+      "total": 512
+    }
+  ]
+}

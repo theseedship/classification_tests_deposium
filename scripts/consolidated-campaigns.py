@@ -127,6 +127,10 @@ class Campaigns:
                      and resource["stop_reason"] is None, "campaign: invalid resource observation")
         return {"task": task, "observation": observation, "model": model, "counts": count, "groups": groups,
                 "source": source, "report": report, "identity": dict(identity),
+                "model_identity": {"model_repo_id": data["model"].get("model_repo_id", data["model"].get("repo_id")),
+                                   "model_revision": data["model"].get("model_revision", data["model"].get("revision")),
+                                   "model_assets_sha256": data["model"].get("model_sha256") or data["model"]["files"][0]["sha256"],
+                                   "runtime": dict(data["runtime"])},
                 "adapter_ms": self.stats(phase["latency_ms"], count["statuses"]["ok"]),
                 "session_group_peak_rss_mib": peak,
                 "rss_scope": "Sampled owned process-group peak over fresh session startup, controls, warm-up and this pack; not total GPU memory"}

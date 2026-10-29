@@ -1,4 +1,12 @@
-# Langues et reranking : pistes d'évaluation
+# Historical language and reranking proposals
+
+**Historical design note — 3 October 2026.** The French text below records the
+proposal at that date, before later passage campaigns. Its future-tense tasks
+and publisher/runtime descriptions are not the current execution status. Use
+[Campaign status](CAMPAIGN_STATUS.md) for issue dependencies and next steps,
+[Results and coverage](RESULTS.md#coverage-overview) for observations and gaps,
+and the [protocol](PROTOCOL.md) for evaluation boundaries. No language-policy
+qualification or application integration follows from this note.
 
 État au 3 octobre 2026 : **cadrage pour un lot ultérieur**. Aucun modèle,
 entraînement, téléchargement ou appel applicatif n'a été lancé pour cette fiche.

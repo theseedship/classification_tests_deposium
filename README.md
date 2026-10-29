@@ -1,58 +1,66 @@
 # Deposium RAG Decision Bench
 
-An exploratory benchmark for **decision models and rerankers in
-retrieval-augmented generation (RAG)**. Evaluate what a request needs, which
-tool to propose, which passages matter, and whether they support a claim.
-Compare candidates on the same visible inputs and retain failed or unsupported
-cases alongside scores, actual runtimes, and resource measurements.
+An exploratory benchmark for **decisions and evidence inside
+retrieval-augmented generation (RAG)**: understanding a request, proposing tools,
+ranking retrieved passages, and assessing claim support and answerability.
+Compare candidates on declared inputs while retaining missing, unsupported and
+failed cases alongside quality, execution time and memory measurements.
 
-A standalone Python engine supplies synthetic datasets, candidate adapters,
-task-specific scorers, and versioned reports. **No Deposium application stack is
-needed for validation or isolated models.** Integration tests are separate.
+The standalone Python engine provides synthetic datasets, candidate adapters,
+task-specific scorers and versioned reports. **Core validation needs no model
+weights, API keys, Docker or Deposium application stack.**
 
 **Research status:** references and translations are agent-authored and pending
-human review. Results are exploratory. Routing agreement is not a validated
-business decision, and a correct choice does not establish end-to-end answer
-quality. The 132-case totals mix splits; test-only results are separate.
+human review. Results are exploratory. A correct proposal does not establish
+tool execution, a useful final answer or product qualification.
 
-**[Full results: all models, tasks, speed and memory](docs/RESULTS.md)** ·
-[Evaluation protocol](docs/PROTOCOL.md) · [Datasets](datasets/) ·
-[Current benchmark priorities](docs/BENCHMARK_PRIORITIES_20261029.md) ·
-[Campaign status and next steps](docs/CAMPAIGN_STATUS.md) ·
-[Progressive campaign plan](docs/CAPABILITY_CAMPAIGN_PLAN.md) ·
-[Tool/MCP and model-routing proposal](docs/INTENT_AND_MODEL_ROUTING.md)
+## Start here
 
-## What is this useful for?
+| Page | What to find |
+|---|---|
+| **[Results and coverage](docs/RESULTS.md#coverage-overview)** | Every model/runtime observation, explicit untested cells, task-specific scores, split denominators, speed and memory; [CSV](docs/leaderboard/coverage.csv) and [JSON](docs/leaderboard/coverage.json) exports. |
+| **[Campaign status and next steps](docs/CAMPAIGN_STATUS.md)** | Current issue order, dependencies, exit criteria, validation limits and what can proceed in parallel. |
+| **[Evaluation protocol](docs/PROTOCOL.md)** | Allowed model inputs, task boundaries, scoring, versioning and evidence preservation. |
+| **[Contributing offline](CONTRIBUTING.md)** | Copyable checks, expected signals, optional dependencies and a small first contribution. |
 
-| Application | Question being evaluated | Boundary |
-|---|---|---|
-| Request understanding | Inventory, stored summaries, retrieved content, or clarification? | Closed-choice understanding; a prediction grants no document access. |
-| First tool selection | Search, compute statistics, or fall back to a planner? | Candidate proposals; the 24-case observation does not execute tools. |
-| Retrieval and reranking | Which passages are relevant, and in what order? | Fixed passage pools, separate from live search and final generation. |
-| Evidence assessment | Does a passage support or refute a claim? Is the evidence sufficient? | Task-specific references; similarity or confidence alone does not prove support. |
-| Robustness and resource tradeoffs | What changes with language, distractors, length, option order, or quantization? | Separate campaigns and runtime identities; no universal hardware speed ranking. |
+Dated reports remain in the [campaign archive](docs/RESULTS_INDEX.md). They are
+evidence for their recorded revisions, rather than competing current roadmaps.
+The [public issue roadmap](https://github.com/theseedship/classification_tests_deposium/issues/19)
+tracks the work described by the status page.
 
-Keep **model capability**, **application integration after deterministic guards**,
-and **end-to-end RAG quality** separate. Identity, access, consent, and resource
-checks remain outside candidate predictions.
+## What the benchmark covers
 
-The benchmark isolates steps inside RAG; it does not currently qualify a full
-retrieval-to-answer system, citation fidelity, or user-visible product behavior.
-The complementary [capability-choice pack](datasets/capability-choice-v1/README.md)
-adds 192 synthetic choices about capability/tool sets, arguments, dependencies,
-clarification, and next steps after fixed observations. It includes geospatial,
-web, open-data and local-document scenarios, with compact and expanded catalogues.
-The [first D3 Flash Q8/Metal campaign](docs/CAPABILITY_FLASH_RESULTS_20261029.md)
-reached **192/192**, including **96/96 test cases**, on 29 October 2026.
-This ceiling on four-proposal synthetic choices does not qualify tool execution
-or product behavior. The [next harness stages](docs/INTENT_AND_MODEL_ROUTING.md)
-cover free-form tool selection and complete execution loops. Difficulty prediction
-and model assignment remain a separate axis.
+| Application question | Current boundary |
+|---|---|
+| What does this request need? | Closed-choice context use, including documentary, mathematics and chemistry cases. |
+| Which tool or capability should be proposed? | First-tool agreement and four-proposal capability/workflow choices; no executed tools. |
+| Which retrieved passages matter? | Ranking and relevance over fixed synthetic passage pools. |
+| Do the passages support the claim or answer? | Separate support and answerability tasks, with conflict and insufficient-evidence cases. |
+| What changes with language, order, length or runtime? | Declared campaign-specific variants and resource measurements; no universal hardware speed ranking. |
 
-## Quick start: no weights, API keys, Docker, or services
+The [coverage overview](docs/RESULTS.md#coverage-overview) shows which candidates
+actually ran each task. Its [harness overview](docs/RESULTS.md#harness-coverage)
+also identifies gaps: open tool discovery, executable arguments, artifact
+dependencies, adaptive execution loops, empirical model allocation, and final
+answer/citation quality. Closed-choice success does not fill those cells.
 
-Use **Python 3.11+ and Git**. Run commands from the repository root; the core
-has no external Python dependencies and needs no package installation.
+Datasets have distinct denominators: context choices **132**, first-tool
+proposals **24**, capability choices **192**, physics choices **48**, and passage
+evidence **1,536 correlated variants**. Typed-decision fixtures contain 36 cases;
+the 14 document-task cases overlap that pack. Graph and tool-selection review
+packs are review material with no scored model results. See the
+[dataset cards](datasets/) and [protocol](docs/PROTOCOL.md) for family counts,
+splits, permitted inputs and each task's eligible denominator.
+
+Synthetic scenarios represent workflow properties, rather than production
+conversations. Translations, catalogue views and passage orders stay in their
+family split; they are not independent users or facts. Identity, access,
+consent and resource guards remain deterministic and outside model predictions.
+
+## Quick start
+
+Use **Python 3.11+ and Git**. The core has no external Python dependencies and
+needs no package installation. From a fresh public clone:
 
 ```bash
 git clone https://github.com/theseedship/classification_tests_deposium.git
@@ -60,6 +68,8 @@ cd classification_tests_deposium
 python3 -m deposium_bench validate-registry
 python3 -m deposium_bench validate-cases \
   --dataset datasets/context-choice-v1/cases.jsonl
+python3 -m deposium_bench validate-cases \
+  --dataset datasets/physics-choice-v1/cases.jsonl
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
@@ -67,209 +77,63 @@ python3 -m deposium_bench.capability_corpus --check
 python3 scripts/build-full-results.py --check
 ```
 
-These commands validate data, contracts, and implementation controls.
-**They do not download or score a real model.** Optional Node, JSON Schema,
-notebook, and application integration checks may be skipped when their
-dependencies are unavailable. A skipped check is not a successful integration.
+These checks validate data, contracts and generated views; they do not score a
+real model. See [Contributing](CONTRIBUTING.md) for expected signals and tests.
+Linux is the reference environment for the full offline suite. macOS core and
+targeted checks are separate from a full-suite qualification; the
+[validation matrix](docs/CAMPAIGN_STATUS.md#validation-matrix) records known
+limitations. Optional skips do not establish successful integration.
 
-Linux is the reference environment for the full offline unit suite. Campaign
-reports document model-specific macOS checks and inference qualifications.
-The historical frozen campaign code was checked offline on 29 October 2026:
-**817 tests, 786 passed, 31 optional skips**, no failures.
-No model weights or external services were required. Run the unit suite separately:
+## Run or add a real model
 
-```bash
-python3 -m unittest discover -s tests -v
-```
+Read the [protocol](docs/PROTOCOL.md), the relevant dataset card, and a
+[candidate profile](profiles/) with its dated setup and resource protocol.
+Prepare only selected pinned assets in an isolated runtime, verify their hashes,
+and write each campaign to a new archive. Imports and ordinary validation do
+not download weights or start API experiments. Remote campaigns need explicit
+credentials and budgets.
 
-## Datasets and tasks
+The [candidate inventory](docs/NEXT_CANDIDATES.md) distinguishes new checkpoints
+from previously tested runtime identities. The
+[frozen capability cohort](docs/CAPABILITY_CAMPAIGN_PLAN.md) remains separate
+from additional candidates. Historical D3 27B is not D3 Ultra; Jev 1.13 is not
+Jev 1.14. A publisher's result does not count as a result in this benchmark.
 
-| Pack | Size and languages | Evaluation status |
-|---|---|---|
-| [Physics choices](datasets/physics-choice-v1/README.md) | 48 synthetic cases, 24 FR/EN families; 12 calibration / 36 test | [Flash Q8/Metal: 39/48, test 32/36](docs/PHYSICS_FLASH_RESULTS_20261029.md); exact rational oracles, references pending human review. |
-| [Context choice](datasets/context-choice-v1/README.md) | 132 cases, 66 FR/EN families; documentary tasks, mathematics, chemistry | Scored exploratory decisions; 36 train / 30 calibration / 66 test cases. |
-| [First tool choice](datasets/mastra-read-pilot-v0/README.md) | 24 cases, 12 FR/EN families; search / statistics / fallback | Provisional agreement; zero human-approved references and zero semantically qualified cases. |
-| [Capability and workflow choices](datasets/capability-choice-v1/README.md) | 192 cases, 48 FR/EN families × 8/32-card catalogues; selection, arguments, fixed-observation next steps | [D3 Flash Q8/Metal: 192/192, test 96/96](docs/CAPABILITY_FLASH_RESULTS_20261029.md); agent references pending human review, no executed tools or product qualification. |
-| [Passage evidence](datasets/passage-evidence-v1/README.md) | 1,536 cases from 24 synthetic families; FR, EN, DE, ES, IT, PT | Ranking, relevance, claim support, answerability; four passage orders and two views are correlated variants. |
-| [Typed decisions](datasets/decisions-v1/README.md) | 36 cases, 18 FR/EN families | Contract and fixture controls; component replay needs application sources. |
-| [Document tasks](datasets/document-task-v1/README.md) | 14 cases, seven families | Historical projection of the typed-decision pack, not another independent corpus. |
-| [Graph review](datasets/graph-document-review-v0/DATASET.md) | 16 synthetic FR/EN templates, eight families | Unresolved references, zero cases scored; no captured graph or document collection included. |
-| [Tool-selection review](datasets/tool-selection-review-v0/README.md) | 16 review cases, eight families | Review material only; no delivered runner or scorer for this pack. |
+For `run`, exit code `0` requires all cases to pass. Code `1` can mean a complete
+run with incorrect predictions; inspect `completion_status`, coverage and all
+statuses. Code `2` signals invalid input/archive or zero scored cases.
+Observation commands have separate qualification rules. `ok` means valid output,
+not a correct answer, and a resource refusal is a preflight outcome.
 
-Synthetic cases represent workflow properties, not production conversations.
-Translations, document/scenario variants, and passage orders stay in their family
-split; they are not independent users, documents, or algorithms. Dataset cards
-explain construction, oracles, review, and limits; most cards are in French.
+Every new scored campaign must enter the shared result generator and its
+regression checks. Refresh public tables and exports with
+`python3 scripts/build-full-results.py --write`, then run `--check`. Linking
+only a standalone report does not complete consolidation. The CLI and notebook
+use the same engine; notebook cells must not implement another pipeline.
 
-## Evaluation protocol
+## Reproducibility and release boundaries
 
-1. **Fix the experiment before inference.** Version the dataset, profile,
-   projection, scorer, and budgets; pin model/tokenizer/runtime revisions,
-   precision, device, and prompts.
-2. **Expose only allowed inputs.** Adapters use the task-specific input
-   projection: context, question, options, passage pools, or structured fields
-   as applicable. Expected answers, reference explanations, split labels,
-   and descriptive case identities stay outside model inputs.
-3. **Check the real inference path.** Audit native tokenization and forward
-   inputs where supported. Refuse unsupported lengths instead of silently
-   truncating; record the observed model/runtime.
-4. **Keep outcomes distinct.** `ok` means valid output, not a correct answer.
-   `unsupported`, `missing`, `error`, `timeout`, and `abstain` remain distinct.
-   Empty outputs and zero scored cases cannot produce a passing evaluation.
-5. **Report coverage and denominators.** Keep accuracy, passage nDCG, support,
-   and routing agreement separate, with split/language/domain/family breakdowns.
-6. **Preserve evidence.** Archive cases, profile, provenance, raw outputs, scores,
-   and hashes. A resume or rescore writes a new archive and keeps the original.
-   Hashes establish byte integrity, not independent certification.
+The public repository includes source, synthetic cases, relative profiles,
+protocols, aggregates and hashes. **Weights, installed environments, private
+documents and some historical raw archives are not included.** A clone can
+validate code and read reports; rescoring requires its original raw archive,
+and new inference also requires pinned assets and runtimes.
 
-The [CLI](deposium_bench/cli.py) and [notebook](notebooks/decision_bench.ipynb)
-call the same engine, datasets, adapters, and scorers. Notebook cells do not
-implement another pipeline. See the [English protocol](docs/PROTOCOL.md),
-[campaign guide, French](docs/CAMPAIGNS.md), and [notebook guide, French](docs/NOTEBOOK.md).
+Application replay additionally requires an accessible pinned application
+harness and its dependencies; a contract registry is not evidence of an active
+service. Preserve original datasets and archives, record failures, and never
+adjust references or tune on exposed test cases to improve a score.
 
-## Selected observations
-
-**29 October 2026:** [Clef Flash on matching passages](docs/PASSAGE_CLEF_RESULTS_20261029.md)
-scored relevance **261/512**, support **446/768**, answerability **109/128**, with
-all 728 physical calls valid. D3 Flash scored 252/512, 460/768 and 122/128.
-Clef accepted 12/16 pools annotated as conflicting as answerable. Paired
-outcomes and class confusion, rather than a pooled score, describe the tradeoffs;
-references remain pending human review.
-
-**29 October 2026:** [D3 Flash Q8 passage evidence](docs/PASSAGE_FLASH_RESULTS_20261029.md)
-scored relevance **252/512**, support **460/768** and answerability **122/128**,
-with all 728 distinct physical calls valid. Answerability improves over the
-historical D3-lite observation; insufficient-versus-refuted support and graded
-relevance remain weak. These are 128 correlated test pools in eight families,
-with no new ranking or end-to-end answer evaluation.
-
-**29 October 2026:** [Clef Flash Q8/Metal](docs/CLEF_FLASH_RESULTS_20261029.md)
-scored context **110/132 (test 59/66)**, capability **192/192 (test 96/96)** and
-physics **41/48 (test 31/36)**, with full scored coverage. D3 Flash's physics
-test remains 32/36 despite its lower full total of 39/48. These exploratory
-observations use separate denominators; the capability ceiling does not qualify
-executable tools. Clef 27B remains unexecuted.
-
-**29 October 2026:** the first complementary
-[D3 Flash Q8/Metal campaign](docs/CAPABILITY_FLASH_RESULTS_20261029.md) reached
-192/192 on capability choices (test 96/96); its separate fresh context anchor
-reached 124/132 (test 61/66). These runs are reported separately from the
-historical comparison below. Canary calls do not enter either denominator.
-
-**[Open the full results](docs/RESULTS.md): 30 context model/runtime observations**, including Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime, with
-complete quality, domain, language, complexity, speed and memory tables;
-[every exported task breakdown](docs/leaderboard/task-breakdown.csv) and
-[all other benchmark campaigns](docs/leaderboard/other-benchmarks.md) are linked
-from the same page. A separate [48-case physics pack](datasets/physics-choice-v1/README.md)
-and an [opt-in D3 Turbo HTTP adapter](docs/PHYSICS_DECISION3_IMPORT.md) are available;
-the [first direct Flash Q8 physics campaign](docs/PHYSICS_FLASH_RESULTS_20261029.md)
-scored 39/48, test 32/36. The hosted Turbo adapter remains unexecuted.
-General plugin/MCP execution remains untested.
-
-The context columns use the same 132-case pack; tool agreement is shown only
-where the separate 24-proposal task actually ran. Capability, physics and
-passage evidence now have their own consolidated rankings on the same results page.
-These are **not a general leaderboard or a controlled comparison of hardware latency**.
-
-| Model observation | Actual runtime | Context /132 | Context test /66 | Provisional tool /24 | Capability /192 | Capability test /96 |
-|---|---|---:|---:|---:|---:|---:|
-| Historical D3, class 27B Q4 | llama.cpp / Metal | 128 | 65 | 24 | Not run | Not run |
-| D3 Flash Q8, nominal 9B | llama.cpp / Metal | 124 | 61 | 20 | **192** | **96** |
-| D3 Flash Q8, direct upstream | llama.cpp / Metal, distinct binary | 124 | 61 | Not run | Not run | Not run |
-| Clef Flash Q8, nominal 9B | Direct upstream llama.cpp / Metal | 110 | 59 | Not run | **192** | **96** |
-| GLiClass v4 9B BF16 | Official PyTorch pipeline / MPS | 117 | 63 | 20 | Not run | Not run |
-| Vela3-fast, decision backbone only | Official DecisionEncoder / CPU FP32 | 57 | 28 | 18 | Not run | Not run |
-
-The [updated task rankings](docs/RESULTS.md#updated-task-rankings) show both
-Flash candidates, full/test physics scores, all three capability tracks and
-separate relevance/support/answerability results. The page also includes the
-historical passage-ranking, longer-context and repeated-timing tables. Canary
-calls and repeated anchors do not add leaderboard models or quality cases.
-
-Vela3-fast's specialized span and router adapters were not loaded. D3 Ultra and
-Turbo are **not evaluated here**; the historical D3 row identifies neither.
-A name alone does not identify the tested weights, readout, or runtime.
-
-The English [full results](docs/RESULTS.md) retain coverage, revisions, and
-resource scopes, and link to the dated [campaign archive](docs/RESULTS_INDEX.md).
-Older campaign reports are primarily in French. The
-[candidate inventory](docs/NEXT_CANDIDATES.md) distinguishes new checkpoints
-from models already tested on another runtime.
-
-## Run a real model
-
-Read the installation and resource protocol for a [candidate profile](profiles/).
-Download only selected, pinned assets, verify their hashes, and use an isolated
-runtime. Core validation does not install runtimes or fetch weights. Remote APIs
-require explicit credentials and budgets; imports never start API experiments.
-
-For example, **after preparing Vela3-fast's assets and pinned environment**:
-
-```bash
-python3 -m deposium_bench run \
-  --dataset datasets/context-choice-v1/cases.jsonl \
-  --profile profiles/vela3-fast-cpu.json \
-  --output results/vela3-fast-local-001/bases
-python3 -m deposium_bench observe-mastra-read \
-  --dataset datasets/mastra-read-pilot-v0/cases.jsonl \
-  --profile profiles/vela3-fast-cpu.json --max-seconds 300 \
-  --output results/vela3-fast-local-001/mastra
-```
-
-No stack root is needed for these isolated model commands. Every output folder
-must be new. The Vela3-fast profile requires its exact Python/runtime pins and
-admits the model only when its memory guard passes. See
-[setup, measurements, and limitations](docs/VELA3_FAST_RESULTS_20261028.md).
-
-For `run`, exit code `0` requires a complete campaign with all cases passing.
-Unsupported or otherwise unscored cases prevent this success status. Code `1`
-can mean a **complete run with incorrect predictions**; inspect
-`completion_status`, coverage, and statuses in the summary. Code `2` signals
-invalid input/archive or zero scored cases. Observation commands have their
-own qualification rules; agreement is not a semantic PASS.
-
-## Reproducibility and contributions
-
-The repo includes source, synthetic cases, profiles, hashes, and aggregates.
-**Weights, installed environments, private documents, and some historical raw
-archives are not included.** A clone can validate the benchmark and read reports;
-rescoring needs a campaign's raw archive, and inference needs its assets/runtime. See
-[evidence preservation, French](docs/EVIDENCE_PRESERVATION.md).
-
-To add a candidate, use the shared adapter interface and the model's actual
-native helper. Add a pinned profile, explicit setup instructions, input and
-failure checks, and a new archive. Report missing capabilities and negative
-results. Do not adjust references to improve a score, tune on test cases,
-or treat translations as independent samples.
-
-Every new scored campaign must also be registered in the public result
-generator and its regression tests. Refresh `docs/RESULTS.md`, model/campaign/task
-CSVs and the structured JSON with `scripts/build-full-results.py --write`, then
-run `--check`. A separate report link alone is not a completed consolidation.
-
-Application replays additionally need an accessible, pinned Deposium checkout
-and its dependencies. `--stack-root` is configurable; the benchmark does not
-replace routing or start the stack. An integration registry lists contracts,
-not qualified services. See [integration boundaries](docs/PROTOCOL.md#1-keep-evaluation-boundaries-separate).
-
-When citing a result, identify the **report date/commit, dataset version, model
-revision, runtime/precision, task, split, and denominator**. Keep reference-review
-status with the score. Maintainer instructions are in [AGENTS.md](AGENTS.md);
-the [protocol](docs/PROTOCOL.md) defines the reproducibility boundaries.
-
-## Local-only material
-
-An ignored private overlay may exist in a maintainer's local checkout; it is not
-distributed by this public repository or required for the core benchmark.
-[AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md) explain how to keep shared
-instructions and local-only material separate.
+When citing a result, identify its **report date/commit, dataset version,
+model revision, runtime/precision, task, split, denominator and review status**.
+Public contributions must contain reviewed synthetic material and aggregates.
+Ignored local material stays local; see [Contributing](CONTRIBUTING.md),
+[AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md).
 
 ## Licensing
 
-The original benchmark code, documentation, and synthetic datasets are
-licensed under [MIT](LICENSE), copyright 2026 The Seed Ship. This covers the
-public tracked benchmark content. Ignored local Deposium files, application
-sources, and private data are outside this release and its license.
-
-Models, native helpers, and runtimes keep their own licenses. No weights are
-included; a candidate profile does not grant redistribution rights.
+Original public benchmark code, documentation and synthetic datasets are
+licensed under [MIT](LICENSE), copyright 2026 The Seed Ship. Ignored local
+Deposium files, application sources and private data are outside this release.
+Models, native helpers and runtimes keep their own licenses. No weights are
+included; a candidate profile grants no redistribution rights.

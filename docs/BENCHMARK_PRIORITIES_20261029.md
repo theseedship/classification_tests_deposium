@@ -1,137 +1,99 @@
-# Benchmark priorities — 29 October 2026
+# Benchmark priorities — 29 October 2026 checkpoint
 
-This working sequence follows the public campaign review and the local physics
-import. It does not launch inference, download assets, spend an API budget or
-qualify an application. References and translations remain agent-authored,
-pending human review. Keep every historical dataset and archive unchanged.
+**Dated checkpoint, not the current work queue.** Use
+[Campaign status and next steps](CAMPAIGN_STATUS.md) and
+[#19, the public roadmap](https://github.com/theseedship/classification_tests_deposium/issues/19)
+for dependencies and exit criteria. Use [Results and coverage](RESULTS.md#coverage-overview)
+for current consolidated observations. This page preserves the rationale and
+evidence links for the 29 October lots; it launches no inference or API budget.
 
-## 1. Complete the physics baseline
+References and translations are agent-authored and pending human review.
+Original datasets, plans and archives remain unchanged.
 
-The local import supplies 48 frozen choices in 24 FR/EN families, including
-12 calibration and 36 test cases. Supplied laws and exact rational oracles
-measure elementary rule application, not general scientific expertise.
+## Physics baseline: first observations completed
 
-- Validate the corpus, scorer negative controls, schemas, shared analysis and
-  native supervisor's selected-dataset/source capture without a model.
-- Preserve the dataset and manifest bytes. Review the laws, units, signs,
-  assumptions and bilingual wording; an agent review is not human approval.
-- Use the separate [Flash Q8 protocol](PHYSICS_FLASH_PROTOCOL_20261029.md) for
-  native preparation, a calibration canary, a fresh context anchor and physics.
-  Preparation and inference remain distinct observations.
-  A [direct upstream variant](PHYSICS_FLASH_UPSTREAM_PROTOCOL_20261029.md)
-  prepares the same isolated model without an application gateway, with its
-  own plan and newly built runtime identity.
-- Report physics correct/scored/all and test/36 separately from context/132
-  and test/66. Keep all unsuccessful statuses and counts by family, language,
-  task and authored difficulty. Do not merge the packs into one accuracy.
-- Keep the optional [Turbo HTTP adapter](PHYSICS_DECISION3_IMPORT.md) separate;
-  an API experiment requires its own current provider review and explicit budget.
+The import added 48 frozen choices in 24 FR/EN families: 12 calibration and
+36 test cases. Supplied laws and exact rational oracles probe elementary rule
+application. They do not establish general scientific expertise or complete
+human review of laws, units, signs, assumptions and bilingual wording.
 
-**Completion evidence:** offline checks plus a new sealed real-model archive
-and a reviewed public aggregate. Until that archive exists, physics is `not_run`
-with zero scored model cases. A local mocked integration check is not a campaign.
+The [D3 Flash Q8/direct upstream Metal observation](PHYSICS_FLASH_RESULTS_20261029.md)
+and subsequent [Clef Flash comparison](CLEF_FLASH_RESULTS_20261029.md) now
+exist. Their task-specific full/test denominators and fresh context anchors
+are in [Results](RESULTS.md#updated-task-rankings). Preparation is no longer
+the next step for these completed runtime identities.
 
-**First observation completed:** [Flash Q8/Metal](PHYSICS_FLASH_RESULTS_20261029.md)
-scored 39/48, test 32/36, with all cases scored and a separate fresh anchor of
-124/132, test 61/66. The direct upstream runtime is separate from application
-integration; cross-model physics comparisons and human review remain open.
+Preserved protocols distinguish the original
+[gateway-backed Flash preparation](PHYSICS_FLASH_PROTOCOL_20261029.md), the
+[executed direct upstream route](PHYSICS_FLASH_UPSTREAM_PROTOCOL_20261029.md)
+and the optional [hosted Turbo adapter](PHYSICS_DECISION3_IMPORT.md). The
+gateway and Turbo paths were not qualified by the direct observation. Human
+review and additional qualified cross-model runs remain open; physics length
+variants were not implemented.
 
-## 2. Continue the frozen capability cohort
+## Capability cohort: preserve the frozen sequence
 
-Flash Q8 completed capability-choice-v1 at 192/192, including 96/96 test.
-This is 48 scenario families and 24 test families, with correlated language and
-catalogue variants. Its ceiling makes the smallest useful candidate and the
-resource tradeoff especially informative; it does not qualify executed tools.
+The [first D3 Flash campaign](CAPABILITY_FLASH_RESULTS_20261029.md) and the
+[additional Clef Flash campaign](CLEF_FLASH_RESULTS_20261029.md) reached the
+ceiling of the 192-case four-proposal pack, including its 96 test cases.
+Its 48 scenario families have correlated language/catalogue variants; correct
+choices do not qualify discovery, executable arguments or tool feedback loops.
 
-Keep the [existing seven-candidate plan](CAPABILITY_CAMPAIGN_PLAN.md) and
-[machine-readable order](../plans/capability-choice-v1-sequence.json): remaining
-historical D3 27B Q4, GLiClass 9B, D3 Mini, Nano, Lite, then Vela 2.0 0.3B.
-Six candidates remain `not_run` on this pack. Recheck admission for the next
-candidate and prepare each actual platform/runtime; historical Linux CPU
-locks do not qualify macOS. A changed cohort/order needs a new plan version,
-not a silent response to a test score.
+Keep the [original seven-candidate plan](CAPABILITY_CAMPAIGN_PLAN.md) and
+[machine-readable order](../plans/capability-choice-v1-sequence.json). Six
+candidates remain unrun on this pack, starting with historical D3 27B Q4,
+subject to actual resource admission. Clef is an addition and does not reorder
+the cohort. Platform-specific preparation and remaining execution are tracked
+in [#14](https://github.com/theseedship/classification_tests_deposium/issues/14);
+Clef 27B has its own [#15](https://github.com/theseedship/classification_tests_deposium/issues/15)
+envelope. Historical CPU locks do not qualify a macOS path.
 
-Each admitted candidate gets separate new anchor/132 and capability/192
-archives, plus its technical canary. Preserve partial runs and unsupported
-inputs. Compare held-out scores, per-track results, paired family outcomes,
-latency and resource scopes. Do not rerun all 28 historical observations merely
-to fill a larger table.
+Each new candidate/runtime needs a separate fresh context anchor, capability
+archive and technical canary. Preserve partial and unsupported outcomes. There
+is no requirement to rerun every historical context observation to fill a table.
 
-## 3. Strengthen evidence assessment
+## Evidence assessment: matched Flash observations completed
 
-The separate [Clef Flash Q8 campaign](CLEF_FLASH_RESULTS_20261029.md) is now
-complete: context 110/132 (test 59/66), capability 192/192 (test 96/96), physics
-41/48 (test 31/36). Its capability ceiling reinforces the value of the evidence
-comparison below. Clef was an additional candidate; the original seven-model
-sequence remains unchanged. Clef 27B is still unexecuted.
+The [D3 Flash passage observation](PASSAGE_FLASH_RESULTS_20261029.md) and
+[matched Clef comparison](PASSAGE_CLEF_RESULTS_20261029.md) now cover separate
+relevance, support and answerability tasks on the same 128 rotation-zero test
+pools. The reports preserve paired class errors and physical-call accounting.
+Do not keep treating those Flash runs as future preparation.
 
-The [balanced passage ranking results](leaderboard/other-benchmarks.md) already
-include four passage rotations over 512 test variants. Evidence assessment is
-a separate gap: D3-lite support is 443/768 and answerability 88/128 on the
-initial 128 cases; Jev 1.14 support is partial and answerability unmeasured.
-These denominators are logical choices, not independent scenario counts.
+Their relevance and support errors, and Clef's conflicting-pool behavior,
+motivate [human review #8](https://github.com/theseedship/classification_tests_deposium/issues/8).
+The historical [passage ranking/order results](leaderboard/other-benchmarks.md)
+cover different task projections and axes. Four-rotation ranking is not proof
+of four-rotation support/answerability robustness; that work belongs to
+[#13](https://github.com/theseedship/classification_tests_deposium/issues/13).
+Jev 1.14's partial historical support observation does not establish a current
+full-suite qualification or an answerability score.
 
-Before another campaign, freeze the same selected passage pools/views and
-each task's projection, reference, eligible denominator and request budget.
-Prepare Flash Q8 as a proposed stronger comparison; its context/capability
-results are not evidence of support-task readiness. Audit the native input
-limits and the total physical-call count before inference. Keep ranking,
-support, relevance, answerability and evidence-set retention separate. No
-current remote endpoint or price is assumed from a historical Jev report.
+## Executable workflows: next contract before expansion
 
-**Completion evidence:** complete task-specific observations, class/error
-breakdowns, retained missing cases and a comparison on matching inputs.
-Extending the evidence tasks has priority over another general model leaderboard.
+The [feature evaluation design](INTENT_AND_MODEL_ROUTING.md) remains a design.
+The agreed next implementation is
+[#9](https://github.com/theseedship/classification_tests_deposium/issues/9):
+an explicit versioned input/output/reference/artifact/failure contract and one
+end-to-end offline fixture before broadening the pilot. Fresh families and
+negative controls are needed beyond four authored proposals; v1 stays intact.
 
-**Stronger observation completed:** [D3 Flash Q8/Metal](PASSAGE_FLASH_RESULTS_20261029.md)
-scored relevance 252/512, support 460/768 and answerability 122/128 on the
-same 128 rotation-zero test pools, all scored. Answerability improves over
-historical D3-lite's 88/128, but support gains only 17 decisions and its macro
-class score decreases. Its v1 labels and previous archives remain unchanged;
-the subsequent Clef comparison is recorded below, with human review of
-insufficient/refuted distinctions still pending.
+That contract supports discovery/selection (#10), executable arguments and
+artifact bindings (#11), then bounded deterministic tool episodes (#12).
+Selection, arguments, dependencies, actual observations, stopping and task
+success need separate metrics. A notebook fork or copied application router
+does not supply this harness. Empirical small/large allocation and real
+retrieval-to-answer/citation evaluation remain later, distinct qualifications.
 
-**Matched Clef observation completed:** [Clef Flash Q8/Metal](PASSAGE_CLEF_RESULTS_20261029.md)
-scored relevance 261/512, support 446/768 and answerability 109/128 on identical
-task inputs, with 728/728 physical calls valid and a separate fresh context
-anchor. It accepts 12/16 conflicting pools as answerable; the overall score
-does not qualify conflict handling. Both Flash observations and their paired
-class errors are now archived. Human semantic review and new held-out scenarios
-remain open; the frozen v1 references and original cohort are unchanged.
+## Constraints retained from this checkpoint
 
-## 4. Build executable arguments and bounded episodes
+Fix projections, references, eligible denominators, candidate identities and
+budgets before inference. Retain failed statuses and expose missing coverage.
+Use train/calibration for adjustments, preserve family splits, and never
+retune exposed test references to obtain a better score. New scenarios need a
+separately reviewed version. Resource refusal is a preflight outcome.
 
-The current capability pack offers four authored proposals and fixed
-observations. Preserve v1 and its perfect Flash result. A later version needs
-new held-out scenario families, explicit alternative valid plans, reviewed
-references and scorers rejecting empty, wrong, overcalling and premature-success
-outputs before candidate predictions.
-
-Extend the shared engine with task-specific contracts: generate arguments,
-validate their values and artifact bindings, execute controlled synthetic tools,
-feed actual observations back, and check retry/step budgets and stopping.
-Score selection, arguments, dependencies, task result and evidence separately.
-No notebook pipeline or copied application router. A real integration must
-inspect and call a separately supplied, pinned application harness.
-
-**Completion evidence:** successful and deliberately failing controlled episodes
-with archived traces; application replay and full retrieval-to-answer quality
-remain separate later qualifications. See the [experiment design](INTENT_AND_MODEL_ROUTING.md).
-
-## Cross-cutting constraints
-
-Human scientific/linguistic review remains pending and must be reported. Do not
-change references after model errors to obtain a better score. New variants
-stay with their source family's split; exposed test cases cannot become a fresh
-held-out benchmark. Input length and answer position are distinct robustness
-axes. Physics length variants are not implemented by this import.
-
-Language expansion, many new checkpoints, specialized Vela adapters and adaptive
-small/large-model allocation follow these lots. Allocation requires paired
-small/large outcomes and always-small/always-large controls, not D1/D2/D3 tags
-or confidence as a truth reference.
-
-Only reviewed public code, synthetic fixtures, protocols and aggregates may be
-released. Private backups, source audits, locators, budgets and raw archives
-remain local. Check the proposed public index, including new files, before any
-commit; a successful check of the unchanged index does not cover local additions.
+Only reviewed public source, synthetic fixtures, protocols and aggregates may
+be released. Keep private material and execution assets local. Review explicit
+staged public paths and run `python3 scripts/check-public-content.py`; the check
+of an unchanged index does not cover untracked or unstaged additions.
