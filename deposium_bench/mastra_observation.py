@@ -143,8 +143,8 @@ def observe_local(dataset: str | Path, profile_path: str | Path, output: str | P
                   or (profile["adapter"] == "small_model" and profile["model"]["mode"] == "liquid3"))
     if profile["adapter"] != "d3" and not larger_cpu and max_seconds > 300:
         raise ValueError("mastra observation: budget must be 1..300 seconds for this adapter")
-    remote = profile["adapter"] == "jev_http"
-    allowed = {"indecis", "julia", "gliner", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"} | ({"jev_http"} if allow_remote else set())
+    remote = profile["adapter"] in {"jev_http", "decision3_http"}
+    allowed = {"indecis", "julia", "gliner", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"} | ({"jev_http", "decision3_http"} if allow_remote else set())
     if profile["adapter"] not in allowed or "bench.context-choice" not in profile["capabilities"]:
         raise ValueError("mastra observation: only explicit local choice models are supported")
     if remote and (len(cases) > 24 or digest != _hash(Path(DATASET).read_bytes())):

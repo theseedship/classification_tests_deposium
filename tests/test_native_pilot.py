@@ -255,6 +255,7 @@ class NativePilotTests(unittest.TestCase):
             with tarfile.open(target) as source:
                 for relative in ("deposium_bench/data/stack-registry.json", "deposium_bench/data/context-distractors.json",
                                  "deposium_bench/research_corpus.py", "deposium_bench/capability_corpus.py",
+                                 "deposium_bench/physics_corpus.py",
                                  *("datasets/capability-choice-v1/" + name for name in pilot.SOURCE_FILES)):
                     self.assertEqual(source.extractfile(relative).read(), (pilot.ROOT / relative).read_bytes())
                 self.assertEqual(source.extractfile("datasets/native-pilot-selected/cases.jsonl").read(), payload)

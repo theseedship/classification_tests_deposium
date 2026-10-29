@@ -1,0 +1,32 @@
+{
+  "schema_version": "deposium.physics-dataset/v1",
+  "dataset_id": "physics-choice-v1",
+  "case_count": 48,
+  "family_count": 24,
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "cases_sha256": "e21cd2e0f4e35465b56158ba1fa07c8d8203be81a969c6edf4b7630d2f0d7307",
+  "oracle_version": "deposium.physics-oracles/v1",
+  "generator_sha256": "d05f0451c5d275294f2c317c142fa5b8946582dc09dc16c140424999f0cb26bf",
+  "review": "agent_only",
+  "human_review": "not_performed",
+  "evaluation_status": "not_run",
+  "created_before_candidate_inference": true,
+  "counts_by_difficulty": {
+    "D1": 16,
+    "D2": 16,
+    "D3": 16
+  },
+  "counts_by_split": {
+    "calibration": 12,
+    "test": 36
+  },
+  "limitations": [
+    "Finite elementary laws supplied in the input; not general physics qualification.",
+    "24 families; translations are correlated; no trained or human-reviewed reference.",
+    "No real document, measurement device or product component executed.",
+    "Separate new corpus with no historical candidate comparator."
+  ]
+}

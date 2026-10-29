@@ -1,4 +1,4 @@
-// Native text-only D3 preparation, using the pinned server implementation.
+// Native text-only D3/Clef preparation, using the pinned server implementation.
 // This helper creates no llama_context, submits no server task and calls no decode.
 // Build explicitly with scripts/build-systemone-preflight.py; no runtime install.
 #include "server-decision.h"
@@ -38,16 +38,17 @@ static bool nonempty_text(const json & value) {
 }
 
 static void usage() {
-    std::cout << "systemone-preflight --model EXISTING_GGUF --model-id ALIAS --max-tokens 4096\n"
+    std::cout << "systemone-preflight --model EXISTING_GGUF --model-id ALIAS --max-tokens 4096 [--decision-type d3|clef]\n"
               << "stdin: JSONL {case_id, native_request_json: exact gateway request body string}\n"
               << "stdout: JSONL native preparation evidence; no weights or forward are executed\n"
               << "token_ids_sha256 hashes a compact UTF-8 JSON integer array without a newline\n"
-              << "Only text-only, single choice questions with c0..c3 are supported.\n";
+              << "Only text-only, single choice questions with three or four c0..cN options are supported.\n";
 }
 
 int main(int argc, char ** argv) {
     std::string model_path;
     std::string model_id;
+    std::string decision_type = "d3";
     int max_tokens = 4096;
     try {
         if (argc == 2 && std::string(argv[1]) == "--help") {
@@ -64,6 +65,9 @@ int main(int argc, char ** argv) {
             } else if (key == "--model-id") {
                 require(model_id.empty());
                 model_id = value;
+            } else if (key == "--decision-type") {
+                require(value == "d3" || value == "clef");
+                decision_type = value;
             } else if (key == "--max-tokens") {
                 size_t consumed = 0;
                 max_tokens = std::stoi(value, &consumed);
@@ -92,10 +96,10 @@ int main(int argc, char ** argv) {
     server_decision_context decision;
     try {
         decision.init(model.get());
-        require(decision.type == COMMON_DECISION_TYPE_VLLM_D3);
-        require(!decision.is_joint() && !decision.can_share_prompt());
+        require(decision.type == (decision_type == "clef" ? COMMON_DECISION_TYPE_CLEF : COMMON_DECISION_TYPE_VLLM_D3));
+        require(decision.is_joint() == (decision_type == "clef") && !decision.can_share_prompt());
     } catch (const std::exception &) {
-        std::cerr << "native_d3_metadata_invalid\n";
+        std::cerr << "native_decision_metadata_invalid\n";
         return 2;
     }
 
@@ -108,6 +112,7 @@ int main(int argc, char ** argv) {
         json result = {
             {"schema_version", "deposium.native-systemone-encoding/v1"},
             {"source_revision", PIN},
+            {"decision_type", decision_type},
             {"case_id", nullptr},
             {"status", "error"},
             {"max_tokens", max_tokens},
@@ -136,7 +141,9 @@ int main(int argc, char ** argv) {
             const auto & question = body["questions"]["answer"];
             require(exact_keys(question, {"type", "instructions", "criteria"}));
             require(question["type"] == "choice" && nonempty_text(question["instructions"]));
-            require(exact_keys(question["criteria"], {"c0", "c1", "c2", "c3"}));
+            const size_t n_options = question["criteria"].size();
+            require((n_options == 3 && exact_keys(question["criteria"], {"c0", "c1", "c2"})) ||
+                    (n_options == 4 && exact_keys(question["criteria"], {"c0", "c1", "c2", "c3"})));
             for (const auto & item : question["criteria"].items()) {
                 require(nonempty_text(item.value()));
             }
@@ -147,10 +154,14 @@ int main(int argc, char ** argv) {
             std::vector<raw_buffer> files;
             const json state = decision.parse_state(body, files);
             require(files.empty() && questions.size() == 1);
-            require(decision.n_variants(questions.front()) == 1);
+            require(decision.is_joint() || decision.n_variants(questions.front()) == 1);
             server_task task(SERVER_TASK_TYPE_DECISION);
             const mtmd_helper_init_opt init_opt = {};
-            decision.fill_task(state, questions, questions.front(), 0, files, nullptr, init_opt, task);
+            if (decision.is_joint()) {
+                decision.fill_task_joint(state, questions, files, nullptr, init_opt, task);
+            } else {
+                decision.fill_task(state, questions, questions.front(), 0, files, nullptr, init_opt, task);
+            }
             require(!task.tokens.has_mtmd && task.n_tokens() > 0);
             const auto & tokens = task.tokens.get_tokens();
             const std::string token_json = json(tokens).dump();
@@ -158,12 +169,18 @@ int main(int argc, char ** argv) {
             for (const auto & option : questions.front().options) {
                 option_keys.push_back(option.key);
             }
-            require(option_keys == json::array({"c0", "c1", "c2", "c3"}));
-            require(task.decision.labels.size() == 4);
+            json expected_keys = json::array();
+            for (size_t i = 0; i < n_options; ++i) {
+                expected_keys.push_back("c" + std::to_string(i));
+            }
+            require(option_keys == expected_keys);
+            require(decision.is_joint() ? (task.decision.n_scores == (int) n_options && task.decision.order.size() == tokens.size())
+                                        : task.decision.labels.size() == n_options);
             const bool within_limit = task.n_tokens() <= max_tokens;
             result["status"] = within_limit ? "within_limit" : "unsupported";
             result["native_input_prepared"] = true;
             result["variant_count"] = 1;
+            result["joint"] = decision.is_joint();
             result["variants"] = json::array({{
                 {"index", 0}, {"token_count", task.n_tokens()}, {"token_ids", tokens},
                 {"token_ids_sha256", hash_sha256_hex(token_json.data(), token_json.size())},
@@ -171,6 +188,12 @@ int main(int argc, char ** argv) {
                 {"within_limit", within_limit}, {"option_keys", option_keys},
                 {"label_tokens", task.decision.labels},
             }});
+            if (decision.is_joint()) {
+                const std::string order_json = json(task.decision.order).dump();
+                result["variants"][0]["decision_order"] = task.decision.order;
+                result["variants"][0]["decision_order_sha256"] = hash_sha256_hex(order_json.data(), order_json.size());
+                result["variants"][0]["n_scores"] = task.decision.n_scores;
+            }
             if (!within_limit) {
                 result["error"] = "native_prepared_sequence_exceeds_limit";
                 failed = true;

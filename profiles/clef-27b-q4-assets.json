@@ -1,0 +1,12 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "ggml-org/Clef-GGUF",
+  "revision": "d7492270abd7af222e98dca986580772e6229242",
+  "files": [
+    {
+      "path": "Clef-Q4_K_M.gguf",
+      "size": 19540136096,
+      "sha256": "06a819954debafc9664ac6bf3898818185d21d7efe36d0f01009d9958bf6e1fd"
+    }
+  ]
+}

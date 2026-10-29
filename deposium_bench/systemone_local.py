@@ -176,6 +176,7 @@ class LocalSystemOneAdapter:
         self._port = urlsplit(self._model["endpoint"]).port
         self._lock = threading.Lock()
         self._states = {}
+        self._prepared_tokens = None
         self._failure = None
         self._closed = False
         self.provenance = {"adapter": "systemone_local", "qualification": "model_isolated",
@@ -206,6 +207,24 @@ class LocalSystemOneAdapter:
                                  (session["gateway"], "binary"), (session["harness"], "path"),
                                  (session["runtime_pin"], "path")):
                 self._remember(Path(record[name]), record["sha256"])
+            if "native_preparation" in session:
+                binding = session["native_preparation"]
+                preparation_path = Path(binding["path"])
+                self._remember(preparation_path, binding["sha256"])
+                if preparation_path.stat().st_size > MAX_BYTES:
+                    raise ValueError("systemone_preparation_invalid")
+                preparation = decode(preparation_path.read_bytes())
+                entries = preparation.get("request_tokens")
+                if (preparation.get("schema_version") != "deposium.native-preparation-map/v1"
+                        or preparation.get("model_id") != self._model["model_id"]
+                        or preparation.get("source_revision") != session["runtime"]["revision"]
+                        or preparation.get("max_tokens") != self._model["max_length"]
+                        or not isinstance(entries, dict) or not entries
+                        or any(not re.fullmatch(r"[0-9a-f]{64}", key)
+                               or type(count) is not int or not 0 < count <= self._model["max_length"]
+                               for key, count in entries.items())):
+                    raise ValueError("systemone_preparation_invalid")
+                self._prepared_tokens = entries
             self._remember(Path(__file__), digest(__file__))
             self._remember(Path(__file__).with_name("choice_protocol.py"),
                            digest(Path(__file__).with_name("choice_protocol.py")))
@@ -213,6 +232,8 @@ class LocalSystemOneAdapter:
                         ("model", "runtime", "gateway", "harness", "runtime_pin", "settings", "max_rss_mb")}
             identity["adapter_sha256"] = digest(__file__)
             identity["choice_protocol_sha256"] = digest(Path(__file__).with_name("choice_protocol.py"))
+            if self._prepared_tokens is not None:
+                identity["native_preparation"] = session["native_preparation"]
             self.provenance.update(available=True, identity=identity,
                 identity_sha256=hashlib.sha256(_wire(identity)).hexdigest(), session_sha256=self._model["session_sha256"])
         except FileNotFoundError:
@@ -265,8 +286,11 @@ class LocalSystemOneAdapter:
                     return {"status": "unsupported", "output": None, "raw_output": raw,
                             "error": "systemone_request_body_too_large"}
                 self._guard()
+                body_sha256 = hashlib.sha256(body).hexdigest()
+                if self._prepared_tokens is not None and body_sha256 not in self._prepared_tokens:
+                    return self._fail("error", "systemone_native_request_not_prepared", raw)
                 raw.update(http_attempted=True, native_request=payload, option_mapping=mapping,
-                           request_body_sha256=hashlib.sha256(body).hexdigest())
+                           request_body_sha256=body_sha256)
                 started = time.perf_counter()
                 status, data = http_request(self._port, "POST", "/v1/systemone", body, self._key,
                                             self._profile["timeout_seconds"])
@@ -304,6 +328,11 @@ class LocalSystemOneAdapter:
                         or type(usage.get("output_tokens")) is not int or usage["output_tokens"] != 0):
                     return self._fail("error", "systemone_usage_invalid", raw)
                 raw.update(observed_model=native["model"], usage=usage)
+                if self._prepared_tokens is not None:
+                    raw["prepared_input_tokens"] = self._prepared_tokens[body_sha256]
+                    raw["native_preparation_count_match"] = usage["input_tokens"] == self._prepared_tokens[body_sha256]
+                    if not raw["native_preparation_count_match"]:
+                        return self._fail("error", "systemone_native_preparation_count_mismatch", raw)
                 if "truncated" in usage:
                     if type(usage["truncated"]) is not bool:
                         return self._fail("error", "systemone_usage_invalid", raw)

@@ -20,6 +20,7 @@ from .campaigns import (_close_adapter, _decode, _destination, _encode, _hash,
                         _prepare_profile, _source_fingerprint, _stack_context, _write_new)
 from .d3_adapter import minimum_available_mib
 from .mastra_observation import memory_snapshot
+from .native_supervision import NativeSupervisionError, require_native_supervision
 from .passage_dataset import (CHOICE_LABELS, DEFAULT_DATASET, candidate_row,
                               export_requests, load_dataset, score_choices,
                               score_rankings, select_cases)
@@ -224,7 +225,7 @@ def _revalidate_inherited(adapter, request: dict, record: dict, parent_seal_hash
 def observe_choice(profile_path: str | Path, output: str | Path, *, split: str = "test",
                    max_seconds: int = 2400, dataset_path: str | Path = DEFAULT_DATASET,
                    stack_root: str | Path | None = None, adapter_factory=create_adapter,
-                   memory_reader=memory_snapshot, allow_remote: bool = False,
+                   memory_reader=None, allow_remote: bool = False,
                    resume_archive: str | Path | None = None) -> dict:
     """One sealed, no-retry pass; every physical response is fsynced."""
     if type(max_seconds) is not int or not 1 <= max_seconds <= 3600:
@@ -234,11 +235,15 @@ def observe_choice(profile_path: str | Path, output: str | Path, *, split: str =
     path = Path(profile_path).resolve()
     profile, source_hash = load_profile(path)
     remote = profile["adapter"] == "jev_http"
+    native = profile["adapter"] == "systemone_local"
+    supervision = None
     if resume_archive is not None and not (remote and allow_remote):
         raise PassageObservationError("Jev resume requires --allow-remote and a Jev HTTP profile")
     if remote:
         if not allow_remote:
             raise PassageObservationError("Jev HTTP requires explicit --allow-remote")
+    elif native:
+        supervision = require_native_supervision(profile, path)
     elif (profile["adapter"] != "d3" or profile["model"]["repo_id"] != "vllm-sr/d3-lite"
           or profile["capabilities"] != ["bench.context-choice"] or profile["recordings"] is not None):
         raise PassageObservationError("Only the pinned local D3-lite choice profile is admitted")
@@ -259,7 +264,15 @@ def observe_choice(profile_path: str | Path, output: str | Path, *, split: str =
             resume_archive, split=split, cases=selected, logical=logical, physical=physical,
             dataset_hash=dataset_hash, dataset_manifest=dataset_manifest,
             archived_profile=archived_profile, source_hash=source_hash)
-    minimum = (FLOOR_MIB if remote else
+    if memory_reader is None:
+        if native:
+            from .native_resources import memory_snapshot as memory_reader
+        else:
+            memory_reader = memory_snapshot
+    # The live matching supervisor already admits and guards this resident
+    # model. Require its full host reserve, without reserving its RSS twice.
+    floor = supervision.min_free_mb if native else FLOOR_MIB
+    minimum = (floor if remote or native else
                max(minimum_available_mib(profile["model"]["repo_id"]),
                    profile["model"]["max_rss_mb"] + 1024))
     before = memory_reader()
@@ -287,7 +300,7 @@ def observe_choice(profile_path: str | Path, output: str | Path, *, split: str =
                 "bench": source, "stack_context": stack, "memory_before": before,
                 "budget": {"max_seconds": max_seconds, "max_unique_calls": MAX_UNIQUE_CALLS,
                            "planned_unique_calls": len(physical), "minimum_available_mib": minimum,
-                           "ongoing_available_floor_mib": FLOOR_MIB, "concurrency": 1},
+                           "ongoing_available_floor_mib": floor, "concurrency": 1},
                 "qualification": "isolated_model_observation_agent_only_references",
                 "limitations": ["One in-flight call may finish after the wall deadline.",
                                 "Four passages are authored, not retrieved by the application.",
@@ -298,6 +311,9 @@ def observe_choice(profile_path: str | Path, output: str | Path, *, split: str =
                                             "remote_model_ram": "not_observed"}
         manifest["limitations"].append(
             "HTTP duration includes network and server time; remote model RAM and inference time are not observed.")
+    if native:
+        manifest["execution_scope"] = "supervised_native_model_isolated"
+        manifest["native_supervision"] = supervision.provenance()
     if parent is not None:
         manifest["resume_parent"] = {"path": str(parent), "seal_sha256": parent_seal_hash,
                                      "physical_inherited": len(inherited)}
@@ -321,10 +337,16 @@ def observe_choice(profile_path: str | Path, output: str | Path, *, split: str =
                 if _hash((parent / "seal.json").read_bytes()) != parent_seal_hash:
                     raise PassageObservationError("Jev resume parent changed during revalidation")
             for request in physical[len(inherited):] if stop_reason is None else ():
+                if supervision is not None:
+                    try:
+                        supervision.check(profile, path)
+                    except NativeSupervisionError:
+                        stop_reason = "native_supervision_lost"
+                        break
                 if time.monotonic() - started >= max_seconds:
                     stop_reason = "wall_budget"
                     break
-                if memory_reader().get("MemAvailable_mib", 0) < FLOOR_MIB:
+                if memory_reader().get("MemAvailable_mib", 0) < floor:
                     stop_reason = "host_memory_pressure"
                     break
                 begun = time.perf_counter()
@@ -358,6 +380,11 @@ def observe_choice(profile_path: str | Path, output: str | Path, *, split: str =
                 _close_adapter(adapter)
             except Exception:
                 stop_reason = stop_reason or "adapter_close_failed"
+        if supervision is not None:
+            try:
+                supervision.check(profile, path)
+            except NativeSupervisionError:
+                stop_reason = stop_reason or "native_supervision_lost"
         if _source_fingerprint()["files"] != source["files"]:
             stop_reason = "bench_source_changed"
         logical_rows = _logical_predictions(logical, records)

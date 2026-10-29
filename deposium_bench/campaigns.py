@@ -82,7 +82,7 @@ def _source_fingerprint() -> dict:
 def _scorer_fingerprint() -> dict:
     root = Path(__file__).parent
     files = {name: _hash((root / name).read_bytes()) for name in
-             ("scoring.py", "cases.py", "research_corpus.py", "capability_corpus.py", "choice_protocol.py",
+             ("scoring.py", "cases.py", "research_corpus.py", "physics_corpus.py", "capability_corpus.py", "choice_protocol.py",
               "lengths.py", "data/context-distractors.json")}
     from .capability_corpus import SOURCE_FILES
     for name in SOURCE_FILES:
@@ -154,7 +154,7 @@ def _prepare_profile(profile_path: Path) -> tuple[dict, str, bytes | None]:
         for name in PATH_FIELDS:
             model[name] = os.path.abspath(profile_path.parent / model[name])
         profile = {**profile, "model": model}
-    elif profile["adapter"] == "jev_http":
+    elif profile["adapter"] in {"jev_http", "decision3_http"}:
         model = dict(profile["model"])
         model["budget_ledger"] = os.path.abspath(profile_path.parent / model["budget_ledger"])
         profile = {**profile, "model": model}
@@ -172,7 +172,7 @@ def _prepare_profile(profile_path: Path) -> tuple[dict, str, bytes | None]:
 
 
 def _validate_output_scope(cases: list[dict], profile: dict) -> None:
-    if profile["adapter"] not in {"julia", "gliner", "jev_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
+    if profile["adapter"] not in {"julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
         return
     supported = [case for case in cases if case["contract_id"] in profile["capabilities"]]
     if not supported:

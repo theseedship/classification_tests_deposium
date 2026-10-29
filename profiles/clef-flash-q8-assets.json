@@ -1,0 +1,12 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "ggml-org/Clef-Flash-GGUF",
+  "revision": "6e2a164d70aae2af7fce86005da3f91805565b1d",
+  "files": [
+    {
+      "path": "Clef-Flash-Q8_0.gguf",
+      "size": 9657260288,
+      "sha256": "25f801e2a27610b0ccc0cb1558d7eda3d7a304e34e2c4a04e3079357ff7d906e"
+    }
+  ]
+}
