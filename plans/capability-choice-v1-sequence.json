@@ -1,0 +1,516 @@
+{
+  "schema_version": "deposium.capability-campaign-plan/v1",
+  "plan_id": "capability-choice-v1-initial-20261029",
+  "status": "planned_not_executed",
+  "selection_basis": "Highest historical all-case correct count within known recorded size classes; native Q8 Flash selected from a tie; GLiClass9B added as a different-family held-out-test counterpoint. This does not predict new-pack performance.",
+  "dataset": {
+    "path": "datasets/capability-choice-v1/cases.jsonl",
+    "sha256": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+    "case_count": 192,
+    "family_count": 48,
+    "test_cases": 96,
+    "test_families": 24
+  },
+  "historical_anchor": {
+    "path": "datasets/context-choice-v1/cases.jsonl",
+    "sha256": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+    "case_count": 132,
+    "test_cases": 66,
+    "policy": "New archive per candidate/runtime; historical archives unchanged; never pool accuracy across packs."
+  },
+  "selection_evidence": {
+    "path": "docs/leaderboard/results.json",
+    "sha256": "725660331fe8064772afe39e896b9ad63d080f22e637f78bc72e987282313ee7",
+    "reference_review": "agent_only_pending_human"
+  },
+  "technical_canary": {
+    "selection_rule": "Lexically first calibration family per track; all four FR/EN and catalogue variants. No choice based on gold or predictions.",
+    "case_ids": [
+      "ccv1-selection-02-compact-fr",
+      "ccv1-selection-02-compact-en",
+      "ccv1-selection-02-expanded-fr",
+      "ccv1-selection-02-expanded-en",
+      "ccv1-arguments-02-compact-fr",
+      "ccv1-arguments-02-compact-en",
+      "ccv1-arguments-02-expanded-fr",
+      "ccv1-arguments-02-expanded-en",
+      "ccv1-observations-02-compact-fr",
+      "ccv1-observations-02-compact-en",
+      "ccv1-observations-02-expanded-fr",
+      "ccv1-observations-02-expanded-en"
+    ],
+    "case_count": 12,
+    "quality_gate": false,
+    "limitations": "Three families do not represent all tasks or maximum native input lengths; validate native encodings over all 192 inputs separately."
+  },
+  "initial_cohort": [
+    {
+      "order": 1,
+      "wave": "A",
+      "source_observation": "D3FlashQ8",
+      "display_name": "D3 flash · Q8 Metal",
+      "size_class": "8–10B",
+      "model_size": {
+        "basis": "nominal_model_class",
+        "label": "9B class",
+        "parameters": null,
+        "scope": "Publisher model-name class, not an independent parameter count of converted GGUF; text only, without vision projector",
+        "source": {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        }
+      },
+      "role": "practical_reference",
+      "historical_model_identity": {
+        "model_repo_id": "ggml-org/vllm-d3-flash-GGUF",
+        "model_revision": "3d53d13778bf8035e6e1e534ce489ed052ee5663",
+        "model_assets_sha256": "7352edf6be85d93ab8806a17e1b3d0a7e71ee3685af3212ddbe679b742c2221b",
+        "source_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+        "adapter": "systemone_local"
+      },
+      "asset_manifest": "profiles/d3-flash-q8-assets.json",
+      "historical_profile": null,
+      "preparation_required": "prepare_supervised_dataset_session",
+      "target_runtime_status": "must_be_pinned_and_observed_before_campaign",
+      "historical_scores": {
+        "all_correct": 124,
+        "all_total": 132,
+        "test_correct": 61,
+        "test_total": 66,
+        "documentary_correct": 72,
+        "documentary_total": 76
+      },
+      "historical_resources": {
+        "adapter_ms": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 205.43433299462777,
+          "median": 194.33064600161742,
+          "min": 126.80870899930596,
+          "p95": 200.43862500460818
+        },
+        "initialization_ms": null,
+        "rss_scope": "Sampled native process-group RSS over context + tool session; not a total unified-memory peak",
+        "sampled_gpu_allocated_peak_mib": null,
+        "session_process_group_peak_rss_mib": 9613.65625,
+        "worker_rss_mib": {
+          "count": 0,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": null,
+          "median": null,
+          "min": null,
+          "p95": null,
+          "unreported_calls": 132
+        }
+      },
+      "execution_status": "not_run",
+      "cases_scored": 0
+    },
+    {
+      "order": 2,
+      "wave": "A",
+      "source_observation": "D3Q4",
+      "display_name": "D3 historical · Q4 Metal",
+      "size_class": "~27B",
+      "model_size": {
+        "basis": "nominal_model_class",
+        "label": "27B class",
+        "parameters": null,
+        "scope": "Publisher model-name class, not an independent parameter count of converted GGUF; text only, without vision projector",
+        "source": {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        }
+      },
+      "role": "large_comparison_not_truth_oracle",
+      "historical_model_identity": {
+        "model_repo_id": "ggml-org/vllm-d3-GGUF",
+        "model_revision": "de9670136f5ddd83e677c89ce041d5b9bb3b0dcb",
+        "model_assets_sha256": "a5a341e8611dc5d916c8f4c693dbef4a68e57eb17d37914fd56dcb5a9221eb2d",
+        "source_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+        "adapter": "systemone_local"
+      },
+      "asset_manifest": "profiles/d3-27b-q4-assets.json",
+      "historical_profile": null,
+      "preparation_required": "prepare_supervised_dataset_session",
+      "target_runtime_status": "must_be_pinned_and_observed_before_campaign",
+      "historical_scores": {
+        "all_correct": 128,
+        "all_total": 132,
+        "test_correct": 65,
+        "test_total": 66,
+        "documentary_correct": 73,
+        "documentary_total": 76
+      },
+      "historical_resources": {
+        "adapter_ms": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 640.6425829991349,
+          "median": 613.6710000027961,
+          "min": 351.5312079980504,
+          "p95": 629.6586250027758
+        },
+        "initialization_ms": null,
+        "rss_scope": "Sampled native process-group RSS over context + tool session; not a total unified-memory peak",
+        "sampled_gpu_allocated_peak_mib": null,
+        "session_process_group_peak_rss_mib": 19264.59375,
+        "worker_rss_mib": {
+          "count": 0,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": null,
+          "median": null,
+          "min": null,
+          "p95": null,
+          "unreported_calls": 132
+        }
+      },
+      "execution_status": "not_run",
+      "cases_scored": 0
+    },
+    {
+      "order": 3,
+      "wave": "A",
+      "source_observation": "GLiClass9B",
+      "display_name": "GLiClass v4 9B · BF16 MPS",
+      "size_class": "8–10B",
+      "model_size": {
+        "basis": "nominal_model_class",
+        "label": "9B class",
+        "parameters": null,
+        "scope": "Publisher model-name size class; not a measured parameter count",
+        "source": {
+          "path": "docs/GLICLASS_V4_RESULTS_20261017.md"
+        }
+      },
+      "role": "independent_family_counterpoint",
+      "historical_model_identity": {
+        "model_repo_id": "knowledgator/gliclass-v4-9b",
+        "model_revision": "14d11a92b5e0bab4a166e1fce4cc0777cac27182",
+        "model_assets_sha256": "74ed02898a294d608732aa6ecf81623f93edd7c40c4c1100d469f363181fd46d",
+        "source_revision": "6a00f8067648f25aa0f4f477d167c5f391cb4165",
+        "adapter": "gliclass"
+      },
+      "asset_manifest": "profiles/gliclass-v4-9b-assets.json",
+      "historical_profile": "profiles/gliclass-v4-9b-mps.json",
+      "preparation_required": "verify_pinned_mps_runtime_and_assets",
+      "target_runtime_status": "must_be_pinned_and_observed_before_campaign",
+      "historical_scores": {
+        "all_correct": 117,
+        "all_total": 132,
+        "test_correct": 63,
+        "test_total": 66,
+        "documentary_correct": 70,
+        "documentary_total": 76
+      },
+      "historical_resources": {
+        "adapter_ms": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 1714.252708999993,
+          "median": 326.53593699978956,
+          "min": 200.99416700031725,
+          "p95": 615.4868329977035
+        },
+        "initialization_ms": 13465.537666997989,
+        "rss_scope": "Per-response worker RSS, context-choice phase; not total host memory",
+        "sampled_gpu_allocated_peak_mib": 17149.05615234375,
+        "session_process_group_peak_rss_mib": null,
+        "worker_rss_mib": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 1171.234375,
+          "median": 1040.1875,
+          "min": 893.234375,
+          "p95": 1168.1875,
+          "unreported_calls": 0
+        }
+      },
+      "execution_status": "not_run",
+      "cases_scored": 0
+    },
+    {
+      "order": 4,
+      "wave": "B",
+      "source_observation": "D3mini",
+      "display_name": "D3 mini · CPU",
+      "size_class": "3–5B",
+      "model_size": {
+        "basis": "checkpoint_tensor_count",
+        "label": "4.539B backbone",
+        "parameters": 4539265536,
+        "scope": "BF16 backbone; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_LARGER_CPU_PILOT.md"
+        }
+      },
+      "role": "size_class_representative",
+      "historical_model_identity": {
+        "model_repo_id": "vllm-sr/d3-mini",
+        "model_revision": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4",
+        "model_assets_sha256": "6ef2321ba6d5eb304741c2fe2f44064aa95120469684aa160ea6c1f7bf954ca4",
+        "source_revision": null,
+        "adapter": "d3"
+      },
+      "asset_manifest": "profiles/d3-mini-assets.json",
+      "historical_profile": "profiles/d3-mini-cpu-context.json",
+      "preparation_required": "prepare_platform_specific_runtime",
+      "target_runtime_status": "must_be_pinned_and_observed_before_campaign",
+      "historical_scores": {
+        "all_correct": 119,
+        "all_total": 132,
+        "test_correct": 60,
+        "test_total": 66,
+        "documentary_correct": 71,
+        "documentary_total": 76
+      },
+      "historical_resources": {
+        "adapter_ms": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 9412.811145999513,
+          "median": 5971.7429145002825,
+          "min": 4440.002865001588,
+          "p95": 8291.937783000321
+        },
+        "initialization_ms": 16466.749440000058,
+        "rss_scope": "Per-response worker RSS, context-choice phase; not total host memory",
+        "sampled_gpu_allocated_peak_mib": null,
+        "session_process_group_peak_rss_mib": null,
+        "worker_rss_mib": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 7733.7109375,
+          "median": 7592.54296875,
+          "min": 7418.2578125,
+          "p95": 7724.88671875,
+          "unreported_calls": 0
+        }
+      },
+      "execution_status": "not_run",
+      "cases_scored": 0
+    },
+    {
+      "order": 5,
+      "wave": "B",
+      "source_observation": "D3nano",
+      "display_name": "D3 nano · CPU",
+      "size_class": "1–3B",
+      "model_size": {
+        "basis": "checkpoint_tensor_count",
+        "label": "2.213B backbone",
+        "parameters": 2213241664,
+        "scope": "BF16 backbone including vision module; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      },
+      "role": "size_class_representative",
+      "historical_model_identity": {
+        "model_repo_id": "vllm-sr/d3-nano",
+        "model_revision": "3aeb1c22a5632aac72353c36b3d0111c40e7dbf4",
+        "model_assets_sha256": "47ef14e962d8c7206da5230a4f38733f266d8e7aa85311440e83e1e468da8302",
+        "source_revision": null,
+        "adapter": "d3"
+      },
+      "asset_manifest": "profiles/d3-nano-assets.json",
+      "historical_profile": "profiles/d3-nano-cpu-context.json",
+      "preparation_required": "prepare_platform_specific_runtime",
+      "target_runtime_status": "must_be_pinned_and_observed_before_campaign",
+      "historical_scores": {
+        "all_correct": 117,
+        "all_total": 132,
+        "test_correct": 61,
+        "test_total": 66,
+        "documentary_correct": 68,
+        "documentary_total": 76
+      },
+      "historical_resources": {
+        "adapter_ms": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 2923.646831000042,
+          "median": 2083.6887780001234,
+          "min": 1623.6573329997555,
+          "p95": 2453.3506230000057
+        },
+        "initialization_ms": 12354.17311799938,
+        "rss_scope": "Per-response worker RSS, context-choice phase; not total host memory",
+        "sampled_gpu_allocated_peak_mib": null,
+        "session_process_group_peak_rss_mib": null,
+        "worker_rss_mib": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 3473.72265625,
+          "median": 3359.28515625,
+          "min": 3208.84765625,
+          "p95": 3466.34765625,
+          "unreported_calls": 0
+        }
+      },
+      "execution_status": "not_run",
+      "cases_scored": 0
+    },
+    {
+      "order": 6,
+      "wave": "B",
+      "source_observation": "D3lite",
+      "display_name": "D3 lite · CPU",
+      "size_class": "0.5–1B",
+      "model_size": {
+        "basis": "checkpoint_tensor_count",
+        "label": "0.853B backbone",
+        "parameters": 852985920,
+        "scope": "BF16 backbone including vision module; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      },
+      "role": "size_class_representative",
+      "historical_model_identity": {
+        "model_repo_id": "vllm-sr/d3-lite",
+        "model_revision": "a8d25a91ef75552803f7009d25b7bd435991abd9",
+        "model_assets_sha256": "8dcce58ddc219bd01c8907ffef35351366363d413bf879e0e7c3ffded5a1b49f",
+        "source_revision": null,
+        "adapter": "d3"
+      },
+      "asset_manifest": "profiles/d3-lite-assets.json",
+      "historical_profile": "profiles/d3-lite-cpu-context.json",
+      "preparation_required": "prepare_platform_specific_runtime",
+      "target_runtime_status": "must_be_pinned_and_observed_before_campaign",
+      "historical_scores": {
+        "all_correct": 95,
+        "all_total": 132,
+        "test_correct": 50,
+        "test_total": 66,
+        "documentary_correct": 64,
+        "documentary_total": 76
+      },
+      "historical_resources": {
+        "adapter_ms": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 2250.7758319998175,
+          "median": 1002.3418849996233,
+          "min": 734.0665140000056,
+          "p95": 1349.637145000088
+        },
+        "initialization_ms": 11239.628727999843,
+        "rss_scope": "Per-response worker RSS, context-choice phase; not total host memory",
+        "sampled_gpu_allocated_peak_mib": null,
+        "session_process_group_peak_rss_mib": null,
+        "worker_rss_mib": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 1844.82421875,
+          "median": 1706.63671875,
+          "min": 1531.1640625,
+          "p95": 1834.07421875,
+          "unreported_calls": 0
+        }
+      },
+      "execution_status": "not_run",
+      "cases_scored": 0
+    },
+    {
+      "order": 7,
+      "wave": "B",
+      "source_observation": "Vela03",
+      "display_name": "Vela 2.0 0.3B · CPU",
+      "size_class": "<0.5B",
+      "model_size": {
+        "basis": "publisher_declared",
+        "label": "0.309B declared",
+        "parameters": 309114369,
+        "scope": "Published main checkpoint parameter count; separate extraction head excluded",
+        "source": {
+          "path": "docs/VELA2_PILOT.md"
+        }
+      },
+      "role": "size_class_representative",
+      "historical_model_identity": {
+        "model_repo_id": "vllm-sr/Vela-2.0-0.3B",
+        "model_revision": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+        "model_assets_sha256": "066d2f1cb4175e5228ba4c64624f7078c3d5c2b39e6e7f2bd4ba848eb6c5545d",
+        "source_revision": null,
+        "adapter": "vela2"
+      },
+      "asset_manifest": "profiles/vela2-03-assets.json",
+      "historical_profile": "profiles/vela2-03-cpu-context.json",
+      "preparation_required": "prepare_platform_specific_runtime",
+      "target_runtime_status": "must_be_pinned_and_observed_before_campaign",
+      "historical_scores": {
+        "all_correct": 65,
+        "all_total": 132,
+        "test_correct": 37,
+        "test_total": 66,
+        "documentary_correct": 52,
+        "documentary_total": 76
+      },
+      "historical_resources": {
+        "adapter_ms": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 276.4518929980113,
+          "median": 171.18665900125052,
+          "min": 116.75575099798152,
+          "p95": 251.98510700283805
+        },
+        "initialization_ms": 12767.430995998438,
+        "rss_scope": "Per-response worker RSS, context-choice phase; not total host memory",
+        "sampled_gpu_allocated_peak_mib": null,
+        "session_process_group_peak_rss_mib": null,
+        "worker_rss_mib": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 1196.21875,
+          "median": 1172.96875,
+          "min": 1139.46875,
+          "p95": 1194.71875,
+          "unreported_calls": 0
+        }
+      },
+      "execution_status": "not_run",
+      "cases_scored": 0
+    }
+  ],
+  "expected_volumes": {
+    "candidates": 7,
+    "new_pack_decisions": 1344,
+    "anchor_decisions": 924,
+    "canary_decisions": 84,
+    "definition": "Planned one-pass volumes, not observed calls. Optional calibration repeats/diagnostics are separate and never added to quality denominators."
+  },
+  "execution_rules": [
+    "No launch, download, paid API or service change is performed by reading this plan.",
+    "Prepare the native supervisor for arbitrary datasets: run-native-pilot.py is currently fixed to old packs.",
+    "Do not run historical Linux-wheel CPU locks as if they were qualified macOS environments. Pin and validate a platform-specific runtime, or run the original WSL environment explicitly.",
+    "New quantization, model revision, helper, backend, runtime build or device is a separate observation.",
+    "Admit one model at a time under fixed candidate-specific memory/time guards; preserve at least the existing 8 GiB reserve or a stricter profile requirement.",
+    "Verify all input encodings without truncation, then the calibration canary. A structurally valid wrong choice does not fail the technical gate.",
+    "Freeze profiles, prompts and budgets before full-pack predictions. If an envelope needs measurement, use only calibration and record it before the test.",
+    "Archive canary, anchor and new-pack phases separately; release workers between phases and record cache/cold-start limitations.",
+    "Run full 132 and full 192 packs for every technically admitted candidate. Do not stop or select candidates based on test accuracy.",
+    "Keep errors, missing, unsupported, timeout and abstention distinct. A resource stop yields a partial archive and full denominator, never a silent smaller benchmark.",
+    "Compare matching case IDs within each pack; group uncertainty by scenario family. Old and new families are not paired with each other.",
+    "Catalogue-view differences combine length, distractors and position shifts; they are not an isolated causal effect of tool count.",
+    "Pair compact/expanded outputs within family and language, and FR/EN outputs within family and catalogue view; retain correctness and status transitions and group uncertainty by family."
+  ],
+  "optional_after_initial_cohort": [
+    {
+      "source_observation": "D3FlashQ4",
+      "purpose": "Quantization/memory contrast with Flash Q8, as a separate arm."
+    },
+    {
+      "source_observation": "Vela3Fast",
+      "purpose": "Small alternative-family control; decision-only backbone, not a class quality winner or qualified Vela span/router."
+    },
+    {
+      "source_observation": "EosQ8",
+      "purpose": "Optional native-stack technical control, not the selected sub-1B quality representative."
+    }
+  ],
+  "deferred": [
+    "D3 Ultra/Turbo and GLiClass27B require distinct model/runtime/resource audits. Historical D3Q4 identifies neither Ultra nor Turbo.",
+    "Vela3 specialized adapters require their own task contracts and scorers.",
+    "Free-form tool sets, executable arguments, adaptive MCP episodes and empirical model-routing policies are separate harness work."
+  ]
+}
