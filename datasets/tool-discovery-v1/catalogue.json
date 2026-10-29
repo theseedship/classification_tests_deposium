@@ -1,0 +1,138 @@
+{
+  "schema_version": "deposium.tool-discovery-catalogue/v1",
+  "provenance": "New synthetic agent-authored descriptions; no application inventory or live service snapshot.",
+  "tools": [
+    {
+      "plugin_id": "plugin.tables",
+      "capability_id": "capability.tables.count_rows",
+      "tool_id": "tool.tables.count_rows",
+      "description": {
+        "fr": "Compte les lignes d’un tableau déjà fourni, sans lire une autre source ni calculer une somme de valeurs.",
+        "en": "Counts rows in an already supplied table, without reading another source or summing values."
+      },
+      "eligible": true,
+      "available": true
+    },
+    {
+      "plugin_id": "plugin.tables",
+      "capability_id": "capability.tables.lookup_series",
+      "tool_id": "tool.tables.lookup_series",
+      "description": {
+        "fr": "Lit une colonne numérique dans le jeu de données synthétique désigné et renvoie la série de valeurs. Ne calcule pas de total.",
+        "en": "Reads a numeric column from the specified synthetic dataset and returns its value series. Does not calculate a total."
+      },
+      "eligible": true,
+      "available": true
+    },
+    {
+      "plugin_id": "plugin.tables",
+      "capability_id": "capability.tables.sum_values",
+      "tool_id": "tool.tables.sum_values",
+      "description": {
+        "fr": "Additionne les valeurs d’une série numérique déjà fournie. Ne récupère pas de données et ne compte pas les lignes d’un tableau.",
+        "en": "Sums values in an already supplied numeric series. Does not retrieve data or count table rows."
+      },
+      "eligible": true,
+      "available": true
+    },
+    {
+      "plugin_id": "plugin.tables",
+      "capability_id": "capability.tables.filter_rows",
+      "tool_id": "tool.tables.filter_primary",
+      "description": {
+        "fr": "Filtre un tableau déjà fourni par égalité exacte entre une colonne et une valeur, puis renvoie les lignes correspondantes. Interface primaire.",
+        "en": "Filters an already supplied table by exact equality between a column and a value, returning the matching rows. Primary interface."
+      },
+      "eligible": true,
+      "available": true
+    },
+    {
+      "plugin_id": "plugin.tables",
+      "capability_id": "capability.tables.filter_rows",
+      "tool_id": "tool.tables.filter_compatible",
+      "description": {
+        "fr": "Filtre un tableau déjà fourni par la même égalité exacte colonne-valeur et renvoie les mêmes lignes que l’interface primaire. Interface compatible.",
+        "en": "Filters an already supplied table by the same exact column-value equality and returns the same rows as the primary interface. Compatible interface."
+      },
+      "eligible": true,
+      "available": true
+    },
+    {
+      "plugin_id": "plugin.tables",
+      "capability_id": "capability.tables.describe_columns",
+      "tool_id": "tool.tables.describe_columns",
+      "description": {
+        "fr": "Décrit seulement les noms et types des colonnes d’un tableau fourni. Ne compte, ne filtre et n’agrège aucune ligne.",
+        "en": "Describes only column names and types in a supplied table. Does not count, filter or aggregate rows."
+      },
+      "eligible": true,
+      "available": true
+    },
+    {
+      "plugin_id": "plugin.geo",
+      "capability_id": "capability.geo.flood_snapshot",
+      "tool_id": "tool.geo.flood_snapshot",
+      "description": {
+        "fr": "Consulte la couche synthétique de risque d’inondation pour une commune ou des coordonnées explicitement fournies. Une localisation est obligatoire. Ne calcule pas d’itinéraire.",
+        "en": "Looks up the synthetic flood-risk layer for an explicitly supplied municipality or coordinates. A location is required. Does not calculate a route."
+      },
+      "eligible": true,
+      "available": true
+    },
+    {
+      "plugin_id": "plugin.geo",
+      "capability_id": "capability.geo.shortest_route",
+      "tool_id": "tool.geo.shortest_route",
+      "description": {
+        "fr": "Calcule le plus court chemin dans un réseau routier fourni entre deux nœuds fournis. Respecter le drapeau de disponibilité de cette carte.",
+        "en": "Calculates the shortest path through a supplied road network between two supplied nodes. Respect this card’s availability flag."
+      },
+      "eligible": true,
+      "available": false
+    },
+    {
+      "plugin_id": "plugin.documents",
+      "capability_id": "capability.documents.passage_search",
+      "tool_id": "tool.documents.passage_search",
+      "description": {
+        "fr": "Cherche des passages textuels dans une collection locale synthétique autorisée. Ne lit pas de colonne de tableau et ne traite pas de son.",
+        "en": "Searches textual passages in an eligible synthetic local collection. Does not read table columns or process audio."
+      },
+      "eligible": true,
+      "available": true
+    },
+    {
+      "plugin_id": "plugin.web",
+      "capability_id": "capability.web.snapshot_search",
+      "tool_id": "tool.web.snapshot_search",
+      "description": {
+        "fr": "Cherche des pages dans un instantané web synthétique figé. Ne transcrit pas de son et ne remplace pas les opérations de tableau.",
+        "en": "Searches pages in a frozen synthetic web snapshot. Does not transcribe audio or replace table operations."
+      },
+      "eligible": true,
+      "available": true
+    },
+    {
+      "plugin_id": "plugin.images",
+      "capability_id": "capability.images.resize",
+      "tool_id": "tool.images.resize",
+      "description": {
+        "fr": "Redimensionne une image fournie. Ne traite ni piste audio, ni texte, ni graphe routier.",
+        "en": "Resizes a supplied image. Does not process audio tracks, text or road graphs."
+      },
+      "eligible": true,
+      "available": true
+    },
+    {
+      "plugin_id": "plugin.restricted_tables",
+      "capability_id": "capability.restricted_tables.lookup_series",
+      "tool_id": "tool.restricted_tables.lookup_series",
+      "description": {
+        "fr": "Décrit une lecture de série dans une collection synthétique hors du périmètre autorisé. Le drapeau eligible est faux : cette proposition ne donne aucun accès.",
+        "en": "Describes series lookup in a synthetic collection outside the eligible scope. The eligible flag is false: proposing this tool grants no access."
+      },
+      "eligible": false,
+      "available": true
+    }
+  ]
+}

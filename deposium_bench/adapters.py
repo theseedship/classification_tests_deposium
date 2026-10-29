@@ -95,7 +95,7 @@ def _validate_profile(profile: dict) -> None:
     capabilities = profile["capabilities"]
     allowed = set(CONTRACTS) | ({"mcps.search"} if adapter == "recorded" else set())
     if adapter == "recorded":
-        allowed.add("bench.tool-plan")
+        allowed.update({"bench.tool-plan", "bench.tool-discovery"})
     if adapter in {"julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast", "recorded"}:
         allowed.add("bench.context-choice")
     if (not isinstance(capabilities, list) or not capabilities

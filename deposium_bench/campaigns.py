@@ -82,7 +82,7 @@ def _source_fingerprint() -> dict:
 def _scorer_fingerprint() -> dict:
     root = Path(__file__).parent
     files = {name: _hash((root / name).read_bytes()) for name in
-             ("scoring.py", "cases.py", "tool_plan.py", "research_corpus.py", "physics_corpus.py", "capability_corpus.py", "choice_protocol.py",
+             ("scoring.py", "cases.py", "tool_plan.py", "tool_discovery.py", "research_corpus.py", "physics_corpus.py", "capability_corpus.py", "choice_protocol.py",
               "lengths.py", "data/context-distractors.json")}
     from .capability_corpus import SOURCE_FILES
     for name in SOURCE_FILES:
@@ -366,6 +366,25 @@ def render_report(summary: dict) -> str:
         lines.append(f"| {component['path']} | {selection} | {component['recorded_cases']} | {component['scored_cases']} |")
     lines += ["", "Une sélection indique le périmètre demandé, pas sa disponibilité ou sa réussite.",
               "Les contrôles figés ne sollicitent aucun composant applicatif."]
+    discovery = metrics.get("task_metrics", {}).get("bench.tool-discovery")
+    if discovery is not None:
+        eligible, observed = discovery["eligible_select_cases"], discovery["observed_select_cases"]
+        def displayed(value):
+            return "N/A" if value is None else f"{value:.4f}"
+        lines += ["", "## Tool discovery (tool-ID level)", "",
+                  f"Select-reference cases: {eligible}; valid metric observations: {observed}. "
+                  "Missing, failed and invalid outputs contribute zero to all-eligible means.", "",
+                  "| Metric | Sum / eligible select cases | Mean |", "|---|---:|---:|"]
+        for name in ("shortlist_recall", "shortlist_precision", "final_recall", "final_precision"):
+            lines.append(f"| {name} | {discovery[name + '_sum']:.4f} / {eligible} | "
+                         f"{displayed(discovery[name + '_over_all_eligible'])} |")
+        for name in ("final_sufficient", "final_minimal"):
+            lines.append(f"| {name} | {discovery[name + '_cases']} / {eligible} | "
+                         f"{displayed(discovery[name + '_over_all_eligible'])} |")
+        lines += ["", f"Unnecessary final tools: {discovery['unnecessary_tools_sum']} over "
+                  f"{observed} valid select-reference observations; observed mean "
+                  f"{displayed(discovery['unnecessary_tools_mean_observed'])}. "
+                  "This count does not assign zero unnecessary calls to unobserved outputs."]
     lines += ["", "## Cas à examiner", ""]
     for row in metrics["rows"]:
         if not row["passed"]:

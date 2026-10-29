@@ -50,6 +50,9 @@ def score_case(case: dict, result: dict) -> dict:
         return {"scored": True, "passed": False, "checks": [], "reason": "invalid_json_output"}
     if _empty(output):
         return {"scored": True, "passed": False, "checks": [], "reason": "empty_output"}
+    if case["contract_id"] == "bench.tool-discovery":
+        from .tool_discovery import score_output
+        return score_output(case, output)
     checks = []
     for assertion in case["reference"]["assertions"]:
         try:
@@ -112,9 +115,13 @@ def summarize(cases: list[dict], results: list[dict]) -> dict:
         rows.append({"case_id": case["case_id"], "pack": case["pack"],
                      "language": case["language"], "status": result["status"],
                      **score_case(case, result)})
-    return {**_counts(rows),
+    report = {**_counts(rows),
             "by_pack": {pack: _counts([row for row in rows if row["pack"] == pack])
                         for pack in sorted({row["pack"] for row in rows})},
             "by_language": {language: _counts([row for row in rows if row["language"] == language])
                             for language in sorted({row["language"] for row in rows})},
             "rows": rows}
+    if any(case["contract_id"] == "bench.tool-discovery" for case in cases):
+        from .tool_discovery import CONTRACT, summarize_metrics
+        report["task_metrics"] = {CONTRACT: summarize_metrics(cases, rows)}
+    return report

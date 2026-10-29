@@ -61,6 +61,14 @@ proposals and negative controls through the shared engine. This is a recorded
 harness fixture: zero model cases, zero held-out cases and no executed tools.
 The proposed 12-family expansion remains unmaterialized beyond that first family.
 
+The separate [tool-discovery pack](datasets/tool-discovery-v1/README.md)
+adds 12 FR/EN cases in six new families: shortlist tools from a synthetic
+catalogue, select a minimal sufficient set, or explicitly request clarification
+or report no suitable tool. Its [contract and metrics](docs/TOOL_DISCOVERY_CONTRACT_V1.md)
+separate shortlist recall/precision from final-set sufficiency and unnecessary
+selections. Only recorded controls are qualified so far: no model result,
+argument execution or adaptive tool loop is established.
+
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their
 family split; they are not independent users or facts. Identity, access,
@@ -79,6 +87,8 @@ python3 -m deposium_bench validate-cases \
   --dataset datasets/context-choice-v1/cases.jsonl
 python3 -m deposium_bench validate-cases \
   --dataset datasets/physics-choice-v1/cases.jsonl
+python3 -m deposium_bench validate-cases \
+  --dataset datasets/tool-discovery-v1/cases.jsonl
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check

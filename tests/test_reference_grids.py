@@ -54,13 +54,13 @@ class ReferenceGridTests(unittest.TestCase):
         self.assertEqual(report["human_review"],
                          {"provided_by_this_check": 0, "status": "not_provided"})
         packs = report["choice_packs"]
-        self.assertEqual(len(packs), 4)
-        self.assertEqual(sorted(pack["cases"] for pack in packs), [2, 48, 132, 192])
-        self.assertEqual(sum(pack["cases"] for pack in packs), 374)
-        self.assertEqual(sum(pack["positive_controls"] for pack in packs), 376)
-        self.assertEqual(sum(pack["wrong_controls"] for pack in packs), 1120)
-        self.assertEqual(sum(pack["empty_controls"] for pack in packs), 748)
-        self.assertEqual(sum(pack["unscored_controls"] for pack in packs), 1496)
+        self.assertEqual(len(packs), 5)
+        self.assertEqual(sorted(pack["cases"] for pack in packs), [2, 12, 48, 132, 192])
+        self.assertEqual(sum(pack["cases"] for pack in packs), 386)
+        self.assertEqual(sum(pack["positive_controls"] for pack in packs), 390)
+        self.assertEqual(sum(pack["wrong_controls"] for pack in packs), 1144)
+        self.assertEqual(sum(pack["empty_controls"] for pack in packs), 772)
+        self.assertEqual(sum(pack["unscored_controls"] for pack in packs), 1544)
         for pack in packs:
             self.assertEqual(pack["sha256"], hashlib.sha256((ROOT / pack["source"]).read_bytes()).hexdigest())
 

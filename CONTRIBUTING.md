@@ -18,6 +18,8 @@ python3 -m deposium_bench validate-cases \
   --dataset datasets/context-choice-v1/cases.jsonl
 python3 -m deposium_bench validate-cases \
   --dataset datasets/physics-choice-v1/cases.jsonl
+python3 -m deposium_bench validate-cases \
+  --dataset datasets/tool-discovery-v1/cases.jsonl
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
@@ -32,6 +34,7 @@ Each command should exit `0`. The expected signals are:
 |---|---|
 | Registry | Contracts are structurally valid; this does not contact or qualify services. |
 | Context / physics cases | Valid corpus, respectively 132 / 48 cases; no candidate inference. |
+| Tool-discovery cases | Valid 12-case FR/EN catalogue-selection pack; recorded controls only, no qualified model or executed tool. |
 | First-tool cases | Valid 24-case proposal pack; references remain provisional. |
 | Passage dataset / corpus | Valid 1,536-case corpus and no difference from the frozen generated corpus. |
 | Capability corpus | No difference from the frozen 192-case corpus. |
@@ -72,6 +75,12 @@ macOS checkpoint: core and targeted checks succeeded, while the full suite had
 known failures/errors also present on its compared public base. Do not present
 that as a full macOS PASS or reuse a historical test count as current evidence.
 Report your OS, Python version, commands, failures and skips with your change.
+
+For a failing check, include the public commit SHA, exact command and exit code,
+plus a short redacted diagnostic. Compare full-suite failure identifiers on the
+same public base before attributing a platform failure to a patch. Exclude local
+paths, credentials and private data from diagnostics; a successful validation
+still does not mean a real model campaign ran.
 
 ## A small first pull request
 

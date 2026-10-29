@@ -24,13 +24,13 @@
       "status": "fixture_only"
     },
     {
-      "boundary": "Four-proposal capability selection does not establish discovery recall.",
+      "boundary": "[Tool-discovery contract](TOOL_DISCOVERY_CONTRACT_V1.md): 12 FR/EN cases, separate shortlist/final-set metrics and recorded controls; no qualified model output path, model result or executed tools.",
       "capability": "Open catalogue discovery and sufficient tool sets",
       "id": "discovery",
       "issues": [
         "https://github.com/theseedship/classification_tests_deposium/issues/10"
       ],
-      "status": "not_implemented"
+      "status": "fixture_only"
     },
     {
       "boundary": "Selecting a supplied argument proposal does not execute or validate generated values.",
@@ -4518,7 +4518,7 @@
     "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
     "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
     "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
-    "scripts/build-full-results.py": "e573017807ef7119e039cd2fc85bc99da7131b73cc1db914af50e19dcc1abdc5",
+    "scripts/build-full-results.py": "1a94a1a7f22aa5b0098587b1e9227a1f381c55217829d5a3362835bd8cd29eb4",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
     "scripts/consolidated-campaigns.py": "71b2c6972e1da1dca58f28e2514a30cb02e98d14ce18c85a3a5fc1fd2a4ea2f0"

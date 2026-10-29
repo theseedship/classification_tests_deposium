@@ -422,6 +422,9 @@
           "type": "string",
           "minLength": 1,
           "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "task_metrics": {
+          "$ref": "#/$defs/discovery_row_metrics"
         }
       },
       "allOf": [
@@ -612,6 +615,18 @@
           "items": {
             "$ref": "#/$defs/row"
           }
+        },
+        "task_metrics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "bench.tool-discovery"
+          ],
+          "properties": {
+            "bench.tool-discovery": {
+              "$ref": "#/$defs/discovery_metrics"
+            }
+          }
         }
       },
       "allOf": [
@@ -635,6 +650,501 @@
           }
         }
       ]
+    },
+    "discovery_row_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "eligible_select",
+        "shortlist_limit",
+        "shortlist_size",
+        "final_size",
+        "shortlist_recall",
+        "shortlist_precision",
+        "final_recall",
+        "final_precision",
+        "final_sufficient",
+        "final_minimal",
+        "unnecessary_tools"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "deposium.tool-discovery-metrics/v1"
+        },
+        "eligible_select": {
+          "type": "boolean"
+        },
+        "shortlist_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "shortlist_size": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "final_size": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "shortlist_recall": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "shortlist_precision": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_recall": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_precision": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_sufficient": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_minimal": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unnecessary_tools": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "discovery_metrics_group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "level",
+        "total_cases",
+        "scored_cases",
+        "eligible_select_cases",
+        "observed_select_cases",
+        "final_sufficient_cases",
+        "final_minimal_cases",
+        "unnecessary_tools_sum",
+        "shortlist_limits",
+        "shortlist_recall_sum",
+        "shortlist_recall_over_all_eligible",
+        "shortlist_precision_sum",
+        "shortlist_precision_over_all_eligible",
+        "final_recall_sum",
+        "final_recall_over_all_eligible",
+        "final_precision_sum",
+        "final_precision_over_all_eligible",
+        "final_sufficient_over_all_eligible",
+        "final_minimal_over_all_eligible",
+        "unnecessary_tools_mean_observed"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "deposium.tool-discovery-metrics/v1"
+        },
+        "level": {
+          "const": "tool_id"
+        },
+        "total_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scored_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eligible_select_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "observed_select_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "final_sufficient_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "final_minimal_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unnecessary_tools_sum": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "shortlist_limits": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[1-8]$"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "shortlist_recall_sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "shortlist_recall_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "shortlist_precision_sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "shortlist_precision_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_recall_sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "final_recall_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_precision_sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "final_precision_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_sufficient_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_minimal_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unnecessary_tools_mean_observed": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "discovery_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "level",
+        "total_cases",
+        "scored_cases",
+        "eligible_select_cases",
+        "observed_select_cases",
+        "final_sufficient_cases",
+        "final_minimal_cases",
+        "unnecessary_tools_sum",
+        "shortlist_limits",
+        "shortlist_recall_sum",
+        "shortlist_recall_over_all_eligible",
+        "shortlist_precision_sum",
+        "shortlist_precision_over_all_eligible",
+        "final_recall_sum",
+        "final_recall_over_all_eligible",
+        "final_precision_sum",
+        "final_precision_over_all_eligible",
+        "final_sufficient_over_all_eligible",
+        "final_minimal_over_all_eligible",
+        "unnecessary_tools_mean_observed",
+        "by_language",
+        "by_split"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "deposium.tool-discovery-metrics/v1"
+        },
+        "level": {
+          "const": "tool_id"
+        },
+        "total_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scored_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eligible_select_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "observed_select_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "final_sufficient_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "final_minimal_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unnecessary_tools_sum": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "shortlist_limits": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[1-8]$"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "shortlist_recall_sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "shortlist_recall_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "shortlist_precision_sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "shortlist_precision_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_recall_sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "final_recall_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_precision_sum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "final_precision_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_sufficient_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "final_minimal_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unnecessary_tools_mean_observed": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "by_language": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "enum": [
+              "fr",
+              "en"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/discovery_metrics_group"
+          }
+        },
+        "by_split": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "enum": [
+              "train",
+              "calibration",
+              "test"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/discovery_metrics_group"
+          }
+        }
+      }
     }
   },
   "allOf": [
