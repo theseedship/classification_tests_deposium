@@ -185,6 +185,13 @@ success. Missing and failed outputs stay in the eligible denominators;
 inapplicable metrics are null rather than a fabricated perfect score. The
 [versioned contract](TOOL_DISCOVERY_CONTRACT_V1.md) defines the exact formulas.
 
+The [dated offline evidence](evidence/tool-discovery-offline-20261029.json)
+records 12/12 passing scripted cases and a separate expected failing superset
+control (11/12, with all cases scored). Both controls retain six sufficient
+select sets, while the excessive control has only five minimal sets and one
+unnecessary tool. These receipts qualify the harness and accounting only;
+they add no real-model observation to the ranking.
+
 This slice uses the shared case/adapter/campaign/scoring path and a recorded
 `harness_control` profile. Real model profiles cannot advertise the contract
 until their output path is qualified. No arguments or tools execute, and
