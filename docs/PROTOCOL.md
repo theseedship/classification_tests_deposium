@@ -219,6 +219,10 @@ defines bounds, source-closure hashes and strict provenance.
 The reference-grid command validates this pack without calling either tool.
 Its explicit shared-CLI control executes the two local functions. Rescore
 validates retained receipts without executing tools or the policy again.
+The [dated execution evidence](evidence/tool-arguments-offline-20261030.json)
+records four passing cases with eight actual tool calls. A separate wrong-unit
+control retains all four scored cases, passes three and observes seven calls:
+the invalid second operation is blocked after its actual lookup.
 The first lookup is fixed, followed by one proposed call; retries, adaptive
 observations and stopping remain #12. No real model, live MCP or product
 integration is qualified by these synthetic controls.
