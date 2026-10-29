@@ -1,0 +1,68 @@
+{
+  "schema_version": "deposium.research-dataset/v1",
+  "dataset_id": "capability-choice-v1",
+  "version": "1.0.0-exploratory",
+  "case_schema": "deposium.case/v2",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+  "case_count": 192,
+  "family_count": 48,
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "contract_id": "bench.context-choice",
+  "review": "agent_only",
+  "human_review": "not_performed",
+  "evaluation_status": "not_run",
+  "cases_scored": 0,
+  "human_approved": 0,
+  "reference_kind": "frozen agent-authored judgments; structural checks do not prove semantic truth",
+  "generator_version": "deposium.capability-corpus/v1",
+  "source_files_sha256": {
+    "catalogue.json": "17bad337dce4e6b38b6fac70341e07cc8edef3d44c323cb7c40faa29bbc26be1",
+    "specs-selection.json": "90dfea2f41c30aec6aafc284aae501dec3d9530db80f441243b7466c182e758c",
+    "specs-arguments.json": "f0c0797592edf9d4278a1ef3c3137845c6a6f9d2e601b493d85d95ce6252465a",
+    "specs-observations.json": "191f5ddfb876b775a37247ffc07af8e94c7117c39bd8e4227bb63a91c6b365c8"
+  },
+  "counts_by_split": {
+    "calibration": 48,
+    "test": 96,
+    "train": 48
+  },
+  "counts_by_language": {
+    "en": 96,
+    "fr": 96
+  },
+  "counts_by_track": {
+    "arguments": 64,
+    "observations": 64,
+    "selection": 64
+  },
+  "counts_by_use_case": {
+    "cross_source": 28,
+    "geospatial": 52,
+    "local_rag": 32,
+    "open_data": 48,
+    "web": 32
+  },
+  "counts_by_catalogue": {
+    "compact": 96,
+    "expanded": 96
+  },
+  "counts_by_correct_position": {
+    "a": 48,
+    "b": 48,
+    "c": 48,
+    "d": 48
+  },
+  "split_policy": "Interleaved 4 train/4 calibration/8 test families per track; all languages and catalogue variants stay in one family split. Choice positions balanced within each split.",
+  "limitations": [
+    "48 authored scenario families, not 192 independent observations or production requests.",
+    "Closed choice among four proposals; not free-form tool generation, open-set discovery recall, argument execution or validated routing accuracy.",
+    "Eight-card and 32-card variants share facts/references; catalogue cards are synthetic descriptions, not installed/active MCP tools.",
+    "Observation cases select a next step from a frozen snapshot; no closed-loop harness or live tool execution is delivered.",
+    "D1/D2/D3 describe authored context strata, not measured model difficulty or an escalation oracle.",
+    "No model inference, application harness, latency, service or product qualification has run for this pack."
+  ]
+}

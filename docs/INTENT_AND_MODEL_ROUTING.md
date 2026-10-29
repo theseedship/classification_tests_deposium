@@ -1,10 +1,13 @@
 # Intent, tool sets, and model routing: proposed experiment
 
-**Status: feature proposal for review, not an implemented router or a measured
-campaign.** The proposed feature understands a request, discovers capabilities
-in a large catalogue, and selects a plugin, a function, or a set of MCP tools.
-Choosing a small or large model is a separate axis. This page specifies an
-offline experiment before product integration; no new runner is delivered here.
+**Status: staged experiment, not an implemented product router or a measured
+campaign.** The [first complementary pack](../datasets/capability-choice-v1/README.md)
+now provides 192 runnable closed choices in 48 synthetic FR/EN scenario families,
+using the existing engine and adapters. It covers capability/tool-set proposals,
+arguments/dependencies and next steps after fixed observations, with 8/32-card
+catalogues. No real model has run on this pack. Free-form discovery/selection,
+full execution loops and empirical small/large model allocation remain future
+harness stages. Choosing a model is a separate axis from choosing tools.
 
 ## What the existing results establish
 
@@ -13,6 +16,7 @@ offline experiment before product integration; no new runner is delivered here.
 | [Context choice](../datasets/context-choice-v1/README.md) | 132 closed choices, including 76 documentary cases distinguishing inventory, stored summaries, retrieved answers, or insufficient information | Open-ended intent detection, a difficulty predictor, and execution of a selected workflow |
 | [First tool choice](../datasets/mastra-read-pilot-v0/README.md) | 24 synthetic search / statistics / fallback proposals; provisional agreement only | Plugin discovery, argument resolution, tool execution, and validated routing accuracy |
 | [Tool-selection review](../datasets/tool-selection-review-v0/README.md) | 16 review cases, including two blocked contract gaps; no runner or scorer | A runnable plugin-selection benchmark or an evaluated application integration |
+| [Capability choices v1](../datasets/capability-choice-v1/README.md) | 192 frozen closed choices, 48 families; compact/expanded synthetic catalogues | Real model results, free-form plans, executable arguments and a complete feedback loop |
 
 The context pack's D1/D2/D3 values are authored annotations: explicit requests,
 combined constraints, and dependencies or contextual references, fixed before inference.
@@ -86,7 +90,8 @@ fixtures; keep all variants in their family split. Vary catalogue size and
 overlapping descriptions explicitly. Validate non-empty assertions with empty,
 wrong, overcalling, and premature-success controls before scoring candidates.
 Only then add a pinned application-harness replay and an explicitly configured
-live campaign. None of these proposed packs is reported as measured here.
+live campaign. The first capability-choice corpus is validated; none of these
+new tasks is reported as measured by a real model or application here.
 
 ## Freeze a bounded harness before predictions
 
