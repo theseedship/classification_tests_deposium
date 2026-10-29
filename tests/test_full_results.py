@@ -31,6 +31,7 @@ EXPECTED_LABELS = {
     "Indecis", "Jev", "Julia", "Kai", "Laya", "Liquid3", "ModernJEV",
     "Muose", "Noma", "Nox", "Omni", "Sol", "Vela03", "Vela08", "Vela4",
     "D3FlashQ4", "D3FlashQ8", "D3Q4", "EosQ8", "GLiClass9B", "Vela3Fast",
+    "ClefFlashQ8", "D3FlashQ8Upstream",
 }
 
 
@@ -52,6 +53,9 @@ def public_fixture(root):
         "docs/evidence/model-comparison-vela2-20261011/analysis.json",
         "docs/evidence/model-comparison-d3-20261011/analysis.json",
     }
+    paths.update(results.RECENT_INPUTS)
+    paths.add(results.OTHER_GUIDE)
+    paths.update(results.OTHER_SOURCES.values())
     for row in metadata["observations"].values():
         paths.add(row["source_analysis"])
         paths.update(evidence["path"] for evidence in row["evidence"])
@@ -139,12 +143,14 @@ class FullResultsTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             results.validate_pair("D3Q4", base, route, self.composer.legacy)
 
-    def test_join_contains_28_unique_observations_and_preserves_known_scores(self):
+    def test_join_contains_30_unique_context_observations_and_preserves_historical_scores(self):
         self.assertEqual(set(self.by_id), EXPECTED_LABELS)
-        self.assertEqual(len(self.data["observations"]), 28)
+        self.assertEqual(len(self.data["observations"]), 30)
+        self.assertEqual(self.data["historical_context_observations"], 28)
         for phase in ("context", "tool_proposal"):
-            self.assertEqual(len({r[phase]["source"]["seal_sha256"] for r in self.by_id.values()}), 28)
-            self.assertEqual(len({r[phase]["source"]["dataset_sha256"] for r in self.by_id.values()}), 1)
+            observed = [r[phase] for r in self.by_id.values() if r[phase] is not None]
+            self.assertEqual(len({r["source"]["seal_sha256"] for r in observed}), 30 if phase == "context" else 28)
+            self.assertEqual(len({r["source"]["dataset_sha256"] for r in observed}), 1)
         self.assertEqual(self.by_id["D3Q4"]["context"]["counts"]["correct"], 128)
         self.assertEqual(self.by_id["GLiClass9B"]["context"]["groups"]["split"]["test"]["correct"], 63)
         self.assertEqual(self.by_id["Vela3Fast"]["context"]["counts"]["correct"], 57)
@@ -247,6 +253,10 @@ class FullResultsTests(unittest.TestCase):
             self.assertEqual({k: v["total"] for k, v in context["groups"]["domain"].items()},
                              {"documentary": 76, "mathematics": 28, "chemistry": 28})
             self.assertEqual(sum(context["counts"]["statuses"].values()), 132)
+            if tool is None:
+                self.assertIn(row["id"], {"ClefFlashQ8", "D3FlashQ8Upstream"})
+                self.assertEqual(row["tool_proposal_status"], "not_run")
+                continue
             self.assertEqual(tool["counts"]["total"], 24)
             self.assertEqual(tool["cases_scored"], 0)
             self.assertEqual(tool["qualification"], "provisional_agreement_pending_human_review")
@@ -414,9 +424,9 @@ class FullResultsTests(unittest.TestCase):
             expected = 1 + sum(r["context"]["counts"]["correct"] > correct for r in rows)
             self.assertEqual(row["rank_all_splits"], expected)
         models, tasks = results.flat_rows(self.data)
-        self.assertEqual(len(models), 28)
+        self.assertEqual(len(models), 30)
         test_tasks = [r for r in tasks if r["task"] == "context" and r["axis"] == "split" and r["group"] == "test"]
-        self.assertEqual(len(test_tasks), 28)
+        self.assertEqual(len(test_tasks), 30)
         self.assertEqual({r["total"] for r in test_tasks}, {66})
         self.assertEqual({r["metric"] for r in tasks if r["task"] == "tool_proposal"}, {"provisional_agreement"})
 
@@ -424,7 +434,8 @@ class FullResultsTests(unittest.TestCase):
         first = results.outputs(self.data)
         self.assertEqual(first, results.outputs(results.build(self.root)))
         self.assertEqual(set(first), {"docs/RESULTS.md", "docs/leaderboard/models.csv",
-                                      "docs/leaderboard/task-breakdown.csv", "docs/leaderboard/results.json"})
+                                      "docs/leaderboard/task-breakdown.csv", "docs/leaderboard/results.json",
+                                      "docs/leaderboard/campaigns.csv"})
         code = (
             "import hashlib,json,pathlib,runpy,sys;root=pathlib.Path(sys.argv[1]);"
             "m=runpy.run_path(str(root/'scripts/build-full-results.py'));"
@@ -437,6 +448,84 @@ class FullResultsTests(unittest.TestCase):
                    "PYTHONPATH": str(ROOT), "PYTHONDONTWRITEBYTECODE": "1"}
             actual = subprocess.check_output([sys.executable, "-c", code, str(self.root)], env=env, text=True)
             self.assertEqual(actual.strip(), expected)
+
+    def test_clef_is_in_main_ranking_and_downloads_without_a_fabricated_tool_score(self):
+        row = self.by_id["ClefFlashQ8"]
+        self.assertEqual(row["context"]["counts"]["correct"], 110)
+        self.assertEqual(row["context"]["groups"]["split"]["test"]["correct"], 59)
+        self.assertIsNone(row["tool_proposal"])
+        self.assertEqual(row["tool_proposal_status"], "not_run")
+        views = results.outputs(self.data)
+        csv_rows = {r["observation"]: r for r in csv.DictReader(io.StringIO(views["docs/leaderboard/models.csv"]))}
+        self.assertEqual(csv_rows["ClefFlashQ8"]["tool_agreement"], "")
+        self.assertEqual(csv_rows["ClefFlashQ8"]["tool_status"], "not_run")
+        self.assertEqual(csv_rows["ClefFlashQ8"]["all_correct"], "110")
+        main_table = views["docs/RESULTS.md"].split("## Model quality\n", 1)[1].split("## Language", 1)[0]
+        self.assertIn("Clef Flash · Q8 direct Metal", main_table)
+        self.assertIn("| 110 | 59 | 63 | 25 | 22 | Not run |", main_table)
+        task_rows = list(csv.DictReader(io.StringIO(views["docs/leaderboard/task-breakdown.csv"])))
+        self.assertFalse(any(r["observation"] == "ClefFlashQ8" and r["task"] == "tool_proposal" for r in task_rows))
+
+    def test_independent_task_rankings_keep_physics_test_reversal_and_capability_tie(self):
+        rows = {(r["task"], r["observation"]): r for r in self.data["campaigns"]}
+        clef, d3 = rows["physics", "ClefFlashQ8"], rows["physics", "D3FlashQ8Upstream"]
+        self.assertEqual((clef["rank_all"], clef["rank_test"]), (1, 2))
+        self.assertEqual((d3["rank_all"], d3["rank_test"]), (2, 1))
+        self.assertEqual((clef["counts"]["correct"], clef["counts"]["by_split"]["test"]["correct"]), (41, 31))
+        for key in ("ClefFlashQ8", "D3FlashQ8"):
+            row = rows["capability", key]
+            self.assertEqual((row["rank_all"], row["rank_test"]), (1, 1))
+            self.assertEqual((row["counts"]["correct"], row["counts"]["total"]), (192, 192))
+        records = list(csv.DictReader(io.StringIO(results.outputs(self.data)["docs/leaderboard/campaigns.csv"])))
+        self.assertTrue(any(r["observation"] == "ClefFlashQ8" and r["task"] == "physics"
+                            and r["test_correct"] == "31" and r["test_total"] == "36" for r in records))
+
+    def test_passage_rankings_retain_partial_and_unrun_cases_and_separate_rotations(self):
+        rows = {(r["task"], r["observation"]): r for r in self.data["campaigns"]}
+        for obs, correct, rank in (("D3FlashQ8Upstream", 122, 1), ("ClefFlashQ8", 109, 2), ("D3lite", 88, 3)):
+            row = rows["passage_answerability", obs]
+            self.assertEqual((row["counts"]["correct"], row["counts"]["total"], row["rank_all"]), (correct, 128, rank))
+        partial = rows["passage_support", "Jev114"]
+        self.assertEqual(partial["status"], "partial")
+        self.assertIsNone(partial["rank_all"])
+        self.assertEqual((partial["counts"]["correct"], partial["counts"]["scored"], partial["counts"]["total"]), (394, 514, 768))
+        unrun = rows["passage_answerability", "Jev114"]
+        self.assertEqual(unrun["status"], "not_run")
+        self.assertIsNone(unrun["rank_all"])
+        self.assertEqual(unrun["counts"]["statuses"]["missing"], 128)
+        self.assertEqual(rows["passage_relevance_four_rotations", "Jev114"]["counts"]["total"], 2048)
+        self.assertNotIn(("passage_relevance", "Jev114"), rows)
+
+    def test_recent_campaigns_fail_closed_on_identity_counts_macro_and_confusion_drift(self):
+        clef = "docs/evidence/clef-flash-20261029/analysis.json"
+        passage = "docs/evidence/passage-clef-flash-20261029/analysis.json"
+        mutations = [
+            (clef, lambda a: a["model"].update(model_sha256="a" * 64)),
+            (clef, lambda a: a["runtime"].update(binary_sha256="b" * 64)),
+            (clef, lambda a: a["phases"]["context"]["identity"].update(dataset_sha256="c" * 64)),
+            (clef, lambda a: a["phases"]["context"]["counts"].update(scored_cases=0, passed_cases=0)),
+            (clef, lambda a: a["phases"]["physics"]["groups"]["language"]["fr"].update(passed_cases=19)),
+            (passage, lambda a: a["axes"]["support"].update(macro_accuracy_scored=float("nan"))),
+            (passage, lambda a: a["axes"]["answerability"]["confusion"]["answerable"].update(answerable=86)),
+            (passage, lambda a: a["coverage"].update(logical_decisions=1407)),
+        ]
+        for path, change in mutations:
+            with self.subTest(path=path, mutation=change), self.changed_json(path, change):
+                with self.assertRaises(results.ResultError):
+                    results.build(self.root)
+
+    def test_main_hub_includes_other_protocol_tables_with_working_relative_links(self):
+        rendered = results.render(self.data)
+        for heading in ("### Passage ranking and evidence", "### Longer contexts",
+                        "### Repeated timing and stability", "### Initial documentary routing pilot"):
+            self.assertIn(heading, rendered)
+        self.assertIn("[passage dataset](../datasets/passage-evidence-v1/README.md)", rendered)
+        self.assertIn("(evidence/passage-order-control-20261015/analysis.json)", rendered)
+        self.assertNotIn("(../../datasets/", rendered)
+        self.assertEqual(set(self.data["other_campaigns"]), {"passage_order", "length", "repeated_timing"})
+        for item in self.data["other_campaigns"].values():
+            self.assertIn(item["source"], self.data["sources_sha256"])
+        self.assertNotIn('"rows":', json.dumps(self.data["other_campaigns"]))
 
 
 if __name__ == "__main__":

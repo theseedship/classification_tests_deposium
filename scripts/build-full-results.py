@@ -13,6 +13,8 @@ import importlib.util
 import io
 import json
 import math
+import posixpath
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -29,6 +31,20 @@ FAST = EVIDENCE + "vela3-fast-20261028/analysis.json"
 CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
 NATIVE_SESSION = EVIDENCE + "native-model-comparison-20261016/native-sessions.json"
 GLICLASS_SESSION = EVIDENCE + "gliclass-model-comparison-20261017/gliclass-session.json"
+CAMPAIGN_MODULE = "scripts/consolidated-campaigns.py"
+OTHER_GUIDE = "docs/leaderboard/other-benchmarks.md"
+OTHER_SOURCES = {"passage_order": EVIDENCE + "passage-order-control-20261015/analysis.json",
+                 "length": EVIDENCE + "length-comparison-20261004/analysis.json",
+                 "repeated_timing": EVIDENCE + "timing-comparison-20261004/analysis.json"}
+RECENT_INPUTS = (CAMPAIGN_MODULE, EVIDENCE + "clef-flash-20261029/analysis.json",
+                 EVIDENCE + "physics-flash-20261029/analysis.json",
+                 EVIDENCE + "passage-flash-20261029/analysis.json",
+                 EVIDENCE + "passage-clef-flash-20261029/analysis.json",
+                 EVIDENCE + "passage-cpu-20261015/analysis.json",
+                 EVIDENCE + "passage-jev-20261015/analysis.json",
+                 "profiles/d3-flash-q8-assets.json", "profiles/clef-flash-q8-assets.json",
+                 "docs/PASSAGE_CPU_RESULTS_20261015.md", "docs/PASSAGE_JEV_RESULTS_20261015.md",
+                 "docs/PASSAGE_FLASH_RESULTS_20261029.md", "docs/PASSAGE_CLEF_RESULTS_20261029.md")
 STATUS_KEYS = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
 IDENTITY_KEYS = ("adapter", "profile_id", "device", "model_repo_id", "model_id",
                  "model_revision", "source_revision", "model_assets_sha256",
@@ -293,7 +309,11 @@ def build(root=ROOT):
             base[label], routes[label] = export["base"][label], export["mastra"][label]
     metadata = inputs.load(METADATA)
     require(metadata.get("schema_version") == "deposium.public-model-metadata/v1", "metadata version")
-    require(set(metadata["observations"]) == set(base) == set(routes) and len(base) == 28,
+    inputs.read(CAMPAIGN_MODULE)
+    spec = importlib.util.spec_from_file_location("public_campaigns", inputs.root / CAMPAIGN_MODULE)
+    campaigns = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(campaigns)
+    require(set(base) == set(routes) and set(metadata["observations"]) == set(base) | campaigns.NEW_CONTEXT_IDS,
             "metadata/observation roster mismatch")
     native = inputs.load(NATIVE_SESSION)
     gli = inputs.load(GLICLASS_SESSION)
@@ -359,8 +379,38 @@ def build(root=ROOT):
         require(len({row[phase]["source"]["dataset_sha256"] for row in rows}) == 1,
                 f"mixed datasets: {phase}")
     complementary = capability_campaign(inputs, base["D3FlashQ8"], metadata["observations"]["D3FlashQ8"])
+    recent_context, campaign_rows = campaigns.Campaigns(inputs, require).load(metadata["observations"], complementary)
+    rows.extend(recent_context)
+    rows.sort(key=lambda row: (-row["context"]["counts"]["correct"], row["id"]))
+    for row in rows:
+        if row["id"] not in campaigns.NEW_CONTEXT_IDS:
+            row["historical_rank_all_splits"] = row["rank_all_splits"]
+        row["rank_all_splits"] = 1 + sum(r["context"]["counts"]["correct"] > row["context"]["counts"]["correct"] for r in rows)
+        row["rank_test_splits"] = 1 + sum(r["context"]["groups"]["split"]["test"]["correct"] > row["context"]["groups"]["split"]["test"]["correct"] for r in rows)
+    require(len({r["context"]["source"]["seal_sha256"] for r in rows}) == len(rows), "duplicate observation seals: consolidated context")
+    other_guide = inputs.read(OTHER_GUIDE).decode("utf-8")
+    def summary_only(value):
+        if isinstance(value, dict):
+            return {k: summary_only(v) for k, v in value.items() if k not in
+                    {"rows", "replacement_predictions", "complement_predictions", "full_pool_answerability_gate"}}
+        if isinstance(value, list):
+            return [summary_only(v) for v in value]
+        return value
+    others = {}
+    for key, path in OTHER_SOURCES.items():
+        summary = summary_only(inputs.load(path))
+        if key == "length":
+            for model in summary["models"].values():
+                model["groups"] = {"target": model["groups"]["target"]}
+        elif key == "passage_order":
+            summary.pop("by_rotation", None)
+            summary.pop("original_rotation_zero", None)
+        others[key] = {"source": path, "summary": summary,
+                       "scope": "Published overall, per-target or balanced-ranking summaries; detailed cross-groups, rotations and per-case rows remain in the linked source"}
     inputs.read("scripts/build-full-results.py")
     return {"schema_version": "deposium.public-results/v1", "observations": rows,
+            "campaigns": campaign_rows, "historical_context_observations": len(base),
+            "other_campaigns": others, "other_benchmarks_markdown": other_guide,
             "capability_campaign": complementary,
             "scope": "aggregate_presentation_only_no_inference_or_raw_archive_verification",
             "reference_review": "agent_only_pending_human",
@@ -382,7 +432,8 @@ def flat_rows(data):
         meta, ctx, tool, res = row["metadata"], row["context"], row["tool_proposal"], row["resources"]
         groups = ctx["groups"]
         models.append({
-            "rank_all_splits": row["rank_all_splits"], "observation": row["id"], "model": meta["display_name"],
+            "rank_all_splits": row["rank_all_splits"], "rank_test_splits": row["rank_test_splits"],
+            "observation": row["id"], "model": meta["display_name"],
             "size": meta["model_size"]["label"], "parameters": meta["model_size"]["parameters"],
             "size_basis": meta["model_size"]["basis"], "runtime_group": meta["runtime_group"],
             "hardware": meta["hardware_group"], "precision": meta["precision"],
@@ -391,8 +442,10 @@ def flat_rows(data):
                (("test", "split", "test"), ("documentary", "domain", "documentary"),
                 ("math", "domain", "mathematics"), ("chemistry", "domain", "chemistry"),
                 ("en", "language", "en"), ("fr", "language", "fr"))},
-            "tool_agreement": tool["counts"]["agreement_count"], "tool_valid": tool["counts"]["valid_decisions"],
-            "tool_total": 24, "tool_qualified_cases": 0,
+            "tool_status": "observed_provisional" if tool else "not_run",
+            "tool_agreement": tool["counts"]["agreement_count"] if tool else None,
+            "tool_valid": tool["counts"]["valid_decisions"] if tool else None,
+            "tool_total": 24 if tool else None, "tool_qualified_cases": 0,
             "adapter_median_ms": res["adapter_ms"]["median"], "adapter_p95_ms": res["adapter_ms"]["p95"],
             "timed_calls": res["adapter_ms"]["count"], "initialization_ms": res["initialization_ms"],
             "worker_peak_rss_mib": res["worker_rss_mib"]["max"], "rss_reported_calls": res["worker_rss_mib"]["count"],
@@ -401,6 +454,8 @@ def flat_rows(data):
             "rss_scope": res["rss_scope"], "source_analysis": meta["source_analysis"],
         })
         for phase in ("context", "tool_proposal"):
+            if row[phase] is None:
+                continue
             for axis, values in row[phase]["groups"].items():
                 for group, count in sorted(values.items()):
                     route = phase == "tool_proposal"
@@ -410,11 +465,107 @@ def flat_rows(data):
                                   "scored_or_valid": count["valid_decisions" if route else "scored"],
                                   "total": count["total"],
                                   **{status: count.get("statuses", {}).get(status) for status in sorted(STATUS_KEYS)}})
+    for row in data["campaigns"]:
+        for axis, values in {"all": {"all": row["counts"]}, **row["groups"]}.items():
+            for group, count in sorted(values.items()):
+                tasks.append({"observation": row["observation"], "task": row["task"], "axis": axis, "group": group,
+                              "metric": "correct_choice", "numerator": count["correct"],
+                              "scored_or_valid": count["scored"], "total": count["total"],
+                              **{status: count["statuses"][status] for status in sorted(STATUS_KEYS)}})
     return models, tasks
+
+
+def campaign_csv_rows(data):
+    records = []
+    for row in data["campaigns"]:
+        c, timing = row["counts"], row.get("adapter_ms", {})
+        test = c.get("by_split", {}).get("test", {})
+        records.append({"task": row["task"], "observation": row["observation"], "model": row["model"],
+                        "status": row["status"], "rank_all": row["rank_all"], "rank_test": row["rank_test"],
+                        "correct": c["correct"], "scored": c["scored"], "total": c["total"],
+                        "families": c["families"], "test_correct": test.get("correct"),
+                        "test_scored": test.get("scored"), "test_total": test.get("total"),
+                        "macro_accuracy": row.get("macro_accuracy"),
+                        "physical_calls": row.get("physical_calls"), "timed_calls": timing.get("count"),
+                        "adapter_median_ms": timing.get("median"), "adapter_p95_ms": timing.get("p95"),
+                        "session_group_peak_rss_mib": row.get("session_group_peak_rss_mib"),
+                        "rss_scope": row.get("rss_scope"), "source_analysis": row["source"],
+                        **c["statuses"]})
+    return records
 
 
 def number(value, places=1):
     return "NR" if value is None else f"{value:,.{places}f}"
+
+
+def render_campaign_rankings(data):
+    lines = ["## Updated task rankings", "",
+             "These tables include the published D3/Clef campaigns through 29 October 2026. "
+             "Each task has its own ranking and denominator; there is no pooled cross-task score. "
+             "Ranks use correct/all among completely scored observations on the same task/denominator. "
+             "Partial and unrun campaigns remain visible but unranked. Ties share competition ranks. "
+             "Canaries and repeated context anchors do not add quality cases.", ""]
+    for task, title in (("capability", "Capability choices"), ("physics", "Physics choices")):
+        lines += [f"### {title}", "", "| Rank all | Rank test | Model / execution path | Correct / all | Scored / all | Test correct / all | Source |",
+                  "|---:|---:|---|---:|---:|---:|---|"]
+        rows = [r for r in data["campaigns"] if r["task"] == task]
+        for row in rows:
+            c, test = row["counts"], row["counts"]["by_split"]["test"]
+            lines.append(f"| {row['rank_all']} | {row['rank_test']} | {row['model']} | {c['correct']}/{c['total']} | "
+                         f"{c['scored']}/{c['total']} | {test['correct']}/{test['total']} | [Report]({row['report']}) |")
+        if task == "capability":
+            lines += ["", "Both candidates reach the ceiling on these supplied proposals; this does not qualify executable tools. "
+                      "D3 uses the earlier gateway-backed runtime; Clef uses the direct native listener.", "",
+                      "| Model | Track | Correct / all | Test correct / all |", "|---|---|---:|---:|"]
+            for row in rows:
+                for track, title in (("selection", "Capability selection"), ("arguments", "Arguments and dependencies"),
+                                     ("observations", "Next step after fixed observations")):
+                    c = row["groups"]["track"][track]
+                    test = c["by_split"]["test"]
+                    lines.append(f"| {row['model']} | {title} | {c['correct']}/{c['total']} | {test['correct']}/{test['total']} |")
+        else:
+            lines += ["", "Clef has the higher full total; D3 has the higher held-out test score. "
+                      "Calibration and test are therefore shown separately; neither result establishes general physics expertise."]
+        lines.append("")
+    for axis, title in (("relevance", "Passage relevance"), ("support", "Claim support"), ("answerability", "Answerability")):
+        lines += [f"### {title}", "", "Rotation 0: 128 pools, eight families, eight language directions, two correlated views.", "",
+                  "| Rank | Model / runtime | Correct / all | Scored / all | Macro class accuracy | Observation |",
+                  "|---:|---|---:|---:|---:|---|"]
+        for row in data["campaigns"]:
+            if row["task"] != "passage_" + axis:
+                continue
+            c, macro = row["counts"], row.get("macro_accuracy")
+            score = f"{c['correct']}/{c['total']}" if c["scored"] else "Not run"
+            lines.append(f"| {row['rank_all'] or '—'} | {row['model']} | {score} | {c['scored']}/{c['total']} | "
+                         f"{number(100 * macro, 2) + '%' if macro is not None else 'NR'} | {row['status']}; [report]({row['report']}) |")
+        lines.append("")
+    lines += ["Class macro accuracy averages the scored class accuracies. Jev's partial support macro is conditional "
+              "on its observed subset and is not a complete-coverage comparison; unobserved decisions remain missing in the totals.", ""]
+    jev = next(r for r in data["campaigns"] if r["task"] == "passage_relevance_four_rotations")
+    c = jev["counts"]
+    lines += [f"Jev's published relevance export is **{c['correct']}/{c['total']}**, scored {c['scored']}/{c['total']}, "
+              "over four rotations. It is retained in the downloads as `passage_relevance_four_rotations`, "
+              "outside the 512-decision relevance ranking. Replayed rotations are not extra independent model calls.", "",
+              "Support insufficiency/refutation remains weak for both Flash candidates. Clef accepts 12/16 pools annotated "
+              "as conflicting as answerable; D3 accepts none in this finite run. See "
+              "[paired outcomes and confusion matrices](PASSAGE_CLEF_RESULTS_20261029.md). "
+              "This is not factual-verifier or end-to-end qualification.", "",
+              "### Campaign latency and memory", "",
+              "Physical-call timings are kept separate from reused logical decisions; session RSS scopes differ "
+              "from the historical context + tool sessions. NR means unreported. No controlled speed ranking is inferred.", "",
+              "| Model / runtime | Task | Timed calls | Median ms | p95 ms | Session RSS GiB |",
+              "|---|---|---:|---:|---:|---:|"]
+    for row in data["campaigns"]:
+        if "adapter_ms" not in row:
+            continue
+        t = row["adapter_ms"]
+        lines.append(f"| {row['model']} | {row['task']} | {t['count']} | {number(t['median'])} | {number(t['p95'])} | "
+                     f"{number(row['session_group_peak_rss_mib'] / 1024, 2)} |")
+    lines += ["", "[Campaign summary CSV](leaderboard/campaigns.csv) and [task breakdown CSV](leaderboard/task-breakdown.csv) "
+              "contain denominators, statuses and all exported groups. Ranking/nDCG, longer contexts and repeated timing "
+              "retain their separate protocols in [other campaigns](leaderboard/other-benchmarks.md). "
+              "Clef 27B and the six remaining original cohort candidates remain unrun on the new packs.", ""]
+    return lines
 
 
 def render_capability(campaign):
@@ -459,17 +610,39 @@ def render_capability(campaign):
               "or total unified GPU memory. GPU allocation was unreported. Catalogue variants are correlated.",
               f"[Full campaign report]({campaign['report']}) · "
               "[Groups, pairs and source evidence](evidence/capability-flash-20261029/analysis.json). "
-              "The 28 historical observations below retain their original rows and ranks.", ""]
+              "Historical source exports remain unchanged; the consolidated context ranks below include the new observations.", ""]
+    return lines
+
+
+def render_other_protocols(text):
+    """Include the tracked legacy tables, fixing links relative to docs/RESULTS.md."""
+    sections = re.split(r"(?m)(?=^## )", text)
+    selected = [s for s in sections if s.startswith("## ") and not s.startswith("## Support and answerability decisions")]
+    require(len(selected) == 5, "other campaigns: source sections changed; review consolidation")
+    def relocate(match):
+        href = match.group(1)
+        if href.startswith(("https://", "http://", "#")):
+            return match.group(0)
+        return "](" + posixpath.normpath(posixpath.join("leaderboard", href)) + ")"
+    lines = ["## Other evaluated protocols", "",
+             "The historical tables below are included from the tracked [other-campaign guide](leaderboard/other-benchmarks.md). "
+             "Their original denominators, failure counts and timing scopes are preserved. They are not combined with "
+             "the context or rotation-zero evidence rankings. Structured summary metrics and source hashes are also "
+              "included under `other_campaigns` in the JSON download; detailed cross-groups, rotations and per-case rows remain in the source exports.", ""]
+    for section in selected:
+        section = re.sub(r"(?m)^## ", "### ", section)
+        lines.append(re.sub(r"\]\(([^)\s]+)\)", relocate, section).rstrip())
+        lines.append("")
     return lines
 
 
 def render(data):
     lines = ["# Full results", "", "[README](../README.md) · [Quality](#model-quality) · [Language and task complexity](#language-and-task-complexity) ·",
-             "[New capability tests](#complementary-capability-campaign-29-october-2026) · "
+             "[Updated task rankings](#updated-task-rankings) · [New capability tests](#complementary-capability-campaign-29-october-2026) · "
              "[Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·",
-             "[Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
-             "**28 historical model/runtime observations**, consolidated from the public frozen exports through 28 October 2026.",
-             "Rows identify observations, not 28 independent model families. Repeated exports of the same sealed run are deduplicated;",
+             "[Other evaluated protocols](#other-evaluated-protocols) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
+             f"**{len(data['observations'])} context model/runtime observations through 29 October 2026**: 28 historical observations plus Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.",
+             "Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;",
              "quantizations and devices remain separate. Rendering this page does not rerun or rescore models.", "",
              "**Exploratory evidence:** synthetic, agent-authored references and translations await human review.",
              "The ranking uses all 132 cases (train + calibration + test); the separate test column uses 66 cases.",
@@ -478,36 +651,41 @@ def render(data):
              "| Task | Common input and denominator | Status |", "|---|---|---|",
              "| Documentary text and choices | 76 context-dependent choices | Scored exploratory decisions |",
              "| Mathematics / chemistry | 28 / 28 constrained choices | Scored synthetic probes, not expert scientific qualification |",
-             "| Clef Flash Q8 context, capabilities and physics | Separate 132-, 192- and 48-case packs | [Completed direct Metal campaign and D3 comparison](CLEF_FLASH_RESULTS_20261029.md); separate from the 28 historical rows |",
+             "| Clef Flash Q8 context, capabilities and physics | Separate 132-, 192- and 48-case packs | Included in the context table and updated task rankings below; [report](CLEF_FLASH_RESULTS_20261029.md) |",
              "| First tool proposal | 24 search / statistics / fallback choices | Provisional agreement only; no tool execution; **0 semantically qualified cases** |",
              "| Physics | [48 synthetic choices](../datasets/physics-choice-v1/README.md), 24 FR/EN families | [Flash Q8/direct Metal: 39/48, test 32/36](PHYSICS_FLASH_RESULTS_20261029.md); reported separately, human review pending |",
              "| Passage ranking, relevance, support, answerability | Separate fixed-passage campaigns | [Full tables and coverage](leaderboard/other-benchmarks.md); [D3 Flash evidence observation](PASSAGE_FLASH_RESULTS_20261029.md) and [matched Clef comparison](PASSAGE_CLEF_RESULTS_20261029.md), reported separately |",
              "| Capability/tool-set, argument and fixed-observation choices | [192-case complementary pack](../datasets/capability-choice-v1/README.md) | [First D3 Flash Q8/Metal campaign and fresh context anchor](CAPABILITY_FLASH_RESULTS_20261029.md), reported separately from the 28 historical rows; no tool execution or product qualification |",
              "| Free-form plugin/MCP selection, complete execution loop, difficulty prediction, adaptive model routing | Future harness stages | **Not run**; [experiment design](INTENT_AND_MODEL_ROUTING.md) |",
              "| End-to-end RAG and generated-answer quality | No campaign qualified here | **Not run** |", ""]
+    lines += render_campaign_rankings(data)
     lines += render_capability(data["capability_campaign"])
     lines += ["## Model quality", "",
              "Each score is **correct / all cases** in its column, retaining failures in the denominator.",
              "Tool is **agreement / 24 provisional proposals**, not routing accuracy. Full scored/valid counts and separate",
              "`missing`, `unsupported`, `error`, `timeout`, and `abstain` counts are in the downloads.",
              "Equal all-case totals share a competition rank; row order within a tie is alphabetical by observation ID.", "",
-             "| Rank | Model observation | Size¹ | Runtime² | All /132 | Test /66 | Text /76 | Math /28 | Chem /28 | Tool /24 |",
-             "|---:|---|---|---|---:|---:|---:|---:|---:|---:|"]
+             "| Rank all | Rank test | Model observation | Size¹ | Runtime² | All /132 | Test /66 | Text /76 | Math /28 | Chem /28 | Tool /24 |",
+             "|---:|---:|---|---|---|---:|---:|---:|---:|---:|---:|"]
     runtime_codes = {"historical_cpu": "CPU-H", "remote_api": "API", "apple_metal_native": "Metal",
-                     "apple_mps": "MPS", "cpu_new": "CPU-N"}
+                     "apple_mps": "MPS", "cpu_new": "CPU-N", "apple_metal_upstream": "Metal-U"}
     for row in data["observations"]:
         m, c, g = row["metadata"], row["context"]["counts"], row["context"]["groups"]
-        lines.append(f"| {row['rank_all_splits']} | {m['display_name']} | {m['model_size']['label'] or 'NR'} | "
+        tool = row["tool_proposal"]
+        lines.append(f"| {row['rank_all_splits']} | {row['rank_test_splits']} | {m['display_name']} | {m['model_size']['label'] or 'NR'} | "
                      f"{runtime_codes[m['runtime_group']]} | {c['correct']} | {g['split']['test']['correct']} | "
                      f"{g['domain']['documentary']['correct']} | {g['domain']['mathematics']['correct']} | "
-                     f"{g['domain']['chemistry']['correct']} | {row['tool_proposal']['counts']['agreement_count']} |")
+                     f"{g['domain']['chemistry']['correct']} | {tool['counts']['agreement_count'] if tool else 'Not run'} |")
     lines += ["", "¹ Sizes describe the observed checkpoint: exact tensor counts, nominal classes, and publisher declarations",
               "are distinguished in [metadata](leaderboard/model-metadata.json). A backbone count may exclude a separate readout;",
               "some counts include vision weights. **NR** means not reported in the selected public evidence, not zero.",
               "The historical 27B D3 is neither an Ultra nor a Turbo observation; neither variant was evaluated here.", "",
               "² CPU-H: historical Linux/WSL CPU runs (processor not identified here); API: remote service with unknown server hardware;",
               "Metal: native llama.cpp on Apple M5 Pro; MPS: official PyTorch pipeline on Apple M5 Pro;",
-              "CPU-N: newer macOS CPU run. Runtime, readout, serializer, precision, and input lengths differ.", "",
+              "CPU-N: newer macOS CPU run; Metal-U: direct upstream native listener, separate from gateway-backed historical runs. Runtime, readout, serializer, precision, and input lengths differ.",
+              "Not run in the tool column means no 24-case first-tool observation was published for that runtime; it is not zero accuracy. "
+              "Later passage anchors reproduce the published D3 124/132 (test 61/66) and Clef 110/132 (test 59/66) totals; "
+              "those repeated checks are not additional leaderboard models.", "",
               "## Language and task complexity", "",
               "D1/D2/D3 are authored context-task strata, **not predictions of difficulty or evidence that escalation helps**.",
               "A correct choice also does not prove that a plugin was executed or a useful answer generated.", "",
@@ -517,7 +695,7 @@ def render(data):
         g = row["context"]["groups"]
         values = [g["language"][key]["correct"] for key in ("fr", "en")] + [g["difficulty"][key]["correct"] for key in ("D1", "D2", "D3")]
         lines.append("| " + row["metadata"]["display_name"] + " | " + " | ".join(map(str, values)) +
-                     f" | {row['context']['counts']['scored']} | {row['tool_proposal']['counts']['valid_decisions']} |")
+                     f" | {row['context']['counts']['scored']} | {row['tool_proposal']['counts']['valid_decisions'] if row['tool_proposal'] else 'Not run'} |")
     lines += ["", "## Speed and memory", "",
               "These are **context-choice adapter observations**, not controlled cross-hardware speed rankings.",
               "Latency includes the adapter's recorded boundary and successful calls only; cold initialization is separate.",
@@ -525,7 +703,7 @@ def render(data):
               "[Repeated timing and stability](leaderboard/other-benchmarks.md#repeated-timing-and-stability) use separate campaigns.", "",
               "**RSS and GPU allocations are different measurements: never add them.** Neither establishes total unified-memory use.",
               "RSS below is worker peak for the context phase unless marked **S**, which is a sampled process-group peak over",
-              "the native context + tool session. An allocation or peak is not a minimum-memory requirement; allow runtime/OS headroom.",
+              "the session specified in the CSV (historical context + tool, or a fresh context-only session). An allocation or peak is not a minimum-memory requirement; allow runtime/OS headroom.",
               "Metal/MPS observations used a 64 GiB Apple M5 Pro. CPU-H observations are not assumed to share controlled hardware.", "",
               "| Model observation | Runtime | Median ms | p95 ms | Timed /132 | Init ms | RSS GiB³ | GPU alloc GiB |",
               "|---|---|---:|---:|---:|---:|---:|---:|"]
@@ -539,10 +717,13 @@ def render(data):
                      f"{number(rss / 1024 if rss is not None else None, 2)}{' S' if session is not None else ''} | "
                      f"{number(gpu / 1024 if gpu is not None else None, 2)} |")
     lines += ["", "³ Worker RSS reporting coverage and the exact measurement scope are retained in the CSV/JSON.",
-              "NR means unreported; GPU NR must not be read as zero. Sizes, weight-file sizes, RSS, and GPU allocation are different quantities.", "",
+              "NR means unreported; GPU NR must not be read as zero. Sizes, weight-file sizes, RSS, and GPU allocation are different quantities.", ""]
+    lines += render_other_protocols(data["other_benchmarks_markdown"])
+    lines += [
               "## Every task and downloadable data", "",
-              "- [Model summary CSV](leaderboard/models.csv): all 28 observations, model sizes, runtimes, quality, latency, and separate resource measurements.",
-              "- [Task breakdown CSV](leaderboard/task-breakdown.csv): every exported context task type and documentary subtype, domain, language, split, difficulty stratum, domain × language/split, plus tool-choice subgroups.",
+              f"- [Model summary CSV](leaderboard/models.csv): all {len(data['observations'])} context observations, model sizes, runtimes, quality, latency, and separate resource measurements.",
+              "- [Campaign summary CSV](leaderboard/campaigns.csv): independent capability, physics and passage rankings, coverage, test scores, class macro scores and measured resource scopes.",
+              "- [Task breakdown CSV](leaderboard/task-breakdown.csv): exported context task types/subtypes, domains, languages, splits and difficulty; tool-choice subgroups; plus capability, physics and passage groups, with task-specific denominators.",
               "- [Full structured results](leaderboard/results.json): identities, revisions, model/runtime settings, counts, statuses, all groups, source seals, and input-file SHA-256 hashes.",
               "- [Other benchmark results](leaderboard/other-benchmarks.md): full passage, support, answerability, length, repeated timing, and legacy pilot tables. These use different corpora/metrics and are not merged into one accuracy score.", "",
               "In the task CSV, `numerator` is correct choices or provisional agreement as named by `metric`.",
@@ -562,6 +743,7 @@ def render(data):
 def outputs(data):
     models, tasks = flat_rows(data)
     return {"docs/RESULTS.md": render(data), "docs/leaderboard/models.csv": csv_text(models),
+            "docs/leaderboard/campaigns.csv": csv_text(campaign_csv_rows(data)),
             "docs/leaderboard/task-breakdown.csv": csv_text(tasks),
             "docs/leaderboard/results.json": json.dumps(data, ensure_ascii=False, sort_keys=True, indent=2, allow_nan=False) + "\n"}
 
@@ -573,7 +755,8 @@ def main(argv=None):
     mode.add_argument("--write", action="store_true")
     args = parser.parse_args(argv)
     try:
-        generated = outputs(build())
+        generated_data = build()
+        generated = outputs(generated_data)
         stale = []
         for relative, content in generated.items():
             path = ROOT / relative
@@ -586,7 +769,7 @@ def main(argv=None):
     except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as exc:
         print(f"Full results invalid: {exc}", file=sys.stderr)
         return 2
-    print("Full results: 28 public observations; views " + ("written" if args.write else "current"))
+    print(f"Full results: {len(generated_data['observations'])} context observations; views " + ("written" if args.write else "current"))
     return 0
 
 

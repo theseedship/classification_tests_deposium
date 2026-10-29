@@ -156,7 +156,7 @@ executable tools. Clef 27B remains unexecuted.
 reached 124/132 (test 61/66). These runs are reported separately from the
 historical comparison below. Canary calls do not enter either denominator.
 
-**[Open the full results](docs/RESULTS.md): 28 model/runtime observations**, with
+**[Open the full results](docs/RESULTS.md): 30 context model/runtime observations**, including Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime, with
 complete quality, domain, language, complexity, speed and memory tables;
 [every exported task breakdown](docs/leaderboard/task-breakdown.csv) and
 [all other benchmark campaigns](docs/leaderboard/other-benchmarks.md) are linked
@@ -166,21 +166,25 @@ the [first direct Flash Q8 physics campaign](docs/PHYSICS_FLASH_RESULTS_20261029
 scored 39/48, test 32/36. The hosted Turbo adapter remains unexecuted.
 General plugin/MCP execution remains untested.
 
-The context and routing columns retain historical observations on the same
-132-case pack and 24 proposals. The new-pack columns show the separate
-29 October capability campaign; the other listed models have not run that pack.
+The context columns use the same 132-case pack; tool agreement is shown only
+where the separate 24-proposal task actually ran. Capability, physics and
+passage evidence now have their own consolidated rankings on the same results page.
 These are **not a general leaderboard or a controlled comparison of hardware latency**.
 
-| Model observation | Actual runtime | Historical /132 | Historical test /66 | Provisional tool /24 | New pack /192 | New test /96 |
+| Model observation | Actual runtime | Context /132 | Context test /66 | Provisional tool /24 | Capability /192 | Capability test /96 |
 |---|---|---:|---:|---:|---:|---:|
 | Historical D3, class 27B Q4 | llama.cpp / Metal | 128 | 65 | 24 | Not run | Not run |
 | D3 Flash Q8, nominal 9B | llama.cpp / Metal | 124 | 61 | 20 | **192** | **96** |
+| D3 Flash Q8, direct upstream | llama.cpp / Metal, distinct binary | 124 | 61 | Not run | Not run | Not run |
+| Clef Flash Q8, nominal 9B | Direct upstream llama.cpp / Metal | 110 | 59 | Not run | **192** | **96** |
 | GLiClass v4 9B BF16 | Official PyTorch pipeline / MPS | 117 | 63 | 20 | Not run | Not run |
 | Vela3-fast, decision backbone only | Official DecisionEncoder / CPU FP32 | 57 | 28 | 18 | Not run | Not run |
 
-The [new campaign tables](docs/RESULTS.md#complementary-capability-campaign-29-october-2026)
-show the fresh 132-case anchor, all three 64-case tracks, FR/EN and 8/32-card
-views, speed and sampled group RSS. Canary calls are excluded from both full-pack scores.
+The [updated task rankings](docs/RESULTS.md#updated-task-rankings) show both
+Flash candidates, full/test physics scores, all three capability tracks and
+separate relevance/support/answerability results. The page also includes the
+historical passage-ranking, longer-context and repeated-timing tables. Canary
+calls and repeated anchors do not add leaderboard models or quality cases.
 
 Vela3-fast's specialized span and router adapters were not loaded. D3 Ultra and
 Turbo are **not evaluated here**; the historical D3 row identifies neither.
@@ -237,6 +241,11 @@ native helper. Add a pinned profile, explicit setup instructions, input and
 failure checks, and a new archive. Report missing capabilities and negative
 results. Do not adjust references to improve a score, tune on test cases,
 or treat translations as independent samples.
+
+Every new scored campaign must also be registered in the public result
+generator and its regression tests. Refresh `docs/RESULTS.md`, model/campaign/task
+CSVs and the structured JSON with `scripts/build-full-results.py --write`, then
+run `--check`. A separate report link alone is not a completed consolidation.
 
 Application replays additionally need an accessible, pinned Deposium checkout
 and its dependencies. `--stack-root` is configurable; the benchmark does not

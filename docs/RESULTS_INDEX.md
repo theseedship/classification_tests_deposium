@@ -1,8 +1,9 @@
 # Campaign archive
 
 **Start with [Full results](RESULTS.md)** for the complete English comparison:
-28 model/runtime observations, all context-choice domains and task breakdowns,
-provisional tool proposals, execution speed, and separate memory measurements.
+30 context model/runtime observations, including Clef Flash Q8 and direct
+upstream D3 Flash Q8, all context domains, separate capability/physics/evidence
+rankings, provisional tool proposals, speed and separate memory measurements.
 The [other benchmark tables](leaderboard/other-benchmarks.md) cover passage
 ranking, evidence, longer contexts, repeated timing, and the initial pilot.
 
@@ -12,7 +13,8 @@ complete view. Most original campaign reports are in French.
 
 The first [capability-choice campaign](CAPABILITY_FLASH_RESULTS_20261029.md)
 and its fresh context anchor are separate observations from the 28-row
-historical comparison. Their 192- and 132-case denominators are never pooled.
+historical exports; their results are included in the current task tables.
+Their 192- and 132-case denominators are never pooled.
 
 | Campaign | Observations and boundaries | Reports and frozen evidence |
 |---|---|---|
