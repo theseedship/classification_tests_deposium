@@ -6,6 +6,14 @@ The references and translations remain agent-authored. Validation, packet
 generation, unit tests, and an agent checking this implementation are not human
 scientific or linguistic review.
 
+**This packet is for an additional human audit.** It is not required for
+automatic model grading or for continuing exploratory comparisons. Routine
+work uses the frozen references, executable checks and shared scorers; see
+[automatic grading and reference checks](PROTOCOL.md#automatic-grading-and-reference-checks).
+Assistant reviews are useful additional evidence, recorded separately as
+agent reviews. They never fill a form labelled as a person's assessment.
+No maintainer is expected to become a physics or language expert to use the benchmark.
+
 ## First review: who does what and when
 
 **No reviewer has been selected or assigned yet; there are zero human

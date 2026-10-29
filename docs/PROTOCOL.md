@@ -29,6 +29,51 @@ must not copy application routing rules into a second implementation.
 
 ## 2. Use a task-specific dataset and metric
 
+### Automatic grading and reference checks
+
+Exploratory model comparisons do not require a person to fill the human-review
+forms. The candidate receives only its allowed input; a frozen reference and
+the shared task scorer grade its recorded output automatically. No tested
+model supplies its own expected answer or changes the grading rule. The main
+context, physics, capability and tool-plan packs contain FR/EN cases. Passage
+evidence additionally covers DE/ES/IT/PT and declared cross-language directions.
+Documentation is in English; that does not make the benchmark English-only.
+
+Keep the following checks distinct:
+
+| Check | What it establishes | Remaining limit |
+|---|---|---|
+| Executable numerical or structural oracle | Exact rational calculations, finite algebra/chemistry rules, advertised types and constraints match the frozen synthetic fixture. | A supplied physical law, assumption, translation or natural-language interpretation may still need review. |
+| Shared scorer controls | Declared correct outputs pass and deliberately wrong/empty outputs fail; failure states and denominators are retained. | Passing the reference through its own scorer does not independently prove the reference correct. |
+| Additional agent review | An assistant can independently derive a response from the visible input, record reasoning, then compare with the reference and flag ambiguities. | Agents can share errors; agreement or majority vote is not proof of semantic truth or human review. |
+| Optional human review | A person can examine meaning, wording and scientific assumptions under the [review pilot](REFERENCE_REVIEW_PILOT.md). | Record actual expertise/scope and disagreements; no form is mandatory for continuing offline engineering or exploratory campaigns. |
+
+Run the bounded automatic reference/grid audit with Python 3.11+:
+
+```bash
+python3 scripts/check-reference-grids.py
+```
+
+This standard-library command reuses the existing validators and scorers. Its
+report separates source/oracle consistency and scripted scorer controls,
+states actual denominators and keeps semantic/human review qualifications
+explicit. It performs no candidate inference, model download or paid API call.
+The [dated command output](evidence/reference-grid-check-20261029.json) records
+the exact source hashes, Python version and tested control scopes. The
+[dated agent-review evidence](evidence/agent-reference-review-20261029.json)
+separately records eight physics cases and sixteen passage pools: 184 label
+comparisons, all matching the authored references in this sample. This is an
+agent consistency assessment, not a new candidate model score or a review of
+every corpus variant.
+
+For a fair comparison, freeze the same dataset version, permitted inputs,
+reference alternatives and scorer for each candidate, then retain every
+incorrect, missing, unsupported, errored or timed-out result. Report language,
+task, split and runtime separately. If a reference is disputed, preserve old
+data/results and propose a reviewed new version; never repair a reference
+merely to agree with a tested model. Free-form answers need their own qualified
+rubric and judge path; existing exact-choice scores do not establish that path.
+
 ### Context-dependent choices
 
 The [context-choice pack](../datasets/context-choice-v1/README.md) contains

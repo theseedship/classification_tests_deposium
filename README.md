@@ -13,6 +13,9 @@ weights, API keys, Docker or Deposium application stack.**
 **Research status:** references and translations are agent-authored and pending
 human review. Results are exploratory. A correct proposal does not establish
 tool execution, a useful final answer or product qualification.
+**Model grading is already automatic.** Human-review forms are an additional
+reference audit, not a prerequisite for running exploratory model comparisons.
+The main choice packs are bilingual FR/EN; passage evidence also covers DE/ES/IT/PT.
 
 ## Start here
 
@@ -81,10 +84,15 @@ python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
 python3 -m deposium_bench.capability_corpus --check
 python3 scripts/build-full-results.py --check
+python3 scripts/check-reference-grids.py
 ```
 
 These checks validate data, contracts and generated views; they do not score a
 real model. See [Contributing](CONTRIBUTING.md) for expected signals and tests.
+The reference-grid command exercises fixed correct, incorrect and empty outputs
+through the shared scorers. It checks application of the grading rules, not
+the semantic truth of every authored answer. See
+[automatic grading and reference checks](docs/PROTOCOL.md#automatic-grading-and-reference-checks).
 Linux is the reference environment for the full offline suite. macOS core and
 targeted checks are separate from a full-suite qualification; the
 [validation matrix](docs/CAMPAIGN_STATUS.md#validation-matrix) records known

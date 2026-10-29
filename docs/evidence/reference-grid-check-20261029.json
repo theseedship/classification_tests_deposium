@@ -1,0 +1,226 @@
+{
+  "choice_packs": [
+    {
+      "accounting_probes": {
+        "abstain_controls": 132,
+        "counts_by_status": {
+          "error": 132,
+          "missing": 132,
+          "timeout": 132,
+          "unsupported": 132
+        },
+        "total_cases_per_probe": 132
+      },
+      "cases": 132,
+      "empty_controls": 264,
+      "families": 66,
+      "languages": {
+        "en": 66,
+        "fr": 66
+      },
+      "positive_controls": 132,
+      "reference_check": "programmatic_science_oracles_and_frozen_agent_documentary_references",
+      "sha256": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+      "source": "datasets/context-choice-v1/cases.jsonl",
+      "unscored_controls": 528,
+      "wrong_controls": 396
+    },
+    {
+      "accounting_probes": {
+        "abstain_controls": 48,
+        "counts_by_status": {
+          "error": 48,
+          "missing": 48,
+          "timeout": 48,
+          "unsupported": 48
+        },
+        "total_cases_per_probe": 48
+      },
+      "cases": 48,
+      "empty_controls": 96,
+      "families": 24,
+      "languages": {
+        "en": 24,
+        "fr": 24
+      },
+      "positive_controls": 48,
+      "reference_check": "programmatic_oracle_consistency",
+      "sha256": "e21cd2e0f4e35465b56158ba1fa07c8d8203be81a969c6edf4b7630d2f0d7307",
+      "source": "datasets/physics-choice-v1/cases.jsonl",
+      "unscored_controls": 192,
+      "wrong_controls": 144
+    },
+    {
+      "accounting_probes": {
+        "abstain_controls": 192,
+        "counts_by_status": {
+          "error": 192,
+          "missing": 192,
+          "timeout": 192,
+          "unsupported": 192
+        },
+        "total_cases_per_probe": 192
+      },
+      "cases": 192,
+      "empty_controls": 384,
+      "families": 48,
+      "languages": {
+        "en": 96,
+        "fr": 96
+      },
+      "positive_controls": 192,
+      "reference_check": "frozen_agent_reference_consistency",
+      "sha256": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+      "source": "datasets/capability-choice-v1/cases.jsonl",
+      "unscored_controls": 768,
+      "wrong_controls": 576
+    },
+    {
+      "accounting_probes": {
+        "abstain_controls": 2,
+        "counts_by_status": {
+          "error": 2,
+          "missing": 2,
+          "timeout": 2,
+          "unsupported": 2
+        },
+        "total_cases_per_probe": 2
+      },
+      "cases": 2,
+      "empty_controls": 4,
+      "families": 1,
+      "languages": {
+        "en": 1,
+        "fr": 1
+      },
+      "positive_controls": 4,
+      "reference_check": "frozen_agent_alternative_plan_consistency",
+      "sha256": "95c1098bed1bce3bf014dc3933afa1d872226277ef7d4b6ae2588cbbe59d958e",
+      "source": "datasets/tool-plan-pilot-v1/cases.jsonl",
+      "unscored_controls": 8,
+      "wrong_controls": 4
+    }
+  ],
+  "control_kind": "scripted_not_model",
+  "human_review": {
+    "provided_by_this_check": 0,
+    "status": "not_provided"
+  },
+  "model_inference": "not_run",
+  "passage_pack": {
+    "cases": 1536,
+    "choice_controls": {
+      "answerability": {
+        "accounting_counts_by_status": {
+          "error": 32,
+          "missing": 32,
+          "timeout": 32,
+          "unsupported": 32
+        },
+        "empty_control_scope": "first_request_only",
+        "empty_controls": 2,
+        "positive_controls": 32,
+        "total_decisions": 32,
+        "unscored_controls": 128,
+        "wrong_controls": 64
+      },
+      "relevance": {
+        "accounting_counts_by_status": {
+          "error": 128,
+          "missing": 128,
+          "timeout": 128,
+          "unsupported": 128
+        },
+        "empty_control_scope": "first_request_only",
+        "empty_controls": 2,
+        "positive_controls": 128,
+        "total_decisions": 128,
+        "unscored_controls": 512,
+        "wrong_controls": 384
+      },
+      "support": {
+        "accounting_counts_by_status": {
+          "error": 192,
+          "missing": 192,
+          "timeout": 192,
+          "unsupported": 192
+        },
+        "empty_control_scope": "first_request_only",
+        "empty_controls": 2,
+        "positive_controls": 192,
+        "total_decisions": 192,
+        "unscored_controls": 768,
+        "wrong_controls": 384
+      }
+    },
+    "control_subset": {
+      "cases": 32,
+      "families": 8,
+      "fresh_held_out": false,
+      "selection": "existing_fixed_strata_no_model_outputs",
+      "source": "plans/reference-review-pilot-v1.json"
+    },
+    "families": 24,
+    "passage_languages": {
+      "de": 192,
+      "en": 384,
+      "es": 192,
+      "fr": 384,
+      "it": 192,
+      "pt": 192
+    },
+    "projection_decisions": {
+      "answerability": 1536,
+      "ranking": 1536,
+      "relevance": 6144,
+      "support": 9216
+    },
+    "question_languages": {
+      "de": 192,
+      "en": 384,
+      "es": 192,
+      "fr": 384,
+      "it": 192,
+      "pt": 192
+    },
+    "ranking_scorer_controls": {
+      "cases_tested": 0,
+      "status": "not_run_by_this_check"
+    },
+    "reference_check": "frozen_agent_reference_and_visible_span_consistency",
+    "sha256": "35a8b8982d12959985218b5bc6e10e932ba30970bd7ab9a81c6f10d17a7fe476",
+    "source": "datasets/passage-evidence-v1/cases.jsonl"
+  },
+  "runtime": {
+    "implementation": "cpython",
+    "python": "3.12.12"
+  },
+  "schema_version": "deposium.reference-grid-check/v1",
+  "scorer_version": "deposium.exact/v1",
+  "semantic_truth": "not_established_by_this_check",
+  "sources_sha256": {
+    "datasets/capability-choice-v1/cases.jsonl": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+    "datasets/capability-choice-v1/manifest.json": "252f727631584fc15501a840a5697c9060516626d573ee93d55966cfb012e06d",
+    "datasets/context-choice-v1/cases.jsonl": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+    "datasets/context-choice-v1/manifest.json": "937f3f52242093806cf7804845972dcdb2d7fe1a1e34dcee18b29250f6caa64b",
+    "datasets/passage-evidence-v1/cases.jsonl": "35a8b8982d12959985218b5bc6e10e932ba30970bd7ab9a81c6f10d17a7fe476",
+    "datasets/passage-evidence-v1/manifest.json": "6d89c4b9ce9ab37eac8c66e0540a7c154009cf23a9321b69cbd1abfef384eb89",
+    "datasets/physics-choice-v1/cases.jsonl": "e21cd2e0f4e35465b56158ba1fa07c8d8203be81a969c6edf4b7630d2f0d7307",
+    "datasets/physics-choice-v1/manifest.json": "543676833aedaee264623e1c1afd5fe96bfc983756c20bf520d8cf1f45ab2971",
+    "datasets/tool-plan-pilot-v1/cases.jsonl": "95c1098bed1bce3bf014dc3933afa1d872226277ef7d4b6ae2588cbbe59d958e",
+    "datasets/tool-plan-pilot-v1/manifest.json": "7b25a4ae3818eb2d85714834c64d9ca9dc8fe1ad2f6ea165923be76604533dd6",
+    "deposium_bench/capability_corpus.py": "e954abb30a5230cc12169000019493e2bd8c81232a2982ee656836801b8d9a05",
+    "deposium_bench/cases.py": "c10a43398ae0da78bc6aba22c553af9d2251a885a3aa3fc6aed024ae1f0cb700",
+    "deposium_bench/choice_protocol.py": "cbc990434887ddedc4df5f20c416cb64e073ecb5c7a4b4d93321d79f9ea8728f",
+    "deposium_bench/passage_corpus.py": "dc9437c98d9b436d7f71c5b6a125f6f60f01f08617e9fc45a757bdf0b4bb4379",
+    "deposium_bench/passage_dataset.py": "15b8a117a197129a8ae88e253f64e878e34bb60d5a3cd9747d6ec0b0496298a0",
+    "deposium_bench/physics_corpus.py": "d05f0451c5d275294f2c317c142fa5b8946582dc09dc16c140424999f0cb26bf",
+    "deposium_bench/registry.py": "2d70f741a287e4c5a435ca7fc20578140b16631af4c92e2b9fa353cb1d4f75e0",
+    "deposium_bench/research_corpus.py": "4daa9e5abf8fad1085de2051e6b2d4aabed49eb199283302306805a1b4261433",
+    "deposium_bench/scoring.py": "2e007624d42a52dad1cadb95b541a2ce25503b12c686f1b81b1e9264c90a0de9",
+    "deposium_bench/tool_plan.py": "754c5f6a09cf8be6dab7c44551c905565b2f5be92b54aad97ab40f8c6280d1ea",
+    "plans/reference-review-pilot-v1.json": "e99de7e9d3ef4ce1f999645f14080e34ee36cafc4f8ce91850022bbbb830c447",
+    "scripts/check-reference-grids.py": "0b77c4e87c7029d8e8b53db84c8ed5c274f6307d11e1040ad26515c7b52743cb"
+  },
+  "status": "implementation_checks_passed"
+}

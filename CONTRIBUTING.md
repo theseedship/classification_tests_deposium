@@ -23,6 +23,7 @@ python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
 python3 -m deposium_bench.capability_corpus --check
 python3 scripts/build-full-results.py --check
+python3 scripts/check-reference-grids.py
 ```
 
 Each command should exit `0`. The expected signals are:
@@ -35,6 +36,7 @@ Each command should exit `0`. The expected signals are:
 | Passage dataset / corpus | Valid 1,536-case corpus and no difference from the frozen generated corpus. |
 | Capability corpus | No difference from the frozen 192-case corpus. |
 | Full results | No difference between tracked generated tables/exports and their declared public sources. |
+| Reference grids | Shared validators and scripted scorer controls pass with explicit denominators; no candidate inference or claim that every authored answer is true. |
 
 A failing `--check` is a discrepancy to inspect. Do not regenerate a frozen
 corpus or change a reference merely to clear a failure. For intentional result
