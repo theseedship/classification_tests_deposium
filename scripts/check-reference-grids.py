@@ -253,11 +253,32 @@ def audit(root=ROOT):
             "passages: control-plan source mismatch")
     selected_ids = {row["case_id"] for row in plan["cases"] if row["dataset"] == "passage"}
     passage_report = check_passage_pack(cases, digest, selected_ids)
+    # Execution fixtures have a different evidence boundary. Validate their
+    # sources here; only their explicit profile run executes the local tools.
+    execution_source = "datasets/tool-arguments-v1/cases.jsonl"
+    execution_manifest = "datasets/tool-arguments-v1/manifest.json"
+    execution_cases, execution_digest = load_cases(root / execution_source)
+    execution = read_json(root, execution_manifest)
+    require(len(execution_cases) == 4 and execution["cases_sha256"] == execution_digest,
+            "tool-arguments: missing cases or manifest mismatch")
+    hashes[execution_source] = execution_digest
+    hashes[execution_manifest] = sha256(root / execution_manifest)
+    for field, public_path in (("control_profile", "profiles/tool-arguments-control.json"),
+                               ("control_recordings", "fixtures/tool-arguments-control.jsonl")):
+        require(execution[field] == public_path
+                and execution[field + "_sha256"] == sha256(root / public_path),
+                "tool-arguments: control source mismatch")
+        hashes[public_path] = sha256(root / public_path)
+    execution_report = {"source": execution_source, "sha256": execution_digest,
+                        "cases": 4, "families": len({c["translation_family"] for c in execution_cases}),
+                        "reference_check": "bounded_fixture_and_exact_integer_reference_consistency",
+                        "tool_execution": "not_run_by_this_check", "scorer_controls": "not_run_by_this_check"}
     # Fingerprint the implementation actually imported from this checkout,
     # separately from data read through the testable root parameter.
     for name in ("cases.py", "scoring.py", "research_corpus.py", "physics_corpus.py",
                  "capability_corpus.py", "tool_plan.py", "passage_dataset.py",
-                 "passage_corpus.py", "choice_protocol.py", "registry.py", "tool_discovery.py"):
+                 "passage_corpus.py", "choice_protocol.py", "registry.py", "tool_discovery.py",
+                 "tool_arguments.py", "synthetic_tools.py"):
         relative = "deposium_bench/" + name
         hashes[relative] = sha256(ROOT / relative)
     hashes["scripts/check-reference-grids.py"] = sha256(Path(__file__))
@@ -269,6 +290,7 @@ def audit(root=ROOT):
             "semantic_truth": "not_established_by_this_check",
             "human_review": {"provided_by_this_check": 0, "status": "not_provided"},
             "model_inference": "not_run", "choice_packs": packs, "passage_pack": passage_report,
+            "execution_fixtures": [execution_report],
             "sources_sha256": dict(sorted(hashes.items()))}
 
 

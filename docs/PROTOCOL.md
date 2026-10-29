@@ -199,6 +199,30 @@ selecting a dependent pair checks its membership, not execution order or
 artifact values. Those remain #11/#12. Existing v1 packs and model results
 are preserved; the new scorer fingerprint identifies the additive task code.
 
+### Executable arguments and actual artifact bindings
+
+The [tool-arguments pack](../datasets/tool-arguments-v1/README.md) contains four
+FR/EN training cases in two synthetic table families, with no held-out cases.
+An explicit `fixture_arguments` control profile actually runs a bounded lookup,
+passes its actual observation through a whitelisted candidate projection, and
+executes one guarded sum proposal. Literal artifact IDs, column, unit and scope
+must match; the harness does not fill an artifact placeholder for the candidate.
+
+Candidate recordings contain proposals only. The execution adapter constructs
+the receipts, projected input/hash and trace. Ordinary recorded and real-model
+profiles cannot advertise this execution contract. Keep tool selection, argument
+validity, artifact binding, execution and result metrics separate, with failed
+and unobserved cases retained in the declared denominators. Missing receipts
+do not establish zero execution. The [contract](TOOL_ARGUMENTS_CONTRACT_V1.md)
+defines bounds, source-closure hashes and strict provenance.
+
+The reference-grid command validates this pack without calling either tool.
+Its explicit shared-CLI control executes the two local functions. Rescore
+validates retained receipts without executing tools or the policy again.
+The first lookup is fixed, followed by one proposed call; retries, adaptive
+observations and stopping remain #12. No real model, live MCP or product
+integration is qualified by these synthetic controls.
+
 ### Retrieved passages and evidence
 
 The [passage-evidence pack](../datasets/passage-evidence-v1/README.md) contains

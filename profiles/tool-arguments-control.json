@@ -1,0 +1,13 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "tool-arguments-control",
+  "adapter": "fixture_arguments",
+  "qualification": "harness_control",
+  "capabilities": [
+    "bench.tool-arguments"
+  ],
+  "model": null,
+  "timeout_seconds": 15,
+  "revision": null,
+  "recordings": "../fixtures/tool-arguments-control.jsonl"
+}

@@ -619,14 +619,16 @@
         "task_metrics": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "bench.tool-discovery"
-          ],
           "properties": {
             "bench.tool-discovery": {
               "$ref": "#/$defs/discovery_metrics"
+            },
+            "bench.tool-arguments": {
+              "$ref": "#/$defs/arguments_metrics"
             }
-          }
+          },
+          "minProperties": 1,
+          "required": []
         }
       },
       "allOf": [
@@ -1142,6 +1144,289 @@
           },
           "additionalProperties": {
             "$ref": "#/$defs/discovery_metrics_group"
+          }
+        }
+      }
+    },
+    "arguments_metrics_group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "eligible_cases",
+        "scored_cases",
+        "cases_with_execution_trace",
+        "cases_without_execution_trace",
+        "tool_calls_observed",
+        "tool_correct_cases",
+        "tool_over_all_eligible",
+        "arguments_correct_cases",
+        "arguments_over_all_eligible",
+        "binding_correct_cases",
+        "binding_over_all_eligible",
+        "execution_correct_cases",
+        "execution_over_all_eligible",
+        "result_correct_cases",
+        "result_over_all_eligible"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "deposium.tool-arguments-metrics/v1"
+        },
+        "eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scored_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cases_with_execution_trace": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cases_without_execution_trace": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_calls_observed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "arguments_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "arguments_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "binding_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "binding_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "execution_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "execution_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "result_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "result_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "arguments_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "eligible_cases",
+        "scored_cases",
+        "cases_with_execution_trace",
+        "cases_without_execution_trace",
+        "tool_calls_observed",
+        "tool_correct_cases",
+        "tool_over_all_eligible",
+        "arguments_correct_cases",
+        "arguments_over_all_eligible",
+        "binding_correct_cases",
+        "binding_over_all_eligible",
+        "execution_correct_cases",
+        "execution_over_all_eligible",
+        "result_correct_cases",
+        "result_over_all_eligible",
+        "by_language",
+        "by_split"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "deposium.tool-arguments-metrics/v1"
+        },
+        "eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scored_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cases_with_execution_trace": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cases_without_execution_trace": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_calls_observed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "arguments_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "arguments_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "binding_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "binding_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "execution_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "execution_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "result_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "result_over_all_eligible": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "by_language": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "enum": [
+              "fr",
+              "en"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/arguments_metrics_group"
+          }
+        },
+        "by_split": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "enum": [
+              "train",
+              "calibration",
+              "test"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/arguments_metrics_group"
           }
         }
       }

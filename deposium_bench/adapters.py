@@ -90,12 +90,14 @@ def _validate_profile(profile: dict) -> None:
     if profile["schema_version"] != "deposium.candidate/v1" or not isinstance(profile["profile_id"], str) or not profile["profile_id"].strip():
         raise AdapterError("Invalid candidate profile identity.")
     adapter = profile["adapter"]
-    if not isinstance(adapter, str) or adapter not in {"mcps", "mcps_resident", "recorded", "julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
+    if not isinstance(adapter, str) or adapter not in {"mcps", "mcps_resident", "recorded", "fixture_arguments", "julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
         raise AdapterError("Unknown candidate adapter.")
     capabilities = profile["capabilities"]
     allowed = set(CONTRACTS) | ({"mcps.search"} if adapter == "recorded" else set())
     if adapter == "recorded":
         allowed.update({"bench.tool-plan", "bench.tool-discovery"})
+    if adapter == "fixture_arguments":
+        allowed = {"bench.tool-arguments"}
     if adapter in {"julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast", "recorded"}:
         allowed.add("bench.context-choice")
     if (not isinstance(capabilities, list) or not capabilities
@@ -432,6 +434,9 @@ def create_adapter(profile: dict, profile_path: str | Path, stack_root: str | Pa
     _validate_profile(profile)
     profile = copy.deepcopy(profile)
     path = Path(profile_path).resolve()
+    if profile["adapter"] == "fixture_arguments":
+        from .tool_arguments import FixtureArgumentsAdapter
+        return FixtureArgumentsAdapter(profile, path, recordings_data)
     if profile["adapter"] == "recorded":
         return RecordedAdapter(profile, path, recordings_data)
     if profile["adapter"] == "julia":
