@@ -321,6 +321,31 @@ class ToolDiscoveryTests(unittest.TestCase):
             with self.subTest(adapter=adapter):
                 self.assertFalse(candidate_validator.is_valid(candidate))
 
+    def test_optional_campaign_schema_accepts_actual_native_controls_and_rejects_false_provenance(self):
+        try:
+            import jsonschema
+        except ImportError:
+            self.skipTest("jsonschema is optional; runtime guards are tested separately")
+        schema = json.loads((ROOT / "schemas/campaign-v1.schema.json").read_text())
+        jsonschema.Draft202012Validator.check_schema(schema)
+        validator = jsonschema.Draft202012Validator(schema)
+        for pack, profile, count in (("tool-discovery-v1", "tool-discovery-control", 12),
+                                     ("tool-plan-pilot-v1", "tool-plan-control", 2)):
+            destination = self.tmp / profile
+            summary = campaigns.run_campaign(ROOT / "datasets" / pack / "cases.jsonl",
+                                              ROOT / "profiles" / (profile + ".json"), destination)
+            self.assertEqual(summary["metrics"]["scored_cases"], count)
+            manifest = json.loads((destination / "manifest.json").read_text())
+            with self.subTest(pack=pack):
+                validator.validate(manifest)
+                for field, value in (("adapter", "mcps"), ("qualification", "model_isolated"),
+                                     ("model", {"id": "invented-model"}),
+                                     ("recordings_sha256", "invalid"),
+                                     ("capabilities", ["bench.unregistered"])):
+                    invalid = deepcopy(manifest)
+                    invalid["adapter_provenance"][field] = value
+                    self.assertFalse(validator.is_valid(invalid), (pack, field))
+
     def test_cli_complete_control_and_negative_superset_keep_every_case(self):
         result = subprocess.run([sys.executable, "-m", "deposium_bench", "run", "--dataset", str(DATASET),
                                  "--profile", str(PROFILE), "--output", str(self.tmp / "cli"), "--format", "json"],
