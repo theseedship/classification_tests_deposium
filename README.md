@@ -15,8 +15,9 @@ human review. Results are exploratory. Routing agreement is not a validated
 business decision, and a correct choice does not establish end-to-end answer
 quality. The 132-case totals mix splits; test-only results are separate.
 
+**[Full results: all models, tasks, speed and memory](docs/RESULTS.md)** ·
 [Evaluation protocol](docs/PROTOCOL.md) · [Datasets](datasets/) ·
-[Results index](docs/RESULTS_INDEX.md)
+[Tool/MCP and model-routing proposal](docs/INTENT_AND_MODEL_ROUTING.md)
 
 ## What is this useful for?
 
@@ -34,6 +35,11 @@ checks remain outside candidate predictions.
 
 The benchmark isolates steps inside RAG; it does not currently qualify a full
 retrieval-to-answer system, citation fidelity, or user-visible product behavior.
+The [next experiment](docs/INTENT_AND_MODEL_ROUTING.md) broadens the small
+search/statistics/fallback pack to capability discovery, plugin and MCP-tool sets,
+arguments, dependent calls, and observation-driven execution loops. Synthetic
+geospatial, web, and open-data scenarios make these needs concrete. Difficulty
+prediction and model assignment are evaluated separately from tool selection.
 
 ## Quick start: no weights, API keys, Docker, or services
 
@@ -49,6 +55,7 @@ python3 -m deposium_bench validate-cases \
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
+python3 scripts/build-full-results.py --check
 ```
 
 These commands validate data, contracts, and implementation controls.
@@ -59,7 +66,7 @@ dependencies are unavailable. A skipped check is not a successful integration.
 Linux is the reference environment for the full offline unit suite. Campaign
 reports document model-specific macOS checks and inference qualifications.
 The public snapshot was checked on 29 October 2026 in a clean clone without
-local private files: **759 tests, 728 passed, 31 optional skips**, no failures.
+local private files: **778 tests, 747 passed, 31 optional skips**, no failures.
 No model weights or external services were required. Run the unit suite separately:
 
 ```bash
@@ -111,6 +118,12 @@ implement another pipeline. See the [English protocol](docs/PROTOCOL.md),
 
 ## Selected observations
 
+**[Open the full results](docs/RESULTS.md): 28 model/runtime observations**, with
+complete quality, domain, language, complexity, speed and memory tables;
+[every exported task breakdown](docs/leaderboard/task-breakdown.csv) and
+[all other benchmark campaigns](docs/leaderboard/other-benchmarks.md) are linked
+from the same page. Physics and general plugin/MCP execution remain untested.
+
 These rows use the same 132-case context pack and 24 routing proposals, with
 different revisions, precisions, and runtimes. They are **not a general
 leaderboard or a controlled comparison of hardware latency**.
@@ -126,14 +139,11 @@ Vela3-fast's specialized span and router adapters were not loaded. D3 Ultra and
 Turbo are **not evaluated here**; the historical D3 row identifies neither.
 A name alone does not identify the tested weights, readout, or runtime.
 
-Full reports retain errors, coverage, revisions, resource measurements, and
-qualifications: [results index](docs/RESULTS_INDEX.md),
-[native D3](docs/NATIVE_DECISION_RESULTS_20261016.md),
-[GLiClass](docs/GLICLASS_V4_RESULTS_20261017.md),
-[Vela3-fast](docs/VELA3_FAST_RESULTS_20261028.md),
-[passage ranking](docs/PASSAGE_CPU_RESULTS_20261015.md), and
-[candidate inventory](docs/NEXT_CANDIDATES.md). Detailed reports are primarily
-in French; machine-readable aggregates are included alongside them.
+The English [full results](docs/RESULTS.md) retain coverage, revisions, and
+resource scopes, and link to the dated [campaign archive](docs/RESULTS_INDEX.md).
+Older campaign reports are primarily in French. The
+[candidate inventory](docs/NEXT_CANDIDATES.md) distinguishes new checkpoints
+from models already tested on another runtime.
 
 ## Run a real model
 

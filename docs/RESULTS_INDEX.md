@@ -1,77 +1,39 @@
-# Résultats consolidés entre postes — 28 octobre 2026
+# Campaign archive
 
-La PR #8, fusionnée dans `main` à `796ba198`, apporte les campagnes CPU/API
-et les essais sur les passages. La PR #9 apporte les quatre campagnes natives
-Metal. La PR #10 ajoute GLiClass v4 9B sur MPS/BF16 ; le lot du 28 octobre ajoute
-Vela3-fast, backbone de décision CPU FP32. Cet index relie ces
-résultats en conservant leurs machines, précisions et protocoles respectifs.
-Il ne crée ni nouvelle inférence ni classement de latence entre matériels.
+**Start with [Full results](RESULTS.md)** for the complete English comparison:
+28 model/runtime observations, all context-choice domains and task breakdowns,
+provisional tool proposals, execution speed, and separate memory measurements.
+The [other benchmark tables](leaderboard/other-benchmarks.md) cover passage
+ranking, evidence, longer contexts, repeated timing, and the initial pilot.
 
-## Décisions courtes : modèles isolés
+This archive preserves dated protocols and source exports. Older eleven- and
+nineteen-observation tables remain historical snapshots rather than the current
+complete view. Most original campaign reports are in French.
 
-Ces quatre panneaux utilisent les 132 bases FR/EN (66 familles) et les
-24 propositions Mastra (12 familles), avec références encore proposées par
-agents. Mastra conserve zéro cas sémantiquement qualifié ; aucun outil exécuté.
+| Campaign | Observations and boundaries | Reports and frozen evidence |
+|---|---|---|
+| Historical CPU/API context choice | 22 observations, including remote Jev 1.13; different model-specific precisions | [Summary](LARGER_CPU_RESULTS_20261011.md), [D3 mini/flash](D3_LARGER_CPU_RESULTS.md), [22-observation overview](evidence/model-comparison-larger-cpu-overview-20261011/report.md), [manifest](evidence/model-comparison-larger-cpu-overview-20261011/manifest.json) |
+| Native Apple Metal | Eos Q8, D3 Flash Q8/Q4, historical D3 27B Q4; pinned llama.cpp | [Results and resources](NATIVE_DECISION_RESULTS_20261016.md), [aggregate](evidence/native-model-comparison-20261016/report.md), [session identities](evidence/native-model-comparison-20261016/native-sessions.json) |
+| GLiClass v4 9B | Official PyTorch pipeline, MPS/BF16; native models repeated in the export are deduplicated in Full results | [Results](GLICLASS_V4_RESULTS_20261017.md), [reproduction](GLICLASS_V4_REPRODUCTION.md), [aggregate](evidence/gliclass-model-comparison-20261017/report.md), [session](evidence/gliclass-model-comparison-20261017/gliclass-session.json) |
+| Vela 3.0 Fast | Decision backbone only, official CPU FP32/SDPA; specialized span/router adapters not loaded | [Results and reproduction](VELA3_FAST_RESULTS_20261028.md), [Ultra/Vela review](DECISION3_VELA3_REVIEW_20261028.md), [aggregate](evidence/vela3-fast-20261028/report.md), [session](evidence/vela3-fast-20261028/vela3-fast-session.json) |
+| Passage ranking and evidence | Separate passage corpus; BGE, D3-lite projections, Jev 1.14, and order controls | [English tables](leaderboard/other-benchmarks.md#passage-ranking-and-evidence), [BGE/D3](PASSAGE_CPU_RESULTS_20261015.md), [Jev partial coverage](PASSAGE_JEV_RESULTS_20261015.md), [order controls](evidence/passage-order-control-20261015/report.md), [dataset](PASSAGE_EVIDENCE_DATASET.md) |
+| Longer contexts | Four historical models; unsupported lengths and memory errors retained | [English tables](leaderboard/other-benchmarks.md#longer-contexts), [original report](evidence/length-comparison-20261004/report.md) |
+| Repeated timing and stability | Separate repeated runs; no repeated native/MPS campaign inferred | [English tables](leaderboard/other-benchmarks.md#repeated-timing-and-stability), [original report](evidence/timing-comparison-20261004/report.md) |
 
-| Panneau | Exécutions et matériel | Synthèse | Preuves publiques |
-| --- | --- | --- | --- |
-| Historique CPU/API consolidé | 22 observations, dont Jev distant ; campagnes WSL/CPU, précisions propres à chaque modèle | [Nox, Vela, Liquid et classement complet](LARGER_CPU_RESULTS_20261011.md), [D3 mini/flash](D3_LARGER_CPU_RESULTS.md) | [22 modèles](evidence/model-comparison-larger-cpu-overview-20261011/report.md), [manifeste](evidence/model-comparison-larger-cpu-overview-20261011/manifest.json) |
-| Natif Mac / Metal | Eos Q8, Flash Q8/Q4, D3 27B Q4 ; llama.cpp et passerelle locale | [Scores, RAM et pins](NATIVE_DECISION_RESULTS_20261016.md) | [Comparatif](evidence/native-model-comparison-20261016/report.md), [identités](evidence/native-model-comparison-20261016/native-sessions.json) |
-| GLiClass Mac / MPS | GLiClass v4 9B BF16 ; pipeline officiel PyTorch | [Résultats et limites](GLICLASS_V4_RESULTS_20261017.md), [reproduction et transfert](GLICLASS_V4_REPRODUCTION.md) | [Comparatif avec les quatre campagnes Metal](evidence/gliclass-model-comparison-20261017/report.md), [provenance MPS](evidence/gliclass-model-comparison-20261017/gliclass-session.json) |
-| Vela 3 Fast Mac / CPU | Backbone de décision seul FP32/SDPA officiel ; 57/132 bases, 18/24 accords provisoires, ~3,16 Gio RSS | [Résultats et reproduction](VELA3_FAST_RESULTS_20261028.md), [audit Ultra/Vela 3](DECISION3_VELA3_REVIEW_20261028.md) | [Comparatif](evidence/vela3-fast-20261028/report.md), [identité et sceaux](evidence/vela3-fast-20261028/vela3-fast-session.json) |
+The 132-case context pack contains 66 FR/EN families and includes train,
+calibration, and test splits; test-only counts are separate. The 24 first-tool
+proposals contain 12 families, zero human-approved references, and zero
+semantically qualified cases. Agreement does not establish tool execution or
+business correctness. See the [protocol](PROTOCOL.md).
 
-Les totaux 22 + 4 + 1 + 1 désignent des observations, **pas 28 modèles distincts**.
-Eos et D3 Flash apparaissent sur plusieurs runtimes ; Flash Q8/Q4 sont deux
-quantifications. Les agrégats historiques ne sont pas réécrits pour supprimer
-ces distinctions. Les sous-tableaux datés « onze modèles » ou « dix-neuf
-modèles » restent des instantanés historiques.
+Git shares source, synthetic cases, relative profiles, reports, aggregate JSON,
+and hashes. It does not transfer model weights, installed environments, private
+raw archives, or local configuration. Reading these public results and running
+offline validation needs none of those private files. Rescoring requires the
+original raw archive; new inference also requires pinned assets and runtimes.
+The generated Full results join does neither. Initial archives remain preserved,
+including the incomplete GLiClass envelope and its separate resumed tool phase.
 
-Sur Mac, D3 Flash Q8 reste le choix par défaut proposé hors 27B : **124/132**,
-72/76 documentaire, environ 9,39 Gio de RSS observé sur les entrées courtes.
-Flash Q4 : **122/132**, 6,66 Gio RSS. GLiClass : **117/132**, mais **63/66 test**
-contre 61/66 pour Flash Q8 ; son allocation GPU observée est de 16,75 Gio,
-distincte du RSS. Le corpus limité et ses références provisoires ne prouvent
-pas une avance générale. La même valeur totale sur CPU et Metal ne démontre
-pas une identité des prédictions ou une parité numérique.
-
-**D3 mini et Liquid d1-3B sont déjà mesurés sur CPU** : respectivement 119/132
-et 101/132. Leurs chemins natifs Mac restent à qualifier. Leur proposer un
-premier pilote CPU serait donc une répétition ; l’[inventaire courant](NEXT_CANDIDATES.md)
-sépare checkpoint nouveau et runtime encore non exécuté.
-
-## Autres protocoles, conservés séparément
-
-| Évaluation | Résultat observable et limites | Rapports |
-| --- | --- | --- |
-| Passages et reranking multilingues | Split test : 512 cas, huit familles, quatre rotations ; BGE nDCG@1 0,922, D3-lite 0,701, Jev 1.14 0,840. Pas de gain démontré à remplacer BGE par ces projections de décisions | [BGE/D3](PASSAGE_CPU_RESULTS_20261015.md), [Jev et couverture partielle](PASSAGE_JEV_RESULTS_20261015.md), [rotations](evidence/passage-order-control-20261015/report.md), [corpus](PASSAGE_EVIDENCE_DATASET.md) |
-| Grandes longueurs et temps répétés historiques | Campagnes distinctes des nouvelles entrées courtes ; aucun résultat GLiClass long ou temporel répété | [Longueurs](evidence/length-comparison-20261004/report.md), [temps répétés](evidence/timing-comparison-20261004/report.md) |
-| Frontières d'intégration RAG | Modèle isolé, proposition après contrôles déterministes et parcours complet restent des niveaux de preuve distincts | [Protocole public](PROTOCOL.md) |
-
-Jev 1.13 historique et Jev 1.14 sur les passages restent distincts. La campagne
-Jev 1.14 est incomplète à 522/728 appels : pertinence complète pour le classement,
-soutien partiel, réponse possible non mesurée. Aucun nouveau coût API ni outil
-applicatif n’est engagé par cette consolidation.
-
-## Ce qui est partagé et ce qui reste local
-
-**Git partage** code, profils relatifs, manifestes SHA, corpus synthétiques,
-références versionnées, rapports et JSON agrégés. Une fois la branche publiée,
-un autre poste peut les récupérer. GLiClass est fusionné via la PR #10 ;
-Vela3-fast est disponible sur la branche publiée de ce nouveau lot avant sa fusion.
-
-**Git ne partage pas** les poids, environnements installés, profils absolus,
-sorties brutes, archives scellées, snapshots de sources et journaux sous
-`models/` ou `results/`. Un pull n’est pas une sauvegarde ni un transfert de ces
-preuves privées. Les archives CPU restent sur le poste qui les a produites ;
-les archives Metal et GLiClass restent sur le Mac. Leur présence sur l’autre
-poste n’a pas été vérifiée par ce lot.
-
-Lire les agrégats publics et exécuter les tests hors poids ne nécessite pas
-ces captures privées. Refaire un rescore ou un audit des sorties brutes les
-nécessite ; réexécuter l’inférence demande en plus les actifs et le runtime
-épinglés. Les historiques et sceaux initiaux sont conservés, y compris
-l’enveloppe GLiClass `completed:false` avant reprise Mastra séparée.
-
-Cette consolidation ne déploie rien sur Railway, ne met pas à jour le gitlink
-de la stack et ne publie pas le correctif local voisin de `deposium-inference`.
-Ce dernier reste un lot séparé, comme documenté dans le rapport natif.
+No application deployment or integration qualification follows from these
+isolated-model reports. The [proposed feature evaluation](INTENT_AND_MODEL_ROUTING.md)
+separates capability discovery, tool sets, execution loops, and model assignment.
