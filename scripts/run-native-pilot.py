@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import importlib.util
+import io
 import json
 import os
 from pathlib import Path
@@ -24,10 +25,61 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from deposium_bench.campaigns import run_campaign
+from deposium_bench.cases import parse_cases
+from deposium_bench.capability_corpus import SOURCE_FILES
 from deposium_bench.mastra_observation import observe_local
 from deposium_bench.native_resources import memory_snapshot, process_group_rss_mib
-from deposium_bench.native_supervision import native_supervision
+from deposium_bench.native_supervision import NativeSupervisionError, native_supervision
 from deposium_bench.systemone_local import AUTH_ENV, LocalSystemOneAdapter, digest, http_request, native_overflow
+
+DEFAULT_DATASET = ROOT / "datasets/context-choice-v1/cases.jsonl"
+
+
+def selected_dataset(args):
+    """Validate one exact input snapshot before any resource or model work."""
+    path = Path(getattr(args, "dataset", None) or DEFAULT_DATASET).expanduser().resolve(strict=True)
+    payload = path.read_bytes()
+    cases, dataset_sha256 = parse_cases(payload)
+    if any(case["schema_version"] != "deposium.case/v2"
+           or case["contract_id"] != "bench.context-choice" for case in cases):
+        raise ValueError("native_pilot_requires_context_choice_v2_dataset")
+    return payload, {"schema_version": "deposium.case/v2", "sha256": dataset_sha256,
+                     "validated_cases": len(cases), "snapshot": "dataset.jsonl",
+                     "selection": "explicit" if getattr(args, "dataset", None) else "historical_default"}
+
+
+def archive_bench_source(path, dataset):
+    """Retain the public oracle dependencies plus the validated input snapshot."""
+    with tarfile.open(path, "x") as archive:
+        selected = list((ROOT / "deposium_bench").rglob("*.py"))
+        selected += list((ROOT / "schemas").glob("*.json"))
+        selected += [ROOT / "deposium_bench/data" / name for name in
+                     ("stack-registry.json", "context-distractors.json", "mastra-read-contracts.json")]
+        selected += [ROOT / "datasets/capability-choice-v1" / name for name in SOURCE_FILES]
+        selected += [Path(__file__).resolve()]
+        for source in sorted(selected):
+            archive.add(source, arcname=str(source.relative_to(ROOT)), recursive=False)
+        snapshot = tarfile.TarInfo("datasets/native-pilot-selected/cases.jsonl")
+        snapshot.size = len(dataset)
+        archive.addfile(snapshot, io.BytesIO(dataset))
+
+
+def dataset_coverage(summary, expected):
+    """Describe collection and technical coverage without gating on accuracy."""
+    metrics = summary["metrics"]
+    counts = metrics["counts_by_status"]
+    if (type(expected) is not int or expected < 1 or metrics["total_cases"] != expected
+            or set(counts) != {"ok", "unsupported", "missing", "error", "timeout", "abstain"}
+            or any(type(count) is not int or count < 0 for count in counts.values())
+            or sum(counts.values()) != expected
+            or type(metrics["scored_cases"]) is not int or not 0 <= metrics["scored_cases"] <= expected):
+        raise ValueError("native_pilot_campaign_denominator_mismatch")
+    collected = summary["completion_status"] == "complete"
+    return {"eligible_cases": expected, "scored_cases": metrics["scored_cases"],
+            "counts_by_status": dict(counts), "collection_complete": collected,
+            "technical_full_coverage": collected and counts["ok"] == expected
+                                       and metrics["scored_cases"] == expected,
+            "quality_verdict": metrics["verdict"]}
 
 
 def write_new(path, value):
@@ -113,6 +165,7 @@ def pilot(args):
     output = args.output.expanduser().resolve()
     if any(output.is_relative_to(root) for root in (service, stack)):
         raise ValueError("native_pilot_output_must_be_outside_application_stack")
+    dataset_payload, dataset_metadata = selected_dataset(args)
     model = args.model.expanduser().resolve(strict=True)
     assets = json.loads(args.assets_manifest.read_text())
     validate_assets(assets, model)
@@ -140,12 +193,10 @@ def pilot(args):
     if not gateway.is_file() or not os.access(gateway, os.X_OK):
         raise FileNotFoundError("native_pilot_gateway_missing")
     output.mkdir(parents=True, exist_ok=False)
-    with tarfile.open(output / "bench-source.tar", "x") as archive:
-        for path in sorted((ROOT / "deposium_bench").rglob("*.py")):
-            archive.add(path, arcname=str(path.relative_to(ROOT)), recursive=False)
-        for path in sorted((ROOT / "schemas").glob("*.json")):
-            archive.add(path, arcname=str(path.relative_to(ROOT)), recursive=False)
-        archive.add(__file__, arcname="scripts/run-native-pilot.py", recursive=False)
+    dataset_path = output / dataset_metadata["snapshot"]
+    with dataset_path.open("xb") as snapshot:
+        snapshot.write(dataset_payload)
+    archive_bench_source(output / "bench-source.tar", dataset_payload)
     with tarfile.open(output / "service-source.tar", "x") as archive:
         selected = list((service / "src").rglob("*.rs")) + [helper, service / "Cargo.toml",
             service / "Cargo.lock", service / "rust-toolchain.toml",
@@ -174,6 +225,7 @@ def pilot(args):
     watcher = None
     result = {"schema_version": "deposium.native-pilot/v1", "created_at": datetime.now(timezone.utc).isoformat(),
               "model_assets": assets, "runtime": runtime, "memory_before": before,
+              "dataset": dataset_metadata,
               "completed": False, "smoke_cases_scored": 0, "campaigns": {},
               "budget": {"rss_guard_mib": args.max_rss_mb, "min_available_mib": args.min_free_mb,
                          "max_seconds": args.max_seconds, "sample_interval_seconds": .25},
@@ -181,6 +233,7 @@ def pilot(args):
                 "Host available memory on macOS is a reclaimable-page estimate.",
                 "Process-group RSS is not a measurement of all unified GPU allocations.",
                 "One slot, one question per call, sequential; concurrent D3 batching unqualified.",
+                "Completed describes collection, not an accuracy PASS or human semantic qualification.",
                 "Campaigns follow an archived synthetic warm-up; latency is not a cold-start measure."]}
     try:
         with (output / "gateway.log").open("x") as log:
@@ -265,8 +318,26 @@ def pilot(args):
                     raise RuntimeError("native_pilot_native_overflow_not_rejected")
             finally:
                 adapter.close()
-            if not args.smoke_only:
-                base = run_campaign(ROOT / "datasets/context-choice-v1/cases.jsonl", profile_path,
+            if not args.smoke_only and dataset_metadata["selection"] == "explicit":
+                with native_supervision(profile_path, process=process, watcher=watcher,
+                        stop=guard_stop, guard=guard, max_rss_mb=args.max_rss_mb,
+                        min_free_mb=args.min_free_mb) as scope:
+                    def stop_requested():
+                        try:
+                            scope.check(profile, profile_path)
+                        except NativeSupervisionError:
+                            guard["stop_reason"] = guard["stop_reason"] or "native_supervision_lost"
+                            return True
+                        return False
+                    campaign = run_campaign(dataset_path, profile_path, output / "campaign",
+                                            stack_root=args.stack_root, stop_requested=stop_requested)
+                result["campaigns"]["campaign"] = campaign
+                coverage = dataset_coverage(campaign, dataset_metadata["validated_cases"])
+                result["campaign_coverage"] = coverage
+                result["completed"] = (coverage["collection_complete"] and coverage["scored_cases"] > 0
+                                       and not guard["stop_reason"])
+            elif not args.smoke_only:
+                base = run_campaign(dataset_path, profile_path,
                                     output / "bases", stack_root=args.stack_root)
                 result["campaigns"]["bases"] = base
                 if (base["completion_status"] != "complete" or base["metrics"]["total_cases"] != 132
@@ -284,7 +355,9 @@ def pilot(args):
                 if (mastra["completion_status"] != "complete"
                         or mastra["metrics"]["coverage"]["valid_decisions"] != 24):
                     raise RuntimeError("native_pilot_mastra_coverage_incomplete")
-            result["completed"] = not guard["stop_reason"]
+                result["completed"] = not guard["stop_reason"]
+            else:
+                result["completed"] = not guard["stop_reason"]
     finally:
         try:
             finish_owned(process, watcher, guard_stop)
@@ -293,6 +366,10 @@ def pilot(args):
                 os.environ.pop(AUTH_ENV, None)
             else:
                 os.environ[AUTH_ENV] = previous_key
+        # A last sample may trip a guard while finish_owned joins the writer.
+        # Final completion must reflect that settled state before sealing.
+        if guard["stop_reason"] is not None:
+            result["completed"] = False
         if process is not None:
             result["gateway_exit_code"] = process.returncode
         result["resources"] = guard
@@ -301,6 +378,7 @@ def pilot(args):
         files = {str(p.relative_to(output)): digest(p) for p in sorted(output.rglob("*")) if p.is_file()}
         write_new(output / "pilot-seal.json", {"schema_version": "deposium.native-pilot-seal/v1", "files": files})
     print(json.dumps({"output": str(output), "completed": result["completed"], "resources": guard}, indent=2))
+    return result
 
 
 def main(argv=None):
@@ -311,6 +389,8 @@ def main(argv=None):
     parser.add_argument("--assets-manifest", type=Path, required=True)
     parser.add_argument("--model-id", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--dataset", type=Path,
+                        help="Explicit context-choice v2 JSONL phase; skips the historical bases+Mastra sequence")
     parser.add_argument("--runtime", choices=("decision2", "d3"), default="d3")
     parser.add_argument("--backend", choices=("metal", "cpu", "cuda"), required=True)
     parser.add_argument("--context", type=int, default=4096)

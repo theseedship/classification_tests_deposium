@@ -44,6 +44,11 @@ def _measurements(record: dict | None) -> dict:
     encoding = raw.get("encoding_info") if isinstance(raw.get("encoding_info"), dict) else {}
     tokens = raw.get("token_components") if isinstance(raw.get("token_components"), dict) else {}
     usage = raw.get("usage") if isinstance(raw.get("usage"), dict) else {}
+    native = raw.get("native_result") if isinstance(raw.get("native_result"), dict) else {}
+    native_usage = native.get("usage") if isinstance(native.get("usage"), dict) else {}
+    native_truncated = raw.get("native_usage_truncated")
+    if type(native_truncated) is not bool:
+        native_truncated = native_usage.get("truncated")
     return {"http_attempted": raw.get("http_attempted") if type(raw.get("http_attempted")) is bool else None,
             "cached_failure": raw.get("cached_failure") if type(raw.get("cached_failure")) is bool else None,
             "http_ms": _number(raw.get("http_ms")),
@@ -56,6 +61,7 @@ def _measurements(record: dict | None) -> dict:
             "native_padded_tokens": _number(tokens.get("padded", tokens.get("padded_tokens"))),
             "rss_mib": _number(raw.get("rss_mb")),
             "forward_executed": raw.get("forward_executed") if type(raw.get("forward_executed")) is bool else None,
+            "native_usage_truncated": native_truncated if type(native_truncated) is bool else None,
             "state_truncated": encoding.get("stateTruncated"),
             "options_truncated": encoding.get("optionsTruncated")}
 
@@ -117,7 +123,12 @@ def _counts(rows: list[dict]) -> dict:
             "reference_tokens": _stats([row["reference_actual_tokens"] for row in rows]),
             "reference_padded_tokens": _stats([row["reference_padded_tokens"] for row in rows]),
             "truncation_observations": {field: sum(row["measurements"][field] is True for row in rows)
-                                        for field in ("state_truncated", "options_truncated")}}
+                                        for field in ("state_truncated", "options_truncated")},
+            "truncation_observation_counts": {
+                field: {"true": sum(row["measurements"].get(field) is True for row in rows),
+                        "false": sum(row["measurements"].get(field) is False for row in rows),
+                        "unknown": sum(type(row["measurements"].get(field)) is not bool for row in rows)}
+                for field in ("state_truncated", "options_truncated", "native_usage_truncated")}}
 
 
 def analyze_context(run_path: str | Path, output_dir: str | Path) -> dict:
@@ -244,7 +255,7 @@ def analyze_context(run_path: str | Path, output_dir: str | Path) -> dict:
     csv_buffer = io.StringIO(newline="")
     fields = ["case_id", "translation_family", *DIMENSIONS, "status", "supported", "scored", "passed",
               "error", "failure_kind", "reference_actual_tokens", "reference_padded_tokens",
-              "adapter_duration_ms", "decision_ms", "inference_ms", "http_ms", "http_attempted", "cached_failure", "provider_input_tokens", "provider_output_tokens", "native_tokens", "native_padded_tokens", "rss_mib"]
+              "adapter_duration_ms", "decision_ms", "inference_ms", "http_ms", "http_attempted", "cached_failure", "provider_input_tokens", "provider_output_tokens", "native_tokens", "native_padded_tokens", "rss_mib", "native_usage_truncated"]
     writer = csv.DictWriter(csv_buffer, fieldnames=fields)
     writer.writeheader()
     for row in rows:

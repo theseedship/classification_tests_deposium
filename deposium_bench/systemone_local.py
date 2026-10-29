@@ -40,6 +40,17 @@ def _wire(value):
     return json.dumps(value, ensure_ascii=False, allow_nan=False, separators=(",", ":")).encode()
 
 
+def native_request(value, model_id):
+    """Pure shared HTTP projection; no native tokenization or forward audit."""
+    validate_choice_input(value)
+    mapping = {"c" + str(i): option["id"] for i, option in enumerate(value["options"])}
+    payload = {"model": model_id, "state": value["context"],
+        "questions": {"answer": {"type": "choice", "instructions": value["question"],
+            "criteria": {"c" + str(i): option["description"]
+                         for i, option in enumerate(value["options"])}}}}
+    return payload, mapping, _wire(payload)
+
+
 def _finite(value):
     return type(value) in (float, int) and math.isfinite(value) and 0 <= value <= 1
 
@@ -237,21 +248,17 @@ class LocalSystemOneAdapter:
         with self._lock:
             if self._failure:
                 result = copy.deepcopy(self._failure)
-                result["raw_output"] = {"http_attempted": False, "cached_failure": True}
+                result["raw_output"] = {"http_attempted": False, "cached_failure": True,
+                                        "native_usage_truncated": None}
                 return result
             if self._closed:
                 return self._fail("error", "systemone_adapter_closed")
             raw = {"http_attempted": False, "cached_failure": False, "native_result": None,
-                   "requested_model": self._model["model_id"], "forward_executed": None}
+                   "requested_model": self._model["model_id"], "forward_executed": None,
+                   "native_usage_truncated": None}
             try:
                 value = request.get("input")
-                validate_choice_input(value)
-                mapping = {"c" + str(i): option["id"] for i, option in enumerate(value["options"])}
-                payload = {"model": self._model["model_id"], "state": value["context"],
-                    "questions": {"answer": {"type": "choice", "instructions": value["question"],
-                        "criteria": {"c" + str(i): option["description"]
-                                     for i, option in enumerate(value["options"])}}}}
-                body = _wire(payload)
+                payload, mapping, body = native_request(value, self._model["model_id"])
                 if self._key in body.decode():
                     raise ValueError("systemone_input_secret_rejected")
                 if len(body) > 131072:
@@ -295,8 +302,14 @@ class LocalSystemOneAdapter:
                 if (not isinstance(usage, dict) or type(usage.get("input_tokens")) is not int
                         or not 0 < usage["input_tokens"] <= self._model["max_length"]
                         or type(usage.get("output_tokens")) is not int or usage["output_tokens"] != 0):
-                    raise ValueError("systemone_usage_invalid")
+                    return self._fail("error", "systemone_usage_invalid", raw)
                 raw.update(observed_model=native["model"], usage=usage)
+                if "truncated" in usage:
+                    if type(usage["truncated"]) is not bool:
+                        return self._fail("error", "systemone_usage_invalid", raw)
+                    raw["native_usage_truncated"] = usage["truncated"]
+                    if usage["truncated"]:
+                        return self._fail("error", "systemone_native_input_truncated", raw)
                 self.provenance["model_response"] = "observed"
                 return {"status": "ok", "output": {"choice_id": mapping[answer["choice"]]},
                         "raw_output": raw, "error": None}

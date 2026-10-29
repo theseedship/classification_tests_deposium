@@ -86,6 +86,47 @@ class ContextAnalysisTests(unittest.TestCase):
         self.assertFalse(overflow["forward_executed"])
         self.assertIsNone(overflow["inference_ms"])
 
+    def test_native_usage_truncation_accepts_only_bool_and_extracts_nested_legacy_declarations(self):
+        for flag in (True, False, None, 0, 1, "false", "true", [], {}):
+            record = {"duration_ms": 5, "raw_output": {"native_result": {"usage": {"truncated": flag}}}}
+            with self.subTest(flag=flag):
+                measurement = _measurements(record)
+                self.assertIs(measurement["native_usage_truncated"], flag if type(flag) is bool else None)
+                self.assertIsNone(measurement["forward_executed"])
+        for raw in ({}, {"native_result": {}}, {"native_result": {"usage": {}}},
+                    {"native_result": {"usage": None}}, {"native_usage_truncated": None}):
+            self.assertIsNone(_measurements({"duration_ms": 1, "raw_output": raw})["native_usage_truncated"])
+        for flag in (True, False):
+            self.assertIs(_measurements({"duration_ms": 1, "raw_output": {
+                "native_usage_truncated": flag}})["native_usage_truncated"], flag)
+
+    def test_truncation_counts_keep_false_unknown_cached_and_unrecorded_in_full_denominator(self):
+        template = self.analyze()["rows"][0]
+        raw_outputs = [
+            {"native_usage_truncated": True, "native_result": {"usage": {"truncated": True}}},
+            {"native_result": {"usage": {"truncated": False}}},
+            {"native_usage_truncated": None, "native_result": {"usage": {"truncated": True}}},
+            {}, {"native_result": {"usage": {"truncated": 0}}},
+            {"cached_failure": True, "http_attempted": False, "native_usage_truncated": None},
+            None,
+        ]
+        rows = []
+        for index, raw in enumerate(raw_outputs):
+            row = deepcopy(template)
+            row.update(case_id=f"synthetic-truncation-{index}", recorded=raw is not None,
+                       status="missing" if raw is None else "error", scored=False, passed=False,
+                       measurements=_measurements({"duration_ms": 1, "raw_output": raw} if raw is not None else None))
+            rows.append(row)
+        counts = _counts(rows)
+        self.assertEqual(counts["total_cases"], 7)
+        self.assertEqual(counts["recorded_cases"], 6)
+        self.assertEqual(counts["counts_by_status"]["missing"], 1)
+        self.assertEqual(counts["truncation_observations"], {"state_truncated": 0, "options_truncated": 0})
+        self.assertEqual(counts["truncation_observation_counts"]["native_usage_truncated"],
+                         {"true": 2, "false": 1, "unknown": 4})
+        for observations in counts["truncation_observation_counts"].values():
+            self.assertEqual(sum(observations.values()), counts["total_cases"])
+
     def test_zero_scored_and_incomplete_archive_stay_invalid_and_missing(self):
         zero = self.root / "zero"
         campaigns.run_campaign(DEFAULT_DATASET, ROOT / "profiles/fixture-control.json", zero, max_new_cases=0)

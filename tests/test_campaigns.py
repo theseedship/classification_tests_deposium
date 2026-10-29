@@ -123,6 +123,33 @@ class CampaignTests(unittest.TestCase):
         self.assertEqual(summary["metrics"]["counts_by_status"]["missing"], 36)
         self.assertEqual(campaigns.resume_campaign(self.root / "run", self.root / "resume")["completion_status"], "complete")
 
+    def test_external_stop_before_first_or_after_one_call_preserves_missing_and_seals_prefix(self):
+        for admitted in (0, 1):
+            calls = []
+            def factory(*args, **kwargs):
+                adapter = create_adapter(*args, **kwargs)
+                predict = adapter.predict
+                def spy(request):
+                    calls.append(request["case_id"])
+                    return predict(request)
+                adapter.predict = spy
+                return adapter
+            name = f"stopped-{admitted}"
+            with self.subTest(admitted=admitted), patch.object(campaigns, "create_adapter", side_effect=factory):
+                summary = self.run_control(name, stop_requested=lambda: len(calls) >= admitted)
+            self.assertEqual(len(calls), admitted)
+            self.assertEqual(summary["completion_status"], "incomplete")
+            self.assertEqual(summary["metrics"]["total_cases"], 36)
+            self.assertEqual(summary["metrics"]["scored_cases"], admitted)
+            self.assertEqual(summary["metrics"]["counts_by_status"]["missing"], 36 - admitted)
+            self.assertEqual(summary["metrics"]["verdict"], "invalid" if admitted == 0 else "fail")
+            self.assertEqual(len((self.root / name / "raw.jsonl").read_bytes().splitlines()), admitted)
+            self.assertTrue((self.root / name / "seal.json").is_file())
+            original = snapshot(self.root / name)
+            resumed = campaigns.resume_campaign(self.root / name, self.root / f"resumed-{admitted}")
+            self.assertEqual(resumed["completion_status"], "complete")
+            self.assertEqual(snapshot(self.root / name), original)
+
     def test_interrupt_keeps_durable_results_then_resumes(self):
         def factory(*args, **kwargs):
             adapter = create_adapter(*args, **kwargs)

@@ -63,11 +63,38 @@ class LocalSystemOneTests(unittest.TestCase):
     def response(self, native=None):
         return 200, json.dumps(self.native if native is None else native).encode()
 
+    def test_shared_native_request_is_pure_and_preserves_utf8_wire_order_without_semantic_ids(self):
+        value = {"context": "À Paris 🌍", "question": "Quelle équipe ?", "options": [
+            {"id": "hidden-output-first", "description": "Paiements et remboursements"},
+            {"id": "hidden-output-second", "description": "Suivi de livraison"}]}
+        before = deepcopy(value)
+        expected = ('{"model":"fixture-model","state":"À Paris 🌍","questions":{"answer":'
+                    '{"type":"choice","instructions":"Quelle équipe ?","criteria":'
+                    '{"c0":"Paiements et remboursements","c1":"Suivi de livraison"}}}}').encode("utf-8")
+        with patch("builtins.open", side_effect=AssertionError("no file I/O")), \
+                patch.object(Path, "read_bytes", side_effect=AssertionError("no file I/O")), \
+                patch.object(Path, "read_text", side_effect=AssertionError("no file I/O")), \
+                patch.object(local, "http_request", side_effect=AssertionError("no HTTP")), \
+                patch.object(local, "digest", side_effect=AssertionError("no asset hashing")):
+            payload, mapping, body = local.native_request(value, "fixture-model")
+        self.assertEqual(body, expected)
+        self.assertEqual(json.loads(body), payload)
+        self.assertEqual(mapping, {"c0": "hidden-output-first", "c1": "hidden-output-second"})
+        self.assertNotIn(b"hidden-output", body)
+        self.assertEqual(value, before)
+        self.assertEqual(list(payload), ["model", "state", "questions"])
+        for forbidden in ("reference", "evaluation", "split", "case_id"):
+            with self.subTest(field=forbidden), self.assertRaises(ValueError):
+                local.native_request({**value, forbidden: "hidden annotation"}, "fixture-model")
+
     def test_no_request_during_construction_and_mapping_uses_no_annotations(self):
-        with patch.object(local, "http_request", return_value=self.response()) as call:
+        with patch.object(local, "http_request", return_value=self.response()) as call, \
+                patch.object(local, "native_request", wraps=local.native_request) as render:
             adapter = self.adapter()
             call.assert_not_called()
+            render.assert_not_called()
             result = adapter.predict(self.request)
+        render.assert_called_once_with(self.request["input"], "fixture-model")
         self.assertEqual(result["status"], "ok")
         self.assertEqual(result["output"], {"choice_id": "semantic-second"})
         payload = json.loads(call.call_args.args[3])
@@ -124,6 +151,56 @@ class LocalSystemOneTests(unittest.TestCase):
                 self.assertEqual(adapter.predict(self.request)["status"], status)
                 self.assertEqual(call.call_count, 1)
         self.assertEqual(self.adapter().predict({"contract_id": "other"})["status"], "unsupported")
+
+    def test_reported_native_truncation_rejects_output_and_caches_failure_without_new_http(self):
+        native = deepcopy(self.native)
+        native["usage"]["truncated"] = True
+        with patch.object(local, "http_request", return_value=self.response(native)) as call:
+            adapter = self.adapter()
+            first = adapter.predict(self.request)
+            second = adapter.predict(self.request)
+        self.assertEqual(first["status"], "error")
+        self.assertEqual(first["error"], "systemone_native_input_truncated")
+        self.assertIsNone(first["output"])
+        self.assertIs(first["raw_output"]["native_usage_truncated"], True)
+        self.assertIsNone(first["raw_output"]["forward_executed"])
+        self.assertIs(first["raw_output"]["native_result"]["usage"]["truncated"], True)
+        self.assertEqual(second["error"], first["error"])
+        self.assertIsNone(second["output"])
+        self.assertTrue(second["raw_output"]["cached_failure"])
+        self.assertFalse(second["raw_output"]["http_attempted"])
+        self.assertIsNone(second["raw_output"]["native_usage_truncated"])
+        self.assertEqual(call.call_count, 1)
+
+    def test_false_or_absent_native_truncation_keeps_observation_distinct_from_forward_proof(self):
+        for present in (True, False):
+            native = deepcopy(self.native)
+            if present:
+                native["usage"]["truncated"] = False
+            with self.subTest(flag_present=present), patch.object(local, "http_request", return_value=self.response(native)):
+                result = self.adapter().predict(self.request)
+            self.assertEqual(result["status"], "ok")
+            self.assertEqual(result["output"], {"choice_id": "semantic-second"})
+            self.assertIs(result["raw_output"]["native_usage_truncated"], False if present else None)
+            self.assertIsNone(result["raw_output"]["forward_executed"])
+
+    def test_native_truncation_flag_requires_boolean_and_invalid_usage_is_fatal_without_retry(self):
+        for flag in (0, 1, "false", "true", None, [], {}):
+            native = deepcopy(self.native)
+            native["usage"]["truncated"] = flag
+            with self.subTest(flag=flag), patch.object(local, "http_request", return_value=self.response(native)) as call:
+                adapter = self.adapter()
+                first = adapter.predict(self.request)
+                second = adapter.predict(self.request)
+            self.assertEqual(first["status"], "error")
+            self.assertEqual(first["error"], "systemone_usage_invalid")
+            self.assertIsNone(first["output"])
+            self.assertIsNone(first["raw_output"]["native_usage_truncated"])
+            self.assertIsNone(first["raw_output"]["forward_executed"])
+            self.assertEqual(second["error"], first["error"])
+            self.assertTrue(second["raw_output"]["cached_failure"])
+            self.assertFalse(second["raw_output"]["http_attempted"])
+            self.assertEqual(call.call_count, 1)
 
     def test_explicit_native_overflow_is_unsupported_and_other_500_stays_error(self):
         error = {"error": {"code": 500, "type": "server_error", "message":

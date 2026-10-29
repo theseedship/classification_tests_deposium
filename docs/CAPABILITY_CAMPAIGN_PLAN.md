@@ -80,11 +80,11 @@ per-call timeouts; never raise limits in response to test failures.
 2. Prepare the selected platform-specific runtime and observe its actual device,
    precision, helper, tokenizer/readout and binary/library hashes. A profile's
    presence or an old session manifest does not establish current readiness.
-3. Prepare native supervision for the new dataset. The present
-   [native pilot](../scripts/run-native-pilot.py) hardcodes the old context pack
-   followed by Mastra; it does **not** already run this 192-case pack.
-   The shared `run --dataset` engine is generic. Adapt and validate the supervised
-   launcher/session separately, preserving its defaults and lifecycle guards.
+3. Prepare a supervised session for the new dataset. The
+   [native pilot](../scripts/run-native-pilot.py) now accepts an explicit
+   `--dataset` for one campaign and preserves its historical 132+Mastra default.
+   It snapshots validated input bytes before model work. Validate the selected
+   model/session and lifecycle guards before using it for a real campaign.
 4. Prepare Wave B deliberately: the historical CPU locks contain Linux-specific
    requirements. A macOS port needs an isolated, newly pinned runtime and native
    helper/encoding checks. Alternatively, execute the original WSL environment
@@ -92,6 +92,12 @@ per-call timeouts; never raise limits in response to test failures.
 5. Validate native input encodings for **all 192 cases**, including the longest
    expanded inputs. No silent truncation or backend/model fallback is allowed.
    An unsupported input retains that status; do not shrink the benchmark.
+
+The first Flash Q8 execution envelope and preparation method are fixed in the
+[native protocol](CAPABILITY_NATIVE_PROTOCOL_20261029.md). Its 18 GiB RSS
+ceiling is stricter than the historical 20 GiB ceiling, with the same 8 GiB
+reserve; this is a recorded pre-prediction resource decision. The bounded
+vocabulary-only helper reuses native preparation without a decode/forward.
 
 A new GGUF conversion, quantization, model revision, helper/runtime build or
 device is a separate observation. Keep it distinct from the historical CPU

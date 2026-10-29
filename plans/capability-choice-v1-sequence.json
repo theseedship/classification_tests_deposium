@@ -103,7 +103,17 @@
         }
       },
       "execution_status": "not_run",
-      "cases_scored": 0
+      "cases_scored": 0,
+      "current_execution_protocol": "docs/CAPABILITY_NATIVE_PROTOCOL_20261029.md",
+      "planned_execution_envelope": {
+        "rss_limit_mib": 18432,
+        "reserve_mib": 8192,
+        "context": 4096,
+        "canary_max_seconds": 600,
+        "anchor_max_seconds": 1200,
+        "capability_max_seconds": 1800,
+        "selection": "stricter-than-historical ceiling fixed before new predictions"
+      }
     },
     {
       "order": 2,
@@ -481,7 +491,7 @@
   },
   "execution_rules": [
     "No launch, download, paid API or service change is performed by reading this plan.",
-    "Prepare the native supervisor for arbitrary datasets: run-native-pilot.py is currently fixed to old packs.",
+    "Use the explicitly validated --dataset native supervisor with one new campaign per session; its historical 132+Mastra default remains available.",
     "Do not run historical Linux-wheel CPU locks as if they were qualified macOS environments. Pin and validate a platform-specific runtime, or run the original WSL environment explicitly.",
     "New quantization, model revision, helper, backend, runtime build or device is a separate observation.",
     "Admit one model at a time under fixed candidate-specific memory/time guards; preserve at least the existing 8 GiB reserve or a stricter profile requirement.",
@@ -512,5 +522,6 @@
     "D3 Ultra/Turbo and GLiClass27B require distinct model/runtime/resource audits. Historical D3Q4 identifies neither Ultra nor Turbo.",
     "Vela3 specialized adapters require their own task contracts and scorers.",
     "Free-form tool sets, executable arguments, adaptive MCP episodes and empirical model-routing policies are separate harness work."
-  ]
+  ],
+  "plan_revision": 2
 }
