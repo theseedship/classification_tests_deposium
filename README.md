@@ -138,16 +138,21 @@ complete quality, domain, language, complexity, speed and memory tables;
 [all other benchmark campaigns](docs/leaderboard/other-benchmarks.md) are linked
 from the same page. Physics and general plugin/MCP execution remain untested.
 
-These rows use the same 132-case context pack and 24 routing proposals, with
-different revisions, precisions, and runtimes. They are **not a general
-leaderboard or a controlled comparison of hardware latency**.
+The context and routing columns retain historical observations on the same
+132-case pack and 24 proposals. The new-pack columns show the separate
+29 October capability campaign; the other listed models have not run that pack.
+These are **not a general leaderboard or a controlled comparison of hardware latency**.
 
-| Model observation | Actual runtime | All splits /132 | Test only /66 | Provisional routing agreement /24 |
-|---|---|---:|---:|---:|
-| Historical D3, class 27B Q4 | llama.cpp / Metal | 128 | 65 | 24 |
-| D3 Flash Q8 | llama.cpp / Metal | 124 | 61 | 20 |
-| GLiClass v4 9B BF16 | Official PyTorch pipeline / MPS | 117 | 63 | 20 |
-| Vela3-fast, decision backbone only | Official DecisionEncoder / CPU FP32 | 57 | 28 | 18 |
+| Model observation | Actual runtime | Historical /132 | Historical test /66 | Provisional tool /24 | New pack /192 | New test /96 |
+|---|---|---:|---:|---:|---:|---:|
+| Historical D3, class 27B Q4 | llama.cpp / Metal | 128 | 65 | 24 | Not run | Not run |
+| D3 Flash Q8, nominal 9B | llama.cpp / Metal | 124 | 61 | 20 | **192** | **96** |
+| GLiClass v4 9B BF16 | Official PyTorch pipeline / MPS | 117 | 63 | 20 | Not run | Not run |
+| Vela3-fast, decision backbone only | Official DecisionEncoder / CPU FP32 | 57 | 28 | 18 | Not run | Not run |
+
+The [new campaign tables](docs/RESULTS.md#complementary-capability-campaign-29-october-2026)
+show the fresh 132-case anchor, all three 64-case tracks, FR/EN and 8/32-card
+views, speed and sampled group RSS. Canary calls are excluded from both full-pack scores.
 
 Vela3-fast's specialized span and router adapters were not loaded. D3 Ultra and
 Turbo are **not evaluated here**; the historical D3 row identifies neither.

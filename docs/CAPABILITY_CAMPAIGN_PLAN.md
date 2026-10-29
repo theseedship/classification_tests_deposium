@@ -21,6 +21,8 @@ size classes. Those totals mix train, calibration and test; separate test/66
 and documentary/76 results are shown. They are exploratory observations with
 agent-authored references, not general model rankings or predictions of new scores.
 Unknown-size candidates are not silently assigned to a size class.
+The sequence pins selection evidence at its original benchmark revision;
+later presentation updates do not replace that historical selection input.
 
 | Order | Wave | Size class | Selected observation | Historical all /132 | Test /66 | Text /76 | Purpose |
 |---:|---|---|---|---:|---:|---:|---|

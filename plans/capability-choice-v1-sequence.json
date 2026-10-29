@@ -22,6 +22,7 @@
   },
   "selection_evidence": {
     "path": "docs/leaderboard/results.json",
+    "bench_revision": "35e47377694bb3354e07e075e9d8923f0dc6ac36",
     "sha256": "725660331fe8064772afe39e896b9ad63d080f22e637f78bc72e987282313ee7",
     "reference_review": "agent_only_pending_human"
   },
