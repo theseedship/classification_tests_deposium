@@ -230,6 +230,9 @@ own qualification rules; agreement is not a semantic PASS.
 
 ## Reproducibility and contributions
 
+New here? Follow the [first offline contribution guide](CONTRIBUTING.md) to
+validate a public clone, choose a small change, and check what you will publish.
+
 The repo includes source, synthetic cases, profiles, hashes, and aggregates.
 **Weights, installed environments, private documents, and some historical raw
 archives are not included.** A clone can validate the benchmark and read reports;
