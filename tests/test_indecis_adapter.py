@@ -75,7 +75,9 @@ class IndecisAdapterTests(unittest.TestCase):
         (self.source/'README.md').write_text('not runtime code')
         self.worker_source=self.root/'worker-source';self.worker_source.mkdir()
         for name in ('main.go','main_test.go','go.mod'):(self.worker_source/name).write_text('fixture=1\n')
-        self.binary=self.root/'indecis-worker';self.binary.write_text(FAKE_WORKER.replace('__CAPTURE__',repr(str(self.capture))));self.binary.chmod(0o755)
+        # Use the test interpreter without relying on the worker's restricted PATH.
+        worker=FAKE_WORKER.replace('#!/usr/bin/env python3','#!'+sys.executable,1)
+        self.binary=self.root/'indecis-worker';self.binary.write_text(worker.replace('__CAPTURE__',repr(str(self.capture))));self.binary.chmod(0o755)
         self.assets=self.root/'assets.json';self.sources=self.root/'sources.json';self.prompt=self.root/'prompt.json';self.build=self.root/'build.json'
         self.prompt.write_text(json.dumps(INDECIS_CHOICE_PROMPT));self.write_manifests()
         self.profile_path=self.root/'profile.json'
