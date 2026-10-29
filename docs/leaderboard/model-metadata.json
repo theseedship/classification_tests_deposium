@@ -1,6 +1,6 @@
 {
   "schema_version": "deposium.public-model-metadata/v1",
-  "scope": "Display annotations for 28 isolated-model observations; not a separate evaluation or capability registry",
+  "scope": "Display annotations for 30 context model/runtime observations; not a separate evaluation or capability registry",
   "limitations": [
     "Model classes, declared rounded sizes and verified tensor counts are explicitly distinguished. Parameter counts describe the scope named in each row, not memory usage.",
     "Runtime, revisions, measurements and source hashes in campaign aggregates remain authoritative; this catalogue supplies presentation labels only.",
@@ -692,6 +692,54 @@
       "evidence": [
         {
           "path": "docs/LARGER_CPU_PILOT_20261011.md"
+        }
+      ]
+    },
+    "ClefFlashQ8": {
+      "display_name": "Clef Flash · Q8 direct Metal",
+      "family": "Clef",
+      "model_size": {
+        "parameters": null,
+        "label": "9B class",
+        "basis": "nominal_model_class",
+        "scope": "Nominal GGUF model class, not an independently verified converted parameter count; text-only observation",
+        "source": {
+          "path": "docs/CLEF_NATIVE_PROTOCOL_20261029.md"
+        }
+      },
+      "runtime_group": "apple_metal_upstream",
+      "precision": "Q8_0",
+      "hardware_group": "Apple M5 Pro; 64 GiB unified memory",
+      "source_analysis": "docs/evidence/clef-flash-20261029/analysis.json",
+      "observed_date": "2026-10-29",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/CLEF_FLASH_RESULTS_20261029.md"
+        }
+      ]
+    },
+    "D3FlashQ8Upstream": {
+      "display_name": "D3 flash · Q8 direct Metal",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": null,
+        "label": "9B class",
+        "basis": "nominal_model_class",
+        "scope": "Nominal GGUF model class, not an independently verified converted parameter count; text-only observation",
+        "source": {
+          "path": "docs/PHYSICS_FLASH_RESULTS_20261029.md"
+        }
+      },
+      "runtime_group": "apple_metal_upstream",
+      "precision": "Q8_0",
+      "hardware_group": "Apple M5 Pro; 64 GiB unified memory",
+      "source_analysis": "docs/evidence/physics-flash-20261029/analysis.json",
+      "observed_date": "2026-10-29",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/PHYSICS_FLASH_RESULTS_20261029.md"
         }
       ]
     }
