@@ -62,7 +62,8 @@
           "mcps.scope-dispatch",
           "mcps.semantic-source-route",
           "mcps.search",
-          "bench.context-choice"
+          "bench.context-choice",
+          "bench.tool-plan"
         ]
       },
       "uniqueItems": true
@@ -961,6 +962,27 @@
           },
           "timeout_seconds": {
             "maximum": 30
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "capabilities": {
+            "contains": {
+              "const": "bench.tool-plan"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adapter": {
+            "const": "recorded"
+          },
+          "qualification": {
+            "const": "harness_control"
           }
         }
       }

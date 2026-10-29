@@ -12,15 +12,18 @@ and end-to-end quality are distinct qualifications.
 
 ## Work order and exit criteria
 
-The immediate sequence is documentation/coverage consolidation, then the new
-versioned contract in #9, with human-review preparation in #8 alongside it.
-There is no need to rerun the whole historical leaderboard first.
+The documentation/coverage consolidation is in [PR #24](https://github.com/theseedship/classification_tests_deposium/pull/24).
+The initial #9 contract now has an offline fixture; its review precedes expansion
+into #10/#11. Human-review preparation is in parallel in
+[PR #25](https://github.com/theseedship/classification_tests_deposium/pull/25),
+with zero real human judgments so far. There is no need to rerun the whole
+historical leaderboard first.
 
 | Work | Prerequisite and next action | Exit criterion |
 |---|---|---|
 | [#7 — Contributor entry point](https://github.com/theseedship/classification_tests_deposium/issues/7) | Use the [offline quickstart](../CONTRIBUTING.md); keep commands independent of weights, APIs and the application. | Copyable commands, expected signals, platform/skip limits and staged-public-content checks are documented. |
 | [#8 — Human reference review](https://github.com/theseedship/classification_tests_deposium/issues/8) **in parallel** | Prepare a stratified physics/passage packet and annotation process; recruit human reviewers. Cover laws/units, FR/EN wording, thematic relevance, support/refuted/insufficient, conflicting pools and both passage views. | Human annotations, disagreements and adjudication are recorded separately from agent labels; model predictions are hidden where possible and unavoidable exposure is recorded. Preparation alone is not completed human review. |
-| [#9 — New contract and fresh scenarios](https://github.com/theseedship/classification_tests_deposium/issues/9) **next implementation** | Specify allowed inputs, outputs, references, artifact IDs and failure states; audit which runtime outputs can represent them. Start with one end-to-end offline fixture before expanding the proposed pilot. | Versioned contract plus deterministic success and negative controls for empty/wrong/malformed/overcalling/premature-success outputs; fresh families/splits; v1 unchanged. Mock/oracle replay is labelled as such. |
+| [#9 — New contract and fresh scenarios](https://github.com/theseedship/classification_tests_deposium/issues/9) **initial fixture prepared** | Review the [bounded proposal contract](TOOL_PLAN_CONTRACT_V1.md), runtime output audit and [12-family proposal](../datasets/tool-plan-pilot-v1/README.md). Only one train family is materialized (two FR/EN cases); no held-out cases or model campaigns. | Recorded shared-engine success and empty/wrong/malformed/overcalling/premature-success controls are implemented. v1 choice datasets remain unchanged. Review and freeze any expansion before inference; a recorded control is not a model result. |
 | [#10 — Discovery and tool selection](https://github.com/theseedship/classification_tests_deposium/issues/10) | Build on #9; offline catalogue/scorer design can start now. Distinguish plugin, capability and tool IDs, shortlist recall and final selection. | Frozen synthetic catalogue, valid alternatives and no-suitable/missing/unavailable-tool cases; deterministic permissions; selection scored without executing tools. |
 | [#11 — Arguments and artifact dependencies](https://github.com/theseedship/classification_tests_deposium/issues/11) | Build on #9 and coordinate with #10; bind later arguments to actual prior synthetic tool results. | Type/value/unit/scope and dependency checks, with wrong values, stale bindings and wrong-order controls; shared engine retained. |
 | [#12 — Bounded tool episodes](https://github.com/theseedship/classification_tests_deposium/issues/12) | After #9/#11 and a supported candidate output format, execute two or three deterministic synthetic tools and feed back actual observations. | Archived success/failure traces; explicit retry/step/call/time bounds; separate selection, arguments, dependencies, result and stopping metrics. Offline fixtures remain distinct from model campaigns. |

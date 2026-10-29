@@ -79,7 +79,7 @@ A missing model observation and a missing harness capability are different gaps.
 |---|---|---|---|
 | Closed context, first-tool, capability and physics choices | implemented | Observed only on supplied alternatives; tool/24 remains provisional and executes no tool. | — |
 | Fixed-pool relevance, support, answerability and ranking | implemented | Separate rotation/metric scopes above; no live retrieval or final answers. | — |
-| Versioned task contract beyond supplied proposals | not_implemented | Contract and offline fixture are prerequisites for new campaigns. | [#9](https://github.com/theseedship/classification_tests_deposium/issues/9) |
+| Versioned task contract beyond supplied proposals | fixture_only | [Bounded contract](TOOL_PLAN_CONTRACT_V1.md) and two recorded FR/EN training controls; no qualified model output path, model result or executed tools. | [#9](https://github.com/theseedship/classification_tests_deposium/issues/9) |
 | Open catalogue discovery and sufficient tool sets | not_implemented | Four-proposal capability selection does not establish discovery recall. | [#10](https://github.com/theseedship/classification_tests_deposium/issues/10) |
 | Free-form executable arguments and artifact bindings | not_implemented | Selecting a supplied argument proposal does not execute or validate generated values. | [#11](https://github.com/theseedship/classification_tests_deposium/issues/11) |
 | Bounded episodes with executed tools and feedback | not_implemented | Fixed observation choices do not implement a multi-turn execution loop. | [#12](https://github.com/theseedship/classification_tests_deposium/issues/12) |

@@ -102,6 +102,21 @@ the new tasks. Source and scorer fingerprints include the capability corpus
 code and its four source files; older archives may require an explicit derived
 rescore under a changed scorer. A rescore does not create new inference or timing.
 
+### Experimental bounded tool proposals
+
+The [tool-plan contract](TOOL_PLAN_CONTRACT_V1.md) introduces a structured
+proposal through the same case, adapter, campaign and typed exact scoring
+engine. Its [initial fixture](../datasets/tool-plan-pilot-v1/README.md) contains
+one new synthetic FR/EN family: two training cases and zero held-out cases.
+Complete alternative plans bind canonical proposed artifact IDs, while empty,
+wrong, malformed, extra-call and premature-success controls must fail.
+
+Only a recorded `harness_control` profile is currently admitted. No model
+output path is qualified and no tools or numeric computation are executed.
+The 12-family expansion is a proposal, not a materialized test set. Keep this
+fixture outside model rankings; executable argument values and adaptive
+episodes require the later contracts and actual execution evidence.
+
 ### Retrieved passages and evidence
 
 The [passage-evidence pack](../datasets/passage-evidence-v1/README.md) contains

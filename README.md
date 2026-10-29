@@ -52,6 +52,12 @@ packs are review material with no scored model results. See the
 [dataset cards](datasets/) and [protocol](docs/PROTOCOL.md) for family counts,
 splits, permitted inputs and each task's eligible denominator.
 
+The experimental [bounded tool-plan contract](docs/TOOL_PLAN_CONTRACT_V1.md)
+adds one synthetic family as two FR/EN training cases, with complete alternative
+proposals and negative controls through the shared engine. This is a recorded
+harness fixture: zero model cases, zero held-out cases and no executed tools.
+The proposed 12-family expansion remains unmaterialized beyond that first family.
+
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their
 family split; they are not independent users or facts. Identity, access,
