@@ -205,6 +205,13 @@ class _State:
         if after_policy > self.task["budgets"]["max_elapsed_ms"]:
             self.budgets = self.procedure = False
             return {"allowed": False, "code": "time_limit"}, None
+        # Every proposed call consumes an attempt, including calls whose tool
+        # or shape is invalid. Check these independent limits before rejecting
+        # malformed actions so their attempts cannot escape budget accounting.
+        if is_call and (self.attempts > self.task["budgets"]["max_tool_calls"]
+                        or self.lookups > self.task["budgets"]["max_lookup_attempts"]):
+            self.budgets = self.procedure = False
+            return {"allowed": False, "code": "call_or_retry_limit"}, None
         if not isinstance(proposal, dict) or len(canonical(proposal)) > 8192:
             self.procedure = self.tool_ok = self.args_ok = False
             return {"allowed": False, "code": "invalid_action"}, None
@@ -223,10 +230,6 @@ class _State:
                 or proposal.get("tool_id") not in ("fixture.lookup", "fixture.sum")):
             self.procedure = self.tool_ok = self.args_ok = False
             return {"allowed": False, "code": "invalid_action"}, None
-        if (self.attempts > self.task["budgets"]["max_tool_calls"]
-                or self.lookups > self.task["budgets"]["max_lookup_attempts"]):
-            self.budgets = self.procedure = False
-            return {"allowed": False, "code": "call_or_retry_limit"}, None
         tool, args = proposal["tool_id"], proposal["arguments"]
         fields = {"dataset_id", "scope_id"} if tool == "fixture.lookup" else {"artifact_id", "column", "unit", "scope_id"}
         shape = isinstance(args, dict) and set(args) == fields and all(isinstance(v, str) and 0 < len(v) <= 128 for v in args.values())

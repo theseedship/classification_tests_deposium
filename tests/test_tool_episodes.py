@@ -230,6 +230,40 @@ class EpisodeTests(unittest.TestCase):
         with self.assertRaisesRegex(CaseError, "nonmonotonic"):
             self.execute(clock=iter([0, 0, -1]).__next__)
 
+    def test_malformed_calls_cannot_bypass_attempt_or_lookup_budgets(self):
+        case = self.case(6)
+        finish = self.actions(6)[0]
+        variants = {
+            "unknown_tool": ({"action": "call", "tool_id": "unknown.tool", "arguments": {}}, 4, 0),
+            "extra_fields": ({"action": "call", "tool_id": "fixture.sum", "arguments": {}, "extra": True}, 4, 0),
+            "oversized_call": ({"action": "call", "tool_id": "fixture.sum", "arguments": {"extra": "x" * 8192}}, 4, 0),
+            "malformed_lookup": ({"action": "call", "tool_id": "fixture.lookup", "arguments": None, "extra": True}, 3, 3),
+        }
+        for label, (call, attempts, lookups) in variants.items():
+            with self.subTest(label=label), patch.object(episodes.EpisodeRuntime, "lookup", side_effect=AssertionError("invalid call executed")), \
+                    patch.object(episodes.EpisodeRuntime, "sum", side_effect=AssertionError("invalid call executed")):
+                response, output, _ = self.execute(case, [deepcopy(call) for _ in range(attempts)] + [finish])
+            self.assertTrue(output["checks"]["stopping_valid"])
+            self.assertFalse(output["checks"]["procedure_valid"])
+            self.assertFalse(output["checks"]["budgets_respected"])
+            self.assertEqual(output["steps"][attempts - 1]["guard"]["code"], "call_or_retry_limit")
+            self.assertEqual(output["usage"]["tool_call_attempts"], attempts)
+            self.assertEqual(output["usage"]["lookup_attempts"], lookups)
+            self.assertEqual(output["usage"]["tool_calls_executed"], 0)
+            with patch.object(episodes.EpisodeRuntime, "__init__", side_effect=AssertionError("pure receipt validation")), \
+                    patch.object(episodes.ReplayPolicy, "predict", side_effect=AssertionError("pure policy validation")):
+                episodes.validate_receipt(case["input"], output)
+                metric = summarize([case], [{"case_id": case["case_id"], **response}])["task_metrics"][episodes.CONTRACT]
+                self.assertEqual(metric["budget_eligible_cases"], 1)
+                self.assertEqual(metric["budget_correct_cases"], 0)
+                self.assertEqual(metric["budget_over_all_eligible"], 0)
+                self.assertEqual(metric["cases_with_execution_trace"], 1)
+                self.assertFalse(score_case(case, response)["passed"])
+                forged = deepcopy(output)
+                forged["checks"]["budgets_respected"] = True
+                with self.assertRaises(CaseError):
+                    episodes.validate_receipt(case["input"], forged)
+
     def test_nonok_policy_statuses_retain_observed_execution_and_zero_stage_credit(self):
         for status in ("missing", "unsupported", "error", "timeout", "abstain"):
             with self.subTest(status=status):
