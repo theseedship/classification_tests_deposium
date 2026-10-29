@@ -1,0 +1,699 @@
+{
+  "schema_version": "deposium.public-model-metadata/v1",
+  "scope": "Display annotations for 28 isolated-model observations; not a separate evaluation or capability registry",
+  "limitations": [
+    "Model classes, declared rounded sizes and verified tensor counts are explicitly distinguished. Parameter counts describe the scope named in each row, not memory usage.",
+    "Runtime, revisions, measurements and source hashes in campaign aggregates remain authoritative; this catalogue supplies presentation labels only.",
+    "CPU, API, Metal and MPS observations use different runtimes and devices. Their timings do not establish a controlled hardware comparison.",
+    "A missing parameter count stays null. Weights on disk, process RSS and GPU allocations are separate quantities."
+  ],
+  "observations": {
+    "D3FlashQ4": {
+      "display_name": "D3 flash · Q4 Metal",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": null,
+        "label": "9B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name class, not an independent parameter count of converted GGUF; text only, without vision projector",
+        "source": {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        }
+      },
+      "runtime_group": "apple_metal_native",
+      "precision": "Q4_K_M",
+      "hardware_group": "Apple M5 Pro; 64 GiB unified memory",
+      "source_analysis": "docs/evidence/native-model-comparison-20261016/analysis.json",
+      "observed_date": "2026-10-16",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        },
+        {
+          "path": "docs/evidence/native-model-comparison-20261016/native-sessions.json"
+        }
+      ]
+    },
+    "D3FlashQ8": {
+      "display_name": "D3 flash · Q8 Metal",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": null,
+        "label": "9B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name class, not an independent parameter count of converted GGUF; text only, without vision projector",
+        "source": {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        }
+      },
+      "runtime_group": "apple_metal_native",
+      "precision": "Q8_0",
+      "hardware_group": "Apple M5 Pro; 64 GiB unified memory",
+      "source_analysis": "docs/evidence/native-model-comparison-20261016/analysis.json",
+      "observed_date": "2026-10-16",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        },
+        {
+          "path": "docs/evidence/native-model-comparison-20261016/native-sessions.json"
+        }
+      ]
+    },
+    "D3Q4": {
+      "display_name": "D3 historical · Q4 Metal",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": null,
+        "label": "27B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name class, not an independent parameter count of converted GGUF; text only, without vision projector",
+        "source": {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        }
+      },
+      "runtime_group": "apple_metal_native",
+      "precision": "Q4_K_M",
+      "hardware_group": "Apple M5 Pro; 64 GiB unified memory",
+      "source_analysis": "docs/evidence/native-model-comparison-20261016/analysis.json",
+      "observed_date": "2026-10-16",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        },
+        {
+          "path": "docs/evidence/native-model-comparison-20261016/native-sessions.json"
+        }
+      ]
+    },
+    "D3edge": {
+      "display_name": "D3 edge · CPU",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": 594321600,
+        "label": "0.594B backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "BF16 backbone including vision module; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "BF16 backbone / FP32 readout",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-d3-20261011/analysis.json",
+      "observed_date": "2026-10-11",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      ]
+    },
+    "D3flash": {
+      "display_name": "D3 flash · CPU",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": 8392695024,
+        "label": "8.393B backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "BF16 backbone; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_LARGER_CPU_PILOT.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "BF16 backbone / FP32 readout",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-d3-larger-20261011/analysis.json",
+      "observed_date": "2026-10-11",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_LARGER_CPU_PILOT.md"
+        }
+      ]
+    },
+    "D3lite": {
+      "display_name": "D3 lite · CPU",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": 852985920,
+        "label": "0.853B backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "BF16 backbone including vision module; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "BF16 backbone / FP32 readout",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-d3-20261011/analysis.json",
+      "observed_date": "2026-10-11",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      ]
+    },
+    "D3mini": {
+      "display_name": "D3 mini · CPU",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": 4539265536,
+        "label": "4.539B backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "BF16 backbone; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_LARGER_CPU_PILOT.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "BF16 backbone / FP32 readout",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-d3-larger-20261011/analysis.json",
+      "observed_date": "2026-10-11",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_LARGER_CPU_PILOT.md"
+        }
+      ]
+    },
+    "D3nano": {
+      "display_name": "D3 nano · CPU",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": 2213241664,
+        "label": "2.213B backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "BF16 backbone including vision module; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "BF16 backbone / FP32 readout",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-d3-20261011/analysis.json",
+      "observed_date": "2026-10-11",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      ]
+    },
+    "Eos": {
+      "display_name": "Decision 2.0 Eos 0.8B · CPU",
+      "family": "Decision 2.0",
+      "model_size": {
+        "parameters": null,
+        "label": "0.8B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name size class; not a measured parameter count",
+        "source": {
+          "path": "profiles/decision2-eos-assets.json"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "profiles/decision2-eos-assets.json"
+        }
+      ]
+    },
+    "EosQ8": {
+      "display_name": "Decision 2.0 Eos 0.8B · Q8 Metal",
+      "family": "Decision 2.0",
+      "model_size": {
+        "parameters": null,
+        "label": "0.8B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name class, not an independent parameter count of converted GGUF; text only, without vision projector",
+        "source": {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        }
+      },
+      "runtime_group": "apple_metal_native",
+      "precision": "Q8_0",
+      "hardware_group": "Apple M5 Pro; 64 GiB unified memory",
+      "source_analysis": "docs/evidence/native-model-comparison-20261016/analysis.json",
+      "observed_date": "2026-10-16",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        },
+        {
+          "path": "docs/evidence/native-model-comparison-20261016/native-sessions.json"
+        }
+      ]
+    },
+    "GLiClass9B": {
+      "display_name": "GLiClass v4 9B · BF16 MPS",
+      "family": "GLiClass v4",
+      "model_size": {
+        "parameters": null,
+        "label": "9B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name size class; not a measured parameter count",
+        "source": {
+          "path": "docs/GLICLASS_V4_RESULTS_20261017.md"
+        }
+      },
+      "runtime_group": "apple_mps",
+      "precision": "BF16",
+      "hardware_group": "Apple M5 Pro; 64 GiB unified memory",
+      "source_analysis": "docs/evidence/gliclass-model-comparison-20261017/analysis.json",
+      "observed_date": "2026-10-17",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/GLICLASS_V4_RESULTS_20261017.md"
+        },
+        {
+          "path": "docs/evidence/gliclass-model-comparison-20261017/gliclass-session.json"
+        }
+      ]
+    },
+    "GLiNER": {
+      "display_name": "GLiNER2.5-multi-Decide · CPU",
+      "family": "GLiNER",
+      "model_size": {
+        "parameters": null,
+        "label": null,
+        "basis": "unavailable",
+        "scope": "No parameter count in selected public evidence",
+        "source": {
+          "path": "docs/GLINER_PILOT.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": null,
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "docs/GLINER_PILOT.md"
+        }
+      ]
+    },
+    "Indecis": {
+      "display_name": "Indecis · untrained open mode · CPU",
+      "family": "Indecis",
+      "model_size": {
+        "parameters": null,
+        "label": null,
+        "basis": "unavailable",
+        "scope": "No parameter count in selected public evidence",
+        "source": {
+          "path": "docs/INDECIS_PILOT.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "Floating-point path; no int8",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "docs/INDECIS_PILOT.md"
+        }
+      ]
+    },
+    "Jev": {
+      "display_name": "Jev 1.13 · HTTP API",
+      "family": "Jev",
+      "model_size": {
+        "parameters": null,
+        "label": null,
+        "basis": "unavailable",
+        "scope": "Remote model size, precision and server hardware not observed",
+        "source": {
+          "path": "docs/JEV_PILOT.md"
+        }
+      },
+      "runtime_group": "remote_api",
+      "precision": null,
+      "hardware_group": "Remote API; server hardware not observed",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "docs/JEV_PILOT.md"
+        }
+      ]
+    },
+    "Julia": {
+      "display_name": "Julia-1 · CPU",
+      "family": "Julia",
+      "model_size": {
+        "parameters": null,
+        "label": null,
+        "basis": "unavailable",
+        "scope": "No parameter count in selected public evidence",
+        "source": {
+          "path": "docs/JULIA_RESULTS.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": null,
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "docs/JULIA_RESULTS.md"
+        }
+      ]
+    },
+    "Kai": {
+      "display_name": "Decision 2.0 Kai 0.6B · CPU",
+      "family": "Decision 2.0",
+      "model_size": {
+        "parameters": null,
+        "label": "0.6B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name size class; not a measured parameter count",
+        "source": {
+          "path": "profiles/decision2-kai-assets.json"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "profiles/decision2-kai-assets.json"
+        }
+      ]
+    },
+    "Laya": {
+      "display_name": "Laya multilingual · CPU",
+      "family": "Laya",
+      "model_size": {
+        "parameters": null,
+        "label": "322M declared",
+        "basis": "publisher_declared",
+        "scope": "Rounded published parameter count; not independently counted here",
+        "source": {
+          "path": "docs/LAYA_RESULTS.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "docs/LAYA_RESULTS.md"
+        }
+      ]
+    },
+    "Liquid3": {
+      "display_name": "Liquid d1-3B · CPU",
+      "family": "Liquid d1",
+      "model_size": {
+        "parameters": 3123483888,
+        "label": "3.123B",
+        "basis": "checkpoint_tensor_count",
+        "scope": "Recorded expected loaded parameter count, tied embeddings counted once",
+        "source": {
+          "path": "docs/LARGER_CPU_PILOT_20261011.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json",
+      "observed_date": "2026-10-11",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/LARGER_CPU_PILOT_20261011.md"
+        }
+      ]
+    },
+    "ModernJEV": {
+      "display_name": "ModernJEV-Decide-Preview · CPU",
+      "family": "ModernJEV",
+      "model_size": {
+        "parameters": null,
+        "label": null,
+        "basis": "unavailable",
+        "scope": "No parameter count in selected public evidence",
+        "source": {
+          "path": "profiles/modernjev-assets.json"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "profiles/modernjev-assets.json"
+        }
+      ]
+    },
+    "Muose": {
+      "display_name": "Muose-50M-Decision · CPU",
+      "family": "Muose",
+      "model_size": {
+        "parameters": null,
+        "label": "50M class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name size class; not a measured parameter count",
+        "source": {
+          "path": "profiles/muose-assets.json"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "profiles/muose-assets.json"
+        }
+      ]
+    },
+    "Noma": {
+      "display_name": "Noma · CPU",
+      "family": "Noma",
+      "model_size": {
+        "parameters": null,
+        "label": "~2.67B declared",
+        "basis": "publisher_declared",
+        "scope": "Rounded model-family declaration; not independently counted here",
+        "source": {
+          "path": "docs/LARGER_DECISION_MODELS_PILOT.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "BF16",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "docs/LARGER_DECISION_MODELS_PILOT.md"
+        }
+      ]
+    },
+    "Nox": {
+      "display_name": "Decision 2.0 Nox 4B · CPU",
+      "family": "Decision 2.0",
+      "model_size": {
+        "parameters": 4208383488,
+        "label": "4.208B",
+        "basis": "checkpoint_tensor_count",
+        "scope": "Recorded expected loaded parameter count",
+        "source": {
+          "path": "docs/LARGER_CPU_PILOT_20261011.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json",
+      "observed_date": "2026-10-11",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/LARGER_CPU_PILOT_20261011.md"
+        }
+      ]
+    },
+    "Omni": {
+      "display_name": "Liquid d1-omni-600M · CPU",
+      "family": "Liquid d1",
+      "model_size": {
+        "parameters": null,
+        "label": "600M class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name size class; not a measured parameter count",
+        "source": {
+          "path": "profiles/omni-assets.json"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261010/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "profiles/omni-assets.json"
+        }
+      ]
+    },
+    "Sol": {
+      "display_name": "Decision 2.0 Sol 2B · CPU",
+      "family": "Decision 2.0",
+      "model_size": {
+        "parameters": null,
+        "label": "2B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name size class; not a measured parameter count",
+        "source": {
+          "path": "docs/evidence/model-comparison-complete-20261010-sol/analysis.json"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-complete-20261010-sol/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "docs/evidence/model-comparison-complete-20261010-sol/analysis.json"
+        }
+      ]
+    },
+    "Vela03": {
+      "display_name": "Vela 2.0 0.3B · CPU",
+      "family": "Vela 2.0",
+      "model_size": {
+        "parameters": 309114369,
+        "label": "0.309B declared",
+        "basis": "publisher_declared",
+        "scope": "Published main checkpoint parameter count; separate extraction head excluded",
+        "source": {
+          "path": "docs/VELA2_PILOT.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-vela2-20261011/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "docs/VELA2_PILOT.md"
+        }
+      ]
+    },
+    "Vela08": {
+      "display_name": "Vela 2.0 0.8B · CPU",
+      "family": "Vela 2.0",
+      "model_size": {
+        "parameters": 754565953,
+        "label": "0.755B declared",
+        "basis": "publisher_declared",
+        "scope": "Published main checkpoint parameter count; separate extraction head excluded",
+        "source": {
+          "path": "docs/VELA2_PILOT.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-vela2-20261011/analysis.json",
+      "observed_date": null,
+      "date_label": "Historical observations consolidated by 2026-10-11; individual run date not asserted here",
+      "evidence": [
+        {
+          "path": "docs/VELA2_PILOT.md"
+        }
+      ]
+    },
+    "Vela3Fast": {
+      "display_name": "Vela 3.0 fast · decision only · CPU",
+      "family": "Vela 3.0",
+      "model_size": {
+        "parameters": 380436226,
+        "label": "0.380B decision backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "F32 decision checkpoint, including scalar log_tau; optional span/router/vision adapters not loaded",
+        "source": {
+          "path": "docs/VELA3_FAST_RESULTS_20261028.md"
+        }
+      },
+      "runtime_group": "cpu_new",
+      "precision": "FP32",
+      "hardware_group": "Apple M5 Pro CPU; 64 GiB unified memory",
+      "source_analysis": "docs/evidence/vela3-fast-20261028/analysis.json",
+      "observed_date": "2026-10-28",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/VELA3_FAST_RESULTS_20261028.md"
+        }
+      ]
+    },
+    "Vela4": {
+      "display_name": "Vela 2.0 4B · CPU",
+      "family": "Vela 2.0",
+      "model_size": {
+        "parameters": 4211182082,
+        "label": "4.211B",
+        "basis": "checkpoint_tensor_count",
+        "scope": "Recorded expected loaded parameter count, including scalar set_bias omitted by HF aggregate",
+        "source": {
+          "path": "docs/LARGER_CPU_PILOT_20261011.md"
+        }
+      },
+      "runtime_group": "historical_cpu",
+      "precision": "FP32",
+      "hardware_group": "Historical Linux/WSL CPU; processor not identified here",
+      "source_analysis": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json",
+      "observed_date": "2026-10-11",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/LARGER_CPU_PILOT_20261011.md"
+        }
+      ]
+    }
+  }
+}
