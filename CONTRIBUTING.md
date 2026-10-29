@@ -20,6 +20,8 @@ python3 -m deposium_bench validate-cases \
   --dataset datasets/physics-choice-v1/cases.jsonl
 python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-discovery-v1/cases.jsonl
+python3 -m deposium_bench validate-cases \
+  --dataset datasets/tool-arguments-v1/cases.jsonl
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
@@ -35,6 +37,7 @@ Each command should exit `0`. The expected signals are:
 | Registry | `status: valid`, `evaluation_status: not_run` | Contracts are structurally valid; this does not contact or qualify services. |
 | Context / physics cases | `status: valid`, case count and hash | Valid corpus, respectively 132 / 48 cases; no candidate inference. |
 | Tool-discovery cases | `status: valid`, `cases: 12` | FR/EN catalogue-selection pack; recorded controls only, no qualified model or executed tool. |
+| Tool-argument cases | `status: valid`, `cases: 4` | Checks the bounded training fixture without executing its tools. Run its explicit control profile for actual lookup/sum receipts. |
 | First-tool cases | `status: valid_review_corpus`, `cases_scored: 0` | Valid 24-case proposal pack; references remain provisional. |
 | Passage dataset / corpus | `status: valid`; `Dataset regeneration matches` | Valid 1,536-case corpus and no difference from the frozen generated corpus. |
 | Capability corpus | `status: valid_frozen_corpus`, `cases_scored: 0` | No difference from the frozen 192-case corpus. |

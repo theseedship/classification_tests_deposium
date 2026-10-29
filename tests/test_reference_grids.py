@@ -36,7 +36,9 @@ class ReferenceGridTests(unittest.TestCase):
         # The real audit must complete using local public fixtures alone.
         with patch("socket.create_connection", side_effect=AssertionError("network forbidden")), \
                 patch("urllib.request.urlopen", side_effect=AssertionError("HTTP forbidden")), \
-                patch("subprocess.Popen", side_effect=AssertionError("external processes forbidden")):
+                patch("subprocess.Popen", side_effect=AssertionError("external processes forbidden")), \
+                patch("deposium_bench.synthetic_tools.FixtureStore.lookup", side_effect=AssertionError("audit must not execute lookup")), \
+                patch("deposium_bench.synthetic_tools.FixtureStore.sum", side_effect=AssertionError("audit must not execute sum")):
             cls.report = grids.audit()
         cls.cases, cls.digest = grids.load_cases(ROOT / "datasets/physics-choice-v1/cases.jsonl")
 
@@ -61,6 +63,11 @@ class ReferenceGridTests(unittest.TestCase):
         self.assertEqual(sum(pack["wrong_controls"] for pack in packs), 1144)
         self.assertEqual(sum(pack["empty_controls"] for pack in packs), 772)
         self.assertEqual(sum(pack["unscored_controls"] for pack in packs), 1544)
+        execution = report["execution_fixtures"]
+        self.assertEqual(len(execution), 1)
+        self.assertEqual((execution[0]["cases"], execution[0]["families"]), (4, 2))
+        self.assertEqual(execution[0]["tool_execution"], "not_run_by_this_check")
+        self.assertEqual(execution[0]["scorer_controls"], "not_run_by_this_check")
         for pack in packs:
             self.assertEqual(pack["sha256"], hashlib.sha256((ROOT / pack["source"]).read_bytes()).hexdigest())
 

@@ -69,6 +69,13 @@ separate shortlist recall/precision from final-set sufficiency and unnecessary
 selections. Only recorded controls are qualified so far: no model result,
 argument execution or adaptive tool loop is established.
 
+The [argument-execution fixture](datasets/tool-arguments-v1/README.md) adds four
+FR/EN training cases with two bounded Python tools. A lookup actually returns
+an artifact; a proposed sum must consume that exact artifact with the correct
+column, unit and scope. The execution adapter retains actual receipts and
+separate stage metrics. This is synthetic harness execution, with zero real
+model cases or application integrations; adaptive episodes remain a separate task.
+
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their
 family split; they are not independent users or facts. Identity, access,
@@ -89,6 +96,8 @@ python3 -m deposium_bench validate-cases \
   --dataset datasets/physics-choice-v1/cases.jsonl
 python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-discovery-v1/cases.jsonl
+python3 -m deposium_bench validate-cases \
+  --dataset datasets/tool-arguments-v1/cases.jsonl
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check

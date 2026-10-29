@@ -1,0 +1,87 @@
+{
+  "schema_version": "deposium.tool-arguments-manifest/v1",
+  "dataset_id": "tool-arguments-v1",
+  "contract_id": "bench.tool-arguments",
+  "review": "agent_only_pending_human",
+  "evidence_level": "harness_control_only",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "7ff5065b1b8adb70d09a17888e0f64fc865bf3445176e0802a8d904a0ccd703b",
+  "case_count": 4,
+  "family_count": 2,
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "counts_by_language": {
+    "fr": 2,
+    "en": 2
+  },
+  "counts_by_split": {
+    "train": 4,
+    "calibration": 0,
+    "test": 0
+  },
+  "families": [
+    {
+      "family_id": "tool-arguments-family-001",
+      "case_ids": [
+        "a001-fr",
+        "a001-en"
+      ],
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-argument-table-001",
+      "dataset_id": "ledger-demo",
+      "scope_id": "scope-alpha",
+      "column": "amount",
+      "unit": "EUR",
+      "authored_reference_value": 60,
+      "control_artifact_id": "artifact:1b955560f3dbb985a141e5523cfaa174a8587aed58aff12e91aa2b5530bc1f4a"
+    },
+    {
+      "family_id": "tool-arguments-family-002",
+      "case_ids": [
+        "a002-fr",
+        "a002-en"
+      ],
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-argument-table-002",
+      "dataset_id": "mass-demo",
+      "scope_id": "scope-beta",
+      "column": "mass",
+      "unit": "kg",
+      "authored_reference_value": 12,
+      "control_artifact_id": "artifact:c894f7fc4661c1a1ce5a7c5d38ff78f25624817daf764c8f74085ccc3313aadd"
+    }
+  ],
+  "control_profile": "profiles/tool-arguments-control.json",
+  "control_profile_sha256": "05fc3c7dcab137b88924f00d37fd75eb5a9d75e26f485f2f06146424d09235c7",
+  "control_recordings": "fixtures/tool-arguments-control.jsonl",
+  "control_recordings_sha256": "48ef43e6662f5668b1b2d2b39bb07630eb1dc3af9f8284d99e8a9c7b40721aeb",
+  "artifact_id_rule": "artifact: + SHA256 of UTF-8 JSON {scope_id,dataset}, with sorted keys, compact separators, ensure_ascii=true and finite JSON values",
+  "provenance": "Entirely synthetic tables, scope IDs, requests and agent-authored translations. Fixed literal results are declared before any candidate inference; no private source data or live service inventory was copied.",
+  "reference_construction": "Independent authored integer totals: 10 + 15 + 35 = 60 EUR; 2 + 3 + 7 = 12 kg. Control artifact hashes identify data, not the answer. The executed tool runtime never reads reference assertions.",
+  "qualification": {
+    "candidate_model_cases": 0,
+    "human_judgments": 0,
+    "held_out_cases": 0,
+    "real_application_integration": false,
+    "adaptive_episode_implemented": false
+  },
+  "limitations": [
+    "All four cases are training fixtures; there is no calibration/test benchmark.",
+    "Both families share the same lookup-to-sum operation pattern, also used in earlier training controls.",
+    "FR/EN variants share their table, scope, reference and content-addressed artifact ID.",
+    "The first lookup is fixed by the harness; only the next-call proposal is provided by the scripted candidate.",
+    "Argument values are constrained by the published schema; no real model output path is qualified.",
+    "Actual synthetic tool execution is separate from any live MCP or application integration.",
+    "References and translations remain agent-authored, not human-certified."
+  ]
+}

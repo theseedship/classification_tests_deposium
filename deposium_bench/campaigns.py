@@ -82,7 +82,7 @@ def _source_fingerprint() -> dict:
 def _scorer_fingerprint() -> dict:
     root = Path(__file__).parent
     files = {name: _hash((root / name).read_bytes()) for name in
-             ("scoring.py", "cases.py", "tool_plan.py", "tool_discovery.py", "research_corpus.py", "physics_corpus.py", "capability_corpus.py", "choice_protocol.py",
+             ("scoring.py", "cases.py", "tool_plan.py", "tool_discovery.py", "tool_arguments.py", "synthetic_tools.py", "research_corpus.py", "physics_corpus.py", "capability_corpus.py", "choice_protocol.py",
               "lengths.py", "data/context-distractors.json")}
     from .capability_corpus import SOURCE_FILES
     for name in SOURCE_FILES:
@@ -113,7 +113,7 @@ def _limit(value: int | None) -> None:
 def _prepare_profile(profile_path: Path) -> tuple[dict, str, bytes | None]:
     profile, digest = load_profile(profile_path)
     recordings = None
-    if profile["adapter"] == "recorded":
+    if profile["adapter"] in {"recorded", "fixture_arguments"}:
         recordings = (profile_path.parent / profile["recordings"]).read_bytes()
         profile = {**profile, "recordings": "recordings.jsonl"}
     elif profile["adapter"] in {"julia", "gliner", "decision2", "vela2", "d3"}:
@@ -220,7 +220,7 @@ def _stack_context(cases: list[dict], profile: dict, stack_root: str | Path | No
                            "case_ids": [case["case_id"] for case in linked_cases],
                            "supported_contract_ids": supported, "selected": selected,
                            "omission_reason": None if selected else (
-                               "harness_control_only" if profile["adapter"] == "recorded" else
+                               "harness_control_only" if profile["qualification"] == "harness_control" else
                                "model_isolated_only" if profile["qualification"] == "model_isolated" else
                                "no_cases_in_campaign" if not linked_cases else "no_supported_contract")})
     payload = _encode(preflight) if preflight is not None else None
@@ -237,7 +237,8 @@ def _manifest(cases: list[dict], dataset: bytes, profile: dict, source_profile_h
         "created_at": datetime.now(timezone.utc).isoformat(), "mode": mode,
         "qualification": profile["qualification"],
         "proof_level": "harness_control" if profile["qualification"] == "harness_control" else "A",
-        "input_protocol": ("recorded_control" if profile["adapter"] == "recorded" else
+        "input_protocol": ("fixture_arguments_control" if profile["adapter"] == "fixture_arguments" else
+                           "recorded_control" if profile["adapter"] == "recorded" else
                            "context_choice" if "bench.context-choice" in profile["capabilities"] else "current_equivalent"),
         "dataset_sha256": _hash(dataset), "profile_sha256": _hash(_encode(profile)),
         "source_profile_sha256": source_profile_hash,
@@ -385,6 +386,17 @@ def render_report(summary: dict) -> str:
                   f"{observed} valid select-reference observations; observed mean "
                   f"{displayed(discovery['unnecessary_tools_mean_observed'])}. "
                   "This count does not assign zero unnecessary calls to unobserved outputs."]
+    arguments = metrics.get("task_metrics", {}).get("bench.tool-arguments")
+    if arguments is not None:
+        total = arguments["eligible_cases"]
+        lines += ["", "## Synthetic argument execution", "",
+                  "Recorded proposals; the fixture tools actually execute. No model or product is qualified.",
+                  "", "| Stage | Correct / eligible cases |", "|---|---:|"]
+        for stage in ("tool", "arguments", "binding", "execution", "result"):
+            lines.append(f"| {stage} | {arguments[stage + '_correct_cases']} / {total} |")
+        lines += ["", f"Observed tool calls: {arguments['tool_calls_observed']}; "
+                  f"cases with retained execution traces: {arguments['cases_with_execution_trace']} / {total}. "
+                  "An absent trace is unobserved execution, not proof of zero calls."]
     lines += ["", "## Cas à examiner", ""]
     for row in metrics["rows"]:
         if not row["passed"]:
@@ -489,7 +501,7 @@ def _archive(archive_dir: str | Path) -> tuple[Path, dict, list[dict], list[dict
     profile, profile_hash = parse_profile(payloads["profile.json"])
     if profile_hash != manifest.get("profile_sha256"):
         raise CampaignError("Archived candidate profile differs from its manifest.")
-    if profile["adapter"] == "recorded":
+    if profile["adapter"] in {"recorded", "fixture_arguments"}:
         if (profile["recordings"] != "recordings.jsonl" or "recordings.jsonl" not in payloads or
                 _hash(payloads["recordings.jsonl"]) !=
                 manifest.get("adapter_provenance", {}).get("recordings_sha256")):

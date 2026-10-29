@@ -61,7 +61,8 @@
       "enum": [
         "current_equivalent",
         "recorded_control",
-        "context_choice"
+        "context_choice",
+        "fixture_arguments_control"
       ]
     },
     "dataset_sha256": {
@@ -118,6 +119,9 @@
         },
         {
           "$ref": "#/$defs/vela3_fast_provenance"
+        },
+        {
+          "$ref": "#/$defs/fixture_arguments_provenance"
         }
       ]
     },
@@ -8021,6 +8025,61 @@
         }
       ],
       "description": "Vela3-fast decision backbone only. Complete pinned assets/runtime and owned CPU worker resource observations are required when available. No span, vision, routing or product qualification."
+    },
+    "fixture_arguments_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_sha256",
+        "adapter_sha256",
+        "identity_sha256",
+        "recordings_sha256",
+        "adapter",
+        "qualification",
+        "model",
+        "capabilities",
+        "available",
+        "recordings_count"
+      ],
+      "properties": {
+        "profile_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "adapter_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "identity_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "recordings_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "adapter": {
+          "const": "fixture_arguments"
+        },
+        "qualification": {
+          "const": "harness_control"
+        },
+        "model": {
+          "type": "null"
+        },
+        "capabilities": {
+          "const": [
+            "bench.tool-arguments"
+          ]
+        },
+        "available": {
+          "const": true
+        },
+        "recordings_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
     }
   },
   "allOf": [
@@ -8093,12 +8152,18 @@
             "const": "harness_control"
           },
           "input_protocol": {
-            "const": "recorded_control"
+            "enum": [
+              "recorded_control",
+              "fixture_arguments_control"
+            ]
           },
           "adapter_provenance": {
             "properties": {
               "adapter": {
-                "const": "recorded"
+                "enum": [
+                  "recorded",
+                  "fixture_arguments"
+                ]
               },
               "qualification": {
                 "const": "harness_control"
@@ -8192,6 +8257,52 @@
             }
           }
         ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter_provenance": {
+            "properties": {
+              "adapter": {
+                "const": "fixture_arguments"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "harness_control"
+          },
+          "proof_level": {
+            "const": "harness_control"
+          },
+          "input_protocol": {
+            "const": "fixture_arguments_control"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input_protocol": {
+            "const": "fixture_arguments_control"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adapter_provenance": {
+            "properties": {
+              "adapter": {
+                "const": "fixture_arguments"
+              }
+            }
+          }
+        }
       }
     }
   ]

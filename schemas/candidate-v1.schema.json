@@ -42,7 +42,8 @@
         "systemone_local",
         "gliclass",
         "vela3_fast",
-        "decision3_http"
+        "decision3_http",
+        "fixture_arguments"
       ]
     },
     "qualification": {
@@ -64,7 +65,8 @@
           "mcps.search",
           "bench.context-choice",
           "bench.tool-plan",
-          "bench.tool-discovery"
+          "bench.tool-discovery",
+          "bench.tool-arguments"
         ]
       },
       "uniqueItems": true
@@ -1005,6 +1007,76 @@
           },
           "qualification": {
             "const": "harness_control"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "fixture_arguments"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adapter": {
+            "const": "fixture_arguments"
+          },
+          "qualification": {
+            "const": "harness_control"
+          },
+          "model": {
+            "type": "null"
+          },
+          "revision": {
+            "type": "null"
+          },
+          "recordings": {
+            "type": "string",
+            "minLength": 1
+          },
+          "capabilities": {
+            "const": [
+              "bench.tool-arguments"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "capabilities": {
+            "contains": {
+              "const": "bench.tool-arguments"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adapter": {
+            "const": "fixture_arguments"
+          },
+          "qualification": {
+            "const": "harness_control"
+          },
+          "model": {
+            "type": "null"
+          },
+          "revision": {
+            "type": "null"
+          },
+          "recordings": {
+            "type": "string",
+            "minLength": 1
+          },
+          "capabilities": {
+            "const": [
+              "bench.tool-arguments"
+            ]
           }
         }
       }
