@@ -21,6 +21,9 @@ prepared the human-review packet, with **zero actual human judgments** so far.
 See [who fills the forms and when](REFERENCE_REVIEW_PILOT.md#first-review-who-does-what-and-when).
 Human assessment remains #8 and can proceed independently of the next offline
 engineering work. There is no need to rerun the historical leaderboard first.
+Model grading itself is automatic: the [reference-grid check](PROTOCOL.md#automatic-grading-and-reference-checks)
+and bounded agent reviews strengthen the checks without assigning expert forms
+to the maintainer. Human review stays a separate, explicitly pending audit.
 
 | Work | Prerequisite and next action | Exit criterion |
 |---|---|---|

@@ -1,0 +1,1402 @@
+{
+  "schema_version": "deposium.agent-reference-review/v1",
+  "date": "2026-10-29",
+  "source_commit": "ea92001641e5e39a666459f945d1208f0dcf4e7e",
+  "purpose": "Bounded agent consistency review of existing synthetic references, separate from candidate evaluation and human assessment.",
+  "method": {
+    "actor_type": "agent_not_human",
+    "procedure": "Read task instructions and visible input projections, derive and freeze labels, then display and compare authored reference labels. No candidate model predictions or raw campaign archives were inspected.",
+    "label_freeze_sha256": "36c03b0387e7bd0b763f48c0da3a6dbaeab0ff978f04a4de8b5035992abc8bea",
+    "label_freeze_attestation": "Execution-order record from this agent session, not an externally timestamped commitment or proof of perfect blinding.",
+    "independence": "A separate agent pass within the same assistant framework/model family; independence from the authoring model family is not established.",
+    "judge_model_revision": "not_recorded",
+    "judge_build": "not_recorded",
+    "sampling_settings": "not_recorded",
+    "human_judgments": 0,
+    "candidate_model_cases_scored": 0,
+    "external_inference_services_called": 0,
+    "existing_references_changed": false
+  },
+  "source_sha256": {
+    "datasets/physics-choice-v1/cases.jsonl": "e21cd2e0f4e35465b56158ba1fa07c8d8203be81a969c6edf4b7630d2f0d7307",
+    "datasets/passage-evidence-v1/cases.jsonl": "35a8b8982d12959985218b5bc6e10e932ba30970bd7ab9a81c6f10d17a7fe476",
+    "plans/reference-review-pilot-v1.json": "e99de7e9d3ef4ce1f999645f14080e34ee36cafc4f8ce91850022bbbb830c447"
+  },
+  "selection": {
+    "manifest": "plans/reference-review-pilot-v1.json",
+    "physics": "Four manifest families: uniform distance, parallel resistance, thermal mixing and missing mass; both French and English.",
+    "passage": "All eight manifest scenario families, French full and English head_384 views, rotation zero.",
+    "physics_cases_assessed": 8,
+    "physics_families_assessed": 4,
+    "passage_pools_assessed": 16,
+    "passage_families_assessed": 8,
+    "fresh_held_out_data": false,
+    "language_view_sampling": "Language and passage view are confounded in this bounded passage selection; this is not an isolated translation or truncation-effect experiment."
+  },
+  "comparison_summary": {
+    "assessed_label_comparisons": {
+      "physics": 8,
+      "relevance": 64,
+      "support": 96,
+      "answerability": 16
+    },
+    "agreements_with_authored_references": {
+      "physics": 8,
+      "relevance": 64,
+      "support": 96,
+      "answerability": 16
+    },
+    "total_assessed_label_comparisons": 184,
+    "total_agreements": 184,
+    "disagreements_found": 0,
+    "interpretation": "Agreement on the reviewed synthetic sample, not proof that every reference is semantically true and not a candidate model accuracy score. Translations and views are correlated."
+  },
+  "independent_arithmetic_checks": [
+    {
+      "family": "physics-uniform-distance",
+      "expression": "12 * 5",
+      "exact_result": "60",
+      "unit": "m"
+    },
+    {
+      "family": "physics-parallel-resistance",
+      "expression": "1 / (1/6 + 1/3)",
+      "exact_result": "2",
+      "unit": "ohm"
+    },
+    {
+      "family": "physics-thermal-mixing",
+      "expression": "(1*80 + 3*20)/(1+3)",
+      "exact_result": "35",
+      "unit": "degree Celsius"
+    },
+    {
+      "family": "physics-missing-mass",
+      "expression": "12/m",
+      "counterexamples": [
+        {
+          "positive_mass_kg": 1,
+          "acceleration_m_per_s2": 12
+        },
+        {
+          "positive_mass_kg": 2,
+          "acceleration_m_per_s2": 6
+        }
+      ],
+      "conclusion": "A unique acceleration cannot be determined."
+    }
+  ],
+  "physics_reviews": [
+    {
+      "review_id": "V001",
+      "source_case_id": "physics-uniform-distance-fr",
+      "family_id": "physics-uniform-distance-fr-en",
+      "language": "fr",
+      "agent_choice_id_before_reference_comparison": "a",
+      "authored_reference_choice_id": "a",
+      "agrees_with_authored_reference": true,
+      "derivation_from_visible_input": "12 m/s * 5 s = 60 m"
+    },
+    {
+      "review_id": "V002",
+      "source_case_id": "physics-uniform-distance-en",
+      "family_id": "physics-uniform-distance-fr-en",
+      "language": "en",
+      "agent_choice_id_before_reference_comparison": "a",
+      "authored_reference_choice_id": "a",
+      "agrees_with_authored_reference": true,
+      "derivation_from_visible_input": "12 m/s * 5 s = 60 m"
+    },
+    {
+      "review_id": "V005",
+      "source_case_id": "physics-parallel-resistance-fr",
+      "family_id": "physics-parallel-resistance-fr-en",
+      "language": "fr",
+      "agent_choice_id_before_reference_comparison": "c",
+      "authored_reference_choice_id": "c",
+      "agrees_with_authored_reference": true,
+      "derivation_from_visible_input": "1/(1/6 + 1/3) = 2 ohm"
+    },
+    {
+      "review_id": "V006",
+      "source_case_id": "physics-parallel-resistance-en",
+      "family_id": "physics-parallel-resistance-fr-en",
+      "language": "en",
+      "agent_choice_id_before_reference_comparison": "c",
+      "authored_reference_choice_id": "c",
+      "agrees_with_authored_reference": true,
+      "derivation_from_visible_input": "1/(1/6 + 1/3) = 2 ohm"
+    },
+    {
+      "review_id": "V011",
+      "source_case_id": "physics-thermal-mixing-fr",
+      "family_id": "physics-thermal-mixing-fr-en",
+      "language": "fr",
+      "agent_choice_id_before_reference_comparison": "a",
+      "authored_reference_choice_id": "a",
+      "agrees_with_authored_reference": true,
+      "derivation_from_visible_input": "(1*80 + 3*20)/(1+3) = 35 Celsius; same constant specific heat, isolated system and negligible vessel explicitly supplied"
+    },
+    {
+      "review_id": "V012",
+      "source_case_id": "physics-thermal-mixing-en",
+      "family_id": "physics-thermal-mixing-fr-en",
+      "language": "en",
+      "agent_choice_id_before_reference_comparison": "a",
+      "authored_reference_choice_id": "a",
+      "agrees_with_authored_reference": true,
+      "derivation_from_visible_input": "(1*80 + 3*20)/(1+3) = 35 Celsius; same constant specific heat, isolated system and negligible vessel explicitly supplied"
+    },
+    {
+      "review_id": "V015",
+      "source_case_id": "physics-missing-mass-fr",
+      "family_id": "physics-missing-mass-fr-en",
+      "language": "fr",
+      "agent_choice_id_before_reference_comparison": "c",
+      "authored_reference_choice_id": "c",
+      "agrees_with_authored_reference": true,
+      "derivation_from_visible_input": "a=12/m has different answers for positive mass m=1 and m=2; no unique acceleration is determined"
+    },
+    {
+      "review_id": "V016",
+      "source_case_id": "physics-missing-mass-en",
+      "family_id": "physics-missing-mass-fr-en",
+      "language": "en",
+      "agent_choice_id_before_reference_comparison": "c",
+      "authored_reference_choice_id": "c",
+      "agrees_with_authored_reference": true,
+      "derivation_from_visible_input": "a=12/m has different answers for positive mass m=1 and m=2; no unique acceleration is determined"
+    }
+  ],
+  "passage_reviews": [
+    {
+      "review_id": "V017",
+      "source_case_id": "fc9f72552a442db9a051f96b",
+      "family_id": "family-589683ab6db468293afcd1ed",
+      "scenario_type": "component_relation_collision",
+      "question_language": "fr",
+      "passage_language": "fr",
+      "view": "full",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 8,
+          "agrees": 8
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "The named entity and exact requested relation must both match. The same number on a neighboring field does not establish the claim. The direct 43-token ceiling fact supports c1 and contradicts the alternative 56-token value under the synthetic single-value field interpretation.",
+      "selected_visible_evidence": [
+        {
+          "claim_position": 1,
+          "passage_position": 1,
+          "agent_label": "supports",
+          "exact_visible_quote": "Dans le registre de Tessuron, 43 jetons correspond à « plafond du fonds cuivre »."
+        },
+        {
+          "claim_position": 2,
+          "passage_position": 1,
+          "agent_label": "refutes",
+          "exact_visible_quote": "Dans le registre de Tessuron, 43 jetons correspond à « plafond du fonds cuivre »."
+        }
+      ]
+    },
+    {
+      "review_id": "V020",
+      "source_case_id": "60f33792f0391edb15483fe8",
+      "family_id": "family-589683ab6db468293afcd1ed",
+      "scenario_type": "component_relation_collision",
+      "question_language": "en",
+      "passage_language": "en",
+      "view": "head_384",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 8,
+          "agrees": 8
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "The named entity and exact requested relation must both match. The same number on a neighboring field does not establish the claim. The direct 43-token ceiling fact supports c1 and contradicts the alternative 56-token value under the synthetic single-value field interpretation.",
+      "selected_visible_evidence": [
+        {
+          "claim_position": 1,
+          "passage_position": 1,
+          "agent_label": "supports",
+          "exact_visible_quote": "In the register for Tessuron, 43 tokens corresponds to “copper fund ceiling”."
+        },
+        {
+          "claim_position": 2,
+          "passage_position": 1,
+          "agent_label": "refutes",
+          "exact_visible_quote": "In the register for Tessuron, 43 tokens corresponds to “copper fund ceiling”."
+        }
+      ]
+    },
+    {
+      "review_id": "V021",
+      "source_case_id": "e384aed32be6012f708a31df",
+      "family_id": "family-0e69abc5df634cb6aede3f0f",
+      "scenario_type": "variant_scope",
+      "question_language": "fr",
+      "passage_language": "fr",
+      "view": "full",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "Only the explicitly named R variant answers the query. The base entity and S/Z variants cannot substitute for R, even if the number happens to be identical.",
+      "selected_visible_evidence": [
+        {
+          "claim_position": 1,
+          "passage_position": 1,
+          "agent_label": "supports",
+          "exact_visible_quote": "La fiche de Caldrin R indique pour « seuil de contrôle » une valeur de 40 crans."
+        }
+      ]
+    },
+    {
+      "review_id": "V024",
+      "source_case_id": "48bf1d981537bcbe9840f327",
+      "family_id": "family-0e69abc5df634cb6aede3f0f",
+      "scenario_type": "variant_scope",
+      "question_language": "en",
+      "passage_language": "en",
+      "view": "head_384",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "Only the explicitly named R variant answers the query. The base entity and S/Z variants cannot substitute for R, even if the number happens to be identical.",
+      "selected_visible_evidence": [
+        {
+          "claim_position": 1,
+          "passage_position": 1,
+          "agent_label": "supports",
+          "exact_visible_quote": "The sheet for Caldrin R gives a value of 40 steps for “inspection threshold”."
+        }
+      ]
+    },
+    {
+      "review_id": "V025",
+      "source_case_id": "641b94a305cbe23ce5cf0e32",
+      "family_id": "family-3897f428d1ef82dccfc2ea0d",
+      "scenario_type": "unit_condition_collision",
+      "question_language": "fr",
+      "passage_language": "fr",
+      "view": "full",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 8,
+          "agrees": 8
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "Only the fact at 18 degrees Celsius answers the query. The 29-degree fact changes the condition, and a tax-reserve fact changes the relation. For the same requested relation/condition, 65 seconds differs from 65 minutes (3900 seconds).",
+      "selected_visible_evidence": [
+        {
+          "claim_position": 1,
+          "passage_position": 1,
+          "agent_label": "supports",
+          "exact_visible_quote": "Dans le registre de Firavo, 65 secondes correspond à « réserve comptable à 18 °C »."
+        },
+        {
+          "claim_position": 2,
+          "passage_position": 1,
+          "agent_label": "refutes",
+          "exact_visible_quote": "Dans le registre de Firavo, 65 secondes correspond à « réserve comptable à 18 °C »."
+        }
+      ]
+    },
+    {
+      "review_id": "V028",
+      "source_case_id": "743322c2ffd5f332c6f4573e",
+      "family_id": "family-3897f428d1ef82dccfc2ea0d",
+      "scenario_type": "unit_condition_collision",
+      "question_language": "en",
+      "passage_language": "en",
+      "view": "head_384",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 8,
+          "agrees": 8
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "Only the fact at 18 degrees Celsius answers the query. The 29-degree fact changes the condition, and a tax-reserve fact changes the relation. For the same requested relation/condition, 65 seconds differs from 65 minutes (3900 seconds).",
+      "selected_visible_evidence": [
+        {
+          "claim_position": 1,
+          "passage_position": 1,
+          "agent_label": "supports",
+          "exact_visible_quote": "In the register for Firavo, 65 seconds corresponds to “accounting reserve at 18 °C”."
+        },
+        {
+          "claim_position": 2,
+          "passage_position": 1,
+          "agent_label": "refutes",
+          "exact_visible_quote": "In the register for Firavo, 65 seconds corresponds to “accounting reserve at 18 °C”."
+        }
+      ]
+    },
+    {
+      "review_id": "V029",
+      "source_case_id": "3dc4e6700052bf7385ed68c6",
+      "family_id": "family-02726c45d5b3d2c472640d85",
+      "scenario_type": "negation_exception",
+      "question_language": "fr",
+      "passage_language": "fr",
+      "view": "full",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 8,
+          "agrees": 8
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "The explicit exception says the rule does not apply in the requested zone. A neighboring zone or a differently named rule does not override this negation.",
+      "selected_visible_evidence": [
+        {
+          "claim_position": 1,
+          "passage_position": 1,
+          "agent_label": "supports",
+          "exact_visible_quote": "La règle de Dovara ne s'applique pas dans la zone « Lunet » : cette zone constitue une exception explicite."
+        },
+        {
+          "claim_position": 2,
+          "passage_position": 1,
+          "agent_label": "refutes",
+          "exact_visible_quote": "La règle de Dovara ne s'applique pas dans la zone « Lunet » : cette zone constitue une exception explicite."
+        }
+      ]
+    },
+    {
+      "review_id": "V032",
+      "source_case_id": "33fb40e241501b672a0adc8b",
+      "family_id": "family-02726c45d5b3d2c472640d85",
+      "scenario_type": "negation_exception",
+      "question_language": "en",
+      "passage_language": "en",
+      "view": "head_384",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 8,
+          "agrees": 8
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "The explicit exception says the rule does not apply in the requested zone. A neighboring zone or a differently named rule does not override this negation.",
+      "selected_visible_evidence": [
+        {
+          "claim_position": 1,
+          "passage_position": 1,
+          "agent_label": "supports",
+          "exact_visible_quote": "The rule for Dovara does not apply in zone “Lunet”: this zone is an explicit exception."
+        },
+        {
+          "claim_position": 2,
+          "passage_position": 1,
+          "agent_label": "refutes",
+          "exact_visible_quote": "The rule for Dovara does not apply in zone “Lunet”: this zone is an explicit exception."
+        }
+      ]
+    },
+    {
+      "review_id": "V033",
+      "source_case_id": "68714b1520f5cf09645c31eb",
+      "family_id": "family-09b560e08219652669819029",
+      "scenario_type": "distributed_binding",
+      "question_language": "fr",
+      "passage_language": "fr",
+      "view": "full",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          2,
+          2,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "insufficient",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          2,
+          2,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "insufficient",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "The first passage binds batch Talven to Peldrin; the second supplies Talven delivery interval 80 days. Their union answers the query, but neither passage alone supports the entire two-sentence conjunction. Peldrin Z is a different entity.",
+      "selected_visible_evidence": []
+    },
+    {
+      "review_id": "V036",
+      "source_case_id": "1e992380c5d5be36eb98e187",
+      "family_id": "family-09b560e08219652669819029",
+      "scenario_type": "distributed_binding",
+      "question_language": "en",
+      "passage_language": "en",
+      "view": "head_384",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          2,
+          2,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "insufficient",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          2,
+          2,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "insufficient",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "The first passage binds batch Talven to Peldrin; the second supplies Talven delivery interval 80 days. Their union answers the query, but neither passage alone supports the entire two-sentence conjunction. Peldrin Z is a different entity.",
+      "selected_visible_evidence": []
+    },
+    {
+      "review_id": "V037",
+      "source_case_id": "22569131ce285c5e7da3e798",
+      "family_id": "family-3f0a04bc337c79591c9af9df",
+      "scenario_type": "missing_evidence",
+      "question_language": "fr",
+      "passage_language": "fr",
+      "view": "full",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "insufficient",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "insufficient_visible_evidence"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "insufficient",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "insufficient_visible_evidence"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "The pool contains the target entity only for storage, and the requested delivery relation only for other entities. Neither shared numbers nor neighboring entity names supply the missing target-relation fact.",
+      "selected_visible_evidence": []
+    },
+    {
+      "review_id": "V040",
+      "source_case_id": "ed3b8ff9e3f1f12c748a04fd",
+      "family_id": "family-3f0a04bc337c79591c9af9df",
+      "scenario_type": "missing_evidence",
+      "question_language": "en",
+      "passage_language": "en",
+      "view": "head_384",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "insufficient",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "insufficient_visible_evidence"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "insufficient",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "insufficient_visible_evidence"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "The pool contains the target entity only for storage, and the requested delivery relation only for other entities. Neither shared numbers nor neighboring entity names supply the missing target-relation fact.",
+      "selected_visible_evidence": []
+    },
+    {
+      "review_id": "V041",
+      "source_case_id": "5968d2c98b572ffdb8e2c618",
+      "family_id": "family-5354949364bddef18de7c8b6",
+      "scenario_type": "conflicting_evidence",
+      "question_language": "fr",
+      "passage_language": "fr",
+      "view": "full",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          3,
+          3,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "refutes",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "supports",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "conflicting_visible_evidence"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          3,
+          3,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "refutes",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "supports",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "conflicting_visible_evidence"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 8,
+          "agrees": 8
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "One passage asserts 102 days; another asserts 115 days and explicitly denies 102 for the same entity and relation. No authority or temporal rule resolves that conflict. Each direct passage remains highly relevant.",
+      "selected_visible_evidence": [
+        {
+          "claim_position": 1,
+          "passage_position": 1,
+          "agent_label": "supports",
+          "exact_visible_quote": "Pour Noldara, la rubrique « délai de livraison » est fixée à 102 jours."
+        },
+        {
+          "claim_position": 1,
+          "passage_position": 2,
+          "agent_label": "refutes",
+          "exact_visible_quote": "Pour Noldara, la rubrique « délai de livraison » est fixée à 115 jours. Pour Noldara, la valeur de « délai de livraison » n'est pas 102 jours."
+        },
+        {
+          "claim_position": 2,
+          "passage_position": 1,
+          "agent_label": "refutes",
+          "exact_visible_quote": "Pour Noldara, la rubrique « délai de livraison » est fixée à 102 jours."
+        },
+        {
+          "claim_position": 2,
+          "passage_position": 2,
+          "agent_label": "supports",
+          "exact_visible_quote": "Pour Noldara, la rubrique « délai de livraison » est fixée à 115 jours. Pour Noldara, la valeur de « délai de livraison » n'est pas 102 jours."
+        }
+      ]
+    },
+    {
+      "review_id": "V044",
+      "source_case_id": "d4800ffd6f6c824d100a73f0",
+      "family_id": "family-5354949364bddef18de7c8b6",
+      "scenario_type": "conflicting_evidence",
+      "question_language": "en",
+      "passage_language": "en",
+      "view": "head_384",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          3,
+          3,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "refutes",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "supports",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "conflicting_visible_evidence"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          3,
+          3,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "refutes",
+            "insufficient",
+            "insufficient"
+          ],
+          [
+            "refutes",
+            "supports",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "conflicting_visible_evidence"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 8,
+          "agrees": 8
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "One passage asserts 102 days; another asserts 115 days and explicitly denies 102 for the same entity and relation. No authority or temporal rule resolves that conflict. Each direct passage remains highly relevant.",
+      "selected_visible_evidence": [
+        {
+          "claim_position": 1,
+          "passage_position": 1,
+          "agent_label": "supports",
+          "exact_visible_quote": "For Noldara, the “delivery interval” entry is set to 102 days."
+        },
+        {
+          "claim_position": 1,
+          "passage_position": 2,
+          "agent_label": "refutes",
+          "exact_visible_quote": "For Noldara, the “delivery interval” entry is set to 115 days. For Noldara, the value of “delivery interval” is not 102 days."
+        },
+        {
+          "claim_position": 2,
+          "passage_position": 1,
+          "agent_label": "refutes",
+          "exact_visible_quote": "For Noldara, the “delivery interval” entry is set to 102 days."
+        },
+        {
+          "claim_position": 2,
+          "passage_position": 2,
+          "agent_label": "supports",
+          "exact_visible_quote": "For Noldara, the “delivery interval” entry is set to 115 days. For Noldara, the value of “delivery interval” is not 102 days."
+        }
+      ]
+    },
+    {
+      "review_id": "V045",
+      "source_case_id": "706b3d039f5a2f66970c75c9",
+      "family_id": "family-9334f1229ec21fa271389280",
+      "scenario_type": "heading_value_truncation",
+      "question_language": "fr",
+      "passage_language": "fr",
+      "view": "full",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "support": [
+          [
+            "supports",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "answerable"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "The French full view includes the requested fact at the end of the first passage. In the English 384-character prefixes all four visible texts are identical generic introductions with no target entity, relation or value; the hidden full-text fact cannot justify an answer from those prefixes.",
+      "selected_visible_evidence": [
+        {
+          "claim_position": 1,
+          "passage_position": 1,
+          "agent_label": "supports",
+          "exact_visible_quote": "s rubriques. Elles ne donnent aucun résultat de mesure, aucune exception et aucune valeur à retenir. \n\nRubrique du registre: Dans le registre de Corlune, 120 jetons correspond à « réserve comptable »."
+        }
+      ]
+    },
+    {
+      "review_id": "V048",
+      "source_case_id": "98ec9932e04d8a7718084f2d",
+      "family_id": "family-9334f1229ec21fa271389280",
+      "scenario_type": "heading_value_truncation",
+      "question_language": "en",
+      "passage_language": "en",
+      "view": "head_384",
+      "label_order": "Passages and claims use their original order in the source case; positions are 1-based.",
+      "agent_labels_before_reference_comparison": {
+        "relevance": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "support": [
+          [
+            "insufficient",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "insufficient_visible_evidence"
+      },
+      "authored_reference_labels": {
+        "relevance": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "support": [
+          [
+            "insufficient",
+            "insufficient",
+            "insufficient",
+            "insufficient"
+          ]
+        ],
+        "answerability": "insufficient_visible_evidence"
+      },
+      "comparison": {
+        "relevance": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "support": {
+          "assessed": 4,
+          "agrees": 4
+        },
+        "answerability": {
+          "assessed": 1,
+          "agrees": 1
+        }
+      },
+      "reasoning_from_visible_input": "The French full view includes the requested fact at the end of the first passage. In the English 384-character prefixes all four visible texts are identical generic introductions with no target entity, relation or value; the hidden full-text fact cannot justify an answer from those prefixes.",
+      "selected_visible_evidence": []
+    }
+  ],
+  "interpretation_caveats": [
+    "A distinct entity plus distinct relation was treated as irrelevant grade 0; same entity or directly neighboring relation was thematic grade 1. The 0/1 boundary requires an explicit rubric and is a potential disagreement, not an automatic scientific truth.",
+    "Refutation by a different numerical value or converted unit presumes the synthetic field is a single value under the same stated conditions. A different subject, relation or temperature alone is insufficient evidence, not refutation.",
+    "FR full and EN head_384 sampling confounds language and view, so this review cannot quantify translation or truncation effects independently.",
+    "The FR/EN paired physics wording preserves the supplied assumptions in this sample. No claim is made about the unreviewed families/languages.",
+    "This agent shares a model family/framework with the assistant and is not a human or externally independent adjudicator. Procedural input-first derivation limits direct gold copying, not shared-model bias."
+  ],
+  "not_claimed": [
+    "human_review",
+    "human_reference_approval",
+    "externally_independent_judge",
+    "pinned_judge_reproducibility",
+    "candidate_model_quality",
+    "whole_corpus_semantic_truth",
+    "general_physics_expertise",
+    "application_integration",
+    "end_to_end_rag_quality"
+  ],
+  "remaining_review": {
+    "physics_cases_not_assessed": 40,
+    "passage_pools_not_assessed": 1520,
+    "human_review_status": "not_started",
+    "reference_version": "unchanged_v1"
+  }
+}
