@@ -263,6 +263,13 @@ harness behavior, not real-model adaptation, held-out quality or live MCP/RAG
 qualification. Ordinary recorded and real-model adapters cannot claim this
 execution contract until a separate output path is qualified.
 
+The positive control handles 14/14 cases in 34 policy decisions and 20 actual
+tool calls (14 successful receipts and six controlled errors). Only four cases
+produce successful task results. Replacing one normal policy with a premature
+correct-looking answer yields 13/14, 18 actual calls and three task results;
+all 14 cases remain scored. The altered case executes no tool and fails its
+procedure and result checks.
+
 ### Retrieved passages and evidence
 
 The [passage-evidence pack](../datasets/passage-evidence-v1/README.md) contains
