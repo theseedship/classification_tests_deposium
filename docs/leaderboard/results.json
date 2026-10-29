@@ -1,4 +1,569 @@
 {
+  "capability_campaign": {
+    "canary_in_quality_denominators": false,
+    "identity": {
+      "backend_requested": "metal",
+      "gateway_sha256": "11c795638f9852672e164e559a484219c3e34353f44e9ffa81a861c8ff231585",
+      "launcher_sha256": "4dec7fc81385e17a27b7cf2b26c232a1b2864d4ee6295d80eee10c0ba8af86a7",
+      "model_repo_id": "ggml-org/vllm-d3-flash-GGUF",
+      "model_revision": "3d53d13778bf8035e6e1e534ce489ed052ee5663",
+      "model_sha256": "7352edf6be85d93ab8806a17e1b3d0a7e71ee3685af3212ddbe679b742c2221b",
+      "runtime_binary_sha256": "3bc062d01ef3278441a357552c201c87032ee52cdcffbc9034dd43d5d1b25e6b",
+      "runtime_pin_sha256": "e8e3e7997b69e5028a50d92de7c0935b8b28516b41e887d3e9fb8c58cd4980e8",
+      "runtime_repository": "https://github.com/ggml-org/llama.cpp.git",
+      "runtime_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+      "settings": {
+        "concurrency": 1,
+        "context": 4096,
+        "parallel": 1,
+        "questions_per_call": 1,
+        "truncation": "reject_in_pinned_native_engine"
+      },
+      "supervisor_sha256": "30f85b92dfb27fb4d334c85eea0124b4cbccfe7bc9291d644951f2be3f3fd61a"
+    },
+    "model": "D3 Flash Q8",
+    "nominal_size": "9B class",
+    "phases": {
+      "anchor": {
+        "adapter_ms": {
+          "count": 132,
+          "max": 207.07445799780544,
+          "median": 196.31710400426527,
+          "min": 129.54291699861642,
+          "p95": 204.28249999531545
+        },
+        "counts": {
+          "by_split": {
+            "calibration": {
+              "correct": 30,
+              "scored": 30,
+              "total": 30
+            },
+            "test": {
+              "correct": 61,
+              "scored": 66,
+              "total": 66
+            },
+            "train": {
+              "correct": 33,
+              "scored": 36,
+              "total": 36
+            }
+          },
+          "correct": 124,
+          "families": 66,
+          "recorded": 132,
+          "scored": 132,
+          "statuses": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "total": 132
+        },
+        "groups": {
+          "language": {
+            "en": {
+              "by_split": {
+                "calibration": {
+                  "correct": 15,
+                  "scored": 15,
+                  "total": 15
+                },
+                "test": {
+                  "correct": 31,
+                  "scored": 33,
+                  "total": 33
+                },
+                "train": {
+                  "correct": 16,
+                  "scored": 18,
+                  "total": 18
+                }
+              },
+              "correct": 62,
+              "families": 66,
+              "recorded": 66,
+              "scored": 66,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 66,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 66
+            },
+            "fr": {
+              "by_split": {
+                "calibration": {
+                  "correct": 15,
+                  "scored": 15,
+                  "total": 15
+                },
+                "test": {
+                  "correct": 30,
+                  "scored": 33,
+                  "total": 33
+                },
+                "train": {
+                  "correct": 17,
+                  "scored": 18,
+                  "total": 18
+                }
+              },
+              "correct": 62,
+              "families": 66,
+              "recorded": 66,
+              "scored": 66,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 66,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 66
+            }
+          },
+          "split": {
+            "calibration": {
+              "by_split": {
+                "calibration": {
+                  "correct": 30,
+                  "scored": 30,
+                  "total": 30
+                }
+              },
+              "correct": 30,
+              "families": 15,
+              "recorded": 30,
+              "scored": 30,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 30,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 30
+            },
+            "test": {
+              "by_split": {
+                "test": {
+                  "correct": 61,
+                  "scored": 66,
+                  "total": 66
+                }
+              },
+              "correct": 61,
+              "families": 33,
+              "recorded": 66,
+              "scored": 66,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 66,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 66
+            },
+            "train": {
+              "by_split": {
+                "train": {
+                  "correct": 33,
+                  "scored": 36,
+                  "total": 36
+                }
+              },
+              "correct": 33,
+              "families": 18,
+              "recorded": 36,
+              "scored": 36,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 36,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 36
+            }
+          }
+        },
+        "rss_scope": "sampled owned process-group peak over startup, synthetic smoke and this phase; not per-case or total unified GPU memory",
+        "session_group_peak_rss_mib": 9601.90625,
+        "source": {
+          "bench_head": "7e61b6d4660bae81ca97d06d464fb02fac4ec4ef",
+          "campaign_seal_sha256": "2f9de54b42d45e7c31f3cf771a60eda5888535d5344927722547acb559cc120b",
+          "dataset_sha256": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+          "raw_sha256": "a6cc450f57cf299882c8e093a75630fdfe0ad5d5cfd17ba337f3b41a4f80b3ad"
+        }
+      },
+      "capability": {
+        "adapter_ms": {
+          "count": 192,
+          "max": 1014.8322089953581,
+          "median": 576.8764379972708,
+          "min": 294.9129579938017,
+          "p95": 985.788958001649
+        },
+        "counts": {
+          "by_split": {
+            "calibration": {
+              "correct": 48,
+              "scored": 48,
+              "total": 48
+            },
+            "test": {
+              "correct": 96,
+              "scored": 96,
+              "total": 96
+            },
+            "train": {
+              "correct": 48,
+              "scored": 48,
+              "total": 48
+            }
+          },
+          "correct": 192,
+          "families": 48,
+          "recorded": 192,
+          "scored": 192,
+          "statuses": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "total": 192
+        },
+        "groups": {
+          "catalogue_variant": {
+            "compact": {
+              "by_split": {
+                "calibration": {
+                  "correct": 24,
+                  "scored": 24,
+                  "total": 24
+                },
+                "test": {
+                  "correct": 48,
+                  "scored": 48,
+                  "total": 48
+                },
+                "train": {
+                  "correct": 24,
+                  "scored": 24,
+                  "total": 24
+                }
+              },
+              "correct": 96,
+              "families": 48,
+              "recorded": 96,
+              "scored": 96,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 96,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 96
+            },
+            "expanded": {
+              "by_split": {
+                "calibration": {
+                  "correct": 24,
+                  "scored": 24,
+                  "total": 24
+                },
+                "test": {
+                  "correct": 48,
+                  "scored": 48,
+                  "total": 48
+                },
+                "train": {
+                  "correct": 24,
+                  "scored": 24,
+                  "total": 24
+                }
+              },
+              "correct": 96,
+              "families": 48,
+              "recorded": 96,
+              "scored": 96,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 96,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 96
+            }
+          },
+          "language": {
+            "en": {
+              "by_split": {
+                "calibration": {
+                  "correct": 24,
+                  "scored": 24,
+                  "total": 24
+                },
+                "test": {
+                  "correct": 48,
+                  "scored": 48,
+                  "total": 48
+                },
+                "train": {
+                  "correct": 24,
+                  "scored": 24,
+                  "total": 24
+                }
+              },
+              "correct": 96,
+              "families": 48,
+              "recorded": 96,
+              "scored": 96,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 96,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 96
+            },
+            "fr": {
+              "by_split": {
+                "calibration": {
+                  "correct": 24,
+                  "scored": 24,
+                  "total": 24
+                },
+                "test": {
+                  "correct": 48,
+                  "scored": 48,
+                  "total": 48
+                },
+                "train": {
+                  "correct": 24,
+                  "scored": 24,
+                  "total": 24
+                }
+              },
+              "correct": 96,
+              "families": 48,
+              "recorded": 96,
+              "scored": 96,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 96,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 96
+            }
+          },
+          "split": {
+            "calibration": {
+              "by_split": {
+                "calibration": {
+                  "correct": 48,
+                  "scored": 48,
+                  "total": 48
+                }
+              },
+              "correct": 48,
+              "families": 12,
+              "recorded": 48,
+              "scored": 48,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 48,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 48
+            },
+            "test": {
+              "by_split": {
+                "test": {
+                  "correct": 96,
+                  "scored": 96,
+                  "total": 96
+                }
+              },
+              "correct": 96,
+              "families": 24,
+              "recorded": 96,
+              "scored": 96,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 96,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 96
+            },
+            "train": {
+              "by_split": {
+                "train": {
+                  "correct": 48,
+                  "scored": 48,
+                  "total": 48
+                }
+              },
+              "correct": 48,
+              "families": 12,
+              "recorded": 48,
+              "scored": 48,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 48,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 48
+            }
+          },
+          "track": {
+            "arguments": {
+              "by_split": {
+                "calibration": {
+                  "correct": 16,
+                  "scored": 16,
+                  "total": 16
+                },
+                "test": {
+                  "correct": 32,
+                  "scored": 32,
+                  "total": 32
+                },
+                "train": {
+                  "correct": 16,
+                  "scored": 16,
+                  "total": 16
+                }
+              },
+              "correct": 64,
+              "families": 16,
+              "recorded": 64,
+              "scored": 64,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 64,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 64
+            },
+            "observations": {
+              "by_split": {
+                "calibration": {
+                  "correct": 16,
+                  "scored": 16,
+                  "total": 16
+                },
+                "test": {
+                  "correct": 32,
+                  "scored": 32,
+                  "total": 32
+                },
+                "train": {
+                  "correct": 16,
+                  "scored": 16,
+                  "total": 16
+                }
+              },
+              "correct": 64,
+              "families": 16,
+              "recorded": 64,
+              "scored": 64,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 64,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 64
+            },
+            "selection": {
+              "by_split": {
+                "calibration": {
+                  "correct": 16,
+                  "scored": 16,
+                  "total": 16
+                },
+                "test": {
+                  "correct": 32,
+                  "scored": 32,
+                  "total": 32
+                },
+                "train": {
+                  "correct": 16,
+                  "scored": 16,
+                  "total": 16
+                }
+              },
+              "correct": 64,
+              "families": 16,
+              "recorded": 64,
+              "scored": 64,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 64,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 64
+            }
+          }
+        },
+        "rss_scope": "sampled owned process-group peak over startup, synthetic smoke and this phase; not per-case or total unified GPU memory",
+        "session_group_peak_rss_mib": 9704.375,
+        "source": {
+          "bench_head": "7e61b6d4660bae81ca97d06d464fb02fac4ec4ef",
+          "campaign_seal_sha256": "ed2d9f9bb69af8deaa5570191a0602dc18058003314400e40824e64711cc8d7f",
+          "dataset_sha256": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+          "raw_sha256": "a0da3b91335caa84ea97d0118e0b5879ac13091cd28df269f01b6944d4b89e35"
+        }
+      }
+    },
+    "reference_review": "synthetic_agent_authored_pending_human_review",
+    "report": "CAPABILITY_FLASH_RESULTS_20261029.md",
+    "runtime": "llama.cpp / Metal",
+    "source": "docs/evidence/capability-flash-20261029/analysis.json"
+  },
   "observations": [
     {
       "context": {
@@ -53586,6 +54151,7 @@
     "docs/NATIVE_DECISION_RESULTS_20261016.md": "3501cf9d35c175c7022dcb7b1e87f03ad2aea1b0da4d020920603a29b599ada9",
     "docs/VELA2_PILOT.md": "6743665f0102fe20a5c51810c880b7a3d87d0cd1bb69a7927b55397f32deaf40",
     "docs/VELA3_FAST_RESULTS_20261028.md": "6cad54a1cd023ec2abd554cb099d881959ef9061c90dc47cf027de52c01a0101",
+    "docs/evidence/capability-flash-20261029/analysis.json": "df15bea59de4a762655dc601eb4cdad88a368977b4c65c688b0cfc2b95931a80",
     "docs/evidence/gliclass-model-comparison-20261017/analysis.json": "62e3280544704ede362a8be9d8be4244dc34935a4a30dbe8d4f2bbcad8fd354a",
     "docs/evidence/gliclass-model-comparison-20261017/gliclass-session.json": "938b445cac5d50ddde7776c43dad22e0ac9e8c4e14246db73232f3a00fb19639",
     "docs/evidence/model-comparison-complete-20261004/analysis.json": "810bdfe62c52e1c2f7c00d98beb31b970cd958a51b0cdc0832f3e3e5877fcca1",
@@ -53606,7 +54172,7 @@
     "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
     "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
     "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
-    "scripts/build-full-results.py": "aa4121b920d4b062820f1bdd42bda0c0a9a75f9c30ede710432179a983fb76f1",
+    "scripts/build-full-results.py": "e0500a7f447b68036fdf080a47936900acd33c265c1146a1f0f12b4b14d6bda7",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7"
   }

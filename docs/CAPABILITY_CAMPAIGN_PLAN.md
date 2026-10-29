@@ -1,7 +1,10 @@
 # Progressive capability-choice campaign
 
-**Status: planned, not executed — 29 October 2026.** Start with seven selected
-model/runtime candidates, rather than rerunning the entire historical inventory.
+**Status: partially executed, 1 of 7 candidates — 29 October 2026.**
+[D3 Flash Q8/Metal](CAPABILITY_FLASH_RESULTS_20261029.md) completed the new pack
+at **192/192, test 96/96**, plus a separate fresh anchor at **124/132, test 61/66**.
+Its 12-case technical canary is separate from both quality denominators.
+The six remaining candidates are `not_run`; the original cohort and order stay fixed.
 The [machine-readable sequence](../plans/capability-choice-v1-sequence.json)
 pins the dataset, selection evidence, model identities, asset manifests, order
 and calibration canary. Reading it performs no inference, download or service action.
@@ -18,6 +21,8 @@ size classes. Those totals mix train, calibration and test; separate test/66
 and documentary/76 results are shown. They are exploratory observations with
 agent-authored references, not general model rankings or predictions of new scores.
 Unknown-size candidates are not silently assigned to a size class.
+The sequence pins selection evidence at its original benchmark revision;
+later presentation updates do not replace that historical selection input.
 
 | Order | Wave | Size class | Selected observation | Historical all /132 | Test /66 | Text /76 | Purpose |
 |---:|---|---|---|---:|---:|---:|---|
@@ -80,11 +85,11 @@ per-call timeouts; never raise limits in response to test failures.
 2. Prepare the selected platform-specific runtime and observe its actual device,
    precision, helper, tokenizer/readout and binary/library hashes. A profile's
    presence or an old session manifest does not establish current readiness.
-3. Prepare native supervision for the new dataset. The present
-   [native pilot](../scripts/run-native-pilot.py) hardcodes the old context pack
-   followed by Mastra; it does **not** already run this 192-case pack.
-   The shared `run --dataset` engine is generic. Adapt and validate the supervised
-   launcher/session separately, preserving its defaults and lifecycle guards.
+3. Prepare a supervised session for the new dataset. The
+   [native pilot](../scripts/run-native-pilot.py) now accepts an explicit
+   `--dataset` for one campaign and preserves its historical 132+Mastra default.
+   It snapshots validated input bytes before model work. Validate the selected
+   model/session and lifecycle guards before using it for a real campaign.
 4. Prepare Wave B deliberately: the historical CPU locks contain Linux-specific
    requirements. A macOS port needs an isolated, newly pinned runtime and native
    helper/encoding checks. Alternatively, execute the original WSL environment
@@ -92,6 +97,12 @@ per-call timeouts; never raise limits in response to test failures.
 5. Validate native input encodings for **all 192 cases**, including the longest
    expanded inputs. No silent truncation or backend/model fallback is allowed.
    An unsupported input retains that status; do not shrink the benchmark.
+
+The first Flash Q8 execution envelope and preparation method are fixed in the
+[native protocol](CAPABILITY_NATIVE_PROTOCOL_20261029.md). Its 18 GiB RSS
+ceiling is stricter than the historical 20 GiB ceiling, with the same 8 GiB
+reserve; this is a recorded pre-prediction resource decision. The bounded
+vocabulary-only helper reuses native preparation without a decode/forward.
 
 A new GGUF conversion, quantization, model revision, helper/runtime build or
 device is a separate observation. Keep it distinct from the historical CPU
@@ -129,6 +140,12 @@ with missing cases retained in the full denominator. `unsupported`, `missing`,
 `error`, `timeout` and technical `abstain` remain distinct from semantic
 clarification or stopping choices. Resume/rescore retains the original archive;
 older archives may require an explicit derived rescore after scorer changes.
+
+For Flash Q8, the completed phases and their coverage are in the
+[dated report](CAPABILITY_FLASH_RESULTS_20261029.md) and
+[aggregate](evidence/capability-flash-20261029/analysis.json). A perfect score
+on four-proposal synthetic choices is a measurement ceiling, not a qualification
+of general capability discovery, executable arguments or a product workflow.
 
 The seven-candidate plan represents **1,344 new-pack decisions + 924 anchor
 decisions**, plus 84 canary decisions if each canary is run once. These are
@@ -169,4 +186,5 @@ chosen sub-1B quality representative.
 Keep Ultra/Turbo, GLiClass 27B and other new releases outside this initial queue
 until their model/runtime/resource audits are complete. This avoids changing
 weights, runtime and task coverage simultaneously while testing the initial
-size/quality intuition. No new inference is claimed here.
+size/quality intuition. Only the first Flash Q8 candidate has been executed;
+this plan does not claim results for the remaining cohort.

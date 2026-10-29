@@ -26,6 +26,7 @@ CPU = EVIDENCE + "model-comparison-larger-cpu-20261011/analysis.json"
 NATIVE = EVIDENCE + "native-model-comparison-20261016/analysis.json"
 GLICLASS = EVIDENCE + "gliclass-model-comparison-20261017/analysis.json"
 FAST = EVIDENCE + "vela3-fast-20261028/analysis.json"
+CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
 NATIVE_SESSION = EVIDENCE + "native-model-comparison-20261016/native-sessions.json"
 GLICLASS_SESSION = EVIDENCE + "gliclass-model-comparison-20261017/gliclass-session.json"
 STATUS_KEYS = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
@@ -169,6 +170,107 @@ def measured_number(value, field):
     return value
 
 
+def campaign_counts(value, total, label, *, require_scored=False):
+    """Validate exported denominators without evaluating or rescoring outputs."""
+    require(type(total) is int and total > 0, f"{label}: zero denominator")
+    for key in ("total_cases", "recorded_cases", "scored_cases", "passed_cases"):
+        require(type(value[key]) is int and 0 <= value[key] <= total, f"{label}: invalid count")
+    require(value["total_cases"] == total
+            and value["passed_cases"] <= value["scored_cases"] <= value["recorded_cases"],
+            f"{label}: inconsistent coverage")
+    statuses = value["counts_by_status"]
+    require(set(statuses) == STATUS_KEYS
+            and all(type(n) is int and n >= 0 for n in statuses.values())
+            and sum(statuses.values()) == total
+            and value["scored_cases"] == statuses["ok"] + statuses["abstain"],
+            f"{label}: inconsistent statuses")
+    require(not require_scored or value["scored_cases"] > 0, f"{label}: zero scored cases")
+    require(type(value["independent_families"]) is int and 1 <= value["independent_families"] <= total,
+            f"{label}: invalid family denominator")
+    splits = value["counts_by_split"]
+    require(bool(splits) and set(splits) <= {"train", "calibration", "test"}, f"{label}: invalid split")
+    for group in splits.values():
+        require(all(type(group[k]) is int and 0 <= group[k] <= total for k in
+                    ("total_cases", "scored_cases", "passed_cases"))
+                and group["passed_cases"] <= group["scored_cases"] <= group["total_cases"],
+                f"{label}: invalid split counts")
+    require(all(sum(group[key] for group in splits.values()) == value[key]
+                for key in ("total_cases", "scored_cases", "passed_cases")), f"{label}: inconsistent split sums")
+    return {"correct": value["passed_cases"], "scored": value["scored_cases"], "total": total,
+            "recorded": value["recorded_cases"], "families": value["independent_families"], "statuses": dict(statuses),
+            "by_split": {part: {"correct": group["passed_cases"], "scored": group["scored_cases"],
+                                 "total": group["total_cases"]} for part, group in splits.items()}}
+
+
+def capability_campaign(inputs, historical, metadata):
+    """Keep the new two-pack experiment separate from historical ranking rows."""
+    source = inputs.load(CAPABILITY)
+    require(source.get("schema_version") == "deposium.capability-flash-results/v1"
+            and source.get("scope") == "isolated_frozen_closed_choice_observations"
+            and source.get("reference_review") == "synthetic_agent_authored_pending_human_review",
+            "capability: changed qualification")
+    expected = {
+        "anchor": {"total": 132, "families": 66, "test_families": 33,
+                   "dataset": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+                   "groups": {"split": {"train": 36, "calibration": 30, "test": 66},
+                              "language": {"fr": 66, "en": 66}}},
+        "capability": {"total": 192, "families": 48, "test_families": 24,
+                       "dataset": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+                       "groups": {"split": {"train": 48, "calibration": 48, "test": 96},
+                                  "language": {"fr": 96, "en": 96},
+                                  "track": {"selection": 64, "arguments": 64, "observations": 64},
+                                  "catalogue_variant": {"compact": 96, "expanded": 96}}},
+    }
+    phases = {}
+    anchor_identity = source["phases"]["anchor"]["identity"]
+    for phase, spec in expected.items():
+        item = source["phases"][phase]
+        identity = item["identity"]
+        require(identity == anchor_identity and identity.get("backend_requested") == "metal",
+                f"capability/{phase}: different model/runtime")
+        require(all(identity.get(new) == historical["identity"].get(old) for new, old in
+                    (("model_repo_id", "model_repo_id"), ("model_revision", "model_revision"),
+                     ("model_sha256", "model_assets_sha256"))), f"capability/{phase}: historical identity mismatch")
+        require(item["sources"]["dataset_sha256"] == spec["dataset"], f"capability/{phase}: dataset mismatch")
+        counts = campaign_counts(item["counts"], spec["total"], phase, require_scored=True)
+        groups = {}
+        for axis, denominators in spec["groups"].items():
+            raw_groups = item["groups"][axis]
+            require(set(raw_groups) == set(denominators), f"capability/{phase}: missing {axis}")
+            groups[axis] = {key: campaign_counts(raw_groups[key], total, f"{phase}/{axis}/{key}")
+                            for key, total in denominators.items()}
+            require(all(sum(group[key] for group in groups[axis].values()) == counts[key]
+                        for key in ("correct", "scored", "total", "recorded")), f"capability/{phase}: inconsistent {axis}")
+            require(all(sum(group["statuses"][status] for group in groups[axis].values()) == counts["statuses"][status]
+                        for status in STATUS_KEYS), f"capability/{phase}: inconsistent {axis} statuses")
+        require(all(groups["split"][part][key] == group[key] for part, group in counts["by_split"].items()
+                    for key in ("correct", "scored", "total")), f"capability/{phase}: split views differ")
+        require(counts["families"] == spec["families"]
+                and groups["split"]["test"]["families"] == spec["test_families"],
+                f"capability/{phase}: family denominator differs")
+        timing = item["counts"]["successful_latency"]["adapter_duration_ms"]
+        require(type(timing["count"]) is int and 0 <= timing["count"] <= counts["statuses"]["ok"],
+                f"capability/{phase}: timing coverage")
+        for field in ("min", "median", "p95", "max"):
+            require(timing[field] is None or (type(timing[field]) in (int, float)
+                    and math.isfinite(timing[field]) and timing[field] >= 0), f"capability/{phase}: timing value")
+        resource = item["session_resources"]
+        peak = measured_number(resource["rss_peak_mib"], f"capability/{phase}/RSS")
+        require(resource["rss_scope"] == "sampled owned process-group peak over startup, synthetic smoke and this phase; not per-case or total unified GPU memory",
+                f"capability/{phase}: RSS scope")
+        require(item["backend_evidence"]["metal_initialization_observed"] is True,
+                f"capability/{phase}: Metal unobserved")
+        phases[phase] = {"counts": counts, "groups": groups,
+                         "adapter_ms": {key: timing[key] for key in ("count", "min", "median", "p95", "max")},
+                         "session_group_peak_rss_mib": peak, "rss_scope": resource["rss_scope"],
+                         "source": {key: item["sources"][key] for key in
+                                    ("dataset_sha256", "campaign_seal_sha256", "raw_sha256", "bench_head")}}
+    return {"source": CAPABILITY, "report": "CAPABILITY_FLASH_RESULTS_20261029.md",
+            "model": "D3 Flash Q8", "nominal_size": metadata["model_size"]["label"],
+            "runtime": "llama.cpp / Metal", "identity": anchor_identity, "phases": phases,
+            "reference_review": source["reference_review"], "canary_in_quality_denominators": False}
+
+
 def build(root=ROOT):
     inputs = PublicInputs(root)
     composer = load_composer(inputs)
@@ -256,8 +358,10 @@ def build(root=ROOT):
                 f"duplicate observation seals: {phase}")
         require(len({row[phase]["source"]["dataset_sha256"] for row in rows}) == 1,
                 f"mixed datasets: {phase}")
+    complementary = capability_campaign(inputs, base["D3FlashQ8"], metadata["observations"]["D3FlashQ8"])
     inputs.read("scripts/build-full-results.py")
     return {"schema_version": "deposium.public-results/v1", "observations": rows,
+            "capability_campaign": complementary,
             "scope": "aggregate_presentation_only_no_inference_or_raw_archive_verification",
             "reference_review": "agent_only_pending_human",
             "ranking": "Competition rank by correct/132, all splits; ties ordered by observation ID",
@@ -313,13 +417,60 @@ def number(value, places=1):
     return "NR" if value is None else f"{value:,.{places}f}"
 
 
+def render_capability(campaign):
+    def ratio(count, key="correct"):
+        return f"{count[key]}/{count['total']}"
+    phases = campaign["phases"]
+    lines = ["## Complementary capability campaign: 29 October 2026", "",
+             f"**{campaign['model']}**, nominal {campaign['nominal_size']}, {campaign['runtime']}. "
+             "The two full packs have separate denominators; canary calls are excluded.",
+             "References remain agent-authored and pending human review. A perfect closed-choice score "
+             "does not qualify tool execution or product behavior.", "",
+             "| Pack / track | Correct / all | Scored / all | Test correct / all |",
+             "|---|---:|---:|---:|"]
+    for phase, label in (("anchor", "Fresh context anchor"), ("capability", "Capability pack")):
+        count = phases[phase]["counts"]
+        lines.append(f"| {label} | {ratio(count)} | {ratio(count, 'scored')} | {ratio(count['by_split']['test'])} |")
+    for track, label in (("selection", "Capability selection"), ("arguments", "Arguments and dependencies"),
+                         ("observations", "Next step after fixed observations")):
+        count = phases["capability"]["groups"]["track"][track]
+        lines.append(f"| {label} | {ratio(count)} | {ratio(count, 'scored')} | {ratio(count['by_split']['test'])} |")
+    lines += ["", "The three track rows partition the 192-case pack; they are not additional cases. "
+              f"The fresh anchor has {phases['anchor']['counts']['families']} FR/EN families. "
+              f"The new pack's 192 language/catalogue variants belong to {phases['capability']['counts']['families']} "
+              f"families, including {phases['capability']['groups']['split']['test']['families']} test families.", "",
+              "| Pack | French correct / all | English correct / all | 8-card correct / all | 32-card correct / all |",
+              "|---|---:|---:|---:|---:|"]
+    for phase, label in (("anchor", "Fresh context anchor"), ("capability", "Capability pack")):
+        groups = phases[phase]["groups"]
+        catalogue = groups.get("catalogue_variant", {})
+        lines.append(f"| {label} | {ratio(groups['language']['fr'])} | {ratio(groups['language']['en'])} | "
+                     f"{ratio(catalogue['compact']) if catalogue else 'Not applicable'} | "
+                     f"{ratio(catalogue['expanded']) if catalogue else 'Not applicable'} |")
+    lines += ["", "| Pack | Timed successful calls / all | Adapter median ms | Adapter p95 ms | Session group RSS GiB |",
+              "|---|---:|---:|---:|---:|"]
+    for phase, label in (("anchor", "Fresh context anchor"), ("capability", "Capability pack")):
+        item = phases[phase]
+        timing = item["adapter_ms"]
+        lines.append(f"| {label} | {timing['count']}/{item['counts']['total']} | {number(timing['median'])} | "
+                     f"{number(timing['p95'])} | {number(item['session_group_peak_rss_mib'] / 1024, 2)} |")
+    lines += ["", "Timings follow each session's synthetic warm-up and describe one pass; loading/startup is excluded. "
+              "RSS is the sampled owned process-group peak over startup, smoke and that pack, not per-case RSS "
+              "or total unified GPU memory. GPU allocation was unreported. Catalogue variants are correlated.",
+              f"[Full campaign report]({campaign['report']}) · "
+              "[Groups, pairs and source evidence](evidence/capability-flash-20261029/analysis.json). "
+              "The 28 historical observations below retain their original rows and ranks.", ""]
+    return lines
+
+
 def render(data):
     lines = ["# Full results", "", "[README](../README.md) · [Quality](#model-quality) · [Language and task complexity](#language-and-task-complexity) ·",
+             "[New capability tests](#complementary-capability-campaign-29-october-2026) · "
              "[Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·",
              "[Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
-             "**28 model/runtime observations**, consolidated from the public frozen exports through 28 October 2026.",
+             "**28 historical model/runtime observations**, consolidated from the public frozen exports through 28 October 2026.",
              "Rows identify observations, not 28 independent model families. Repeated exports of the same sealed run are deduplicated;",
-             "quantizations and devices remain separate. This page is generated offline; no model was rerun or rescored.", "",
+             "quantizations and devices remain separate. Rendering this page does not rerun or rescore models.", "",
              "**Exploratory evidence:** synthetic, agent-authored references and translations await human review.",
              "The ranking uses all 132 cases (train + calibration + test); the separate test column uses 66 cases.",
              "FR/EN translations form 66 families. Differences of a few answers do not establish a general model ranking.", "",
@@ -330,10 +481,11 @@ def render(data):
              "| First tool proposal | 24 search / statistics / fallback choices | Provisional agreement only; no tool execution; **0 semantically qualified cases** |",
              "| Physics | No dedicated pack | **Not run** |",
              "| Passage ranking, relevance, support, answerability | Separate fixed-passage campaigns | [Full tables and coverage](leaderboard/other-benchmarks.md) |",
-             "| Capability/tool-set, argument and fixed-observation choices | [New 192-case complementary pack](../datasets/capability-choice-v1/README.md) | Corpus validated; **no real model campaign yet** |",
+             "| Capability/tool-set, argument and fixed-observation choices | [192-case complementary pack](../datasets/capability-choice-v1/README.md) | [First D3 Flash Q8/Metal campaign and fresh context anchor](CAPABILITY_FLASH_RESULTS_20261029.md), reported separately from the 28 historical rows; no tool execution or product qualification |",
              "| Free-form plugin/MCP selection, complete execution loop, difficulty prediction, adaptive model routing | Future harness stages | **Not run**; [experiment design](INTENT_AND_MODEL_ROUTING.md) |",
-             "| End-to-end RAG and generated-answer quality | No campaign qualified here | **Not run** |", "",
-             "## Model quality", "",
+             "| End-to-end RAG and generated-answer quality | No campaign qualified here | **Not run** |", ""]
+    lines += render_capability(data["capability_campaign"])
+    lines += ["## Model quality", "",
              "Each score is **correct / all cases** in its column, retaining failures in the denominator.",
              "Tool is **agreement / 24 provisional proposals**, not routing accuracy. Full scored/valid counts and separate",
              "`missing`, `unsupported`, `error`, `timeout`, and `abstain` counts are in the downloads.",

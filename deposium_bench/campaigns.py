@@ -13,7 +13,7 @@ import math
 import os
 from pathlib import Path
 import time
-from typing import Any
+from typing import Any, Callable
 import uuid
 
 from . import __version__
@@ -288,7 +288,8 @@ def _normal_result(case: dict, response: Any, elapsed_ms: float) -> dict:
 
 
 def _execute(output: Path, cases: list[dict], adapter: Any, prior: list[dict],
-             *, max_new_cases: int | None) -> tuple[list[dict], bool]:
+             *, max_new_cases: int | None,
+             stop_requested: Callable[[], bool] | None = None) -> tuple[list[dict], bool]:
     completed = {record["case_id"] for record in prior}
     records = list(prior)
     count = 0
@@ -303,6 +304,8 @@ def _execute(output: Path, cases: list[dict], adapter: Any, prior: list[dict],
                 if case["case_id"] in completed:
                     continue
                 if max_new_cases is not None and count >= max_new_cases:
+                    break
+                if stop_requested is not None and stop_requested():
                     break
                 record = observe_case(case, adapter)
                 trace.write(_encode(record))
@@ -398,8 +401,11 @@ def _finish(output: Path, manifest: dict, cases: list[dict], records: list[dict]
 
 
 def run_campaign(dataset_path: str | Path, profile_path: str | Path, output_dir: str | Path,
-                 *, stack_root: str | Path | None = None, max_new_cases: int | None = None) -> dict:
+                 *, stack_root: str | Path | None = None, max_new_cases: int | None = None,
+                 stop_requested: Callable[[], bool] | None = None) -> dict:
     _limit(max_new_cases)
+    if stop_requested is not None and not callable(stop_requested):
+        raise CampaignError("stop_requested must be a callable or None.")
     cases, dataset_hash = load_cases(dataset_path)
     dataset = Path(dataset_path).read_bytes()
     if _hash(dataset) != dataset_hash:
@@ -417,7 +423,8 @@ def run_campaign(dataset_path: str | Path, profile_path: str | Path, output_dir:
         manifest = _manifest(cases, dataset, profile, source_hash, adapter.provenance,
                              "run", None, stack_root, context)
         _create_archive(output, manifest, dataset, profile, recordings, preflight)
-        records, interrupted = _execute(output, cases, adapter, [], max_new_cases=max_new_cases)
+        records, interrupted = _execute(output, cases, adapter, [], max_new_cases=max_new_cases,
+                                        stop_requested=stop_requested)
         return _finish(output, manifest, cases, records, interrupted)
     finally:
         _close_adapter(adapter)

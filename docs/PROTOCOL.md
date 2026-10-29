@@ -72,8 +72,11 @@ chooses among four proposals, with authored references pending human review.
 A correct proposal does not establish open-set discovery recall, executable
 arguments, valid access, tool execution or task success. A fixed observation
 does not test an adaptive multi-turn loop. D1/D2/D3 remain authored strata;
-they do not label the useful model size. The corpus is validated, with no real
-model campaign run yet.
+they do not label the useful model size. The first
+[D3 Flash Q8/Metal campaign](CAPABILITY_FLASH_RESULTS_20261029.md) reached
+192/192 (test 96/96) on 29 October 2026. The references still await human review;
+reaching the ceiling on this closed-choice pack does not qualify tool execution
+or product behavior.
 
 For a complementary or global series, retain a new archive for every dataset
 and model/runtime pair. Keep the historical 132-case results separate, report

@@ -3,8 +3,14 @@
 **192 synthetic closed-choice cases, 48 scenario families, FR/EN.** This
 complementary pack evaluates capability and tool-set proposals, arguments and
 dependencies, clarification, and next-step choices after fixed observations.
-References are agent-authored and pending human review. **No real model or
-application campaign has run on this pack; zero cases are semantically qualified.**
+References are agent-authored and pending human review. The first
+[D3 Flash Q8/Metal campaign](../../docs/CAPABILITY_FLASH_RESULTS_20261029.md)
+reached **192/192, including 96/96 test cases**, on 29 October 2026.
+**Zero cases are semantically qualified; no application or tool execution is tested.**
+
+The perfect score is a ceiling on these four-proposal synthetic choices, not
+evidence of general tool discovery or executable workflows. The dated report
+keeps the fresh 132-case context anchor and 12-case technical canary separate.
 
 The cases reflect generic document/RAG, geospatial, web and open-data workflows
 useful in the Deposium context. They contain no private application inventory,
@@ -79,10 +85,16 @@ references, family splits and hashes. It is not a semantic or human review.
 Change a reference only with an explanation, review and a new dataset version;
 do not regenerate it to improve candidate scores.
 
-## Run a complementary campaign later
+The frozen `manifest.json` records the dataset's generation-time `not_run`
+state and zero scored cases. Campaign executions belong in separate dated
+reports and archives; their results do not rewrite that manifest or its sources.
+
+## Run another complementary campaign
 
 Prepare one existing pinned context-choice candidate and its assets/runtime
-first. For example, after preparing the CPU D3 Flash profile:
+first. For supervised native execution, use the
+[frozen Flash protocol](../../docs/CAPABILITY_NATIVE_PROTOCOL_20261029.md) and
+the native pilot's explicit `--dataset` option. For another prepared CPU profile:
 
 ```bash
 python3 -m deposium_bench run \
@@ -94,7 +106,7 @@ python3 -m deposium_bench analyze-context \
   --output results/capability-d3-flash-001-analysis
 ```
 
-These are explicit future inference commands; dataset validation never runs
+These are explicit inference commands for a new archive; dataset validation never runs
 them. The larger catalogue may exceed a candidate's native input limit.
 Preserve its unsupported/overflow outcome; do not silently truncate cards or
 increase a frozen profile's limits to make it appear compatible. Record actual

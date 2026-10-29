@@ -40,7 +40,10 @@ The complementary [capability-choice pack](datasets/capability-choice-v1/README.
 adds 192 synthetic choices about capability/tool sets, arguments, dependencies,
 clarification, and next steps after fixed observations. It includes geospatial,
 web, open-data and local-document scenarios, with compact and expanded catalogues.
-It has **no real model results yet**. The [next harness stages](docs/INTENT_AND_MODEL_ROUTING.md)
+The [first D3 Flash Q8/Metal campaign](docs/CAPABILITY_FLASH_RESULTS_20261029.md)
+reached **192/192**, including **96/96 test cases**, on 29 October 2026.
+This ceiling on four-proposal synthetic choices does not qualify tool execution
+or product behavior. The [next harness stages](docs/INTENT_AND_MODEL_ROUTING.md)
 cover free-form tool selection and complete execution loops. Difficulty prediction
 and model assignment remain a separate axis.
 
@@ -69,8 +72,8 @@ dependencies are unavailable. A skipped check is not a successful integration.
 
 Linux is the reference environment for the full offline unit suite. Campaign
 reports document model-specific macOS checks and inference qualifications.
-The public snapshot was checked on 29 October 2026 in a clean clone without
-local private files: **793 tests, 762 passed, 31 optional skips**, no failures.
+The frozen campaign code was checked offline on 29 October 2026:
+**817 tests, 786 passed, 31 optional skips**, no failures.
 No model weights or external services were required. Run the unit suite separately:
 
 ```bash
@@ -83,7 +86,7 @@ python3 -m unittest discover -s tests -v
 |---|---|---|
 | [Context choice](datasets/context-choice-v1/README.md) | 132 cases, 66 FR/EN families; documentary tasks, mathematics, chemistry | Scored exploratory decisions; 36 train / 30 calibration / 66 test cases. |
 | [First tool choice](datasets/mastra-read-pilot-v0/README.md) | 24 cases, 12 FR/EN families; search / statistics / fallback | Provisional agreement; zero human-approved references and zero semantically qualified cases. |
-| [Capability and workflow choices](datasets/capability-choice-v1/README.md) | 192 cases, 48 FR/EN families × 8/32-card catalogues; selection, arguments, fixed-observation next steps | Runnable complementary corpus; agent references pending human review; **no real model campaign yet**. |
+| [Capability and workflow choices](datasets/capability-choice-v1/README.md) | 192 cases, 48 FR/EN families × 8/32-card catalogues; selection, arguments, fixed-observation next steps | [D3 Flash Q8/Metal: 192/192, test 96/96](docs/CAPABILITY_FLASH_RESULTS_20261029.md); agent references pending human review, no executed tools or product qualification. |
 | [Passage evidence](datasets/passage-evidence-v1/README.md) | 1,536 cases from 24 synthetic families; FR, EN, DE, ES, IT, PT | Ranking, relevance, claim support, answerability; four passage orders and two views are correlated variants. |
 | [Typed decisions](datasets/decisions-v1/README.md) | 36 cases, 18 FR/EN families | Contract and fixture controls; component replay needs application sources. |
 | [Document tasks](datasets/document-task-v1/README.md) | 14 cases, seven families | Historical projection of the typed-decision pack, not another independent corpus. |
@@ -123,22 +126,33 @@ implement another pipeline. See the [English protocol](docs/PROTOCOL.md),
 
 ## Selected observations
 
+**29 October 2026:** the first complementary
+[D3 Flash Q8/Metal campaign](docs/CAPABILITY_FLASH_RESULTS_20261029.md) reached
+192/192 on capability choices (test 96/96); its separate fresh context anchor
+reached 124/132 (test 61/66). These runs are reported separately from the
+historical comparison below. Canary calls do not enter either denominator.
+
 **[Open the full results](docs/RESULTS.md): 28 model/runtime observations**, with
 complete quality, domain, language, complexity, speed and memory tables;
 [every exported task breakdown](docs/leaderboard/task-breakdown.csv) and
 [all other benchmark campaigns](docs/leaderboard/other-benchmarks.md) are linked
 from the same page. Physics and general plugin/MCP execution remain untested.
 
-These rows use the same 132-case context pack and 24 routing proposals, with
-different revisions, precisions, and runtimes. They are **not a general
-leaderboard or a controlled comparison of hardware latency**.
+The context and routing columns retain historical observations on the same
+132-case pack and 24 proposals. The new-pack columns show the separate
+29 October capability campaign; the other listed models have not run that pack.
+These are **not a general leaderboard or a controlled comparison of hardware latency**.
 
-| Model observation | Actual runtime | All splits /132 | Test only /66 | Provisional routing agreement /24 |
-|---|---|---:|---:|---:|
-| Historical D3, class 27B Q4 | llama.cpp / Metal | 128 | 65 | 24 |
-| D3 Flash Q8 | llama.cpp / Metal | 124 | 61 | 20 |
-| GLiClass v4 9B BF16 | Official PyTorch pipeline / MPS | 117 | 63 | 20 |
-| Vela3-fast, decision backbone only | Official DecisionEncoder / CPU FP32 | 57 | 28 | 18 |
+| Model observation | Actual runtime | Historical /132 | Historical test /66 | Provisional tool /24 | New pack /192 | New test /96 |
+|---|---|---:|---:|---:|---:|---:|
+| Historical D3, class 27B Q4 | llama.cpp / Metal | 128 | 65 | 24 | Not run | Not run |
+| D3 Flash Q8, nominal 9B | llama.cpp / Metal | 124 | 61 | 20 | **192** | **96** |
+| GLiClass v4 9B BF16 | Official PyTorch pipeline / MPS | 117 | 63 | 20 | Not run | Not run |
+| Vela3-fast, decision backbone only | Official DecisionEncoder / CPU FP32 | 57 | 28 | 18 | Not run | Not run |
+
+The [new campaign tables](docs/RESULTS.md#complementary-capability-campaign-29-october-2026)
+show the fresh 132-case anchor, all three 64-case tracks, FR/EN and 8/32-card
+views, speed and sampled group RSS. Canary calls are excluded from both full-pack scores.
 
 Vela3-fast's specialized span and router adapters were not loaded. D3 Ultra and
 Turbo are **not evaluated here**; the historical D3 row identifies neither.

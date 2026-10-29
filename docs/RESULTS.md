@@ -1,12 +1,12 @@
 # Full results
 
 [README](../README.md) · [Quality](#model-quality) · [Language and task complexity](#language-and-task-complexity) ·
-[Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·
+[New capability tests](#complementary-capability-campaign-29-october-2026) · [Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·
 [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)
 
-**28 model/runtime observations**, consolidated from the public frozen exports through 28 October 2026.
+**28 historical model/runtime observations**, consolidated from the public frozen exports through 28 October 2026.
 Rows identify observations, not 28 independent model families. Repeated exports of the same sealed run are deduplicated;
-quantizations and devices remain separate. This page is generated offline; no model was rerun or rescored.
+quantizations and devices remain separate. Rendering this page does not rerun or rescore models.
 
 **Exploratory evidence:** synthetic, agent-authored references and translations await human review.
 The ranking uses all 132 cases (train + calibration + test); the separate test column uses 66 cases.
@@ -21,9 +21,37 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
 | First tool proposal | 24 search / statistics / fallback choices | Provisional agreement only; no tool execution; **0 semantically qualified cases** |
 | Physics | No dedicated pack | **Not run** |
 | Passage ranking, relevance, support, answerability | Separate fixed-passage campaigns | [Full tables and coverage](leaderboard/other-benchmarks.md) |
-| Capability/tool-set, argument and fixed-observation choices | [New 192-case complementary pack](../datasets/capability-choice-v1/README.md) | Corpus validated; **no real model campaign yet** |
+| Capability/tool-set, argument and fixed-observation choices | [192-case complementary pack](../datasets/capability-choice-v1/README.md) | [First D3 Flash Q8/Metal campaign and fresh context anchor](CAPABILITY_FLASH_RESULTS_20261029.md), reported separately from the 28 historical rows; no tool execution or product qualification |
 | Free-form plugin/MCP selection, complete execution loop, difficulty prediction, adaptive model routing | Future harness stages | **Not run**; [experiment design](INTENT_AND_MODEL_ROUTING.md) |
 | End-to-end RAG and generated-answer quality | No campaign qualified here | **Not run** |
+
+## Complementary capability campaign: 29 October 2026
+
+**D3 Flash Q8**, nominal 9B class, llama.cpp / Metal. The two full packs have separate denominators; canary calls are excluded.
+References remain agent-authored and pending human review. A perfect closed-choice score does not qualify tool execution or product behavior.
+
+| Pack / track | Correct / all | Scored / all | Test correct / all |
+|---|---:|---:|---:|
+| Fresh context anchor | 124/132 | 132/132 | 61/66 |
+| Capability pack | 192/192 | 192/192 | 96/96 |
+| Capability selection | 64/64 | 64/64 | 32/32 |
+| Arguments and dependencies | 64/64 | 64/64 | 32/32 |
+| Next step after fixed observations | 64/64 | 64/64 | 32/32 |
+
+The three track rows partition the 192-case pack; they are not additional cases. The fresh anchor has 66 FR/EN families. The new pack's 192 language/catalogue variants belong to 48 families, including 24 test families.
+
+| Pack | French correct / all | English correct / all | 8-card correct / all | 32-card correct / all |
+|---|---:|---:|---:|---:|
+| Fresh context anchor | 62/66 | 62/66 | Not applicable | Not applicable |
+| Capability pack | 96/96 | 96/96 | 96/96 | 96/96 |
+
+| Pack | Timed successful calls / all | Adapter median ms | Adapter p95 ms | Session group RSS GiB |
+|---|---:|---:|---:|---:|
+| Fresh context anchor | 132/132 | 196.3 | 204.3 | 9.38 |
+| Capability pack | 192/192 | 576.9 | 985.8 | 9.48 |
+
+Timings follow each session's synthetic warm-up and describe one pass; loading/startup is excluded. RSS is the sampled owned process-group peak over startup, smoke and that pack, not per-case RSS or total unified GPU memory. GPU allocation was unreported. Catalogue variants are correlated.
+[Full campaign report](CAPABILITY_FLASH_RESULTS_20261029.md) · [Groups, pairs and source evidence](evidence/capability-flash-20261029/analysis.json). The 28 historical observations below retain their original rows and ranks.
 
 ## Model quality
 

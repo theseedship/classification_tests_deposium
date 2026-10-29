@@ -45,7 +45,7 @@ def public_fixture(root):
         "scripts/build-full-results.py", "scripts/compose-larger-cpu-comparison.py",
         "scripts/compose-d3-comparison.py", results.METADATA, results.HISTORICAL,
         results.HISTORICAL.replace("manifest.json", "report.md"), results.CPU,
-        results.NATIVE, results.GLICLASS, results.FAST,
+        results.NATIVE, results.GLICLASS, results.FAST, results.CAPABILITY,
         results.NATIVE_SESSION, results.GLICLASS_SESSION,
         "docs/evidence/model-comparison-d3-larger-20261011/analysis.json",
         "docs/evidence/model-comparison-complete-20261010-sol/analysis.json",
@@ -149,6 +149,70 @@ class FullResultsTests(unittest.TestCase):
         self.assertEqual(self.by_id["GLiClass9B"]["context"]["groups"]["split"]["test"]["correct"], 63)
         self.assertEqual(self.by_id["Vela3Fast"]["context"]["counts"]["correct"], 57)
         self.assertNotIn("physics", self.by_id["D3Q4"]["context"]["groups"]["domain"])
+
+    def test_new_campaign_tables_show_fresh_packs_tracks_views_and_measurements_separately(self):
+        campaign = self.data["capability_campaign"]
+        anchor, capability = (campaign["phases"][key] for key in ("anchor", "capability"))
+        self.assertEqual(set(campaign["phases"]), {"anchor", "capability"})
+        self.assertFalse(campaign["canary_in_quality_denominators"])
+        self.assertEqual((anchor["counts"]["correct"], anchor["counts"]["total"]), (124, 132))
+        self.assertEqual((anchor["counts"]["by_split"]["test"]["correct"],
+                          anchor["counts"]["by_split"]["test"]["total"]), (61, 66))
+        self.assertEqual((capability["counts"]["correct"], capability["counts"]["total"]), (192, 192))
+        self.assertEqual(capability["counts"]["by_split"]["test"], {"correct": 96, "scored": 96, "total": 96})
+        for track in ("selection", "arguments", "observations"):
+            group = capability["groups"]["track"][track]
+            self.assertEqual((group["correct"], group["scored"], group["total"]), (64, 64, 64))
+            self.assertEqual(group["by_split"]["test"], {"correct": 32, "scored": 32, "total": 32})
+        for axis, keys in (("language", ("fr", "en")), ("catalogue_variant", ("compact", "expanded"))):
+            for key in keys:
+                group = capability["groups"][axis][key]
+                self.assertEqual((group["correct"], group["total"]), (96, 96))
+        self.assertAlmostEqual(anchor["adapter_ms"]["median"], 196.31710400426527)
+        self.assertAlmostEqual(capability["adapter_ms"]["p95"], 985.788958001649)
+        self.assertEqual(capability["session_group_peak_rss_mib"], 9704.375)
+        self.assertEqual((anchor["counts"]["families"], capability["counts"]["families"],
+                          capability["groups"]["split"]["test"]["families"]), (66, 48, 24))
+        self.assertIn(results.CAPABILITY, self.data["sources_sha256"])
+        rendered = results.render(self.data)
+        for text in ("nominal 9B class", "llama.cpp / Metal",
+                     "| Fresh context anchor | 124/132 | 132/132 | 61/66 |",
+                     "| Capability pack | 192/192 | 192/192 | 96/96 |",
+                     "| Capability selection | 64/64 | 64/64 | 32/32 |",
+                     "| Capability pack | 96/96 | 96/96 | 96/96 | 96/96 |",
+                     "| Capability pack | 192/192 | 576.9 | 985.8 | 9.48 |",
+                     "canary calls are excluded", "sampled owned process-group peak",
+                     "New capability tests", "66 FR/EN families", "48 families, including 24 test families"):
+            self.assertIn(text, rendered)
+
+    def test_new_campaign_rejects_inconsistent_groups_identity_dataset_and_resource_scope(self):
+        mutations = [
+            lambda data: data["phases"]["capability"]["counts"].update(total_cases=191),
+            lambda data: data["phases"]["capability"]["groups"]["track"]["selection"].update(passed_cases=63),
+            lambda data: data["phases"]["capability"]["groups"]["catalogue_variant"]["expanded"].update(total_cases=95),
+            lambda data: data["phases"]["anchor"]["groups"]["split"]["test"].update(total_cases=65),
+            lambda data: data["phases"]["capability"]["counts"].update(independent_families=47),
+            lambda data: data["phases"]["capability"]["groups"]["split"]["test"].update(independent_families=23),
+            lambda data: data["phases"]["capability"]["identity"].update(model_sha256="a" * 64),
+            lambda data: data["phases"]["capability"]["sources"].update(dataset_sha256="a" * 64),
+            lambda data: data["phases"]["capability"]["session_resources"].update(rss_scope="total GPU memory"),
+            lambda data: data["phases"]["capability"]["counts"]["successful_latency"]["adapter_duration_ms"].update(median=float("nan")),
+        ]
+        for index, change in enumerate(mutations):
+            with self.subTest(mutation=index), self.changed_json(results.CAPABILITY, change):
+                with self.assertRaises(results.ResultError):
+                    results.build(self.root)
+
+    def test_new_campaign_zero_scored_cases_never_produce_a_summary_pass(self):
+        def zero_scored(data):
+            counts = data["phases"]["capability"]["counts"]
+            counts.update(scored_cases=0, passed_cases=0)
+            counts["counts_by_status"].update(ok=0, error=192)
+            for group in counts["counts_by_split"].values():
+                group.update(scored_cases=0, passed_cases=0)
+        with self.changed_json(results.CAPABILITY, zero_scored):
+            with self.assertRaisesRegex(results.ResultError, "zero scored cases"):
+                results.build(self.root)
 
     def test_repeated_exports_are_not_additional_models_and_conflicts_are_rejected(self):
         gli = json.loads((self.root / results.GLICLASS).read_text())
