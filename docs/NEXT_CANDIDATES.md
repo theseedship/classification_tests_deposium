@@ -10,6 +10,11 @@ and order are unchanged. The [current priorities](BENCHMARK_PRIORITIES_20261029.
 add a separate physics baseline; the dated candidate inventory below remains
 historical context.
 
+[Clef Flash Q8/Metal](CLEF_FLASH_RESULTS_20261029.md) has now completed the
+separate addition: context 110/132 (test 59/66), capability 192/192 (test 96/96),
+physics 41/48 (test 31/36), all cases scored. Clef 27B remains unexecuted;
+this addition does not replace or reorder the original cohort.
+
 ## Actualisation Decision 3 / Vela 3 — 28 octobre 2026
 
 [Audit et catalogue épinglé](DECISION3_VELA3_REVIEW_20261028.md) : aucun Ultra ou

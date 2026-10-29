@@ -33,7 +33,9 @@ ou linguistique humaine. Ce lot fini ne couvre ni physique expérimentale,
 incertitudes de mesure, simulation, problèmes avancés ou documents réels longs.
 La première [campagne Flash Q8/Metal du 29 octobre 2026](../../docs/PHYSICS_FLASH_RESULTS_20261029.md)
 atteint **39/48**, dont **32/36 test**, avec une couverture scorée complète.
-Il n’existe pas encore de comparaison avec un autre modèle sur ces cas.
+La campagne distincte [Clef Flash Q8/Metal](../../docs/CLEF_FLASH_RESULTS_20261029.md)
+atteint **41/48**, dont **31/36 test**. Son gain sur le total vient de la
+calibration ; il ne dépasse pas D3 Flash sur le sous-ensemble test.
 
 La [variante directe du protocole Flash Q8](../../docs/PHYSICS_FLASH_UPSTREAM_PROTOCOL_20261029.md)
 a été exécutée avec une ancre de contexte séparée, sans dépendance à l’API Turbo

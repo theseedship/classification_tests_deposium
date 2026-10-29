@@ -77,10 +77,14 @@ answer, is insufficient, or conflicts.
 |---|---|---:|---:|---:|---|
 | D3-lite CPU | Support | 443/768 | 768/768 | 0/0 | Complete observation |
 | D3-lite CPU | Answerability | 88/128 | 128/128 | 0/0 | Complete observation |
+| D3 Flash Q8/Metal | Support | 460/768 | 768/768 | 0/0 | Complete separate observation, 29 October 2026 |
+| D3 Flash Q8/Metal | Answerability | 122/128 | 128/128 | 0/0 | Complete separate observation, 29 October 2026 |
+| Clef Flash Q8/Metal | Support | 446/768 | 768/768 | 0/0 | Complete matched observation, 29 October 2026 |
+| Clef Flash Q8/Metal | Answerability | 109/128 | 128/128 | 0/0 | Complete matched observation, 29 October 2026 |
 | JeV 1.14.0 API | Support | 394/768 | 514/768 | 2/252 | Partial; missing/errors retained in denominator |
 | JeV 1.14.0 API | Answerability | Unmeasured | 0/128 | 0/128 | No quality score; not run |
 
-No `unsupported`, `timeout`, or `abstain` outcomes were recorded in these four
+No `unsupported`, `timeout`, or `abstain` outcomes were recorded in these
 rows. JeV's campaign stopped after 522/728 planned distinct HTTP attempts;
 relevance observations were sufficient for ranking, but support was partial and
 answerability remained unmeasured. The initial D3 campaign made 728 physical calls
@@ -88,7 +92,25 @@ for 1,408 logical choices; input reuse is not extra independent evidence.
 
 Sources: [initial D3 report](../evidence/passage-cpu-20261015/report.md)
 and [JSON](../evidence/passage-cpu-20261015/analysis.json);
+[D3 Flash results and confusion matrices](../PASSAGE_FLASH_RESULTS_20261029.md)
+and [aggregate](../evidence/passage-flash-20261029/analysis.json);
+[matched Clef comparison](../PASSAGE_CLEF_RESULTS_20261029.md)
+and [aggregate](../evidence/passage-clef-flash-20261029/analysis.json);
 [JeV partial campaign](../evidence/passage-jev-20261015/report.md).
+
+D3 Flash's four-grade relevance accuracy is separately 252/512; this does not
+constitute a new ranking/nDCG result. Support improves only modestly in total
+over D3-lite and macro class accuracy decreases: Flash mislabels 235/584
+insufficient judgments as refutations and 63/584 as support. The answerability
+gain does not qualify it as a factual verifier. Its separately measured timings
+and resources are in the linked report; the historical CPU tables below remain
+unchanged.
+
+Clef's relevance classification is 261/512, not a new ranking/nDCG result.
+Its answerability total masks 12/16 conflicting pools accepted as answerable;
+class macro accuracy is 68.31%, versus D3 Flash's 97.73%. Paired outcomes and
+both confusion matrices are in the matched comparison. Correlated views and
+translations do not qualify an ensemble from the exposed test disagreements.
 
 ## Passage latency and memory
 

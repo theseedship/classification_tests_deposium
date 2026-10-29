@@ -1,0 +1,1843 @@
+{
+  "schema_version": "deposium.passage-clef-flash-public/v1",
+  "report_date": "2026-10-29",
+  "reference_review": "agent_only_pending_human",
+  "execution_scope": "isolated_direct_upstream_llama_cpp_no_application_gateway",
+  "model": {
+    "schema_version": "deposium.model-assets/v1",
+    "repo_id": "ggml-org/Clef-Flash-GGUF",
+    "revision": "6e2a164d70aae2af7fce86005da3f91805565b1d",
+    "files": [
+      {
+        "path": "Clef-Flash-Q8_0.gguf",
+        "size": 9657260288,
+        "sha256": "25f801e2a27610b0ccc0cb1558d7eda3d7a304e34e2c4a04e3079357ff7d906e"
+      }
+    ]
+  },
+  "runtime": {
+    "schema_version": "deposium.upstream-runtime/v1",
+    "repository": "https://github.com/ggml-org/llama.cpp.git",
+    "revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+    "source_tree": "b537a082cb9b23737fac2cfa9e73a178bf8e747d",
+    "source_worktree": "clean",
+    "binary_sha256": "d6ec60cbb70b61572c0f33305b6839952445fa35b9ee2f1355b71216ab28ada1",
+    "build_cache_sha256": "9729139773b4f384536f0cf31715ec7be1c3ab6f23b63cbd02da125107cd78b5",
+    "build_log_sha256": "e998d25811c252adf2f7b158877708df91f3aef2cf92ec56121e9f7929b2e444",
+    "cmake_version": "3.31.6",
+    "shared_libraries": false,
+    "requested_backend": "metal",
+    "build_parallelism": 2
+  },
+  "device": {
+    "kind": "Apple M5 Pro",
+    "unified_memory_gib": 64
+  },
+  "selection": {
+    "path": "datasets/passage-evidence-v1/cases.jsonl",
+    "sha256": "35a8b8982d12959985218b5bc6e10e932ba30970bd7ab9a81c6f10d17a7fe476",
+    "split": "test",
+    "rotation": 0,
+    "pools": 128,
+    "families": 8,
+    "directions": 8,
+    "views": [
+      "full",
+      "head_384"
+    ]
+  },
+  "envelope": {
+    "context": 4096,
+    "batch": 4096,
+    "microbatch": 4096,
+    "parallel": 1,
+    "call_timeout_seconds": 30,
+    "rss_limit_mib": 18432,
+    "reserve_mib": 8192,
+    "automatic_retries": 0,
+    "backend_fallback": false,
+    "watcher_interval_ms": 250
+  },
+  "canary": {
+    "valid_calls": 12,
+    "planned_calls": 12,
+    "quality_cases_scored": 0,
+    "quality_gate": false
+  },
+  "anchor": {
+    "total_cases": 132,
+    "scored_cases": 132,
+    "passed_cases": 110,
+    "counts_by_split": {
+      "calibration": {
+        "passed_cases": 26,
+        "scored_cases": 30,
+        "total_cases": 30
+      },
+      "test": {
+        "passed_cases": 59,
+        "scored_cases": 66,
+        "total_cases": 66
+      },
+      "train": {
+        "passed_cases": 25,
+        "scored_cases": 36,
+        "total_cases": 36
+      }
+    },
+    "counts_by_status": {
+      "abstain": 0,
+      "error": 0,
+      "missing": 0,
+      "ok": 132,
+      "timeout": 0,
+      "unsupported": 0
+    }
+  },
+  "preparation": {
+    "within_limit_inputs": 872,
+    "overflow_controls_rejected": 1,
+    "token_min": 183,
+    "token_max": 1068,
+    "inference_performed": false,
+    "helper_sha256": "42ea3604621a346818bbc27a55488ad411fbb508326d178226305638f3d4e97b"
+  },
+  "preparation_resources": {
+    "rss_peak_mib": 164.8125,
+    "min_available_mib": 32163.171875,
+    "stop_reason": null
+  },
+  "coverage": {
+    "completion_status": "complete",
+    "stop_reason": null,
+    "selected_cases": 128,
+    "logical_decisions": 1408,
+    "physical_planned": 728,
+    "physical_attempted": 728,
+    "physical_statuses": {
+      "ok": 728
+    },
+    "logical_statuses": {
+      "answerability": {
+        "abstain": 0,
+        "error": 0,
+        "missing": 0,
+        "ok": 128,
+        "timeout": 0,
+        "unsupported": 0
+      },
+      "relevance": {
+        "abstain": 0,
+        "error": 0,
+        "missing": 0,
+        "ok": 512,
+        "timeout": 0,
+        "unsupported": 0
+      },
+      "support": {
+        "abstain": 0,
+        "error": 0,
+        "missing": 0,
+        "ok": 768,
+        "timeout": 0,
+        "unsupported": 0
+      }
+    }
+  },
+  "axes": {
+    "relevance": {
+      "counts": {
+        "correct": 261,
+        "scored": 512,
+        "total": 512,
+        "families": 8,
+        "statuses": {
+          "ok": 512,
+          "missing": 0,
+          "unsupported": 0,
+          "error": 0,
+          "timeout": 0,
+          "abstain": 0
+        }
+      },
+      "macro_accuracy_scored": 0.6039799016772701,
+      "macro_accuracy_defined_classes": 4,
+      "by_expected_label": {
+        "3": {
+          "total_decisions": 104,
+          "scored_decisions": 104,
+          "accuracy_scored": 0.9807692307692307,
+          "accuracy_over_all": 0.9807692307692307
+        },
+        "2": {
+          "total_decisions": 32,
+          "scored_decisions": 32,
+          "accuracy_scored": 0.5625,
+          "accuracy_over_all": 0.5625
+        },
+        "1": {
+          "total_decisions": 224,
+          "scored_decisions": 224,
+          "accuracy_scored": 0.11607142857142858,
+          "accuracy_over_all": 0.11607142857142858
+        },
+        "0": {
+          "total_decisions": 152,
+          "scored_decisions": 152,
+          "accuracy_scored": 0.756578947368421,
+          "accuracy_over_all": 0.756578947368421
+        }
+      },
+      "confusion": {
+        "3": {
+          "3": 102,
+          "1": 2
+        },
+        "1": {
+          "0": 100,
+          "1": 26,
+          "2": 4,
+          "3": 94
+        },
+        "0": {
+          "0": 115,
+          "3": 19,
+          "1": 8,
+          "2": 10
+        },
+        "2": {
+          "2": 18,
+          "0": 12,
+          "1": 2
+        }
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 36,
+            "scored": 64,
+            "total": 64,
+            "families": 8,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "en->en": {
+            "correct": 32,
+            "scored": 64,
+            "total": 64,
+            "families": 8,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "en->fr": {
+            "correct": 26,
+            "scored": 64,
+            "total": 64,
+            "families": 8,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "es->es": {
+            "correct": 36,
+            "scored": 64,
+            "total": 64,
+            "families": 8,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "fr->en": {
+            "correct": 29,
+            "scored": 64,
+            "total": 64,
+            "families": 8,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "fr->fr": {
+            "correct": 30,
+            "scored": 64,
+            "total": 64,
+            "families": 8,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "it->it": {
+            "correct": 34,
+            "scored": 64,
+            "total": 64,
+            "families": 8,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "pt->pt": {
+            "correct": 38,
+            "scored": 64,
+            "total": 64,
+            "families": 8,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 126,
+            "scored": 256,
+            "total": 256,
+            "families": 8,
+            "statuses": {
+              "ok": 256,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "head_384": {
+            "correct": 135,
+            "scored": 256,
+            "total": 256,
+            "families": 8,
+            "statuses": {
+              "ok": 256,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 34,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "conflicting_evidence": {
+            "correct": 44,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "distributed_binding": {
+            "correct": 18,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "heading_value_truncation": {
+            "correct": 39,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "missing_evidence": {
+            "correct": 16,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "negation_exception": {
+            "correct": 40,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "unit_condition_collision": {
+            "correct": 38,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "variant_scope": {
+            "correct": 32,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 177,
+            "scored": 352,
+            "total": 352,
+            "families": 6,
+            "statuses": {
+              "ok": 352,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "conflicting_visible_evidence": {
+            "correct": 44,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "insufficient_visible_evidence": {
+            "correct": 40,
+            "scored": 96,
+            "total": 96,
+            "families": 2,
+            "statuses": {
+              "ok": 96,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "family_id": {
+          "family-0e69abc5df634cb6aede3f0f": {
+            "correct": 32,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-3f0a04bc337c79591c9af9df": {
+            "correct": 16,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-5867d6ef440a17cea1f81d3a": {
+            "correct": 40,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-589683ab6db468293afcd1ed": {
+            "correct": 34,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-7d20e3396e4b5a27a2645d95": {
+            "correct": 38,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-aa947d62d77607529f5ea2bc": {
+            "correct": 39,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-bcf0d08abaa69af0d17bc07d": {
+            "correct": 18,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-c74dde7320fb902339cc329e": {
+            "correct": 44,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        }
+      },
+      "distinct_physical_calls": 264,
+      "physical_adapter_ms": {
+        "count": 264,
+        "min": 197.05079100094736,
+        "median": 202.12833299592603,
+        "p95": 376.21474999468774,
+        "max": 407.4547500058543,
+        "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee"
+      }
+    },
+    "support": {
+      "counts": {
+        "correct": 446,
+        "scored": 768,
+        "total": 768,
+        "families": 8,
+        "statuses": {
+          "ok": 768,
+          "missing": 0,
+          "unsupported": 0,
+          "error": 0,
+          "timeout": 0,
+          "abstain": 0
+        }
+      },
+      "macro_accuracy_scored": 0.8109413417632596,
+      "macro_accuracy_defined_classes": 3,
+      "by_expected_label": {
+        "supports": {
+          "total_decisions": 104,
+          "scored_decisions": 104,
+          "accuracy_scored": 0.9807692307692307,
+          "accuracy_over_all": 0.9807692307692307
+        },
+        "refutes": {
+          "total_decisions": 80,
+          "scored_decisions": 80,
+          "accuracy_scored": 1.0,
+          "accuracy_over_all": 1.0
+        },
+        "insufficient": {
+          "total_decisions": 584,
+          "scored_decisions": 584,
+          "accuracy_scored": 0.4520547945205479,
+          "accuracy_over_all": 0.4520547945205479
+        }
+      },
+      "confusion": {
+        "supports": {
+          "supports": 102,
+          "refutes": 2
+        },
+        "refutes": {
+          "refutes": 80
+        },
+        "insufficient": {
+          "refutes": 237,
+          "insufficient": 264,
+          "supports": 83
+        }
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 62,
+            "scored": 96,
+            "total": 96,
+            "families": 8,
+            "statuses": {
+              "ok": 96,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "en->en": {
+            "correct": 63,
+            "scored": 96,
+            "total": 96,
+            "families": 8,
+            "statuses": {
+              "ok": 96,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "en->fr": {
+            "correct": 39,
+            "scored": 96,
+            "total": 96,
+            "families": 8,
+            "statuses": {
+              "ok": 96,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "es->es": {
+            "correct": 66,
+            "scored": 96,
+            "total": 96,
+            "families": 8,
+            "statuses": {
+              "ok": 96,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "fr->en": {
+            "correct": 47,
+            "scored": 96,
+            "total": 96,
+            "families": 8,
+            "statuses": {
+              "ok": 96,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "fr->fr": {
+            "correct": 68,
+            "scored": 96,
+            "total": 96,
+            "families": 8,
+            "statuses": {
+              "ok": 96,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "it->it": {
+            "correct": 50,
+            "scored": 96,
+            "total": 96,
+            "families": 8,
+            "statuses": {
+              "ok": 96,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "pt->pt": {
+            "correct": 51,
+            "scored": 96,
+            "total": 96,
+            "families": 8,
+            "statuses": {
+              "ok": 96,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 229,
+            "scored": 384,
+            "total": 384,
+            "families": 8,
+            "statuses": {
+              "ok": 384,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "head_384": {
+            "correct": 217,
+            "scored": 384,
+            "total": 384,
+            "families": 8,
+            "statuses": {
+              "ok": 384,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 76,
+            "scored": 128,
+            "total": 128,
+            "families": 1,
+            "statuses": {
+              "ok": 128,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "conflicting_evidence": {
+            "correct": 94,
+            "scored": 128,
+            "total": 128,
+            "families": 1,
+            "statuses": {
+              "ok": 128,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "distributed_binding": {
+            "correct": 44,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "heading_value_truncation": {
+            "correct": 12,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "missing_evidence": {
+            "correct": 12,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "negation_exception": {
+            "correct": 76,
+            "scored": 128,
+            "total": 128,
+            "families": 1,
+            "statuses": {
+              "ok": 128,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "unit_condition_collision": {
+            "correct": 90,
+            "scored": 128,
+            "total": 128,
+            "families": 1,
+            "statuses": {
+              "ok": 128,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "variant_scope": {
+            "correct": 42,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 340,
+            "scored": 544,
+            "total": 544,
+            "families": 6,
+            "statuses": {
+              "ok": 544,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "conflicting_visible_evidence": {
+            "correct": 94,
+            "scored": 128,
+            "total": 128,
+            "families": 1,
+            "statuses": {
+              "ok": 128,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "insufficient_visible_evidence": {
+            "correct": 12,
+            "scored": 96,
+            "total": 96,
+            "families": 2,
+            "statuses": {
+              "ok": 96,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "family_id": {
+          "family-0e69abc5df634cb6aede3f0f": {
+            "correct": 42,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-3f0a04bc337c79591c9af9df": {
+            "correct": 12,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-5867d6ef440a17cea1f81d3a": {
+            "correct": 76,
+            "scored": 128,
+            "total": 128,
+            "families": 1,
+            "statuses": {
+              "ok": 128,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-589683ab6db468293afcd1ed": {
+            "correct": 76,
+            "scored": 128,
+            "total": 128,
+            "families": 1,
+            "statuses": {
+              "ok": 128,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-7d20e3396e4b5a27a2645d95": {
+            "correct": 90,
+            "scored": 128,
+            "total": 128,
+            "families": 1,
+            "statuses": {
+              "ok": 128,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-aa947d62d77607529f5ea2bc": {
+            "correct": 12,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-bcf0d08abaa69af0d17bc07d": {
+            "correct": 44,
+            "scored": 64,
+            "total": 64,
+            "families": 1,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-c74dde7320fb902339cc329e": {
+            "correct": 94,
+            "scored": 128,
+            "total": 128,
+            "families": 1,
+            "statuses": {
+              "ok": 128,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        }
+      },
+      "distinct_physical_calls": 392,
+      "physical_adapter_ms": {
+        "count": 392,
+        "min": 194.55575000029057,
+        "median": 201.24689600197598,
+        "p95": 374.09766600467265,
+        "max": 377.4279580102302,
+        "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee"
+      }
+    },
+    "answerability": {
+      "counts": {
+        "correct": 109,
+        "scored": 128,
+        "total": 128,
+        "families": 8,
+        "statuses": {
+          "ok": 128,
+          "missing": 0,
+          "unsupported": 0,
+          "error": 0,
+          "timeout": 0,
+          "abstain": 0
+        }
+      },
+      "macro_accuracy_scored": 0.6830808080808081,
+      "macro_accuracy_defined_classes": 3,
+      "by_expected_label": {
+        "answerable": {
+          "total_decisions": 88,
+          "scored_decisions": 88,
+          "accuracy_scored": 0.9659090909090909,
+          "accuracy_over_all": 0.9659090909090909
+        },
+        "insufficient_visible_evidence": {
+          "total_decisions": 24,
+          "scored_decisions": 24,
+          "accuracy_scored": 0.8333333333333334,
+          "accuracy_over_all": 0.8333333333333334
+        },
+        "conflicting_visible_evidence": {
+          "total_decisions": 16,
+          "scored_decisions": 16,
+          "accuracy_scored": 0.25,
+          "accuracy_over_all": 0.25
+        }
+      },
+      "confusion": {
+        "answerable": {
+          "answerable": 85,
+          "insufficient_visible_evidence": 3
+        },
+        "insufficient_visible_evidence": {
+          "insufficient_visible_evidence": 20,
+          "answerable": 4
+        },
+        "conflicting_visible_evidence": {
+          "answerable": 12,
+          "conflicting_visible_evidence": 4
+        }
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 14,
+            "scored": 16,
+            "total": 16,
+            "families": 8,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "en->en": {
+            "correct": 16,
+            "scored": 16,
+            "total": 16,
+            "families": 8,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "en->fr": {
+            "correct": 16,
+            "scored": 16,
+            "total": 16,
+            "families": 8,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "es->es": {
+            "correct": 10,
+            "scored": 16,
+            "total": 16,
+            "families": 8,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "fr->en": {
+            "correct": 14,
+            "scored": 16,
+            "total": 16,
+            "families": 8,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "fr->fr": {
+            "correct": 13,
+            "scored": 16,
+            "total": 16,
+            "families": 8,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "it->it": {
+            "correct": 12,
+            "scored": 16,
+            "total": 16,
+            "families": 8,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "pt->pt": {
+            "correct": 14,
+            "scored": 16,
+            "total": 16,
+            "families": 8,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 54,
+            "scored": 64,
+            "total": 64,
+            "families": 8,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "head_384": {
+            "correct": 55,
+            "scored": 64,
+            "total": 64,
+            "families": 8,
+            "statuses": {
+              "ok": 64,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 16,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "conflicting_evidence": {
+            "correct": 4,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "distributed_binding": {
+            "correct": 14,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "heading_value_truncation": {
+            "correct": 15,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "missing_evidence": {
+            "correct": 12,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "negation_exception": {
+            "correct": 16,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "unit_condition_collision": {
+            "correct": 16,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "variant_scope": {
+            "correct": 16,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 85,
+            "scored": 88,
+            "total": 88,
+            "families": 6,
+            "statuses": {
+              "ok": 88,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "conflicting_visible_evidence": {
+            "correct": 4,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "insufficient_visible_evidence": {
+            "correct": 20,
+            "scored": 24,
+            "total": 24,
+            "families": 2,
+            "statuses": {
+              "ok": 24,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        },
+        "family_id": {
+          "family-0e69abc5df634cb6aede3f0f": {
+            "correct": 16,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-3f0a04bc337c79591c9af9df": {
+            "correct": 12,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-5867d6ef440a17cea1f81d3a": {
+            "correct": 16,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-589683ab6db468293afcd1ed": {
+            "correct": 16,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-7d20e3396e4b5a27a2645d95": {
+            "correct": 16,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-aa947d62d77607529f5ea2bc": {
+            "correct": 15,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-bcf0d08abaa69af0d17bc07d": {
+            "correct": 14,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          },
+          "family-c74dde7320fb902339cc329e": {
+            "correct": 4,
+            "scored": 16,
+            "total": 16,
+            "families": 1,
+            "statuses": {
+              "ok": 16,
+              "missing": 0,
+              "unsupported": 0,
+              "error": 0,
+              "timeout": 0,
+              "abstain": 0
+            }
+          }
+        }
+      },
+      "distinct_physical_calls": 72,
+      "physical_adapter_ms": {
+        "count": 72,
+        "min": 275.60733299469575,
+        "median": 282.259145489661,
+        "p95": 864.7322499891743,
+        "max": 939.9560419842601,
+        "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee"
+      }
+    }
+  },
+  "all_physical_adapter_ms": {
+    "count": 728,
+    "min": 194.55575000029057,
+    "median": 201.9548130047042,
+    "p95": 376.21474999468774,
+    "max": 939.9560419842601,
+    "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee"
+  },
+  "native_preparation_count_matches": 728,
+  "native_truncation_receipts": {
+    "true": 0,
+    "false": 0,
+    "unknown": 728
+  },
+  "physical_forward_receipts": {
+    "true": 0,
+    "false": 0,
+    "unknown": 728
+  },
+  "resources": {
+    "rss_peak_mib": 10644.921875,
+    "min_available_mib": 21391.015625,
+    "stop_reason": null
+  },
+  "actual_backend": {
+    "kind": "metal",
+    "offloaded_layers": 33,
+    "total_layers": 33,
+    "decision_type": "clef"
+  },
+  "paired_with_d3_flash": {
+    "relevance": {
+      "all": {
+        "total": 512,
+        "families": 8,
+        "both_correct": 231,
+        "d3_only_correct": 21,
+        "clef_only_correct": 30,
+        "both_incorrect": 230,
+        "choice_agreement": 427
+      },
+      "by_view": {
+        "full": {
+          "total": 256,
+          "families": 8,
+          "both_correct": 111,
+          "d3_only_correct": 7,
+          "clef_only_correct": 15,
+          "both_incorrect": 123,
+          "choice_agreement": 215
+        },
+        "head_384": {
+          "total": 256,
+          "families": 8,
+          "both_correct": 120,
+          "d3_only_correct": 14,
+          "clef_only_correct": 15,
+          "both_incorrect": 107,
+          "choice_agreement": 212
+        }
+      }
+    },
+    "support": {
+      "all": {
+        "total": 768,
+        "families": 8,
+        "both_correct": 394,
+        "d3_only_correct": 66,
+        "clef_only_correct": 52,
+        "both_incorrect": 256,
+        "choice_agreement": 642
+      },
+      "by_view": {
+        "full": {
+          "total": 384,
+          "families": 8,
+          "both_correct": 201,
+          "d3_only_correct": 38,
+          "clef_only_correct": 28,
+          "both_incorrect": 117,
+          "choice_agreement": 314
+        },
+        "head_384": {
+          "total": 384,
+          "families": 8,
+          "both_correct": 193,
+          "d3_only_correct": 28,
+          "clef_only_correct": 24,
+          "both_incorrect": 139,
+          "choice_agreement": 328
+        }
+      }
+    },
+    "answerability": {
+      "all": {
+        "total": 128,
+        "families": 8,
+        "both_correct": 103,
+        "d3_only_correct": 19,
+        "clef_only_correct": 6,
+        "both_incorrect": 0,
+        "choice_agreement": 103
+      },
+      "by_view": {
+        "full": {
+          "total": 64,
+          "families": 8,
+          "both_correct": 51,
+          "d3_only_correct": 10,
+          "clef_only_correct": 3,
+          "both_incorrect": 0,
+          "choice_agreement": 51
+        },
+        "head_384": {
+          "total": 64,
+          "families": 8,
+          "both_correct": 52,
+          "d3_only_correct": 9,
+          "clef_only_correct": 3,
+          "both_incorrect": 0,
+          "choice_agreement": 52
+        }
+      }
+    }
+  },
+  "native_d3_flash": {
+    "source": "docs/evidence/passage-flash-20261029/analysis.json",
+    "source_sha256": "f49d97593d7346c013608e74e77c07c791237d97e5f580b1ae591f2a119b3ebf",
+    "logical_and_physical_task_inputs_identical": true,
+    "benchmark_source_sha256": "d4405521c201106d7939e422ca473533a0ec9ac91b6286283a2d7b2d02861dc0",
+    "axes": {
+      "relevance": {
+        "counts": {
+          "correct": 252,
+          "scored": 512,
+          "total": 512,
+          "families": 8,
+          "statuses": {
+            "ok": 512,
+            "missing": 0,
+            "unsupported": 0,
+            "error": 0,
+            "timeout": 0,
+            "abstain": 0
+          }
+        },
+        "macro_accuracy_scored": 0.5905870445344129
+      },
+      "support": {
+        "counts": {
+          "correct": 460,
+          "scored": 768,
+          "total": 768,
+          "families": 8,
+          "statuses": {
+            "ok": 768,
+            "missing": 0,
+            "unsupported": 0,
+            "error": 0,
+            "timeout": 0,
+            "abstain": 0
+          }
+        },
+        "macro_accuracy_scored": 0.7978573937478047
+      },
+      "answerability": {
+        "counts": {
+          "correct": 122,
+          "scored": 128,
+          "total": 128,
+          "families": 8,
+          "statuses": {
+            "ok": 128,
+            "missing": 0,
+            "unsupported": 0,
+            "error": 0,
+            "timeout": 0,
+            "abstain": 0
+          }
+        },
+        "macro_accuracy_scored": 0.9772727272727272
+      }
+    }
+  },
+  "conversion_source_revision": "not_attested",
+  "historical_d3_lite": {
+    "source": "docs/evidence/passage-cpu-20261015/analysis.json",
+    "source_sha256": "f0d643f4e9a49ceeeaa9a8ee065e2121dae94a312a08b8f237cd524496fdd657",
+    "dataset_and_selection_match": true,
+    "runtime_comparison": "different model/runtime/device; no controlled speed ranking",
+    "axes": {
+      "answerability": {
+        "correct": 88,
+        "scored": 128,
+        "total": 128,
+        "macro_accuracy_scored": 0.8080808080808081
+      },
+      "relevance": {
+        "correct": 229,
+        "scored": 512,
+        "total": 512,
+        "macro_accuracy_scored": 0.4960146761133603
+      },
+      "support": {
+        "correct": 443,
+        "scored": 768,
+        "total": 768,
+        "macro_accuracy_scored": 0.8092290129961363
+      }
+    }
+  },
+  "source": {
+    "public_base_commit": "501f0963077a787dfea6168330dde9754affd3e7",
+    "working_tree_changes_present": true,
+    "benchmark_source_sha256": "d4405521c201106d7939e422ca473533a0ec9ac91b6286283a2d7b2d02861dc0",
+    "plan_sha256": "b1bbf35ed5ff3bbfcc6980a81cbbbcf2a7c96daa99a7fc0997e23e15ea3f5984",
+    "protocol_sha256": "d08b7a63305c49eee98d90b3832faeb899b84cb3328ab87b6ce1172f2d943fc4",
+    "supervisor_sha256": "b9c3fb63f87cbac767d945d0419d7ceea74b79519a0622e76b298ee65ae0f8e9",
+    "pre_inference_freeze_sha256": "82fed6841f9c7b57dc8ae560e02125c1d6167693fabdfebccab611f237b1f2e4",
+    "preparation_seal_sha256": "749bf61e79fb3680ba2d2401b7086e58db15f5cc0bae8aab456860cdb845b58e",
+    "canary_seal_sha256": "36848ad07b751d8160b3cfc6d713a1de281874d4bd4cd4dfbc35ecec83b65466",
+    "anchor_seal_sha256": "617d38eb5f07a73490f430c791321832d7e97a89519fc2f2e7805896b8a544ea",
+    "passage_outer_seal_sha256": "dd5aed663384abdcfced4b4ebb3148164784626a52814f7c06def567266b6d19",
+    "passage_inner_seal_sha256": "848b99e4f690331481279a2126a8ea8af0434bd1f06612e2492c486d1d72fdf2",
+    "raw_sha256": "cd63a14396fdb7deaeeb05b1cd154d14f4ba655c9314c8862d1cbd08dbe9f8c0",
+    "scores_sha256": "943b645001fb394f7608cf5e682a7c3b32212fd56ed958c0411e4dec84e23d91",
+    "logical_requests_sha256": "e7fd6b005e55efc211df51fac023324007a51ef948fe80b183afe7e355cb8185",
+    "physical_requests_sha256": "fb85a7251d8ab3b1d415529137273ed9f952ffdd595c0ba4d3695ccd51e30526",
+    "passage_dataset_scorer_sha256": "15b8a117a197129a8ae88e253f64e878e34bb60d5a3cd9747d6ec0b0496298a0",
+    "aggregate_producer_sha256": "575984632f0dce3885155ec347f1b5887e631e5aa9801c4e79d900ec0cbc3d5c"
+  },
+  "limits": [
+    "Eight correlated scenario families; no human-approved references or population confidence interval.",
+    "Rotation zero only; no new ranking, live retrieval, tool execution or generated-answer measurement.",
+    "Physical input reuse is not additional independent evidence; logical tasks retain separate denominators.",
+    "Input-count agreement is not live token-ID comparison; truncation and physical-forward receipts unknown.",
+    "Warm-up excluded; one-pass adapter durations exclude loading, not a controlled cross-device speed comparison.",
+    "Session group RSS includes startup/controls/warm-up; GPU allocation separately unknown.",
+    "Exact historical request-byte identity is not independently attested by the public aggregate.",
+    "Clef GGUF conversion exact Cloudflare source revision not attested; BF16/PyTorch and visual features not evaluated.",
+    "Private outputs, local paths and source captures remain in ignored archives."
+  ]
+}

@@ -129,6 +129,27 @@ implement another pipeline. See the [English protocol](docs/PROTOCOL.md),
 
 ## Selected observations
 
+**29 October 2026:** [Clef Flash on matching passages](docs/PASSAGE_CLEF_RESULTS_20261029.md)
+scored relevance **261/512**, support **446/768**, answerability **109/128**, with
+all 728 physical calls valid. D3 Flash scored 252/512, 460/768 and 122/128.
+Clef accepted 12/16 pools annotated as conflicting as answerable. Paired
+outcomes and class confusion, rather than a pooled score, describe the tradeoffs;
+references remain pending human review.
+
+**29 October 2026:** [D3 Flash Q8 passage evidence](docs/PASSAGE_FLASH_RESULTS_20261029.md)
+scored relevance **252/512**, support **460/768** and answerability **122/128**,
+with all 728 distinct physical calls valid. Answerability improves over the
+historical D3-lite observation; insufficient-versus-refuted support and graded
+relevance remain weak. These are 128 correlated test pools in eight families,
+with no new ranking or end-to-end answer evaluation.
+
+**29 October 2026:** [Clef Flash Q8/Metal](docs/CLEF_FLASH_RESULTS_20261029.md)
+scored context **110/132 (test 59/66)**, capability **192/192 (test 96/96)** and
+physics **41/48 (test 31/36)**, with full scored coverage. D3 Flash's physics
+test remains 32/36 despite its lower full total of 39/48. These exploratory
+observations use separate denominators; the capability ceiling does not qualify
+executable tools. Clef 27B remains unexecuted.
+
 **29 October 2026:** the first complementary
 [D3 Flash Q8/Metal campaign](docs/CAPABILITY_FLASH_RESULTS_20261029.md) reached
 192/192 on capability choices (test 96/96); its separate fresh context anchor
