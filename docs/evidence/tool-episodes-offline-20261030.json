@@ -403,6 +403,62 @@
     "source_mount": "read_only",
     "tests": 965
   },
+  "post_review_budget_fix": {
+    "candidate_model_cases": 0,
+    "control": {
+      "altered_case": {
+        "budgets_respected": false,
+        "tool_call_attempts": 4,
+        "tool_calls_executed": 0
+      },
+      "budget_correct_cases": 13,
+      "budget_eligible_cases": 14,
+      "counts_by_status": {
+        "abstain": 0,
+        "error": 0,
+        "missing": 0,
+        "ok": 14,
+        "timeout": 0,
+        "unsupported": 0
+      },
+      "fingerprints": {
+        "adapter_closure_sha256": "ccf3ffc253cbf04b01e2afea2bc2d7f1541f83862e3c95151e4e8227fc0ce226",
+        "archive_seal_sha256": "55be240d6548b476c0484984876e8ad03b97ff6e417b04fd5fd99281d05dec6c",
+        "bench_source_sha256": "6eb653270eb52f19ed75bd3469e443399d51a2c883f70562fba02b0d1d9090c6",
+        "dataset_sha256": "afe600a4a6d39c09a9d45259067ac2e659b941219f505000549553c9a434aff9",
+        "raw_sha256": "eab6d91aae179dfa9f87f90645f896716cf4b8c53fdddf9d07dcb0f5d90400fb",
+        "recordings_sha256": "50c5cb31d0df1854da4407f22e65d01c9af03ef28d838a60f3162537f7698e98",
+        "scorer_sha256": "1f4c8b494bd21f0bab13cf609ebef2960e1a5485a44191bddf9bba9cbf6f3b30"
+      },
+      "mutation": "One missing-input policy proposes four unknown-tool calls against a three-call limit, then requests clarification.",
+      "passed_cases": 13,
+      "policy_steps_observed": 38,
+      "scored_cases": 14,
+      "task_success_cases": 4,
+      "tool_calls_observed": 20,
+      "total_cases": 14
+    },
+    "executed_benchmark_commit": "db4b9e1943f9a32e343f329f52c90b8166d28177",
+    "fix": "Check call/retry limits before rejecting unknown, extra-field or oversized call proposals; preserve all attempts and actual execution counts.",
+    "focused_tests": {
+      "passed": 64,
+      "skipped": 0,
+      "tests": 64
+    },
+    "offline_linux_suite": {
+      "errors": 0,
+      "failures": 0,
+      "network": "disabled",
+      "passed": 935,
+      "python": "3.12",
+      "skipped": 31,
+      "source_mount": "read_only",
+      "tests": 966
+    },
+    "qualification": "harness_control",
+    "review_finding": "Malformed call proposals increased attempt counters but previously bypassed the independent attempt-limit check before a shape-validation return.",
+    "source_cases_and_references": "unchanged; original positive and premature archives above remain preserved"
+  },
   "qualification": "harness_control",
   "reference_grid_check": {
     "execution_fixtures": [
