@@ -297,7 +297,8 @@
           "enum": [
             "documentary",
             "mathematics",
-            "chemistry"
+            "chemistry",
+            "physics"
           ]
         },
         "difficulty": {
@@ -325,7 +326,14 @@
           "$ref": "#/$defs/text"
         },
         "oracle": {
-          "$ref": "#/$defs/research_oracle"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/research_oracle"
+            },
+            {
+              "$ref": "#/$defs/physics_oracle"
+            }
+          ]
         },
         "length": {
           "anyOf": [
@@ -337,7 +345,32 @@
             }
           ]
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "domain": {
+                "const": "physics"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "oracle": {
+                "$ref": "#/$defs/physics_oracle"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "oracle": {
+                "$ref": "#/$defs/research_oracle"
+              }
+            }
+          }
+        }
+      ]
     },
     "context_choice_input": {
       "type": "object",
@@ -419,6 +452,68 @@
         },
         "base_input": {
           "$ref": "#/$defs/context_choice_input"
+        }
+      }
+    },
+    "physics_oracle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "params",
+        "choices",
+        "base_input",
+        "version"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "uniform-distance",
+            "accelerated-velocity",
+            "accelerated-distance",
+            "opposed-forces",
+            "kinetic-energy",
+            "potential-energy",
+            "lift-efficiency",
+            "inelastic-collision",
+            "spring-energy",
+            "series-current",
+            "parallel-resistance",
+            "electrical-power",
+            "joule-energy",
+            "capacitor-energy",
+            "wave-speed",
+            "period",
+            "echo-distance",
+            "thin-lens",
+            "isobaric-gas",
+            "heat-energy",
+            "thermal-mixing",
+            "hydrostatic-pressure",
+            "missing-mass",
+            "missing-capacity"
+          ]
+        },
+        "params": {
+          "type": "object",
+          "minProperties": 1
+        },
+        "choices": {
+          "type": "object",
+          "minProperties": 2,
+          "maxProperties": 20,
+          "propertyNames": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "additionalProperties": {}
+        },
+        "base_input": {
+          "$ref": "#/$defs/context_choice_input"
+        },
+        "version": {
+          "const": "deposium.physics-oracles/v1"
         }
       }
     }

@@ -41,7 +41,8 @@
         "d3",
         "systemone_local",
         "gliclass",
-        "vela3_fast"
+        "vela3_fast",
+        "decision3_http"
       ]
     },
     "qualification": {
@@ -109,6 +110,9 @@
         },
         {
           "$ref": "#/$defs/vela3_fast_model_config"
+        },
+        {
+          "$ref": "#/$defs/decision3_http_model_config"
         }
       ]
     },
@@ -921,6 +925,39 @@
           },
           "model": {
             "$ref": "#/$defs/vela3_fast_model_config"
+          },
+          "timeout_seconds": {
+            "maximum": 30
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "decision3_http"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "type": "null"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "model": {
+            "$ref": "#/$defs/decision3_http_model_config"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
           },
           "timeout_seconds": {
             "maximum": 30
@@ -2058,6 +2095,60 @@
         }
       },
       "description": "Pinned Vela3-fast 380M F32 CPU SDPA decision-backbone-only candidate; no span, vision, routing or product qualification."
+    },
+    "decision3_http_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoint",
+        "model_id",
+        "credential_env",
+        "budget_ledger",
+        "max_requests",
+        "max_input_tokens",
+        "reserved_input_tokens_per_request",
+        "max_request_bytes",
+        "min_interval_seconds"
+      ],
+      "properties": {
+        "endpoint": {
+          "const": "https://decision.vllm-sr.ai/v1/systemone"
+        },
+        "model_id": {
+          "const": "vllm-sr/d3-turbo"
+        },
+        "credential_env": {
+          "const": "DECISION_API_KEY"
+        },
+        "budget_ledger": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+        },
+        "max_requests": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 800
+        },
+        "max_input_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2000000
+        },
+        "reserved_input_tokens_per_request": {
+          "const": 65536
+        },
+        "max_request_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 131072
+        },
+        "min_interval_seconds": {
+          "type": "number",
+          "minimum": 0.1
+        }
+      },
+      "description": "Explicit remote API policy; budget ledger survives launches/resumes. No immutable HF revision or local model assets are claimed."
     }
   }
 }

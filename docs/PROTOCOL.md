@@ -45,6 +45,22 @@ There are 36 train, 30 calibration, and 66 test cases. Reports showing 132-case
 totals include all three splits and must identify that fact. Keep test-only
 results separate from the full exploratory total.
 
+### Elementary physics choices
+
+The separate [physics pack](../datasets/physics-choice-v1/README.md) contains
+48 FR/EN choices in 24 families, with 12 calibration and 36 test cases. Each
+input supplies the law and assumptions. Exact rational oracles check the
+authored alternatives; scientific and linguistic human review remains pending.
+It measures finite rule application, not general physics expertise. Physics
+length variants are not implemented.
+
+The shared engine, projection and scorer apply. Keep physics/48 and test/36
+separate from the context and capability packs; label analysis groups
+`physics-choice-v1`. The [first direct Flash campaign](PHYSICS_FLASH_RESULTS_20261029.md)
+scored 39/48, including 32/36 test, on 29 October 2026. The original prepared
+gateway-backed protocol and optional hosted Turbo adapter are separate
+inference paths; neither was executed by that campaign.
+
 ### First tool proposals
 
 The [24-case tool proposal pack](../datasets/mastra-read-pilot-v0/README.md)

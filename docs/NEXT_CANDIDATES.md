@@ -4,8 +4,11 @@
 [English staged plan](CAPABILITY_CAMPAIGN_PLAN.md) selects six known-size
 historical class representatives plus GLiClass 9B as a family counterpoint for
 the new 192-case capability pack. It records preparation gates, an exact
-calibration canary, and separate 132/192 archives. It is planned, not executed;
-the dated candidate inventory below remains historical context.
+calibration canary, and separate 132/192 archives. Flash Q8 completed the first
+campaign at 192/192 (test 96/96); six candidates remain `not_run`. The cohort
+and order are unchanged. The [current priorities](BENCHMARK_PRIORITIES_20261029.md)
+add a separate physics baseline; the dated candidate inventory below remains
+historical context.
 
 ## Actualisation Decision 3 / Vela 3 — 28 octobre 2026
 

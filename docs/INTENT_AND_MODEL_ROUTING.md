@@ -5,7 +5,9 @@ campaign.** The [first complementary pack](../datasets/capability-choice-v1/READ
 now provides 192 runnable closed choices in 48 synthetic FR/EN scenario families,
 using the existing engine and adapters. It covers capability/tool-set proposals,
 arguments/dependencies and next steps after fixed observations, with 8/32-card
-catalogues. No real model has run on this pack. Free-form discovery/selection,
+catalogues. The first [D3 Flash Q8/Metal campaign](CAPABILITY_FLASH_RESULTS_20261029.md)
+completed 192/192 choices, including 96/96 test cases, on 29 October 2026.
+References remain agent-authored and pending human review. Free-form discovery/selection,
 full execution loops and empirical small/large model allocation remain future
 harness stages. Choosing a model is a separate axis from choosing tools.
 
@@ -16,7 +18,7 @@ harness stages. Choosing a model is a separate axis from choosing tools.
 | [Context choice](../datasets/context-choice-v1/README.md) | 132 closed choices, including 76 documentary cases distinguishing inventory, stored summaries, retrieved answers, or insufficient information | Open-ended intent detection, a difficulty predictor, and execution of a selected workflow |
 | [First tool choice](../datasets/mastra-read-pilot-v0/README.md) | 24 synthetic search / statistics / fallback proposals; provisional agreement only | Plugin discovery, argument resolution, tool execution, and validated routing accuracy |
 | [Tool-selection review](../datasets/tool-selection-review-v0/README.md) | 16 review cases, including two blocked contract gaps; no runner or scorer | A runnable plugin-selection benchmark or an evaluated application integration |
-| [Capability choices v1](../datasets/capability-choice-v1/README.md) | 192 frozen closed choices, 48 families; compact/expanded synthetic catalogues | Real model results, free-form plans, executable arguments and a complete feedback loop |
+| [Capability choices v1](../datasets/capability-choice-v1/README.md) | 192 frozen closed choices, 48 families; Flash Q8 192/192, test 96/96 | Six remaining planned candidates, free-form plans, executable arguments and a complete feedback loop |
 
 The context pack's D1/D2/D3 values are authored annotations: explicit requests,
 combined constraints, and dependencies or contextual references, fixed before inference.
@@ -90,8 +92,10 @@ fixtures; keep all variants in their family split. Vary catalogue size and
 overlapping descriptions explicitly. Validate non-empty assertions with empty,
 wrong, overcalling, and premature-success controls before scoring candidates.
 Only then add a pinned application-harness replay and an explicitly configured
-live campaign. The first capability-choice corpus is validated; none of these
-new tasks is reported as measured by a real model or application here.
+live campaign. Flash Q8 has measured the closed-choice proposals in the first
+capability corpus. Discovery, executable arguments, adaptive episodes and the
+evidence-to-answer chain above remain unmeasured by that campaign. The
+[current priorities](BENCHMARK_PRIORITIES_20261029.md) keep these stages separate.
 
 ## Freeze a bounded harness before predictions
 

@@ -190,7 +190,7 @@ def _validate_evaluation(case: dict, contracts: dict) -> None:
     metadata = case["evaluation"]
     _object(metadata, {"domain", "difficulty", "base_case_id", "related_contract_ids", "review",
                        "task_type", "oracle", "length"}, "evaluation")
-    for field, choices in (("domain", {"documentary", "mathematics", "chemistry"}),
+    for field, choices in (("domain", {"documentary", "mathematics", "chemistry", "physics"}),
                            ("difficulty", {"D1", "D2", "D3"}), ("review", {"agent_only"})):
         if not isinstance(metadata[field], str) or metadata[field] not in choices:
             raise CaseError(f"evaluation.{field}: invalid value")

@@ -136,6 +136,38 @@ class ContextAnalysisTests(unittest.TestCase):
         self.assertEqual(summary["counts"]["latency"]["adapter_duration_ms"]["count"], 0)
         self.assertIsNone(summary["counts"]["accuracy_scored"])
 
+    def test_research_pack_identity_survives_zero_scored_analysis_and_csv_export(self):
+        profile = json.loads((ROOT / "profiles/fixture-control.json").read_bytes())
+        profile.update(capabilities=["bench.context-choice"],
+                       recordings=str(ROOT / "fixtures/control-responses.jsonl"))
+        profile_path = self.root / "research-profile.json"
+        profile_path.write_bytes(campaigns._encode(profile))
+        for pack, total, families, test_total in (
+                ("context-choice-v1", 132, 66, 66),
+                ("capability-choice-v1", 192, 48, 96),
+                ("physics-choice-v1", 48, 24, 36)):
+            with self.subTest(pack=pack):
+                archive = self.root / (pack + "-run")
+                campaigns.run_campaign(ROOT / "datasets" / pack / "cases.jsonl",
+                                       profile_path, archive, max_new_cases=0)
+                before = snapshot(archive)
+                output = self.root / (pack + "-analysis")
+                with patch.object(campaigns, "create_adapter", side_effect=AssertionError("no inference")):
+                    summary = analyze_context(archive, output)
+                self.assertEqual(set(summary["groups"]["benchmark_pack"]), {pack})
+                counts = summary["groups"]["benchmark_pack"][pack]
+                self.assertEqual(counts["total_cases"], total)
+                self.assertEqual(counts["independent_families"], families)
+                self.assertEqual(counts["counts_by_split"]["test"]["total_cases"], test_total)
+                self.assertEqual(counts["counts_by_status"]["missing"], total)
+                self.assertEqual(counts["scored_cases"], 0)
+                self.assertIsNone(counts["accuracy_scored"])
+                self.assertEqual(summary["analysis_status"], "no_scored_cases")
+                rows = list(csv.DictReader(io.StringIO((output / "rows.csv").read_text())))
+                self.assertEqual({row["benchmark_pack"] for row in rows}, {pack})
+                self.assertEqual(len(rows), total)
+                self.assertEqual(snapshot(archive), before)
+
     def test_modified_unsealed_or_obsolete_archive_is_rejected(self):
         original_scorer = campaigns._scorer_fingerprint()
         with patch.object(campaigns, "_scorer_fingerprint", return_value={**original_scorer, "sha256": "0" * 64}):

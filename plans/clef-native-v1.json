@@ -1,0 +1,145 @@
+{
+  "schema_version": "deposium.clef-campaign-plan/v1",
+  "plan_id": "clef-native-v1-20261029",
+  "status": "not_run",
+  "cases_scored": 0,
+  "reference_review": "agent_only_pending_human",
+  "protocol": "docs/CLEF_NATIVE_PROTOCOL_20261029.md",
+  "original_capability_cohort_changed": false,
+  "original_cohort_plan_sha256": "9df73dbb264214444542b929f0d9a693eeb33b547b328434cb3d7b6206cb6559",
+  "runtime_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+  "adapter": "systemone_local",
+  "decision_type": "clef",
+  "candidate_order": [
+    "clef_flash_q8",
+    "clef_27b_q4"
+  ],
+  "candidates": {
+    "clef_flash_q8": {
+      "asset_manifest": "profiles/clef-flash-q8-assets.json",
+      "model_repo_id": "ggml-org/Clef-Flash-GGUF",
+      "model_revision": "6e2a164d70aae2af7fce86005da3f91805565b1d",
+      "model_file": "Clef-Flash-Q8_0.gguf",
+      "model_sha256": "25f801e2a27610b0ccc0cb1558d7eda3d7a304e34e2c4a04e3079357ff7d906e",
+      "model_id": "clef-flash-q8-v1",
+      "rss_limit_mib": 18432,
+      "reserve_mib": 8192,
+      "status": "not_run",
+      "cases_scored": 0,
+      "upstream_source": {
+        "repo_id": "Cloudflare/clef-flash",
+        "observed_revision": "f0b7d3cd65296abfe459e6c228b618f5d8b26d2f",
+        "conversion_source_revision": "not_attested"
+      }
+    },
+    "clef_27b_q4": {
+      "asset_manifest": "profiles/clef-27b-q4-assets.json",
+      "model_repo_id": "ggml-org/Clef-GGUF",
+      "model_revision": "d7492270abd7af222e98dca986580772e6229242",
+      "model_file": "Clef-Q4_K_M.gguf",
+      "model_sha256": "06a819954debafc9664ac6bf3898818185d21d7efe36d0f01009d9958bf6e1fd",
+      "model_id": "clef-27b-q4-v1",
+      "rss_limit_mib": 24576,
+      "reserve_mib": 8192,
+      "status": "not_run",
+      "cases_scored": 0
+    }
+  },
+  "datasets": [
+    {
+      "dataset_id": "context-choice-v1",
+      "path": "datasets/context-choice-v1/cases.jsonl",
+      "sha256": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+      "case_count": 132,
+      "test_case_count": 66,
+      "family_count": 66
+    },
+    {
+      "dataset_id": "capability-choice-v1",
+      "path": "datasets/capability-choice-v1/cases.jsonl",
+      "sha256": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+      "case_count": 192,
+      "test_case_count": 96,
+      "family_count": 48
+    },
+    {
+      "dataset_id": "physics-choice-v1",
+      "path": "datasets/physics-choice-v1/cases.jsonl",
+      "sha256": "e21cd2e0f4e35465b56158ba1fa07c8d8203be81a969c6edf4b7630d2f0d7307",
+      "case_count": 48,
+      "test_case_count": 36,
+      "family_count": 24
+    }
+  ],
+  "canary_case_ids": [
+    "ccv1-selection-02-compact-fr",
+    "ccv1-selection-02-compact-en",
+    "ccv1-selection-02-expanded-fr",
+    "ccv1-selection-02-expanded-en",
+    "ccv1-arguments-02-compact-fr",
+    "ccv1-arguments-02-compact-en",
+    "ccv1-arguments-02-expanded-fr",
+    "ccv1-arguments-02-expanded-en",
+    "ccv1-observations-02-compact-fr",
+    "ccv1-observations-02-compact-en",
+    "ccv1-observations-02-expanded-fr",
+    "ccv1-observations-02-expanded-en"
+  ],
+  "phases": [
+    {
+      "order": 1,
+      "name": "technical_canary",
+      "case_count": 12,
+      "max_seconds": 600,
+      "quality_gate": false
+    },
+    {
+      "order": 2,
+      "name": "context",
+      "case_count": 132,
+      "test_case_count": 66,
+      "max_seconds": 1200
+    },
+    {
+      "order": 3,
+      "name": "capability",
+      "case_count": 192,
+      "test_case_count": 96,
+      "max_seconds": 1200
+    },
+    {
+      "order": 4,
+      "name": "physics",
+      "case_count": 48,
+      "test_case_count": 36,
+      "max_seconds": 600
+    }
+  ],
+  "planned_dataset_calls_per_admitted_candidate": 384,
+  "native_preparation": {
+    "distinct_dataset_inputs": 372,
+    "separate_three_choice_control": 1,
+    "separate_overflow_control": 1,
+    "rss_limit_mib": 2048,
+    "reserve_mib": 8192,
+    "max_seconds": 600
+  },
+  "inference": {
+    "context": 4096,
+    "batch": 4096,
+    "microbatch": 4096,
+    "request_concurrency": 1,
+    "questions_per_request": 1,
+    "per_call_timeout_seconds": 30,
+    "automatic_retries": 0,
+    "backend_fallback": false,
+    "watcher_interval_ms": 250
+  },
+  "limits": [
+    "Separate configurations and runtime identities; no pooled accuracy across packs.",
+    "Flash GGUF links to the Cloudflare source but exact converted source revision is not attested.",
+    "Publisher BF16/PyTorch, visual, multi-question and product capabilities remain untested.",
+    "Profiles and native source support are not evidence of a scored campaign.",
+    "The 27B requires a separate validated executable envelope, not changing the Flash guard."
+  ]
+}

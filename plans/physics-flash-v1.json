@@ -1,0 +1,115 @@
+{
+  "schema_version": "deposium.physics-campaign-plan/v1",
+  "plan_id": "physics-flash-v1-20261029",
+  "status": "not_run",
+  "cases_scored": 0,
+  "services_observed": "not_observed",
+  "reference_review": "agent_only_pending_human",
+  "protocol": "docs/PHYSICS_FLASH_PROTOCOL_20261029.md",
+  "dataset": {
+    "path": "datasets/physics-choice-v1/cases.jsonl",
+    "sha256": "e21cd2e0f4e35465b56158ba1fa07c8d8203be81a969c6edf4b7630d2f0d7307",
+    "manifest_path": "datasets/physics-choice-v1/manifest.json",
+    "manifest_sha256": "543676833aedaee264623e1c1afd5fe96bfc983756c20bf520d8cf1f45ab2971",
+    "case_count": 48,
+    "family_count": 24,
+    "test_cases": 36,
+    "test_families": 18
+  },
+  "historical_anchor": {
+    "path": "datasets/context-choice-v1/cases.jsonl",
+    "sha256": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+    "case_count": 132,
+    "family_count": 66,
+    "test_cases": 66
+  },
+  "candidate": {
+    "model_repo_id": "ggml-org/vllm-d3-flash-GGUF",
+    "model_revision": "3d53d13778bf8035e6e1e534ce489ed052ee5663",
+    "model_file": "vllm-d3-flash-Q8_0.gguf",
+    "model_sha256": "7352edf6be85d93ab8806a17e1b3d0a7e71ee3685af3212ddbe679b742c2221b",
+    "asset_manifest": "profiles/d3-flash-q8-assets.json",
+    "adapter": "systemone_local",
+    "runtime_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+    "requested_backend": "metal",
+    "actual_runtime_status": "not_observed_for_this_campaign"
+  },
+  "native_preparation": {
+    "distinct_inputs": 180,
+    "max_seconds": 600,
+    "rss_limit_mib": 2048,
+    "reserve_mib": 8192,
+    "helper_source": "native/systemone-preflight.cpp",
+    "max_tokens": 4096,
+    "inference_performed": false,
+    "oversize_negative_control_required": true
+  },
+  "inference_envelope": {
+    "context": 4096,
+    "batch": 4096,
+    "microbatch": 4096,
+    "slots": 1,
+    "request_concurrency": 1,
+    "questions_per_request": 1,
+    "per_call_timeout_seconds": 30,
+    "rss_limit_mib": 18432,
+    "reserve_mib": 8192,
+    "watcher_interval_ms": 250,
+    "automatic_retries": 0,
+    "backend_fallback": false
+  },
+  "phases": [
+    {
+      "order": 1,
+      "name": "technical_canary",
+      "dataset": "physics-choice-v1",
+      "case_ids": [
+        "physics-uniform-distance-fr",
+        "physics-uniform-distance-en",
+        "physics-accelerated-velocity-fr",
+        "physics-accelerated-velocity-en",
+        "physics-accelerated-distance-fr",
+        "physics-accelerated-distance-en",
+        "physics-opposed-forces-fr",
+        "physics-opposed-forces-en",
+        "physics-lift-efficiency-fr",
+        "physics-lift-efficiency-en",
+        "physics-inelastic-collision-fr",
+        "physics-inelastic-collision-en"
+      ],
+      "case_count": 12,
+      "family_count": 6,
+      "max_seconds": 600,
+      "quality_gate": false,
+      "included_in_full_pack_denominator": false
+    },
+    {
+      "order": 2,
+      "name": "fresh_context_anchor",
+      "dataset": "context-choice-v1",
+      "case_count": 132,
+      "max_seconds": 1200
+    },
+    {
+      "order": 3,
+      "name": "physics",
+      "dataset": "physics-choice-v1",
+      "case_count": 48,
+      "max_seconds": 600
+    }
+  ],
+  "planned_dataset_inference_calls": 192,
+  "technical_calls": "Synthetic smoke and guard calls are additional, archived separately and never scored.",
+  "execution_rules": [
+    "Reading this plan performs no inference, download, paid API call or service change.",
+    "Verify actual local assets, preparation helper, pinned runtime and real gateway before inference; never infer readiness from profiles.",
+    "Freeze exact current benchmark source/scorer and runtime fingerprints before the first forward.",
+    "Use the shared supervised native runner with explicit --dataset and a fresh session/output per phase.",
+    "Preparation checks all 180 distinct inputs; the calibration canary has no accuracy threshold.",
+    "Keep physics/48 and test/36 separate from context/132 and test/66; no pooled accuracy.",
+    "Retain all missing, unsupported, error, timeout and abstain states; preserve every failed/partial archive.",
+    "Do not raise budgets or change references after test outcomes. Missing prerequisites leave not_run and zero scored cases.",
+    "Keep all source snapshots, raw outputs, credentials and local locators outside public Git.",
+    "This separate physics experiment does not change the frozen capability cohort or its order."
+  ]
+}

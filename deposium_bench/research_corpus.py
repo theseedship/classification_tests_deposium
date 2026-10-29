@@ -533,6 +533,10 @@ def validate_oracle(case):
     option ID/text association are fixed; presentation order may change. Unknown
     oracle families fail explicitly rather than claiming general symbolic proof.
     """
+    if (isinstance(case, dict) and isinstance(case.get("evaluation"), dict)
+            and case["evaluation"].get("domain") == "physics"):
+        from .physics_corpus import validate_oracle as validate_physics_oracle
+        return validate_physics_oracle(case)
     try:
         evaluation = case["evaluation"]
         if evaluation["base_case_id"].startswith("ccv1-"):

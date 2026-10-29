@@ -90,11 +90,11 @@ def _validate_profile(profile: dict) -> None:
     if profile["schema_version"] != "deposium.candidate/v1" or not isinstance(profile["profile_id"], str) or not profile["profile_id"].strip():
         raise AdapterError("Invalid candidate profile identity.")
     adapter = profile["adapter"]
-    if not isinstance(adapter, str) or adapter not in {"mcps", "mcps_resident", "recorded", "julia", "gliner", "jev_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
+    if not isinstance(adapter, str) or adapter not in {"mcps", "mcps_resident", "recorded", "julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
         raise AdapterError("Unknown candidate adapter.")
     capabilities = profile["capabilities"]
     allowed = set(CONTRACTS) | ({"mcps.search"} if adapter == "recorded" else set())
-    if adapter in {"julia", "gliner", "jev_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast", "recorded"}:
+    if adapter in {"julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast", "recorded"}:
         allowed.add("bench.context-choice")
     if (not isinstance(capabilities, list) or not capabilities
             or any(not isinstance(item, str) or item not in allowed for item in capabilities)
@@ -113,6 +113,10 @@ def _validate_profile(profile: dict) -> None:
         return
     if adapter == "indecis":
         from .indecis_adapter import validate_model_profile
+        validate_model_profile(profile)
+        return
+    if adapter == "decision3_http":
+        from .decision3_http_adapter import validate_model_profile
         validate_model_profile(profile)
         return
     if adapter == "jev_http":
@@ -437,6 +441,9 @@ def create_adapter(profile: dict, profile_path: str | Path, stack_root: str | Pa
     if profile["adapter"] == "indecis":
         from .indecis_adapter import IndecisAdapter
         return IndecisAdapter(profile, path)
+    if profile["adapter"] == "decision3_http":
+        from .decision3_http_adapter import Decision3HTTPAdapter
+        return Decision3HTTPAdapter(profile, path)
     if profile["adapter"] == "jev_http":
         from .jev_http_adapter import JevHTTPAdapter
         return JevHTTPAdapter(profile, path)

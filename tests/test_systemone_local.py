@@ -116,6 +116,53 @@ class LocalSystemOneTests(unittest.TestCase):
             with self.subTest(change=change), self.assertRaises(ValueError):
                 parse_profile(json.dumps(profile).encode())
 
+    def bind_preparation(self, tokens=23):
+        import hashlib
+        body = local.native_request(self.request["input"], "fixture-model")[2]
+        path = self.root / "preparation.json"
+        self.session["runtime"]["revision"] = "b" * 40
+        path.write_text(json.dumps({"schema_version": "deposium.native-preparation-map/v1",
+            "model_id": "fixture-model", "source_revision": "b" * 40, "max_tokens": 4096,
+            "request_tokens": {hashlib.sha256(body).hexdigest(): tokens}}))
+        self.session["native_preparation"] = {"path": str(path), "sha256": local.digest(path)}
+        self.session_path.write_text(json.dumps(self.session))
+        self.profile["model"]["session_sha256"] = local.digest(self.session_path)
+        self.path.write_text(json.dumps(self.profile))
+        return path
+
+    def test_bound_preparation_rejects_unprepared_input_before_http_and_changed_receipt(self):
+        path = self.bind_preparation()
+        with patch.object(local, "http_request") as call:
+            adapter = self.adapter()
+            changed = deepcopy(self.request)
+            changed["input"]["context"] += " New facts."
+            result = adapter.predict(changed)
+            self.assertEqual(result["error"], "systemone_native_request_not_prepared")
+            self.assertFalse(result["raw_output"]["http_attempted"])
+            call.assert_not_called()
+            adapter = self.adapter()
+            path.write_text("{}")
+            self.assertEqual(adapter.predict(self.request)["status"], "error")
+            call.assert_not_called()
+
+    def test_bound_preparation_checks_actual_usage_and_preserves_unknown_forward_receipt(self):
+        for expected in (23, 24):
+            with self.subTest(expected=expected):
+                self.bind_preparation(expected)
+                with patch.object(local, "http_request", return_value=self.response()) as call:
+                    adapter = self.adapter()
+                    result = adapter.predict(self.request)
+                    self.assertEqual(result["status"], "ok" if expected == 23 else "error")
+                    self.assertEqual(result["raw_output"]["prepared_input_tokens"], expected)
+                    self.assertEqual(result["raw_output"]["native_preparation_count_match"], expected == 23)
+                    self.assertIsNone(result["raw_output"]["forward_executed"])
+                    self.assertIsNone(result["raw_output"]["native_usage_truncated"])
+                    if expected != 23:
+                        self.assertEqual(result["error"], "systemone_native_preparation_count_mismatch")
+                        self.assertIsNone(result["output"])
+                        self.assertEqual(adapter.predict(self.request)["status"], "error")
+                    self.assertEqual(call.call_count, 1)
+
     def test_missing_or_mutated_assets_and_receipt_never_make_requests(self):
         with patch.object(local, "http_request") as call:
             adapter = self.adapter()

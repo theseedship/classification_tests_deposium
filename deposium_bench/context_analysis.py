@@ -153,10 +153,12 @@ def analyze_context(run_path: str | Path, output_dir: str | Path) -> dict:
         failure = ("target_unattainable" if score["status"] == "unsupported" and error == "input_length_target_unattainable"
                    else "typed_overflow" if score["status"] in {"error", "unsupported"} and error in OVERFLOW_ERRORS
                    else score["status"] if score["status"] != "ok" else None)
+        default_pack = ("physics-choice-v1" if metadata.get("domain") == "physics"
+                        else "context-choice-v1" if metadata else "legacy_typed_decisions")
         row = {"case_id": case["case_id"], "base_case_id": metadata.get("base_case_id", case["case_id"]),
                "translation_family": case["translation_family"], "scenario_id": case["scenario_id"],
                "split": case["split"], "domain": metadata.get("domain", "unannotated"),
-               "benchmark_pack": params.get("benchmark_pack", "context-choice-v1" if metadata else "legacy_typed_decisions"),
+               "benchmark_pack": params.get("benchmark_pack", default_pack),
                "task_type": metadata.get("task_type", "unannotated"),
                "use_case": params.get("use_case", "not_annotated"),
                "catalogue_variant": params.get("catalogue_variant", "not_applicable"),

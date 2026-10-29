@@ -17,6 +17,8 @@ quality. The 132-case totals mix splits; test-only results are separate.
 
 **[Full results: all models, tasks, speed and memory](docs/RESULTS.md)** ·
 [Evaluation protocol](docs/PROTOCOL.md) · [Datasets](datasets/) ·
+[Current benchmark priorities](docs/BENCHMARK_PRIORITIES_20261029.md) ·
+[Campaign status and next steps](docs/CAMPAIGN_STATUS.md) ·
 [Progressive campaign plan](docs/CAPABILITY_CAMPAIGN_PLAN.md) ·
 [Tool/MCP and model-routing proposal](docs/INTENT_AND_MODEL_ROUTING.md)
 
@@ -72,7 +74,7 @@ dependencies are unavailable. A skipped check is not a successful integration.
 
 Linux is the reference environment for the full offline unit suite. Campaign
 reports document model-specific macOS checks and inference qualifications.
-The frozen campaign code was checked offline on 29 October 2026:
+The historical frozen campaign code was checked offline on 29 October 2026:
 **817 tests, 786 passed, 31 optional skips**, no failures.
 No model weights or external services were required. Run the unit suite separately:
 
@@ -84,6 +86,7 @@ python3 -m unittest discover -s tests -v
 
 | Pack | Size and languages | Evaluation status |
 |---|---|---|
+| [Physics choices](datasets/physics-choice-v1/README.md) | 48 synthetic cases, 24 FR/EN families; 12 calibration / 36 test | [Flash Q8/Metal: 39/48, test 32/36](docs/PHYSICS_FLASH_RESULTS_20261029.md); exact rational oracles, references pending human review. |
 | [Context choice](datasets/context-choice-v1/README.md) | 132 cases, 66 FR/EN families; documentary tasks, mathematics, chemistry | Scored exploratory decisions; 36 train / 30 calibration / 66 test cases. |
 | [First tool choice](datasets/mastra-read-pilot-v0/README.md) | 24 cases, 12 FR/EN families; search / statistics / fallback | Provisional agreement; zero human-approved references and zero semantically qualified cases. |
 | [Capability and workflow choices](datasets/capability-choice-v1/README.md) | 192 cases, 48 FR/EN families × 8/32-card catalogues; selection, arguments, fixed-observation next steps | [D3 Flash Q8/Metal: 192/192, test 96/96](docs/CAPABILITY_FLASH_RESULTS_20261029.md); agent references pending human review, no executed tools or product qualification. |
@@ -136,7 +139,11 @@ historical comparison below. Canary calls do not enter either denominator.
 complete quality, domain, language, complexity, speed and memory tables;
 [every exported task breakdown](docs/leaderboard/task-breakdown.csv) and
 [all other benchmark campaigns](docs/leaderboard/other-benchmarks.md) are linked
-from the same page. Physics and general plugin/MCP execution remain untested.
+from the same page. A separate [48-case physics pack](datasets/physics-choice-v1/README.md)
+and an [opt-in D3 Turbo HTTP adapter](docs/PHYSICS_DECISION3_IMPORT.md) are available;
+the [first direct Flash Q8 physics campaign](docs/PHYSICS_FLASH_RESULTS_20261029.md)
+scored 39/48, test 32/36. The hosted Turbo adapter remains unexecuted.
+General plugin/MCP execution remains untested.
 
 The context and routing columns retain historical observations on the same
 132-case pack and 24 proposals. The new-pack columns show the separate

@@ -5,11 +5,12 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from deposium_bench.campaigns import _encode, _hash, _prepare_profile
 from deposium_bench.jev_http_adapter import JevHTTPAdapter
 from deposium_bench.passage_dataset import load_dataset
+from deposium_bench.native_supervision import NativeSupervisionError
 from deposium_bench.passage_observation import (
     PassageObservationError, _logical_predictions, _seal, _verified_files, analyze, choice_plan, compose_rankings,
     observe_choice, select_pilot,
@@ -99,6 +100,64 @@ class PassageObservationTests(unittest.TestCase):
 
     def setUp(self):
         FakeAdapter.instances.clear()
+
+    def native_profile(self, folder):
+        path = folder / "native-profile.json"
+        path.write_text(json.dumps({"schema_version": "deposium.candidate/v1", "profile_id": "synthetic-native",
+            "adapter": "systemone_local", "qualification": "model_isolated", "revision": "a" * 40,
+            "capabilities": ["bench.context-choice"], "recordings": None, "timeout_seconds": 30,
+            "model": {"endpoint": "http://127.0.0.1:11438/v1/systemone", "model_id": "synthetic-native",
+                "repo_id": "fixture/model", "session_manifest": "never-opened-session.json",
+                "session_sha256": "b" * 64, "max_length": 4096, "max_rss_mb": 18432,
+                "credential_env": "DEPOSIUM_BENCH_LOCAL_KEY"}}))
+        return path
+
+    def test_native_passage_requires_live_scope_before_adapter_or_archive(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            profile = self.native_profile(root)
+            with self.assertRaises(NativeSupervisionError):
+                observe_choice(profile, root / "blocked", adapter_factory=FakeAdapter,
+                               memory_reader=lambda: {"MemAvailable_mib": 50000})
+            self.assertFalse(FakeAdapter.instances)
+            self.assertFalse((root / "blocked").exists())
+
+    def test_native_passage_keeps_reserve_and_complete_logical_denominators(self):
+        scope = Mock(min_free_mb=8192)
+        scope.provenance.return_value = {"kind": "synthetic_live_scope_fixture"}
+        with tempfile.TemporaryDirectory() as temp, \
+                patch("deposium_bench.passage_observation.require_native_supervision", return_value=scope):
+            root = Path(temp)
+            profile = self.native_profile(root)
+            result = observe_choice(profile, root / "complete", adapter_factory=FakeAdapter,
+                                    memory_reader=lambda: {"MemAvailable_mib": 9000})
+            self.assertEqual(result["completion_status"], "complete")
+            self.assertEqual((result["selected_cases"], result["logical_decisions"], result["physical_attempted"]),
+                             (128, 1408, 728))
+            self.assertGreaterEqual(scope.check.call_count, 729)
+            manifest = json.loads((root / "complete/manifest.json").read_bytes())
+            self.assertEqual(manifest["execution_scope"], "supervised_native_model_isolated")
+            self.assertEqual(manifest["budget"]["ongoing_available_floor_mib"], 8192)
+            self.assertEqual(len(FakeAdapter.instances[-1].seen), 728)
+            self.assertTrue(FakeAdapter.instances[-1].closed)
+
+    def test_native_passage_scope_loss_stops_and_retains_missing_cases(self):
+        scope = Mock(min_free_mb=8192)
+        scope.provenance.return_value = {"kind": "synthetic_live_scope_fixture"}
+        scope.check.side_effect = [None, NativeSupervisionError("synthetic scope lost"),
+                                   NativeSupervisionError("synthetic scope lost")]
+        with tempfile.TemporaryDirectory() as temp, \
+                patch("deposium_bench.passage_observation.require_native_supervision", return_value=scope):
+            root = Path(temp)
+            result = observe_choice(self.native_profile(root), root / "partial", adapter_factory=FakeAdapter,
+                                    memory_reader=lambda: {"MemAvailable_mib": 9000})
+            self.assertEqual(result["completion_status"], "incomplete")
+            self.assertEqual(result["stop_reason"], "native_supervision_lost")
+            self.assertEqual((result["physical_attempted"], result["physical_planned"]), (1, 728))
+            self.assertEqual(result["logical_decisions"], 1408)
+            self.assertGreater(result["logical_statuses"]["support"]["missing"], 0)
+            self.assertEqual(len(FakeAdapter.instances[-1].seen), 1)
+            _verified_files(root / "partial", {"raw.jsonl", "summary.json"})
 
     def _make_resume_parent(self, folder: Path, *, changed_plan: bool = False):
         folder.mkdir(parents=True, exist_ok=True)

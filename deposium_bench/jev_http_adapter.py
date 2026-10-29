@@ -117,9 +117,15 @@ def _contains(value, secret):
 
 class JevHTTPAdapter:
     capabilities = (CONTEXT_CHOICE_CONTRACT,)
+    validate_profile = staticmethod(validate_model_profile)
+    host = HOST
+    path = PATH
+    credential_env = CREDENTIAL_ENV
+    request_id_header = 'x-typesafe-request-id'
+    source_files = ()
 
     def __init__(self, profile, profile_path):
-        validate_model_profile(profile)
+        self.validate_profile(profile)
         self._model = copy.deepcopy(profile['model'])
         self._timeout = float(profile['timeout_seconds'])
         self._lock = threading.Lock()
@@ -130,7 +136,7 @@ class JevHTTPAdapter:
         hashes = {}
         for name, path in (('adapter_sha256', Path(__file__)),
                            ('budget_helper_sha256', Path(__file__).with_name('http_budget.py')),
-                           ('choice_protocol_sha256', Path(__file__).with_name('choice_protocol.py'))):
+                           ('choice_protocol_sha256', Path(__file__).with_name('choice_protocol.py'))) + self.source_files:
             before = _stat(path)
             hashes[name] = hashlib.sha256(path.read_bytes()).hexdigest()
             if before != _stat(path):
@@ -144,7 +150,7 @@ class JevHTTPAdapter:
         # Do not resolve symlinks: the budget helper rejects them before opening.
         self._budget = HTTPBudget(Path(os.path.abspath(ledger)), self._policy)
         settings = {**self._policy, 'retry_policy': 'none', 'tls_verify': True, 'redirects': False, 'proxy': False}
-        self.provenance = {'profile_sha256': _digest(profile), **hashes, 'adapter': 'jev_http',
+        self.provenance = {'profile_sha256': _digest(profile), **hashes, 'adapter': profile['adapter'],
                            'qualification': 'model_isolated', 'model': copy.deepcopy(self._model),
                            'capabilities': list(self.capabilities), 'available': False,
                            'transport': 'https_post_json', 'input_protocol': 'context_choice',
@@ -155,7 +161,7 @@ class JevHTTPAdapter:
         identity.pop('available')
         identity['model'].pop('budget_ledger')
         self.provenance['identity_sha256'] = _digest(identity)
-        self._key = os.environ.get(CREDENTIAL_ENV)
+        self._key = os.environ.get(self.credential_env)
         if not self._key:
             self._fail('missing', 'jev_credential_missing')
         elif (not self._key.isascii() or any(ord(char) <= 32 or ord(char) >= 127 for char in self._key)):
@@ -188,7 +194,7 @@ class JevHTTPAdapter:
         """One bounded HTTPS request, with socket shutdown at the total deadline."""
         started = time.monotonic()
         deadline = started + self._timeout
-        connection = HTTPSConnection(HOST, port=443, timeout=self._timeout, context=ssl.create_default_context())
+        connection = HTTPSConnection(self.host, port=443, timeout=self._timeout, context=ssl.create_default_context())
         self._connection = connection
         stopped = threading.Event()
         sockets = []
@@ -215,7 +221,7 @@ class JevHTTPAdapter:
             if connection.sock is not None:
                 sockets.append(connection.sock)
             remaining()
-            connection.request('POST', PATH, body=body,
+            connection.request('POST', self.path, body=body,
                                headers={'Authorization': 'Bearer '+self._key, 'Content-Type': 'application/json',
                                         'Accept': 'application/json'})
             remaining()
@@ -224,7 +230,7 @@ class JevHTTPAdapter:
             status = response.status
             if type(status) is not int or not 100 <= status <= 599:
                 raise _Failure('jev_http_protocol_invalid')
-            request_id = response.getheader('x-typesafe-request-id')
+            request_id = response.getheader(self.request_id_header)
             if not isinstance(request_id, str) or not re.fullmatch(r'[A-Za-z0-9._:-]{1,128}', request_id):
                 request_id = None
             length = response.getheader('content-length')
@@ -294,6 +300,15 @@ class JevHTTPAdapter:
             raise _Failure('jev_usage_invalid')
         return native, {'choice_id': descriptions[answer['choice']]}
 
+    def _body(self, value):
+        return {'model': self._model['model_id'], 'state': value['context'],
+                'questions': {'answer': {'type': 'choice', 'instructions': value['question'],
+                                        'criteria': {option['description']: None for option in value['options']}}}}
+
+    def _error_response(self, data, raw):
+        """Provider-specific optional diagnostics; legacy Jev keeps status only."""
+        return
+
     def predict(self, request):
         if not isinstance(request, dict) or request.get('contract_id') != CONTEXT_CHOICE_CONTRACT:
             return _envelope('unsupported', error='unsupported_contract')
@@ -312,9 +327,7 @@ class JevHTTPAdapter:
                 input_digest = _digest(value)
                 if _contains(value, self._key):
                     return _envelope('error', error='jev_input_secret_rejected')
-                body = _encode({'model': self._model['model_id'], 'state': value['context'],
-                                'questions': {'answer': {'type':'choice', 'instructions':value['question'],
-                                                        'criteria': {option['description']: None for option in value['options']}}}}, ordered=True)
+                body = _encode(self._body(value), ordered=True)
             except (ValueError, TypeError, UnicodeError, RecursionError):
                 return _envelope('error', error='jev_input_invalid')
             if len(body) > self._model['max_request_bytes']:
@@ -335,6 +348,7 @@ class JevHTTPAdapter:
                         raw['http_ms'] = (time.monotonic()-started)*1000
                     raw.update(http_status=status, request_id=request_id, response_sha256=hashlib.sha256(data).hexdigest(), http_ms=elapsed)
                     if status != 200:
+                        self._error_response(data, raw)
                         code = {401:'jev_http_unauthorized',403:'jev_http_forbidden',429:'jev_http_rate_limited',
                                 529:'jev_http_overloaded',422:'jev_http_unprocessable'}.get(status, 'jev_http_status_'+str(status))
                         raise _Failure(code)

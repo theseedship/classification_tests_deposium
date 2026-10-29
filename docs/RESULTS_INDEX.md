@@ -16,6 +16,7 @@ historical comparison. Their 192- and 132-case denominators are never pooled.
 
 | Campaign | Observations and boundaries | Reports and frozen evidence |
 |---|---|---|
+| Physics choices, 29 October 2026 | D3 Flash Q8/direct upstream Metal: 39/48, test 32/36; separate fresh context anchor 124/132, test 61/66; human review pending | [Results and limits](PHYSICS_FLASH_RESULTS_20261029.md), [public aggregate](evidence/physics-flash-20261029/analysis.json), [direct protocol](PHYSICS_FLASH_UPSTREAM_PROTOCOL_20261029.md) |
 | Capability choice, 29 October 2026 | D3 Flash Q8/Metal: 192/192, test 96/96; fresh context anchor 124/132, test 61/66; separate 12-case technical canary | [English results and limits](CAPABILITY_FLASH_RESULTS_20261029.md), [reviewed aggregate](evidence/capability-flash-20261029/analysis.json), [frozen protocol](CAPABILITY_NATIVE_PROTOCOL_20261029.md) |
 | Historical CPU/API context choice | 22 observations, including remote Jev 1.13; different model-specific precisions | [Summary](LARGER_CPU_RESULTS_20261011.md), [D3 mini/flash](D3_LARGER_CPU_RESULTS.md), [22-observation overview](evidence/model-comparison-larger-cpu-overview-20261011/report.md), [manifest](evidence/model-comparison-larger-cpu-overview-20261011/manifest.json) |
 | Native Apple Metal | Eos Q8, D3 Flash Q8/Q4, historical D3 27B Q4; pinned llama.cpp | [Results and resources](NATIVE_DECISION_RESULTS_20261016.md), [aggregate](evidence/native-model-comparison-20261016/report.md), [session identities](evidence/native-model-comparison-20261016/native-sessions.json) |
