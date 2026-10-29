@@ -625,6 +625,9 @@
             },
             "bench.tool-arguments": {
               "$ref": "#/$defs/arguments_metrics"
+            },
+            "bench.tool-episode": {
+              "$ref": "#/$defs/episode_metrics"
             }
           },
           "minProperties": 1,
@@ -1427,6 +1430,463 @@
           },
           "additionalProperties": {
             "$ref": "#/$defs/arguments_metrics_group"
+          }
+        }
+      }
+    },
+    "episode_metrics_group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "eligible_cases",
+        "scored_cases",
+        "procedure_correct_cases",
+        "cases_with_execution_trace",
+        "cases_without_execution_trace",
+        "tool_calls_observed",
+        "tool_call_attempts_observed",
+        "policy_steps_observed",
+        "task_success_cases",
+        "task_success_eligible_cases",
+        "tool_status_counts",
+        "tool_eligible_cases",
+        "tool_correct_cases",
+        "tool_over_all_eligible",
+        "arguments_eligible_cases",
+        "arguments_correct_cases",
+        "arguments_over_all_eligible",
+        "binding_eligible_cases",
+        "binding_correct_cases",
+        "binding_over_all_eligible",
+        "execution_eligible_cases",
+        "execution_correct_cases",
+        "execution_over_all_eligible",
+        "result_eligible_cases",
+        "result_correct_cases",
+        "result_over_all_eligible",
+        "stopping_eligible_cases",
+        "stopping_correct_cases",
+        "stopping_over_all_eligible",
+        "budget_eligible_cases",
+        "budget_correct_cases",
+        "budget_over_all_eligible"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "deposium.tool-episode-metrics/v1"
+        },
+        "eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scored_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "procedure_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cases_with_execution_trace": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cases_without_execution_trace": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_calls_observed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_call_attempts_observed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "policy_steps_observed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "task_success_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "task_success_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_status_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "controlled_error"
+          ],
+          "properties": {
+            "ok": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "controlled_error": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "tool_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "arguments_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "arguments_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "arguments_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "binding_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "binding_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "binding_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "execution_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "execution_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "execution_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "result_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "result_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "result_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "stopping_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stopping_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stopping_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "budget_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "budget_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "budget_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "episode_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "eligible_cases",
+        "scored_cases",
+        "procedure_correct_cases",
+        "cases_with_execution_trace",
+        "cases_without_execution_trace",
+        "tool_calls_observed",
+        "tool_call_attempts_observed",
+        "policy_steps_observed",
+        "task_success_cases",
+        "task_success_eligible_cases",
+        "tool_status_counts",
+        "tool_eligible_cases",
+        "tool_correct_cases",
+        "tool_over_all_eligible",
+        "arguments_eligible_cases",
+        "arguments_correct_cases",
+        "arguments_over_all_eligible",
+        "binding_eligible_cases",
+        "binding_correct_cases",
+        "binding_over_all_eligible",
+        "execution_eligible_cases",
+        "execution_correct_cases",
+        "execution_over_all_eligible",
+        "result_eligible_cases",
+        "result_correct_cases",
+        "result_over_all_eligible",
+        "stopping_eligible_cases",
+        "stopping_correct_cases",
+        "stopping_over_all_eligible",
+        "budget_eligible_cases",
+        "budget_correct_cases",
+        "budget_over_all_eligible",
+        "by_language",
+        "by_split"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "deposium.tool-episode-metrics/v1"
+        },
+        "eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scored_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "procedure_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cases_with_execution_trace": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cases_without_execution_trace": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_calls_observed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_call_attempts_observed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "policy_steps_observed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "task_success_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "task_success_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_status_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ok",
+            "controlled_error"
+          ],
+          "properties": {
+            "ok": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "controlled_error": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "tool_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "arguments_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "arguments_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "arguments_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "binding_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "binding_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "binding_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "execution_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "execution_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "execution_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "result_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "result_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "result_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "stopping_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stopping_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stopping_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "budget_eligible_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "budget_correct_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "budget_over_all_eligible": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "by_language": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "fr",
+              "en",
+              "other",
+              "und"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/episode_metrics_group"
+          }
+        },
+        "by_split": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "train",
+              "calibration",
+              "test"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/episode_metrics_group"
           }
         }
       }

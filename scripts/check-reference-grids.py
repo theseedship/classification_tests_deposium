@@ -20,6 +20,7 @@ if str(ROOT) not in sys.path:
 
 from deposium_bench import capability_corpus, passage_corpus
 from deposium_bench import passage_dataset as passages
+from deposium_bench.adapters import load_profile
 from deposium_bench.cases import load_cases
 from deposium_bench.scoring import SCORER_VERSION, score_case, summarize
 from deposium_bench.tool_plan import validate_output
@@ -211,6 +212,65 @@ def check_passage_pack(cases, digest, selected_ids):
             "ranking_scorer_controls": {"status": "not_run_by_this_check", "cases_tested": 0}}
 
 
+def execution_fixture_inventory(root, hashes):
+    """Validate execution-fixture sources without creating an adapter or policy."""
+    reports = []
+    specs = (
+        ("tool-arguments-v1", 4, 2, "fixture_arguments", "bench.tool-arguments",
+         "bounded_fixture_and_exact_integer_reference_consistency"),
+        ("tool-episodes-v1", 14, 7, "fixture_episode", "bench.tool-episode",
+         "bounded_episode_reference_and_fault_policy_consistency"),
+    )
+    for name, count, families, adapter, contract, kind in specs:
+        source = f"datasets/{name}/cases.jsonl"
+        manifest_path = f"datasets/{name}/manifest.json"
+        try:
+            cases, digest = load_cases(root / source)
+            manifest = read_json(root, manifest_path)
+        except (OSError, ValueError):
+            raise AuditError(f"{name}: execution-fixture sources could not be validated") from None
+        actual_families = len({c["translation_family"] for c in cases})
+        languages = dict(sorted(Counter(c["language"] for c in cases).items()))
+        splits = {split: sum(c["split"] == split for c in cases)
+                  for split in ("train", "calibration", "test")}
+        require(len(cases) == count and actual_families == families
+                and {c["contract_id"] for c in cases} == {contract}
+                and splits == {"train": count, "calibration": 0, "test": 0}
+                and languages == {"en": count // 2, "fr": count // 2},
+                f"{name}: missing cases, families, languages or training split")
+        require(manifest.get("cases_sha256") == digest
+                and manifest.get("case_count") == count
+                and manifest.get("family_count") == families
+                and manifest.get("counts_by_split") == splits
+                and manifest.get("counts_by_language") == languages,
+                f"{name}: manifest hash or inventory mismatch")
+        hashes[source], hashes[manifest_path] = digest, sha256(root / manifest_path)
+        stem = name.removesuffix("-v1")
+        profile_path = f"profiles/{stem}-control.json"
+        recordings_path = f"fixtures/{stem}-control.jsonl"
+        for field, public_path in (("control_profile", profile_path),
+                                   ("control_recordings", recordings_path)):
+            require(manifest.get(field) == public_path
+                    and manifest.get(field + "_sha256") == sha256(root / public_path),
+                    f"{name}: control source mismatch")
+            hashes[public_path] = sha256(root / public_path)
+        try:
+            profile, _ = load_profile(root / profile_path)
+        except (OSError, ValueError):
+            raise AuditError(f"{name}: control profile could not be validated") from None
+        require(profile["adapter"] == adapter and profile["qualification"] == "harness_control"
+                and profile["capabilities"] == [contract] and profile["model"] is None
+                and profile["revision"] is None and profile["recordings"] == "../" + recordings_path,
+                f"{name}: unqualified execution-fixture control profile")
+        reports.append({"source": source, "sha256": digest, "cases": count,
+                        "families": actual_families, "languages": languages,
+                        "counts_by_split": splits, "profile_adapter": adapter,
+                        "reference_check": kind, "tool_execution": "not_run_by_this_check",
+                        "policy_execution": "not_run_by_this_check",
+                        "scorer_controls": "not_run_by_this_check"})
+    return reports
+
+
 def audit(root=ROOT):
     root = Path(root)
     specs = (
@@ -255,30 +315,13 @@ def audit(root=ROOT):
     passage_report = check_passage_pack(cases, digest, selected_ids)
     # Execution fixtures have a different evidence boundary. Validate their
     # sources here; only their explicit profile run executes the local tools.
-    execution_source = "datasets/tool-arguments-v1/cases.jsonl"
-    execution_manifest = "datasets/tool-arguments-v1/manifest.json"
-    execution_cases, execution_digest = load_cases(root / execution_source)
-    execution = read_json(root, execution_manifest)
-    require(len(execution_cases) == 4 and execution["cases_sha256"] == execution_digest,
-            "tool-arguments: missing cases or manifest mismatch")
-    hashes[execution_source] = execution_digest
-    hashes[execution_manifest] = sha256(root / execution_manifest)
-    for field, public_path in (("control_profile", "profiles/tool-arguments-control.json"),
-                               ("control_recordings", "fixtures/tool-arguments-control.jsonl")):
-        require(execution[field] == public_path
-                and execution[field + "_sha256"] == sha256(root / public_path),
-                "tool-arguments: control source mismatch")
-        hashes[public_path] = sha256(root / public_path)
-    execution_report = {"source": execution_source, "sha256": execution_digest,
-                        "cases": 4, "families": len({c["translation_family"] for c in execution_cases}),
-                        "reference_check": "bounded_fixture_and_exact_integer_reference_consistency",
-                        "tool_execution": "not_run_by_this_check", "scorer_controls": "not_run_by_this_check"}
+    execution_reports = execution_fixture_inventory(root, hashes)
     # Fingerprint the implementation actually imported from this checkout,
     # separately from data read through the testable root parameter.
     for name in ("cases.py", "scoring.py", "research_corpus.py", "physics_corpus.py",
                  "capability_corpus.py", "tool_plan.py", "passage_dataset.py",
                  "passage_corpus.py", "choice_protocol.py", "registry.py", "tool_discovery.py",
-                 "tool_arguments.py", "synthetic_tools.py"):
+                 "tool_arguments.py", "synthetic_tools.py", "tool_episodes.py", "adapters.py"):
         relative = "deposium_bench/" + name
         hashes[relative] = sha256(ROOT / relative)
     hashes["scripts/check-reference-grids.py"] = sha256(Path(__file__))
@@ -290,7 +333,7 @@ def audit(root=ROOT):
             "semantic_truth": "not_established_by_this_check",
             "human_review": {"provided_by_this_check": 0, "status": "not_provided"},
             "model_inference": "not_run", "choice_packs": packs, "passage_pack": passage_report,
-            "execution_fixtures": [execution_report],
+            "execution_fixtures": execution_reports,
             "sources_sha256": dict(sorted(hashes.items()))}
 
 

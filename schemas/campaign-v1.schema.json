@@ -62,7 +62,8 @@
         "current_equivalent",
         "recorded_control",
         "context_choice",
-        "fixture_arguments_control"
+        "fixture_arguments_control",
+        "fixture_episode_control"
       ]
     },
     "dataset_sha256": {
@@ -122,6 +123,9 @@
         },
         {
           "$ref": "#/$defs/fixture_arguments_provenance"
+        },
+        {
+          "$ref": "#/$defs/fixture_episode_provenance"
         }
       ]
     },
@@ -1067,16 +1071,25 @@
             "properties": {
               "capabilities": {
                 "contains": {
-                  "enum": ["bench.tool-plan", "bench.tool-discovery"]
+                  "enum": [
+                    "bench.tool-plan",
+                    "bench.tool-discovery"
+                  ]
                 }
               }
             }
           },
           "then": {
             "properties": {
-              "adapter": {"const": "recorded"},
-              "qualification": {"const": "harness_control"},
-              "model": {"type": "null"}
+              "adapter": {
+                "const": "recorded"
+              },
+              "qualification": {
+                "const": "harness_control"
+              },
+              "model": {
+                "type": "null"
+              }
             }
           }
         },
@@ -8080,6 +8093,61 @@
           "minimum": 1
         }
       }
+    },
+    "fixture_episode_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_sha256",
+        "adapter_sha256",
+        "identity_sha256",
+        "recordings_sha256",
+        "adapter",
+        "qualification",
+        "model",
+        "capabilities",
+        "available",
+        "recordings_count"
+      ],
+      "properties": {
+        "profile_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "adapter_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "identity_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "recordings_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "adapter": {
+          "const": "fixture_episode"
+        },
+        "qualification": {
+          "const": "harness_control"
+        },
+        "model": {
+          "type": "null"
+        },
+        "capabilities": {
+          "const": [
+            "bench.tool-episode"
+          ]
+        },
+        "available": {
+          "const": true
+        },
+        "recordings_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
     }
   },
   "allOf": [
@@ -8154,7 +8222,8 @@
           "input_protocol": {
             "enum": [
               "recorded_control",
-              "fixture_arguments_control"
+              "fixture_arguments_control",
+              "fixture_episode_control"
             ]
           },
           "adapter_provenance": {
@@ -8162,7 +8231,8 @@
               "adapter": {
                 "enum": [
                   "recorded",
-                  "fixture_arguments"
+                  "fixture_arguments",
+                  "fixture_episode"
                 ]
               },
               "qualification": {
@@ -8299,6 +8369,52 @@
             "properties": {
               "adapter": {
                 "const": "fixture_arguments"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter_provenance": {
+            "properties": {
+              "adapter": {
+                "const": "fixture_episode"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "harness_control"
+          },
+          "proof_level": {
+            "const": "harness_control"
+          },
+          "input_protocol": {
+            "const": "fixture_episode_control"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input_protocol": {
+            "const": "fixture_episode_control"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adapter_provenance": {
+            "properties": {
+              "adapter": {
+                "const": "fixture_episode"
               }
             }
           }

@@ -1,0 +1,272 @@
+{
+  "schema_version": "deposium.tool-episodes-manifest/v1",
+  "dataset_id": "tool-episodes-v1",
+  "contract_id": "bench.tool-episode",
+  "review": "agent_only_pending_human",
+  "evidence_level": "harness_control_only",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "afe600a4a6d39c09a9d45259067ac2e659b941219f505000549553c9a434aff9",
+  "case_count": 14,
+  "family_count": 7,
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "counts_by_language": {
+    "fr": 7,
+    "en": 7
+  },
+  "counts_by_split": {
+    "train": 14,
+    "calibration": 0,
+    "test": 0
+  },
+  "families": [
+    {
+      "family_id": "tool-episode-family-001",
+      "scenario_type": "success",
+      "case_ids": [
+        "ep001-fr",
+        "ep001-en"
+      ],
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-episode-table-001",
+      "reference_outcome": {
+        "decision": "success",
+        "reason": "complete",
+        "value": 60,
+        "unit": "EUR"
+      },
+      "task_success_expected": true,
+      "expected_scripted_control_usage": {
+        "policy_steps": 3,
+        "tool_call_attempts": 2,
+        "tool_calls_executed": 2,
+        "lookup_attempts": 1
+      },
+      "usage_is_grading_reference": false,
+      "literal_sum_artifact_id": "artifact:04c4405c0c2a272d2f4d693b426a815614641893c9e714a0f8b31f14b20ab5d6"
+    },
+    {
+      "family_id": "tool-episode-family-002",
+      "scenario_type": "transient_lookup_retry",
+      "case_ids": [
+        "ep002-fr",
+        "ep002-en"
+      ],
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-episode-table-002",
+      "reference_outcome": {
+        "decision": "success",
+        "reason": "complete",
+        "value": 60,
+        "unit": "EUR"
+      },
+      "task_success_expected": true,
+      "expected_scripted_control_usage": {
+        "policy_steps": 4,
+        "tool_call_attempts": 3,
+        "tool_calls_executed": 3,
+        "lookup_attempts": 2
+      },
+      "usage_is_grading_reference": false,
+      "literal_sum_artifact_id": "artifact:2ba694046c80f5bfb5b552751695004a9cf9970ac9a91ca6b3bbb5e48a8fcad6"
+    },
+    {
+      "family_id": "tool-episode-family-003",
+      "scenario_type": "persistent_lookup_failure",
+      "case_ids": [
+        "ep003-fr",
+        "ep003-en"
+      ],
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-episode-table-003",
+      "reference_outcome": {
+        "decision": "stop",
+        "reason": "persistent_error",
+        "value": null,
+        "unit": null
+      },
+      "task_success_expected": false,
+      "expected_scripted_control_usage": {
+        "policy_steps": 3,
+        "tool_call_attempts": 2,
+        "tool_calls_executed": 2,
+        "lookup_attempts": 2
+      },
+      "usage_is_grading_reference": false,
+      "literal_sum_artifact_id": null
+    },
+    {
+      "family_id": "tool-episode-family-004",
+      "scenario_type": "useful_empty_result",
+      "case_ids": [
+        "ep004-fr",
+        "ep004-en"
+      ],
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-episode-table-004",
+      "reference_outcome": {
+        "decision": "stop",
+        "reason": "no_data",
+        "value": null,
+        "unit": null
+      },
+      "task_success_expected": false,
+      "expected_scripted_control_usage": {
+        "policy_steps": 2,
+        "tool_call_attempts": 1,
+        "tool_calls_executed": 1,
+        "lookup_attempts": 1
+      },
+      "usage_is_grading_reference": false,
+      "literal_sum_artifact_id": null
+    },
+    {
+      "family_id": "tool-episode-family-005",
+      "scenario_type": "partial_result",
+      "case_ids": [
+        "ep005-fr",
+        "ep005-en"
+      ],
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-episode-table-005",
+      "reference_outcome": {
+        "decision": "clarify",
+        "reason": "partial_data",
+        "value": null,
+        "unit": null
+      },
+      "task_success_expected": false,
+      "expected_scripted_control_usage": {
+        "policy_steps": 2,
+        "tool_call_attempts": 1,
+        "tool_calls_executed": 1,
+        "lookup_attempts": 1
+      },
+      "usage_is_grading_reference": false,
+      "literal_sum_artifact_id": null
+    },
+    {
+      "family_id": "tool-episode-family-006",
+      "scenario_type": "missing_input",
+      "case_ids": [
+        "ep006-fr",
+        "ep006-en"
+      ],
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-episode-table-006",
+      "reference_outcome": {
+        "decision": "clarify",
+        "reason": "missing_information",
+        "value": null,
+        "unit": null
+      },
+      "task_success_expected": false,
+      "expected_scripted_control_usage": {
+        "policy_steps": 1,
+        "tool_call_attempts": 0,
+        "tool_calls_executed": 0,
+        "lookup_attempts": 0
+      },
+      "usage_is_grading_reference": false,
+      "literal_sum_artifact_id": null
+    },
+    {
+      "family_id": "tool-episode-family-007",
+      "scenario_type": "tool_becomes_unavailable",
+      "case_ids": [
+        "ep007-fr",
+        "ep007-en"
+      ],
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-episode-table-007",
+      "reference_outcome": {
+        "decision": "stop",
+        "reason": "unavailable",
+        "value": null,
+        "unit": null
+      },
+      "task_success_expected": false,
+      "expected_scripted_control_usage": {
+        "policy_steps": 2,
+        "tool_call_attempts": 1,
+        "tool_calls_executed": 1,
+        "lookup_attempts": 1
+      },
+      "usage_is_grading_reference": false,
+      "literal_sum_artifact_id": null
+    }
+  ],
+  "control_profile": "profiles/tool-episodes-control.json",
+  "control_profile_sha256": "b774688e4f60c69fb53af687900b45482a022e6c8f4253b1d47af42935c0b3c3",
+  "control_recordings": "fixtures/tool-episodes-control.jsonl",
+  "control_recordings_sha256": "fb162d8efa97d34486d160c03f1cd6def6527e906e75c3bf96f7b51452108d5b",
+  "expected_scripted_control_totals": {
+    "procedure_matched_cases": 14,
+    "task_success_cases": 4,
+    "success_eligible_cases": 4,
+    "policy_steps": 34,
+    "tool_call_attempts": 20,
+    "tool_calls_executed": 20,
+    "tool_status_ok": 14,
+    "tool_status_controlled_error": 6,
+    "tool_status_counts": {
+      "ok": 14,
+      "controlled_error": 6
+    }
+  },
+  "usage_totals_are_grading_reference": false,
+  "planned_case_metric_populations": {
+    "tool_selection_arguments_execution": 12,
+    "binding_and_result": 4,
+    "stopping_and_budgets": 14
+  },
+  "provenance": "Entirely synthetic bounded tables, scopes, neutral bilingual task instructions and hidden fixture fault schedules. No private application data or operational inventory was copied. Case references and scripted controls were authored before candidate model inference.",
+  "reference_construction": "Full nonempty complete-table success has independently authored result 10 + 15 + 35 = 60 EUR. Error/empty/partial/missing/unavailable outcomes follow the explicit task policy and must not claim a numerical result. Exact control usage remains a diagnostic, not an oracle for all valid trajectories.",
+  "qualification": {
+    "candidate_model_cases": 0,
+    "human_judgments": 0,
+    "held_out_cases": 0,
+    "real_application_integration": false,
+    "scripted_policy_is_model_adaptation": false
+  },
+  "limitations": [
+    "All 14 cases are exposed training fixtures, not held-out model evaluations.",
+    "Families share the lookup-to-sum operation pattern with earlier training controls.",
+    "The control policy is a fixed action sequence; actual observations are delivered but reasoning or adaptation by a model is not demonstrated.",
+    "A procedure can handle an unanswerable or failed scenario correctly without achieving task success.",
+    "Correct clarification with zero tool calls still contains a scored policy decision; zero scored cases cannot pass.",
+    "Source fault schedules are fixture-internal and must not enter candidate-visible projections.",
+    "Content-addressed artifact IDs identify data within a case-local store and do not grant authorization.",
+    "References and translations remain agent-authored, not human-approved."
+  ]
+}

@@ -196,7 +196,7 @@ This slice uses the shared case/adapter/campaign/scoring path and a recorded
 `harness_control` profile. Real model profiles cannot advertise the contract
 until their output path is qualified. No arguments or tools execute, and
 selecting a dependent pair checks its membership, not execution order or
-artifact values. Those remain #11/#12. Existing v1 packs and model results
+artifact values. Those are covered by the separate argument and episode fixtures below. Existing v1 packs and model results
 are preserved; the new scorer fingerprint identifies the additive task code.
 
 ### Executable arguments and actual artifact bindings
@@ -224,8 +224,51 @@ records four passing cases with eight actual tool calls. A separate wrong-unit
 control retains all four scored cases, passes three and observes seven calls:
 the invalid second operation is blocked after its actual lookup.
 The first lookup is fixed, followed by one proposed call; retries, adaptive
-observations and stopping remain #12. No real model, live MCP or product
-integration is qualified by these synthetic controls.
+observations and stopping are covered by the separate episode contract below.
+No real model, live MCP or product integration is qualified by these controls.
+
+### Bounded episodes driven by actual observations
+
+The [tool-episodes pack](../datasets/tool-episodes-v1/README.md) contains seven
+synthetic families as 14 FR/EN training cases, with no calibration or test cases.
+The dedicated `fixture_episode` control adapter invokes a policy after each
+actual bounded lookup/sum observation. The candidate sees only the declared
+request, known parameters, tool interfaces/availability, history and remaining
+budgets; source fault schedules and references stay outside that projection.
+Recordings contain actions only, never supplied execution receipts.
+
+Normal and transient-error scenarios can produce a verified sum. Persistent
+failure, empty data, partial data, missing input and unavailable tools require
+an evidence-based stop or clarification. Report procedure correctness over all
+14 cases separately from successful task results over four eligible cases.
+Selection, arguments and execution have 12 eligible cases; binding and result
+have four; stopping and budgets have 14. Retain failed or missing cases in each
+eligible denominator. Actual call/step counts are diagnostics, not exact-path
+gold answers: another legal path within the same bounds may pass.
+
+The [contract](TOOL_EPISODES_CONTRACT_V1.md) defines independent step, call,
+lookup-retry and monotonic elapsed-time guards. Time is checked around the
+synchronous fixture invocations; this is not hard interruption of arbitrary
+model or service execution. Success requires a retained actual sum
+receipt and cannot pass from a correct-looking value alone. Invalid proposals
+remain failures even if followed by a valid finish. Each policy input/hash,
+proposal, guard, receipt, timing and counter is archived. Rescore validates the
+retained transcript without invoking tools, the policy or a clock again.
+
+The reference-grid audit only validates this pack's structure, frozen oracle
+and control hashes; actual tool execution requires the explicit shared-CLI
+profile. The [dated offline evidence](evidence/tool-episodes-offline-20261030.json)
+records controlled execution and negative controls. Scripted controls establish
+harness behavior, not real-model adaptation, held-out quality or live MCP/RAG
+qualification. Ordinary recorded and real-model adapters cannot claim this
+execution contract until a separate output path is qualified.
+
+The positive control handles 14/14 cases in 34 policy decisions and 20 actual
+tool calls (14 successful receipts and six controlled errors). Only four cases
+produce successful task results. Replacing one normal policy with a premature
+correct-looking answer yields 13/14, 18 actual calls and three task results;
+all 14 cases remain scored. The altered case executes no tool and fails its
+procedure and result checks.
 
 ### Retrieved passages and evidence
 

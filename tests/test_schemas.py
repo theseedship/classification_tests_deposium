@@ -150,7 +150,7 @@ class SchemaContracts(unittest.TestCase):
     def test_candidate_and_result_match_runtime_statuses_and_capabilities(self):
         candidate = load_schema("candidate")
         self.assertEqual(set(candidate["properties"]["capabilities"]["items"]["enum"]),
-                         set(CONTRACTS) | {"mcps.search", "bench.context-choice", "bench.tool-plan", "bench.tool-discovery", "bench.tool-arguments"})
+                         set(CONTRACTS) | {"mcps.search", "bench.context-choice", "bench.tool-plan", "bench.tool-discovery", "bench.tool-arguments", "bench.tool-episode"})
         self.assertIn({"type": "null"}, candidate["properties"]["model"]["anyOf"])
         mcps = candidate["allOf"][0]["then"]["properties"]
         self.assertEqual(set(mcps["capabilities"]["items"]["enum"]), set(CONTRACTS))

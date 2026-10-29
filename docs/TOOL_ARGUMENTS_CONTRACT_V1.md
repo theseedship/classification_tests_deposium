@@ -187,7 +187,8 @@ unknown/stale bindings, fabricated execution fields and preservation on rescore.
 The first lookup is fixed, and the candidate proposes only one next call.
 This is an actual two-step dependency fixture, not a retry or stopping loop.
 [#12](https://github.com/theseedship/classification_tests_deposium/issues/12)
-will reuse bounded tools to deliver successive actual observations, enforce
-step/call/time budgets and assess recovery and stopping. Real candidates need
+is implemented as a separate [bounded episode fixture](TOOL_EPISODES_CONTRACT_V1.md)
+with successive actual observations, step/call/time budgets, recovery and
+stopping controls. Real candidates need
 a separately qualified output adapter, pinned runtime, fresh scenarios and
 campaign budget. Existing v1 references and historical model scores are preserved.

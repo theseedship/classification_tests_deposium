@@ -1,5 +1,5 @@
 """Offline reference-grid controls are implementation checks, never model results."""
-from contextlib import redirect_stderr, redirect_stdout
+from contextlib import ExitStack, redirect_stderr, redirect_stdout
 from copy import deepcopy
 import hashlib
 import importlib.util
@@ -33,12 +33,22 @@ grids = import_grid("reference_grids_under_test")
 class ReferenceGridTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        # The real audit must complete using local public fixtures alone.
-        with patch("socket.create_connection", side_effect=AssertionError("network forbidden")), \
-                patch("urllib.request.urlopen", side_effect=AssertionError("HTTP forbidden")), \
-                patch("subprocess.Popen", side_effect=AssertionError("external processes forbidden")), \
-                patch("deposium_bench.synthetic_tools.FixtureStore.lookup", side_effect=AssertionError("audit must not execute lookup")), \
-                patch("deposium_bench.synthetic_tools.FixtureStore.sum", side_effect=AssertionError("audit must not execute sum")):
+        # The real audit must complete without constructing execution adapters,
+        # invoking a policy, or executing even the local synthetic tools.
+        forbidden = (
+            "socket.create_connection", "urllib.request.urlopen", "subprocess.Popen",
+            "deposium_bench.adapters.create_adapter",
+            "deposium_bench.synthetic_tools.FixtureStore.lookup",
+            "deposium_bench.synthetic_tools.FixtureStore.sum",
+            "deposium_bench.tool_episodes.EpisodeRuntime.lookup",
+            "deposium_bench.tool_episodes.EpisodeRuntime.sum",
+            "deposium_bench.tool_episodes.ReplayPolicy.predict",
+            "deposium_bench.tool_episodes.run_episode",
+            "deposium_bench.tool_episodes.FixtureEpisodeAdapter.predict",
+        )
+        with ExitStack() as stack:
+            for target in forbidden:
+                stack.enter_context(patch(target, side_effect=AssertionError(f"audit must not call {target}")))
             cls.report = grids.audit()
         cls.cases, cls.digest = grids.load_cases(ROOT / "datasets/physics-choice-v1/cases.jsonl")
 
@@ -64,10 +74,17 @@ class ReferenceGridTests(unittest.TestCase):
         self.assertEqual(sum(pack["empty_controls"] for pack in packs), 772)
         self.assertEqual(sum(pack["unscored_controls"] for pack in packs), 1544)
         execution = report["execution_fixtures"]
-        self.assertEqual(len(execution), 1)
-        self.assertEqual((execution[0]["cases"], execution[0]["families"]), (4, 2))
-        self.assertEqual(execution[0]["tool_execution"], "not_run_by_this_check")
-        self.assertEqual(execution[0]["scorer_controls"], "not_run_by_this_check")
+        self.assertEqual(len(execution), 2)
+        for row, stem, count, families, adapter in zip(
+                execution, ("tool-arguments", "tool-episodes"), (4, 14), (2, 7),
+                ("fixture_arguments", "fixture_episode")):
+            self.assertEqual(row["source"], f"datasets/{stem}-v1/cases.jsonl")
+            self.assertEqual((row["cases"], row["families"]), (count, families))
+            self.assertEqual(row["languages"], {"en": families, "fr": families})
+            self.assertEqual(row["counts_by_split"], {"train": count, "calibration": 0, "test": 0})
+            self.assertEqual(row["profile_adapter"], adapter)
+            for key in ("tool_execution", "policy_execution", "scorer_controls"):
+                self.assertEqual(row[key], "not_run_by_this_check")
         for pack in packs:
             self.assertEqual(pack["sha256"], hashlib.sha256((ROOT / pack["source"]).read_bytes()).hexdigest())
 
@@ -103,10 +120,56 @@ class ReferenceGridTests(unittest.TestCase):
     def test_report_fingerprints_executed_sources_and_runtime(self):
         hashes = self.report["sources_sha256"]
         for path in ("scripts/check-reference-grids.py", "deposium_bench/scoring.py",
-                     "deposium_bench/physics_corpus.py", "deposium_bench/passage_dataset.py"):
+                     "deposium_bench/physics_corpus.py", "deposium_bench/passage_dataset.py",
+                     "deposium_bench/tool_episodes.py", "deposium_bench/adapters.py",
+                     "datasets/tool-episodes-v1/cases.jsonl", "datasets/tool-episodes-v1/manifest.json",
+                     "profiles/tool-episodes-control.json", "fixtures/tool-episodes-control.jsonl"):
             self.assertEqual(hashes[path], hashlib.sha256((ROOT / path).read_bytes()).hexdigest())
         self.assertEqual(self.report["runtime"]["python"], ".".join(map(str, sys.version_info[:3])))
         self.assertEqual(self.report["scorer_version"], "deposium.exact/v1")
+
+    def test_episode_inventory_rejects_reference_missing_mandatory_budget_guard(self):
+        source = ROOT / "datasets/tool-episodes-v1/cases.jsonl"
+        cases = [json.loads(line) for line in source.read_text().splitlines()]
+        cases[0]["reference"]["assertions"] = [
+            item for item in cases[0]["reference"]["assertions"]
+            if item["path"] != "/checks/budgets_respected"]
+        load_cases = grids.load_cases
+        with tempfile.TemporaryDirectory() as directory:
+            malformed = Path(directory) / "cases.jsonl"
+            malformed.write_text("".join(json.dumps(case) + "\n" for case in cases))
+
+            def load(path):
+                return load_cases(malformed if path == source else path)
+
+            with patch.object(grids, "load_cases", side_effect=load), self.assertRaises(grids.AuditError):
+                grids.execution_fixture_inventory(ROOT, {})
+
+    def test_episode_inventory_rejects_stale_manifest_and_control_hashes(self):
+        read_json = grids.read_json
+        manifest_path = "datasets/tool-episodes-v1/manifest.json"
+        for key in ("cases_sha256", "control_profile_sha256", "control_recordings_sha256"):
+            with self.subTest(field=key):
+                def read(root, path):
+                    value = read_json(root, path)
+                    if path == manifest_path:
+                        value[key] = "0" * 64
+                    return value
+
+                with patch.object(grids, "read_json", side_effect=read), self.assertRaises(grids.AuditError):
+                    grids.execution_fixture_inventory(ROOT, {})
+
+    def test_episode_inventory_requires_explicit_harness_control_profile(self):
+        load_profile = grids.load_profile
+
+        def load(path):
+            profile, digest = load_profile(path)
+            if path.name == "tool-episodes-control.json":
+                profile["qualification"] = "model_run"
+            return profile, digest
+
+        with patch.object(grids, "load_profile", side_effect=load), self.assertRaises(grids.AuditError):
+            grids.execution_fixture_inventory(ROOT, {})
 
     def test_rejecting_everything_is_also_an_audit_failure(self):
         fake = {"scored": True, "passed": False, "checks": [], "reason": "fake"}

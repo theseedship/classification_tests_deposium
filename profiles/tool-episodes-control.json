@@ -1,0 +1,13 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "tool-episodes-control",
+  "adapter": "fixture_episode",
+  "qualification": "harness_control",
+  "capabilities": [
+    "bench.tool-episode"
+  ],
+  "model": null,
+  "timeout_seconds": 15,
+  "revision": null,
+  "recordings": "../fixtures/tool-episodes-control.jsonl"
+}

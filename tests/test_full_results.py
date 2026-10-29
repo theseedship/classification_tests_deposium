@@ -560,7 +560,10 @@ class FullResultsTests(unittest.TestCase):
         self.assertEqual(harness["arguments"]["status"], "fixture_only")
         self.assertEqual(harness["arguments"]["issues"], [results.ISSUES + "11"])
         self.assertIn("actual bounded lookup/sum", harness["arguments"]["boundary"])
-        for key, issue in (("episodes", 12), ("small_large", 16), ("application", 17), ("rag_final", 18)):
+        self.assertEqual(harness["episodes"]["status"], "fixture_only")
+        self.assertEqual(harness["episodes"]["issues"], [results.ISSUES + "12"])
+        self.assertIn("four task results", harness["episodes"]["boundary"])
+        for key, issue in (("small_large", 16), ("application", 17), ("rag_final", 18)):
             self.assertEqual(harness[key]["status"], "not_implemented")
             self.assertEqual(harness[key]["issues"], [results.ISSUES + str(issue)])
         self.assertEqual(harness["order_retention"]["status"], "partial_coverage")

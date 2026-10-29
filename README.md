@@ -37,15 +37,16 @@ tracks the work described by the status page.
 |---|---|
 | What does this request need? | Closed-choice context use, including documentary, mathematics and chemistry cases. |
 | Which tool or capability should be proposed? | First-tool agreement and four-proposal capability/workflow choices; no executed tools. |
+| Can tools execute with valid bindings and bounded feedback? | Synthetic argument/episode controls execute lookup/sum functions; real-model output and application integration remain unqualified. |
 | Which retrieved passages matter? | Ranking and relevance over fixed synthetic passage pools. |
 | Do the passages support the claim or answer? | Separate support and answerability tasks, with conflict and insufficient-evidence cases. |
 | What changes with language, order, length or runtime? | Declared campaign-specific variants and resource measurements; no universal hardware speed ranking. |
 
 The [coverage overview](docs/RESULTS.md#coverage-overview) shows which candidates
 actually ran each task. Its [harness overview](docs/RESULTS.md#harness-coverage)
-also identifies gaps: open tool discovery, executable arguments, artifact
-dependencies, adaptive execution loops, empirical model allocation, and final
-answer/citation quality. Closed-choice success does not fill those cells.
+separates implemented scripted discovery, arguments and feedback fixtures from
+untested real-model output paths, empirical model allocation, application replay,
+and final answer/citation quality. Closed-choice success does not fill those cells.
 
 Datasets have distinct denominators: context choices **132**, first-tool
 proposals **24**, capability choices **192**, physics choices **48**, and passage
@@ -74,7 +75,15 @@ FR/EN training cases with two bounded Python tools. A lookup actually returns
 an artifact; a proposed sum must consume that exact artifact with the correct
 column, unit and scope. The execution adapter retains actual receipts and
 separate stage metrics. This is synthetic harness execution, with zero real
-model cases or application integrations; adaptive episodes remain a separate task.
+model cases or application integrations; adaptive episodes are a separate task.
+
+The [bounded episode fixture](datasets/tool-episodes-v1/README.md) adds 14 FR/EN
+training controls across success, transient/persistent errors, empty/partial
+data, missing input and an unavailable tool. Each policy step receives actual
+observations. Correct handling of all 14 scenarios includes **four successful
+task results** and ten justified stops or clarification requests. The fixture
+checks retry, call, step and elapsed-time limits; scripted replay does not
+establish real-model adaptation or production MCP integration.
 
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their
@@ -98,6 +107,8 @@ python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-discovery-v1/cases.jsonl
 python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-arguments-v1/cases.jsonl
+python3 -m deposium_bench validate-cases \
+  --dataset datasets/tool-episodes-v1/cases.jsonl
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
