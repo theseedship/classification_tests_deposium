@@ -1,0 +1,93 @@
+{
+  "schema_version": "deposium.tool-plan-pilot-manifest/v1",
+  "dataset_id": "tool-plan-pilot-v1",
+  "contract_id": "bench.tool-plan",
+  "review": "agent_only_pending_human",
+  "evidence_level": "harness_control_only",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "95c1098bed1bce3bf014dc3933afa1d872226277ef7d4b6ae2588cbbe59d958e",
+  "materialized": {
+    "families": 1,
+    "cases": 2,
+    "languages": [
+      "fr",
+      "en"
+    ],
+    "by_split": {
+      "train": 2,
+      "calibration": 0,
+      "test": 0
+    }
+  },
+  "proposal": {
+    "status": "proposed_not_frozen",
+    "families": [
+      {
+        "family_id": "tool-plan-lookup-sum",
+        "planned_split": "train",
+        "status": "materialized_train_only"
+      },
+      {
+        "family_id": "tool-plan-lookup-filter-sum",
+        "planned_split": "train",
+        "status": "proposed_not_materialized"
+      },
+      {
+        "family_id": "tool-plan-no-suitable-tool",
+        "planned_split": "train",
+        "status": "proposed_not_materialized"
+      },
+      {
+        "family_id": "tool-plan-clarify-missing-scope",
+        "planned_split": "train",
+        "status": "proposed_not_materialized"
+      },
+      {
+        "family_id": "tool-plan-geospatial-tool-set",
+        "planned_split": "calibration",
+        "status": "proposed_not_materialized"
+      },
+      {
+        "family_id": "tool-plan-web-open-data-selection",
+        "planned_split": "calibration",
+        "status": "proposed_not_materialized"
+      },
+      {
+        "family_id": "tool-plan-argument-unit-scope",
+        "planned_split": "calibration",
+        "status": "proposed_not_materialized"
+      },
+      {
+        "family_id": "tool-plan-unavailable-tool",
+        "planned_split": "calibration",
+        "status": "proposed_not_materialized"
+      },
+      {
+        "family_id": "tool-plan-multi-artifact-binding",
+        "planned_split": "test",
+        "status": "proposed_not_materialized"
+      },
+      {
+        "family_id": "tool-plan-recover-tool-failure",
+        "planned_split": "test",
+        "status": "proposed_not_materialized"
+      },
+      {
+        "family_id": "tool-plan-sufficient-evidence-stop",
+        "planned_split": "test",
+        "status": "proposed_not_materialized"
+      },
+      {
+        "family_id": "tool-plan-call-budget-stop",
+        "planned_split": "test",
+        "status": "proposed_not_materialized"
+      }
+    ],
+    "families_by_planned_split": {
+      "train": 4,
+      "calibration": 4,
+      "test": 4
+    },
+    "note": "Only the first training family is materialized. Remaining names are design directions, not cases or held-out evaluation. Several require future contract extensions and issues 10-12."
+  }
+}

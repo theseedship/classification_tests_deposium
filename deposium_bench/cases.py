@@ -101,6 +101,9 @@ def validate_cases(cases: Any) -> list[dict]:
     registry, _ = load_registry()
     contracts = {contract["id"]: component["packs"] for component in registry["components"]
                  for contract in component["contracts"]}
+    # Benchmark-native task, deliberately separate from the application stack
+    # inventory: a recorded plan fixture cannot qualify an application service.
+    native_contracts = {"bench.tool-plan": ["PRODUCT"]}
     seen: set[str] = set()
     partitions: dict[tuple[str, str], str] = {}
     keys = {"schema_version", "case_id", "scenario_id", "translation_family", "document_ids",
@@ -124,7 +127,8 @@ def validate_cases(cases: Any) -> list[dict]:
             if case["contract_id"] != RESEARCH_CONTRACT:
                 raise CaseError("research case: invalid isolated capability")
             _validate_evaluation(case, contracts)
-        elif case["contract_id"] not in contracts or case["pack"] not in contracts[case["contract_id"]]:
+        elif case["pack"] not in contracts.get(case["contract_id"],
+                                               native_contracts.get(case["contract_id"], ())):
             raise CaseError("case.contract_id: unknown contract or incompatible pack")
         documents = case["document_ids"]
         if not isinstance(documents, list):
@@ -175,6 +179,9 @@ def validate_cases(cases: Any) -> list[dict]:
             meaningful |= any(not _empty(item) for item in root_values)
         if not meaningful:
             raise CaseError("reference: assertions contain no substantive expectation")
+        if case["contract_id"] == "bench.tool-plan":
+            from .tool_plan import validate_case
+            validate_case(case)
         if research:
             from .research_corpus import validate_oracle
             validate_oracle(case)

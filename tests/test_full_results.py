@@ -551,7 +551,10 @@ class FullResultsTests(unittest.TestCase):
 
     def test_harness_gaps_are_global_and_do_not_invent_model_unsupported_results(self):
         harness = {r["id"]: r for r in self.data["coverage"]["harness"]}
-        for key, issue in (("task_contract", 9), ("discovery", 10), ("arguments", 11),
+        self.assertEqual(harness["task_contract"]["status"], "fixture_only")
+        self.assertEqual(harness["task_contract"]["issues"], [results.ISSUES + "9"])
+        self.assertIn("no qualified model", harness["task_contract"]["boundary"])
+        for key, issue in (("discovery", 10), ("arguments", 11),
                            ("episodes", 12), ("small_large", 16), ("application", 17), ("rag_final", 18)):
             self.assertEqual(harness[key]["status"], "not_implemented")
             self.assertEqual(harness[key]["issues"], [results.ISSUES + str(issue)])

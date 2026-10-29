@@ -6,6 +6,59 @@ The references and translations remain agent-authored. Validation, packet
 generation, unit tests, and an agent checking this implementation are not human
 scientific or linguistic review.
 
+## First review: who does what and when
+
+**No reviewer has been selected or assigned yet; there are zero human
+judgments.** The files are a prepared workflow, not forms someone has already
+completed. Tests, a merge and packet generation never fill human judgments.
+
+| When | Who | What they do |
+|---|---|---|
+| Before review | Coordinator, with optional assistant help | Export the blank packet, select a small assignment and give the reviewer only its visible questions and blank assessment rows. Keep authored answers separate. |
+| Independent assessment | An actual human who can assess the language and subject | Read the assigned inputs, choose their own answers, explain the reasoning and flag wording issues or uncertainty. |
+| After answers are saved | Coordinator, then another human where practical | Preserve the original responses, compare with the authored references and record disagreements. The assistant can check file structure, not supply missing human opinions. |
+
+A suggested **first assignment is four French physics questions**, rather
+than all 368 assessment slots. This is a proposal for a future reviewer:
+
+1. The coordinator exports the existing packet from the repository root:
+
+   ```bash
+   python3 -B scripts/reference_review.py export \
+     --output results/reference-review-pilot-001
+   ```
+
+   Use a new destination if that directory already exists. Keep an unchanged
+   copy of the full blank export.
+2. In `reviewer/inputs.jsonl`, select the first four entries with
+   `task: physics` and `language: fr`. Note their opaque `review_id` values.
+   Copy those four inputs and the four corresponding
+   `<review_id>.choice` rows from `reviewer/assessments.jsonl` into the small
+   assignment. Share only these reviewer inputs, blank rows and these
+   instructions. Do not share `coordinator/`, authored answers or model results.
+3. The human reviews those four questions using the supplied laws and options.
+   They may fill the JSONL rows directly **or reply in plain text**: give each
+   assigned judgment ID, chosen option, calculation/reasoning, wording concerns
+   and prior exposure. They can leave a question unresolved and explain why.
+   No one needs to edit JSON to contribute a substantive review.
+4. If the reply is plain text, the coordinator preserves it unchanged and
+   transcribes it faithfully into the matching rows, using an opaque reviewer
+   alias and the required fields described below. Ask the person for missing
+   information; do not invent a judgment, explanation or exposure declaration.
+   Unassessed rows in the master packet stay blank with `status: not_started`.
+5. Save the independent answers before the coordinator shows the authored
+   references to the reviewer for comparison. Record the assigned/completed counts and any
+   disagreements; four completed questions do not qualify the entire corpus.
+
+The audit of that partly completed master packet should report `in_progress`
+and exit 1. **That is expected progress, not a failed review**: the other slots
+remain pending. A person may help with another small assignment later; nobody
+is required to complete all 368 slots at once. Actual human qualification stays
+pending until the relevant real assessments and their limits are reported.
+Offline implementation work such as
+[#10](https://github.com/theseedship/classification_tests_deposium/issues/10)
+can proceed while this review is pending.
+
 ## Scope and limits
 
 Review the meaning and wording of a bounded sample of the existing public,
