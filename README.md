@@ -85,6 +85,13 @@ task results** and ten justified stops or clarification requests. The fixture
 checks retry, call, step and elapsed-time limits; scripted replay does not
 establish real-model adaptation or production MCP integration.
 
+The [passage-order and retention extension](docs/PASSAGE_ORDER_RETENTION_V1.md)
+plans the four existing rotations and both passage views: 5,632 logical test
+decisions map to 920 distinct candidate inputs. It analyzes sealed observations
+with the shared scorers, including sufficient-evidence and conflict retention.
+Existing rotation-zero observations leave 192 additional inputs unobserved;
+the extension performs no new inference or model-order qualification.
+
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their
 family split; they are not independent users or facts. Identity, access,
@@ -113,6 +120,7 @@ python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
 python3 -m deposium_bench.capability_corpus --check
+python3 -m deposium_bench.passage_order_retention plan
 python3 scripts/build-full-results.py --check
 python3 scripts/check-reference-grids.py
 ```

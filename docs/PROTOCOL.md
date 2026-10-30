@@ -277,6 +277,26 @@ The [passage-evidence pack](../datasets/passage-evidence-v1/README.md) contains
 question/passage language directions, four passage orders, and two visible views.
 Those variants do not constitute 1,536 independent facts.
 
+The [order/retention extension](PASSAGE_ORDER_RETENTION_V1.md) freezes the
+existing four rotations and both views without changing their references.
+Its test selection has 512 pools, 5,632 logical decisions and 920 distinct
+physical requests under the shared candidate projection. Single-passage
+relevance/support inputs are invariant across pool rotations; reusing their
+outputs is not evidence of model robustness to order. Whole-pool answerability
+does expose passage order. Rotation-zero observations leave 192 additional
+unique answerability inputs missing. The offline analyzer verifies sealed
+source identity and rescores actual observations without creating a candidate.
+
+Evidence retention uses only the existing replacement composition: predicted
+relevance descending, input order for ties. At fixed cutoffs 1/3/4, report
+complete minimal evidence-set capture for answerable pools and same-claim
+support/refutation-pair capture for conflicting pools. Missing or failed
+eligible rankings contribute zero to the full eligible denominator; inapplicable
+metrics remain null. This is retained synthetic evidence, not generated-answer
+correctness. The [plan](../plans/passage-order-retention-v1.json) permits zero
+model/network calls; future inference requires a separately frozen calibrated
+candidate envelope. Historical datasets, references and observations stay intact.
+
 Evaluate these tasks separately:
 
 - **Ranking:** order a fixed pool of visible passages; report the declared nDCG
