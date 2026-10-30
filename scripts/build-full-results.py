@@ -572,7 +572,7 @@ def build_coverage(observations, campaigns, others, inputs):
         ("order_retention", "Order robustness and evidence retention", "partial_coverage",
          "[Offline order/retention analysis](PASSAGE_ORDER_RETENTION_V1.md) covers four rotations and both views (920 distinct test inputs); historical ranking exists, while new Flash classifications still cover rotation 0 only. No new model calls.", [13]),
         ("cohort", "Remaining cohort on new packs", "not_run",
-         "Historical context scores cannot fill new task cells.", [14]),
+         "[Historical 27B readiness](D3_27B_CAPABILITY_PROTOCOL_20261030.md) has a candidate-bound offline envelope; execution is deferred with zero new cases. Historical context scores cannot fill new task cells.", [14]),
         ("large_envelope", "Clef 27B candidate envelope", "not_run",
          "Separate runtime/resource qualification is required.", [15]),
         ("small_large", "Empirical small/large allocation and replay", "not_implemented",

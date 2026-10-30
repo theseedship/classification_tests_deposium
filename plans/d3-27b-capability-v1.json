@@ -1,0 +1,115 @@
+{
+  "schema_version": "deposium.d3-27b-capability-plan/v1",
+  "plan_id": "d3-27b-capability-v1-20261030",
+  "status": "deferred_by_maintainer",
+  "execution_status": "not_run",
+  "cases_scored": 0,
+  "services_observed": "not_observed",
+  "reference_review": "agent_only_pending_human",
+  "protocol": "docs/D3_27B_CAPABILITY_PROTOCOL_20261030.md",
+  "parent_sequence": "plans/capability-choice-v1-sequence.json",
+  "cohort_order": 2,
+  "candidate": {
+    "model_repo_id": "ggml-org/vllm-d3-GGUF",
+    "model_revision": "de9670136f5ddd83e677c89ce041d5b9bb3b0dcb",
+    "model_sha256": "a5a341e8611dc5d916c8f4c693dbef4a68e57eb17d37914fd56dcb5a9221eb2d",
+    "asset_manifest": "profiles/d3-27b-q4-assets.json",
+    "model_id": "d3-27b-q4-v1",
+    "decision_type": "d3",
+    "runtime_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+    "requested_backend": "metal",
+    "application_gateway": "not_used",
+    "actual_runtime_status": "not_observed_for_this_campaign"
+  },
+  "datasets": {
+    "anchor": {
+      "path": "datasets/context-choice-v1/cases.jsonl",
+      "sha256": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+      "case_count": 132,
+      "test_cases": 66,
+      "policy": "New archive per candidate/runtime; historical archives unchanged; never pool accuracy across packs."
+    },
+    "capability": {
+      "path": "datasets/capability-choice-v1/cases.jsonl",
+      "sha256": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+      "case_count": 192,
+      "family_count": 48,
+      "test_cases": 96,
+      "test_families": 24
+    }
+  },
+  "technical_canary": {
+    "selection_rule": "Lexically first calibration family per track; all four FR/EN and catalogue variants. No choice based on gold or predictions.",
+    "case_ids": [
+      "ccv1-selection-02-compact-fr",
+      "ccv1-selection-02-compact-en",
+      "ccv1-selection-02-expanded-fr",
+      "ccv1-selection-02-expanded-en",
+      "ccv1-arguments-02-compact-fr",
+      "ccv1-arguments-02-compact-en",
+      "ccv1-arguments-02-expanded-fr",
+      "ccv1-arguments-02-expanded-en",
+      "ccv1-observations-02-compact-fr",
+      "ccv1-observations-02-compact-en",
+      "ccv1-observations-02-expanded-fr",
+      "ccv1-observations-02-expanded-en"
+    ],
+    "case_count": 12,
+    "quality_gate": false,
+    "limitations": "Three families do not represent all tasks or maximum native input lengths; validate native encodings over all 192 inputs separately."
+  },
+  "native_preparation": {
+    "distinct_inputs": 324,
+    "overflow_controls": 1,
+    "exact_inventory_required": true,
+    "rss_limit_mib": 2048,
+    "reserve_mib": 8192,
+    "max_seconds": 600,
+    "max_tokens": 4096,
+    "actual_execution_receipt_required": true,
+    "execution_status": "not_run",
+    "required_behavior": {
+      "weights_loaded": false,
+      "inference_context_created": false,
+      "forward_executed": false
+    }
+  },
+  "inference_envelope": {
+    "name": "d3-27b-q4-24g-v1",
+    "context": 4096,
+    "batch": 4096,
+    "microbatch": 4096,
+    "slots": 1,
+    "request_concurrency": 1,
+    "questions_per_request": 1,
+    "rss_limit_mib": 24576,
+    "reserve_mib": 8192,
+    "admission_available_mib": 32768,
+    "watcher_interval_ms": 250,
+    "per_call_timeout_seconds": 30,
+    "automatic_retries": 0,
+    "backend_fallback": false
+  },
+  "phase_budgets": {
+    "canary_max_seconds": 600,
+    "full_phase_budget_status": "pending_genuine_calibration",
+    "required_calibration_calls": 12,
+    "rule": "ceil_180_plus_2n_times_max_canary_adapter_seconds/v1",
+    "anchor_max_seconds": null,
+    "capability_max_seconds": null,
+    "anchor_ceiling_seconds": 1200,
+    "capability_ceiling_seconds": 1800,
+    "measured_sealed_canary_required": true,
+    "accuracy_gate": false
+  },
+  "execution_rules": [
+    "Actual model execution remains deferred; offline preparation may continue.",
+    "No model hash, build, vocabulary load or inference is authorized by reading this plan.",
+    "Recheck available memory before model-byte reads; preserve 32 GiB admission and the 8 GiB reserve.",
+    "Do not stop unrelated workloads or raise guards to complete a score.",
+    "Exact candidate-bound preparation and a successful technical canary precede all full phases.",
+    "Freeze full-phase numeric time budgets from actual calibration before full-pack predictions.",
+    "Preserve original datasets, references, cohort order and prior archives.",
+    "Publish only reviewed aggregates and safe identities; local execution evidence remains ignored."
+  ]
+}
