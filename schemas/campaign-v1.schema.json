@@ -63,7 +63,8 @@
         "recorded_control",
         "context_choice",
         "fixture_arguments_control",
-        "fixture_episode_control"
+        "fixture_episode_control",
+        "generated_tool_proposals_v1"
       ]
     },
     "dataset_sha256": {
@@ -126,6 +127,9 @@
         },
         {
           "$ref": "#/$defs/fixture_episode_provenance"
+        },
+        {
+          "$ref": "#/$defs/llama_cpp_json_provenance"
         }
       ]
     },
@@ -8148,6 +8152,365 @@
           "minimum": 1
         }
       }
+    },
+    "llama_cpp_json_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model",
+        "runtime",
+        "harness",
+        "runtime_pin",
+        "template",
+        "settings",
+        "max_rss_mb",
+        "adapter_sources"
+      ],
+      "properties": {
+        "model": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repo_id",
+            "revision",
+            "path",
+            "sha256",
+            "alias",
+            "size",
+            "quantization"
+          ],
+          "properties": {
+            "repo_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "alias": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,95}$"
+            },
+            "size": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 8589934592
+            },
+            "quantization": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.-]{1,32}$"
+            }
+          }
+        },
+        "runtime": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "revision",
+            "binary",
+            "sha256",
+            "backend_requested"
+          ],
+          "properties": {
+            "repository": {
+              "const": "https://github.com/ggml-org/llama.cpp.git"
+            },
+            "revision": {
+              "const": "efe3626b119ff81033e309c3ba07a770bef2c546"
+            },
+            "binary": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "backend_requested": {
+              "const": "metal"
+            }
+          }
+        },
+        "harness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        "runtime_pin": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        "template": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(?=[\\s\\S]*\\S)[^\\x00-\\x1f]*$"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        "settings": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model_id",
+            "max_length",
+            "max_output_tokens",
+            "seed",
+            "prompt_version",
+            "parallel",
+            "concurrency",
+            "truncation"
+          ],
+          "properties": {
+            "model_id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,95}$"
+            },
+            "max_length": {
+              "type": "integer",
+              "const": 4096
+            },
+            "max_output_tokens": {
+              "type": "integer",
+              "minimum": 32,
+              "maximum": 512
+            },
+            "seed": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "prompt_version": {
+              "const": "deposium.local-tool-policy-prompt/v1"
+            },
+            "parallel": {
+              "type": "integer",
+              "const": 1
+            },
+            "concurrency": {
+              "type": "integer",
+              "const": 1
+            },
+            "truncation": {
+              "const": "reject_in_pinned_native_engine"
+            }
+          }
+        },
+        "max_rss_mb": {
+          "type": "integer",
+          "minimum": 256,
+          "maximum": 8192
+        },
+        "adapter_sources": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "adapters.py",
+            "local_tool_policy.py",
+            "native_supervision.py",
+            "systemone_local.py",
+            "cases.py",
+            "tool_arguments.py",
+            "tool_episodes.py",
+            "synthetic_tools.py",
+            "tool_discovery.py"
+          ],
+          "properties": {
+            "adapters.py": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "local_tool_policy.py": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "native_supervision.py": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "systemone_local.py": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "cases.py": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "tool_arguments.py": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "tool_episodes.py": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "synthetic_tools.py": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "tool_discovery.py": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        }
+      }
+    },
+    "llama_cpp_json_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapter",
+        "qualification",
+        "capabilities",
+        "available",
+        "transport",
+        "input_protocol",
+        "model_execution"
+      ],
+      "properties": {
+        "adapter": {
+          "const": "llama_cpp_json"
+        },
+        "qualification": {
+          "const": "model_isolated"
+        },
+        "capabilities": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "bench.tool-discovery",
+              "bench.tool-arguments",
+              "bench.tool-episode"
+            ]
+          }
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "transport": {
+          "const": "loopback_http_no_proxy_no_redirect_no_retry"
+        },
+        "input_protocol": {
+          "const": "generated_tool_proposals_v1"
+        },
+        "model_execution": {
+          "const": "not_observed"
+        },
+        "identity": {
+          "$ref": "#/$defs/llama_cpp_json_identity"
+        },
+        "identity_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "adapter_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "session_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "availability_error": {
+          "enum": [
+            "local_json_asset_missing",
+            "local_json_session_or_supervision_invalid"
+          ]
+        },
+        "native_response": {
+          "const": "observed_not_physical_forward_attestation"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "available": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "identity",
+              "identity_sha256",
+              "adapter_sha256",
+              "session_sha256"
+            ],
+            "properties": {
+              "availability_error": false
+            }
+          },
+          "else": {
+            "required": [
+              "availability_error"
+            ],
+            "properties": {
+              "identity": false,
+              "identity_sha256": false,
+              "adapter_sha256": false,
+              "session_sha256": false,
+              "native_response": false
+            }
+          }
+        }
+      ]
     }
   },
   "allOf": [
@@ -8271,7 +8634,8 @@
                   "small_model",
                   "d3",
                   "gliclass",
-                  "vela3_fast"
+                  "vela3_fast",
+                  "llama_cpp_json"
                 ]
               },
               "qualification": {
@@ -8302,10 +8666,8 @@
               "properties": {
                 "adapter_provenance": {
                   "properties": {
-                    "capabilities": {
-                      "const": [
-                        "bench.context-choice"
-                      ]
+                    "adapter": {
+                      "const": "llama_cpp_json"
                     }
                   }
                 }
@@ -8314,16 +8676,42 @@
             "then": {
               "properties": {
                 "input_protocol": {
-                  "const": "context_choice"
+                  "const": "generated_tool_proposals_v1"
                 }
               }
             },
             "else": {
-              "properties": {
-                "input_protocol": {
-                  "const": "current_equivalent"
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "adapter_provenance": {
+                        "properties": {
+                          "capabilities": {
+                            "const": [
+                              "bench.context-choice"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "input_protocol": {
+                        "const": "context_choice"
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "input_protocol": {
+                        "const": "current_equivalent"
+                      }
+                    }
+                  }
                 }
-              }
+              ]
             }
           }
         ]
@@ -8417,6 +8805,54 @@
                 "const": "fixture_episode"
               }
             }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter_provenance": {
+            "properties": {
+              "adapter": {
+                "const": "llama_cpp_json"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "proof_level": {
+            "const": "A"
+          },
+          "input_protocol": {
+            "const": "generated_tool_proposals_v1"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input_protocol": {
+            "const": "generated_tool_proposals_v1"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adapter_provenance": {
+            "$ref": "#/$defs/llama_cpp_json_provenance"
+          },
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "proof_level": {
+            "const": "A"
           }
         }
       }

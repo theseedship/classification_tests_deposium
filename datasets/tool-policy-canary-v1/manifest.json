@@ -1,0 +1,191 @@
+{
+  "schema_version": "deposium.tool-policy-canary-manifest/v1",
+  "dataset_id": "tool-policy-canary-v1",
+  "frozen_date": "2026-10-30",
+  "status": "frozen_before_first_candidate_prediction",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "6add6d14904e16cc39449368ff932316409c294dd43674f4fb9a1a1fcdbc2a6d",
+  "case_count": 10,
+  "family_count": 5,
+  "counts_by_language": {
+    "fr": 5,
+    "en": 5
+  },
+  "counts_by_split": {
+    "train": 10,
+    "calibration": 0,
+    "test": 0
+  },
+  "counts_by_contract": {
+    "bench.tool-discovery": 2,
+    "bench.tool-arguments": 2,
+    "bench.tool-episode": 6
+  },
+  "reference_review": "agent_only_pending_human",
+  "source_provenance": "New synthetic catalogue, tables, scope/document IDs, requests and translations; no private application data or live service inventory.",
+  "split_rationale": "All translations and related variants remain TRAIN. Row counting and lookup/sum/retry motifs relate to prior training controls; new source identities are not fresh held-out reasoning types.",
+  "reference_construction": "Literal independently authored totals: 4+9+12=25 kg; 8+11+14=33 EUR; 5+6+8=19 kg. Missing input expects clarify/missing_information with value/unit null and task_success false. No candidate prediction or execution output supplies a reference.",
+  "families": [
+    {
+      "family_id": "tool-policy-canary-family-001",
+      "scenario_type": "single_tool_selection",
+      "case_ids": [
+        "tp001-fr",
+        "tp001-en"
+      ],
+      "contract_id": "bench.tool-discovery",
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-canary-001",
+      "authored_selection": {
+        "decision": "select",
+        "tool_ids": [
+          "tool.canary.table_row_count"
+        ],
+        "reason": "ready"
+      }
+    },
+    {
+      "family_id": "tool-policy-canary-family-002",
+      "scenario_type": "guarded_sum_arguments",
+      "case_ids": [
+        "tp002-fr",
+        "tp002-en"
+      ],
+      "contract_id": "bench.tool-arguments",
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-canary-002",
+      "authored_reference_value": 25,
+      "unit": "kg",
+      "content_artifact_id": "artifact:fde742e5c73ff7b2bba25518e52b237c26c0952857e11c8f8774285c381177b3"
+    },
+    {
+      "family_id": "tool-policy-canary-family-003",
+      "scenario_type": "normal_success",
+      "case_ids": [
+        "tp003-fr",
+        "tp003-en"
+      ],
+      "contract_id": "bench.tool-episode",
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-canary-003",
+      "authored_outcome": {
+        "decision": "success",
+        "reason": "complete",
+        "value": 33,
+        "unit": "EUR"
+      },
+      "task_success_expected": true,
+      "diagnostic_ideal_usage": {
+        "policy_decisions": 3,
+        "tool_calls_executed": 2,
+        "lookup_attempts": 1
+      },
+      "usage_is_grading_reference": false,
+      "content_artifact_id": "artifact:3b04f2dd5defcc2f4082a1fe124c0ae245bbdc797224c513d19d5aa1b5abab86"
+    },
+    {
+      "family_id": "tool-policy-canary-family-004",
+      "scenario_type": "transient_lookup_retry",
+      "case_ids": [
+        "tp004-fr",
+        "tp004-en"
+      ],
+      "contract_id": "bench.tool-episode",
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-canary-004",
+      "authored_outcome": {
+        "decision": "success",
+        "reason": "complete",
+        "value": 19,
+        "unit": "kg"
+      },
+      "task_success_expected": true,
+      "diagnostic_ideal_usage": {
+        "policy_decisions": 4,
+        "tool_calls_executed": 3,
+        "lookup_attempts": 2
+      },
+      "usage_is_grading_reference": false,
+      "content_artifact_id": "artifact:d11200fc3ae935ae9918cfda74b542cb877ec952ff8d4b72a425ac0c270884e0"
+    },
+    {
+      "family_id": "tool-policy-canary-family-005",
+      "scenario_type": "missing_input",
+      "case_ids": [
+        "tp005-fr",
+        "tp005-en"
+      ],
+      "contract_id": "bench.tool-episode",
+      "split": "train",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-canary-005",
+      "authored_outcome": {
+        "decision": "clarify",
+        "reason": "missing_information",
+        "value": null,
+        "unit": null
+      },
+      "task_success_expected": false,
+      "diagnostic_ideal_usage": {
+        "policy_decisions": 1,
+        "tool_calls_executed": 0,
+        "lookup_attempts": 0
+      },
+      "usage_is_grading_reference": false
+    }
+  ],
+  "episode_input_version": "deposium.tool-episode-input/v2",
+  "episode_output_version": "deposium.tool-episode-output/v1",
+  "episode_budget": {
+    "max_steps": 5,
+    "max_tool_calls": 3,
+    "max_lookup_attempts": 2,
+    "max_elapsed_ms": 60000
+  },
+  "timing_policy": "Actual model/policy wall time counts inside the episode elapsed budget; the one-second v1 budget and existing v1 data remain unchanged.",
+  "artifact_id_rule": "artifact: + SHA256 of UTF-8 JSON {scope_id,dataset}, sorted keys, compact separators, ensure_ascii=true, allow_nan=false; identities bind actual case-local observations, not candidate output or expected totals.",
+  "diagnostic_ideal_totals": {
+    "model_policy_decisions": 20,
+    "actual_fixture_tool_calls": 14,
+    "tool_status_ok": 12,
+    "tool_status_controlled_error": 2,
+    "episode_task_successes": 4,
+    "episode_correct_clarifications": 2
+  },
+  "diagnostic_usage_is_grading_reference": false,
+  "hard_case_count_bounds": {
+    "maximum_policy_generations": 34,
+    "maximum_fixture_tool_calls": 22
+  },
+  "candidate_assets_manifest": "profiles/qwen3-4b-instruct-q8-assets.json",
+  "candidate_assets_manifest_sha256": "185e57730e3979bcba1a347b0bfaf9521494f58b2c5dcc43ed965b534c534351",
+  "candidate_profile": "generated_only_by_explicit_local_supervisor_not_a_public_fixture",
+  "qualification_at_freeze": {
+    "real_model_cases": 0,
+    "scored_model_cases": 0,
+    "held_out_cases": 0,
+    "human_judgments": 0,
+    "live_mcp_integration": false,
+    "end_to_end_rag": false
+  },
+  "cohort_policy": "Additional generative canary candidate; does not replace or reorder the frozen classifier cohort."
+}

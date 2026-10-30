@@ -152,6 +152,9 @@ class SchemaContracts(unittest.TestCase):
         self.assertEqual(set(candidate["properties"]["capabilities"]["items"]["enum"]),
                          set(CONTRACTS) | {"mcps.search", "bench.context-choice", "bench.tool-plan", "bench.tool-discovery", "bench.tool-arguments", "bench.tool-episode"})
         self.assertIn({"type": "null"}, candidate["properties"]["model"]["anyOf"])
+        self.assertIn("llama_cpp_json", candidate["properties"]["adapter"]["enum"])
+        self.assertEqual(candidate["$defs"]["llama_cpp_json_model_config"]["properties"]["max_length"],
+                         {"type": "integer", "const": 4096})
         mcps = candidate["allOf"][0]["then"]["properties"]
         self.assertEqual(set(mcps["capabilities"]["items"]["enum"]), set(CONTRACTS))
         self.assertEqual(mcps["model"], {"type": "null"})

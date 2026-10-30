@@ -678,7 +678,8 @@ def render_coverage(coverage):
         links = ", ".join(f"[#{url.rsplit('/', 1)[1]}]({url})" for url in row["issues"]) or "—"
         lines.append(f"| {row['capability']} | {row['status']} | {row['boundary']} | {links} |")
     lines += ["", "The initial contract, discovery, arguments and episode fixtures are implemented as scripted controls. "
-              "Next, qualify a candidate output path and a bounded canary; freeze fresh held-out families "
+              "The [prepared local JSON route](LOCAL_TOOL_POLICY_V1.md) has zero real-model observations. "
+              "Next, qualify its bounded TRAIN canary; freeze fresh held-out families "
               "before broader model campaigns. See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.", ""]
     return lines
 

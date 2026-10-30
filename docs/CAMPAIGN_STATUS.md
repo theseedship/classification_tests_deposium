@@ -34,6 +34,13 @@ stops/clarifications. These remain synthetic harness checks with zero real-model
 results. Next, qualify one candidate's output path and a small bounded canary
 before broader comparisons; freeze fresh held-out families before a campaign.
 
+The [local generated-JSON path](LOCAL_TOOL_POLICY_V1.md) and
+[fixed supervisor](LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md) are now
+prepared with a frozen ten-case TRAIN canary. Offline parser, lifecycle and
+execution controls are implemented; actual Qwen runtime/model qualification
+remains `not_run` with zero real-model cases. The historical 27B remains
+deferred. No model loading, downloading or paid API is implied by this checkpoint.
+
 | Work | Prerequisite and next action | Exit criterion |
 |---|---|---|
 | [#7 — Contributor entry point](https://github.com/theseedship/classification_tests_deposium/issues/7) **delivered** | Use the [offline quickstart](../CONTRIBUTING.md), merged with #24; no weights, APIs or application required. | Copyable commands, expected signals, platform/skip limits and staged-public-content checks are documented. |
@@ -86,7 +93,7 @@ No model inference or paid API was part of the offline checks.
 
 | Scope | Recorded result | Interpretation |
 |---|---|---|
-| Linux / Python 3.12, candidate-bound 27B readiness and the shared core | 1003 tests: 972 passed, 31 optional skips, no failures or errors. Executed without network in the local validation image, with a read-only source mount and temporary results storage. | Current offline implementation check; skipped optional integrations remain unqualified. It is not model inference or human review. |
+| Linux / Python 3.12, prepared local JSON policy and the shared core | 1039 tests: 1008 passed, 31 optional skips, no failures or errors. Executed without network in the local validation image, with a read-only source mount and temporary results storage. | Current offline implementation check; skipped optional integrations remain unqualified. It is not model inference or human review. |
 | Historical frozen campaign code, 29 October 2026 | 817 tests: 786 passed, 31 optional skips, no failures. | Historical code checkpoint only; **not the current checkout's global PASS**. |
 | macOS / Python 3.13, core checks | Registry, context/physics cases, capability/passage corpora and generated result views validated at the prior checkpoint. | Data/contract/export checks, not inference or human review. |
 | macOS / Python 3.13, targeted native/campaign/scoring suite | 182 tests: 180 passed, two optional skips. | Targeted implementation verification only. |

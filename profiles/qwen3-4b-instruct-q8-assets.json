@@ -1,0 +1,12 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+  "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+  "files": [
+    {
+      "path": "Qwen3-4B-Instruct-2507-Q8_0.gguf",
+      "size": 4280405600,
+      "sha256": "391c1e410fd9f4cf2de2b510273b56a84c19ce18f4fa3bfb3774031dac4ef068"
+    }
+  ]
+}

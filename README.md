@@ -92,6 +92,12 @@ with the shared scorers, including sufficient-evidence and conflict retention.
 Existing rotation-zero observations leave 192 additional inputs unobserved;
 the extension performs no new inference or model-order qualification.
 
+A separate [local JSON proposal path](docs/LOCAL_TOOL_POLICY_V1.md) and its
+[supervised launch protocol](docs/LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md)
+are prepared for a frozen ten-case TRAIN canary. This uses a generative Qwen
+candidate outside the classifier cohort. Offline transport/guard tests do not
+qualify a real model: no weights or model responses have been observed here yet.
+
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their
 family split; they are not independent users or facts. Identity, access,
@@ -116,6 +122,8 @@ python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-arguments-v1/cases.jsonl
 python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-episodes-v1/cases.jsonl
+python3 -m deposium_bench validate-cases \
+  --dataset datasets/tool-policy-canary-v1/cases.jsonl
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
