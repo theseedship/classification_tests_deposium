@@ -46,7 +46,7 @@ def public_fixture(root):
         "scripts/build-full-results.py", "scripts/compose-larger-cpu-comparison.py",
         "scripts/compose-d3-comparison.py", results.METADATA, results.HISTORICAL,
         results.HISTORICAL.replace("manifest.json", "report.md"), results.CPU,
-        results.NATIVE, results.GLICLASS, results.FAST, results.CAPABILITY, results.LOCAL_POLICY,
+        results.NATIVE, results.GLICLASS, results.FAST, results.CAPABILITY, *results.LOCAL_POLICY,
         results.NATIVE_SESSION, results.GLICLASS_SESSION,
         "docs/evidence/model-comparison-d3-larger-20261011/analysis.json",
         "docs/evidence/model-comparison-complete-20261010-sol/analysis.json",

@@ -1,0 +1,253 @@
+{
+  "aggregate_producer_sha256": "7e41954c17cb19a0ed12a53e90cdce0512f379360c65e9ffbba039b4b1f0d6d3",
+  "coverage": {
+    "collection_complete": false,
+    "counts_by_status": {
+      "abstain": 0,
+      "error": 1,
+      "missing": 5,
+      "ok": 18,
+      "timeout": 0,
+      "unsupported": 0
+    },
+    "eligible_cases": 24,
+    "passed_cases": 9,
+    "scored_cases": 18,
+    "stop_reason": "rss_guard",
+    "unobserved_cases": [
+      {
+        "case_id": "th110-fr",
+        "status": "error"
+      },
+      {
+        "case_id": "th110-en",
+        "status": "missing"
+      },
+      {
+        "case_id": "th111-fr",
+        "status": "missing"
+      },
+      {
+        "case_id": "th111-en",
+        "status": "missing"
+      },
+      {
+        "case_id": "th112-fr",
+        "status": "missing"
+      },
+      {
+        "case_id": "th112-en",
+        "status": "missing"
+      }
+    ]
+  },
+  "dataset": {
+    "cases": 24,
+    "families": 12,
+    "id": "tool-policy-heldout-v1",
+    "sha256": "7f7ed8f08fe15d5b897744fe71f2a5ed76344b5ccd7a0df43492b2dc3371bac7",
+    "splits": {
+      "calibration": 0,
+      "test": 24,
+      "train": 0
+    }
+  },
+  "envelope": {
+    "admission_available_mib": 16384,
+    "automatic_http_retries": 0,
+    "backend_fallback": false,
+    "batch": 4096,
+    "context": 4096,
+    "max_session_seconds": 600,
+    "microbatch": 4096,
+    "parallel": 1,
+    "per_call_seconds": 20,
+    "request_concurrency": 1,
+    "reserve_mib": 8192,
+    "rss_limit_mib": 8192
+  },
+  "evaluation_status": "test_partial_quality_fail",
+  "limitations": [
+    "Correlated FR/EN pairs from one model, one runtime and one device; no ranking or classifier-cohort comparison.",
+    "Agent-authored references await independent human review; a failure here is not a reference change.",
+    "Unobserved (missing, error, timeout) cases stay in every eligible denominator and contribute zero.",
+    "A resource-guard stop is an envelope outcome of the pinned runtime, not a model quality result.",
+    "Native request-alias enforcement is absent in the pinned server; fixed client and file/session identity guard it.",
+    "Requested JSON schema is not proof of grammar enforcement; generated JSON is scored without repair.",
+    "Sampled RSS is not a unified-memory cap; available memory is a reclaimable-page estimate.",
+    "Single pass at temperature 0: descriptive latency only, not a production tail guarantee.",
+    "Synthetic lookup/sum tools only; no live MCP, application replay or answer quality."
+  ],
+  "model": {
+    "file": "Qwen3-4B-Instruct-2507-Q8_0.gguf",
+    "repo_id": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+    "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+    "sha256": "391c1e410fd9f4cf2de2b510273b56a84c19ce18f4fa3bfb3774031dac4ef068",
+    "size": 4280405600
+  },
+  "prompt_version": "deposium.local-tool-policy-prompt/v2",
+  "qualification": "model_isolated_generated_json_test",
+  "report_date": "2026-10-30",
+  "resources": {
+    "available_after_mib": 29818.4,
+    "available_before_mib": 28881.4,
+    "case_duration_ms": {
+      "count": 19,
+      "max": 13204.1,
+      "median": 1870.0,
+      "min": 1128.1,
+      "sum": 58483.6
+    },
+    "host": {
+      "memory_total_mib": 65536.0,
+      "platform": "macOS arm64"
+    },
+    "min_available_mib": 24291.1,
+    "rss_limit_mib": 8192,
+    "rss_peak_mib": 8193.1
+  },
+  "results": {
+    "arguments": {
+      "arguments": {
+        "correct": 4,
+        "eligible": 4
+      },
+      "binding": {
+        "correct": 4,
+        "eligible": 4
+      },
+      "execution": {
+        "correct": 4,
+        "eligible": 4
+      },
+      "result": {
+        "correct": 4,
+        "eligible": 4
+      },
+      "tool": {
+        "correct": 4,
+        "eligible": 4
+      }
+    },
+    "by_language": {
+      "en": {
+        "correct": 4,
+        "eligible": 9,
+        "eligible_all": 12
+      },
+      "fr": {
+        "correct": 5,
+        "eligible": 9,
+        "eligible_all": 12
+      }
+    },
+    "by_task": {
+      "arguments": {
+        "correct": 4,
+        "eligible": 4,
+        "scored": 4
+      },
+      "discovery": {
+        "correct": 2,
+        "eligible": 8,
+        "scored": 8
+      },
+      "episodes": {
+        "correct": 3,
+        "eligible": 12,
+        "scored": 6
+      }
+    },
+    "discovery": {
+      "eligible_select_cases": 4,
+      "final_minimal": {
+        "correct": 2,
+        "eligible": 4
+      },
+      "final_sufficient": {
+        "correct": 2,
+        "eligible": 4
+      },
+      "shortlist_recall_sum": 2.0,
+      "valid_select_observations": 2
+    },
+    "episodes": {
+      "policy_steps_observed": 28,
+      "procedure": {
+        "correct": 3,
+        "eligible": 12
+      },
+      "stages": {
+        "arguments": {
+          "correct": 5,
+          "eligible": 12
+        },
+        "binding": {
+          "correct": 3,
+          "eligible": 4
+        },
+        "budget": {
+          "correct": 3,
+          "eligible": 12
+        },
+        "execution": {
+          "correct": 3,
+          "eligible": 12
+        },
+        "result": {
+          "correct": 3,
+          "eligible": 4
+        },
+        "stopping": {
+          "correct": 3,
+          "eligible": 12
+        },
+        "tool": {
+          "correct": 3,
+          "eligible": 12
+        }
+      },
+      "task_success": {
+        "correct": 3,
+        "eligible": 4,
+        "over_all_cases": 12
+      },
+      "tool_call_attempts_observed": 24,
+      "tool_calls_observed": 12
+    },
+    "overall": {
+      "correct": 9,
+      "eligible": 18,
+      "eligible_all": 24
+    }
+  },
+  "review": "agent_only_pending_human",
+  "runtime": {
+    "backend": {
+      "kind": "metal",
+      "offloaded_layers": 37,
+      "total_layers": 37
+    },
+    "binary_sha256": "3bc062d01ef3278441a357552c201c87032ee52cdcffbc9034dd43d5d1b25e6b",
+    "chat_template_sha256": "c979e0e71a3e21b8f208e6ab120d5cb29327885f29d2a8b18fda67a723798e18",
+    "repository": "https://github.com/ggml-org/llama.cpp.git",
+    "revision": "efe3626b119ff81033e309c3ba07a770bef2c546"
+  },
+  "schema_version": "deposium.local-tool-policy-results/v1",
+  "seals": {
+    "campaign_seal_sha256": "5da529b901c5eb4d872af403276dbf863d5959ef4d2003d891eddcb1007f48c6",
+    "pilot_seal_sha256": "4c4cc34d5befa04174402b4a22b10bdaec132084f7b948e45f0cc61e25b4df82",
+    "raw_sha256": "940a3e928b637bfdaaac1b910777ae7448ca846b51b1ff8a8091d3f765e26628"
+  },
+  "technical_controls": {
+    "counted_as_benchmark_predictions": false,
+    "http_statuses": {
+      "authenticated_props": 200,
+      "chat_json_warmup": 200,
+      "oversized_chat_context": 400,
+      "unauthenticated_chat": 401,
+      "unknown_request_model_diagnostic": 200
+    },
+    "native_request_alias_enforcement": false
+  }
+}

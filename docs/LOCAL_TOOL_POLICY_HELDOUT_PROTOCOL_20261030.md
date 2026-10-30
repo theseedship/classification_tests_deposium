@@ -1,6 +1,8 @@
 # Held-out local JSON-policy evaluation protocol
 
-**Fixed on 30 October 2026, before any held-out prediction.** This protocol
+**Fixed on 30 October 2026, before any held-out prediction.** Executed the same
+day; see the [dated results](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md) (TRAIN v2
+7/10; held-out partial 9/18 of 24 after an RSS-guard stop). This protocol
 extends the [supervised TRAIN canary](LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md)
 to a frozen held-out pack and a revised candidate prompt. At freeze there are
 **zero held-out model cases**. The [TRAIN result](LOCAL_TOOL_POLICY_RESULTS_20261030.md)

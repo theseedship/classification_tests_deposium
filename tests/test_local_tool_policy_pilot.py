@@ -93,6 +93,8 @@ class LocalToolPolicyPilotTests(unittest.TestCase):
         process, stop, guard, output, envelope = kwargs["args"]
         self.assertEqual((envelope.max_rss_mb, envelope.min_free_mb, envelope.max_seconds), (8192, 8192, 600))
         guard.update(last_observed_monotonic=time.monotonic(), rss_peak_mib=100, min_available_mib=self.available)
+        if getattr(self, "guard_stop", None):
+            guard.update(stop_reason=self.guard_stop, rss_peak_mib=8193)
         (output / "resources.jsonl").write_text('{"synthetic_resource_sample":true}\n')
         return self.watcher
 
@@ -373,6 +375,17 @@ module.main(["--help"])
                         pilot.pilot(self.args)
             self.assertEqual(self.commands, [])
             self.assertFalse(self.args.output.exists())
+
+    def test_resource_guard_stop_is_surfaced_as_the_attempt_stop_reason(self):
+        self.guard_stop = "rss_guard"
+        with self.mocked():
+            result = pilot.pilot(self.args)
+        self.assertEqual(result["stop_reason"], "rss_guard")
+        self.assertEqual(result["resources"]["stop_reason"], "rss_guard")
+        self.assertFalse(result["collection_complete"])
+        self.assertEqual(result["scored_cases"], 0)
+        self.assertTrue(result["outer_sealed"])
+        self.assert_sealed_after_cleanup()
 
     def test_partial_metal_offload_fails_before_template_and_quality_calls(self):
         self.log = b"ggml_metal_init: synthetic GPU\nload_tensors: offloaded 32/33 layers to GPU\n"
