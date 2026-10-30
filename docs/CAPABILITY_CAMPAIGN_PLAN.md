@@ -16,6 +16,17 @@ free-form tool generation, executable arguments or a complete MCP loop.
 
 ## Initial cohort and order
 
+**Execution-order revision, 30 October 2026 (sequence revision 4).** After
+the Flash Q8 campaign, Wave B runs before the remaining Wave A candidates:
+D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini on a newly pinned macOS arm64 CPU
+runtime, then the 27B Q4 Metal and GLiClass MPS candidates. The reason is cost
+of qualification, not expected quality: the 27B path needs a 32 GiB admission,
+a rebuilt native toolchain and a public preparation driver. Membership, packs,
+references, canary selection and phases are unchanged; each macOS run is a new
+runtime identity beside the historical Linux/WSL row. First protocol:
+[D3 lite on macOS CPU](D3_LITE_MACOS_CPU_PROTOCOL_20261030.md).
+
+
 Selection uses the highest **historical correct/132** within known recorded
 size classes. Those totals mix train, calibration and test; separate test/66
 and documentary/76 results are shown. They are exploratory observations with

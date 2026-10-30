@@ -9,7 +9,7 @@ import sys
 import tempfile
 import types
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from deposium_bench.adapters import parse_profile
 from deposium_bench.campaigns import _prepare_profile
@@ -194,6 +194,44 @@ class D3AdapterTests(unittest.TestCase):
             self.worker.write_text(WORKER.replace('MODE',repr(mode)))
             bad=self.adapter().predict({'contract_id':'bench.context-choice','input':INPUT})
             self.assertEqual((bad['status'],bad['error']),('error','d3_runtime_or_protocol_changed'))
+
+    def test_macos_probes_use_vm_stat_estimate_and_process_group_rss(self):
+        with patch.object(module.platform, 'system', return_value='Darwin'), \
+                patch('deposium_bench.native_resources.memory_snapshot',
+                      return_value={'MemAvailable_mib': 12345.5, 'MemTotal_mib': 65536.0}):
+            self.assertEqual(module.D3Adapter._host_available_mb(), 12345.5)
+        with patch.object(module.platform, 'system', return_value='Darwin'), \
+                patch('deposium_bench.native_resources.memory_snapshot', side_effect=OSError('vm_stat')):
+            with self.assertRaisesRegex(OSError, 'd3_host_memory_unknown'):
+                module.D3Adapter._host_available_mb()
+        adapter = self.adapter()
+        adapter._process = Mock(pid=424242)
+        adapter._process.poll.return_value = None
+        with patch.object(module.platform, 'system', return_value='Darwin'), \
+                patch.object(module.Path, 'read_text', side_effect=FileNotFoundError()), \
+                patch('deposium_bench.native_resources.process_group_rss_mib', return_value=321.0) as group:
+            adapter._rss()
+            group.assert_called_once_with(424242)
+            self.assertEqual(adapter._peak_rss_mb, 321.0)
+            with patch('deposium_bench.native_resources.process_group_rss_mib', return_value=adapter._model['max_rss_mb'] + 1):
+                with self.assertRaisesRegex(MemoryError, 'd3_rss_limit'):
+                    adapter._rss()
+        with patch.object(module.platform, 'system', return_value='Linux'), \
+                patch.object(module.Path, 'read_text', side_effect=FileNotFoundError()):
+            with self.assertRaisesRegex(OSError, 'd3_rss_unavailable'):
+                adapter._rss()
+        adapter._process = None
+
+    def test_worker_rss_divisor_follows_the_platform(self):
+        spec = importlib.util.spec_from_file_location('d3_worker_rss_test', ROOT / 'bridges/d3-worker.py')
+        worker = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(worker)
+        usage = Mock(ru_maxrss=2 * 1048576)
+        with patch.object(worker.resource, 'getrusage', return_value=usage):
+            with patch.object(worker.sys, 'platform', 'darwin'):
+                self.assertEqual(worker._rss(), 2.0)
+            with patch.object(worker.sys, 'platform', 'linux'):
+                self.assertEqual(worker._rss(), 2048.0)
 
     def test_fake_worker_prediction_is_independent_of_host_available_memory(self):
         with patch.object(module.D3Adapter, '_host_available_mb', return_value=1024):

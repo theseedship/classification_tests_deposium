@@ -742,6 +742,30 @@
           "path": "docs/PHYSICS_FLASH_RESULTS_20261029.md"
         }
       ]
+    },
+    "D3liteMacos": {
+      "display_name": "D3 lite · macOS CPU",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": 852985920,
+        "label": "0.853B backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "BF16 backbone including vision module; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      },
+      "runtime_group": "cpu_new",
+      "precision": "BF16 backbone / FP32 readout",
+      "hardware_group": "Apple M5 Pro CPU; 64 GiB unified memory",
+      "source_analysis": "docs/evidence/d3-lite-macos-20261030/analysis.json",
+      "observed_date": "2026-10-30",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_LITE_MACOS_CPU_PROTOCOL_20261030.md"
+        }
+      ]
     }
   }
 }
