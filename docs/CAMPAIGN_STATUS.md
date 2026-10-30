@@ -35,11 +35,12 @@ results. Next, qualify one candidate's output path and a small bounded canary
 before broader comparisons; freeze fresh held-out families before a campaign.
 
 The [local generated-JSON path](LOCAL_TOOL_POLICY_V1.md) and
-[fixed supervisor](LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md) are now
-prepared with a frozen ten-case TRAIN canary. Offline parser, lifecycle and
-execution controls are implemented; actual Qwen runtime/model qualification
-remains `not_run` with zero real-model cases. The historical 27B remains
-deferred. No model loading, downloading or paid API is implied by this checkpoint.
+[fixed supervisor](LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md) ran the frozen
+ten-case TRAIN canary on 30 October 2026 ([#35](https://github.com/theseedship/classification_tests_deposium/issues/35)):
+all cases collected, **5/10 passed**, quality verdict `fail`
+([results](LOCAL_TOOL_POLICY_RESULTS_20261030.md)). The failures are an empty
+discovery shortlist and episodes that never stop; this is not a held-out result.
+The historical 27B remains deferred.
 
 | Work | Prerequisite and next action | Exit criterion |
 |---|---|---|
@@ -54,6 +55,7 @@ deferred. No model loading, downloading or paid API is implied by this checkpoin
 | [#15 — Clef 27B envelope](https://github.com/theseedship/classification_tests_deposium/issues/15) | Prepare a dedicated native identity and resource envelope; the Flash launcher is not a generic large-model override. | Offline refusal controls and actual supported native choices; 24 GiB RSS plus 8 GiB reserve admission guard before any inference. Clef 27B and historical D3 27B remain distinct. |
 | [#21 — Jev 1.14 full-suite qualification](https://github.com/theseedship/classification_tests_deposium/issues/21) | Prepare coverage plan, current provider identity/limits/terms/price, call bounds and strict fake-transport controls. Paid phases require explicit maintainer authorization. | Every applicable current task has a declared outcome, failure/unsupported coverage and consolidated public exports; historical Jev 1.13 and partial Jev 1.14 evidence are not reused as full-suite results. |
 | [#22 — D3 Ultra full-suite qualification](https://github.com/theseedship/classification_tests_deposium/issues/22) | Prepare actual checkpoint, output support, native helper and resource admission before large assets. Pair applicable inputs with #21; do not infer local feasibility from a nominal model size. | Qualified runtime and task-specific archives/exports, with quantizations kept as separate identities; historical D3 27B is not relabelled as Ultra. |
+| [#35 — Local JSON model on the TRAIN canary](https://github.com/theseedship/classification_tests_deposium/issues/35) **collected; quality `fail`** | Pinned Qwen3 4B Q8 on the fixed supervised path: [results](LOCAL_TOOL_POLICY_RESULTS_20261030.md). Next, freeze fresh held-out families before any comparison; do not tune on the TRAIN failures. | All ten cases attempted (10 `ok`), sealed archive, pure rescore identical; 5/10 passed (discovery 0/2, arguments 2/2, episodes 3/6). One model, TRAIN only: no ranking, MCP or product qualification. |
 | [#16 — Empirical small/large allocation](https://github.com/theseedship/classification_tests_deposium/issues/16) **later** | Design can start; measured allocation needs fresh held-out paired outcomes from qualified small/large candidates. | Both-success, large-only, neither and small-only outcomes plus always-small/always-large cost controls; authored difficulty/confidence is not ground truth. |
 | [#17 — Pinned application replay](https://github.com/theseedship/classification_tests_deposium/issues/17) **later** | Design can start; implementation requires a maintainer-supplied real harness. Record pinned source/runtime and deterministic guard boundaries. | Actual invocation receipts and public synthetic fixtures; copied routing or a registry alone cannot qualify integration. |
 | [#18 — Answers and citations](https://github.com/theseedship/classification_tests_deposium/issues/18) **later** | Needs reviewed facts/acceptable answers; #8, #12 and #17 support the later product evaluation. | Separate retrieval availability, factual correctness, claim/source support and abstention; negative controls include irrelevant citations, wrong numbers, contradictions and absent evidence. |

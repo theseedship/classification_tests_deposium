@@ -94,9 +94,11 @@ the extension performs no new inference or model-order qualification.
 
 A separate [local JSON proposal path](docs/LOCAL_TOOL_POLICY_V1.md) and its
 [supervised launch protocol](docs/LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md)
-are prepared for a frozen ten-case TRAIN canary. This uses a generative Qwen
-candidate outside the classifier cohort. Offline transport/guard tests do not
-qualify a real model: no weights or model responses have been observed here yet.
+were run once on a frozen ten-case TRAIN canary with a generative Qwen
+candidate outside the classifier cohort. The [first run](docs/LOCAL_TOOL_POLICY_RESULTS_20261030.md)
+collected all ten cases and passed **5/10** (quality verdict `fail`; discovery 0/2,
+arguments 2/2, episodes 3/6). It qualifies the runtime and scoring path, not
+tool routing: the cases are TRAIN, correlated and synthetic.
 
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their

@@ -270,7 +270,7 @@ correct-looking answer yields 13/14, 18 actual calls and three task results;
 all 14 cases remain scored. The altered case executes no tool and fails its
 procedure and result checks.
 
-### Generated JSON proposals: prepared local qualification path
+### Generated JSON proposals: local TRAIN canary
 
 The [local tool-policy adapter](LOCAL_TOOL_POLICY_V1.md) provides a separate
 `llama_cpp_json` path with an owned loopback session, strict generated-JSON
@@ -301,11 +301,15 @@ The known single-model native alias behavior is recorded separately from the
 fixed client alias and owned-model identity. A requested schema is not proof
 that every grammar constraint or semantic field was enforced.
 
-This is **offline preparation only**: zero real-model cases, no downloaded
-weights, no native generation or successful model canary are established by
-unit controls. The added generative candidate does not replace or reorder the
-frozen classifier cohort. Actual qualification and any later evaluation need
-fresh admission and sealed execution evidence.
+The canary has been run once (30 October 2026): all ten cases were collected
+with the pinned Qwen3 4B Q8 asset and Metal offload, and **5/10 passed**
+(discovery 0/2, arguments 2/2, episodes 3/6). See the
+[dated results](LOCAL_TOOL_POLICY_RESULTS_20261030.md). This establishes that the
+supervised path generates, binds and scores real model JSON; it is a
+`fail` on quality and not evidence of tool-routing ability. Unit controls alone
+still establish nothing about a model. The generative candidate does not
+replace or reorder the frozen classifier cohort. Any held-out evaluation needs
+fresh families, fresh admission and a new sealed archive.
 
 ### Retrieved passages and evidence
 
