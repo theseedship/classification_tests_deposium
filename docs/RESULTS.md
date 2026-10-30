@@ -4,7 +4,7 @@
 [Updated task rankings](#updated-task-rankings) · [Language and task complexity](#language-and-task-complexity) · [Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·
 [Other evaluated protocols](#other-evaluated-protocols) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)
 
-**31 context model/runtime observations through 30 October 2026**: 28 earlier observations, the macOS CPU D3 lite runtime, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.
+**32 context model/runtime observations through 30 October 2026**: 28 earlier observations, the macOS CPU D3 lite and Vela 2.0 0.3B runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.
 Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;
 quantizations and devices remain separate. Rendering this page does not rerun or rescore models.
 
@@ -20,7 +20,7 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
 
 ### Context model/runtime observations
 
-The 31 rows below preserve quantization and runtime identities; sizes are publisher classes or declared counts, not independent measurements. **Metal gateway** and **direct Metal** are different paths; scores and task rankings follow below. Context/132 contains text/76, mathematics/28 and chemistry/28; [their scores and held-out test results](#model-quality) remain separate.
+The 32 rows below preserve quantization and runtime identities; sizes are publisher classes or declared counts, not independent measurements. **Metal gateway** and **direct Metal** are different paths; scores and task rankings follow below. Context/132 contains text/76, mathematics/28 and chemistry/28; [their scores and held-out test results](#model-quality) remain separate.
 
 | Model / runtime observation | Size | Context /132 | Tool proposal /24 | Capability /192 | Physics /48 | Relevance R0 /512 | Support R0 /768 | Answerability R0 /128 | Relevance R0–3 /2048 | Ranking R0–3 /512 |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -47,6 +47,7 @@ The 31 rows below preserve quantization and runtime identities; sizes are publis
 | D3 edge · CPU | 0.594B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Decision 2.0 Kai 0.6B · CPU | 0.6B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Vela 2.0 0.3B · CPU | 0.309B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Vela 2.0 0.3B · macOS CPU | 0.309B declared | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | not_run | not_run | not_run | not_run | not_run |
 | GLiNER2.5-multi-Decide · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Vela 3.0 fast · decision only · CPU | 0.380B decision backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Laya multilingual · CPU | 322M declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
@@ -119,6 +120,7 @@ These tables include every published campaign on these packs. Each task has its 
 | 1 | 1 | Clef Flash Q8 · direct Metal | 192/192 | 192/192 | 96/96 | [Report](CLEF_FLASH_RESULTS_20261029.md) |
 | 1 | 1 | D3 Flash Q8 · gateway Metal | 192/192 | 192/192 | 96/96 | [Report](CAPABILITY_FLASH_RESULTS_20261029.md) |
 | 3 | 3 | D3 lite · macOS CPU | 168/192 | 192/192 | 80/96 | [Report](D3_LITE_MACOS_RESULTS_20261030.md) |
+| 4 | 4 | Vela 2.0 0.3B · macOS CPU | 128/192 | 192/192 | 62/96 | [Report](VELA2_03_MACOS_RESULTS_20261030.md) |
 
 Clef Flash Q8 · direct Metal, D3 Flash Q8 · gateway Metal reach the ceiling on these supplied proposals; a perfect or near-perfect closed-choice score does not qualify executable tools. Runtimes differ per row (gateway-backed Metal, direct native listener, CPU worker) and are not pooled.
 
@@ -135,6 +137,9 @@ Clef Flash Q8 · direct Metal, D3 Flash Q8 · gateway Metal reach the ceiling on
 | D3 lite · macOS CPU | Capability selection | 47/64 | 23/32 |
 | D3 lite · macOS CPU | Arguments and dependencies | 57/64 | 25/32 |
 | D3 lite · macOS CPU | Next step after fixed observations | 64/64 | 32/32 |
+| Vela 2.0 0.3B · macOS CPU | Capability selection | 53/64 | 26/32 |
+| Vela 2.0 0.3B · macOS CPU | Arguments and dependencies | 30/64 | 11/32 |
+| Vela 2.0 0.3B · macOS CPU | Next step after fixed observations | 45/64 | 25/32 |
 
 ### Physics choices
 
@@ -146,7 +151,8 @@ Clef Flash Q8 · direct Metal, D3 Flash Q8 · gateway Metal reach the ceiling on
 |---:|---:|---|---:|---:|---:|---|
 | 1 | 2 | Clef Flash Q8 · direct Metal | 41/48 | 48/48 | 31/36 | [Report](CLEF_FLASH_RESULTS_20261029.md) |
 | 2 | 1 | D3 Flash Q8 · direct Metal | 39/48 | 48/48 | 32/36 | [Report](PHYSICS_FLASH_RESULTS_20261029.md) |
-| 3 | 3 | D3 lite · macOS CPU | 14/48 | 48/48 | 12/36 | [Report](D3_LITE_MACOS_RESULTS_20261030.md) |
+| 3 | 3 | Vela 2.0 0.3B · macOS CPU | 18/48 | 48/48 | 14/36 | [Report](VELA2_03_MACOS_RESULTS_20261030.md) |
+| 4 | 4 | D3 lite · macOS CPU | 14/48 | 48/48 | 12/36 | [Report](D3_LITE_MACOS_RESULTS_20261030.md) |
 
 Calibration (12) and test (36) are shown separately because the all-case and test leaders can differ; with four options, 12/48 is chance level. No result establishes general physics expertise: the law and assumptions are supplied in each input.
 
@@ -203,6 +209,7 @@ Physical-call timings are kept separate from reused logical decisions; session R
 | Clef Flash Q8 · direct Metal | capability | 192 | 616.9 | 953.5 | 10.60 |
 | D3 Flash Q8 · gateway Metal | capability | 192 | 576.9 | 985.8 | 9.48 |
 | D3 lite · macOS CPU | capability | 192 | 13,298.7 | 23,008.6 | 1.83 |
+| Vela 2.0 0.3B · macOS CPU | capability | 192 | 344.5 | 528.2 | 1.26 |
 | D3 Flash Q8 · direct Metal | passage_answerability | 72 | 278.2 | 748.7 | 9.45 |
 | Clef Flash Q8 · direct Metal | passage_answerability | 72 | 282.3 | 864.7 | 10.40 |
 | Clef Flash Q8 · direct Metal | passage_relevance | 264 | 202.1 | 376.2 | 10.40 |
@@ -211,6 +218,7 @@ Physical-call timings are kept separate from reused logical decisions; session R
 | Clef Flash Q8 · direct Metal | passage_support | 392 | 201.2 | 374.1 | 10.40 |
 | Clef Flash Q8 · direct Metal | physics | 48 | 196.7 | 211.7 | 9.55 |
 | D3 Flash Q8 · direct Metal | physics | 48 | 193.7 | 202.1 | 9.36 |
+| Vela 2.0 0.3B · macOS CPU | physics | 48 | 169.9 | 211.0 | 1.16 |
 | D3 lite · macOS CPU | physics | 48 | 3,073.8 | 3,981.3 | 1.56 |
 
 [Campaign summary CSV](leaderboard/campaigns.csv) and [task breakdown CSV](leaderboard/task-breakdown.csv) contain denominators, statuses and all exported groups. Ranking/nDCG, longer contexts and repeated timing retain their separate protocols in [other campaigns](leaderboard/other-benchmarks.md). Clef 27B and the six remaining original cohort candidates remain unrun on the new packs.
@@ -249,16 +257,17 @@ Equal all-case totals share a competition rank; row order within a tie is alphab
 | 19 | 19 | Decision 2.0 Eos 0.8B · CPU | 0.8B class | CPU-H | 77 | 40 | 55 | 12 | 10 | 19 |
 | 19 | 19 | Decision 2.0 Eos 0.8B · Q8 Metal | 0.8B class | Metal | 77 | 40 | 55 | 12 | 10 | 19 |
 | 21 | 22 | D3 edge · CPU | 0.594B backbone | CPU-H | 74 | 37 | 48 | 12 | 14 | 18 |
-| 22 | 24 | Decision 2.0 Kai 0.6B · CPU | 0.6B class | CPU-H | 70 | 36 | 56 | 7 | 7 | 16 |
+| 22 | 25 | Decision 2.0 Kai 0.6B · CPU | 0.6B class | CPU-H | 70 | 36 | 56 | 7 | 7 | 16 |
 | 23 | 22 | Vela 2.0 0.3B · CPU | 0.309B declared | CPU-H | 65 | 37 | 52 | 4 | 9 | 18 |
-| 24 | 21 | GLiNER2.5-multi-Decide · CPU | NR | CPU-H | 59 | 38 | 41 | 5 | 13 | 12 |
-| 25 | 26 | Vela 3.0 fast · decision only · CPU | 0.380B decision backbone | CPU-N | 57 | 28 | 43 | 9 | 5 | 18 |
-| 26 | 25 | Laya multilingual · CPU | 322M declared | CPU-H | 56 | 30 | 42 | 8 | 6 | 10 |
-| 27 | 27 | Julia-1 · CPU | NR | CPU-H | 52 | 26 | 32 | 8 | 12 | 11 |
-| 28 | 27 | Liquid d1-omni-600M · CPU | 600M class | CPU-H | 51 | 26 | 39 | 4 | 8 | 16 |
-| 29 | 30 | Indecis · untrained open mode · CPU | NR | CPU-H | 44 | 22 | 32 | 2 | 10 | 11 |
-| 30 | 29 | ModernJEV-Decide-Preview · CPU | NR | CPU-H | 42 | 23 | 23 | 13 | 6 | 8 |
-| 31 | 31 | Muose-50M-Decision · CPU | 50M class | CPU-H | 41 | 21 | 30 | 6 | 5 | 10 |
+| 23 | 22 | Vela 2.0 0.3B · macOS CPU | 0.309B declared | CPU-N | 65 | 37 | 52 | 4 | 9 | 18 |
+| 25 | 21 | GLiNER2.5-multi-Decide · CPU | NR | CPU-H | 59 | 38 | 41 | 5 | 13 | 12 |
+| 26 | 27 | Vela 3.0 fast · decision only · CPU | 0.380B decision backbone | CPU-N | 57 | 28 | 43 | 9 | 5 | 18 |
+| 27 | 26 | Laya multilingual · CPU | 322M declared | CPU-H | 56 | 30 | 42 | 8 | 6 | 10 |
+| 28 | 28 | Julia-1 · CPU | NR | CPU-H | 52 | 26 | 32 | 8 | 12 | 11 |
+| 29 | 28 | Liquid d1-omni-600M · CPU | 600M class | CPU-H | 51 | 26 | 39 | 4 | 8 | 16 |
+| 30 | 31 | Indecis · untrained open mode · CPU | NR | CPU-H | 44 | 22 | 32 | 2 | 10 | 11 |
+| 31 | 30 | ModernJEV-Decide-Preview · CPU | NR | CPU-H | 42 | 23 | 23 | 13 | 6 | 8 |
+| 32 | 32 | Muose-50M-Decision · CPU | 50M class | CPU-H | 41 | 21 | 30 | 6 | 5 | 10 |
 
 ¹ Sizes describe the observed checkpoint: exact tensor counts, nominal classes, and publisher declarations
 are distinguished in [metadata](leaderboard/model-metadata.json). A backbone count may exclude a separate readout;
@@ -300,6 +309,7 @@ A correct choice also does not prove that a plugin was executed or a useful answ
 | D3 edge · CPU | 34 | 40 | 24 | 21 | 29 | 132 | 24 |
 | Decision 2.0 Kai 0.6B · CPU | 34 | 36 | 27 | 17 | 26 | 132 | 24 |
 | Vela 2.0 0.3B · CPU | 33 | 32 | 21 | 19 | 25 | 132 | 24 |
+| Vela 2.0 0.3B · macOS CPU | 33 | 32 | 21 | 19 | 25 | 132 | 24 |
 | GLiNER2.5-multi-Decide · CPU | 28 | 31 | 17 | 19 | 23 | 132 | 24 |
 | Vela 3.0 fast · decision only · CPU | 25 | 32 | 20 | 14 | 23 | 132 | 24 |
 | Laya multilingual · CPU | 32 | 24 | 17 | 13 | 26 | 132 | 24 |
@@ -346,6 +356,7 @@ Metal/MPS observations used a 64 GiB Apple M5 Pro. CPU-H observations are not as
 | D3 edge · CPU | CPU-H | 438.4 | 564.7 | 132 | 8,443.2 | 1.32 | NR |
 | Decision 2.0 Kai 0.6B · CPU | CPU-H | 1,220.8 | 2,227.8 | 132 | 19,524.6 | 3.01 | NR |
 | Vela 2.0 0.3B · CPU | CPU-H | 171.2 | 252.0 | 132 | 12,767.4 | 1.17 | NR |
+| Vela 2.0 0.3B · macOS CPU | CPU-N | 154.0 | 195.8 | 132 | 5,922.9 | 1.18 | NR |
 | GLiNER2.5-multi-Decide · CPU | CPU-H | 234.9 | 401.0 | 132 | 13,096.7 | 2.82 | NR |
 | Vela 3.0 fast · decision only · CPU | CPU-N | 80.5 | 116.4 | 132 | 8,339.1 | 3.16 | NR |
 | Laya multilingual · CPU | CPU-H | 168.9 | 219.7 | 132 | 11,186.0 | 2.27 | NR |
@@ -532,7 +543,7 @@ separate historical observations.
 
 ## Every task and downloadable data
 
-- [Model summary CSV](leaderboard/models.csv): all 31 context observations, model sizes, runtimes, quality, latency, and separate resource measurements.
+- [Model summary CSV](leaderboard/models.csv): all 32 context observations, model sizes, runtimes, quality, latency, and separate resource measurements.
 - [Coverage CSV](leaderboard/coverage.csv) and [coverage JSON](leaderboard/coverage.json): every observation × task cell, explicit execution and review status, protocol denominator, source, and unobserved fields.
 - [Campaign summary CSV](leaderboard/campaigns.csv): independent capability, physics and passage rankings, coverage, test scores, class macro scores and measured resource scopes.
 - [Task breakdown CSV](leaderboard/task-breakdown.csv): exported context task types/subtypes, domains, languages, splits and difficulty; tool-choice subgroups; plus capability, physics and passage groups, with task-specific denominators.

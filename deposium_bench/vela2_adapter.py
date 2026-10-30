@@ -9,6 +9,7 @@ import hashlib
 import json
 import math
 import os
+import platform
 from pathlib import Path
 import re
 import shutil
@@ -332,16 +333,27 @@ class Vela2Adapter:
         try:
             for line in Path(f"/proc/{self._process.pid}/status").read_text().splitlines():
                 if line.startswith("VmRSS:"):
-                    rss = int(line.split()[1]) / 1024
-                    self._peak_rss_mb = max(self._peak_rss_mb, rss)
-                    if rss > self._model["max_rss_mb"]:
-                        raise MemoryError("vela2_rss_limit")
-                    if self._host_available_mb() < memory_floor_mib(self._model["repo_id"]):
-                        raise MemoryError("vela2_host_memory_low")
+                    self._record_rss(int(line.split()[1]) / 1024)
                     return
         except FileNotFoundError:
+            if platform.system() == "Darwin" and self._process.poll() is None:
+                # The worker owns its own session, so its process group is the
+                # worker alone; ps reports resident KiB (same helper as the native adapters).
+                try:
+                    from .native_resources import process_group_rss_mib
+                    self._record_rss(process_group_rss_mib(self._process.pid))
+                except (OSError, ValueError, subprocess.SubprocessError):
+                    raise OSError("vela2_rss_unavailable") from None
+                return
             if self._process.poll() is None:
                 raise OSError("vela2_rss_unavailable")
+
+    def _record_rss(self, rss):
+        self._peak_rss_mb = max(self._peak_rss_mb, rss)
+        if rss > self._model["max_rss_mb"]:
+            raise MemoryError("vela2_rss_limit")
+        if self._host_available_mb() < memory_floor_mib(self._model["repo_id"]):
+            raise MemoryError("vela2_host_memory_low")
 
     def _list_assets(self):
         actual = set()
@@ -357,6 +369,13 @@ class Vela2Adapter:
 
     @staticmethod
     def _host_available_mb():
+        if platform.system() == "Darwin":
+            # Reclaimable-page estimate from vm_stat, as for the other macOS adapters.
+            try:
+                from .native_resources import memory_snapshot
+                return float(memory_snapshot()["MemAvailable_mib"])
+            except (OSError, ValueError, KeyError, subprocess.SubprocessError):
+                raise OSError("vela2_host_memory_unknown") from None
         available = None
         for line in Path("/proc/meminfo").read_text().splitlines():
             if line.startswith("MemAvailable:"):

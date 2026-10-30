@@ -139,7 +139,9 @@ they do not label the useful model size. The first
 [D3 Flash Q8/Metal campaign](CAPABILITY_FLASH_RESULTS_20261029.md) reached
 192/192 (test 96/96) on 29 October 2026; the first Wave B candidate,
 [D3 lite on macOS CPU](D3_LITE_MACOS_RESULTS_20261030.md), reached 168/192
-(test 80/96) on 30 October 2026 under a new runtime identity. The references still await human review;
+(test 80/96) on 30 October 2026 under a new runtime identity; Vela 2.0 0.3B
+on the same runtime reached 128/192 (test 62/96)
+([results](VELA2_03_MACOS_RESULTS_20261030.md)). The references still await human review;
 reaching the ceiling on this closed-choice pack does not qualify tool execution
 or product behavior.
 

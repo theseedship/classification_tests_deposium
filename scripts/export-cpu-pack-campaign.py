@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Export a reviewed public aggregate from a sealed CPU-worker pack campaign; no inference.
 
-For the capability and physics packs run through a `d3` CPU worker with the
+For the context, capability and physics packs run through a `d3` or `vela2` CPU worker with the
 shared engine (`python3 -m deposium_bench run`). The archive's seal, dataset,
 scorer, profile, asset and runtime-lock identities are verified against the
 tracked public files, then only aggregate counts, group breakdowns, timing
@@ -99,10 +99,16 @@ def export(args):
     _, normalized_hash, _ = campaigns._prepare_profile(profile_path)
     require(manifest["source_profile_sha256"] == normalized_hash, "archive profile differs from the tracked profile")
     provenance = manifest["adapter_provenance"]
-    require(provenance["adapter"] == "d3" and provenance["available"] is True and provenance["device"] == "cpu"
-            and provenance["backbone_dtype"] == "bfloat16" and provenance["readout_dtype"] == "float32"
-            and provenance["model_repo_id"] == profile["model"]["repo_id"]
+    adapter = provenance["adapter"]
+    require(adapter in ("d3", "vela2") and adapter == profile["adapter"] and provenance["available"] is True
+            and provenance["device"] == "cpu" and provenance["model_repo_id"] == profile["model"]["repo_id"]
             and provenance["model_revision"] == profile["revision"], "adapter provenance differs from the profile")
+    if adapter == "d3":
+        require(provenance["backbone_dtype"] == "bfloat16" and provenance["readout_dtype"] == "float32", "unexpected D3 dtypes")
+        precision = {"backbone_dtype": "bfloat16", "readout_dtype": "float32"}
+    else:
+        require(provenance["dtype"] == "float32", "unexpected Vela2 dtype")
+        precision = {"dtype": "float32"}
     assets = load(ROOT / "profiles" / profile["model"]["assets_manifest"])
     indexed = {f["path"]: {"sha256": f["sha256"], "size": f["size"]} for f in assets["files"]}
     require(assets["repo_id"] == profile["model"]["repo_id"] and assets["revision"] == profile["revision"]
@@ -146,8 +152,7 @@ def export(args):
                      "analysis_sha256": sha(json.dumps(analysis, sort_keys=True, ensure_ascii=False).encode())},
         "included_in_full_pack_quality_denominator": True,
         "latency_ms": flash.stats(_stats([r["duration_ms"] for r in ok_rows])),
-        "actual_backend": {"kind": "cpu", "device": "cpu", "threads": profile["model"]["threads"],
-                           "backbone_dtype": "bfloat16", "readout_dtype": "float32",
+        "actual_backend": {"kind": "cpu", "device": "cpu", "threads": profile["model"]["threads"], **precision,
                            "loading_mode": provenance["loading_mode"]},
         "resources": {"rss_peak_mib": round(peak, 1), "stop_reason": None,
                       "rss_scope": "maximum of the worker's own ru_maxrss after loading and after each case; single CPU worker process, not a process-group sample",
@@ -170,7 +175,7 @@ def export(args):
                   "model_assets_sha256": provenance["model_assets_sha256"],
                   "assets_manifest": "profiles/" + profile["model"]["assets_manifest"],
                   "backbone_parameters": provenance.get("backbone_parameters"), "readout_shape": provenance.get("readout_shape")},
-        "runtime": {"adapter": "d3", "device": "cpu", "platform": args.platform,
+        "runtime": {"adapter": adapter, "device": "cpu", "platform": args.platform,
                     "pins": {k: pins.get(k) for k in RUNTIME_NAMES},
                     "runtime_lock": str(lock_path.relative_to(ROOT)), "runtime_lock_sha256": sha(lock_bytes),
                     "profile": str(profile_path.relative_to(ROOT)), "profile_id": profile["profile_id"],
