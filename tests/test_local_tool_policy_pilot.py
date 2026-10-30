@@ -42,7 +42,7 @@ class LocalToolPolicyPilotTests(unittest.TestCase):
         self.runtime = {"repository": pilot.upstream.REPOSITORY, "revision": pilot.upstream.PIN,
                         "binary_sha256": pilot.digest(self.binary)}
         for relative in ("native/systemone-preflight.cpp", "docs/LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md",
-                         pilot.HELDOUT_PROTOCOL, "docs/LOCAL_TOOL_POLICY_V1.md", "datasets/tool-policy-canary-v1/manifest.json",
+                         pilot.HELDOUT_PROTOCOL, pilot.CACHE_AMENDMENT, "docs/LOCAL_TOOL_POLICY_V1.md", "datasets/tool-policy-canary-v1/manifest.json",
                          "datasets/tool-policy-heldout-v1/manifest.json", "profiles/qwen3-4b-instruct-q8-assets.json"):
             path = self.tmp / relative
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -59,7 +59,8 @@ class LocalToolPolicyPilotTests(unittest.TestCase):
         self.generated_key = None
         self.commands, self.controls, self.events = [], [], []
         self.original_popen = pilot.subprocess.Popen
-        self.log = b"ggml_metal_init: synthetic GPU\nload_tensors: offloaded 33/33 layers to GPU\n"
+        self.log = (b"ggml_metal_init: synthetic GPU\nload_tensors: offloaded 33/33 layers to GPU\n"
+                    b"srv load_model: prompt cache is disabled - use `--cache-ram N` to enable it\n")
         self.available = 50000
         self.props = {"model_alias": pilot.MODEL_ID, "model_ftype": "Q8_0", "total_slots": 1,
             "default_generation_settings": {"n_ctx": 4096}, "chat_template": "{{ 'synthetic template' }}\n\u00e9"}
@@ -272,7 +273,8 @@ module.main(["--help"])
         command = self.commands[0]
         for flag in ("--jinja", "--no-context-shift", "--no-warmup", "--no-webui"):
             self.assertIn(flag, command)
-        for flag, value in (("--fit", "off"), ("--parallel", "1"), ("--ctx-size", "4096"), ("--ubatch-size", "4096")):
+        for flag, value in (("--fit", "off"), ("--parallel", "1"), ("--ctx-size", "4096"), ("--ubatch-size", "4096"),
+                            ("--cache-ram", "0")):
             self.assertEqual(command[command.index(flag) + 1], value)
         self.assert_sealed_after_cleanup()
 
@@ -385,6 +387,16 @@ module.main(["--help"])
         self.assertFalse(result["collection_complete"])
         self.assertEqual(result["scored_cases"], 0)
         self.assertTrue(result["outer_sealed"])
+        self.assert_sealed_after_cleanup()
+
+    def test_enabled_host_prompt_cache_in_native_log_fails_before_quality_calls(self):
+        self.log = (b"ggml_metal_init: synthetic GPU\nload_tensors: offloaded 33/33 layers to GPU\n"
+                    b"srv load_model: prompt cache is enabled, size limit: 8192 MiB\n")
+        with self.mocked():
+            result = pilot.pilot(self.args)
+        self.assertEqual(result["failure_code"], "local_policy_host_prompt_cache_not_disabled")
+        self.assertFalse((self.args.output / "campaign").exists())
+        self.assertEqual(pilot.ENVELOPE["host_prompt_cache_mib"], 0)
         self.assert_sealed_after_cleanup()
 
     def test_partial_metal_offload_fails_before_template_and_quality_calls(self):

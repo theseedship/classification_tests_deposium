@@ -319,8 +319,10 @@ held-out run, each in a new archive bound to its frozen manifest. Both ran on
 30 October 2026 ([results](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md)): TRAIN with
 v2 passed 7/10; the held-out attempt was **partial**, 9/18 scored of 24, after the
 pinned server's sampled RSS reached the 8 GiB ceiling at the nineteenth case.
-The ceiling was not raised; the six unobserved cases stay in every denominator,
-and a complete collection needs a reviewed session amendment.
+The ceiling was not raised; the six unobserved cases stay in every denominator.
+The cause was the server's default host prompt cache; the dated
+[amendment](LOCAL_TOOL_POLICY_PROMPT_CACHE_AMENDMENT_20261030.md) disables it,
+with a byte-identical TRAIN control before held-out attempt 002.
 
 ### Retrieved passages and evidence
 

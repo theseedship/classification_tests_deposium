@@ -38,6 +38,7 @@ reading it downloads or executes nothing. The fixed alias is
 | Estimated available host reserve | 8,192 MiB |
 | Admission before model-byte reads | 16,384 MiB |
 | HTTP retry, backend/model fallback | None |
+| Host prompt cache (`--cache-ram`) | 0 since the [30 October amendment](LOCAL_TOOL_POLICY_PROMPT_CACHE_AMENDMENT_20261030.md); earlier attempts ran with the 8,192 MiB default |
 
 The CLI exposes no resource or sampling overrides. Native fitting, context
 shifting and automatic warm-up are disabled. Metal must actually offload every
@@ -69,8 +70,9 @@ retained files. Credential-bearing responses, including escaped JSON echoes,
 are refused and retained as hashes with a redaction marker only.
 
 Native arguments explicitly request Jinja, one slot, Metal, fixed batches,
-`--fit off`, `--no-context-shift`, `--no-warmup` and `--no-webui`. Capture actual
-Metal offload from the new owned log. Authenticate `/props`, check the actual
+`--fit off`, `--no-context-shift`, `--no-warmup`, `--no-webui` and, since the
+amendment, `--cache-ram 0`. Capture actual Metal offload and the disabled
+prompt cache from the new owned log. Authenticate `/props`, check the actual
 alias/context/slots/Q8 metadata and preserve the returned default chat template
 as its **exact UTF-8 bytes**, without adding a newline. The session binds that
 template, model, runtime, supervisor and source hashes. HTTP requests use the

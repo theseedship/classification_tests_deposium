@@ -48,6 +48,7 @@ FROZEN_MANIFESTS = {
     "datasets/tool-policy-heldout-v1/manifest.json": "c57545613997e21a804a5587bda7a20819d3b436ea9b3d15e2d40b686ec639ed",
 }
 HELDOUT_PROTOCOL = "docs/LOCAL_TOOL_POLICY_HELDOUT_PROTOCOL_20261030.md"
+CACHE_AMENDMENT = "docs/LOCAL_TOOL_POLICY_PROMPT_CACHE_AMENDMENT_20261030.md"
 ASSETS = {"schema_version": "deposium.model-assets/v1", "repo_id": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
     "revision": "a06e946bb6b655725eafa393f4a9745d460374c9", "files": [{
         "path": "Qwen3-4B-Instruct-2507-Q8_0.gguf", "size": 4280405600,
@@ -57,7 +58,12 @@ SETTINGS = {"model_id": MODEL_ID, "max_length": 4096, "max_output_tokens": 256,
 ENVELOPE = {"context": 4096, "batch": 4096, "microbatch": 4096, "parallel": 1,
     "request_concurrency": 1, "rss_limit_mib": 8192, "reserve_mib": 8192,
     "admission_available_mib": 16384, "max_session_seconds": 600, "per_call_seconds": 20,
-    "automatic_http_retries": 0, "backend_fallback": False}
+    "automatic_http_retries": 0, "backend_fallback": False,
+    # The pinned server keeps a host prompt cache of 8,192 MiB by default and
+    # grows toward it on every task; requests never reuse it (cache_prompt is
+    # false), so it is disabled. Attempts before the dated amendment ran with
+    # the default and are recorded as such in their archives.
+    "host_prompt_cache_mib": 0}
 
 
 def require(value, code):
@@ -146,7 +152,7 @@ def pilot(args):
         archive.add(Path(__file__), arcname="scripts/run-local-tool-policy-pilot.py", recursive=False)
         archive.add(Path(upstream.__file__), arcname="scripts/run-upstream-native-pilot.py", recursive=False)
         for relative in ("native/systemone-preflight.cpp", "docs/LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md",
-                         HELDOUT_PROTOCOL, "docs/LOCAL_TOOL_POLICY_V1.md", dataset["manifest"],
+                         HELDOUT_PROTOCOL, CACHE_AMENDMENT, "docs/LOCAL_TOOL_POLICY_V1.md", dataset["manifest"],
                          "profiles/qwen3-4b-instruct-q8-assets.json"):
             archive.add(ROOT / relative, arcname=relative, recursive=False)
     shared.write_new(output / "runtime-pin.json", runtime)
@@ -204,7 +210,7 @@ def pilot(args):
         command = [str(binary), "--model", str(model), "--alias", MODEL_ID, "--host", "127.0.0.1",
             "--port", str(args.port), "--ctx-size", "4096", "--batch-size", "4096", "--ubatch-size", "4096",
             "--parallel", "1", "--n-gpu-layers", "99", "--jinja", "--fit", "off", "--no-context-shift",
-            "--no-warmup", "--no-webui", "--log-verbosity", "4"]
+            "--no-warmup", "--no-webui", "--cache-ram", str(ENVELOPE["host_prompt_cache_mib"]), "--log-verbosity", "4"]
         shared.write_new(output / "launch.json", {"command": command, "credential_transport": "ephemeral_environment_only"})
         envelope_args = argparse.Namespace(max_rss_mb=8192, min_free_mb=8192, max_seconds=600)
         with (output / "engine.log").open("xb") as log:
@@ -231,6 +237,10 @@ def pilot(args):
             require(offload is not None and int(offload[1]) == int(offload[2]) > 0
                     and re.search(r"metal", native_log, re.I), "local_policy_full_metal_offload_required")
             result["actual_backend"] = {"kind": "metal", "offloaded_layers": int(offload[1]), "total_layers": int(offload[2])}
+            # Verify the effect in the owned log, as for Metal: the flag alone is not evidence.
+            require(re.search(r"prompt cache is disabled", native_log) is not None
+                    and re.search(r"prompt cache is enabled", native_log) is None, "local_policy_host_prompt_cache_not_disabled")
+            result["host_prompt_cache"] = "disabled_observed_in_native_log"
 
             def control(name, method, path, body, credential, scope=None):
                 if scope is not None:
