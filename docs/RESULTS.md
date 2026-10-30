@@ -20,11 +20,11 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
 
 ### Context model/runtime observations
 
-The 30 rows below preserve quantization and runtime identities. **Metal gateway** and **direct Metal** are different paths; scores and task rankings follow below. Context/132 contains text/76, mathematics/28 and chemistry/28; [their scores and held-out test results](#model-quality) remain separate.
+The 30 rows below preserve quantization and runtime identities; sizes are publisher classes or declared counts, not independent measurements. **Metal gateway** and **direct Metal** are different paths; scores and task rankings follow below. Context/132 contains text/76, mathematics/28 and chemistry/28; [their scores and held-out test results](#model-quality) remain separate.
 
 | Model / runtime observation | Size | Context /132 | Tool proposal /24 | Capability /192 | Physics /48 | Relevance R0 /512 | Support R0 /768 | Answerability R0 /128 | Relevance R0–3 /2048 | Ranking R0–3 /512 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| D3 historical · Q4 Metal | 27B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 27B · Q4 Metal | 27B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 flash · Q8 Metal (gateway) | 9B class | complete 132/132 | complete 24/24 | complete 192/192 | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 flash · Q8 direct Metal | 9B class | complete 132/132 | not_run | not_run | complete 48/48 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | D3 flash · CPU | 8.393B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
@@ -69,6 +69,16 @@ These do not add context models. D3-lite's passage session has a different runti
 
 R0 means rotation 0 (128 pools, eight families, two correlated views). Relevance/512 and replayed relevance/2048 have different protocols; neither is ranking/512. Ranking cells cover 512 pools over four balanced rotations; nDCG@1 is defined on 480/480 eligible pools. D3-lite/Jev ranking replays existing relevance decisions; rotations add no model calls. Tie-break rows are offline combined methods, with projected sequential cost rather than a measured integrated pipeline. [Ranking scores, controls and evidence retention](#passage-ranking-and-evidence) remain separate from classification.
 
+### Generated-JSON tool-policy observations
+
+A different candidate output path: the model generates a shortlist/selection, sum arguments or one episode action per step, and the runtime executes the synthetic tools. Cells count passed/scored cases over the TRAIN canary plus the held-out TEST pack under prompt v2 (complete observations only; the 30 classifier rows have no observation on these columns). Scores, failure modes and the partial first held-out attempt are in the [dated reports](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md).
+
+| Model / runtime observation | Size | Discovery (JSON) /10 | Arguments (JSON) /6 | Episodes (JSON) /18 |
+|---|---|---|---|---|
+| Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2 | 4B class | complete 10/10 | complete 6/6 | complete 18/18 |
+
+Cells are execution coverage, as above. Passed cases over scored cases: Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2: discovery 3/10 passed, arguments 6/6 passed, episodes 7/18 passed. A passed case is an exact match of the authored outcome (and minimal tool set, or actual execution receipt); a correct clarification or stop is procedure handling, not task success.
+
 The 24-case tool column reports valid provisional proposals: **zero human-approved references and zero semantically qualified cases**. Complete coverage does not qualify routing or tool execution. See [task-specific rankings](#updated-task-rankings), [historical context quality](#model-quality), [full task CSV](leaderboard/task-breakdown.csv), and the dated [D3 capability report](CAPABILITY_FLASH_RESULTS_20261029.md) for scores and source details.
 
 ## Harness coverage
@@ -80,9 +90,9 @@ A missing model observation and a missing harness capability are different gaps.
 | Closed context, first-tool, capability and physics choices | implemented | Observed only on supplied alternatives; tool/24 remains provisional and executes no tool. | — |
 | Fixed-pool relevance, support, answerability and ranking | implemented | Separate rotation/metric scopes above; no live retrieval or final answers. | — |
 | Versioned task contract beyond supplied proposals | fixture_only | [Bounded contract](TOOL_PLAN_CONTRACT_V1.md) and two recorded FR/EN training controls; no qualified model output path, model result or executed tools. | [#9](https://github.com/theseedship/classification_tests_deposium/issues/9) |
-| Open catalogue discovery and sufficient tool sets | fixture_only | [Tool-discovery contract](TOOL_DISCOVERY_CONTRACT_V1.md): 12 FR/EN cases, separate shortlist/final-set metrics and recorded controls; no qualified model output path, model result or executed tools. | [#10](https://github.com/theseedship/classification_tests_deposium/issues/10) |
-| Executable arguments and artifact bindings | fixture_only | [Argument-execution contract](TOOL_ARGUMENTS_CONTRACT_V1.md): four FR/EN training cases, actual bounded lookup/sum and artifact guards; no qualified real-model output path or application integration. | [#11](https://github.com/theseedship/classification_tests_deposium/issues/11) |
-| Bounded episodes with executed tools and feedback | fixture_only | [Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics; four task results, zero real-model or application qualification. | [#12](https://github.com/theseedship/classification_tests_deposium/issues/12) |
+| Open catalogue discovery and sufficient tool sets | model_observed | [Tool-discovery contract](TOOL_DISCOVERY_CONTRACT_V1.md): 12 FR/EN recorded-control cases, separate shortlist/final-set metrics. One generative candidate observed through the local JSON route on the canary/held-out packs (see the generated-JSON coverage row); no executed tools, no application integration. | [#10](https://github.com/theseedship/classification_tests_deposium/issues/10) |
+| Executable arguments and artifact bindings | model_observed | [Argument-execution contract](TOOL_ARGUMENTS_CONTRACT_V1.md): four FR/EN training controls with actual bounded lookup/sum and artifact guards. One generative candidate observed on the canary/held-out argument cases (6/6); no application integration. | [#11](https://github.com/theseedship/classification_tests_deposium/issues/11) |
+| Bounded episodes with executed tools and feedback | model_observed | [Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics. One generative candidate observed on the canary/held-out episodes (7/18): positive paths pass, stop/clarify outcomes mostly fail; no application qualification. | [#12](https://github.com/theseedship/classification_tests_deposium/issues/12) |
 | Generated JSON proposals from a local model | model_observed | Qwen3-4B Q8, five observations: [TRAIN prompt v1](LOCAL_TOOL_POLICY_RESULTS_20261030.md) 5/10 scored of 10 (0/2 discovery, 2/2 arguments, 3/6 episodes); [TRAIN prompt v2](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md) 7/10 scored of 10 (1/2 discovery, 2/2 arguments, 4/6 episodes), identical generated content with the [host prompt cache disabled](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md); [held-out prompt v2](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md) attempt 1 9/18 scored of 24 (2/8 discovery, 4/4 arguments, 3/6 episodes), 6 unobserved after `rss_guard`, [attempt 2](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md) 9/24 scored of 24 (2/8 discovery, 4/4 arguments, 3/12 episodes). One model, correlated FR/EN pairs; no ranking, live MCP or product qualification. | [#35](https://github.com/theseedship/classification_tests_deposium/issues/35) |
 | Order robustness and evidence retention | partial_coverage | [Offline order/retention analysis](PASSAGE_ORDER_RETENTION_V1.md) covers four rotations and both views (920 distinct test inputs); historical ranking exists, while new Flash classifications still cover rotation 0 only. No new model calls. | [#13](https://github.com/theseedship/classification_tests_deposium/issues/13) |
 | Remaining cohort on new packs | not_run | [Historical 27B readiness](D3_27B_CAPABILITY_PROTOCOL_20261030.md) has a candidate-bound offline envelope; execution is deferred with zero new cases. Historical context scores cannot fill new task cells. | [#14](https://github.com/theseedship/classification_tests_deposium/issues/14) |
@@ -190,7 +200,7 @@ Equal all-case totals share a competition rank; row order within a tie is alphab
 
 | Rank all | Rank test | Model observation | Size¹ | Runtime² | All /132 | Test /66 | Text /76 | Math /28 | Chem /28 | Tool /24 |
 |---:|---:|---|---|---|---:|---:|---:|---:|---:|---:|
-| 1 | 1 | D3 historical · Q4 Metal | 27B class | Metal | 128 | 65 | 73 | 28 | 27 | 24 |
+| 1 | 1 | D3 27B · Q4 Metal | 27B class | Metal | 128 | 65 | 73 | 28 | 27 | 24 |
 | 2 | 4 | D3 flash · Q8 Metal | 9B class | Metal | 124 | 61 | 72 | 26 | 26 | 20 |
 | 2 | 4 | D3 flash · Q8 direct Metal | 9B class | Metal-U | 124 | 61 | 72 | 26 | 26 | Not run |
 | 2 | 4 | D3 flash · CPU | 8.393B backbone | CPU-H | 124 | 61 | 72 | 26 | 26 | 20 |
@@ -238,7 +248,7 @@ A correct choice also does not prove that a plugin was executed or a useful answ
 
 | Model observation | FR /66 | EN /66 | D1 /40 | D2 /40 | D3 /52 | Scored /132 | Tool valid /24 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| D3 historical · Q4 Metal | 64 | 64 | 40 | 38 | 50 | 132 | 24 |
+| D3 27B · Q4 Metal | 64 | 64 | 40 | 38 | 50 | 132 | 24 |
 | D3 flash · Q8 Metal | 62 | 62 | 39 | 37 | 48 | 132 | 24 |
 | D3 flash · Q8 direct Metal | 62 | 62 | 39 | 37 | 48 | 132 | Not run |
 | D3 flash · CPU | 62 | 62 | 39 | 37 | 48 | 132 | 24 |
@@ -283,7 +293,7 @@ Metal/MPS observations used a 64 GiB Apple M5 Pro. CPU-H observations are not as
 
 | Model observation | Runtime | Median ms | p95 ms | Timed /132 | Init ms | RSS GiB³ | GPU alloc GiB |
 |---|---|---:|---:|---:|---:|---:|---:|
-| D3 historical · Q4 Metal | Metal | 613.7 | 629.7 | 132 | NR | 18.81 S | NR |
+| D3 27B · Q4 Metal | Metal | 613.7 | 629.7 | 132 | NR | 18.81 S | NR |
 | D3 flash · Q8 Metal | Metal | 194.3 | 200.4 | 132 | NR | 9.39 S | NR |
 | D3 flash · Q8 direct Metal | Metal-U | 194.6 | 200.6 | 132 | NR | 9.36 S | NR |
 | D3 flash · CPU | CPU-H | 10,080.2 | 15,009.8 | 132 | 24,467.3 | 13.75 | NR |

@@ -437,7 +437,16 @@ COVERAGE_TASKS = (
      "passage-evidence-v1; four replayed rotations; 512 pools; not independent calls"),
     ("passage_ranking", "Ranking R0–3", 512,
      "passage-evidence-v1; four balanced rotations; nDCG@1 defined/eligible=480/480; 512 total pools"),
+    # Generated-JSON tool tasks: a different candidate output path from the closed
+    # choices above. Denominators join the TRAIN canary and the held-out TEST pack.
+    ("tool_discovery", "Discovery (JSON)", 10,
+     "tool-policy-canary-v1 train 2 + tool-policy-heldout-v1 test 8; generated shortlist/selection; prompt v2"),
+    ("tool_arguments", "Arguments (JSON)", 6,
+     "tool-policy-canary-v1 train 2 + tool-policy-heldout-v1 test 4; generated arguments, actual lookup/sum; prompt v2"),
+    ("tool_episodes", "Episodes (JSON)", 18,
+     "tool-policy-canary-v1 train 6 + tool-policy-heldout-v1 test 12; generated actions, actual bounded feedback; prompt v2"),
 )
+CLOSED_CHOICE_TASKS = 9  # the first tasks are the classifier matrix; the rest are generated-JSON columns
 ISSUES = "https://github.com/theseedship/classification_tests_deposium/issues/"
 
 
@@ -481,7 +490,10 @@ def local_policy_observation(source, split, eligible, complete, prompt, report):
     if not complete:
         text += f", {eligible - coverage['scored_cases']} unobserved after `{coverage['stop_reason']}`"
     return {"report": report, "passed": coverage["passed_cases"], "scored": coverage["scored_cases"],
-            "eligible": eligible, "complete": complete, "text": text}
+            "eligible": eligible, "complete": complete, "text": text,
+            "by_task": {n: {"correct": tasks[n]["correct"], "scored": scored_of(tasks[n]), "eligible": tasks[n]["eligible"]}
+                        for n in ("discovery", "arguments", "episodes")},
+            "all_ok": coverage["counts_by_status"]["ok"] == eligible}
 
 
 def local_policy_observations(inputs):
@@ -522,9 +534,11 @@ def coverage_cell(counts, total, source=None, *, metric="correct_choice", status
 def build_coverage(observations, campaigns, others, inputs):
     """Join exact public observation identities; never fill a gap by model name."""
     totals = {key: total for key, _, total, _ in COVERAGE_TASKS}
+    policy = local_policy_observations(inputs)
     def unobserved():
         return {key: coverage_cell(None, total, metric="provisional_agreement" if key == "tool_proposal"
-                                   else "ndcg@1" if key == "passage_ranking" else "correct_choice")
+                                   else "ndcg@1" if key == "passage_ranking"
+                                   else "case_pass" if key.startswith("tool_") else "correct_choice")
                 for key, total in totals.items()}
     by_id = {}
     for row in observations:
@@ -537,7 +551,7 @@ def build_coverage(observations, campaigns, others, inputs):
                                                   metric="provisional_agreement", statuses=tool["statuses"])
         by_id[row["id"]] = {"id": row["id"], "model": meta["display_name"],
                             "size": meta["model_size"]["label"], "runtime": meta["runtime_group"],
-                            "context_observation": True, "cells": cells}
+                            "context_observation": True, "generative_observation": False, "cells": cells}
 
     # These are separate runtime fingerprints, not additional context models.
     supplemental = (
@@ -549,8 +563,25 @@ def build_coverage(observations, campaigns, others, inputs):
     )
     for key, model, size, runtime in supplemental:
         by_id[key] = {"id": key, "model": model, "size": size, "runtime": runtime,
-                      "context_observation": False,
+                      "context_observation": False, "generative_observation": False,
                       "cells": unobserved()}
+    # One generative candidate on the generated-JSON tasks: the complete prompt-v2
+    # observations (TRAIN control with the cache amendment, held-out attempt 002).
+    # Per-task statuses are exact only because every case in both archives is `ok`.
+    train, test = policy["train_v2_cache_off"], policy["heldout_002"]
+    require(train["all_ok"] and test["all_ok"] and train["complete"] and test["complete"],
+            "coverage: generative cells require complete all-ok observations")
+    generative = {"id": "QwenToolPolicyV2", "model": "Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2",
+                  "size": "4B class", "runtime": "native_metal_generated_json",
+                  "context_observation": False, "generative_observation": True, "cells": unobserved()}
+    for task, name in (("tool_discovery", "discovery"), ("tool_arguments", "arguments"), ("tool_episodes", "episodes")):
+        a, b = train["by_task"][name], test["by_task"][name]
+        total = a["eligible"] + b["eligible"]
+        counts = {"total": total, "scored": a["scored"] + b["scored"], "correct": a["correct"] + b["correct"],
+                  "statuses": {**{k: 0 for k in STATUS_KEYS}, "ok": total}}
+        generative["cells"][task] = coverage_cell(counts, totals[task], LOCAL_POLICY[3] + " + " + LOCAL_POLICY[4],
+                                                  metric="case_pass")
+    by_id[generative["id"]] = generative
     context_ids = {r["id"]: r for r in observations}
     cpu = inputs.load(EVIDENCE + "passage-cpu-20261015/analysis.json")
     require(all(cpu["choice_model"][key] == context_ids["D3lite"]["identity"][key]
@@ -617,7 +648,6 @@ def build_coverage(observations, campaigns, others, inputs):
                     metric_eligible=metric["eligible_cases"])
         by_id[target]["cells"]["passage_ranking"] = cell
 
-    policy = local_policy_observations(inputs)
     harness = [
         ("closed_choices", "Closed context, first-tool, capability and physics choices", "implemented",
          "Observed only on supplied alternatives; tool/24 remains provisional and executes no tool.", []),
@@ -625,12 +655,12 @@ def build_coverage(observations, campaigns, others, inputs):
          "Separate rotation/metric scopes above; no live retrieval or final answers.", []),
         ("task_contract", "Versioned task contract beyond supplied proposals", "fixture_only",
          "[Bounded contract](TOOL_PLAN_CONTRACT_V1.md) and two recorded FR/EN training controls; no qualified model output path, model result or executed tools.", [9]),
-        ("discovery", "Open catalogue discovery and sufficient tool sets", "fixture_only",
-         "[Tool-discovery contract](TOOL_DISCOVERY_CONTRACT_V1.md): 12 FR/EN cases, separate shortlist/final-set metrics and recorded controls; no qualified model output path, model result or executed tools.", [10]),
-        ("arguments", "Executable arguments and artifact bindings", "fixture_only",
-         "[Argument-execution contract](TOOL_ARGUMENTS_CONTRACT_V1.md): four FR/EN training cases, actual bounded lookup/sum and artifact guards; no qualified real-model output path or application integration.", [11]),
-        ("episodes", "Bounded episodes with executed tools and feedback", "fixture_only",
-         "[Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics; four task results, zero real-model or application qualification.", [12]),
+        ("discovery", "Open catalogue discovery and sufficient tool sets", "model_observed",
+         "[Tool-discovery contract](TOOL_DISCOVERY_CONTRACT_V1.md): 12 FR/EN recorded-control cases, separate shortlist/final-set metrics. One generative candidate observed through the local JSON route on the canary/held-out packs (see the generated-JSON coverage row); no executed tools, no application integration.", [10]),
+        ("arguments", "Executable arguments and artifact bindings", "model_observed",
+         "[Argument-execution contract](TOOL_ARGUMENTS_CONTRACT_V1.md): four FR/EN training controls with actual bounded lookup/sum and artifact guards. One generative candidate observed on the canary/held-out argument cases (6/6); no application integration.", [11]),
+        ("episodes", "Bounded episodes with executed tools and feedback", "model_observed",
+         "[Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics. One generative candidate observed on the canary/held-out episodes (7/18): positive paths pass, stop/clarify outcomes mostly fail; no application qualification.", [12]),
         ("local_json_policy", "Generated JSON proposals from a local model", "model_observed",
          f"Qwen3-4B Q8, five observations: [TRAIN prompt v1]({policy['train_v1']['report']}) {policy['train_v1']['text']}; "
          f"[TRAIN prompt v2]({policy['train_v2']['report']}) {policy['train_v2']['text']}, identical generated content with the "
@@ -675,6 +705,7 @@ def coverage_csv_rows(coverage):
             cell = row["cells"][task["id"]]
             records.append({"observation": row["id"], "model": row["model"], "size": row["size"],
                             "runtime": row["runtime"], "context_observation": row["context_observation"],
+                            "generative_observation": row.get("generative_observation", False),
                             "task": task["id"], "protocol": task["protocol"],
                             **{k: cell.get(k) for k in ("status", "evidence_present", "review_pending",
                                "scored_or_valid", "total", "metric", "numerator", "metric_value",
@@ -690,7 +721,8 @@ def render_coverage(coverage):
         if status == "not_run":
             return "not_run" + (f" 0/{total}" if cell["evidence_present"] else "")
         return f"{status} {n}/{total}"
-    tasks = coverage["tasks"]
+    all_tasks = coverage["tasks"]
+    tasks, generated = all_tasks[:CLOSED_CHOICE_TASKS], all_tasks[CLOSED_CHOICE_TASKS:]
     lines = ["## Coverage overview", "",
              "**Execution coverage, not accuracy.** Each cell is `complete`, `partial`, or `not_run`, "
              "followed by scored/valid decisions over the planned denominator when observed. "
@@ -702,14 +734,14 @@ def render_coverage(coverage):
              "Recorded `missing`, `unsupported`, `error`, `timeout`, and `abstain` outcomes remain separate in the "
              "[coverage CSV](leaderboard/coverage.csv) and [JSON](leaderboard/coverage.json).", "",
              "### Context model/runtime observations", "",
-             "The 30 rows below preserve quantization and runtime identities. **Metal gateway** and "
+             "The 30 rows below preserve quantization and runtime identities; sizes are publisher classes or declared counts, not independent measurements. **Metal gateway** and "
              "**direct Metal** are different paths; scores and task rankings follow below. "
              "Context/132 contains text/76, mathematics/28 and chemistry/28; "
              "[their scores and held-out test results](#model-quality) remain separate.", "",
              "| Model / runtime observation | Size | " + " | ".join(f"{t['label']} /{t['total']}" for t in tasks) + " |",
              "|---|---|" + "---|" * len(tasks)]
     for row in coverage["observations"]:
-        if not row["context_observation"]:
+        if not row["context_observation"] or row.get("generative_observation"):
             continue
         label = row["model"]
         if row["id"] == "D3FlashQ8":
@@ -723,7 +755,7 @@ def render_coverage(coverage):
               "| Model / method | " + " | ".join(f"{t['label']} /{t['total']}" for t in tasks[4:]) + " |",
               "|---|" + "---|" * len(tasks[4:])]
     for row in coverage["observations"]:
-        if row["context_observation"]:
+        if row["context_observation"] or row.get("generative_observation"):
             continue
         lines.append(f"| {row['model']} | " + " | ".join(cell_text(row["cells"][t["id"]]) for t in tasks[4:]) + " |")
     lines += ["", "R0 means rotation 0 (128 pools, eight families, two correlated views). "
@@ -732,6 +764,26 @@ def render_coverage(coverage):
               "D3-lite/Jev ranking replays existing relevance decisions; rotations add no model calls. "
               "Tie-break rows are offline combined methods, with projected sequential cost rather than a measured integrated pipeline. "
               "[Ranking scores, controls and evidence retention](#passage-ranking-and-evidence) remain separate from classification.", "",
+              "### Generated-JSON tool-policy observations", "",
+              "A different candidate output path: the model generates a shortlist/selection, sum arguments or one episode "
+              "action per step, and the runtime executes the synthetic tools. Cells count passed/scored cases over the "
+              "TRAIN canary plus the held-out TEST pack under prompt v2 (complete observations only; the 30 classifier rows "
+              "have no observation on these columns). Scores, failure modes and the partial first held-out attempt are in the "
+              "[dated reports](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md).", "",
+              "| Model / runtime observation | Size | " + " | ".join(f"{t['label']} /{t['total']}" for t in generated) + " |",
+              "|---|---|" + "---|" * len(generated)]
+    passed = []
+    for row in coverage["observations"]:
+        if not row.get("generative_observation"):
+            continue
+        lines.append(f"| {row['model']} | {row['size']} | " + " | ".join(cell_text(row["cells"][t["id"]]) for t in generated) + " |")
+        passed.append(f"{row['model']}: " + ", ".join(
+            f"{t['label'].split(' ')[0].lower()} {row['cells'][t['id']]['numerator']}/{row['cells'][t['id']]['scored_or_valid']} passed"
+            for t in generated))
+    lines += ["", "Cells are execution coverage, as above. Passed cases over scored cases: " + "; ".join(passed) + ". "
+              "A passed case is an exact match of the authored outcome (and minimal tool set, or actual execution receipt); "
+              "a correct clarification or stop is procedure handling, not task success."]
+    lines += ["",
               "The 24-case tool column reports valid provisional proposals: **zero human-approved references "
               "and zero semantically qualified cases**. Complete coverage does not qualify routing or tool execution. "
               "See [task-specific rankings](#updated-task-rankings), [historical context quality](#model-quality), "
