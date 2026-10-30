@@ -99,6 +99,20 @@ class Campaigns:
         return data, {"adapter": "systemone_local", "model_repo_id": repo, "model_revision": revision,
                       "model_assets_sha256": weight, "runtime": dict(runtime)}
 
+    @staticmethod
+    def lock_pins(text):
+        """Exact `name==version` pins of a runtime lock; comments and blanks are ignored."""
+        pins = {}
+        for line in text.splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            match = re.fullmatch(r"([A-Za-z0-9][A-Za-z0-9._-]*)==([A-Za-z0-9][A-Za-z0-9.+!_-]*)", line)
+            if match is None:
+                raise ValueError("campaign: unpinned runtime lock line")
+            pins[re.sub(r"[-_.]+", "-", match[1]).lower()] = match[2]
+        return pins
+
     def cpu(self, path, asset_path, lock_path, profile_path):
         """A CPU-worker pack campaign exported by scripts/export-cpu-pack-campaign.py."""
         data = self.inputs.load(path)
@@ -109,12 +123,16 @@ class Campaigns:
         asset, model, runtime = self.inputs.load(asset_path), data["model"], data["runtime"]
         self.require(model["model_repo_id"] == asset["repo_id"] and model["model_revision"] == asset["revision"]
                      and model["assets_manifest"] == asset_path, "campaign: CPU model/asset identity mismatch")
+        lock_bytes = self.inputs.read(lock_path)
+        lock = self.lock_pins(lock_bytes.decode("utf-8"))
         self.require(runtime["adapter"] == "d3" and runtime["device"] == "cpu" and runtime["runtime_lock"] == lock_path
-                     and runtime["runtime_lock_sha256"] == hashlib.sha256(self.inputs.read(lock_path)).hexdigest()
-                     and runtime["profile"] == profile_path
-                     and all(isinstance(runtime["pins"].get(k), str) and runtime["pins"][k]
-                             for k in ("python", "torch", "transformers", "tokenizers", "safetensors")),
-                     "campaign: CPU runtime identity mismatch")
+                     and runtime["runtime_lock_sha256"] == hashlib.sha256(lock_bytes).hexdigest()
+                     and runtime["profile"] == profile_path, "campaign: CPU runtime identity mismatch")
+        # The aggregate's pins must be the lock's own values, not merely present.
+        pins = runtime["pins"]
+        self.require(isinstance(pins, dict) and {"python", "torch", "transformers", "tokenizers", "safetensors"} <= set(pins)
+                     and all(lock.get(name) == version for name, version in pins.items()),
+                     "campaign: CPU runtime pins differ from the referenced lock")
         profile = self.inputs.load(profile_path)
         self.require(profile["profile_id"] == runtime["profile_id"] and profile["revision"] == asset["revision"]
                      and profile["model"]["repo_id"] == asset["repo_id"], "campaign: CPU profile mismatch")

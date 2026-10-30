@@ -6066,7 +6066,7 @@
     "scripts/build-full-results.py": "fe3c520adc3762bca8f1dd4b2e429b3ef0364fc89bf87570458a5118733bf40e",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-    "scripts/consolidated-campaigns.py": "dbc5f49c60aca9bce8b17c1f38379818075930e2db9ab3e2115f861b26f61e99"
+    "scripts/consolidated-campaigns.py": "6ca3d68e4f71da1c3465118a0e1b5bd8e31bcd4129d93bf890926636521ae2b2"
   },
   "tasks": [
     {

@@ -15,10 +15,15 @@ complete view. Most original campaign reports are in French.
 The first [capability-choice campaign](CAPABILITY_FLASH_RESULTS_20261029.md)
 and its fresh context anchor are separate observations from the 28-row
 historical exports; their results are included in the current task tables.
-Their 192- and 132-case denominators are never pooled.
+Their 192- and 132-case denominators are never pooled. The 30 October 2026
+entries add a sub-1B CPU candidate on the complementary packs and the first
+generative tool-policy observations; see the
+[cohort execution-order revision](CAPABILITY_CAMPAIGN_PLAN.md#initial-cohort-and-order).
 
 | Campaign | Observations and boundaries | Reports and frozen evidence |
 |---|---|---|
+| D3 lite on macOS CPU, 30 October 2026 | New runtime identity (pinned macOS arm64 CPU, BF16 backbone): context 94/132 (test 49/66), tool 19/24, capability 168/192 (test 80/96), physics 14/48 (test 12/36); complete coverage, human review pending | [Results](D3_LITE_MACOS_RESULTS_20261030.md), [protocol](D3_LITE_MACOS_CPU_PROTOCOL_20261030.md), aggregates: [context/tool](evidence/d3-lite-macos-20261030/analysis.json), [capability](evidence/d3-lite-macos-20261030/capability.json), [physics](evidence/d3-lite-macos-20261030/physics.json) |
+| Generated JSON tool policy, Qwen3-4B Q8, 30 October 2026 | Generative candidate outside the classifier cohort; TRAIN canary prompt v1 5/10, prompt v2 7/10 (identical with the host prompt cache disabled); held-out 24 TEST cases: attempt 1 partial 9/18 (RSS guard), attempt 2 complete 9/24 | [TRAIN v1](LOCAL_TOOL_POLICY_RESULTS_20261030.md), [TRAIN v2 and partial held-out](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md), [complete held-out and cache control](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md); protocols: [supervised canary](LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md), [held-out](LOCAL_TOOL_POLICY_HELDOUT_PROTOCOL_20261030.md), [prompt-cache amendment](LOCAL_TOOL_POLICY_PROMPT_CACHE_AMENDMENT_20261030.md); aggregates under `evidence/local-tool-policy-*` |
 | Clef Flash matched passage evidence, 29 October 2026 | Same 128 test pools as D3 Flash: relevance 261/512, support 446/768, answerability 109/128; complete coverage and paired class errors | [Comparison and limits](PASSAGE_CLEF_RESULTS_20261029.md), [public aggregate](evidence/passage-clef-flash-20261029/analysis.json), [frozen Clef protocol](PASSAGE_CLEF_PROTOCOL_20261029.md) |
 | D3 Flash passage evidence, 29 October 2026 | Direct upstream Metal, 128 rotation-zero test pools: relevance 252/512, support 460/768, answerability 122/128; 728/728 physical calls valid | [Results, confusions and limits](PASSAGE_FLASH_RESULTS_20261029.md), [public aggregate](evidence/passage-flash-20261029/analysis.json), [frozen protocol](PASSAGE_FLASH_PROTOCOL_20261029.md) |
 | Clef Flash Q8, 29 October 2026 | Direct upstream Metal: context 110/132 (test 59/66), capability 192/192 (test 96/96), physics 41/48 (test 31/36); complete scored coverage, human review pending | [Results and paired comparison](CLEF_FLASH_RESULTS_20261029.md), [public aggregate](evidence/clef-flash-20261029/analysis.json), [frozen protocol](CLEF_NATIVE_PROTOCOL_20261029.md) |
