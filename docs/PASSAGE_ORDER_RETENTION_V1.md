@@ -159,6 +159,12 @@ network, subprocess and adapter/inference entry points to raise during actual
 analysis. They exercise real shared projections/scorers/archive validation,
 not a second inference pipeline.
 
+The [dated offline receipt](evidence/passage-order-offline-20261030.json)
+records 986 Linux tests (955 passed, 31 optional skips) and one explicitly
+authored sealed transport fixture. Its 728 records include each failure state;
+the analyzer leaves 192 extra physical inputs unobserved. Those fixture labels
+are controls, not collected model responses or a new model-quality result.
+
 ## Execution budget and remaining qualification
 
 The present plan admits **zero model calls, zero network calls and zero
