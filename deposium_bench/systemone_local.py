@@ -55,6 +55,47 @@ def _finite(value):
     return type(value) in (float, int) and math.isfinite(value) and 0 <= value <= 1
 
 
+class NativeChoiceError(ValueError):
+    """A native usage refusal, retaining diagnostics without executing anything."""
+    def __init__(self, code, diagnostic):
+        super().__init__(code)
+        self.diagnostic = diagnostic
+
+
+def native_choice_response(native, model_id, model_path, mapping, max_length, expected_input_tokens=None):
+    """Pure response validation shared by live transport and retained audits."""
+    if not isinstance(native, dict) or native.get("model") not in {model_id, model_path}:
+        raise ValueError("systemone_response_model_mismatch")
+    if not isinstance(native.get("answers"), dict) or set(native["answers"]) != {"answer"}:
+        raise ValueError("systemone_response_invalid")
+    answer = native["answers"]["answer"]
+    probabilities = answer.get("probabilities") if isinstance(answer, dict) else None
+    if (not isinstance(answer, dict) or answer.get("type") != "choice"
+            or not isinstance(probabilities, dict) or set(probabilities) != set(mapping)
+            or any(not _finite(p) for p in probabilities.values())
+            or abs(sum(probabilities.values()) - 1) > 1e-5 or answer.get("choice") not in mapping
+            or probabilities[answer["choice"]] != max(probabilities.values()) or not _finite(answer.get("confidence"))):
+        raise ValueError("systemone_response_invalid")
+    usage = native.get("usage")
+    if (not isinstance(usage, dict) or type(usage.get("input_tokens")) is not int
+            or not 0 < usage["input_tokens"] <= max_length
+            or type(usage.get("output_tokens")) is not int or usage["output_tokens"] != 0):
+        raise NativeChoiceError("systemone_usage_invalid", {})
+    diagnostic = {"observed_model": native["model"], "usage": copy.deepcopy(usage)}
+    if expected_input_tokens is not None:
+        diagnostic.update(prepared_input_tokens=expected_input_tokens,
+                          native_preparation_count_match=usage["input_tokens"] == expected_input_tokens)
+        if not diagnostic["native_preparation_count_match"]:
+            raise NativeChoiceError("systemone_native_preparation_count_mismatch", diagnostic)
+    if "truncated" in usage:
+        if type(usage["truncated"]) is not bool:
+            raise NativeChoiceError("systemone_usage_invalid", diagnostic)
+        diagnostic["native_usage_truncated"] = usage["truncated"]
+        if usage["truncated"]:
+            raise NativeChoiceError("systemone_native_input_truncated", diagnostic)
+    return {"choice_id": mapping[answer["choice"]]}, diagnostic
+
+
 def _state(path):
     stat = path.stat()
     return (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
@@ -308,39 +349,15 @@ class LocalSystemOneAdapter:
                 if self._key in json.dumps(native):
                     raise ValueError("systemone_response_secret_rejected")
                 raw["native_result"] = native
-                if native.get("model") not in {self._model["model_id"], self._session["model"]["path"]}:
-                    raise ValueError("systemone_response_model_mismatch")
-                if not isinstance(native.get("answers"), dict) or set(native["answers"]) != {"answer"}:
-                    raise ValueError("systemone_response_invalid")
-                answer = native["answers"]["answer"]
-                probabilities = answer.get("probabilities")
-                if (answer.get("type") != "choice"
-                        or not isinstance(probabilities, dict) or set(probabilities) != set(mapping)
-                        or any(not _finite(p) for p in probabilities.values())
-                        or abs(sum(probabilities.values()) - 1) > 1e-5
-                        or answer.get("choice") not in mapping
-                        or probabilities[answer["choice"]] != max(probabilities.values())
-                        or not _finite(answer.get("confidence"))):
-                    raise ValueError("systemone_response_invalid")
-                usage = native.get("usage")
-                if (not isinstance(usage, dict) or type(usage.get("input_tokens")) is not int
-                        or not 0 < usage["input_tokens"] <= self._model["max_length"]
-                        or type(usage.get("output_tokens")) is not int or usage["output_tokens"] != 0):
-                    return self._fail("error", "systemone_usage_invalid", raw)
-                raw.update(observed_model=native["model"], usage=usage)
-                if self._prepared_tokens is not None:
-                    raw["prepared_input_tokens"] = self._prepared_tokens[body_sha256]
-                    raw["native_preparation_count_match"] = usage["input_tokens"] == self._prepared_tokens[body_sha256]
-                    if not raw["native_preparation_count_match"]:
-                        return self._fail("error", "systemone_native_preparation_count_mismatch", raw)
-                if "truncated" in usage:
-                    if type(usage["truncated"]) is not bool:
-                        return self._fail("error", "systemone_usage_invalid", raw)
-                    raw["native_usage_truncated"] = usage["truncated"]
-                    if usage["truncated"]:
-                        return self._fail("error", "systemone_native_input_truncated", raw)
+                try:
+                    output, diagnostic = native_choice_response(native, self._model["model_id"], self._session["model"]["path"],
+                        mapping, self._model["max_length"], self._prepared_tokens[body_sha256] if self._prepared_tokens is not None else None)
+                except NativeChoiceError as exc:
+                    raw.update(exc.diagnostic)
+                    return self._fail("error", str(exc), raw)
+                raw.update(diagnostic)
                 self.provenance["model_response"] = "observed"
-                return {"status": "ok", "output": {"choice_id": mapping[answer["choice"]]},
+                return {"status": "ok", "output": output,
                         "raw_output": raw, "error": None}
             except TimeoutError:
                 return self._fail("timeout", "systemone_http_timeout", raw)
