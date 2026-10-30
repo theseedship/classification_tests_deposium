@@ -59,6 +59,11 @@ episodes remain covered by TRAIN only.
 3. No third prompt revision, reference change or re-run after seeing held-out
    outcomes. A further candidate change requires a fresh held-out version.
 
+The first attempt stopped at the RSS guard because of the pinned server's host
+prompt cache. The dated [prompt-cache amendment](LOCAL_TOOL_POLICY_PROMPT_CACHE_AMENDMENT_20261030.md)
+disables it, requires a byte-identical TRAIN v2 neutrality control, and then
+permits held-out attempt 002 on the unchanged pack. It changes no ceiling.
+
 ```bash
 python3 scripts/run-local-tool-policy-pilot.py \
   --source-root "$NATIVE_SOURCE" --binary "$NATIVE_BINARY" \
