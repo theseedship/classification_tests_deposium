@@ -109,6 +109,7 @@ No model inference or paid API was part of the offline checks.
 
 | Scope | Recorded result | Interpretation |
 |---|---|---|
+| macOS / Python 3.12, 30 October 2026 checkpoint (D3 lite macOS port, CPU pack exporter, generated-JSON observations) | 1075 tests: 103 failures, 22 errors, 68 skips. Failure identifiers are a strict subset of the previous macOS baseline (seven D3 adapter tests fixed by the port) plus one DuckDB test that needs a `node` version in this shell. | Not a full macOS PASS; Linux remains the reference environment. New campaigns report their own checks in their PRs. |
 | Linux / Python 3.12, prepared local JSON policy and the shared core | 1039 tests: 1008 passed, 31 optional skips, no failures or errors. Executed without network in the local validation image, with a read-only source mount and temporary results storage. | Current offline implementation check; skipped optional integrations remain unqualified. It is not model inference or human review. |
 | Historical frozen campaign code, 29 October 2026 | 817 tests: 786 passed, 31 optional skips, no failures. | Historical code checkpoint only; **not the current checkout's global PASS**. |
 | macOS / Python 3.13, core checks | Registry, context/physics cases, capability/passage corpora and generated result views validated at the prior checkpoint. | Data/contract/export checks, not inference or human review. |

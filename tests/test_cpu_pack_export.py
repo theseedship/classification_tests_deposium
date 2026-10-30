@@ -120,3 +120,37 @@ class PublishedCpuPackTests(unittest.TestCase):
             text = (self.EVIDENCE / name).read_text()
             for forbidden in ("/Users/", "/private/", "/tmp/", "raw_output", "pid"):
                 self.assertNotIn(forbidden, text, (name, forbidden))
+
+
+class ConsolidatedCpuLoaderTests(unittest.TestCase):
+    def test_cpu_loader_refuses_pins_that_differ_from_the_referenced_lock(self):
+        campaigns = module("consolidated_campaigns_for_cpu", "scripts/consolidated-campaigns.py")
+
+        class Inputs:
+            def read(self, relative):
+                return (ROOT / relative).read_bytes()
+
+            def load(self, relative):
+                return json.loads(self.read(relative))
+
+        def require(value, message):
+            if not value:
+                raise ValueError(message)
+        loader = campaigns.Campaigns(Inputs(), require)
+        path = "docs/evidence/d3-lite-macos-20261030/physics.json"
+        data, identity = loader.cpu(path, "profiles/d3-lite-assets.json", "runtimes/d3-macos/runtime.lock",
+                                    "profiles/d3-lite-macos-cpu.json")
+        self.assertEqual(identity["runtime"]["pins"]["torch"], "2.14.0")
+        lock = campaigns.Campaigns.lock_pins((ROOT / "runtimes/d3-macos/runtime.lock").read_text())
+        self.assertEqual(lock["torch"], "2.14.0")
+        with self.assertRaisesRegex(ValueError, "unpinned"):
+            campaigns.Campaigns.lock_pins("torch>=2\n")
+        good = json.loads((ROOT / path).read_text())
+        for change in ({"torch": "0.0.0"}, {"python": "3.12.0"}, {"nonexistent": "1.0"}):
+            broken = json.loads(json.dumps(good))
+            broken["runtime"]["pins"].update(change)
+            drifted = type("Inputs", (), {"read": lambda self, rel: (ROOT / rel).read_bytes(),
+                                          "load": lambda self, rel: broken if rel == path else json.loads((ROOT / rel).read_bytes())})()
+            with self.subTest(change=change), self.assertRaisesRegex(ValueError, "pins differ"):
+                campaigns.Campaigns(drifted, require).cpu(path, "profiles/d3-lite-assets.json",
+                                                          "runtimes/d3-macos/runtime.lock", "profiles/d3-lite-macos-cpu.json")
