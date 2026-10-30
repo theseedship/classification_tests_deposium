@@ -10057,13 +10057,13 @@
         "status": "fixture_only"
       },
       {
-        "boundary": "Qwen3-4B Q8, three observations: [TRAIN prompt v1](LOCAL_TOOL_POLICY_RESULTS_20261030.md) 5/10 scored of 10 (0/2 discovery, 2/2 arguments, 3/6 episodes); [TRAIN prompt v2](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md) 7/10 scored of 10 (1/2 discovery, 2/2 arguments, 4/6 episodes); [held-out prompt v2](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md) 9/18 scored of 24 (2/8 discovery, 4/4 arguments, 3/6 episodes), 6 unobserved after `rss_guard`. One model, correlated FR/EN pairs; no ranking, live MCP or product qualification.",
+        "boundary": "Qwen3-4B Q8, five observations: [TRAIN prompt v1](LOCAL_TOOL_POLICY_RESULTS_20261030.md) 5/10 scored of 10 (0/2 discovery, 2/2 arguments, 3/6 episodes); [TRAIN prompt v2](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md) 7/10 scored of 10 (1/2 discovery, 2/2 arguments, 4/6 episodes), identical generated content with the [host prompt cache disabled](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md); [held-out prompt v2](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md) attempt 1 9/18 scored of 24 (2/8 discovery, 4/4 arguments, 3/6 episodes), 6 unobserved after `rss_guard`, [attempt 2](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md) 9/24 scored of 24 (2/8 discovery, 4/4 arguments, 3/12 episodes). One model, correlated FR/EN pairs; no ranking, live MCP or product qualification.",
         "capability": "Generated JSON proposals from a local model",
         "id": "local_json_policy",
         "issues": [
           "https://github.com/theseedship/classification_tests_deposium/issues/35"
         ],
-        "status": "partial_coverage"
+        "status": "model_observed"
       },
       {
         "boundary": "[Offline order/retention analysis](PASSAGE_ORDER_RETENTION_V1.md) covers four rotations and both views (920 distinct test inputs); historical ranking exists, while new Flash classifications still cover rotation 0 only. No new model calls.",
@@ -14506,8 +14506,10 @@
       "docs/evidence/gliclass-model-comparison-20261017/gliclass-session.json": "938b445cac5d50ddde7776c43dad22e0ac9e8c4e14246db73232f3a00fb19639",
       "docs/evidence/length-comparison-20261004/analysis.json": "48311eb6272d28dc4e5d607dfbc09bd77d35d6ef399075bb696115cd257c5f9e",
       "docs/evidence/local-tool-policy-20261030/analysis.json": "a1958d86ae75a28c417edc25976c4684e110baa7e3cb1ea11853dcf41d90594f",
+      "docs/evidence/local-tool-policy-heldout-002-20261030/analysis.json": "d92146eb33150333f2709a9a20aa134722bfb01c62fb8b6df5404fa9e4dcca4a",
       "docs/evidence/local-tool-policy-heldout-20261030/analysis.json": "bbbfcbdc7a3446d9a96f336daa7badffee6e00a29ae9b954a559cc0c0b96c3ed",
       "docs/evidence/local-tool-policy-v2-train-20261030/analysis.json": "7a22334db7f1bffea827c4d92093fbf058350091a9713807cf03726b0e459ab2",
+      "docs/evidence/local-tool-policy-v2-train-cache-off-20261030/analysis.json": "35cf7509e8168bc4142161c186633e1463ccd587a76f5a880925f4782c34b8c6",
       "docs/evidence/model-comparison-complete-20261004/analysis.json": "810bdfe62c52e1c2f7c00d98beb31b970cd958a51b0cdc0832f3e3e5877fcca1",
       "docs/evidence/model-comparison-complete-20261010-sol/analysis.json": "6659ab61c392c0123eb46350595181ba5f2e6530b59713a21847f755ea4fe97c",
       "docs/evidence/model-comparison-complete-20261010/analysis.json": "cd8b34aa95aeba2f3aabb50a2d91da133affc7fbf965123487e24d2c4492f422",
@@ -14536,7 +14538,7 @@
       "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
       "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
       "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
-      "scripts/build-full-results.py": "7ffcda8c97cd26f8f7ca9ac4410d4d39e397f95f1c152cbef3f2cd773dcc0907",
+      "scripts/build-full-results.py": "827c6e516be951060833d92d603d793ce737c038fa63c7b1deb45d8b3c2fcc44",
       "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
       "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
       "scripts/consolidated-campaigns.py": "71b2c6972e1da1dca58f28e2514a30cb02e98d14ce18c85a3a5fc1fd2a4ea2f0"
@@ -101201,8 +101203,10 @@
     "docs/evidence/gliclass-model-comparison-20261017/gliclass-session.json": "938b445cac5d50ddde7776c43dad22e0ac9e8c4e14246db73232f3a00fb19639",
     "docs/evidence/length-comparison-20261004/analysis.json": "48311eb6272d28dc4e5d607dfbc09bd77d35d6ef399075bb696115cd257c5f9e",
     "docs/evidence/local-tool-policy-20261030/analysis.json": "a1958d86ae75a28c417edc25976c4684e110baa7e3cb1ea11853dcf41d90594f",
+    "docs/evidence/local-tool-policy-heldout-002-20261030/analysis.json": "d92146eb33150333f2709a9a20aa134722bfb01c62fb8b6df5404fa9e4dcca4a",
     "docs/evidence/local-tool-policy-heldout-20261030/analysis.json": "bbbfcbdc7a3446d9a96f336daa7badffee6e00a29ae9b954a559cc0c0b96c3ed",
     "docs/evidence/local-tool-policy-v2-train-20261030/analysis.json": "7a22334db7f1bffea827c4d92093fbf058350091a9713807cf03726b0e459ab2",
+    "docs/evidence/local-tool-policy-v2-train-cache-off-20261030/analysis.json": "35cf7509e8168bc4142161c186633e1463ccd587a76f5a880925f4782c34b8c6",
     "docs/evidence/model-comparison-complete-20261004/analysis.json": "810bdfe62c52e1c2f7c00d98beb31b970cd958a51b0cdc0832f3e3e5877fcca1",
     "docs/evidence/model-comparison-complete-20261010-sol/analysis.json": "6659ab61c392c0123eb46350595181ba5f2e6530b59713a21847f755ea4fe97c",
     "docs/evidence/model-comparison-complete-20261010/analysis.json": "cd8b34aa95aeba2f3aabb50a2d91da133affc7fbf965123487e24d2c4492f422",
@@ -101231,7 +101235,7 @@
     "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
     "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
     "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
-    "scripts/build-full-results.py": "7ffcda8c97cd26f8f7ca9ac4410d4d39e397f95f1c152cbef3f2cd773dcc0907",
+    "scripts/build-full-results.py": "827c6e516be951060833d92d603d793ce737c038fa63c7b1deb45d8b3c2fcc44",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
     "scripts/consolidated-campaigns.py": "71b2c6972e1da1dca58f28e2514a30cb02e98d14ce18c85a3a5fc1fd2a4ea2f0"
