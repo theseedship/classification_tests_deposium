@@ -1,7 +1,10 @@
 # Amendment: disable the native host prompt cache
 
 **Fixed on 30 October 2026, after the partial held-out attempt and before any
-further prediction.** This amends the
+further prediction.** Executed the same day; see the
+[results](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md), which also qualify the
+"byte-identical" wording below (generated content identical; volatile HTTP
+metadata and the clock-derived episode budget differ). This amends the
 [supervised session protocol](LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md) and
 applies to every later attempt under the
 [held-out protocol](LOCAL_TOOL_POLICY_HELDOUT_PROTOCOL_20261030.md). It changes

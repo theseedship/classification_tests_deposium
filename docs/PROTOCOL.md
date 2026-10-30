@@ -321,8 +321,12 @@ v2 passed 7/10; the held-out attempt was **partial**, 9/18 scored of 24, after t
 pinned server's sampled RSS reached the 8 GiB ceiling at the nineteenth case.
 The ceiling was not raised; the six unobserved cases stay in every denominator.
 The cause was the server's default host prompt cache; the dated
-[amendment](LOCAL_TOOL_POLICY_PROMPT_CACHE_AMENDMENT_20261030.md) disables it,
-with a byte-identical TRAIN control before held-out attempt 002.
+[amendment](LOCAL_TOOL_POLICY_PROMPT_CACHE_AMENDMENT_20261030.md) disabled it.
+The TRAIN control reproduced identical generated content (7/10) and held-out
+attempt 002 collected all 24 cases: **9/24**
+([results](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md)). Every declared
+contract outcome has been observed once; the nonselection and stop outcomes
+fail, including a self-computed success when the sum tool was unavailable.
 
 ### Retrieved passages and evidence
 

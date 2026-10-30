@@ -10,7 +10,10 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 AGGREGATES = {"train_v1": ROOT / "docs/evidence/local-tool-policy-20261030/analysis.json",
               "train_v2": ROOT / "docs/evidence/local-tool-policy-v2-train-20261030/analysis.json",
-              "heldout": ROOT / "docs/evidence/local-tool-policy-heldout-20261030/analysis.json"}
+              "heldout": ROOT / "docs/evidence/local-tool-policy-heldout-20261030/analysis.json",
+              "train_v2_cache_off": ROOT / "docs/evidence/local-tool-policy-v2-train-cache-off-20261030/analysis.json",
+              "heldout_002": ROOT / "docs/evidence/local-tool-policy-heldout-002-20261030/analysis.json"}
+NAMES = ("train_v1", "train_v2", "heldout", "train_v2_cache_off", "heldout_002")
 
 
 def module(name, relative):
@@ -97,7 +100,8 @@ class PublishedAggregateTests(unittest.TestCase):
         cls.aggregates = {name: json.loads(path.read_text()) for name, path in AGGREGATES.items()}
 
     def test_denominators_are_closed_and_failures_stay_visible(self):
-        expected = {"train_v1": (10, 10, 5, True), "train_v2": (10, 10, 7, True), "heldout": (24, 18, 9, False)}
+        expected = {"train_v1": (10, 10, 5, True), "train_v2": (10, 10, 7, True), "heldout": (24, 18, 9, False),
+                    "train_v2_cache_off": (10, 10, 7, True), "heldout_002": (24, 24, 9, True)}
         for name, a in self.aggregates.items():
             coverage, by_task = a["coverage"], a["results"]["by_task"]
             eligible, scored, passed, complete = expected[name]
@@ -135,6 +139,21 @@ class PublishedAggregateTests(unittest.TestCase):
         self.assertEqual(self.aggregates["train_v2"]["dataset"]["id"], "tool-policy-canary-v1")
         self.assertEqual(self.aggregates["train_v2"]["results"]["by_task"]["discovery"], {"correct": 1, "scored": 2, "eligible": 2})
 
+    def test_cache_amendment_control_and_complete_second_attempt_are_recorded(self):
+        control, second = self.aggregates["train_v2_cache_off"], self.aggregates["heldout_002"]
+        for a in (control, second):
+            self.assertEqual(a["envelope"]["host_prompt_cache_mib"], 0)
+            self.assertEqual(a["prompt_version"], "deposium.local-tool-policy-prompt/v2")
+            self.assertLess(a["resources"]["rss_peak_mib"], a["resources"]["rss_limit_mib"])
+        self.assertNotIn("host_prompt_cache_mib", self.aggregates["train_v2"]["envelope"])
+        self.assertEqual(control["results"], self.aggregates["train_v2"]["results"])
+        self.assertEqual(second["evaluation_status"], "test_collected_quality_fail")
+        self.assertEqual(second["coverage"]["unobserved_cases"], [])
+        self.assertEqual(second["results"]["by_task"], {"discovery": {"correct": 2, "scored": 8, "eligible": 8},
+                                                        "arguments": {"correct": 4, "scored": 4, "eligible": 4},
+                                                        "episodes": {"correct": 3, "scored": 12, "eligible": 12}})
+        self.assertEqual(second["results"]["episodes"]["task_success"], {"correct": 3, "eligible": 4, "over_all_cases": 12})
+
     def test_public_files_contain_no_paths_template_or_raw_output(self):
         for name, path in AGGREGATES.items():
             text = path.read_text()
@@ -143,11 +162,10 @@ class PublishedAggregateTests(unittest.TestCase):
                 self.assertNotIn(forbidden, text, (name, forbidden))
 
     def test_generator_accepts_the_three_aggregates_and_refuses_inconsistent_ones(self):
-        inputs = FakeInputs({path: deepcopy(self.aggregates[name])
-                             for path, name in zip(results.LOCAL_POLICY, ("train_v1", "train_v2", "heldout"))})
+        inputs = FakeInputs({path: deepcopy(self.aggregates[name]) for path, name in zip(results.LOCAL_POLICY, NAMES)})
         rows = results.local_policy_observations(inputs)
         self.assertEqual([(r["passed"], r["scored"], r["eligible"], r["complete"]) for r in rows.values()],
-                         [(5, 10, 10, True), (7, 10, 10, True), (9, 18, 24, False)])
+                         [(5, 10, 10, True), (7, 10, 10, True), (9, 18, 24, False), (7, 10, 10, True), (9, 24, 24, True)])
         self.assertIn("6 unobserved after `rss_guard`", rows["heldout"]["text"])
         mutations = [
             ("heldout", lambda d: d["coverage"].update(scored_cases=0)),
@@ -160,11 +178,13 @@ class PublishedAggregateTests(unittest.TestCase):
             ("train_v2", lambda d: d["coverage"]["counts_by_status"].update(missing=3)),
             ("train_v1", lambda d: d.update(review="human_approved")),
             ("train_v1", lambda d: d.update(qualification="product")),
+            ("train_v2_cache_off", lambda d: d["coverage"].update(passed_cases=6, scored_cases=10)),
+            ("train_v2_cache_off", lambda d: d["envelope"].update(host_prompt_cache_mib=8192)),
+            ("heldout_002", lambda d: d["coverage"].update(collection_complete=False)),
         ]
         for name, mutate in mutations:
-            broken = {path: deepcopy(self.aggregates[n])
-                      for path, n in zip(results.LOCAL_POLICY, ("train_v1", "train_v2", "heldout"))}
-            target = broken[results.LOCAL_POLICY[("train_v1", "train_v2", "heldout").index(name)]]
+            broken = {path: deepcopy(self.aggregates[n]) for path, n in zip(results.LOCAL_POLICY, NAMES)}
+            target = broken[results.LOCAL_POLICY[NAMES.index(name)]]
             mutate(target)
             with self.subTest(name=name), self.assertRaises(results.ResultError):
                 results.local_policy_observations(FakeInputs(broken))

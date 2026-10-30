@@ -31,7 +31,9 @@ FAST = EVIDENCE + "vela3-fast-20261028/analysis.json"
 CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
 LOCAL_POLICY = (EVIDENCE + "local-tool-policy-20261030/analysis.json",
                 EVIDENCE + "local-tool-policy-v2-train-20261030/analysis.json",
-                EVIDENCE + "local-tool-policy-heldout-20261030/analysis.json")
+                EVIDENCE + "local-tool-policy-heldout-20261030/analysis.json",
+                EVIDENCE + "local-tool-policy-v2-train-cache-off-20261030/analysis.json",
+                EVIDENCE + "local-tool-policy-heldout-002-20261030/analysis.json")
 NATIVE_SESSION = EVIDENCE + "native-model-comparison-20261016/native-sessions.json"
 GLICLASS_SESSION = EVIDENCE + "gliclass-model-comparison-20261017/gliclass-session.json"
 CAMPAIGN_MODULE = "scripts/consolidated-campaigns.py"
@@ -444,6 +446,8 @@ LOCAL_POLICY_EXPECTED = (
     (LOCAL_POLICY[0], "train", 10, True, "deposium.local-tool-policy-prompt/v1", "LOCAL_TOOL_POLICY_RESULTS_20261030.md"),
     (LOCAL_POLICY[1], "train", 10, True, "deposium.local-tool-policy-prompt/v2", "LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md"),
     (LOCAL_POLICY[2], "test", 24, False, "deposium.local-tool-policy-prompt/v2", "LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md"),
+    (LOCAL_POLICY[3], "train", 10, True, "deposium.local-tool-policy-prompt/v2", "LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md"),
+    (LOCAL_POLICY[4], "test", 24, True, "deposium.local-tool-policy-prompt/v2", "LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md"),
 )
 
 
@@ -481,8 +485,16 @@ def local_policy_observation(source, split, eligible, complete, prompt, report):
 
 
 def local_policy_observations(inputs):
-    rows = [local_policy_observation(inputs.load(path), *rest) for path, *rest in LOCAL_POLICY_EXPECTED]
-    return dict(zip(("train_v1", "train_v2", "heldout"), rows))
+    sources = [inputs.load(path) for path, *_ in LOCAL_POLICY_EXPECTED]
+    rows = [local_policy_observation(source, *rest) for source, (_, *rest) in zip(sources, LOCAL_POLICY_EXPECTED)]
+    named = dict(zip(("train_v1", "train_v2", "heldout", "train_v2_cache_off", "heldout_002"), rows))
+    # The cache amendment is admitted as generation-neutral only if the TRAIN control matches.
+    require(named["train_v2"]["passed"] == named["train_v2_cache_off"]["passed"]
+            and sources[3]["envelope"].get("host_prompt_cache_mib") == 0
+            and sources[4]["envelope"].get("host_prompt_cache_mib") == 0
+            and "host_prompt_cache_mib" not in sources[1]["envelope"],
+            "prompt-cache amendment control does not match")
+    return named
 
 
 def coverage_cell(counts, total, source=None, *, metric="correct_choice", statuses=None):
@@ -619,10 +631,12 @@ def build_coverage(observations, campaigns, others, inputs):
          "[Argument-execution contract](TOOL_ARGUMENTS_CONTRACT_V1.md): four FR/EN training cases, actual bounded lookup/sum and artifact guards; no qualified real-model output path or application integration.", [11]),
         ("episodes", "Bounded episodes with executed tools and feedback", "fixture_only",
          "[Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics; four task results, zero real-model or application qualification.", [12]),
-        ("local_json_policy", "Generated JSON proposals from a local model", "partial_coverage",
-         f"Qwen3-4B Q8, three observations: [TRAIN prompt v1]({policy['train_v1']['report']}) {policy['train_v1']['text']}; "
-         f"[TRAIN prompt v2]({policy['train_v2']['report']}) {policy['train_v2']['text']}; "
-         f"[held-out prompt v2]({policy['heldout']['report']}) {policy['heldout']['text']}. "
+        ("local_json_policy", "Generated JSON proposals from a local model", "model_observed",
+         f"Qwen3-4B Q8, five observations: [TRAIN prompt v1]({policy['train_v1']['report']}) {policy['train_v1']['text']}; "
+         f"[TRAIN prompt v2]({policy['train_v2']['report']}) {policy['train_v2']['text']}, identical generated content with the "
+         f"[host prompt cache disabled]({policy['train_v2_cache_off']['report']}); "
+         f"[held-out prompt v2]({policy['heldout']['report']}) attempt 1 {policy['heldout']['text']}, "
+         f"[attempt 2]({policy['heldout_002']['report']}) {policy['heldout_002']['text']}. "
          "One model, correlated FR/EN pairs; no ranking, live MCP or product qualification.", [35]),
         ("order_retention", "Order robustness and evidence retention", "partial_coverage",
          "[Offline order/retention analysis](PASSAGE_ORDER_RETENTION_V1.md) covers four rotations and both views (920 distinct test inputs); historical ranking exists, while new Flash classifications still cover rotation 0 only. No new model calls.", [13]),
@@ -733,10 +747,10 @@ def render_coverage(coverage):
         links = ", ".join(f"[#{url.rsplit('/', 1)[1]}]({url})" for url in row["issues"]) or "—"
         lines.append(f"| {row['capability']} | {row['status']} | {row['boundary']} | {links} |")
     lines += ["", "The initial contract, discovery, arguments and episode fixtures are implemented as scripted controls. "
-              "The [local JSON route](LOCAL_TOOL_POLICY_V1.md) has two TRAIN canary observations (prompt v1 5/10, prompt v2 7/10) "
-              "and one partial held-out observation (9/18 scored of 24, stopped by the RSS guard; "
-              "[report](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md)). Completing the held-out collection needs a reviewed "
-              "session amendment, not a higher ceiling. See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.", ""]
+              "The [local JSON route](LOCAL_TOOL_POLICY_V1.md) has TRAIN canary observations (prompt v1 5/10, prompt v2 7/10, "
+              "unchanged with the host prompt cache disabled) and a complete held-out observation of 9/24 "
+              "([report](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md)) after a first partial attempt. "
+              "Every declared contract outcome has now been observed at least once; most nonselection and stop outcomes fail. See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.", ""]
     return lines
 
 

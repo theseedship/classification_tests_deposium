@@ -102,8 +102,10 @@ tool routing: the cases are TRAIN, correlated and synthetic. Under the
 [held-out protocol](docs/LOCAL_TOOL_POLICY_HELDOUT_PROTOCOL_20261030.md), a revised
 prompt (v2) reached **7/10** on the same TRAIN cases, and the first attempt on the
 frozen [24-case held-out pack](datasets/tool-policy-heldout-v1/README.md) was
-**partial: 9/18 scored of 24**, stopped by the RSS guard with six cases unobserved
-([report](docs/LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md)).
+partial (9/18 scored of 24, RSS guard). After a dated amendment disabled the
+server's host prompt cache, a byte-for-byte content control and a **complete
+second attempt scored 9/24** ([report](docs/LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md)):
+positive routes pass, nearly every nonselection or stop outcome fails.
 
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their
