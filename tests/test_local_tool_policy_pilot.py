@@ -9,6 +9,8 @@ import io
 import json
 import os
 from pathlib import Path
+import subprocess
+import sys
 import tarfile
 import tempfile
 import time
@@ -158,6 +160,57 @@ class LocalToolPolicyPilotTests(unittest.TestCase):
         self.assertEqual(pilot.ASSETS, manifest)
         self.assertEqual(hashlib.sha256(self.args.dataset.read_bytes()).hexdigest(), pilot.DATASET_SHA)
         self.assertEqual(pilot.ENVELOPE["admission_available_mib"], 16384)
+
+    def test_actual_source_snapshot_imports_and_displays_help_without_original_checkout(self):
+        actual_capture = pilot.shared.archive_bench_source
+        self.available = 16000  # Capture source only; no weight hash or process.
+        with self.mocked(), patch.object(pilot.shared, "archive_bench_source", side_effect=actual_capture):
+            result = pilot.pilot(self.args)
+        self.assertEqual(result["status"], "not_run")
+        self.assertEqual(self.commands, [])
+        extracted = self.tmp / "isolated-source"
+        extracted.mkdir()
+        with tarfile.open(self.args.output / "bench-source.tar") as snapshot:
+            for relative, source in (("scripts/run-local-tool-policy-pilot.py", SCRIPT),
+                                     ("scripts/run-upstream-native-pilot.py", Path(pilot.upstream.__file__)),
+                                     ("scripts/run-native-pilot.py", Path(pilot.shared.__file__))):
+                self.assertEqual(snapshot.extractfile(relative).read(), source.read_bytes())
+            snapshot.extractall(extracted, filter="data")
+        bootstrap = r'''
+import importlib.util
+from pathlib import Path
+import sys
+
+captured = Path(sys.argv[1]).resolve()
+forbidden = Path(sys.argv[2]).resolve()
+snapshot_root = captured.parents[1]
+sys.path[:] = [entry for entry in sys.path if entry and not Path(entry).resolve().is_relative_to(forbidden)]
+assert all(not Path(entry).resolve().is_relative_to(forbidden) for entry in sys.path)
+
+def deny_original_source(event, args):
+    if event in {"open", "os.listdir", "os.scandir"} and args and isinstance(args[0], (str, bytes)):
+        path = Path(args[0].decode() if isinstance(args[0], bytes) else args[0]).resolve()
+        if path.is_relative_to(forbidden):
+            raise RuntimeError("original checkout is unavailable to this process")
+
+sys.addaudithook(deny_original_source)
+spec = importlib.util.spec_from_file_location("captured_policy_launcher", captured)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+assert module.ROOT == snapshot_root
+assert Path(module.upstream.__file__) == snapshot_root / "scripts/run-upstream-native-pilot.py"
+assert Path(module.shared.__file__) == snapshot_root / "scripts/run-native-pilot.py"
+import deposium_bench
+assert Path(deposium_bench.__file__).is_relative_to(snapshot_root)
+module.main(["--help"])
+'''
+        child = subprocess.run([sys.executable, "-I", "-S", "-B", "-c", bootstrap,
+            str(extracted / "scripts/run-local-tool-policy-pilot.py"), str(ROOT)], cwd=extracted,
+            env={"PATH": os.defpath, "LANG": "C.UTF-8"}, text=True, capture_output=True, timeout=20, check=False)
+        self.assertEqual(child.returncode, 0, child.stderr)
+        self.assertIn("--runtime-manifest", child.stdout)
+        self.assertIn("--assets-manifest", child.stdout)
+        self.assertNotIn(str(ROOT), child.stdout)
 
     def test_shared_campaign_keeps_semantic_failures_and_ignores_unknown_native_request_alias(self):
         previous = os.environ.get(pilot.AUTH_ENV)

@@ -107,6 +107,7 @@ def pilot(args):
     shared.archive_bench_source(output / "bench-source.tar", payload)
     with tarfile.open(output / "bench-source.tar", "a") as archive:
         archive.add(Path(__file__), arcname="scripts/run-local-tool-policy-pilot.py", recursive=False)
+        archive.add(Path(upstream.__file__), arcname="scripts/run-upstream-native-pilot.py", recursive=False)
         for relative in ("native/systemone-preflight.cpp", "docs/LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md",
                          "docs/LOCAL_TOOL_POLICY_V1.md", "datasets/tool-policy-canary-v1/manifest.json",
                          "profiles/qwen3-4b-instruct-q8-assets.json"):
