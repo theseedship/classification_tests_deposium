@@ -28,6 +28,7 @@ CPU = EVIDENCE + "model-comparison-larger-cpu-20261011/analysis.json"
 NATIVE = EVIDENCE + "native-model-comparison-20261016/analysis.json"
 GLICLASS = EVIDENCE + "gliclass-model-comparison-20261017/analysis.json"
 FAST = EVIDENCE + "vela3-fast-20261028/analysis.json"
+D3LITE_MACOS = EVIDENCE + "d3-lite-macos-20261030/analysis.json"
 CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
 LOCAL_POLICY = (EVIDENCE + "local-tool-policy-20261030/analysis.json",
                 EVIDENCE + "local-tool-policy-v2-train-20261030/analysis.json",
@@ -48,6 +49,9 @@ RECENT_INPUTS = (CAMPAIGN_MODULE, EVIDENCE + "clef-flash-20261029/analysis.json"
                  EVIDENCE + "passage-cpu-20261015/analysis.json",
                  EVIDENCE + "passage-jev-20261015/analysis.json",
                  "profiles/d3-flash-q8-assets.json", "profiles/clef-flash-q8-assets.json",
+                 EVIDENCE + "d3-lite-macos-20261030/capability.json", EVIDENCE + "d3-lite-macos-20261030/physics.json",
+                 "profiles/d3-lite-assets.json", "profiles/d3-lite-macos-cpu.json", "runtimes/d3-macos/runtime.lock",
+                 "docs/D3_LITE_MACOS_RESULTS_20261030.md",
                  "docs/PASSAGE_CPU_RESULTS_20261015.md", "docs/PASSAGE_JEV_RESULTS_20261015.md",
                  "docs/PASSAGE_FLASH_RESULTS_20261029.md", "docs/PASSAGE_CLEF_RESULTS_20261029.md")
 STATUS_KEYS = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
@@ -300,7 +304,7 @@ def build(root=ROOT):
     base, routes, _ = composer.compose(current, frozen)
     require(len(base) == 22, "historical roster changed")
     for path, selected in ((NATIVE, {"D3Q4", "D3FlashQ4", "D3FlashQ8", "EosQ8"}),
-                           (GLICLASS, {"GLiClass9B"}), (FAST, {"Vela3Fast"})):
+                           (GLICLASS, {"GLiClass9B"}), (FAST, {"Vela3Fast"}), (D3LITE_MACOS, {"D3liteMacos"})):
         export = inputs.load(path)
         require(export.get("scope") == "isolated_model_observations"
                 and export.get("base_reference_review") == "agent_only_pending_human",
@@ -379,7 +383,7 @@ def build(root=ROOT):
             "resources": resource,
         })
     for phase in ("context", "tool_proposal"):
-        require(len({row[phase]["source"]["seal_sha256"] for row in rows}) == 28,
+        require(len({row[phase]["source"]["seal_sha256"] for row in rows}) == len(rows),
                 f"duplicate observation seals: {phase}")
         require(len({row[phase]["source"]["dataset_sha256"] for row in rows}) == 1,
                 f"mixed datasets: {phase}")
@@ -734,7 +738,7 @@ def render_coverage(coverage):
              "Recorded `missing`, `unsupported`, `error`, `timeout`, and `abstain` outcomes remain separate in the "
              "[coverage CSV](leaderboard/coverage.csv) and [JSON](leaderboard/coverage.json).", "",
              "### Context model/runtime observations", "",
-             "The 30 rows below preserve quantization and runtime identities; sizes are publisher classes or declared counts, not independent measurements. **Metal gateway** and "
+             f"The {sum(1 for r in coverage['observations'] if r['context_observation'])} rows below preserve quantization and runtime identities; sizes are publisher classes or declared counts, not independent measurements. **Metal gateway** and "
              "**direct Metal** are different paths; scores and task rankings follow below. "
              "Context/132 contains text/76, mathematics/28 and chemistry/28; "
              "[their scores and held-out test results](#model-quality) remain separate.", "",
@@ -975,7 +979,7 @@ def render(data):
              "[Updated task rankings](#updated-task-rankings) · [Language and task complexity](#language-and-task-complexity) · "
              "[Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·",
              "[Other evaluated protocols](#other-evaluated-protocols) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
-             f"**{len(data['observations'])} context model/runtime observations through 29 October 2026**: 28 historical observations plus Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.",
+             f"**{len(data['observations'])} context model/runtime observations through 30 October 2026**: 28 earlier observations, the macOS CPU D3 lite runtime, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.",
              "Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;",
              "quantizations and devices remain separate. Rendering this page does not rerun or rescore models.", "",
              "**Exploratory evidence:** synthetic, agent-authored references and translations await human review.",

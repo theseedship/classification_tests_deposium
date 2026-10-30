@@ -2514,6 +2514,176 @@
     {
       "cells": {
         "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 168,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
+          "source": "docs/evidence/d3-lite-macos-20261030/capability.json",
+          "status": "complete",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 94,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/d3-lite-macos-20261030/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 14,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/d3-lite-macos-20261030/physics.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 19,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/d3-lite-macos-20261030/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "generative_observation": false,
+      "id": "D3liteMacos",
+      "model": "D3 lite · macOS CPU",
+      "runtime": "cpu_new",
+      "size": "0.853B backbone"
+    },
+    {
+      "cells": {
+        "capability": {
           "evidence_present": false,
           "metric": "correct_choice",
           "numerator": null,
@@ -5831,6 +6001,8 @@
     "docs/CLEF_NATIVE_PROTOCOL_20261029.md": "afe9b28b1944a4c003607dceb4da72356941fd5774a7ed850e4c0b0b2b74d4ae",
     "docs/D3_CPU_PILOT.md": "f1efc01e7e839921d65ba87e6e8dc69ab897a98934ac77ef55792a9e852ea13f",
     "docs/D3_LARGER_CPU_PILOT.md": "fff448300435de571ec4372ca3c2216b1baf53dc50d616af68a369b3ee01adc5",
+    "docs/D3_LITE_MACOS_CPU_PROTOCOL_20261030.md": "2cb6f644789f6d22082340a035aad2e73b351adeb21e54788f1a7edd4dc99a28",
+    "docs/D3_LITE_MACOS_RESULTS_20261030.md": "4b8ff65a006fa1970c96de6091df71130c43d45f165c1bda51787fdfd35c5e3c",
     "docs/GLICLASS_V4_RESULTS_20261017.md": "9b2795a6c3a90b05ca7dbf8ede7d950873dfb7637fc097f79405d72bc01d065d",
     "docs/GLINER_PILOT.md": "70d485a2a84cde3fd039398a8d35c250fc6368fed16138ed1987342d39c0439c",
     "docs/INDECIS_PILOT.md": "7f2c1b72608d86166832837313c40e7f016558bd9a98c11f589ae3426602db71",
@@ -5849,6 +6021,9 @@
     "docs/VELA3_FAST_RESULTS_20261028.md": "6cad54a1cd023ec2abd554cb099d881959ef9061c90dc47cf027de52c01a0101",
     "docs/evidence/capability-flash-20261029/analysis.json": "df15bea59de4a762655dc601eb4cdad88a368977b4c65c688b0cfc2b95931a80",
     "docs/evidence/clef-flash-20261029/analysis.json": "a1b5b8124d8fa2097eb6d603b5bb88bd4306481764ed0438742b6fbbdf9390eb",
+    "docs/evidence/d3-lite-macos-20261030/analysis.json": "df7f64795ce2f86ac2e4919a90135df129fb8c6234ae25cfa33e1f779bfc9052",
+    "docs/evidence/d3-lite-macos-20261030/capability.json": "c2f259c7e215a53d815b008c8809999cf1fde12b55e9efdf0b2a195d9e35aa10",
+    "docs/evidence/d3-lite-macos-20261030/physics.json": "d322064f3922e2030e1332de741b5bd53b09eb924415fe1883e3ea612dab6118",
     "docs/evidence/gliclass-model-comparison-20261017/analysis.json": "62e3280544704ede362a8be9d8be4244dc34935a4a30dbe8d4f2bbcad8fd354a",
     "docs/evidence/gliclass-model-comparison-20261017/gliclass-session.json": "938b445cac5d50ddde7776c43dad22e0ac9e8c4e14246db73232f3a00fb19639",
     "docs/evidence/length-comparison-20261004/analysis.json": "48311eb6272d28dc4e5d607dfbc09bd77d35d6ef399075bb696115cd257c5f9e",
@@ -5876,19 +6051,22 @@
     "docs/evidence/physics-flash-20261029/analysis.json": "b7675cb4a17cf92ef66bc2107ace0d48dbcd37a37d676e1b0e3a280cc165ec56",
     "docs/evidence/timing-comparison-20261004/analysis.json": "eb8c5babe3dac5033291bd118b761e0e84b5aceb4c3b73b8ad0e429c2db65942",
     "docs/evidence/vela3-fast-20261028/analysis.json": "83c06bdf377353541aba7944231654f3c794f19ab17016de99e3b0fdba70ae4e",
-    "docs/leaderboard/model-metadata.json": "c3012122565dfd97133ec1f3fa0c28babf8ad60690073170ccc768e43c982386",
+    "docs/leaderboard/model-metadata.json": "c3e559cd561061566fe0add489d3fb98ea4c7c7341f35f604fd74380d8f831f2",
     "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
     "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
     "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
+    "profiles/d3-lite-assets.json": "0a165940562c277e7050631651b5e59d9a351345c041695e43d48f4de4f4fa71",
+    "profiles/d3-lite-macos-cpu.json": "01abd2d2bad5d6b92ab2bc71c5135b8a3984098b30ebdbd2a162e5c734bcbde9",
     "profiles/decision2-eos-assets.json": "31675c97916270d1744f9ea2446f591bc04165ef531bc2a12aedd159f16e3d1c",
     "profiles/decision2-kai-assets.json": "88a103ac103b1c21a9b8aca6cb3caba6d807a588a390d42d6c0ae5da1aea101d",
     "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
     "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
     "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
-    "scripts/build-full-results.py": "a6a37b2cfc6fca41468c1e4bd1c44796c2fbdf67a42a058741d46587289637c7",
+    "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+    "scripts/build-full-results.py": "fe3c520adc3762bca8f1dd4b2e429b3ef0364fc89bf87570458a5118733bf40e",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-    "scripts/consolidated-campaigns.py": "71b2c6972e1da1dca58f28e2514a30cb02e98d14ce18c85a3a5fc1fd2a4ea2f0"
+    "scripts/consolidated-campaigns.py": "dbc5f49c60aca9bce8b17c1f38379818075930e2db9ab3e2115f861b26f61e99"
   },
   "tasks": [
     {

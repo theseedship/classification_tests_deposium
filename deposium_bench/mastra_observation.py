@@ -11,6 +11,8 @@ from datetime import datetime, timezone
 import math
 import os
 from pathlib import Path
+import subprocess
+import platform
 import statistics
 import time
 
@@ -24,6 +26,14 @@ from .native_supervision import NativeSupervisionError, require_native_supervisi
 
 def memory_snapshot() -> dict:
     values = {}
+    if platform.system() != "Linux":
+        # Same reclaimable-page estimate as the native and macOS adapters; an
+        # unavailable probe returns no MemAvailable_mib and the pilot refuses.
+        try:
+            from .native_resources import memory_snapshot as native_snapshot
+            return native_snapshot()
+        except (OSError, ValueError, subprocess.SubprocessError):
+            return values
     try:
         for line in Path("/proc/meminfo").read_text().splitlines():
             key, value = line.split(":", 1)

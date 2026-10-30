@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from deposium_bench.adapters import create_adapter, load_profile
 from deposium_bench.campaigns import _encode, _write_new, _source_fingerprint
-from deposium_bench.mastra_observation import memory_snapshot
+from deposium_bench.native_resources import memory_snapshot
 
 
 def check(profile_path, output):

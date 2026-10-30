@@ -111,9 +111,25 @@
         "report": "docs/CAPABILITY_FLASH_RESULTS_20261029.md",
         "aggregate": "docs/evidence/capability-flash-20261029/analysis.json",
         "bench_revision": "7e61b6d4660bae81ca97d06d464fb02fac4ec4ef",
-        "capability": {"correct": 192, "scored": 192, "total": 192, "test_correct": 96, "test_total": 96},
-        "fresh_context_anchor": {"correct": 124, "scored": 132, "total": 132, "test_correct": 61, "test_total": 66},
-        "technical_canary": {"valid_decisions": 12, "total": 12, "included_in_quality_denominators": false},
+        "capability": {
+          "correct": 192,
+          "scored": 192,
+          "total": 192,
+          "test_correct": 96,
+          "test_total": 96
+        },
+        "fresh_context_anchor": {
+          "correct": 124,
+          "scored": 132,
+          "total": 132,
+          "test_correct": 61,
+          "test_total": 66
+        },
+        "technical_canary": {
+          "valid_decisions": 12,
+          "total": 12,
+          "included_in_quality_denominators": false
+        },
         "qualification": "isolated synthetic closed choices; pending human reference review; no executed tools or product qualification"
       },
       "current_execution_protocol": "docs/CAPABILITY_NATIVE_PROTOCOL_20261029.md",
@@ -535,6 +551,19 @@
     "Vela3 specialized adapters require their own task contracts and scorers.",
     "Free-form tool sets, executable arguments, adaptive MCP episodes and empirical model-routing policies are separate harness work."
   ],
-  "plan_revision": 3,
-  "revision_note": "Execution status updated after the first Flash Q8 campaign. The cohort, order, references and execution protocol are unchanged from revision 2, which was frozen before predictions."
+  "plan_revision": 4,
+  "revision_note": "Revision 4 (30 October 2026): execution order revised after the Flash Q8 campaign. Wave B candidates (D3 lite, Vela 2.0 0.3B, D3 nano, D3 mini) are executed before the 27B and GLiClass candidates because their platform-specific macOS CPU runtime is cheaper to qualify than the 27B native path (which needs a 32 GiB admission, a rebuilt native toolchain and a public preparation driver). The cohort membership, datasets, references, scorers, canary selection and per-candidate phases are unchanged from revision 2. Each macOS CPU run is a new runtime identity beside the historical Linux/WSL row, never a replacement. See docs/D3_LITE_MACOS_CPU_PROTOCOL_20261030.md.",
+  "execution_order_revision": {
+    "revised_on": "2026-10-30",
+    "order": [
+      "D3 Flash Q8 Metal (done)",
+      "D3 lite macOS CPU",
+      "Vela 2.0 0.3B macOS CPU",
+      "D3 nano macOS CPU",
+      "D3 mini macOS CPU",
+      "Historical D3 27B Q4 Metal",
+      "GLiClass v4 9B MPS"
+    ],
+    "reason": "small platform-specific runtimes first; large native envelopes need admission, toolchain and preparation tooling"
+  }
 }

@@ -9,6 +9,7 @@ import hashlib
 import json
 import math
 import os
+import platform
 from pathlib import Path
 import re
 import shutil
@@ -336,14 +337,25 @@ class D3Adapter:
         try:
             for line in Path(f"/proc/{self._process.pid}/status").read_text().splitlines():
                 if line.startswith("VmRSS:"):
-                    rss = int(line.split()[1]) / 1024
-                    self._peak_rss_mb = max(self._peak_rss_mb, rss)
-                    if rss > self._model["max_rss_mb"]:
-                        raise MemoryError("d3_rss_limit")
+                    self._record_rss(int(line.split()[1]) / 1024)
                     return
         except FileNotFoundError:
+            if platform.system() == "Darwin" and self._process.poll() is None:
+                # The worker owns its own session (start_new_session), so its
+                # process group is the worker alone; ps reports resident KiB.
+                try:
+                    from .native_resources import process_group_rss_mib
+                    self._record_rss(process_group_rss_mib(self._process.pid))
+                except (OSError, ValueError, subprocess.SubprocessError):
+                    raise OSError("d3_rss_unavailable") from None
+                return
             if self._process.poll() is None:
                 raise OSError("d3_rss_unavailable")
+
+    def _record_rss(self, rss):
+        self._peak_rss_mb = max(self._peak_rss_mb, rss)
+        if rss > self._model["max_rss_mb"]:
+            raise MemoryError("d3_rss_limit")
 
     def _list_assets(self):
         actual = set()
@@ -359,6 +371,13 @@ class D3Adapter:
 
     @staticmethod
     def _host_available_mb():
+        if platform.system() == "Darwin":
+            # Reclaimable-page estimate from vm_stat, as for the other macOS adapters.
+            try:
+                from .native_resources import memory_snapshot
+                return float(memory_snapshot()["MemAvailable_mib"])
+            except (OSError, ValueError, KeyError, subprocess.SubprocessError):
+                raise OSError("d3_host_memory_unknown") from None
         available = None
         for line in Path("/proc/meminfo").read_text().splitlines():
             if line.startswith("MemAvailable:"):

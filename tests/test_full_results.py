@@ -31,7 +31,7 @@ EXPECTED_LABELS = {
     "Indecis", "Jev", "Julia", "Kai", "Laya", "Liquid3", "ModernJEV",
     "Muose", "Noma", "Nox", "Omni", "Sol", "Vela03", "Vela08", "Vela4",
     "D3FlashQ4", "D3FlashQ8", "D3Q4", "EosQ8", "GLiClass9B", "Vela3Fast",
-    "ClefFlashQ8", "D3FlashQ8Upstream",
+    "ClefFlashQ8", "D3FlashQ8Upstream", "D3liteMacos",
 }
 
 
@@ -46,7 +46,7 @@ def public_fixture(root):
         "scripts/build-full-results.py", "scripts/compose-larger-cpu-comparison.py",
         "scripts/compose-d3-comparison.py", results.METADATA, results.HISTORICAL,
         results.HISTORICAL.replace("manifest.json", "report.md"), results.CPU,
-        results.NATIVE, results.GLICLASS, results.FAST, results.CAPABILITY, *results.LOCAL_POLICY,
+        results.NATIVE, results.GLICLASS, results.FAST, results.D3LITE_MACOS, results.CAPABILITY, *results.LOCAL_POLICY,
         results.NATIVE_SESSION, results.GLICLASS_SESSION,
         "docs/evidence/model-comparison-d3-larger-20261011/analysis.json",
         "docs/evidence/model-comparison-complete-20261010-sol/analysis.json",
@@ -145,11 +145,11 @@ class FullResultsTests(unittest.TestCase):
 
     def test_join_contains_30_unique_context_observations_and_preserves_historical_scores(self):
         self.assertEqual(set(self.by_id), EXPECTED_LABELS)
-        self.assertEqual(len(self.data["observations"]), 30)
-        self.assertEqual(self.data["historical_context_observations"], 28)
+        self.assertEqual(len(self.data["observations"]), 31)
+        self.assertEqual(self.data["historical_context_observations"], 29)
         for phase in ("context", "tool_proposal"):
             observed = [r[phase] for r in self.by_id.values() if r[phase] is not None]
-            self.assertEqual(len({r["source"]["seal_sha256"] for r in observed}), 30 if phase == "context" else 28)
+            self.assertEqual(len({r["source"]["seal_sha256"] for r in observed}), 31 if phase == "context" else 29)
             self.assertEqual(len({r["source"]["dataset_sha256"] for r in observed}), 1)
         self.assertEqual(self.by_id["D3Q4"]["context"]["counts"]["correct"], 128)
         self.assertEqual(self.by_id["GLiClass9B"]["context"]["groups"]["split"]["test"]["correct"], 63)
@@ -426,9 +426,9 @@ class FullResultsTests(unittest.TestCase):
             expected = 1 + sum(r["context"]["counts"]["correct"] > correct for r in rows)
             self.assertEqual(row["rank_all_splits"], expected)
         models, tasks = results.flat_rows(self.data)
-        self.assertEqual(len(models), 30)
+        self.assertEqual(len(models), 31)
         test_tasks = [r for r in tasks if r["task"] == "context" and r["axis"] == "split" and r["group"] == "test"]
-        self.assertEqual(len(test_tasks), 30)
+        self.assertEqual(len(test_tasks), 31)
         self.assertEqual({r["total"] for r in test_tasks}, {66})
         self.assertEqual({r["metric"] for r in tasks if r["task"] == "tool_proposal"}, {"provisional_agreement"})
 
@@ -503,7 +503,7 @@ class FullResultsTests(unittest.TestCase):
         coverage = self.data["coverage"]
         rows = {r["id"]: r for r in coverage["observations"]}
         self.assertEqual({k for k, r in rows.items() if r["context_observation"]}, EXPECTED_LABELS)
-        self.assertEqual(len(rows), 36)
+        self.assertEqual(len(rows), 37)
         self.assertEqual({len(r["cells"]) for r in rows.values()}, {12})
         generative = rows["QwenToolPolicyV2"]
         self.assertTrue(generative["generative_observation"])
@@ -544,7 +544,7 @@ class FullResultsTests(unittest.TestCase):
         rendered = results.render(self.data)
         self.assertLess(rendered.index("## Coverage overview"), rendered.index("## Updated task rankings"))
         csv_rows = list(csv.DictReader(io.StringIO(results.outputs(self.data)["docs/leaderboard/coverage.csv"])))
-        self.assertEqual(len(csv_rows), 36 * 12)
+        self.assertEqual(len(csv_rows), 37 * 12)
         self.assertIn("### Generated-JSON tool-policy observations", rendered)
         self.assertNotIn("| Discovery (JSON) /10 | Arguments", rendered.split("### Passage-only")[0])
         blank = next(r for r in csv_rows if r["observation"] == "ClefFlashQ8" and r["task"] == "tool_proposal")

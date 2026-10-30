@@ -1,6 +1,7 @@
 """Normalize named public campaign aggregates for presentation; never infer/rescore."""
 from __future__ import annotations
 
+import hashlib
 import math
 import re
 
@@ -11,6 +12,9 @@ PASSAGE_D3 = EVIDENCE + "passage-flash-20261029/analysis.json"
 PASSAGE_CLEF = EVIDENCE + "passage-clef-flash-20261029/analysis.json"
 PASSAGE_CPU = EVIDENCE + "passage-cpu-20261015/analysis.json"
 PASSAGE_JEV = EVIDENCE + "passage-jev-20261015/analysis.json"
+D3LITE_MACOS_CAPABILITY = EVIDENCE + "d3-lite-macos-20261030/capability.json"
+D3LITE_MACOS_PHYSICS = EVIDENCE + "d3-lite-macos-20261030/physics.json"
+D3LITE_MACOS_REPORT = "D3_LITE_MACOS_RESULTS_20261030.md"
 NEW_CONTEXT_IDS = {"ClefFlashQ8", "D3FlashQ8Upstream"}
 STATUSES = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
 DATASETS = {
@@ -95,6 +99,29 @@ class Campaigns:
         return data, {"adapter": "systemone_local", "model_repo_id": repo, "model_revision": revision,
                       "model_assets_sha256": weight, "runtime": dict(runtime)}
 
+    def cpu(self, path, asset_path, lock_path, profile_path):
+        """A CPU-worker pack campaign exported by scripts/export-cpu-pack-campaign.py."""
+        data = self.inputs.load(path)
+        self.require(data["schema_version"] == "deposium.cpu-pack-campaign-public/v1"
+                     and data["reference_review"] == "agent_only_pending_human"
+                     and data["execution_scope"] == "isolated_cpu_worker_no_application_gateway",
+                     "campaign: changed CPU qualification")
+        asset, model, runtime = self.inputs.load(asset_path), data["model"], data["runtime"]
+        self.require(model["model_repo_id"] == asset["repo_id"] and model["model_revision"] == asset["revision"]
+                     and model["assets_manifest"] == asset_path, "campaign: CPU model/asset identity mismatch")
+        self.require(runtime["adapter"] == "d3" and runtime["device"] == "cpu" and runtime["runtime_lock"] == lock_path
+                     and runtime["runtime_lock_sha256"] == hashlib.sha256(self.inputs.read(lock_path)).hexdigest()
+                     and runtime["profile"] == profile_path
+                     and all(isinstance(runtime["pins"].get(k), str) and runtime["pins"][k]
+                             for k in ("python", "torch", "transformers", "tokenizers", "safetensors")),
+                     "campaign: CPU runtime identity mismatch")
+        profile = self.inputs.load(profile_path)
+        self.require(profile["profile_id"] == runtime["profile_id"] and profile["revision"] == asset["revision"]
+                     and profile["model"]["repo_id"] == asset["repo_id"], "campaign: CPU profile mismatch")
+        return data, {"adapter": "d3", "model_repo_id": asset["repo_id"], "model_revision": asset["revision"],
+                      "model_assets_sha256": model["model_assets_sha256"],
+                      "runtime": {k: runtime[k] for k in ("device", "platform", "pins", "runtime_lock_sha256", "loading_mode")}}
+
     def phase(self, data, name, task, observation, model, source, report, total, families):
         phase = data["phases"][name]
         count = self.native_counts(phase["counts"])
@@ -119,8 +146,13 @@ class Campaigns:
             self.require(all(groups["split"][split][k] == group[k] for k in ("correct", "scored", "total")),
                          "campaign: split views differ")
         backend = phase["actual_backend"]
-        self.require(backend["kind"] == "metal" and backend["offloaded_layers"] == backend["total_layers"] > 0,
-                     "campaign: Metal not observed")
+        if backend["kind"] == "cpu":
+            self.require(backend["device"] == "cpu" and type(backend["threads"]) is int and backend["threads"] > 0
+                         and backend["backbone_dtype"] == "bfloat16" and backend["readout_dtype"] == "float32",
+                         "campaign: CPU worker identity not observed")
+        else:
+            self.require(backend["kind"] == "metal" and backend["offloaded_layers"] == backend["total_layers"] > 0,
+                         "campaign: Metal not observed")
         resource = phase["resources"]
         peak = resource.get("sampled_group_rss_peak_mib", resource.get("rss_peak_mib"))
         self.require(type(peak) in (int, float) and math.isfinite(peak) and peak >= 0
@@ -129,11 +161,13 @@ class Campaigns:
                 "source": source, "report": report, "identity": dict(identity),
                 "model_identity": {"model_repo_id": data["model"].get("model_repo_id", data["model"].get("repo_id")),
                                    "model_revision": data["model"].get("model_revision", data["model"].get("revision")),
-                                   "model_assets_sha256": data["model"].get("model_sha256") or data["model"]["files"][0]["sha256"],
+                                   "model_assets_sha256": data["model"].get("model_sha256") or data["model"].get("model_assets_sha256")
+                                   or data["model"]["files"][0]["sha256"],
                                    "runtime": dict(data["runtime"])},
                 "adapter_ms": self.stats(phase["latency_ms"], count["statuses"]["ok"]),
                 "session_group_peak_rss_mib": peak,
-                "rss_scope": "Sampled owned process-group peak over fresh session startup, controls, warm-up and this pack; not total GPU memory"}
+                "rss_scope": (resource.get("rss_scope") if backend["kind"] == "cpu" else
+                              "Sampled owned process-group peak over fresh session startup, controls, warm-up and this pack; not total GPU memory")}
 
     def context_row(self, phase, identity, meta):
         c, groups = phase["counts"], phase["groups"]
@@ -242,6 +276,13 @@ class Campaigns:
                            CLEF, "CLEF_FLASH_RESULTS_20261029.md", 48, 24),
                 self.phase(physics, "physics", "physics", "D3FlashQ8Upstream", "D3 Flash Q8 · direct Metal",
                            PHYSICS, "PHYSICS_FLASH_RESULTS_20261029.md", 48, 24)]
+        for path, pack, total, families in ((D3LITE_MACOS_CAPABILITY, "capability", 192, 48),
+                                            (D3LITE_MACOS_PHYSICS, "physics", 48, 24)):
+            data, _ = self.cpu(path, "profiles/d3-lite-assets.json", "runtimes/d3-macos/runtime.lock",
+                               "profiles/d3-lite-macos-cpu.json")
+            self.inputs.read("docs/" + D3LITE_MACOS_REPORT)
+            rows.append(self.phase(data, pack, pack, "D3liteMacos", "D3 lite · macOS CPU", path,
+                                   D3LITE_MACOS_REPORT, total, families))
         cp = capability["phases"]["capability"]
         rows.append({"task": "capability", "observation": "D3FlashQ8", "model": "D3 Flash Q8 · gateway Metal",
                      "counts": cp["counts"], "groups": cp["groups"], "source": capability["source"],
