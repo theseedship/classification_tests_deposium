@@ -51,6 +51,15 @@
       "status": "fixture_only"
     },
     {
+      "boundary": "[Qwen3-4B Q8 TRAIN canary](LOCAL_TOOL_POLICY_RESULTS_20261030.md): 5/10 cases pass over 10 eligible (0/2 discovery, 2/2 arguments, 3/6 episodes); one model, ten correlated TRAIN cases, no held-out, ranking, live MCP or product qualification.",
+      "capability": "Generated JSON proposals from a local model",
+      "id": "local_json_policy",
+      "issues": [
+        "https://github.com/theseedship/classification_tests_deposium/issues/35"
+      ],
+      "status": "train_canary_collected"
+    },
+    {
       "boundary": "[Offline order/retention analysis](PASSAGE_ORDER_RETENTION_V1.md) covers four rotations and both views (920 distinct test inputs); historical ranking exists, while new Flash classifications still cover rotation 0 only. No new model calls.",
       "capability": "Order robustness and evidence retention",
       "id": "order_retention",
@@ -4490,6 +4499,7 @@
     "docs/evidence/gliclass-model-comparison-20261017/analysis.json": "62e3280544704ede362a8be9d8be4244dc34935a4a30dbe8d4f2bbcad8fd354a",
     "docs/evidence/gliclass-model-comparison-20261017/gliclass-session.json": "938b445cac5d50ddde7776c43dad22e0ac9e8c4e14246db73232f3a00fb19639",
     "docs/evidence/length-comparison-20261004/analysis.json": "48311eb6272d28dc4e5d607dfbc09bd77d35d6ef399075bb696115cd257c5f9e",
+    "docs/evidence/local-tool-policy-20261030/analysis.json": "a1958d86ae75a28c417edc25976c4684e110baa7e3cb1ea11853dcf41d90594f",
     "docs/evidence/model-comparison-complete-20261004/analysis.json": "810bdfe62c52e1c2f7c00d98beb31b970cd958a51b0cdc0832f3e3e5877fcca1",
     "docs/evidence/model-comparison-complete-20261010-sol/analysis.json": "6659ab61c392c0123eb46350595181ba5f2e6530b59713a21847f755ea4fe97c",
     "docs/evidence/model-comparison-complete-20261010/analysis.json": "cd8b34aa95aeba2f3aabb50a2d91da133affc7fbf965123487e24d2c4492f422",
@@ -4518,7 +4528,7 @@
     "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
     "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
     "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
-    "scripts/build-full-results.py": "889d99a2d02cb761ce2e437751fb19e9de02912b41e090db434047d5395d05b4",
+    "scripts/build-full-results.py": "1171b65026bf1cf4d0cc85287240181458efb70cfc48b7cdb7527edaced962c7",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
     "scripts/consolidated-campaigns.py": "71b2c6972e1da1dca58f28e2514a30cb02e98d14ce18c85a3a5fc1fd2a4ea2f0"
