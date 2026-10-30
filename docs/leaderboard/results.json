@@ -10273,7 +10273,7 @@
         "context_observation": true,
         "generative_observation": false,
         "id": "D3Q4",
-        "model": "D3 historical · Q4 Metal",
+        "model": "D3 27B · Q4 Metal",
         "runtime": "apple_metal_native",
         "size": "27B class"
       },
@@ -15882,7 +15882,7 @@
       "docs/evidence/physics-flash-20261029/analysis.json": "b7675cb4a17cf92ef66bc2107ace0d48dbcd37a37d676e1b0e3a280cc165ec56",
       "docs/evidence/timing-comparison-20261004/analysis.json": "eb8c5babe3dac5033291bd118b761e0e84b5aceb4c3b73b8ad0e429c2db65942",
       "docs/evidence/vela3-fast-20261028/analysis.json": "83c06bdf377353541aba7944231654f3c794f19ab17016de99e3b0fdba70ae4e",
-      "docs/leaderboard/model-metadata.json": "2607c78e1a447e71d180774d464df4003422ce1855b4d76eb9da1e654926b6bc",
+      "docs/leaderboard/model-metadata.json": "c3012122565dfd97133ec1f3fa0c28babf8ad60690073170ccc768e43c982386",
       "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
       "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
       "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
@@ -15891,7 +15891,7 @@
       "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
       "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
       "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
-      "scripts/build-full-results.py": "59c96fe7fcfa0852ec7e1840dea87bafa6cb9acadefe09abb0be06a2653d03c1",
+      "scripts/build-full-results.py": "a6a37b2cfc6fca41468c1e4bd1c44796c2fbdf67a42a058741d46587289637c7",
       "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
       "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
       "scripts/consolidated-campaigns.py": "71b2c6972e1da1dca58f28e2514a30cb02e98d14ce18c85a3a5fc1fd2a4ea2f0"
@@ -17746,7 +17746,7 @@
       },
       "metadata": {
         "date_label": null,
-        "display_name": "D3 historical · Q4 Metal",
+        "display_name": "D3 27B · Q4 Metal",
         "evidence": [
           {
             "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
@@ -102597,7 +102597,7 @@
     "docs/evidence/physics-flash-20261029/analysis.json": "b7675cb4a17cf92ef66bc2107ace0d48dbcd37a37d676e1b0e3a280cc165ec56",
     "docs/evidence/timing-comparison-20261004/analysis.json": "eb8c5babe3dac5033291bd118b761e0e84b5aceb4c3b73b8ad0e429c2db65942",
     "docs/evidence/vela3-fast-20261028/analysis.json": "83c06bdf377353541aba7944231654f3c794f19ab17016de99e3b0fdba70ae4e",
-    "docs/leaderboard/model-metadata.json": "2607c78e1a447e71d180774d464df4003422ce1855b4d76eb9da1e654926b6bc",
+    "docs/leaderboard/model-metadata.json": "c3012122565dfd97133ec1f3fa0c28babf8ad60690073170ccc768e43c982386",
     "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
     "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
     "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
@@ -102606,7 +102606,7 @@
     "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
     "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
     "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
-    "scripts/build-full-results.py": "59c96fe7fcfa0852ec7e1840dea87bafa6cb9acadefe09abb0be06a2653d03c1",
+    "scripts/build-full-results.py": "a6a37b2cfc6fca41468c1e4bd1c44796c2fbdf67a42a058741d46587289637c7",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
     "scripts/consolidated-campaigns.py": "71b2c6972e1da1dca58f28e2514a30cb02e98d14ce18c85a3a5fc1fd2a4ea2f0"

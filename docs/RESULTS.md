@@ -20,11 +20,11 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
 
 ### Context model/runtime observations
 
-The 30 rows below preserve quantization and runtime identities. **Metal gateway** and **direct Metal** are different paths; scores and task rankings follow below. Context/132 contains text/76, mathematics/28 and chemistry/28; [their scores and held-out test results](#model-quality) remain separate.
+The 30 rows below preserve quantization and runtime identities; sizes are publisher classes or declared counts, not independent measurements. **Metal gateway** and **direct Metal** are different paths; scores and task rankings follow below. Context/132 contains text/76, mathematics/28 and chemistry/28; [their scores and held-out test results](#model-quality) remain separate.
 
 | Model / runtime observation | Size | Context /132 | Tool proposal /24 | Capability /192 | Physics /48 | Relevance R0 /512 | Support R0 /768 | Answerability R0 /128 | Relevance R0–3 /2048 | Ranking R0–3 /512 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| D3 historical · Q4 Metal | 27B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 27B · Q4 Metal | 27B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 flash · Q8 Metal (gateway) | 9B class | complete 132/132 | complete 24/24 | complete 192/192 | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 flash · Q8 direct Metal | 9B class | complete 132/132 | not_run | not_run | complete 48/48 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | D3 flash · CPU | 8.393B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
@@ -200,7 +200,7 @@ Equal all-case totals share a competition rank; row order within a tie is alphab
 
 | Rank all | Rank test | Model observation | Size¹ | Runtime² | All /132 | Test /66 | Text /76 | Math /28 | Chem /28 | Tool /24 |
 |---:|---:|---|---|---|---:|---:|---:|---:|---:|---:|
-| 1 | 1 | D3 historical · Q4 Metal | 27B class | Metal | 128 | 65 | 73 | 28 | 27 | 24 |
+| 1 | 1 | D3 27B · Q4 Metal | 27B class | Metal | 128 | 65 | 73 | 28 | 27 | 24 |
 | 2 | 4 | D3 flash · Q8 Metal | 9B class | Metal | 124 | 61 | 72 | 26 | 26 | 20 |
 | 2 | 4 | D3 flash · Q8 direct Metal | 9B class | Metal-U | 124 | 61 | 72 | 26 | 26 | Not run |
 | 2 | 4 | D3 flash · CPU | 8.393B backbone | CPU-H | 124 | 61 | 72 | 26 | 26 | 20 |
@@ -248,7 +248,7 @@ A correct choice also does not prove that a plugin was executed or a useful answ
 
 | Model observation | FR /66 | EN /66 | D1 /40 | D2 /40 | D3 /52 | Scored /132 | Tool valid /24 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| D3 historical · Q4 Metal | 64 | 64 | 40 | 38 | 50 | 132 | 24 |
+| D3 27B · Q4 Metal | 64 | 64 | 40 | 38 | 50 | 132 | 24 |
 | D3 flash · Q8 Metal | 62 | 62 | 39 | 37 | 48 | 132 | 24 |
 | D3 flash · Q8 direct Metal | 62 | 62 | 39 | 37 | 48 | 132 | Not run |
 | D3 flash · CPU | 62 | 62 | 39 | 37 | 48 | 132 | 24 |
@@ -293,7 +293,7 @@ Metal/MPS observations used a 64 GiB Apple M5 Pro. CPU-H observations are not as
 
 | Model observation | Runtime | Median ms | p95 ms | Timed /132 | Init ms | RSS GiB³ | GPU alloc GiB |
 |---|---|---:|---:|---:|---:|---:|---:|
-| D3 historical · Q4 Metal | Metal | 613.7 | 629.7 | 132 | NR | 18.81 S | NR |
+| D3 27B · Q4 Metal | Metal | 613.7 | 629.7 | 132 | NR | 18.81 S | NR |
 | D3 flash · Q8 Metal | Metal | 194.3 | 200.4 | 132 | NR | 9.39 S | NR |
 | D3 flash · Q8 direct Metal | Metal-U | 194.6 | 200.6 | 132 | NR | 9.36 S | NR |
 | D3 flash · CPU | CPU-H | 10,080.2 | 15,009.8 | 132 | 24,467.3 | 13.75 | NR |

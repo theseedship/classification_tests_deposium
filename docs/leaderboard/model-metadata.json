@@ -63,7 +63,7 @@
       ]
     },
     "D3Q4": {
-      "display_name": "D3 historical · Q4 Metal",
+      "display_name": "D3 27B · Q4 Metal",
       "family": "Decision 3.0",
       "model_size": {
         "parameters": null,

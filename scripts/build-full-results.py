@@ -734,7 +734,7 @@ def render_coverage(coverage):
              "Recorded `missing`, `unsupported`, `error`, `timeout`, and `abstain` outcomes remain separate in the "
              "[coverage CSV](leaderboard/coverage.csv) and [JSON](leaderboard/coverage.json).", "",
              "### Context model/runtime observations", "",
-             "The 30 rows below preserve quantization and runtime identities. **Metal gateway** and "
+             "The 30 rows below preserve quantization and runtime identities; sizes are publisher classes or declared counts, not independent measurements. **Metal gateway** and "
              "**direct Metal** are different paths; scores and task rankings follow below. "
              "Context/132 contains text/76, mathematics/28 and chemistry/28; "
              "[their scores and held-out test results](#model-quality) remain separate.", "",
