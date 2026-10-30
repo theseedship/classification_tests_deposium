@@ -24,31 +24,31 @@
       "status": "fixture_only"
     },
     {
-      "boundary": "[Tool-discovery contract](TOOL_DISCOVERY_CONTRACT_V1.md): 12 FR/EN cases, separate shortlist/final-set metrics and recorded controls; no qualified model output path, model result or executed tools.",
+      "boundary": "[Tool-discovery contract](TOOL_DISCOVERY_CONTRACT_V1.md): 12 FR/EN recorded-control cases, separate shortlist/final-set metrics. One generative candidate observed through the local JSON route on the canary/held-out packs (see the generated-JSON coverage row); no executed tools, no application integration.",
       "capability": "Open catalogue discovery and sufficient tool sets",
       "id": "discovery",
       "issues": [
         "https://github.com/theseedship/classification_tests_deposium/issues/10"
       ],
-      "status": "fixture_only"
+      "status": "model_observed"
     },
     {
-      "boundary": "[Argument-execution contract](TOOL_ARGUMENTS_CONTRACT_V1.md): four FR/EN training cases, actual bounded lookup/sum and artifact guards; no qualified real-model output path or application integration.",
+      "boundary": "[Argument-execution contract](TOOL_ARGUMENTS_CONTRACT_V1.md): four FR/EN training controls with actual bounded lookup/sum and artifact guards. One generative candidate observed on the canary/held-out argument cases (6/6); no application integration.",
       "capability": "Executable arguments and artifact bindings",
       "id": "arguments",
       "issues": [
         "https://github.com/theseedship/classification_tests_deposium/issues/11"
       ],
-      "status": "fixture_only"
+      "status": "model_observed"
     },
     {
-      "boundary": "[Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics; four task results, zero real-model or application qualification.",
+      "boundary": "[Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics. One generative candidate observed on the canary/held-out episodes (7/18): positive paths pass, stop/clarify outcomes mostly fail; no application qualification.",
       "capability": "Bounded episodes with executed tools and feedback",
       "id": "episodes",
       "issues": [
         "https://github.com/theseedship/classification_tests_deposium/issues/12"
       ],
-      "status": "fixture_only"
+      "status": "model_observed"
     },
     {
       "boundary": "Qwen3-4B Q8, five observations: [TRAIN prompt v1](LOCAL_TOOL_POLICY_RESULTS_20261030.md) 5/10 scored of 10 (0/2 discovery, 2/2 arguments, 3/6 episodes); [TRAIN prompt v2](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md) 7/10 scored of 10 (1/2 discovery, 2/2 arguments, 4/6 episodes), identical generated content with the [host prompt cache disabled](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md); [held-out prompt v2](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md) attempt 1 9/18 scored of 24 (2/8 discovery, 4/4 arguments, 3/6 episodes), 6 unobserved after `rss_guard`, [attempt 2](LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md) 9/24 scored of 24 (2/8 discovery, 4/4 arguments, 3/12 episodes). One model, correlated FR/EN pairs; no ranking, live MCP or product qualification.",
@@ -212,6 +212,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -232,6 +265,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "D3Q4",
       "model": "D3 historical · Q4 Metal",
       "runtime": "apple_metal_native",
@@ -341,6 +375,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -361,6 +428,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "D3FlashQ8",
       "model": "D3 flash · Q8 Metal",
       "runtime": "apple_metal_native",
@@ -491,6 +559,39 @@
           "status": "complete",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": false,
           "metric": "provisional_agreement",
@@ -504,6 +605,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "D3FlashQ8Upstream",
       "model": "D3 flash · Q8 direct Metal",
       "runtime": "apple_metal_upstream",
@@ -606,6 +708,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -626,6 +761,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "D3flash",
       "model": "D3 flash · CPU",
       "runtime": "historical_cpu",
@@ -728,6 +864,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -748,6 +917,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Jev",
       "model": "Jev 1.13 · HTTP API",
       "runtime": "remote_api",
@@ -850,6 +1020,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -870,6 +1073,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "D3FlashQ4",
       "model": "D3 flash · Q4 Metal",
       "runtime": "apple_metal_native",
@@ -972,6 +1176,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -992,6 +1229,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "D3mini",
       "model": "D3 mini · CPU",
       "runtime": "historical_cpu",
@@ -1094,6 +1332,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -1114,6 +1385,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "D3nano",
       "model": "D3 nano · CPU",
       "runtime": "historical_cpu",
@@ -1216,6 +1488,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -1236,6 +1541,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "GLiClass9B",
       "model": "GLiClass v4 9B · BF16 MPS",
       "runtime": "apple_mps",
@@ -1373,6 +1679,39 @@
           "status": "complete",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": false,
           "metric": "provisional_agreement",
@@ -1386,6 +1725,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "ClefFlashQ8",
       "model": "Clef Flash · Q8 direct Metal",
       "runtime": "apple_metal_upstream",
@@ -1488,6 +1828,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -1508,6 +1881,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Vela4",
       "model": "Vela 2.0 4B · CPU",
       "runtime": "historical_cpu",
@@ -1610,6 +1984,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -1630,6 +2037,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Nox",
       "model": "Decision 2.0 Nox 4B · CPU",
       "runtime": "historical_cpu",
@@ -1732,6 +2140,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -1752,6 +2193,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Liquid3",
       "model": "Liquid d1-3B · CPU",
       "runtime": "historical_cpu",
@@ -1854,6 +2296,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -1874,6 +2349,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Noma",
       "model": "Noma · CPU",
       "runtime": "historical_cpu",
@@ -1976,6 +2452,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -1996,6 +2505,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "D3lite",
       "model": "D3 lite · CPU",
       "runtime": "historical_cpu",
@@ -2098,6 +2608,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -2118,6 +2661,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Sol",
       "model": "Decision 2.0 Sol 2B · CPU",
       "runtime": "historical_cpu",
@@ -2220,6 +2764,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -2240,6 +2817,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Vela08",
       "model": "Vela 2.0 0.8B · CPU",
       "runtime": "historical_cpu",
@@ -2342,6 +2920,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -2362,6 +2973,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Eos",
       "model": "Decision 2.0 Eos 0.8B · CPU",
       "runtime": "historical_cpu",
@@ -2464,6 +3076,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -2484,6 +3129,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "EosQ8",
       "model": "Decision 2.0 Eos 0.8B · Q8 Metal",
       "runtime": "apple_metal_native",
@@ -2586,6 +3232,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -2606,6 +3285,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "D3edge",
       "model": "D3 edge · CPU",
       "runtime": "historical_cpu",
@@ -2708,6 +3388,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -2728,6 +3441,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Kai",
       "model": "Decision 2.0 Kai 0.6B · CPU",
       "runtime": "historical_cpu",
@@ -2830,6 +3544,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -2850,6 +3597,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Vela03",
       "model": "Vela 2.0 0.3B · CPU",
       "runtime": "historical_cpu",
@@ -2952,6 +3700,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -2972,6 +3753,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "GLiNER",
       "model": "GLiNER2.5-multi-Decide · CPU",
       "runtime": "historical_cpu",
@@ -3074,6 +3856,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -3094,6 +3909,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Vela3Fast",
       "model": "Vela 3.0 fast · decision only · CPU",
       "runtime": "cpu_new",
@@ -3196,6 +4012,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -3216,6 +4065,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Laya",
       "model": "Laya multilingual · CPU",
       "runtime": "historical_cpu",
@@ -3318,6 +4168,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -3338,6 +4221,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Julia",
       "model": "Julia-1 · CPU",
       "runtime": "historical_cpu",
@@ -3440,6 +4324,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -3460,6 +4377,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Omni",
       "model": "Liquid d1-omni-600M · CPU",
       "runtime": "historical_cpu",
@@ -3562,6 +4480,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -3582,6 +4533,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Indecis",
       "model": "Indecis · untrained open mode · CPU",
       "runtime": "historical_cpu",
@@ -3684,6 +4636,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -3704,6 +4689,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "ModernJEV",
       "model": "ModernJEV-Decide-Preview · CPU",
       "runtime": "historical_cpu",
@@ -3806,6 +4792,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": true,
           "metric": "provisional_agreement",
@@ -3826,6 +4845,7 @@
         }
       },
       "context_observation": true,
+      "generative_observation": false,
       "id": "Muose",
       "model": "Muose-50M-Decision · CPU",
       "runtime": "historical_cpu",
@@ -3959,6 +4979,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": false,
           "metric": "provisional_agreement",
@@ -3972,6 +5025,7 @@
         }
       },
       "context_observation": false,
+      "generative_observation": false,
       "id": "D3litePassage",
       "model": "D3 lite · CPU passage session",
       "runtime": "historical_cpu",
@@ -4098,6 +5152,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": false,
           "metric": "provisional_agreement",
@@ -4111,6 +5198,7 @@
         }
       },
       "context_observation": false,
+      "generative_observation": false,
       "id": "Jev114",
       "model": "Jev 1.14 · HTTP API",
       "runtime": "remote_api",
@@ -4216,6 +5304,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": false,
           "metric": "provisional_agreement",
@@ -4229,6 +5350,7 @@
         }
       },
       "context_observation": false,
+      "generative_observation": false,
       "id": "BGEPassage",
       "model": "BGE v2-m3 · INT8 CPU",
       "runtime": "native_cpu_reranker",
@@ -4334,6 +5456,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": false,
           "metric": "provisional_agreement",
@@ -4347,6 +5502,7 @@
         }
       },
       "context_observation": false,
+      "generative_observation": false,
       "id": "D3liteBGE",
       "model": "D3 lite + BGE tie-break · CPU",
       "runtime": "offline_ranking_projection",
@@ -4452,6 +5608,39 @@
           "status": "not_run",
           "total": 48
         },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
         "tool_proposal": {
           "evidence_present": false,
           "metric": "provisional_agreement",
@@ -4465,10 +5654,174 @@
         }
       },
       "context_observation": false,
+      "generative_observation": false,
       "id": "Jev114BGE",
       "model": "Jev 1.14 + BGE tie-break",
       "runtime": "offline_ranking_projection",
       "size": "Two-model method"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 48
+        },
+        "tool_arguments": {
+          "evidence_present": true,
+          "metric": "case_pass",
+          "numerator": 6,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 6,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 6,
+          "source": "docs/evidence/local-tool-policy-v2-train-cache-off-20261030/analysis.json + docs/evidence/local-tool-policy-heldout-002-20261030/analysis.json",
+          "status": "complete",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": true,
+          "metric": "case_pass",
+          "numerator": 3,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 10,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 10,
+          "source": "docs/evidence/local-tool-policy-v2-train-cache-off-20261030/analysis.json + docs/evidence/local-tool-policy-heldout-002-20261030/analysis.json",
+          "status": "complete",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": true,
+          "metric": "case_pass",
+          "numerator": 7,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 18,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 18,
+          "source": "docs/evidence/local-tool-policy-v2-train-cache-off-20261030/analysis.json + docs/evidence/local-tool-policy-heldout-002-20261030/analysis.json",
+          "status": "complete",
+          "total": 18
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": false,
+      "generative_observation": true,
+      "id": "QwenToolPolicyV2",
+      "model": "Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2",
+      "runtime": "native_metal_generated_json",
+      "size": "4B class"
     }
   ],
   "review_pending": true,
@@ -4532,7 +5885,7 @@
     "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
     "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
     "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
-    "scripts/build-full-results.py": "827c6e516be951060833d92d603d793ce737c038fa63c7b1deb45d8b3c2fcc44",
+    "scripts/build-full-results.py": "59c96fe7fcfa0852ec7e1840dea87bafa6cb9acadefe09abb0be06a2653d03c1",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
     "scripts/consolidated-campaigns.py": "71b2c6972e1da1dca58f28e2514a30cb02e98d14ce18c85a3a5fc1fd2a4ea2f0"
@@ -4591,6 +5944,24 @@
       "label": "Ranking R0–3",
       "protocol": "passage-evidence-v1; four balanced rotations; nDCG@1 defined/eligible=480/480; 512 total pools",
       "total": 512
+    },
+    {
+      "id": "tool_discovery",
+      "label": "Discovery (JSON)",
+      "protocol": "tool-policy-canary-v1 train 2 + tool-policy-heldout-v1 test 8; generated shortlist/selection; prompt v2",
+      "total": 10
+    },
+    {
+      "id": "tool_arguments",
+      "label": "Arguments (JSON)",
+      "protocol": "tool-policy-canary-v1 train 2 + tool-policy-heldout-v1 test 4; generated arguments, actual lookup/sum; prompt v2",
+      "total": 6
+    },
+    {
+      "id": "tool_episodes",
+      "label": "Episodes (JSON)",
+      "protocol": "tool-policy-canary-v1 train 6 + tool-policy-heldout-v1 test 12; generated actions, actual bounded feedback; prompt v2",
+      "total": 18
     }
   ]
 }

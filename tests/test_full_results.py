@@ -503,8 +503,18 @@ class FullResultsTests(unittest.TestCase):
         coverage = self.data["coverage"]
         rows = {r["id"]: r for r in coverage["observations"]}
         self.assertEqual({k for k, r in rows.items() if r["context_observation"]}, EXPECTED_LABELS)
-        self.assertEqual(len(rows), 35)
-        self.assertEqual({len(r["cells"]) for r in rows.values()}, {9})
+        self.assertEqual(len(rows), 36)
+        self.assertEqual({len(r["cells"]) for r in rows.values()}, {12})
+        generative = rows["QwenToolPolicyV2"]
+        self.assertTrue(generative["generative_observation"])
+        self.assertFalse(generative["context_observation"])
+        for task, numerator, total in (("tool_discovery", 3, 10), ("tool_arguments", 6, 6), ("tool_episodes", 7, 18)):
+            cell = generative["cells"][task]
+            self.assertEqual((cell["status"], cell["numerator"], cell["scored_or_valid"], cell["total"], cell["metric"]),
+                             ("complete", numerator, total, total, "case_pass"))
+        self.assertEqual(generative["cells"]["context"]["status"], "not_run")
+        self.assertEqual(rows["D3FlashQ8Upstream"]["cells"]["tool_discovery"]["status"], "not_run")
+        self.assertEqual(rows["D3FlashQ8Upstream"]["cells"]["tool_discovery"]["metric"], "case_pass")
         gateway, direct = rows["D3FlashQ8"]["cells"], rows["D3FlashQ8Upstream"]["cells"]
         self.assertEqual(gateway["capability"]["status"], "complete")
         self.assertEqual(direct["capability"]["status"], "not_run")
@@ -534,7 +544,9 @@ class FullResultsTests(unittest.TestCase):
         rendered = results.render(self.data)
         self.assertLess(rendered.index("## Coverage overview"), rendered.index("## Updated task rankings"))
         csv_rows = list(csv.DictReader(io.StringIO(results.outputs(self.data)["docs/leaderboard/coverage.csv"])))
-        self.assertEqual(len(csv_rows), 35 * 9)
+        self.assertEqual(len(csv_rows), 36 * 12)
+        self.assertIn("### Generated-JSON tool-policy observations", rendered)
+        self.assertNotIn("| Discovery (JSON) /10 | Arguments", rendered.split("### Passage-only")[0])
         blank = next(r for r in csv_rows if r["observation"] == "ClefFlashQ8" and r["task"] == "tool_proposal")
         self.assertEqual((blank["scored_or_valid"], blank["unsupported"], blank["review_pending"]), ("", "", "True"))
 
@@ -554,15 +566,13 @@ class FullResultsTests(unittest.TestCase):
         self.assertEqual(harness["task_contract"]["status"], "fixture_only")
         self.assertEqual(harness["task_contract"]["issues"], [results.ISSUES + "9"])
         self.assertIn("no qualified model", harness["task_contract"]["boundary"])
-        self.assertEqual(harness["discovery"]["status"], "fixture_only")
-        self.assertEqual(harness["discovery"]["issues"], [results.ISSUES + "10"])
-        self.assertIn("no qualified model", harness["discovery"]["boundary"])
-        self.assertEqual(harness["arguments"]["status"], "fixture_only")
-        self.assertEqual(harness["arguments"]["issues"], [results.ISSUES + "11"])
+        for key, issue in (("discovery", 10), ("arguments", 11), ("episodes", 12)):
+            self.assertEqual(harness[key]["status"], "model_observed")
+            self.assertEqual(harness[key]["issues"], [results.ISSUES + str(issue)])
+            self.assertIn("One generative candidate", harness[key]["boundary"])
+            self.assertIn("no application", harness[key]["boundary"].lower().replace("no application qualification", "no application"))
         self.assertIn("actual bounded lookup/sum", harness["arguments"]["boundary"])
-        self.assertEqual(harness["episodes"]["status"], "fixture_only")
-        self.assertEqual(harness["episodes"]["issues"], [results.ISSUES + "12"])
-        self.assertIn("four task results", harness["episodes"]["boundary"])
+        self.assertIn("7/18", harness["episodes"]["boundary"])
         for key, issue in (("small_large", 16), ("application", 17), ("rag_final", 18)):
             self.assertEqual(harness[key]["status"], "not_implemented")
             self.assertEqual(harness[key]["issues"], [results.ISSUES + str(issue)])
