@@ -6240,7 +6240,7 @@
     "profiles/vela2-03-assets.json": "989bf962c6665767e00d39a5cd828b82d22556da71361c42f86a34e2a4546fd4",
     "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "ea2c7a39f3f46a58fb4449d22206020f3c07b2e30cf27daee7761a693dbd8fee",
+    "scripts/build-full-results.py": "fa0998ed5d15bfac964e59f5ad3281af70ab36821470314fcb9a7ae9553313b5",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
     "scripts/consolidated-campaigns.py": "2e2811b193b2e6c8dfe2c698be89995d7017a395596508b87e7bed90d620c4a0"

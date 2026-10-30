@@ -886,24 +886,48 @@ def number(value, places=1):
     return "NR" if value is None else f"{value:,.{places}f}"
 
 
+def leaders(rows, rank_key, name, score):
+    """Names sharing rank 1 under `rank_key`, with their score text; ties are listed together."""
+    best = [r for r in rows if r.get(rank_key) == 1]
+    if not best:
+        return "no completely scored observation"
+    return ", ".join(f"{name(r)} ({score(r)})" for r in best) + (" (tie)" if len(best) > 1 else "")
+
+
+LEGEND_RANKS = ("<sub>**Rank all**: competition rank by correct answers over every case of the pack (all splits); "
+                "**Rank test**: the same rank over the held-out test cases only, the better signal against tuning; "
+                "equal totals share a rank. **Correct / all** keeps failed, missing and unsupported cases in the denominator; "
+                "**Scored / all** shows how many cases produced a valid answer.</sub>")
+
+
 def render_campaign_rankings(data):
     lines = ["## Updated task rankings", "",
-             "These tables include the published D3/Clef campaigns through 29 October 2026. "
+             "These tables include every published campaign on these packs. "
              "Each task has its own ranking and denominator; there is no pooled cross-task score. "
              "Ranks use correct/all among completely scored observations on the same task/denominator. "
              "Partial and unrun campaigns remain visible but unranked. Ties share competition ranks. "
              "Canaries and repeated context anchors do not add quality cases.", ""]
     for task, title in (("capability", "Capability choices"), ("physics", "Physics choices")):
-        lines += [f"### {title}", "", "| Rank all | Rank test | Model / execution path | Correct / all | Scored / all | Test correct / all | Source |",
-                  "|---:|---:|---|---:|---:|---:|---|"]
         rows = [r for r in data["campaigns"] if r["task"] == task]
+        total = rows[0]["counts"]["total"] if rows else 0
+        test_total = rows[0]["counts"]["by_split"]["test"]["total"] if rows else 0
+        lines += [f"### {title}", "", LEGEND_RANKS, "",
+                  f"**Leading on held-out test**: {leaders(rows, 'rank_test', lambda r: r['model'], lambda r: f"{r['counts']['by_split']['test']['correct']}/{test_total} test")}; "
+                  f"**leading over all cases**: {leaders(rows, 'rank_all', lambda r: r['model'], lambda r: f"{r['counts']['correct']}/{total}")}. "
+                  "A lead of a few cases on correlated FR/EN variants is not a general ranking.", "",
+                  "| Rank all | Rank test | Model / execution path | Correct / all | Scored / all | Test correct / all | Source |",
+                  "|---:|---:|---|---:|---:|---:|---|"]
         for row in rows:
             c, test = row["counts"], row["counts"]["by_split"]["test"]
             lines.append(f"| {row['rank_all']} | {row['rank_test']} | {row['model']} | {c['correct']}/{c['total']} | "
                          f"{c['scored']}/{c['total']} | {test['correct']}/{test['total']} | [Report]({row['report']}) |")
         if task == "capability":
-            lines += ["", "Both candidates reach the ceiling on these supplied proposals; this does not qualify executable tools. "
-                      "D3 uses the earlier gateway-backed runtime; Clef uses the direct native listener.", "",
+            ceiling = [r["model"] for r in rows if r["counts"]["correct"] == r["counts"]["total"]]
+            lines += ["", (f"{', '.join(ceiling)} reach the ceiling on these supplied proposals; " if ceiling else "")
+                      + "a perfect or near-perfect closed-choice score does not qualify executable tools. "
+                      "Runtimes differ per row (gateway-backed Metal, direct native listener, CPU worker) and are not pooled.", "",
+                      "<sub>**Track**: the three case families of the pack; selection = choose capabilities/tool sets, "
+                      "arguments = bind arguments and dependencies, observations = choose the next step after fixed tool observations.</sub>", "",
                       "| Model | Track | Correct / all | Test correct / all |", "|---|---|---:|---:|"]
             for row in rows:
                 for track, title in (("selection", "Capability selection"), ("arguments", "Arguments and dependencies"),
@@ -912,11 +936,14 @@ def render_campaign_rankings(data):
                     test = c["by_split"]["test"]
                     lines.append(f"| {row['model']} | {title} | {c['correct']}/{c['total']} | {test['correct']}/{test['total']} |")
         else:
-            lines += ["", "Clef has the higher full total; D3 has the higher held-out test score. "
-                      "Calibration and test are therefore shown separately; neither result establishes general physics expertise."]
+            lines += ["", "Calibration (12) and test (36) are shown separately because the all-case and test leaders can differ; "
+                      "with four options, 12/48 is chance level. No result establishes general physics expertise: "
+                      "the law and assumptions are supplied in each input."]
         lines.append("")
     for axis, title in (("relevance", "Passage relevance"), ("support", "Claim support"), ("answerability", "Answerability")):
         lines += [f"### {title}", "", "Rotation 0: 128 pools, eight families, eight language directions, two correlated views.", "",
+                  "<sub>**Rank**: by correct/all among completely scored observations (— when partial or not run); "
+                  "**Macro class accuracy**: mean of the per-class accuracies, so a rare class weighs as much as a frequent one.</sub>", "",
                   "| Rank | Model / runtime | Correct / all | Scored / all | Macro class accuracy | Observation |",
                   "|---:|---|---:|---:|---:|---|"]
         for row in data["campaigns"]:
@@ -996,6 +1023,14 @@ def render(data):
              "Tool is **agreement / 24 provisional proposals**, not routing accuracy. Full scored/valid counts and separate",
              "`missing`, `unsupported`, `error`, `timeout`, and `abstain` counts are in the downloads.",
              "Equal all-case totals share a competition rank; row order within a tie is alphabetical by observation ID.", "",
+             "<sub>**Rank all**: rank by correct answers over all 132 context cases (train + calibration + test); "
+             "**Rank test**: rank over the 66 held-out test cases only, the better signal against tuning; "
+             "**All / Test**: correct answers over those cases; **Text / Math / Chem**: correct answers within each domain "
+             "(76 documentary, 28 mathematics, 28 chemistry cases); **Tool**: provisional agreements over 24 first-tool proposals, "
+             "not routing accuracy. Size¹ and Runtime² are explained below the table.</sub>", "",
+             f"**Leading on held-out test**: {leaders(data['observations'], 'rank_test_splits', lambda r: r['metadata']['display_name'], lambda r: str(r['context']['groups']['split']['test']['correct']) + '/66')}; "
+             f"**leading over all 132 cases**: {leaders(data['observations'], 'rank_all_splits', lambda r: r['metadata']['display_name'], lambda r: str(r['context']['counts']['correct']) + '/132')}. "
+             "Larger native models lead; the gap to the best sub-1B CPU candidates is a few dozen cases on correlated FR/EN pairs.", "",
              "| Rank all | Rank test | Model observation | Size¹ | Runtime² | All /132 | Test /66 | Text /76 | Math /28 | Chem /28 | Tool /24 |",
              "|---:|---:|---|---|---|---:|---:|---:|---:|---:|---:|"]
     runtime_codes = {"historical_cpu": "CPU-H", "remote_api": "API", "apple_metal_native": "Metal",

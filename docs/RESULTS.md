@@ -107,9 +107,13 @@ The initial contract, discovery, arguments and episode fixtures are implemented 
 
 ## Updated task rankings
 
-These tables include the published D3/Clef campaigns through 29 October 2026. Each task has its own ranking and denominator; there is no pooled cross-task score. Ranks use correct/all among completely scored observations on the same task/denominator. Partial and unrun campaigns remain visible but unranked. Ties share competition ranks. Canaries and repeated context anchors do not add quality cases.
+These tables include every published campaign on these packs. Each task has its own ranking and denominator; there is no pooled cross-task score. Ranks use correct/all among completely scored observations on the same task/denominator. Partial and unrun campaigns remain visible but unranked. Ties share competition ranks. Canaries and repeated context anchors do not add quality cases.
 
 ### Capability choices
+
+<sub>**Rank all**: competition rank by correct answers over every case of the pack (all splits); **Rank test**: the same rank over the held-out test cases only, the better signal against tuning; equal totals share a rank. **Correct / all** keeps failed, missing and unsupported cases in the denominator; **Scored / all** shows how many cases produced a valid answer.</sub>
+
+**Leading on held-out test**: Clef Flash Q8 · direct Metal (96/96 test), D3 Flash Q8 · gateway Metal (96/96 test) (tie); **leading over all cases**: Clef Flash Q8 · direct Metal (192/192), D3 Flash Q8 · gateway Metal (192/192) (tie). A lead of a few cases on correlated FR/EN variants is not a general ranking.
 
 | Rank all | Rank test | Model / execution path | Correct / all | Scored / all | Test correct / all | Source |
 |---:|---:|---|---:|---:|---:|---|
@@ -118,7 +122,9 @@ These tables include the published D3/Clef campaigns through 29 October 2026. Ea
 | 3 | 3 | D3 lite · macOS CPU | 168/192 | 192/192 | 80/96 | [Report](D3_LITE_MACOS_RESULTS_20261030.md) |
 | 4 | 4 | Vela 2.0 0.3B · macOS CPU | 128/192 | 192/192 | 62/96 | [Report](VELA2_03_MACOS_RESULTS_20261030.md) |
 
-Both candidates reach the ceiling on these supplied proposals; this does not qualify executable tools. D3 uses the earlier gateway-backed runtime; Clef uses the direct native listener.
+Clef Flash Q8 · direct Metal, D3 Flash Q8 · gateway Metal reach the ceiling on these supplied proposals; a perfect or near-perfect closed-choice score does not qualify executable tools. Runtimes differ per row (gateway-backed Metal, direct native listener, CPU worker) and are not pooled.
+
+<sub>**Track**: the three case families of the pack; selection = choose capabilities/tool sets, arguments = bind arguments and dependencies, observations = choose the next step after fixed tool observations.</sub>
 
 | Model | Track | Correct / all | Test correct / all |
 |---|---|---:|---:|
@@ -137,6 +143,10 @@ Both candidates reach the ceiling on these supplied proposals; this does not qua
 
 ### Physics choices
 
+<sub>**Rank all**: competition rank by correct answers over every case of the pack (all splits); **Rank test**: the same rank over the held-out test cases only, the better signal against tuning; equal totals share a rank. **Correct / all** keeps failed, missing and unsupported cases in the denominator; **Scored / all** shows how many cases produced a valid answer.</sub>
+
+**Leading on held-out test**: D3 Flash Q8 · direct Metal (32/36 test); **leading over all cases**: Clef Flash Q8 · direct Metal (41/48). A lead of a few cases on correlated FR/EN variants is not a general ranking.
+
 | Rank all | Rank test | Model / execution path | Correct / all | Scored / all | Test correct / all | Source |
 |---:|---:|---|---:|---:|---:|---|
 | 1 | 2 | Clef Flash Q8 · direct Metal | 41/48 | 48/48 | 31/36 | [Report](CLEF_FLASH_RESULTS_20261029.md) |
@@ -144,11 +154,13 @@ Both candidates reach the ceiling on these supplied proposals; this does not qua
 | 3 | 3 | Vela 2.0 0.3B · macOS CPU | 18/48 | 48/48 | 14/36 | [Report](VELA2_03_MACOS_RESULTS_20261030.md) |
 | 4 | 4 | D3 lite · macOS CPU | 14/48 | 48/48 | 12/36 | [Report](D3_LITE_MACOS_RESULTS_20261030.md) |
 
-Clef has the higher full total; D3 has the higher held-out test score. Calibration and test are therefore shown separately; neither result establishes general physics expertise.
+Calibration (12) and test (36) are shown separately because the all-case and test leaders can differ; with four options, 12/48 is chance level. No result establishes general physics expertise: the law and assumptions are supplied in each input.
 
 ### Passage relevance
 
 Rotation 0: 128 pools, eight families, eight language directions, two correlated views.
+
+<sub>**Rank**: by correct/all among completely scored observations (— when partial or not run); **Macro class accuracy**: mean of the per-class accuracies, so a rare class weighs as much as a frequent one.</sub>
 
 | Rank | Model / runtime | Correct / all | Scored / all | Macro class accuracy | Observation |
 |---:|---|---:|---:|---:|---|
@@ -160,6 +172,8 @@ Rotation 0: 128 pools, eight families, eight language directions, two correlated
 
 Rotation 0: 128 pools, eight families, eight language directions, two correlated views.
 
+<sub>**Rank**: by correct/all among completely scored observations (— when partial or not run); **Macro class accuracy**: mean of the per-class accuracies, so a rare class weighs as much as a frequent one.</sub>
+
 | Rank | Model / runtime | Correct / all | Scored / all | Macro class accuracy | Observation |
 |---:|---|---:|---:|---:|---|
 | 1 | D3 Flash Q8 · direct Metal | 460/768 | 768/768 | 79.79% | complete; [report](PASSAGE_FLASH_RESULTS_20261029.md) |
@@ -170,6 +184,8 @@ Rotation 0: 128 pools, eight families, eight language directions, two correlated
 ### Answerability
 
 Rotation 0: 128 pools, eight families, eight language directions, two correlated views.
+
+<sub>**Rank**: by correct/all among completely scored observations (— when partial or not run); **Macro class accuracy**: mean of the per-class accuracies, so a rare class weighs as much as a frequent one.</sub>
 
 | Rank | Model / runtime | Correct / all | Scored / all | Macro class accuracy | Observation |
 |---:|---|---:|---:|---:|---|
@@ -213,6 +229,10 @@ Each score is **correct / all cases** in its column, retaining failures in the d
 Tool is **agreement / 24 provisional proposals**, not routing accuracy. Full scored/valid counts and separate
 `missing`, `unsupported`, `error`, `timeout`, and `abstain` counts are in the downloads.
 Equal all-case totals share a competition rank; row order within a tie is alphabetical by observation ID.
+
+<sub>**Rank all**: rank by correct answers over all 132 context cases (train + calibration + test); **Rank test**: rank over the 66 held-out test cases only, the better signal against tuning; **All / Test**: correct answers over those cases; **Text / Math / Chem**: correct answers within each domain (76 documentary, 28 mathematics, 28 chemistry cases); **Tool**: provisional agreements over 24 first-tool proposals, not routing accuracy. Size¹ and Runtime² are explained below the table.</sub>
+
+**Leading on held-out test**: D3 27B · Q4 Metal (65/66); **leading over all 132 cases**: D3 27B · Q4 Metal (128/132). Larger native models lead; the gap to the best sub-1B CPU candidates is a few dozen cases on correlated FR/EN pairs.
 
 | Rank all | Rank test | Model observation | Size¹ | Runtime² | All /132 | Test /66 | Text /76 | Math /28 | Chem /28 | Tool /24 |
 |---:|---:|---|---|---|---:|---:|---:|---:|---:|---:|
