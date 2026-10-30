@@ -154,3 +154,23 @@ class ConsolidatedCpuLoaderTests(unittest.TestCase):
             with self.subTest(change=change), self.assertRaisesRegex(ValueError, "pins differ"):
                 campaigns.Campaigns(drifted, require).cpu(path, "profiles/d3-lite-assets.json",
                                                           "runtimes/d3-macos/runtime.lock", "profiles/d3-lite-macos-cpu.json")
+
+
+class Vela2MacosProbeTests(unittest.TestCase):
+    def test_vela2_adapter_and_worker_use_platform_probes(self):
+        from deposium_bench import vela2_adapter as vela2
+        with patch.object(vela2.platform, "system", return_value="Darwin"), \
+                patch("deposium_bench.native_resources.memory_snapshot",
+                      return_value={"MemAvailable_mib": 999.5, "MemTotal_mib": 65536.0}):
+            self.assertEqual(vela2.Vela2Adapter._host_available_mb(), 999.5)
+        with patch.object(vela2.platform, "system", return_value="Darwin"), \
+                patch("deposium_bench.native_resources.memory_snapshot", side_effect=OSError("vm_stat")):
+            with self.assertRaisesRegex(OSError, "vela2_host_memory_unknown"):
+                vela2.Vela2Adapter._host_available_mb()
+        worker = module("vela2_worker_rss_test", "bridges/vela2-worker.py")
+        usage = type("Usage", (), {"ru_maxrss": 3 * 1048576})()
+        with patch.object(worker.resource, "getrusage", return_value=usage):
+            with patch.object(worker.sys, "platform", "darwin"):
+                self.assertEqual(worker._rss(), 3.0)
+            with patch.object(worker.sys, "platform", "linux"):
+                self.assertEqual(worker._rss(), 3072.0)

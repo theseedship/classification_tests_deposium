@@ -3776,6 +3776,176 @@
     {
       "cells": {
         "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 128,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
+          "source": "docs/evidence/vela2-03-macos-20261030/capability.json",
+          "status": "complete",
+          "total": 192
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 65,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/vela2-03-macos-20261030/analysis.json",
+          "status": "complete",
+          "total": 132
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 18,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/vela2-03-macos-20261030/physics.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
+        "tool_proposal": {
+          "evidence_present": true,
+          "metric": "provisional_agreement",
+          "numerator": 18,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 24,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 24,
+          "source": "docs/evidence/vela2-03-macos-20261030/analysis.json",
+          "status": "complete",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "generative_observation": false,
+      "id": "Vela03Macos",
+      "model": "Vela 2.0 0.3B · macOS CPU",
+      "runtime": "cpu_new",
+      "size": "0.309B declared"
+    },
+    {
+      "cells": {
+        "capability": {
           "evidence_present": false,
           "metric": "correct_choice",
           "numerator": null,
@@ -6017,6 +6187,8 @@
     "docs/PASSAGE_FLASH_RESULTS_20261029.md": "cf376c533151ac8e2427fb13f8b4229e439556b514f9e128c83668ec16dbbd67",
     "docs/PASSAGE_JEV_RESULTS_20261015.md": "ba48c94fe882498e397b0bf7b7c5d07da3edb776403526e8bdab4cde67710848",
     "docs/PHYSICS_FLASH_RESULTS_20261029.md": "356dfd041f7d4646235767601f5272f446f814b4448712910f37c6056d546819",
+    "docs/VELA2_03_MACOS_CPU_PROTOCOL_20261030.md": "4817578dfd85225ede51a6d4c1a06774cb9574f23f3e05c997b63054e250958d",
+    "docs/VELA2_03_MACOS_RESULTS_20261030.md": "21ac1f63c1bd4f89d10675e1c59e8ba1af1aea1a194a7472606b35efbc742856",
     "docs/VELA2_PILOT.md": "6743665f0102fe20a5c51810c880b7a3d87d0cd1bb69a7927b55397f32deaf40",
     "docs/VELA3_FAST_RESULTS_20261028.md": "6cad54a1cd023ec2abd554cb099d881959ef9061c90dc47cf027de52c01a0101",
     "docs/evidence/capability-flash-20261029/analysis.json": "df15bea59de4a762655dc601eb4cdad88a368977b4c65c688b0cfc2b95931a80",
@@ -6050,8 +6222,11 @@
     "docs/evidence/passage-order-control-20261015/analysis.json": "c51e9c27a32c721efcf4be7353fbb12c7dfa897727533d2aa5e12689c30925d3",
     "docs/evidence/physics-flash-20261029/analysis.json": "b7675cb4a17cf92ef66bc2107ace0d48dbcd37a37d676e1b0e3a280cc165ec56",
     "docs/evidence/timing-comparison-20261004/analysis.json": "eb8c5babe3dac5033291bd118b761e0e84b5aceb4c3b73b8ad0e429c2db65942",
+    "docs/evidence/vela2-03-macos-20261030/analysis.json": "9feebff166f7b888ebc3762cadf51585c5de9b7b4cce429d929b9eb207eeae3c",
+    "docs/evidence/vela2-03-macos-20261030/capability.json": "f478cddebf09f67250860947836e15ed843ad7b7ddf70811190008ed4462e1ff",
+    "docs/evidence/vela2-03-macos-20261030/physics.json": "8a52a92bd08244accdbff5b9b61098701b0954a2f6bf3e0d7085a282e7d78cd3",
     "docs/evidence/vela3-fast-20261028/analysis.json": "83c06bdf377353541aba7944231654f3c794f19ab17016de99e3b0fdba70ae4e",
-    "docs/leaderboard/model-metadata.json": "c3e559cd561061566fe0add489d3fb98ea4c7c7341f35f604fd74380d8f831f2",
+    "docs/leaderboard/model-metadata.json": "fdcd8ff3c9efc9b9c43f013ab993c5364e2d3c35198c049f9a8583c5cb0473ea",
     "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
     "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
     "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
@@ -6062,11 +6237,13 @@
     "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
     "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
     "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
+    "profiles/vela2-03-assets.json": "989bf962c6665767e00d39a5cd828b82d22556da71361c42f86a34e2a4546fd4",
+    "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "fe3c520adc3762bca8f1dd4b2e429b3ef0364fc89bf87570458a5118733bf40e",
+    "scripts/build-full-results.py": "ea2c7a39f3f46a58fb4449d22206020f3c07b2e30cf27daee7761a693dbd8fee",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-    "scripts/consolidated-campaigns.py": "6ca3d68e4f71da1c3465118a0e1b5bd8e31bcd4129d93bf890926636521ae2b2"
+    "scripts/consolidated-campaigns.py": "2e2811b193b2e6c8dfe2c698be89995d7017a395596508b87e7bed90d620c4a0"
   },
   "tasks": [
     {

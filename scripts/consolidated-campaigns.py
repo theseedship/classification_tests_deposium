@@ -15,6 +15,9 @@ PASSAGE_JEV = EVIDENCE + "passage-jev-20261015/analysis.json"
 D3LITE_MACOS_CAPABILITY = EVIDENCE + "d3-lite-macos-20261030/capability.json"
 D3LITE_MACOS_PHYSICS = EVIDENCE + "d3-lite-macos-20261030/physics.json"
 D3LITE_MACOS_REPORT = "D3_LITE_MACOS_RESULTS_20261030.md"
+VELA03_MACOS_CAPABILITY = EVIDENCE + "vela2-03-macos-20261030/capability.json"
+VELA03_MACOS_PHYSICS = EVIDENCE + "vela2-03-macos-20261030/physics.json"
+VELA03_MACOS_REPORT = "VELA2_03_MACOS_RESULTS_20261030.md"
 NEW_CONTEXT_IDS = {"ClefFlashQ8", "D3FlashQ8Upstream"}
 STATUSES = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
 DATASETS = {
@@ -121,11 +124,14 @@ class Campaigns:
                      and data["execution_scope"] == "isolated_cpu_worker_no_application_gateway",
                      "campaign: changed CPU qualification")
         asset, model, runtime = self.inputs.load(asset_path), data["model"], data["runtime"]
+        profile = self.inputs.load(profile_path)
+        profile_adapter = profile["adapter"]
         self.require(model["model_repo_id"] == asset["repo_id"] and model["model_revision"] == asset["revision"]
                      and model["assets_manifest"] == asset_path, "campaign: CPU model/asset identity mismatch")
         lock_bytes = self.inputs.read(lock_path)
         lock = self.lock_pins(lock_bytes.decode("utf-8"))
-        self.require(runtime["adapter"] == "d3" and runtime["device"] == "cpu" and runtime["runtime_lock"] == lock_path
+        self.require(runtime["adapter"] in ("d3", "vela2") and runtime["adapter"] == profile_adapter
+                     and runtime["device"] == "cpu" and runtime["runtime_lock"] == lock_path
                      and runtime["runtime_lock_sha256"] == hashlib.sha256(lock_bytes).hexdigest()
                      and runtime["profile"] == profile_path, "campaign: CPU runtime identity mismatch")
         # The aggregate's pins must be the lock's own values, not merely present.
@@ -133,10 +139,9 @@ class Campaigns:
         self.require(isinstance(pins, dict) and {"python", "torch", "transformers", "tokenizers", "safetensors"} <= set(pins)
                      and all(lock.get(name) == version for name, version in pins.items()),
                      "campaign: CPU runtime pins differ from the referenced lock")
-        profile = self.inputs.load(profile_path)
         self.require(profile["profile_id"] == runtime["profile_id"] and profile["revision"] == asset["revision"]
                      and profile["model"]["repo_id"] == asset["repo_id"], "campaign: CPU profile mismatch")
-        return data, {"adapter": "d3", "model_repo_id": asset["repo_id"], "model_revision": asset["revision"],
+        return data, {"adapter": runtime["adapter"], "model_repo_id": asset["repo_id"], "model_revision": asset["revision"],
                       "model_assets_sha256": model["model_assets_sha256"],
                       "runtime": {k: runtime[k] for k in ("device", "platform", "pins", "runtime_lock_sha256", "loading_mode")}}
 
@@ -165,8 +170,9 @@ class Campaigns:
                          "campaign: split views differ")
         backend = phase["actual_backend"]
         if backend["kind"] == "cpu":
+            precision = (backend.get("backbone_dtype"), backend.get("readout_dtype"), backend.get("dtype"))
             self.require(backend["device"] == "cpu" and type(backend["threads"]) is int and backend["threads"] > 0
-                         and backend["backbone_dtype"] == "bfloat16" and backend["readout_dtype"] == "float32",
+                         and precision in (("bfloat16", "float32", None), (None, None, "float32")),
                          "campaign: CPU worker identity not observed")
         else:
             self.require(backend["kind"] == "metal" and backend["offloaded_layers"] == backend["total_layers"] > 0,
@@ -294,13 +300,17 @@ class Campaigns:
                            CLEF, "CLEF_FLASH_RESULTS_20261029.md", 48, 24),
                 self.phase(physics, "physics", "physics", "D3FlashQ8Upstream", "D3 Flash Q8 · direct Metal",
                            PHYSICS, "PHYSICS_FLASH_RESULTS_20261029.md", 48, 24)]
-        for path, pack, total, families in ((D3LITE_MACOS_CAPABILITY, "capability", 192, 48),
-                                            (D3LITE_MACOS_PHYSICS, "physics", 48, 24)):
-            data, _ = self.cpu(path, "profiles/d3-lite-assets.json", "runtimes/d3-macos/runtime.lock",
-                               "profiles/d3-lite-macos-cpu.json")
-            self.inputs.read("docs/" + D3LITE_MACOS_REPORT)
-            rows.append(self.phase(data, pack, pack, "D3liteMacos", "D3 lite · macOS CPU", path,
-                                   D3LITE_MACOS_REPORT, total, families))
+        cpu_campaigns = (
+            ("D3liteMacos", "D3 lite · macOS CPU", "profiles/d3-lite-assets.json", "profiles/d3-lite-macos-cpu.json",
+             D3LITE_MACOS_REPORT, D3LITE_MACOS_CAPABILITY, D3LITE_MACOS_PHYSICS),
+            ("Vela03Macos", "Vela 2.0 0.3B · macOS CPU", "profiles/vela2-03-assets.json", "profiles/vela2-03-macos-cpu.json",
+             VELA03_MACOS_REPORT, VELA03_MACOS_CAPABILITY, VELA03_MACOS_PHYSICS),
+        )
+        for observation, model, assets, profile, report, capability_path, physics_path in cpu_campaigns:
+            self.inputs.read("docs/" + report)
+            for path, pack, total, families in ((capability_path, "capability", 192, 48), (physics_path, "physics", 48, 24)):
+                data, _ = self.cpu(path, assets, "runtimes/d3-macos/runtime.lock", profile)
+                rows.append(self.phase(data, pack, pack, observation, model, path, report, total, families))
         cp = capability["phases"]["capability"]
         rows.append({"task": "capability", "observation": "D3FlashQ8", "model": "D3 Flash Q8 · gateway Metal",
                      "counts": cp["counts"], "groups": cp["groups"], "source": capability["source"],

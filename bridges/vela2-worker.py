@@ -46,7 +46,9 @@ def _read():
 
 
 def _rss():
-    return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024
+    # ru_maxrss is KiB on Linux and bytes on macOS.
+    divisor = 1048576 if sys.platform == "darwin" else 1024
+    return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / divisor
 
 
 def _hash(path):
@@ -120,6 +122,12 @@ def _versions(pins):
 
 
 def _host_available_mb():
+    if sys.platform == "darwin":
+        from deposium_bench.native_resources import memory_snapshot
+        try:
+            return float(memory_snapshot()["MemAvailable_mib"])
+        except (OSError, ValueError, KeyError):
+            raise OSError("vela2_host_memory_unknown") from None
     available = None
     for line in Path("/proc/meminfo").read_text().splitlines():
         if line.startswith("MemAvailable:"):
