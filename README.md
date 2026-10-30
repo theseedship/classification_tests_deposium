@@ -98,10 +98,12 @@ were run once on a frozen ten-case TRAIN canary with a generative Qwen
 candidate outside the classifier cohort. The [first run](docs/LOCAL_TOOL_POLICY_RESULTS_20261030.md)
 collected all ten cases and passed **5/10** (quality verdict `fail`; discovery 0/2,
 arguments 2/2, episodes 3/6). It qualifies the runtime and scoring path, not
-tool routing: the cases are TRAIN, correlated and synthetic. A frozen
-[24-case held-out pack](datasets/tool-policy-heldout-v1/README.md) and a revised
-candidate prompt are fixed by the [held-out protocol](docs/LOCAL_TOOL_POLICY_HELDOUT_PROTOCOL_20261030.md);
-at freeze it has zero model cases.
+tool routing: the cases are TRAIN, correlated and synthetic. Under the
+[held-out protocol](docs/LOCAL_TOOL_POLICY_HELDOUT_PROTOCOL_20261030.md), a revised
+prompt (v2) reached **7/10** on the same TRAIN cases, and the first attempt on the
+frozen [24-case held-out pack](datasets/tool-policy-heldout-v1/README.md) was
+**partial: 9/18 scored of 24**, stopped by the RSS guard with six cases unobserved
+([report](docs/LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md)).
 
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their

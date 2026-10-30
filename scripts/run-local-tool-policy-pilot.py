@@ -359,7 +359,10 @@ def pilot(args):
         result["resource_writer_closed"] = watcher is None or not watcher.is_alive()
         result["resources"] = deepcopy(guard)
         if guard["stop_reason"] is not None:
+            # A resource or supervision stop is the attempt's stop reason; surface
+            # it beside the collection flags instead of only inside the guard copy.
             result["collection_complete"] = False
+            result["stop_reason"] = result.get("stop_reason") or guard["stop_reason"]
         try:
             result["memory_after"] = memory_snapshot()
         except (OSError, ValueError, subprocess.SubprocessError):

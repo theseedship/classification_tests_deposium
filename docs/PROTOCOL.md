@@ -315,8 +315,12 @@ FR/EN families and a revised candidate prompt (`prompt/v2`) that states the
 public contract rules the v1 prompt omitted. TRAIN exposure may change the
 candidate prompt, never a reference; v1 stays available so the TRAIN archive
 rescores byte-for-byte. The order is fixed: TRAIN re-run with v2, then the
-held-out run, each in a new archive bound to its frozen manifest. At freeze
-the held-out pack has zero model cases.
+held-out run, each in a new archive bound to its frozen manifest. Both ran on
+30 October 2026 ([results](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md)): TRAIN with
+v2 passed 7/10; the held-out attempt was **partial**, 9/18 scored of 24, after the
+pinned server's sampled RSS reached the 8 GiB ceiling at the nineteenth case.
+The ceiling was not raised; the six unobserved cases stay in every denominator,
+and a complete collection needs a reviewed session amendment.
 
 ### Retrieved passages and evidence
 

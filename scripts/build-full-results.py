@@ -29,7 +29,9 @@ NATIVE = EVIDENCE + "native-model-comparison-20261016/analysis.json"
 GLICLASS = EVIDENCE + "gliclass-model-comparison-20261017/analysis.json"
 FAST = EVIDENCE + "vela3-fast-20261028/analysis.json"
 CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
-LOCAL_POLICY = EVIDENCE + "local-tool-policy-20261030/analysis.json"
+LOCAL_POLICY = (EVIDENCE + "local-tool-policy-20261030/analysis.json",
+                EVIDENCE + "local-tool-policy-v2-train-20261030/analysis.json",
+                EVIDENCE + "local-tool-policy-heldout-20261030/analysis.json")
 NATIVE_SESSION = EVIDENCE + "native-model-comparison-20261016/native-sessions.json"
 GLICLASS_SESSION = EVIDENCE + "gliclass-model-comparison-20261017/gliclass-session.json"
 CAMPAIGN_MODULE = "scripts/consolidated-campaigns.py"
@@ -437,23 +439,50 @@ COVERAGE_TASKS = (
 ISSUES = "https://github.com/theseedship/classification_tests_deposium/issues/"
 
 
-def local_policy_canary(inputs):
-    """Validate the public canary aggregate before it can appear in the harness table."""
-    source = inputs.load(LOCAL_POLICY)
+LOCAL_POLICY_EXPECTED = (
+    # (relative path, split, eligible, collection complete, prompt version, report)
+    (LOCAL_POLICY[0], "train", 10, True, "deposium.local-tool-policy-prompt/v1", "LOCAL_TOOL_POLICY_RESULTS_20261030.md"),
+    (LOCAL_POLICY[1], "train", 10, True, "deposium.local-tool-policy-prompt/v2", "LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md"),
+    (LOCAL_POLICY[2], "test", 24, False, "deposium.local-tool-policy-prompt/v2", "LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md"),
+)
+
+
+def local_policy_observation(source, split, eligible, complete, prompt, report):
+    """Validate one public local tool-policy aggregate; both aggregate layouts are accepted."""
     require(source.get("schema_version") == "deposium.local-tool-policy-results/v1"
             and source.get("review") == "agent_only_pending_human"
-            and source.get("qualification") == "model_isolated_generated_json_train_canary",
+            and source.get("qualification") in (f"model_isolated_generated_json_{split}",
+                                                 "model_isolated_generated_json_train_canary" if split == "train" else None)
+            and source.get("prompt_version", "deposium.local-tool-policy-prompt/v1") == prompt,
             "unexpected local tool-policy aggregate")
     coverage, tasks = source["coverage"], source["results"]["by_task"]
-    require(coverage["eligible_cases"] == coverage["scored_cases"] == 10 > 0
+    scored_of = lambda cell: cell.get("scored", cell["eligible"])
+    require(coverage["eligible_cases"] == eligible > 0
+            and 0 < coverage["scored_cases"] <= eligible
             and 0 <= coverage["passed_cases"] <= coverage["scored_cases"]
-            and sum(coverage["counts_by_status"].values()) == coverage["eligible_cases"]
-            and sum(t["eligible"] for t in tasks.values()) == coverage["eligible_cases"]
+            and coverage.get("collection_complete", True) is complete
+            and (coverage["scored_cases"] == eligible) is complete
+            and sum(coverage["counts_by_status"].values()) == eligible
+            and coverage["counts_by_status"]["ok"] >= coverage["scored_cases"]
+            and sum(t["eligible"] for t in tasks.values()) == eligible
+            and sum(scored_of(t) for t in tasks.values()) == coverage["scored_cases"]
             and sum(t["correct"] for t in tasks.values()) == coverage["passed_cases"],
             "inconsistent local tool-policy denominators")
-    cells = {name: f"{tasks[name]['correct']}/{tasks[name]['eligible']}" for name in ("discovery", "arguments", "episodes")}
-    return {"report": "LOCAL_TOOL_POLICY_RESULTS_20261030.md", "passed": coverage["passed_cases"],
-            "scored": coverage["scored_cases"], "eligible": coverage["eligible_cases"], **cells}
+    if not complete:
+        require(coverage.get("stop_reason") in ("rss_guard", "host_reserve", "time_limit", "native_supervision_lost")
+                and len(coverage.get("unobserved_cases", [])) == eligible - coverage["counts_by_status"]["ok"],
+                "partial local tool-policy aggregate without an accounted stop")
+    cells = ", ".join(f"{tasks[n]['correct']}/{scored_of(tasks[n])} {n}" for n in ("discovery", "arguments", "episodes"))
+    text = f"{coverage['passed_cases']}/{coverage['scored_cases']} scored of {eligible} ({cells})"
+    if not complete:
+        text += f", {eligible - coverage['scored_cases']} unobserved after `{coverage['stop_reason']}`"
+    return {"report": report, "passed": coverage["passed_cases"], "scored": coverage["scored_cases"],
+            "eligible": eligible, "complete": complete, "text": text}
+
+
+def local_policy_observations(inputs):
+    rows = [local_policy_observation(inputs.load(path), *rest) for path, *rest in LOCAL_POLICY_EXPECTED]
+    return dict(zip(("train_v1", "train_v2", "heldout"), rows))
 
 
 def coverage_cell(counts, total, source=None, *, metric="correct_choice", statuses=None):
@@ -576,7 +605,7 @@ def build_coverage(observations, campaigns, others, inputs):
                     metric_eligible=metric["eligible_cases"])
         by_id[target]["cells"]["passage_ranking"] = cell
 
-    policy = local_policy_canary(inputs)
+    policy = local_policy_observations(inputs)
     harness = [
         ("closed_choices", "Closed context, first-tool, capability and physics choices", "implemented",
          "Observed only on supplied alternatives; tool/24 remains provisional and executes no tool.", []),
@@ -590,10 +619,11 @@ def build_coverage(observations, campaigns, others, inputs):
          "[Argument-execution contract](TOOL_ARGUMENTS_CONTRACT_V1.md): four FR/EN training cases, actual bounded lookup/sum and artifact guards; no qualified real-model output path or application integration.", [11]),
         ("episodes", "Bounded episodes with executed tools and feedback", "fixture_only",
          "[Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics; four task results, zero real-model or application qualification.", [12]),
-        ("local_json_policy", "Generated JSON proposals from a local model", "train_canary_collected",
-         f"[Qwen3-4B Q8 TRAIN canary]({policy['report']}): {policy['passed']}/{policy['scored']} cases pass over {policy['eligible']} eligible "
-         f"({policy['discovery']} discovery, {policy['arguments']} arguments, {policy['episodes']} episodes); one model, ten correlated TRAIN cases, "
-         "no held-out, ranking, live MCP or product qualification.", [35]),
+        ("local_json_policy", "Generated JSON proposals from a local model", "partial_coverage",
+         f"Qwen3-4B Q8, three observations: [TRAIN prompt v1]({policy['train_v1']['report']}) {policy['train_v1']['text']}; "
+         f"[TRAIN prompt v2]({policy['train_v2']['report']}) {policy['train_v2']['text']}; "
+         f"[held-out prompt v2]({policy['heldout']['report']}) {policy['heldout']['text']}. "
+         "One model, correlated FR/EN pairs; no ranking, live MCP or product qualification.", [35]),
         ("order_retention", "Order robustness and evidence retention", "partial_coverage",
          "[Offline order/retention analysis](PASSAGE_ORDER_RETENTION_V1.md) covers four rotations and both views (920 distinct test inputs); historical ranking exists, while new Flash classifications still cover rotation 0 only. No new model calls.", [13]),
         ("cohort", "Remaining cohort on new packs", "not_run",
@@ -703,9 +733,10 @@ def render_coverage(coverage):
         links = ", ".join(f"[#{url.rsplit('/', 1)[1]}]({url})" for url in row["issues"]) or "—"
         lines.append(f"| {row['capability']} | {row['status']} | {row['boundary']} | {links} |")
     lines += ["", "The initial contract, discovery, arguments and episode fixtures are implemented as scripted controls. "
-              "The [local JSON route](LOCAL_TOOL_POLICY_V1.md) now has one collected TRAIN canary with a quality `fail` "
-              "([report](LOCAL_TOOL_POLICY_RESULTS_20261030.md)). Freeze fresh held-out families "
-              "before broader model campaigns. See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.", ""]
+              "The [local JSON route](LOCAL_TOOL_POLICY_V1.md) has two TRAIN canary observations (prompt v1 5/10, prompt v2 7/10) "
+              "and one partial held-out observation (9/18 scored of 24, stopped by the RSS guard; "
+              "[report](LOCAL_TOOL_POLICY_V2_RESULTS_20261030.md)). Completing the held-out collection needs a reviewed "
+              "session amendment, not a higher ceiling. See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.", ""]
     return lines
 
 
