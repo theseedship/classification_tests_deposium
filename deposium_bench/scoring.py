@@ -37,6 +37,14 @@ def score_case(case: dict, result: dict) -> dict:
     if "case_id" in result and result["case_id"] != case["case_id"]:
         raise ValueError("result: mismatching case_id")
     status = result["status"]
+    raw = result.get("raw_output")
+    if isinstance(raw, dict) and raw.get("schema_version") == "deposium.local-tool-model-trace/v1":
+        from .local_tool_policy import validate_trace
+        try:
+            validate_trace(case, result)
+        except (ValueError, KeyError, TypeError):
+            return {"scored": status in {"ok", "abstain"}, "passed": False,
+                    "checks": [], "reason": "invalid_generated_proposal_trace"}
     if status not in {"ok", "abstain"}:
         return {"scored": False, "passed": False, "checks": [], "reason": status}
     if status == "abstain":

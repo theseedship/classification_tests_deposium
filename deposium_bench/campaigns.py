@@ -82,7 +82,7 @@ def _source_fingerprint() -> dict:
 def _scorer_fingerprint() -> dict:
     root = Path(__file__).parent
     files = {name: _hash((root / name).read_bytes()) for name in
-             ("scoring.py", "cases.py", "tool_plan.py", "tool_discovery.py", "tool_arguments.py", "tool_episodes.py", "synthetic_tools.py", "research_corpus.py", "physics_corpus.py", "capability_corpus.py", "choice_protocol.py",
+             ("scoring.py", "cases.py", "tool_plan.py", "tool_discovery.py", "tool_arguments.py", "tool_episodes.py", "local_tool_policy.py", "synthetic_tools.py", "research_corpus.py", "physics_corpus.py", "capability_corpus.py", "choice_protocol.py",
               "lengths.py", "data/context-distractors.json")}
     from .capability_corpus import SOURCE_FILES
     for name in SOURCE_FILES:
@@ -158,7 +158,7 @@ def _prepare_profile(profile_path: Path) -> tuple[dict, str, bytes | None]:
         model = dict(profile["model"])
         model["budget_ledger"] = os.path.abspath(profile_path.parent / model["budget_ledger"])
         profile = {**profile, "model": model}
-    elif profile["adapter"] == "systemone_local":
+    elif profile["adapter"] in {"systemone_local", "llama_cpp_json"}:
         model = dict(profile["model"])
         model["session_manifest"] = os.path.abspath(profile_path.parent / model["session_manifest"])
         profile = {**profile, "model": model}
@@ -237,7 +237,8 @@ def _manifest(cases: list[dict], dataset: bytes, profile: dict, source_profile_h
         "created_at": datetime.now(timezone.utc).isoformat(), "mode": mode,
         "qualification": profile["qualification"],
         "proof_level": "harness_control" if profile["qualification"] == "harness_control" else "A",
-        "input_protocol": ("fixture_episode_control" if profile["adapter"] == "fixture_episode" else
+        "input_protocol": ("generated_tool_proposals_v1" if profile["adapter"] == "llama_cpp_json" else
+                           "fixture_episode_control" if profile["adapter"] == "fixture_episode" else
                            "fixture_arguments_control" if profile["adapter"] == "fixture_arguments" else
                            "recorded_control" if profile["adapter"] == "recorded" else
                            "context_choice" if "bench.context-choice" in profile["capabilities"] else "current_equivalent"),
@@ -560,6 +561,12 @@ def _archive(archive_dir: str | Path) -> tuple[Path, dict, list[dict], list[dict
         duration = record.get("duration_ms")
         if isinstance(duration, bool) or not isinstance(duration, (int, float)) or not math.isfinite(duration) or duration < 0:
             raise CampaignError("Invalid recorded duration.")
+        if profile["adapter"] == "llama_cpp_json" and case["contract_id"] in profile["capabilities"]:
+            from .local_tool_policy import validate_trace, settings_for
+            try:
+                validate_trace(case, record, settings_for(profile["model"]))
+            except (ValueError, KeyError, TypeError) as exc:
+                raise CampaignError("Archived generated proposal trace is inconsistent.") from exc
         seen.add(record["case_id"])
         records.append(record)
     parent = {"archive_dir": str(root), "run_id": manifest["run_id"],

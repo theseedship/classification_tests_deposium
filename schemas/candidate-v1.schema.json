@@ -44,7 +44,8 @@
         "vela3_fast",
         "decision3_http",
         "fixture_arguments",
-        "fixture_episode"
+        "fixture_episode",
+        "llama_cpp_json"
       ]
     },
     "qualification": {
@@ -119,6 +120,9 @@
         },
         {
           "$ref": "#/$defs/decision3_http_model_config"
+        },
+        {
+          "$ref": "#/$defs/llama_cpp_json_model_config"
         }
       ]
     },
@@ -1003,14 +1007,56 @@
         }
       },
       "then": {
-        "properties": {
-          "adapter": {
-            "const": "recorded"
+        "anyOf": [
+          {
+            "properties": {
+              "adapter": {
+                "const": "recorded"
+              },
+              "qualification": {
+                "const": "harness_control"
+              }
+            }
           },
-          "qualification": {
-            "const": "harness_control"
+          {
+            "properties": {
+              "adapter": {
+                "const": "llama_cpp_json"
+              },
+              "qualification": {
+                "const": "model_isolated"
+              },
+              "model": {
+                "$ref": "#/$defs/llama_cpp_json_model_config"
+              },
+              "revision": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "recordings": {
+                "type": "null"
+              },
+              "capabilities": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 3,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "bench.tool-discovery",
+                    "bench.tool-arguments",
+                    "bench.tool-episode"
+                  ]
+                }
+              },
+              "timeout_seconds": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 30
+              }
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -1058,29 +1104,71 @@
         }
       },
       "then": {
-        "properties": {
-          "adapter": {
-            "const": "fixture_arguments"
+        "anyOf": [
+          {
+            "properties": {
+              "adapter": {
+                "const": "fixture_arguments"
+              },
+              "qualification": {
+                "const": "harness_control"
+              },
+              "model": {
+                "type": "null"
+              },
+              "revision": {
+                "type": "null"
+              },
+              "recordings": {
+                "type": "string",
+                "minLength": 1
+              },
+              "capabilities": {
+                "const": [
+                  "bench.tool-arguments"
+                ]
+              }
+            }
           },
-          "qualification": {
-            "const": "harness_control"
-          },
-          "model": {
-            "type": "null"
-          },
-          "revision": {
-            "type": "null"
-          },
-          "recordings": {
-            "type": "string",
-            "minLength": 1
-          },
-          "capabilities": {
-            "const": [
-              "bench.tool-arguments"
-            ]
+          {
+            "properties": {
+              "adapter": {
+                "const": "llama_cpp_json"
+              },
+              "qualification": {
+                "const": "model_isolated"
+              },
+              "model": {
+                "$ref": "#/$defs/llama_cpp_json_model_config"
+              },
+              "revision": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "recordings": {
+                "type": "null"
+              },
+              "capabilities": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 3,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "bench.tool-discovery",
+                    "bench.tool-arguments",
+                    "bench.tool-episode"
+                  ]
+                }
+              },
+              "timeout_seconds": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 30
+              }
+            }
           }
-        }
+        ]
       }
     },
     {
@@ -1133,32 +1221,121 @@
         }
       },
       "then": {
+        "anyOf": [
+          {
+            "properties": {
+              "adapter": {
+                "const": "fixture_episode"
+              },
+              "qualification": {
+                "const": "harness_control"
+              },
+              "model": {
+                "type": "null"
+              },
+              "revision": {
+                "type": "null"
+              },
+              "recordings": {
+                "type": "string",
+                "minLength": 1
+              },
+              "capabilities": {
+                "const": [
+                  "bench.tool-episode"
+                ]
+              },
+              "timeout_seconds": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 3600
+              }
+            }
+          },
+          {
+            "properties": {
+              "adapter": {
+                "const": "llama_cpp_json"
+              },
+              "qualification": {
+                "const": "model_isolated"
+              },
+              "model": {
+                "$ref": "#/$defs/llama_cpp_json_model_config"
+              },
+              "revision": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "recordings": {
+                "type": "null"
+              },
+              "capabilities": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 3,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "bench.tool-discovery",
+                    "bench.tool-arguments",
+                    "bench.tool-episode"
+                  ]
+                }
+              },
+              "timeout_seconds": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 30
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
         "properties": {
           "adapter": {
-            "const": "fixture_episode"
+            "const": "llama_cpp_json"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "adapter": {
+            "const": "llama_cpp_json"
           },
           "qualification": {
-            "const": "harness_control"
+            "const": "model_isolated"
           },
           "model": {
-            "type": "null"
+            "$ref": "#/$defs/llama_cpp_json_model_config"
           },
           "revision": {
-            "type": "null"
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
           },
           "recordings": {
-            "type": "string",
-            "minLength": 1
+            "type": "null"
           },
           "capabilities": {
-            "const": [
-              "bench.tool-episode"
-            ]
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "bench.tool-discovery",
+                "bench.tool-arguments",
+                "bench.tool-episode"
+              ]
+            }
           },
           "timeout_seconds": {
             "type": "number",
-            "minimum": 1,
-            "maximum": 3600
+            "exclusiveMinimum": 0,
+            "maximum": 30
           }
         }
       }
@@ -2347,6 +2524,71 @@
         }
       },
       "description": "Explicit remote API policy; budget ledger survives launches/resumes. No immutable HF revision or local model assets are claimed."
+    },
+    "llama_cpp_json_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoint",
+        "model_id",
+        "max_length",
+        "max_output_tokens",
+        "seed",
+        "prompt_version",
+        "repo_id",
+        "session_manifest",
+        "session_sha256",
+        "max_rss_mb",
+        "credential_env"
+      ],
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "pattern": "^http://127\\.0\\.0\\.1:(?:102[4-9]|10[3-9][0-9]|1[1-9][0-9]{2}|[2-9][0-9]{3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])/v1/chat/completions$"
+        },
+        "model_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,95}$"
+        },
+        "max_length": {
+          "type": "integer",
+          "const": 4096
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 32,
+          "maximum": 512
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "prompt_version": {
+          "const": "deposium.local-tool-policy-prompt/v1"
+        },
+        "repo_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "session_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\x00]+$"
+        },
+        "session_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "max_rss_mb": {
+          "type": "integer",
+          "minimum": 256,
+          "maximum": 8192
+        },
+        "credential_env": {
+          "const": "DEPOSIUM_BENCH_LOCAL_KEY"
+        }
+      }
     }
   }
 }

@@ -90,7 +90,7 @@ A missing model observation and a missing harness capability are different gaps.
 | Pinned application harness integration | not_implemented | An integration registry or isolated model run does not establish live application behavior. | [#17](https://github.com/theseedship/classification_tests_deposium/issues/17) |
 | Evidence-to-answer generation and citation fidelity | not_implemented | No complete retrieval-to-answer campaign is qualified. | [#18](https://github.com/theseedship/classification_tests_deposium/issues/18) |
 
-The initial contract, discovery, arguments and episode fixtures are implemented as scripted controls. Next, qualify a candidate output path and a bounded canary; freeze fresh held-out families before broader model campaigns. See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.
+The initial contract, discovery, arguments and episode fixtures are implemented as scripted controls. The [prepared local JSON route](LOCAL_TOOL_POLICY_V1.md) has zero real-model observations. Next, qualify its bounded TRAIN canary; freeze fresh held-out families before broader model campaigns. See [campaign status](CAMPAIGN_STATUS.md) for the working sequence.
 
 ## Updated task rankings
 

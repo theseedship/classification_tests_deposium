@@ -270,6 +270,43 @@ correct-looking answer yields 13/14, 18 actual calls and three task results;
 all 14 cases remain scored. The altered case executes no tool and fails its
 procedure and result checks.
 
+### Generated JSON proposals: prepared local qualification path
+
+The [local tool-policy adapter](LOCAL_TOOL_POLICY_V1.md) provides a separate
+`llama_cpp_json` path with an owned loopback session, strict generated-JSON
+parsing, source/model/template bindings and retained raw response bytes.
+Discovery proposes a native shortlist/selection. Argument evaluation reuses
+the actual fixed lookup and guarded sum. Episodes inject the model policy
+into the same runtime after each actual observation. No authored complete-plan
+choice or symbolic argument substitution replaces generation.
+
+The [canary](../datasets/tool-policy-canary-v1/README.md) freezes ten TRAIN
+cases in five FR/EN families, with no held-out cases. Its new episode input/v2
+permits a declared maximum 60,000 ms; input/v1 stays bounded at 1,000 ms and
+all original references remain unchanged. Actual model and tool time count
+toward the episode deadline. Retained call, policy, episode and case timings
+must be mutually consistent. Parsing, execution guards and source-scope checks
+remain independent of native grammar enforcement and candidate predictions.
+
+Raw generations, proposal/request hashes, statuses and execution receipts are
+bound and checked on pure rescore. Invalid JSON, incomplete, explicitly truncated
+or credential-bearing responses cannot become scored proposals; wrong but
+valid JSON still reaches the task's independent correctness checks. No rescore
+invokes a model, tool, clock, old service or credential.
+
+The [fixed native protocol](LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md)
+requires the pinned Qwen3 4B Q8 asset, one process/slot, actual Metal offload,
+8 GiB RSS plus 8 GiB reserve, a 600-second session and 20-second HTTP calls.
+The known single-model native alias behavior is recorded separately from the
+fixed client alias and owned-model identity. A requested schema is not proof
+that every grammar constraint or semantic field was enforced.
+
+This is **offline preparation only**: zero real-model cases, no downloaded
+weights, no native generation or successful model canary are established by
+unit controls. The added generative candidate does not replace or reorder the
+frozen classifier cohort. Actual qualification and any later evaluation need
+fresh admission and sealed execution evidence.
+
 ### Retrieved passages and evidence
 
 The [passage-evidence pack](../datasets/passage-evidence-v1/README.md) contains

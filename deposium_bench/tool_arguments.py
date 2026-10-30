@@ -120,6 +120,35 @@ def validate_receipt(task, output):
         raise CaseError("tool-arguments: execution receipt mismatch")
 
 
+def run_arguments(task, predict):
+    """Execute the same guarded fixture around one declared proposal policy.
+
+    The callback receives only the actual lookup projection. It returns the
+    ordinary adapter envelope; references and case identities are not passed.
+    """
+    from .adapters import _envelope
+    validate_input(task)
+    store = FixtureStore(task)
+    lookup = store.lookup()
+    projected = candidate_input(task, lookup)
+    projection_hash = hashlib.sha256(canonical(projected)).hexdigest()
+    response = predict(deepcopy(projected))
+    diagnostic = {"candidate_input": projected, "candidate_input_sha256": projection_hash,
+                  "trace": deepcopy(store.trace)}
+    if response["status"] != "ok":
+        return _envelope(response["status"], raw_output=diagnostic, error=response["error"])
+    proposal = response["output"]
+    flags = proposal_checks(proposal, task, lookup)
+    execution = {"executed": False, "status": "blocked", "value": None, "unit": None}
+    if all(flags.values()):
+        result = store.sum(proposal["arguments"])
+        execution = {"executed": True, "status": result["status"], "value": result["value"], "unit": result["unit"]}
+    output = {"schema_version": OUTPUT_VERSION, "candidate_input": projected,
+              "candidate_input_sha256": projection_hash, "proposal": deepcopy(proposal),
+              "checks": flags, "execution": execution, "trace": deepcopy(store.trace)}
+    return _envelope("ok", output=output, raw_output=deepcopy(proposal))
+
+
 class FixtureArgumentsAdapter:
     """A proposal replay around two genuinely executed local fixture functions."""
     def __init__(self, profile, profile_path, recordings_data=None):
@@ -139,27 +168,8 @@ class FixtureArgumentsAdapter:
         request = _request(request)
         if request["contract_id"] != CONTRACT:
             return _envelope("unsupported", error="unsupported_contract")
-        task = request["input"]
-        validate_input(task)
-        store = FixtureStore(task)
-        lookup = store.lookup()
-        projected = candidate_input(task, lookup)
-        projection_hash = hashlib.sha256(canonical(projected)).hexdigest()
-        response = self.control.predict({"case_id": request["case_id"], "contract_id": CONTRACT, "input": projected})
-        diagnostic = {"candidate_input": projected, "candidate_input_sha256": projection_hash,
-                      "trace": deepcopy(store.trace)}
-        if response["status"] != "ok":
-            return _envelope(response["status"], raw_output=diagnostic, error=response["error"])
-        proposal = response["output"]
-        flags = proposal_checks(proposal, task, lookup)
-        execution = {"executed": False, "status": "blocked", "value": None, "unit": None}
-        if all(flags.values()):
-            result = store.sum(proposal["arguments"])
-            execution = {"executed": True, "status": result["status"], "value": result["value"], "unit": result["unit"]}
-        output = {"schema_version": OUTPUT_VERSION, "candidate_input": projected,
-                  "candidate_input_sha256": projection_hash, "proposal": deepcopy(proposal),
-                  "checks": flags, "execution": execution, "trace": deepcopy(store.trace)}
-        return _envelope("ok", output=output, raw_output=deepcopy(proposal))
+        return run_arguments(request["input"], lambda projected: self.control.predict({
+            "case_id": request["case_id"], "contract_id": CONTRACT, "input": projected}))
 
 
 def summarize_metrics(cases, rows, results):
@@ -180,11 +190,16 @@ def summarize_metrics(cases, rows, results):
             result = raw.get(case["case_id"], {})
             output = result.get("output")
             try:
+                retained = result.get("raw_output")
+                if isinstance(retained, dict) and retained.get("schema_version") == "deposium.local-tool-model-trace/v1":
+                    from .local_tool_policy import validate_trace
+                    validate_trace(case, result)
+                    retained = retained["argument_diagnostic"]
                 if result.get("status") == "ok":
                     validate_receipt(case["input"], output)
                     calls = len(output["trace"])
                 else:
-                    validate_diagnostic(case["input"], result.get("raw_output"))
+                    validate_diagnostic(case["input"], retained)
                     calls = 1
             except (CaseError, KeyError, TypeError):
                 continue
