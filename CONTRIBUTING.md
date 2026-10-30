@@ -28,6 +28,7 @@ python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
 python3 -m deposium_bench.capability_corpus --check
+python3 -m deposium_bench.passage_order_retention plan
 python3 scripts/build-full-results.py --check
 python3 scripts/check-reference-grids.py
 ```
@@ -44,6 +45,7 @@ Each command should exit `0`. The expected signals are:
 | First-tool cases | `status: valid_review_corpus`, `cases_scored: 0` | Valid 24-case proposal pack; references remain provisional. |
 | Passage dataset / corpus | `status: valid`; `Dataset regeneration matches` | Valid 1,536-case corpus and no difference from the frozen generated corpus. |
 | Capability corpus | `status: valid_frozen_corpus`, `cases_scored: 0` | No difference from the frozen 192-case corpus. |
+| Passage-order plan | `status: offline_prepared_no_new_inference`, `distinct_physical_calls: 920` | Plans 5,632 logical test decisions across existing rotations/views; executes no model. |
 | Full results | `views current` | Tracked generated tables/exports match their declared public sources. |
 | Reference grids | `status: implementation_checks_passed` | Shared validators and scripted controls pass with explicit denominators; no inference or proof that every authored answer is true. |
 

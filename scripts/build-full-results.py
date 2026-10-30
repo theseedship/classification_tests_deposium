@@ -570,7 +570,7 @@ def build_coverage(observations, campaigns, others, inputs):
         ("episodes", "Bounded episodes with executed tools and feedback", "fixture_only",
          "[Episode contract](TOOL_EPISODES_CONTRACT_V1.md): 14 FR/EN training controls with actual observations, retry/stopping guards and separate stage metrics; four task results, zero real-model or application qualification.", [12]),
         ("order_retention", "Order robustness and evidence retention", "partial_coverage",
-         "Historical four-rotation ranking exists; new Flash classifications cover rotation 0 only.", [13]),
+         "[Offline order/retention analysis](PASSAGE_ORDER_RETENTION_V1.md) covers four rotations and both views (920 distinct test inputs); historical ranking exists, while new Flash classifications still cover rotation 0 only. No new model calls.", [13]),
         ("cohort", "Remaining cohort on new packs", "not_run",
          "Historical context scores cannot fill new task cells.", [14]),
         ("large_envelope", "Clef 27B candidate envelope", "not_run",

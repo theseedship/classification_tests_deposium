@@ -1,0 +1,247 @@
+{
+  "analysis_sources_sha256": {
+    "deposium_bench/adapters.py": "baad639be6d8ff4feb50c908f7110186780163848905fa0f1fae412b16def86c",
+    "deposium_bench/campaigns.py": "dc98e3330eae8ac59da0eba748c8bbaa9d4f8fb4faa4ab957a7c176f91c892bd",
+    "deposium_bench/choice_protocol.py": "cbc990434887ddedc4df5f20c416cb64e073ecb5c7a4b4d93321d79f9ea8728f",
+    "deposium_bench/passage_dataset.py": "15b8a117a197129a8ae88e253f64e878e34bb60d5a3cd9747d6ec0b0496298a0",
+    "deposium_bench/passage_observation.py": "ca2d36c05b904dcec238f645dc0d7edd6531d443403ad34fd1aee4553c985158",
+    "deposium_bench/passage_order_retention.py": "4438e969bbcf6e189bffce230e58afd2423367462aef55a671a05dc910304b01"
+  },
+  "candidate_model_cases": 0,
+  "date": "2026-10-30",
+  "executed_analysis_commit": "4904e39b729fdca035af7ff4515a3777baf5d74e",
+  "human_judgments": 0,
+  "limitations": [
+    "This source is an explicitly authored transport fixture, not model observations or new model quality results.",
+    "Analysis performs no inference; the 192 additional physical inputs remain unobserved.",
+    "Shared single-passage input reuse is projection invariance, not measured model robustness to pool order.",
+    "Retention measures frozen synthetic evidence sets and conflicts, not generated answer correctness.",
+    "References/translations remain agent-authored, pending human review; variants share families.",
+    "Seals prove retained-byte integrity, not external producer authenticity.",
+    "Original and derived control archives stay local and outside Git; only this selected aggregate is published."
+  ],
+  "new_model_calls": 0,
+  "offline_checks": {
+    "focused": {
+      "passed": 20,
+      "skipped": 0,
+      "tests": 20
+    },
+    "linux": {
+      "errors": 0,
+      "failures": 0,
+      "network": "disabled",
+      "passed": 955,
+      "python": "3.12",
+      "skipped": 31,
+      "source_mount": "read_only",
+      "tests": 986
+    }
+  },
+  "plan": {
+    "by_axis": {
+      "answerability": {
+        "distinct_physical_calls": 264,
+        "logical_decisions": 512,
+        "order_interpretation": "order_visible_in_pool_input"
+      },
+      "relevance": {
+        "distinct_physical_calls": 264,
+        "logical_decisions": 2048,
+        "order_interpretation": "single_passage_projection_invariant"
+      },
+      "support": {
+        "distinct_physical_calls": 392,
+        "logical_decisions": 3072,
+        "order_interpretation": "single_passage_projection_invariant"
+      }
+    },
+    "current_execution_budget": {
+      "candidate_adapters_created": 0,
+      "model_calls": 0,
+      "network_calls": 0
+    },
+    "dataset": {
+      "directions": 8,
+      "families": 8,
+      "path": "datasets/passage-evidence-v1/cases.jsonl",
+      "pools": 512,
+      "rotations": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sha256": "35a8b8982d12959985218b5bc6e10e932ba30970bd7ab9a81c6f10d17a7fe476",
+      "split": "test",
+      "views": [
+        "full",
+        "head_384"
+      ]
+    },
+    "distinct_physical_calls": 920,
+    "future_inference": {
+      "automatic_retries": 0,
+      "maximum_distinct_test_calls_for_this_plan": 920,
+      "required_before_first_call": [
+        "pinned_candidate_and_runtime",
+        "complete_native_input_preparation",
+        "calibration_canary",
+        "frozen_numeric_time_memory_and_request_budgets"
+      ],
+      "status": "not_admitted_by_this_offline_plan"
+    },
+    "limitations": [
+      "Variants share eight families; they are not independent facts.",
+      "Relevance/support rotation reuse is input invariance, not observed order robustness.",
+      "Retention is evaluated against frozen synthetic references, not generated answers.",
+      "No model, retrieval, answer-generation or product qualification follows."
+    ],
+    "logical_decisions": 5632,
+    "logical_requests_sha256": "95b0191fcce607272b695a223ce56b2a10110db41ce46cd399dd0a5004e8c02e",
+    "physical_requests_sha256": "51674d4a182556116e2d0066811a7c76abf59e2aea19adf761c5efec7ff9b1a9",
+    "plan_id": "passage-order-retention-v1-20261030",
+    "reference_review": "agent_only_pending_human",
+    "retention_rule": {
+      "answerability_gate": "not_applied",
+      "conflict_pair": "supports_and_refutes_the_same_frozen_claim",
+      "conflict_pair_eligible": "conflicting_visible_evidence_only",
+      "cutoffs": [
+        1,
+        3,
+        4
+      ],
+      "inapplicable_metric": "null",
+      "missing_or_failed_eligible_ranking": "zero_over_eligible",
+      "ranking": "shared_replacement_predicted_relevance_descending_input_order_ties",
+      "selection": "fixed_before_any_new_candidate_predictions_no_test_tuning",
+      "sufficient_set": "contains_at_least_one_frozen_minimal_evidence_set",
+      "sufficient_set_eligible": "answerable_only"
+    },
+    "schema_version": "deposium.passage-order-retention/v1",
+    "status": "offline_prepared_no_new_inference"
+  },
+  "qualification": "implementation_control",
+  "schema_version": "deposium.passage-order-offline-evidence/v1",
+  "source_control": {
+    "authored_physical_records": 728,
+    "axes": {
+      "answerability": {
+        "counts_by_status": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 360,
+          "ok": 152,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "coverage": 0.296875,
+        "scored_cases": 152,
+        "total_decisions": 512
+      },
+      "relevance": {
+        "counts_by_status": {
+          "abstain": 8,
+          "error": 8,
+          "missing": 8,
+          "ok": 2008,
+          "timeout": 8,
+          "unsupported": 8
+        },
+        "coverage": 0.98046875,
+        "scored_cases": 2008,
+        "total_decisions": 2048
+      },
+      "support": {
+        "counts_by_status": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 3072,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "coverage": 1.0,
+        "scored_cases": 3072,
+        "total_decisions": 3072
+      }
+    },
+    "collected_candidate_responses": 0,
+    "derived_analysis_sha256": "07a1753aac0f016ace439df1031aecfe6dde2faf3534d6ff68b05834f7ad73d4",
+    "kind": "synthetically_authored_sealed_transport_archive",
+    "policy": "Fixed o1 outputs plus one deliberate record per failure class; no reference-driven candidate or model execution.",
+    "retention_metrics": {
+      "conflict_pair@1": {
+        "defined_cases": 64,
+        "defined_fraction": 0.125,
+        "eligible_cases": 64,
+        "mean": 0.0,
+        "mean_conditional_on_observed": 0.0,
+        "mean_over_eligible_missing_zero": 0.0,
+        "total_cases": 512
+      },
+      "conflict_pair@3": {
+        "defined_cases": 64,
+        "defined_fraction": 0.125,
+        "eligible_cases": 64,
+        "mean": 0.5,
+        "mean_conditional_on_observed": 0.5,
+        "mean_over_eligible_missing_zero": 0.5,
+        "total_cases": 512
+      },
+      "conflict_pair@4": {
+        "defined_cases": 64,
+        "defined_fraction": 0.125,
+        "eligible_cases": 64,
+        "mean": 1.0,
+        "mean_conditional_on_observed": 1.0,
+        "mean_over_eligible_missing_zero": 1.0,
+        "total_cases": 512
+      },
+      "sufficient_set@1": {
+        "defined_cases": 336,
+        "defined_fraction": 0.65625,
+        "eligible_cases": 352,
+        "mean": 0.20238095238095238,
+        "mean_conditional_on_observed": 0.20238095238095238,
+        "mean_over_eligible_missing_zero": 0.19318181818181818,
+        "total_cases": 512
+      },
+      "sufficient_set@3": {
+        "defined_cases": 336,
+        "defined_fraction": 0.65625,
+        "eligible_cases": 352,
+        "mean": 0.7023809523809523,
+        "mean_conditional_on_observed": 0.7023809523809523,
+        "mean_over_eligible_missing_zero": 0.6704545454545454,
+        "total_cases": 512
+      },
+      "sufficient_set@4": {
+        "defined_cases": 336,
+        "defined_fraction": 0.65625,
+        "eligible_cases": 352,
+        "mean": 1.0,
+        "mean_conditional_on_observed": 1.0,
+        "mean_over_eligible_missing_zero": 0.9545454545454546,
+        "total_cases": 512
+      }
+    },
+    "source_adapter_identity_sha256": "89695c3b73cc0d2fdeaa16f2ed000a151ddb909a8fcbbebf6e153cba0efc1d41",
+    "source_bench_sha256": "c34fb05e4e4099eb1561390d1c196ee2341ba31130a8cd2d57ea0f1810df413b",
+    "source_declared_qualification": "harness_control_not_model",
+    "source_manifest_sha256": "89ef79908be30f8977d15d3b69522a2d892b4f0c122373b8e5e7895a08a7ddc1",
+    "source_original_profile_sha256": "249e206e6d0697a9a0454fc00d9fa14e5ba98510ab9d79625a95b75788063e10",
+    "source_profile_sha256": "57ad45567e910e7597692e5cdec7e8f83217ebc97fe1537b77168843759b3b42",
+    "source_seal_sha256": "60fbc5f4538aae4024110b37383c9ee77237e64c30d198961205f6ee1c349bfc",
+    "source_statuses": {
+      "abstain": 1,
+      "error": 1,
+      "missing": 1,
+      "ok": 723,
+      "timeout": 1,
+      "unsupported": 1
+    },
+    "target_physical_observed_from_fixture": 728,
+    "target_physical_unobserved": 192
+  }
+}
