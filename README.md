@@ -98,7 +98,10 @@ were run once on a frozen ten-case TRAIN canary with a generative Qwen
 candidate outside the classifier cohort. The [first run](docs/LOCAL_TOOL_POLICY_RESULTS_20261030.md)
 collected all ten cases and passed **5/10** (quality verdict `fail`; discovery 0/2,
 arguments 2/2, episodes 3/6). It qualifies the runtime and scoring path, not
-tool routing: the cases are TRAIN, correlated and synthetic.
+tool routing: the cases are TRAIN, correlated and synthetic. A frozen
+[24-case held-out pack](datasets/tool-policy-heldout-v1/README.md) and a revised
+candidate prompt are fixed by the [held-out protocol](docs/LOCAL_TOOL_POLICY_HELDOUT_PROTOCOL_20261030.md);
+at freeze it has zero model cases.
 
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their
@@ -126,6 +129,8 @@ python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-episodes-v1/cases.jsonl
 python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-policy-canary-v1/cases.jsonl
+python3 -m deposium_bench validate-cases \
+  --dataset datasets/tool-policy-heldout-v1/cases.jsonl
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check

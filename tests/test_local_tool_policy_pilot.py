@@ -42,14 +42,16 @@ class LocalToolPolicyPilotTests(unittest.TestCase):
         self.runtime = {"repository": pilot.upstream.REPOSITORY, "revision": pilot.upstream.PIN,
                         "binary_sha256": pilot.digest(self.binary)}
         for relative in ("native/systemone-preflight.cpp", "docs/LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md",
-                         "docs/LOCAL_TOOL_POLICY_V1.md", "datasets/tool-policy-canary-v1/manifest.json",
-                         "profiles/qwen3-4b-instruct-q8-assets.json"):
+                         pilot.HELDOUT_PROTOCOL, "docs/LOCAL_TOOL_POLICY_V1.md", "datasets/tool-policy-canary-v1/manifest.json",
+                         "datasets/tool-policy-heldout-v1/manifest.json", "profiles/qwen3-4b-instruct-q8-assets.json"):
             path = self.tmp / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes((ROOT / relative).read_bytes())
         self.args = argparse.Namespace(source_root=self.tmp, binary=self.binary,
             runtime_manifest=self.tmp / "runtime.json", model=self.model, assets_manifest=self.manifest,
-            dataset=ROOT / "datasets/tool-policy-canary-v1/cases.jsonl", output=self.tmp / "results/session", port=11446)
+            dataset=ROOT / "datasets/tool-policy-canary-v1/cases.jsonl",
+            dataset_manifest=self.tmp / "datasets/tool-policy-canary-v1/manifest.json",
+            output=self.tmp / "results/session", port=11446)
         self.process = Mock(pid=424242, returncode=None)
         self.process.poll.return_value = None
         self.watcher = Mock()
@@ -158,8 +160,36 @@ class LocalToolPolicyPilotTests(unittest.TestCase):
     def test_public_pin_and_canary_bytes_are_exact_without_loading_any_assets(self):
         manifest = json.loads((ROOT / "profiles/qwen3-4b-instruct-q8-assets.json").read_bytes())
         self.assertEqual(pilot.ASSETS, manifest)
-        self.assertEqual(hashlib.sha256(self.args.dataset.read_bytes()).hexdigest(), pilot.DATASET_SHA)
+        for name in ("canary", "heldout"):
+            manifest = json.loads((ROOT / f"datasets/tool-policy-{name}-v1/manifest.json").read_bytes())
+            self.assertEqual(hashlib.sha256((ROOT / f"datasets/tool-policy-{name}-v1/cases.jsonl").read_bytes()).hexdigest(),
+                             manifest["cases_sha256"])
         self.assertEqual(pilot.ENVELOPE["admission_available_mib"], 16384)
+        self.assertEqual(pilot.local.PROMPT_VERSION, "deposium.local-tool-policy-prompt/v2")
+
+    def test_frozen_manifest_binds_canary_and_heldout_and_refuses_other_inventories(self):
+        with patch.object(pilot, "ROOT", self.tmp):
+            payload, cases, info = pilot.frozen_dataset(self.args.dataset_manifest, self.args.dataset)
+            self.assertEqual((info["cases"], info["families"], info["counts_by_split"]["train"], info["dataset_id"]),
+                             (10, 5, 10, "tool-policy-canary-v1"))
+            held = self.tmp / "datasets/tool-policy-heldout-v1/manifest.json"
+            payload, cases, info = pilot.frozen_dataset(held, ROOT / "datasets/tool-policy-heldout-v1/cases.jsonl")
+            self.assertEqual((info["cases"], info["families"], info["counts_by_split"], info["manifest"]),
+                             (24, 12, {"train": 0, "calibration": 0, "test": 24}, "datasets/tool-policy-heldout-v1/manifest.json"))
+            self.assertEqual(info["counts_by_contract"], {"bench.tool-discovery": 8, "bench.tool-arguments": 4, "bench.tool-episode": 12})
+            with self.assertRaisesRegex(ValueError, "frozen_dataset_mismatch"):
+                pilot.frozen_dataset(held, self.args.dataset)
+            manifest = json.loads(held.read_bytes())
+            for change in ({"status": "draft"}, {"schema_version": "other/v1"}, {"case_count": 23},
+                           {"counts_by_split": {"train": 24, "calibration": 0, "test": 0}}):
+                broken = self.tmp / "broken.json"
+                broken.write_text(json.dumps({**manifest, **change}))
+                outside = self.tmp / "datasets" / "broken.json"
+                outside.write_bytes(broken.read_bytes())
+                with self.subTest(change=change), self.assertRaisesRegex(ValueError, "manifest_invalid|inventory_mismatch"):
+                    pilot.frozen_dataset(outside, ROOT / "datasets/tool-policy-heldout-v1/cases.jsonl")
+            with self.assertRaisesRegex(ValueError, "outside_public_datasets"):
+                pilot.frozen_dataset(broken, ROOT / "datasets/tool-policy-heldout-v1/cases.jsonl")
 
     def test_actual_source_snapshot_imports_and_displays_help_without_original_checkout(self):
         actual_capture = pilot.shared.archive_bench_source
