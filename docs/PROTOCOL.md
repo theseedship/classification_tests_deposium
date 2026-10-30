@@ -308,8 +308,15 @@ with the pinned Qwen3 4B Q8 asset and Metal offload, and **5/10 passed**
 supervised path generates, binds and scores real model JSON; it is a
 `fail` on quality and not evidence of tool-routing ability. Unit controls alone
 still establish nothing about a model. The generative candidate does not
-replace or reorder the frozen classifier cohort. Any held-out evaluation needs
-fresh families, fresh admission and a new sealed archive.
+replace or reorder the frozen classifier cohort. The
+[held-out protocol](LOCAL_TOOL_POLICY_HELDOUT_PROTOCOL_20261030.md) freezes a
+[24-case TEST pack](../datasets/tool-policy-heldout-v1/README.md) in twelve new
+FR/EN families and a revised candidate prompt (`prompt/v2`) that states the
+public contract rules the v1 prompt omitted. TRAIN exposure may change the
+candidate prompt, never a reference; v1 stays available so the TRAIN archive
+rescores byte-for-byte. The order is fixed: TRAIN re-run with v2, then the
+held-out run, each in a new archive bound to its frozen manifest. At freeze
+the held-out pack has zero model cases.
 
 ### Retrieved passages and evidence
 

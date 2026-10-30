@@ -26,6 +26,8 @@ python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-episodes-v1/cases.jsonl
 python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-policy-canary-v1/cases.jsonl
+python3 -m deposium_bench validate-cases \
+  --dataset datasets/tool-policy-heldout-v1/cases.jsonl
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
@@ -45,6 +47,7 @@ Each command should exit `0`. The expected signals are:
 | Tool-argument cases | `status: valid`, `cases: 4` | Checks the bounded training fixture without executing its tools. Run its explicit control profile for actual lookup/sum receipts. |
 | Tool-episode cases | `status: valid`, `cases: 14` | Validates the training episode pack without executing tools. Its explicit control profile executes a bounded feedback loop; zero model cases. |
 | Local-policy canary | `status: valid`, `cases: 10` | Checks frozen TRAIN inputs/references without a model or tools. A [first real-model run](docs/LOCAL_TOOL_POLICY_RESULTS_20261030.md) exists, but this command does not run it. |
+| Local-policy held-out | `status: valid`, `cases: 24` | Checks the frozen TEST pack and references without a model or tools; zero model cases at freeze. |
 | First-tool cases | `status: valid_review_corpus`, `cases_scored: 0` | Valid 24-case proposal pack; references remain provisional. |
 | Passage dataset / corpus | `status: valid`; `Dataset regeneration matches` | Valid 1,536-case corpus and no difference from the frozen generated corpus. |
 | Capability corpus | `status: valid_frozen_corpus`, `cases_scored: 0` | No difference from the frozen 192-case corpus. |

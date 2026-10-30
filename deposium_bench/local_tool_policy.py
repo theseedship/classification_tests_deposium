@@ -27,19 +27,46 @@ CONTRACTS = ("bench.tool-discovery", "bench.tool-arguments", "bench.tool-episode
 TRACE_VERSION = "deposium.local-tool-model-trace/v1"
 CALL_VERSION = "deposium.local-json-call/v1"
 SESSION_VERSION = "deposium.local-json-model-session/v1"
-PROMPT_VERSION = "deposium.local-tool-policy-prompt/v1"
+PROMPT_VERSION = "deposium.local-tool-policy-prompt/v2"
 MODEL_FIELDS = {"endpoint", "model_id", "repo_id", "session_manifest", "session_sha256",
                 "max_length", "max_rss_mb", "credential_env", "max_output_tokens", "seed", "prompt_version"}
 SETTINGS_FIELDS = {"model_id", "max_length", "max_output_tokens", "seed", "prompt_version"}
 STATUSES = {"ok", "unsupported", "missing", "error", "timeout", "abstain"}
 PIN = "efe3626b119ff81033e309c3ba07a770bef2c546"
-SYSTEM = ("Return exactly one JSON value matching the response schema, with no commentary or markdown. "
-          "Use only the supplied request, tool interfaces, permissions and actual observations. "
-          "Never invent an execution receipt. Propose an action or decision; the runtime independently "
-          "enforces permissions, bindings and budgets. A success finish requires an actual successful "
-          "sum observation. A controlled lookup error can be retried within the remaining budget. "
-          "For an incomplete artifact request clarification; for empty complete data stop without "
-          "claiming a numeric result; for missing required input request clarification.")
+# Every prompt version ever used by an archived session stays here verbatim so a
+# pure rescore can rebuild and compare the exact request bytes. v1 described the
+# contracts incompletely: nothing told the candidate that a discovery shortlist
+# must contain the selected tools, or that an episode finishes once an actual
+# observation justifies an outcome. v2 states those public contract rules and
+# names no case, catalogue entry, table or expected answer.
+PROMPTS = {
+    "deposium.local-tool-policy-prompt/v1": (
+        "Return exactly one JSON value matching the response schema, with no commentary or markdown. "
+        "Use only the supplied request, tool interfaces, permissions and actual observations. "
+        "Never invent an execution receipt. Propose an action or decision; the runtime independently "
+        "enforces permissions, bindings and budgets. A success finish requires an actual successful "
+        "sum observation. A controlled lookup error can be retried within the remaining budget. "
+        "For an incomplete artifact request clarification; for empty complete data stop without "
+        "claiming a numeric result; for missing required input request clarification."),
+    "deposium.local-tool-policy-prompt/v2": (
+        "Return exactly one JSON value matching the response schema, with no commentary or markdown. "
+        "Use only the supplied request, tool interfaces, permissions and actual observations. "
+        "Never invent an execution receipt. Propose an action or decision; the runtime independently "
+        "enforces permissions, bindings and budgets. "
+        "Discovery: the shortlist lists every tool identifier you select, holds at most shortlist_limit "
+        "entries and names only tool identifiers from the catalogue; select only eligible and available "
+        "tools and the smallest set that completes the request. If a required input is missing, answer "
+        "clarify with no tools. If no eligible available tool can perform the task, answer no_suitable "
+        "with no tools and the matching reason. "
+        "Arguments: copy the observed artifact identifier and scope exactly. "
+        "Episode: after each actual observation choose one next action; when an observation already "
+        "justifies an outcome, finish instead of calling another tool. A success finish requires an "
+        "actual successful sum observation and repeats its value and unit. A controlled lookup error "
+        "can be retried within the remaining budget. For an incomplete artifact request clarification; "
+        "for empty complete data stop without claiming a numeric result; if a required tool is no longer "
+        "available stop; for missing required input request clarification without guessing an identifier."),
+}
+SYSTEM = PROMPTS[PROMPT_VERSION]
 
 
 def _sha(value):
@@ -81,7 +108,7 @@ def validate_settings(settings):
             or settings["max_length"] != 4096
             or not _integer(settings["max_output_tokens"], 32, 512)
             or not _integer(settings["seed"], 0, 2**31 - 1)
-            or settings["prompt_version"] != PROMPT_VERSION):
+            or settings["prompt_version"] not in PROMPTS):
         raise CaseError("local_json_settings_invalid")
 
 
@@ -155,7 +182,7 @@ def request_body(contract, projection, settings):
     validate_settings(settings)
     # The caller must pass its task-specific projection, never the case envelope.
     return {"model": settings["model_id"], "messages": [
-                {"role": "system", "content": SYSTEM},
+                {"role": "system", "content": PROMPTS[settings["prompt_version"]]},
                 {"role": "user", "content": canonical(projection).decode("ascii")}],
             "response_format": {"type": "json_schema", "json_schema": {
                 "name": "proposal", "strict": True, "schema": output_schema(contract)}},

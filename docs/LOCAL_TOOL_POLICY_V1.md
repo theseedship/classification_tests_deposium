@@ -72,6 +72,18 @@ tool was used to choose those references. New TRAIN identities do not create
 held-out generalization evidence. Any later expansion needs its own family
 freeze and split review before predictions.
 
+## Prompt versions
+
+The system prompt is versioned in `deposium_bench/local_tool_policy.py`
+(`PROMPTS`) and bound into every retained request hash. `prompt/v1` ran the
+first TRAIN canary; it omitted two public contract rules (selected discovery
+tools must appear in the shortlist; an episode finishes once an actual
+observation justifies an outcome). `prompt/v2` states those rules and names
+no case, identifier or answer. Both texts stay in the module so a pure
+rescore of any archive rebuilds its exact request bytes. The
+[held-out protocol](LOCAL_TOOL_POLICY_HELDOUT_PROTOCOL_20261030.md) fixes the
+order TRAIN-v2 then held-out-v2; no prompt change follows a held-out result.
+
 ## Versioned budgets and actual time
 
 Only the new canary episodes use `deposium.tool-episode-input/v2`: at most five

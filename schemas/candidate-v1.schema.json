@@ -2565,7 +2565,10 @@
           "maximum": 2147483647
         },
         "prompt_version": {
-          "const": "deposium.local-tool-policy-prompt/v1"
+          "enum": [
+            "deposium.local-tool-policy-prompt/v1",
+            "deposium.local-tool-policy-prompt/v2"
+          ]
         },
         "repo_id": {
           "type": "string",

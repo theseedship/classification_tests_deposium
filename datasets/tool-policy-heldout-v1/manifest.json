@@ -1,0 +1,415 @@
+{
+  "schema_version": "deposium.tool-policy-heldout-manifest/v1",
+  "dataset_id": "tool-policy-heldout-v1",
+  "frozen_date": "2026-10-30",
+  "status": "frozen_before_first_candidate_prediction",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "7f7ed8f08fe15d5b897744fe71f2a5ed76344b5ccd7a0df43492b2dc3371bac7",
+  "case_count": 24,
+  "family_count": 12,
+  "counts_by_language": {
+    "fr": 12,
+    "en": 12
+  },
+  "counts_by_split": {
+    "train": 0,
+    "calibration": 0,
+    "test": 24
+  },
+  "counts_by_contract": {
+    "bench.tool-discovery": 8,
+    "bench.tool-arguments": 4,
+    "bench.tool-episode": 12
+  },
+  "reference_review": "agent_only_pending_human",
+  "source_provenance": "New synthetic ledger catalogue, tables, scope/document IDs, requests and translations; no private application data, live service inventory or candidate output.",
+  "split_rationale": "Every family, translation pair and source document is TEST. The identities are new and were never shown to the local candidate; the operation motifs (fetch/sum, deduplication, conversion, export, lookup/sum episodes) belong to the same contracts as the TRAIN fixtures, so this is held-out with respect to candidate exposure, not a new reasoning domain.",
+  "related_train_fixture": {
+    "dataset_id": "tool-policy-canary-v1",
+    "cases_sha256": "6add6d14904e16cc39449368ff932316409c294dd43674f4fb9a1a1fcdbc2a6d",
+    "rule": "TRAIN failures may change the candidate prompt version, never these references or the TRAIN cases."
+  },
+  "reference_construction": "Literal independently authored totals: 7+15+22+31=75 m; 3+8+16+5=32 USD; 9+17+6+20=52 kg; 13+2+27=42 EUR. Persistent error, empty data, partial data and sum unavailability expect stop/clarify with null value/unit and task_success false. Discovery alternatives are minimal sufficient sets; the union of alternatives is never required.",
+  "coverage_of_contract_outcomes": {
+    "discovery": [
+      "select (two-tool route)",
+      "select (two equivalent minimal alternatives)",
+      "clarify/missing_information",
+      "no_suitable/unavailable"
+    ],
+    "discovery_not_covered": [
+      "no_suitable/no_capability"
+    ],
+    "episodes": [
+      "success/complete (normal)",
+      "success/complete (one transient retry)",
+      "stop/persistent_error",
+      "stop/no_data",
+      "clarify/partial_data",
+      "stop/unavailable"
+    ],
+    "episodes_not_covered_here": [
+      "clarify/missing_information (covered by TRAIN canary tp005)"
+    ]
+  },
+  "families": [
+    {
+      "family_id": "tool-policy-heldout-family-101",
+      "scenario_type": "two_tool_route_selection",
+      "case_ids": [
+        "th101-fr",
+        "th101-en"
+      ],
+      "contract_id": "bench.tool-discovery",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-101",
+      "shortlist_limit": 4,
+      "catalogue_cards": 6,
+      "authored_selection_alternatives": [
+        {
+          "decision": "select",
+          "tool_ids": [
+            "tool.ledger.fetch_rows",
+            "tool.ledger.sum_column"
+          ],
+          "reason": "ready"
+        }
+      ]
+    },
+    {
+      "family_id": "tool-policy-heldout-family-102",
+      "scenario_type": "equivalent_alternative_selection",
+      "case_ids": [
+        "th102-fr",
+        "th102-en"
+      ],
+      "contract_id": "bench.tool-discovery",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-102",
+      "shortlist_limit": 3,
+      "catalogue_cards": 6,
+      "authored_selection_alternatives": [
+        {
+          "decision": "select",
+          "tool_ids": [
+            "tool.ledger.dedupe_rows"
+          ],
+          "reason": "ready"
+        },
+        {
+          "decision": "select",
+          "tool_ids": [
+            "tool.ledger.distinct_rows"
+          ],
+          "reason": "ready"
+        }
+      ]
+    },
+    {
+      "family_id": "tool-policy-heldout-family-103",
+      "scenario_type": "missing_information_clarification",
+      "case_ids": [
+        "th103-fr",
+        "th103-en"
+      ],
+      "contract_id": "bench.tool-discovery",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-103",
+      "shortlist_limit": 3,
+      "catalogue_cards": 6,
+      "authored_selection_alternatives": [
+        {
+          "decision": "clarify",
+          "tool_ids": [],
+          "reason": "missing_information"
+        }
+      ]
+    },
+    {
+      "family_id": "tool-policy-heldout-family-104",
+      "scenario_type": "unavailable_route_nonselection",
+      "case_ids": [
+        "th104-fr",
+        "th104-en"
+      ],
+      "contract_id": "bench.tool-discovery",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-104",
+      "shortlist_limit": 3,
+      "catalogue_cards": 6,
+      "authored_selection_alternatives": [
+        {
+          "decision": "no_suitable",
+          "tool_ids": [],
+          "reason": "unavailable"
+        }
+      ]
+    },
+    {
+      "family_id": "tool-policy-heldout-family-105",
+      "scenario_type": "argument_binding_after_lookup",
+      "case_ids": [
+        "th105-fr",
+        "th105-en"
+      ],
+      "contract_id": "bench.tool-arguments",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-105",
+      "authored_total": {
+        "value": 75,
+        "unit": "m"
+      },
+      "content_artifact_id": "artifact:34f624cded3f7187cc44a6a6d1a94958e9d2d56db3544b838fe7507c8ae2676e"
+    },
+    {
+      "family_id": "tool-policy-heldout-family-106",
+      "scenario_type": "argument_binding_after_lookup",
+      "case_ids": [
+        "th106-fr",
+        "th106-en"
+      ],
+      "contract_id": "bench.tool-arguments",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-106",
+      "authored_total": {
+        "value": 32,
+        "unit": "USD"
+      },
+      "content_artifact_id": "artifact:9a46067da175b89bbcb7cabfb21e602cc6ac8ae428b74eaf5f5a1e306d615f85"
+    },
+    {
+      "family_id": "tool-policy-heldout-family-107",
+      "scenario_type": "normal_success",
+      "case_ids": [
+        "th107-fr",
+        "th107-en"
+      ],
+      "contract_id": "bench.tool-episode",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-107",
+      "authored_outcome": {
+        "decision": "success",
+        "reason": "complete",
+        "value": 52,
+        "unit": "kg"
+      },
+      "task_success_expected": true,
+      "diagnostic_ideal_usage": {
+        "policy_decisions": 3,
+        "tool_calls_executed": 2,
+        "lookup_attempts": 1
+      },
+      "usage_is_grading_reference": false,
+      "content_artifact_id": "artifact:f3a400612a0eedb8373a88d7acedc5d5a2b9063867a03d7fe1c6b56aefe99897"
+    },
+    {
+      "family_id": "tool-policy-heldout-family-108",
+      "scenario_type": "transient_error_retry_success",
+      "case_ids": [
+        "th108-fr",
+        "th108-en"
+      ],
+      "contract_id": "bench.tool-episode",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-108",
+      "authored_outcome": {
+        "decision": "success",
+        "reason": "complete",
+        "value": 42,
+        "unit": "EUR"
+      },
+      "task_success_expected": true,
+      "diagnostic_ideal_usage": {
+        "policy_decisions": 4,
+        "tool_calls_executed": 3,
+        "lookup_attempts": 2
+      },
+      "usage_is_grading_reference": false,
+      "content_artifact_id": "artifact:bfacfbb8e7827909e8374fd897a8c874947c1b0d74cee381e80a5a3f40fbb2c1"
+    },
+    {
+      "family_id": "tool-policy-heldout-family-109",
+      "scenario_type": "persistent_error_stop",
+      "case_ids": [
+        "th109-fr",
+        "th109-en"
+      ],
+      "contract_id": "bench.tool-episode",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-109",
+      "authored_outcome": {
+        "decision": "stop",
+        "reason": "persistent_error",
+        "value": null,
+        "unit": null
+      },
+      "task_success_expected": false,
+      "diagnostic_ideal_usage": {
+        "policy_decisions": 3,
+        "tool_calls_executed": 2,
+        "lookup_attempts": 2
+      },
+      "usage_is_grading_reference": false,
+      "content_artifact_id": "artifact:eda95aee3006653b2a7357b21b653980b75320bb5d44b5eebfb7575c16c65d7c"
+    },
+    {
+      "family_id": "tool-policy-heldout-family-110",
+      "scenario_type": "empty_data_stop",
+      "case_ids": [
+        "th110-fr",
+        "th110-en"
+      ],
+      "contract_id": "bench.tool-episode",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-110",
+      "authored_outcome": {
+        "decision": "stop",
+        "reason": "no_data",
+        "value": null,
+        "unit": null
+      },
+      "task_success_expected": false,
+      "diagnostic_ideal_usage": {
+        "policy_decisions": 2,
+        "tool_calls_executed": 1,
+        "lookup_attempts": 1
+      },
+      "usage_is_grading_reference": false,
+      "content_artifact_id": "artifact:64804dadad3e219007048fb191bd5fa189e0f3fcdc01a88bfab23baf74ddc237"
+    },
+    {
+      "family_id": "tool-policy-heldout-family-111",
+      "scenario_type": "partial_data_clarification",
+      "case_ids": [
+        "th111-fr",
+        "th111-en"
+      ],
+      "contract_id": "bench.tool-episode",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-111",
+      "authored_outcome": {
+        "decision": "clarify",
+        "reason": "partial_data",
+        "value": null,
+        "unit": null
+      },
+      "task_success_expected": false,
+      "diagnostic_ideal_usage": {
+        "policy_decisions": 2,
+        "tool_calls_executed": 1,
+        "lookup_attempts": 1
+      },
+      "usage_is_grading_reference": false,
+      "content_artifact_id": "artifact:f0473e21a4b333e571b15f56bb7399030ae9beb729a70f5077137ccd8f1f2049"
+    },
+    {
+      "family_id": "tool-policy-heldout-family-112",
+      "scenario_type": "sum_unavailable_after_lookup_stop",
+      "case_ids": [
+        "th112-fr",
+        "th112-en"
+      ],
+      "contract_id": "bench.tool-episode",
+      "split": "test",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "synthetic_document_id": "synthetic-tool-policy-heldout-112",
+      "authored_outcome": {
+        "decision": "stop",
+        "reason": "unavailable",
+        "value": null,
+        "unit": null
+      },
+      "task_success_expected": false,
+      "diagnostic_ideal_usage": {
+        "policy_decisions": 2,
+        "tool_calls_executed": 1,
+        "lookup_attempts": 1
+      },
+      "usage_is_grading_reference": false,
+      "content_artifact_id": "artifact:bc41b635307d1f8e107933e158375a428e1ffe394ae011e0b206badf053397d6"
+    }
+  ],
+  "episode_input_version": "deposium.tool-episode-input/v2",
+  "episode_output_version": "deposium.tool-episode-output/v1",
+  "episode_budget": {
+    "max_steps": 5,
+    "max_tool_calls": 3,
+    "max_lookup_attempts": 2,
+    "max_elapsed_ms": 60000
+  },
+  "timing_policy": "Actual model/policy wall time counts inside the episode elapsed budget; input/v1 fixtures and their archived references remain unchanged.",
+  "artifact_id_rule": "artifact: + SHA256 of UTF-8 JSON {scope_id,dataset}, sorted keys, compact separators, ensure_ascii=true, allow_nan=false; identities bind actual case-local observations, not candidate output or expected totals.",
+  "diagnostic_ideal_totals": {
+    "model_policy_decisions": 44,
+    "actual_fixture_tool_calls": 28,
+    "tool_status_ok": 22,
+    "tool_status_controlled_error": 6,
+    "episode_task_successes": 4,
+    "episode_correct_clarifications": 2,
+    "episode_correct_stops": 6
+  },
+  "diagnostic_usage_is_grading_reference": false,
+  "hard_case_count_bounds": {
+    "maximum_policy_generations": 72,
+    "maximum_fixture_tool_calls": 44
+  },
+  "candidate_assets_manifest": "profiles/qwen3-4b-instruct-q8-assets.json",
+  "candidate_assets_manifest_sha256": "185e57730e3979bcba1a347b0bfaf9521494f58b2c5dcc43ed965b534c534351",
+  "candidate_profile": "generated_only_by_explicit_local_supervisor_not_a_public_fixture",
+  "qualification_at_freeze": {
+    "real_model_cases": 0,
+    "scored_model_cases": 0,
+    "held_out_cases": 24,
+    "human_judgments": 0,
+    "live_mcp_integration": false,
+    "end_to_end_rag": false
+  },
+  "cohort_policy": "Additional generative candidate evaluation; does not replace or reorder the frozen classifier cohort. One model on 24 correlated test cases is not a ranking."
+}

@@ -74,6 +74,16 @@ def milliseconds(values):
             'max': round(ordered[-1], 1), 'sum': round(sum(ordered), 1)}
 
 
+def train_families(dataset):
+    """Accept the first receipt layout (train_families) and the manifest-bound one."""
+    if 'train_families' in dataset:
+        return count(dataset['train_families'])
+    splits = dataset.get('counts_by_split')
+    require(isinstance(splits, dict) and splits.get('train') == dataset.get('cases')
+            and not splits.get('calibration') and not splits.get('test'), 'TRAIN-only export of a non-TRAIN receipt')
+    return count(dataset['families'])
+
+
 def export(root):
     pilot_seal = verify_seal(root, 'pilot-seal.json', 'deposium.native-pilot-seal/v1')
     campaign_seal = verify_seal(root / 'campaign', 'seal.json', 'deposium.archive-seal/v1')
@@ -129,7 +139,7 @@ def export(root):
         'qualification': 'model_isolated_generated_json_train_canary',
         'review': 'agent_only_pending_human',
         'dataset': {'id': 'tool-policy-canary-v1', 'sha256': DATASET_SHA, 'cases': total,
-                    'families': pilot['dataset']['train_families'], 'splits': {'train': total}},
+                    'families': train_families(pilot['dataset']), 'splits': {'train': total}},
         'model': {'repo_id': pilot['model_assets']['repo_id'], 'revision': pilot['model_assets']['revision'],
                   'file': pilot['model_assets']['files'][0]['path'], 'size': pilot['model_assets']['files'][0]['size'],
                   'sha256': pilot['model_assets']['files'][0]['sha256']},

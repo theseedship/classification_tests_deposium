@@ -38,7 +38,16 @@ SPEC.loader.exec_module(upstream)
 shared = upstream.shared
 
 MODEL_ID = "qwen3-4b-instruct-q8-tool-policy-v1"
-DATASET_SHA = "6add6d14904e16cc39449368ff932316409c294dd43674f4fb9a1a1fcdbc2a6d"
+# A frozen public dataset manifest binds the exact case bytes, counts, splits and
+# contracts before any prediction. The launcher pins each admitted manifest's
+# own bytes here, so an edited or untracked manifest (even a self-consistent
+# one) is refused; freezing another pack is a reviewed launcher change.
+MANIFEST_VERSIONS = {"deposium.tool-policy-canary-manifest/v1", "deposium.tool-policy-heldout-manifest/v1"}
+FROZEN_MANIFESTS = {
+    "datasets/tool-policy-canary-v1/manifest.json": "86dc93ddca375b89cb74c186dae6e3bd6d990110d3d641817e3c5f9006e5e4bc",
+    "datasets/tool-policy-heldout-v1/manifest.json": "c57545613997e21a804a5587bda7a20819d3b436ea9b3d15e2d40b686ec639ed",
+}
+HELDOUT_PROTOCOL = "docs/LOCAL_TOOL_POLICY_HELDOUT_PROTOCOL_20261030.md"
 ASSETS = {"schema_version": "deposium.model-assets/v1", "repo_id": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
     "revision": "a06e946bb6b655725eafa393f4a9745d460374c9", "files": [{
         "path": "Qwen3-4B-Instruct-2507-Q8_0.gguf", "size": 4280405600,
@@ -61,20 +70,48 @@ def regular(path, maximum):
             "local_policy_input_missing_or_unbounded")
 
 
-def selected_inputs(args):
-    regular(args.dataset, 2 * 1024 * 1024)
-    payload = args.dataset.read_bytes()
-    require(hashlib.sha256(payload).hexdigest() == DATASET_SHA, "local_policy_frozen_dataset_mismatch")
+def frozen_dataset(manifest_path, dataset_path):
+    """Bind the dataset bytes to a tracked frozen manifest; refuse any other inventory."""
+    regular(manifest_path, 1024 * 1024)
+    require(not manifest_path.is_symlink() and manifest_path.resolve().is_relative_to(ROOT.resolve()),
+            "local_policy_manifest_outside_checkout")
+    relative = str(manifest_path.resolve().relative_to(ROOT.resolve()))
+    manifest_bytes = manifest_path.read_bytes()
+    require(FROZEN_MANIFESTS.get(relative) == hashlib.sha256(manifest_bytes).hexdigest(),
+            "local_policy_manifest_not_frozen")
+    manifest = _decode(manifest_bytes)
+    fields = ("schema_version", "dataset_id", "cases_sha256", "case_count", "family_count",
+              "counts_by_split", "counts_by_contract", "status")
+    require(isinstance(manifest, dict) and all(k in manifest for k in fields)
+            and manifest["schema_version"] in MANIFEST_VERSIONS
+            and manifest["status"] == "frozen_before_first_candidate_prediction",
+            "local_policy_dataset_manifest_invalid")
+    regular(dataset_path, 2 * 1024 * 1024)
+    payload = dataset_path.read_bytes()
+    require(hashlib.sha256(payload).hexdigest() == manifest["cases_sha256"], "local_policy_frozen_dataset_mismatch")
     cases, _ = parse_cases(payload)
-    require(len(cases) == 10 and len({c["translation_family"] for c in cases}) == 5
-            and all(c["split"] == "train" and c["contract_id"] in local.CONTRACTS for c in cases),
-            "local_policy_ten_train_cases_required")
+    splits = {s: sum(c["split"] == s for c in cases) for s in ("train", "calibration", "test")}
+    contracts = {k: sum(c["contract_id"] == k for c in cases) for k in local.CONTRACTS}
+    require(len(cases) == manifest["case_count"] > 0
+            and len({c["translation_family"] for c in cases}) == manifest["family_count"]
+            and typed_equal(splits, manifest["counts_by_split"])
+            and typed_equal({k: v for k, v in contracts.items() if v}, manifest["counts_by_contract"])
+            and all(c["contract_id"] in local.CONTRACTS for c in cases),
+            "local_policy_dataset_inventory_mismatch")
+    info = {"dataset_id": manifest["dataset_id"], "manifest": relative,
+            "manifest_sha256": FROZEN_MANIFESTS[relative], "sha256": manifest["cases_sha256"], "cases": len(cases),
+            "families": manifest["family_count"], "counts_by_split": splits, "counts_by_contract": contracts}
+    return payload, cases, info
+
+
+def selected_inputs(args):
+    payload, cases, dataset = frozen_dataset(args.dataset_manifest, args.dataset)
     regular(args.assets_manifest, 1024 * 1024)
     assets = _decode(args.assets_manifest.read_bytes())
     require(typed_equal(assets, ASSETS), "local_policy_exact_qwen_assets_required")
     model = args.model.absolute()
     require(not model.is_symlink() and model.name == ASSETS["files"][0]["path"], "local_policy_model_path_invalid")
-    return payload, cases, assets, model
+    return payload, cases, assets, model, dataset
 
 
 def technical_body(model=MODEL_ID, oversized=False):
@@ -94,7 +131,7 @@ def observed_json(data, key):
 
 
 def pilot(args):
-    payload, cases, assets, model = selected_inputs(args)
+    payload, cases, assets, model, dataset = selected_inputs(args)
     require(type(args.port) is int and 1024 <= args.port <= 65535, "local_policy_port_invalid")
     output = args.output.absolute()
     allowed = ROOT / "results"
@@ -109,15 +146,15 @@ def pilot(args):
         archive.add(Path(__file__), arcname="scripts/run-local-tool-policy-pilot.py", recursive=False)
         archive.add(Path(upstream.__file__), arcname="scripts/run-upstream-native-pilot.py", recursive=False)
         for relative in ("native/systemone-preflight.cpp", "docs/LOCAL_TOOL_POLICY_NATIVE_PROTOCOL_20261030.md",
-                         "docs/LOCAL_TOOL_POLICY_V1.md", "datasets/tool-policy-canary-v1/manifest.json",
+                         HELDOUT_PROTOCOL, "docs/LOCAL_TOOL_POLICY_V1.md", dataset["manifest"],
                          "profiles/qwen3-4b-instruct-q8-assets.json"):
             archive.add(ROOT / relative, arcname=relative, recursive=False)
     shared.write_new(output / "runtime-pin.json", runtime)
     result = {"schema_version": "deposium.local-tool-policy-pilot/v1",
         "created_at": datetime.now(timezone.utc).isoformat(), "execution_scope": "isolated_upstream_generated_tool_proposals",
-        "status": "not_run", "collection_complete": False, "scored_cases": 0, "total_cases": 10,
+        "status": "not_run", "collection_complete": False, "scored_cases": 0, "total_cases": dataset["cases"],
         "quality_verdict": "not_run", "model_assets": assets, "runtime": runtime, "envelope": ENVELOPE,
-        "dataset": {"sha256": DATASET_SHA, "cases": 10, "train_families": 5},
+        "dataset": dataset, "prompt_version": local.PROMPT_VERSION,
         "technical_controls_in_quality_denominator": False, "technical_controls": [],
         "weight_verification": "not_run", "memory_before": None, "memory_after": None}
     process = watcher = None
@@ -135,7 +172,7 @@ def pilot(args):
         guard["min_available_mib"] = before["MemAvailable_mib"]
         admitted = before["MemAvailable_mib"] >= 16384
         shared.write_new(output / "preflight.json", {"schema_version": "deposium.local-tool-policy-preflight/v1",
-            "model_id": MODEL_ID, "dataset_sha256": DATASET_SHA, "envelope": ENVELOPE,
+            "model_id": MODEL_ID, "dataset_sha256": dataset["sha256"], "envelope": ENVELOPE,
             "available_mib": before["MemAvailable_mib"], "admitted": admitted,
             "weight_hash_performed": False, "model_loaded": False, "campaign_cases_scored": 0})
         if not admitted:
@@ -283,7 +320,7 @@ def pilot(args):
                     return False
                 scope.check(profile, profile_path)
                 summary = run_campaign(output / "dataset.jsonl", profile_path, output / "campaign", stop_requested=stopped)
-                coverage = shared.dataset_coverage(summary, 10)
+                coverage = shared.dataset_coverage(summary, dataset["cases"])
                 result.update(status="collected" if coverage["collection_complete"] else "partial",
                     collection_complete=coverage["collection_complete"], scored_cases=coverage["scored_cases"],
                     quality_verdict=coverage["quality_verdict"], campaign_coverage=coverage)
@@ -342,6 +379,7 @@ def main(argv=None):
     for name in ("source-root", "binary", "runtime-manifest", "model", "assets-manifest", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--dataset", type=Path, default=ROOT / "datasets/tool-policy-canary-v1/cases.jsonl")
+    parser.add_argument("--dataset-manifest", type=Path, default=ROOT / "datasets/tool-policy-canary-v1/manifest.json")
     parser.add_argument("--port", type=int, default=11446)
     args = parser.parse_args(argv)
     try:
