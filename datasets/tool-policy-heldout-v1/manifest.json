@@ -397,7 +397,7 @@
   },
   "diagnostic_usage_is_grading_reference": false,
   "hard_case_count_bounds": {
-    "maximum_policy_generations": 64,
+    "maximum_policy_generations": 72,
     "maximum_fixture_tool_calls": 44
   },
   "candidate_assets_manifest": "profiles/qwen3-4b-instruct-q8-assets.json",

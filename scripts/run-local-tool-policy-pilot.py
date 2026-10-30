@@ -39,8 +39,14 @@ shared = upstream.shared
 
 MODEL_ID = "qwen3-4b-instruct-q8-tool-policy-v1"
 # A frozen public dataset manifest binds the exact case bytes, counts, splits and
-# contracts before any prediction. The launcher never infers them from the file.
+# contracts before any prediction. The launcher pins each admitted manifest's
+# own bytes here, so an edited or untracked manifest (even a self-consistent
+# one) is refused; freezing another pack is a reviewed launcher change.
 MANIFEST_VERSIONS = {"deposium.tool-policy-canary-manifest/v1", "deposium.tool-policy-heldout-manifest/v1"}
+FROZEN_MANIFESTS = {
+    "datasets/tool-policy-canary-v1/manifest.json": "86dc93ddca375b89cb74c186dae6e3bd6d990110d3d641817e3c5f9006e5e4bc",
+    "datasets/tool-policy-heldout-v1/manifest.json": "c57545613997e21a804a5587bda7a20819d3b436ea9b3d15e2d40b686ec639ed",
+}
 HELDOUT_PROTOCOL = "docs/LOCAL_TOOL_POLICY_HELDOUT_PROTOCOL_20261030.md"
 ASSETS = {"schema_version": "deposium.model-assets/v1", "repo_id": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
     "revision": "a06e946bb6b655725eafa393f4a9745d460374c9", "files": [{
@@ -67,10 +73,12 @@ def regular(path, maximum):
 def frozen_dataset(manifest_path, dataset_path):
     """Bind the dataset bytes to a tracked frozen manifest; refuse any other inventory."""
     regular(manifest_path, 1024 * 1024)
-    datasets = ROOT / "datasets"
-    require(not manifest_path.is_symlink() and manifest_path.resolve().is_relative_to(datasets.resolve()),
-            "local_policy_manifest_outside_public_datasets")
+    require(not manifest_path.is_symlink() and manifest_path.resolve().is_relative_to(ROOT.resolve()),
+            "local_policy_manifest_outside_checkout")
+    relative = str(manifest_path.resolve().relative_to(ROOT.resolve()))
     manifest_bytes = manifest_path.read_bytes()
+    require(FROZEN_MANIFESTS.get(relative) == hashlib.sha256(manifest_bytes).hexdigest(),
+            "local_policy_manifest_not_frozen")
     manifest = _decode(manifest_bytes)
     fields = ("schema_version", "dataset_id", "cases_sha256", "case_count", "family_count",
               "counts_by_split", "counts_by_contract", "status")
@@ -90,8 +98,8 @@ def frozen_dataset(manifest_path, dataset_path):
             and typed_equal({k: v for k, v in contracts.items() if v}, manifest["counts_by_contract"])
             and all(c["contract_id"] in local.CONTRACTS for c in cases),
             "local_policy_dataset_inventory_mismatch")
-    info = {"dataset_id": manifest["dataset_id"], "manifest": str(manifest_path.resolve().relative_to(ROOT.resolve())),
-            "manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(), "sha256": manifest["cases_sha256"], "cases": len(cases),
+    info = {"dataset_id": manifest["dataset_id"], "manifest": relative,
+            "manifest_sha256": FROZEN_MANIFESTS[relative], "sha256": manifest["cases_sha256"], "cases": len(cases),
             "families": manifest["family_count"], "counts_by_split": splits, "counts_by_contract": contracts}
     return payload, cases, info
 

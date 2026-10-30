@@ -64,10 +64,13 @@ Episodes use `deposium.tool-episode-input/v2` (five decisions, three tool
 calls, two lookup attempts, 60,000 ms including model time). A fully correct
 ideal trajectory would use 44 generations and 28 actual tool calls (22 `ok`,
 six controlled errors) with four numeric task successes; these are diagnostics,
-not gold paths. Case caps permit at most 64 generations and 44 tool calls.
+not gold paths. Case caps permit at most 72 generations (five per episode even
+after a call or retry limit is exhausted, one per discovery or argument case)
+and 44 executed tool calls.
 
 Report discovery, arguments and episodes separately with their eligible
-denominators: 24 cases; select-reference discovery metrics over 6 of 8; four
+denominators: 24 cases; select-reference discovery metrics over the 4 `select`
+cases of 8 (`th101`, `th102`), with decision correctness over all 8; four
 success-eligible episodes of twelve; FR and EN apart. A correct clarification
 or stop is procedure handling, not task success. No accuracy threshold selects
 or drops cases, and no exposed error is repaired by changing this version.

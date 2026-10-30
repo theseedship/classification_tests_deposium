@@ -33,7 +33,7 @@ Therefore:
 |---|---|
 | Held-out pack | [tool-policy-heldout-v1](../datasets/tool-policy-heldout-v1/README.md): 24 TEST cases, 12 FR/EN families (4 discovery, 2 arguments, 6 episodes); SHA-256 `7f7ed8f08fe15d5b897744fe71f2a5ed76344b5ccd7a0df43492b2dc3371bac7` |
 | TRAIN pack (for the v2 re-run) | [tool-policy-canary-v1](../datasets/tool-policy-canary-v1/README.md), SHA-256 `6add6d14904e16cc39449368ff932316409c294dd43674f4fb9a1a1fcdbc2a6d` |
-| Dataset binding | `--dataset-manifest` must name a tracked frozen manifest under `datasets/`; the launcher refuses bytes, counts, splits or contracts that differ from it |
+| Dataset binding | `--dataset-manifest` must name one of the two manifests whose SHA-256 is pinned in the launcher (`FROZEN_MANIFESTS`); an edited, untracked or self-consistent substitute is refused, as are case bytes, counts, splits or contracts that differ from the pinned manifest |
 | Candidate | `unsloth/Qwen3-4B-Instruct-2507-GGUF` at `a06e946b…`, `Qwen3-4B-Instruct-2507-Q8_0.gguf`, SHA-256 `391c1e41…ef068`, unchanged |
 | Runtime, envelope, controls | Identical to the TRAIN protocol: llama.cpp `efe3626b`, Metal, 4096 context, 256 output tokens, seed 42, temperature 0, one slot, 20 s per call, 600 s session, 8 GiB RSS plus 8 GiB reserve, 16 GiB admission, the same four technical controls |
 | Episode budget | input/v2: 5 decisions, 3 tool calls, 2 lookup attempts, 60,000 ms including model time |
@@ -71,7 +71,8 @@ python3 scripts/run-local-tool-policy-pilot.py \
 
 Report TRAIN v1, TRAIN v2 and held-out v2 as three separate observations with
 their own archives, prompt versions and denominators. For the held-out pack:
-24 eligible cases; discovery 8 (select-reference metrics over 6), arguments 4,
+24 eligible cases; discovery 8 (select-reference metrics over the 4 `select`
+cases, decision correctness over all 8), arguments 4,
 episodes 12 with 4 success-eligible cases; FR and EN separately. Retain every
 `missing`, `unsupported`, `error`, `timeout` and `abstain` case in its
 denominator. A pure rescore must reproduce each archive without a model, tool,

@@ -180,16 +180,24 @@ class LocalToolPolicyPilotTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "frozen_dataset_mismatch"):
                 pilot.frozen_dataset(held, self.args.dataset)
             manifest = json.loads(held.read_bytes())
-            for change in ({"status": "draft"}, {"schema_version": "other/v1"}, {"case_count": 23},
-                           {"counts_by_split": {"train": 24, "calibration": 0, "test": 0}}):
-                broken = self.tmp / "broken.json"
-                broken.write_text(json.dumps({**manifest, **change}))
-                outside = self.tmp / "datasets" / "broken.json"
-                outside.write_bytes(broken.read_bytes())
-                with self.subTest(change=change), self.assertRaisesRegex(ValueError, "manifest_invalid|inventory_mismatch"):
-                    pilot.frozen_dataset(outside, ROOT / "datasets/tool-policy-heldout-v1/cases.jsonl")
-            with self.assertRaisesRegex(ValueError, "outside_public_datasets"):
-                pilot.frozen_dataset(broken, ROOT / "datasets/tool-policy-heldout-v1/cases.jsonl")
+            for relative, pinned in pilot.FROZEN_MANIFESTS.items():
+                self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), pinned)
+            # A self-consistent but unpinned manifest (edited reference plus matching
+            # hash, or any modified inventory) is not frozen, even under datasets/.
+            edited = ROOT / "datasets/tool-policy-heldout-v1/cases.jsonl"
+            tampered = edited.read_bytes().replace(b'"value": 75', b'"value": 76')
+            self.assertNotEqual(tampered, edited.read_bytes())
+            (self.tmp / "tampered.jsonl").write_bytes(tampered)
+            for change in ({"cases_sha256": hashlib.sha256(tampered).hexdigest()}, {"status": "draft"},
+                           {"case_count": 23}, {"counts_by_split": {"train": 24, "calibration": 0, "test": 0}}, {}):
+                unpinned = self.tmp / "datasets/tool-policy-heldout-v1/unpinned.json"
+                unpinned.write_text(json.dumps({**manifest, **change}))
+                with self.subTest(change=change), self.assertRaisesRegex(ValueError, "manifest_not_frozen"):
+                    pilot.frozen_dataset(unpinned, self.tmp / "tampered.jsonl")
+            with self.assertRaisesRegex(ValueError, "frozen_dataset_mismatch"):
+                pilot.frozen_dataset(held, self.tmp / "tampered.jsonl")
+            with self.assertRaisesRegex(ValueError, "outside_checkout"):
+                pilot.frozen_dataset(Path(__file__).resolve(), edited)
 
     def test_actual_source_snapshot_imports_and_displays_help_without_original_checkout(self):
         actual_capture = pilot.shared.archive_bench_source
