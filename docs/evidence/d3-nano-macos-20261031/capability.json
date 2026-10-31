@@ -1,0 +1,6101 @@
+{
+  "aggregate_producer_sha256": "26ab65ea82f34e8c3fb6ad5173dd241e346e90094776db90dcf69c46c530c866",
+  "execution_scope": "isolated_cpu_worker_no_application_gateway",
+  "limits": [
+    "Agent-authored references and translations await independent human review.",
+    "Closed choice among supplied proposals; no tools, executable arguments, agent loop or product journey.",
+    "A new macOS CPU runtime identity: not comparable to the historical Linux/WSL CPU row as if the runtime were the same.",
+    "Worker RSS is the process's own ru_maxrss, not a process-group or unified-memory sample.",
+    "Single pass per case; latency is descriptive, not a production guarantee.",
+    "Language and catalogue variants are correlated within families; no post-hoc confidence interval is fitted."
+  ],
+  "model": {
+    "assets_manifest": "profiles/d3-nano-assets.json",
+    "backbone_parameters": 2213241664,
+    "model_assets_sha256": "47ef14e962d8c7206da5230a4f38733f266d8e7aa85311440e83e1e468da8302",
+    "model_repo_id": "vllm-sr/d3-nano",
+    "model_revision": "3aeb1c22a5632aac72353c36b3d0111c40e7dbf4",
+    "readout_shape": [
+      255,
+      2048
+    ]
+  },
+  "phases": {
+    "capability": {
+      "actual_backend": {
+        "backbone_dtype": "bfloat16",
+        "device": "cpu",
+        "kind": "cpu",
+        "loading_mode": "native-d3-bf16-readout-fp32",
+        "readout_dtype": "float32",
+        "threads": 2
+      },
+      "attempt": 1,
+      "completion_status": "complete",
+      "counts": {
+        "accuracy_over_all": 0.21875,
+        "accuracy_scored": 1.0,
+        "counts_by_split": {
+          "calibration": {
+            "passed_cases": 12,
+            "scored_cases": 12,
+            "total_cases": 48
+          },
+          "test": {
+            "passed_cases": 18,
+            "scored_cases": 18,
+            "total_cases": 96
+          },
+          "train": {
+            "passed_cases": 12,
+            "scored_cases": 12,
+            "total_cases": 48
+          }
+        },
+        "counts_by_status": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 42,
+          "timeout": 150,
+          "unsupported": 0
+        },
+        "coverage_over_all": 0.21875,
+        "failed_scored_cases": 0,
+        "independent_families": 48,
+        "latency": {
+          "adapter_duration_ms": {
+            "count": 192,
+            "max": 60118.621458001144,
+            "median": 0.0012705004337476566,
+            "min": 0.000833999365568161,
+            "p95": 40018.401707999146
+          },
+          "decision_ms": {
+            "count": 42,
+            "max": 52988.511332998314,
+            "median": 28307.62760449761,
+            "min": 14016.886083998543,
+            "p95": 45258.69729099941
+          },
+          "http_ms": {
+            "count": 0,
+            "max": null,
+            "median": null,
+            "min": null,
+            "p95": null
+          },
+          "inference_ms": {
+            "count": 42,
+            "max": 52958.45091600131,
+            "median": 28277.868520499396,
+            "min": 13996.496375002607,
+            "p95": 45234.01729200123
+          }
+        },
+        "passed_cases": 42,
+        "per_response_resources": {
+          "native_padded_tokens": {
+            "count": 0,
+            "max": null,
+            "median": null,
+            "min": null,
+            "p95": null
+          },
+          "native_tokens": {
+            "count": 42,
+            "max": 1066,
+            "median": 601.0,
+            "min": 362,
+            "p95": 1040
+          },
+          "rss_mib": {
+            "count": 42,
+            "max": 3483.578125,
+            "median": 3478.8125,
+            "min": 3273.703125,
+            "p95": 3483.578125
+          }
+        },
+        "recorded_cases": 192,
+        "scenario_count": 48,
+        "scored_cases": 42,
+        "scored_families": 11,
+        "successful_latency": {
+          "adapter_duration_ms": {
+            "count": 42,
+            "max": 53073.87270899926,
+            "median": 28396.60862549863,
+            "min": 14080.862375001743,
+            "p95": 45331.66245800021
+          },
+          "decision_ms": {
+            "count": 42,
+            "max": 52988.511332998314,
+            "median": 28307.62760449761,
+            "min": 14016.886083998543,
+            "p95": 45258.69729099941
+          },
+          "http_ms": {
+            "count": 0,
+            "max": null,
+            "median": null,
+            "min": null,
+            "p95": null
+          },
+          "inference_ms": {
+            "count": 42,
+            "max": 52958.45091600131,
+            "median": 28277.868520499396,
+            "min": 13996.496375002607,
+            "p95": 45234.01729200123
+          }
+        },
+        "total_cases": 192
+      },
+      "families": [
+        {
+          "all_correct": 10,
+          "all_scored": 10,
+          "families": 48,
+          "none_correct": 37,
+          "some_correct": 1,
+          "split": "all",
+          "variants_per_family": [
+            4
+          ]
+        },
+        {
+          "all_correct": 3,
+          "all_scored": 3,
+          "families": 12,
+          "none_correct": 9,
+          "some_correct": 0,
+          "split": "train",
+          "variants_per_family": [
+            4
+          ]
+        },
+        {
+          "all_correct": 3,
+          "all_scored": 3,
+          "families": 12,
+          "none_correct": 9,
+          "some_correct": 0,
+          "split": "calibration",
+          "variants_per_family": [
+            4
+          ]
+        },
+        {
+          "all_correct": 4,
+          "all_scored": 4,
+          "families": 24,
+          "none_correct": 19,
+          "some_correct": 1,
+          "split": "test",
+          "variants_per_family": [
+            4
+          ]
+        }
+      ],
+      "groups": {
+        "benchmark_pack": {
+          "capability-choice-v1": {
+            "accuracy_over_all": 0.21875,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 48
+              },
+              "test": {
+                "passed_cases": 18,
+                "scored_cases": 18,
+                "total_cases": 96
+              },
+              "train": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 48
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 42,
+              "timeout": 150,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.21875,
+            "failed_scored_cases": 0,
+            "independent_families": 48,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 192,
+                "max": 60118.621458001144,
+                "median": 0.0012705004337476566,
+                "min": 0.000833999365568161,
+                "p95": 40018.401707999146
+              },
+              "decision_ms": {
+                "count": 42,
+                "max": 52988.511332998314,
+                "median": 28307.62760449761,
+                "min": 14016.886083998543,
+                "p95": 45258.69729099941
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 42,
+                "max": 52958.45091600131,
+                "median": 28277.868520499396,
+                "min": 13996.496375002607,
+                "p95": 45234.01729200123
+              }
+            },
+            "passed_cases": 42,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 42,
+                "max": 1066,
+                "median": 601.0,
+                "min": 362,
+                "p95": 1040
+              },
+              "rss_mib": {
+                "count": 42,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3273.703125,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 192,
+            "scenario_count": 48,
+            "scored_cases": 42,
+            "scored_families": 11,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 42,
+                "max": 53073.87270899926,
+                "median": 28396.60862549863,
+                "min": 14080.862375001743,
+                "p95": 45331.66245800021
+              },
+              "decision_ms": {
+                "count": 42,
+                "max": 52988.511332998314,
+                "median": 28307.62760449761,
+                "min": 14016.886083998543,
+                "p95": 45258.69729099941
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 42,
+                "max": 52958.45091600131,
+                "median": 28277.868520499396,
+                "min": 13996.496375002607,
+                "p95": 45234.01729200123
+              }
+            },
+            "total_cases": 192
+          }
+        },
+        "catalogue_variant": {
+          "compact": {
+            "accuracy_over_all": 0.22916666666666666,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 24
+              },
+              "test": {
+                "passed_cases": 10,
+                "scored_cases": 10,
+                "total_cases": 48
+              },
+              "train": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 24
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 22,
+              "timeout": 74,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.22916666666666666,
+            "failed_scored_cases": 0,
+            "independent_families": 48,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 96,
+                "max": 30952.195667003252,
+                "median": 0.0012920027074869722,
+                "min": 0.000833999365568161,
+                "p95": 21330.94683300078
+              },
+              "decision_ms": {
+                "count": 22,
+                "max": 30865.025125000102,
+                "median": 17900.492146000033,
+                "min": 14016.886083998543,
+                "p95": 27944.79770899852
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 22,
+                "max": 30841.17716699984,
+                "median": 17878.92864550122,
+                "min": 13996.496375002607,
+                "p95": 27910.094040998956
+              }
+            },
+            "passed_cases": 22,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 22,
+                "max": 662,
+                "median": 455.0,
+                "min": 362,
+                "p95": 540
+              },
+              "rss_mib": {
+                "count": 22,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3273.703125,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 96,
+            "scenario_count": 48,
+            "scored_cases": 22,
+            "scored_families": 11,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 22,
+                "max": 30952.195667003252,
+                "median": 17985.47089600106,
+                "min": 14080.862375001743,
+                "p95": 28049.678708997817
+              },
+              "decision_ms": {
+                "count": 22,
+                "max": 30865.025125000102,
+                "median": 17900.492146000033,
+                "min": 14016.886083998543,
+                "p95": 27944.79770899852
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 22,
+                "max": 30841.17716699984,
+                "median": 17878.92864550122,
+                "min": 13996.496375002607,
+                "p95": 27910.094040998956
+              }
+            },
+            "total_cases": 96
+          },
+          "expanded": {
+            "accuracy_over_all": 0.20833333333333334,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 24
+              },
+              "test": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 48
+              },
+              "train": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 24
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 20,
+              "timeout": 76,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.20833333333333334,
+            "failed_scored_cases": 0,
+            "independent_families": 48,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 96,
+                "max": 60118.621458001144,
+                "median": 0.0012090004020137712,
+                "min": 0.0008749993867240846,
+                "p95": 45139.97808300337
+              },
+              "decision_ms": {
+                "count": 20,
+                "max": 52988.511332998314,
+                "median": 38902.46254199883,
+                "min": 28670.4574999967,
+                "p95": 48103.62433299815
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 20,
+                "max": 52958.45091600131,
+                "median": 38873.94981200123,
+                "min": 28645.642999999836,
+                "p95": 48082.90908399795
+              }
+            },
+            "passed_cases": 20,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 20,
+                "max": 1066,
+                "median": 905.0,
+                "min": 748,
+                "p95": 1047
+              },
+              "rss_mib": {
+                "count": 20,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3399.40625,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 96,
+            "scenario_count": 48,
+            "scored_cases": 20,
+            "scored_families": 10,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 20,
+                "max": 53073.87270899926,
+                "median": 38987.59643749872,
+                "min": 28743.53854199944,
+                "p95": 48177.239832999476
+              },
+              "decision_ms": {
+                "count": 20,
+                "max": 52988.511332998314,
+                "median": 38902.46254199883,
+                "min": 28670.4574999967,
+                "p95": 48103.62433299815
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 20,
+                "max": 52958.45091600131,
+                "median": 38873.94981200123,
+                "min": 28645.642999999836,
+                "p95": 48082.90908399795
+              }
+            },
+            "total_cases": 96
+          }
+        },
+        "difficulty": {
+          "D1": {
+            "accuracy_over_all": 0.3076923076923077,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              },
+              "test": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 32
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 16
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 36,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.3076923076923077,
+            "failed_scored_cases": 0,
+            "independent_families": 13,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 52,
+                "max": 48177.239832999476,
+                "median": 0.0012709988368442282,
+                "min": 0.0009169998520519584,
+                "p95": 42908.59554200142
+              },
+              "decision_ms": {
+                "count": 16,
+                "max": 48103.62433299815,
+                "median": 25649.84660399932,
+                "min": 14208.13674999954,
+                "p95": 48103.62433299815
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 16,
+                "max": 48082.90908399795,
+                "median": 25630.75322899931,
+                "min": 14185.691582999425,
+                "p95": 48082.90908399795
+              }
+            },
+            "passed_cases": 16,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 16,
+                "max": 1008,
+                "median": 617.5,
+                "min": 362,
+                "p95": 1008
+              },
+              "rss_mib": {
+                "count": 16,
+                "max": 3414.90625,
+                "median": 3402.03125,
+                "min": 3273.703125,
+                "p95": 3414.90625
+              }
+            },
+            "recorded_cases": 52,
+            "scenario_count": 13,
+            "scored_cases": 16,
+            "scored_families": 4,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 16,
+                "max": 48177.239832999476,
+                "median": 25715.77645850084,
+                "min": 14282.714541997848,
+                "p95": 48177.239832999476
+              },
+              "decision_ms": {
+                "count": 16,
+                "max": 48103.62433299815,
+                "median": 25649.84660399932,
+                "min": 14208.13674999954,
+                "p95": 48103.62433299815
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 16,
+                "max": 48082.90908399795,
+                "median": 25630.75322899931,
+                "min": 14185.691582999425,
+                "p95": 48082.90908399795
+              }
+            },
+            "total_cases": 52
+          },
+          "D2": {
+            "accuracy_over_all": 0.2857142857142857,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 32
+              },
+              "test": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 24
+              },
+              "train": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 28
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 24,
+              "timeout": 60,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.2857142857142857,
+            "failed_scored_cases": 0,
+            "independent_families": 21,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 84,
+                "max": 53073.87270899926,
+                "median": 0.0012500022421590984,
+                "min": 0.000957999873207882,
+                "p95": 40018.401707999146
+              },
+              "decision_ms": {
+                "count": 24,
+                "max": 52988.511332998314,
+                "median": 25407.72408349767,
+                "min": 14016.886083998543,
+                "p95": 45055.78075000085
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 24,
+                "max": 52958.45091600131,
+                "median": 25384.30249999874,
+                "min": 13996.496375002607,
+                "p95": 45035.442583000986
+              }
+            },
+            "passed_cases": 24,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 24,
+                "max": 1066,
+                "median": 656.0,
+                "min": 384,
+                "p95": 1047
+              },
+              "rss_mib": {
+                "count": 24,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3414.90625,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 84,
+            "scenario_count": 21,
+            "scored_cases": 24,
+            "scored_families": 6,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 24,
+                "max": 53073.87270899926,
+                "median": 25480.06639599953,
+                "min": 14080.862375001743,
+                "p95": 45139.97808300337
+              },
+              "decision_ms": {
+                "count": 24,
+                "max": 52988.511332998314,
+                "median": 25407.72408349767,
+                "min": 14016.886083998543,
+                "p95": 45055.78075000085
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 24,
+                "max": 52958.45091600131,
+                "median": 25384.30249999874,
+                "min": 13996.496375002607,
+                "p95": 45035.442583000986
+              }
+            },
+            "total_cases": 84
+          },
+          "D3": {
+            "accuracy_over_all": 0.03571428571428571,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 12
+              },
+              "test": {
+                "passed_cases": 2,
+                "scored_cases": 2,
+                "total_cases": 40
+              },
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 54,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.03571428571428571,
+            "failed_scored_cases": 0,
+            "independent_families": 14,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 56,
+                "max": 60118.621458001144,
+                "median": 0.0012919990695081651,
+                "min": 0.000833999365568161,
+                "p95": 28049.678708997817
+              },
+              "decision_ms": {
+                "count": 2,
+                "max": 30865.025125000102,
+                "median": 29404.91141699931,
+                "min": 27944.79770899852,
+                "p95": 30865.025125000102
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 2,
+                "max": 30841.17716699984,
+                "median": 29375.6356039994,
+                "min": 27910.094040998956,
+                "p95": 30841.17716699984
+              }
+            },
+            "passed_cases": 2,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 2,
+                "max": 662,
+                "median": 596.0,
+                "min": 530,
+                "p95": 662
+              },
+              "rss_mib": {
+                "count": 2,
+                "max": 3483.578125,
+                "median": 3483.578125,
+                "min": 3483.578125,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 56,
+            "scenario_count": 14,
+            "scored_cases": 2,
+            "scored_families": 1,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 2,
+                "max": 30952.195667003252,
+                "median": 29500.937188000535,
+                "min": 28049.678708997817,
+                "p95": 30952.195667003252
+              },
+              "decision_ms": {
+                "count": 2,
+                "max": 30865.025125000102,
+                "median": 29404.91141699931,
+                "min": 27944.79770899852,
+                "p95": 30865.025125000102
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 2,
+                "max": 30841.17716699984,
+                "median": 29375.6356039994,
+                "min": 27910.094040998956,
+                "p95": 30841.17716699984
+              }
+            },
+            "total_cases": 56
+          }
+        },
+        "domain": {
+          "documentary": {
+            "accuracy_over_all": 0.21875,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 48
+              },
+              "test": {
+                "passed_cases": 18,
+                "scored_cases": 18,
+                "total_cases": 96
+              },
+              "train": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 48
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 42,
+              "timeout": 150,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.21875,
+            "failed_scored_cases": 0,
+            "independent_families": 48,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 192,
+                "max": 60118.621458001144,
+                "median": 0.0012705004337476566,
+                "min": 0.000833999365568161,
+                "p95": 40018.401707999146
+              },
+              "decision_ms": {
+                "count": 42,
+                "max": 52988.511332998314,
+                "median": 28307.62760449761,
+                "min": 14016.886083998543,
+                "p95": 45258.69729099941
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 42,
+                "max": 52958.45091600131,
+                "median": 28277.868520499396,
+                "min": 13996.496375002607,
+                "p95": 45234.01729200123
+              }
+            },
+            "passed_cases": 42,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 42,
+                "max": 1066,
+                "median": 601.0,
+                "min": 362,
+                "p95": 1040
+              },
+              "rss_mib": {
+                "count": 42,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3273.703125,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 192,
+            "scenario_count": 48,
+            "scored_cases": 42,
+            "scored_families": 11,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 42,
+                "max": 53073.87270899926,
+                "median": 28396.60862549863,
+                "min": 14080.862375001743,
+                "p95": 45331.66245800021
+              },
+              "decision_ms": {
+                "count": 42,
+                "max": 52988.511332998314,
+                "median": 28307.62760449761,
+                "min": 14016.886083998543,
+                "p95": 45258.69729099941
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 42,
+                "max": 52958.45091600131,
+                "median": 28277.868520499396,
+                "min": 13996.496375002607,
+                "p95": 45234.01729200123
+              }
+            },
+            "total_cases": 192
+          }
+        },
+        "language": {
+          "en": {
+            "accuracy_over_all": 0.21875,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 24
+              },
+              "test": {
+                "passed_cases": 9,
+                "scored_cases": 9,
+                "total_cases": 48
+              },
+              "train": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 24
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 21,
+              "timeout": 75,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.21875,
+            "failed_scored_cases": 0,
+            "independent_families": 48,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 96,
+                "max": 38300.520582997706,
+                "median": 0.0012915006664115936,
+                "min": 0.000833999365568161,
+                "p95": 30984.274957998423
+              },
+              "decision_ms": {
+                "count": 21,
+                "max": 38195.550666998315,
+                "median": 27944.79770899852,
+                "min": 14016.886083998543,
+                "p95": 36492.301999998745
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 21,
+                "max": 38158.81516599984,
+                "median": 27910.094040998956,
+                "min": 13996.496375002607,
+                "p95": 36472.40245800276
+              }
+            },
+            "passed_cases": 21,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 21,
+                "max": 825,
+                "median": 530,
+                "min": 362,
+                "p95": 807
+              },
+              "rss_mib": {
+                "count": 21,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3281.0,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 96,
+            "scenario_count": 48,
+            "scored_cases": 21,
+            "scored_families": 11,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 21,
+                "max": 38300.520582997706,
+                "median": 28049.678708997817,
+                "min": 14080.862375001743,
+                "p95": 36559.44591599837
+              },
+              "decision_ms": {
+                "count": 21,
+                "max": 38195.550666998315,
+                "median": 27944.79770899852,
+                "min": 14016.886083998543,
+                "p95": 36492.301999998745
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 21,
+                "max": 38158.81516599984,
+                "median": 27910.094040998956,
+                "min": 13996.496375002607,
+                "p95": 36472.40245800276
+              }
+            },
+            "total_cases": 96
+          },
+          "fr": {
+            "accuracy_over_all": 0.21875,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 24
+              },
+              "test": {
+                "passed_cases": 9,
+                "scored_cases": 9,
+                "total_cases": 48
+              },
+              "train": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 24
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 21,
+              "timeout": 75,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.21875,
+            "failed_scored_cases": 0,
+            "independent_families": 48,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 96,
+                "max": 60118.621458001144,
+                "median": 0.0012500022421590984,
+                "min": 0.0009169998520519584,
+                "p95": 45139.97808300337
+              },
+              "decision_ms": {
+                "count": 21,
+                "max": 52988.511332998314,
+                "median": 30865.025125000102,
+                "min": 17316.065041999536,
+                "p95": 48103.62433299815
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 21,
+                "max": 52958.45091600131,
+                "median": 30841.17716699984,
+                "min": 17292.802249998203,
+                "p95": 48082.90908399795
+              }
+            },
+            "passed_cases": 21,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 21,
+                "max": 1066,
+                "median": 662,
+                "min": 454,
+                "p95": 1047
+              },
+              "rss_mib": {
+                "count": 21,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3273.703125,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 96,
+            "scenario_count": 48,
+            "scored_cases": 21,
+            "scored_families": 11,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 21,
+                "max": 53073.87270899926,
+                "median": 30952.195667003252,
+                "min": 17382.332707999012,
+                "p95": 48177.239832999476
+              },
+              "decision_ms": {
+                "count": 21,
+                "max": 52988.511332998314,
+                "median": 30865.025125000102,
+                "min": 17316.065041999536,
+                "p95": 48103.62433299815
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 21,
+                "max": 52958.45091600131,
+                "median": 30841.17716699984,
+                "min": 17292.802249998203,
+                "p95": 48082.90908399795
+              }
+            },
+            "total_cases": 96
+          }
+        },
+        "split": {
+          "calibration": {
+            "accuracy_over_all": 0.25,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 48
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 36,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.25,
+            "failed_scored_cases": 0,
+            "independent_families": 12,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 48,
+                "max": 53073.87270899926,
+                "median": 0.0012920027074869722,
+                "min": 0.000957999873207882,
+                "p95": 40018.401707999146
+              },
+              "decision_ms": {
+                "count": 12,
+                "max": 52988.511332998314,
+                "median": 25898.571958499815,
+                "min": 15790.206416000728,
+                "p95": 52988.511332998314
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 12,
+                "max": 52958.45091600131,
+                "median": 25875.723458497305,
+                "min": 15765.189292000287,
+                "p95": 52958.45091600131
+              }
+            },
+            "passed_cases": 12,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 12,
+                "max": 1066,
+                "median": 647.0,
+                "min": 374,
+                "p95": 1066
+              },
+              "rss_mib": {
+                "count": 12,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3399.40625,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 48,
+            "scenario_count": 12,
+            "scored_cases": 12,
+            "scored_families": 3,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 12,
+                "max": 53073.87270899926,
+                "median": 25973.24779149858,
+                "min": 15869.708207999793,
+                "p95": 53073.87270899926
+              },
+              "decision_ms": {
+                "count": 12,
+                "max": 52988.511332998314,
+                "median": 25898.571958499815,
+                "min": 15790.206416000728,
+                "p95": 52988.511332998314
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 12,
+                "max": 52958.45091600131,
+                "median": 25875.723458497305,
+                "min": 15765.189292000287,
+                "p95": 52958.45091600131
+              }
+            },
+            "total_cases": 48
+          },
+          "test": {
+            "accuracy_over_all": 0.1875,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 18,
+                "scored_cases": 18,
+                "total_cases": 96
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 18,
+              "timeout": 78,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.1875,
+            "failed_scored_cases": 0,
+            "independent_families": 24,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 96,
+                "max": 60118.621458001144,
+                "median": 0.0012500004231696948,
+                "min": 0.000833999365568161,
+                "p95": 39674.67229199974
+              },
+              "decision_ms": {
+                "count": 18,
+                "max": 42843.986290998146,
+                "median": 28307.62760449761,
+                "min": 14016.886083998543,
+                "p95": 42843.986290998146
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 18,
+                "max": 42825.294124999346,
+                "median": 28277.868520499396,
+                "min": 13996.496375002607,
+                "p95": 42825.294124999346
+              }
+            },
+            "passed_cases": 18,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 18,
+                "max": 1021,
+                "median": 596.0,
+                "min": 376,
+                "p95": 1021
+              },
+              "rss_mib": {
+                "count": 18,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3402.03125,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 96,
+            "scenario_count": 24,
+            "scored_cases": 18,
+            "scored_families": 5,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 18,
+                "max": 42908.59554200142,
+                "median": 28396.60862549863,
+                "min": 14080.862375001743,
+                "p95": 42908.59554200142
+              },
+              "decision_ms": {
+                "count": 18,
+                "max": 42843.986290998146,
+                "median": 28307.62760449761,
+                "min": 14016.886083998543,
+                "p95": 42843.986290998146
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 18,
+                "max": 42825.294124999346,
+                "median": 28277.868520499396,
+                "min": 13996.496375002607,
+                "p95": 42825.294124999346
+              }
+            },
+            "total_cases": 96
+          },
+          "train": {
+            "accuracy_over_all": 0.25,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 48
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 36,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.25,
+            "failed_scored_cases": 0,
+            "independent_families": 12,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 48,
+                "max": 45331.66245800021,
+                "median": 0.001229500412591733,
+                "min": 0.0010410003596916795,
+                "p95": 40521.48775000023
+              },
+              "decision_ms": {
+                "count": 12,
+                "max": 45258.69729099941,
+                "median": 25986.411770500126,
+                "min": 14208.13674999954,
+                "p95": 45258.69729099941
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 12,
+                "max": 45234.01729200123,
+                "median": 25965.50072950049,
+                "min": 14185.691582999425,
+                "p95": 45234.01729200123
+              }
+            },
+            "passed_cases": 12,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 12,
+                "max": 1047,
+                "median": 643.5,
+                "min": 362,
+                "p95": 1047
+              },
+              "rss_mib": {
+                "count": 12,
+                "max": 3483.578125,
+                "median": 3446.859375,
+                "min": 3273.703125,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 48,
+            "scenario_count": 12,
+            "scored_cases": 12,
+            "scored_families": 3,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 12,
+                "max": 45331.66245800021,
+                "median": 26053.15545799931,
+                "min": 14282.714541997848,
+                "p95": 45331.66245800021
+              },
+              "decision_ms": {
+                "count": 12,
+                "max": 45258.69729099941,
+                "median": 25986.411770500126,
+                "min": 14208.13674999954,
+                "p95": 45258.69729099941
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 12,
+                "max": 45234.01729200123,
+                "median": 25965.50072950049,
+                "min": 14185.691582999425,
+                "p95": 45234.01729200123
+              }
+            },
+            "total_cases": 48
+          }
+        },
+        "task_type": {
+          "capability.arguments.argument-binding": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 12
+              },
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 8
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 20,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 5,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 20,
+                "max": 0.0020000006770715117,
+                "median": 0.0012500004231696948,
+                "min": 0.000957999873207882,
+                "p95": 0.0016669982869643718
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 20,
+            "scenario_count": 5,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 20
+          },
+          "capability.arguments.clarification": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              },
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              },
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 12,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 3,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 12,
+                "max": 0.0013330027286428958,
+                "median": 0.0011875017662532628,
+                "min": 0.00112499765236862,
+                "p95": 0.0013330027286428958
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 12,
+            "scenario_count": 3,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 12
+          },
+          "capability.arguments.dependency-order": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 12
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 12,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 3,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 12,
+                "max": 0.0040000013541430235,
+                "median": 0.0011869979061884806,
+                "min": 0.0010410003596916795,
+                "p95": 0.0040000013541430235
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 12,
+            "scenario_count": 3,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 12
+          },
+          "capability.arguments.resource-choice": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 8
+              },
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 12,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 3,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 12,
+                "max": 0.0014170000213198364,
+                "median": 0.0012085001799277961,
+                "min": 0.0010410003596916795,
+                "p95": 0.0014170000213198364
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 12,
+            "scenario_count": 3,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 12
+          },
+          "capability.arguments.scope-guard": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 8
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 8,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 2,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 8,
+                "max": 0.0023329994291998446,
+                "median": 0.0012709988368442282,
+                "min": 0.0010839976312126964,
+                "p95": 0.0023329994291998446
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 8,
+            "scenario_count": 2,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 8
+          },
+          "capability.observations.clarify-after-partial": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.0014170000213198364,
+                "median": 0.0012500004231696948,
+                "min": 0.0011669981176964939,
+                "p95": 0.0014170000213198364
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.clarify-provenance": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.004833000275539234,
+                "median": 0.0011880001693498343,
+                "min": 0.0010000003385357559,
+                "p95": 0.004833000275539234
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.empty-result": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.0013329990906640887,
+                "median": 0.0011880001693498343,
+                "min": 0.0011660013115033507,
+                "p95": 0.0013329990906640887
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.ignore-observation-instructions": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.0013329990906640887,
+                "median": 0.0010630010365275666,
+                "min": 0.0010420008038636297,
+                "p95": 0.0013329990906640887
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.next-tool": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.0011250012903474271,
+                "median": 0.0011039992386940867,
+                "min": 0.0010829971870407462,
+                "p95": 0.0011250012903474271
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.next-tool-binding": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.00112499765236862,
+                "median": 0.0010625008144415915,
+                "min": 0.0009169998520519584,
+                "p95": 0.00112499765236862
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.no-success-without-artifact": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.0010420008038636297,
+                "median": 0.0009789982868824154,
+                "min": 0.0009169998520519584,
+                "p95": 0.0010420008038636297
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.partial-answer": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.0012089985830243677,
+                "median": 0.001186999725177884,
+                "min": 0.0010830008250195533,
+                "p95": 0.0012089985830243677
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.refresh-schema-after-error": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.0012920027074869722,
+                "median": 0.0012084983609383926,
+                "min": 0.0010000003385357559,
+                "p95": 0.0012920027074869722
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.repair-prerequisite": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.0013330027286428958,
+                "median": 0.0011664997145999223,
+                "min": 0.0010410003596916795,
+                "p95": 0.0013330027286428958
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.retry": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.00145800004247576,
+                "median": 0.00129149884742219,
+                "min": 0.0012079981388524175,
+                "p95": 0.00145800004247576
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.stop-budget-exhausted": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.001167001755675301,
+                "median": 0.0011250012903474271,
+                "min": 0.0010419971658848226,
+                "p95": 0.001167001755675301
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.stop-cancelled": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.0013329990906640887,
+                "median": 0.0011040010576834902,
+                "min": 0.0009169998520519584,
+                "p95": 0.0013329990906640887
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.stop-incomparable": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.0010000003385357559,
+                "median": 0.0009164996299659833,
+                "min": 0.000833999365568161,
+                "p95": 0.0010000003385357559
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.stop-sufficient-evidence": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.001167001755675301,
+                "median": 0.0011039992386940867,
+                "min": 0.0010000003385357559,
+                "p95": 0.001167001755675301
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.observations.stop-unavailable": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 4,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 1,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 0.0011659976735245436,
+                "median": 0.0010000003385357559,
+                "min": 0.000957999873207882,
+                "p95": 0.0011659976735245436
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 4,
+            "scenario_count": 1,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 4
+          },
+          "capability.selection.multi-tool": {
+            "accuracy_over_all": 0.65,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 10,
+                "scored_cases": 10,
+                "total_cases": 24
+              },
+              "train": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 26,
+              "timeout": 14,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.65,
+            "failed_scored_cases": 0,
+            "independent_families": 10,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 40,
+                "max": 60118.621458001144,
+                "median": 18229.801666499043,
+                "min": 0.0012499986041802913,
+                "p95": 45139.97808300337
+              },
+              "decision_ms": {
+                "count": 26,
+                "max": 52988.511332998314,
+                "median": 28307.62760449761,
+                "min": 14016.886083998543,
+                "p95": 45055.78075000085
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 26,
+                "max": 52958.45091600131,
+                "median": 28277.868520499396,
+                "min": 13996.496375002607,
+                "p95": 45035.442583000986
+              }
+            },
+            "passed_cases": 26,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 26,
+                "max": 1066,
+                "median": 601.0,
+                "min": 384,
+                "p95": 1047
+              },
+              "rss_mib": {
+                "count": 26,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3414.90625,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 40,
+            "scenario_count": 10,
+            "scored_cases": 26,
+            "scored_families": 7,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 26,
+                "max": 53073.87270899926,
+                "median": 28396.60862549863,
+                "min": 14080.862375001743,
+                "p95": 45139.97808300337
+              },
+              "decision_ms": {
+                "count": 26,
+                "max": 52988.511332998314,
+                "median": 28307.62760449761,
+                "min": 14016.886083998543,
+                "p95": 45055.78075000085
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 26,
+                "max": 52958.45091600131,
+                "median": 28277.868520499396,
+                "min": 13996.496375002607,
+                "p95": 45035.442583000986
+              }
+            },
+            "total_cases": 40
+          },
+          "capability.selection.single-tool": {
+            "accuracy_over_all": 1.0,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              },
+              "test": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 8
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "coverage_over_all": 1.0,
+            "failed_scored_cases": 0,
+            "independent_families": 4,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 16,
+                "max": 48177.239832999476,
+                "median": 25715.77645850084,
+                "min": 14282.714541997848,
+                "p95": 48177.239832999476
+              },
+              "decision_ms": {
+                "count": 16,
+                "max": 48103.62433299815,
+                "median": 25649.84660399932,
+                "min": 14208.13674999954,
+                "p95": 48103.62433299815
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 16,
+                "max": 48082.90908399795,
+                "median": 25630.75322899931,
+                "min": 14185.691582999425,
+                "p95": 48082.90908399795
+              }
+            },
+            "passed_cases": 16,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 16,
+                "max": 1008,
+                "median": 617.5,
+                "min": 362,
+                "p95": 1008
+              },
+              "rss_mib": {
+                "count": 16,
+                "max": 3414.90625,
+                "median": 3402.03125,
+                "min": 3273.703125,
+                "p95": 3414.90625
+              }
+            },
+            "recorded_cases": 16,
+            "scenario_count": 4,
+            "scored_cases": 16,
+            "scored_families": 4,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 16,
+                "max": 48177.239832999476,
+                "median": 25715.77645850084,
+                "min": 14282.714541997848,
+                "p95": 48177.239832999476
+              },
+              "decision_ms": {
+                "count": 16,
+                "max": 48103.62433299815,
+                "median": 25649.84660399932,
+                "min": 14208.13674999954,
+                "p95": 48103.62433299815
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 16,
+                "max": 48082.90908399795,
+                "median": 25630.75322899931,
+                "min": 14185.691582999425,
+                "p95": 48082.90908399795
+              }
+            },
+            "total_cases": 16
+          },
+          "capability.selection.source-choice": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              },
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 8,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 2,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 8,
+                "max": 0.0049580012273509055,
+                "median": 0.0016040012269513682,
+                "min": 0.0012499986041802913,
+                "p95": 0.0049580012273509055
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 8,
+            "scenario_count": 2,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 8
+          }
+        },
+        "track": {
+          "arguments": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 16
+              },
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 32
+              },
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 16
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 64,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 16,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 64,
+                "max": 0.0040000013541430235,
+                "median": 0.0012085001799277961,
+                "min": 0.000957999873207882,
+                "p95": 0.0017080019460991025
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 64,
+            "scenario_count": 16,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 64
+          },
+          "observations": {
+            "accuracy_over_all": 0.0,
+            "accuracy_scored": null,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 16
+              },
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 32
+              },
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 16
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 0,
+              "timeout": 64,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.0,
+            "failed_scored_cases": 0,
+            "independent_families": 16,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 64,
+                "max": 0.004833000275539234,
+                "median": 0.00112499765236862,
+                "min": 0.000833999365568161,
+                "p95": 0.0013330027286428958
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "passed_cases": 0,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "rss_mib": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "recorded_cases": 64,
+            "scenario_count": 16,
+            "scored_cases": 0,
+            "scored_families": 0,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "decision_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              }
+            },
+            "total_cases": 64
+          },
+          "selection": {
+            "accuracy_over_all": 0.65625,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 16
+              },
+              "test": {
+                "passed_cases": 18,
+                "scored_cases": 18,
+                "total_cases": 32
+              },
+              "train": {
+                "passed_cases": 12,
+                "scored_cases": 12,
+                "total_cases": 16
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 42,
+              "timeout": 22,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.65625,
+            "failed_scored_cases": 0,
+            "independent_families": 16,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 64,
+                "max": 60118.621458001144,
+                "median": 17985.47089600106,
+                "min": 0.0012499986041802913,
+                "p95": 45331.66245800021
+              },
+              "decision_ms": {
+                "count": 42,
+                "max": 52988.511332998314,
+                "median": 28307.62760449761,
+                "min": 14016.886083998543,
+                "p95": 45258.69729099941
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 42,
+                "max": 52958.45091600131,
+                "median": 28277.868520499396,
+                "min": 13996.496375002607,
+                "p95": 45234.01729200123
+              }
+            },
+            "passed_cases": 42,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 42,
+                "max": 1066,
+                "median": 601.0,
+                "min": 362,
+                "p95": 1040
+              },
+              "rss_mib": {
+                "count": 42,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3273.703125,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 64,
+            "scenario_count": 16,
+            "scored_cases": 42,
+            "scored_families": 11,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 42,
+                "max": 53073.87270899926,
+                "median": 28396.60862549863,
+                "min": 14080.862375001743,
+                "p95": 45331.66245800021
+              },
+              "decision_ms": {
+                "count": 42,
+                "max": 52988.511332998314,
+                "median": 28307.62760449761,
+                "min": 14016.886083998543,
+                "p95": 45258.69729099941
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 42,
+                "max": 52958.45091600131,
+                "median": 28277.868520499396,
+                "min": 13996.496375002607,
+                "p95": 45234.01729200123
+              }
+            },
+            "total_cases": 64
+          }
+        },
+        "use_case": {
+          "cross_source": {
+            "accuracy_over_all": 0.14285714285714285,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 16
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 4
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 24,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.14285714285714285,
+            "failed_scored_cases": 0,
+            "independent_families": 7,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 28,
+                "max": 45139.97808300337,
+                "median": 0.0013125008990755305,
+                "min": 0.000833999365568161,
+                "p95": 38300.520582997706
+              },
+              "decision_ms": {
+                "count": 4,
+                "max": 45055.78075000085,
+                "median": 28953.084333497827,
+                "min": 17159.953625003254,
+                "p95": 45055.78075000085
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 4,
+                "max": 45035.442583000986,
+                "median": 28925.114791500164,
+                "min": 17136.230457999773,
+                "p95": 45035.442583000986
+              }
+            },
+            "passed_cases": 4,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 4,
+                "max": 1040,
+                "median": 656.0,
+                "min": 421,
+                "p95": 1040
+              },
+              "rss_mib": {
+                "count": 4,
+                "max": 3483.578125,
+                "median": 3481.1953125,
+                "min": 3478.8125,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 28,
+            "scenario_count": 7,
+            "scored_cases": 4,
+            "scored_families": 1,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 4,
+                "max": 45139.97808300337,
+                "median": 29039.244874998985,
+                "min": 17230.5418750002,
+                "p95": 45139.97808300337
+              },
+              "decision_ms": {
+                "count": 4,
+                "max": 45055.78075000085,
+                "median": 28953.084333497827,
+                "min": 17159.953625003254,
+                "p95": 45055.78075000085
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 4,
+                "max": 45035.442583000986,
+                "median": 28925.114791500164,
+                "min": 17136.230457999773,
+                "p95": 45035.442583000986
+              }
+            },
+            "total_cases": 28
+          },
+          "geospatial": {
+            "accuracy_over_all": 0.19230769230769232,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 12
+              },
+              "test": {
+                "passed_cases": 6,
+                "scored_cases": 6,
+                "total_cases": 28
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 12
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 10,
+              "timeout": 42,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.19230769230769232,
+            "failed_scored_cases": 0,
+            "independent_families": 13,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 52,
+                "max": 60118.621458001144,
+                "median": 0.0012500022421590984,
+                "min": 0.0009169998520519584,
+                "p95": 40521.48775000023
+              },
+              "decision_ms": {
+                "count": 10,
+                "max": 42579.93458300189,
+                "median": 28679.97029199796,
+                "min": 15408.039624999219,
+                "p95": 42579.93458300189
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 10,
+                "max": 42545.39174999809,
+                "median": 28653.385832998538,
+                "min": 15384.325792001619,
+                "p95": 42545.39174999809
+              }
+            },
+            "passed_cases": 10,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 10,
+                "max": 1047,
+                "median": 600.5,
+                "min": 388,
+                "p95": 1047
+              },
+              "rss_mib": {
+                "count": 10,
+                "max": 3483.578125,
+                "median": 3414.90625,
+                "min": 3414.90625,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 52,
+            "scenario_count": 13,
+            "scored_cases": 10,
+            "scored_families": 3,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 10,
+                "max": 42690.8217909986,
+                "median": 28763.724166999964,
+                "min": 15478.119415998663,
+                "p95": 42690.8217909986
+              },
+              "decision_ms": {
+                "count": 10,
+                "max": 42579.93458300189,
+                "median": 28679.97029199796,
+                "min": 15408.039624999219,
+                "p95": 42579.93458300189
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 10,
+                "max": 42545.39174999809,
+                "median": 28653.385832998538,
+                "min": 15384.325792001619,
+                "p95": 42545.39174999809
+              }
+            },
+            "total_cases": 52
+          },
+          "local_rag": {
+            "accuracy_over_all": 0.25,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 8
+              },
+              "train": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 16
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 8,
+              "timeout": 24,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.25,
+            "failed_scored_cases": 0,
+            "independent_families": 8,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 32,
+                "max": 45331.66245800021,
+                "median": 0.0013330009096534923,
+                "min": 0.0010000003385357559,
+                "p95": 40042.9630419967
+              },
+              "decision_ms": {
+                "count": 8,
+                "max": 45258.69729099941,
+                "median": 25226.214312498996,
+                "min": 14016.886083998543,
+                "p95": 45258.69729099941
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 8,
+                "max": 45234.01729200123,
+                "median": 25206.454416498673,
+                "min": 13996.496375002607,
+                "p95": 45234.01729200123
+              }
+            },
+            "passed_cases": 8,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 8,
+                "max": 1021,
+                "median": 617.0,
+                "min": 362,
+                "p95": 1021
+              },
+              "rss_mib": {
+                "count": 8,
+                "max": 3478.8125,
+                "median": 3439.109375,
+                "min": 3273.703125,
+                "p95": 3478.8125
+              }
+            },
+            "recorded_cases": 32,
+            "scenario_count": 8,
+            "scored_cases": 8,
+            "scored_families": 2,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 8,
+                "max": 45331.66245800021,
+                "median": 25291.39850049978,
+                "min": 14080.862375001743,
+                "p95": 45331.66245800021
+              },
+              "decision_ms": {
+                "count": 8,
+                "max": 45258.69729099941,
+                "median": 25226.214312498996,
+                "min": 14016.886083998543,
+                "p95": 45258.69729099941
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 8,
+                "max": 45234.01729200123,
+                "median": 25206.454416498673,
+                "min": 13996.496375002607,
+                "p95": 45234.01729200123
+              }
+            },
+            "total_cases": 32
+          },
+          "open_data": {
+            "accuracy_over_all": 0.25,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 8,
+                "scored_cases": 8,
+                "total_cases": 12
+              },
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 28
+              },
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 8
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 36,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.25,
+            "failed_scored_cases": 0,
+            "independent_families": 12,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 48,
+                "max": 53073.87270899926,
+                "median": 0.0012084983609383926,
+                "min": 0.0009169998520519584,
+                "p95": 40018.401707999146
+              },
+              "decision_ms": {
+                "count": 12,
+                "max": 52988.511332998314,
+                "median": 26532.101875500302,
+                "min": 14743.28908300231,
+                "p95": 52988.511332998314
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 12,
+                "max": 52958.45091600131,
+                "median": 26509.23343749855,
+                "min": 14726.176542000758,
+                "p95": 52958.45091600131
+              }
+            },
+            "passed_cases": 12,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 12,
+                "max": 1066,
+                "median": 650.0,
+                "min": 376,
+                "p95": 1066
+              },
+              "rss_mib": {
+                "count": 12,
+                "max": 3483.578125,
+                "median": 3478.8125,
+                "min": 3402.03125,
+                "p95": 3483.578125
+              }
+            },
+            "recorded_cases": 48,
+            "scenario_count": 12,
+            "scored_cases": 12,
+            "scored_families": 3,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 12,
+                "max": 53073.87270899926,
+                "median": 26600.43460399902,
+                "min": 14805.025541998475,
+                "p95": 53073.87270899926
+              },
+              "decision_ms": {
+                "count": 12,
+                "max": 52988.511332998314,
+                "median": 26532.101875500302,
+                "min": 14743.28908300231,
+                "p95": 52988.511332998314
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 12,
+                "max": 52958.45091600131,
+                "median": 26509.23343749855,
+                "min": 14726.176542000758,
+                "p95": 52958.45091600131
+              }
+            },
+            "total_cases": 48
+          },
+          "web": {
+            "accuracy_over_all": 0.25,
+            "accuracy_scored": 1.0,
+            "counts_by_split": {
+              "calibration": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 8
+              },
+              "test": {
+                "passed_cases": 4,
+                "scored_cases": 4,
+                "total_cases": 16
+              },
+              "train": {
+                "passed_cases": 0,
+                "scored_cases": 0,
+                "total_cases": 8
+              }
+            },
+            "counts_by_status": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 8,
+              "timeout": 24,
+              "unsupported": 0
+            },
+            "coverage_over_all": 0.25,
+            "failed_scored_cases": 0,
+            "independent_families": 8,
+            "latency": {
+              "adapter_duration_ms": {
+                "count": 32,
+                "max": 48177.239832999476,
+                "median": 0.0013329990906640887,
+                "min": 0.0010420008038636297,
+                "p95": 39674.67229199974
+              },
+              "decision_ms": {
+                "count": 8,
+                "max": 48103.62433299815,
+                "median": 24150.977437499023,
+                "min": 14093.928457998118,
+                "p95": 48103.62433299815
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 8,
+                "max": 48082.90908399795,
+                "median": 24128.841145999104,
+                "min": 14073.29720800044,
+                "p95": 48082.90908399795
+              }
+            },
+            "passed_cases": 8,
+            "per_response_resources": {
+              "native_padded_tokens": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "native_tokens": {
+                "count": 8,
+                "max": 1010,
+                "median": 617.0,
+                "min": 374,
+                "p95": 1010
+              },
+              "rss_mib": {
+                "count": 8,
+                "max": 3478.8125,
+                "median": 3440.421875,
+                "min": 3399.40625,
+                "p95": 3478.8125
+              }
+            },
+            "recorded_cases": 32,
+            "scenario_count": 8,
+            "scored_cases": 8,
+            "scored_families": 2,
+            "successful_latency": {
+              "adapter_duration_ms": {
+                "count": 8,
+                "max": 48177.239832999476,
+                "median": 24223.697083500156,
+                "min": 14155.04512500047,
+                "p95": 48177.239832999476
+              },
+              "decision_ms": {
+                "count": 8,
+                "max": 48103.62433299815,
+                "median": 24150.977437499023,
+                "min": 14093.928457998118,
+                "p95": 48103.62433299815
+              },
+              "http_ms": {
+                "count": 0,
+                "max": null,
+                "median": null,
+                "min": null,
+                "p95": null
+              },
+              "inference_ms": {
+                "count": 8,
+                "max": 48082.90908399795,
+                "median": 24128.841145999104,
+                "min": 14073.29720800044,
+                "p95": 48082.90908399795
+              }
+            },
+            "total_cases": 32
+          }
+        }
+      },
+      "identity": {
+        "analysis_sha256": "617260a8b9b70e41c07eb37ce692d665efb1a971320d0e4a9f1e217c9272e768",
+        "dataset_sha256": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+        "manifest_sha256": "356417cad9ba55d1b07ad467fd4744b39785a9e531b5d4f85a6be691d520a4d7",
+        "outer_seal_sha256": "b2fe2efc6ef48fae7055b8534d76f4a39ba379bf3292c5ccd4c6939e6da8e105",
+        "raw_sha256": "6c6c9cbc67e4a9bf17fb421c944408737b51a01ebcb8825305fcf08e03868fb2",
+        "scorer_sha256": "c57a02c8ba3d75c81d49c2bb94775d99d7b387d0d74f6376a0bac85bd5ab6f63"
+      },
+      "included_in_full_pack_quality_denominator": true,
+      "latency_ms": {
+        "count": 42,
+        "max": 53073.87270899926,
+        "median": 28396.60862549863,
+        "min": 14080.862375001743,
+        "p95": 45331.66245800021
+      },
+      "paired_catalogue_views": [
+        {
+          "any_unscored": 76,
+          "axis": "catalogue",
+          "both_correct": 20,
+          "both_valid_choices": 20,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 20,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "all",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 20,
+              "second": "ok"
+            },
+            {
+              "first": "ok",
+              "pairs": 2,
+              "second": "timeout"
+            },
+            {
+              "first": "timeout",
+              "pairs": 74,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "all",
+          "total_pairs": 96
+        },
+        {
+          "any_unscored": 38,
+          "axis": "catalogue",
+          "both_correct": 10,
+          "both_valid_choices": 10,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 10,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "all",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 10,
+              "second": "ok"
+            },
+            {
+              "first": "ok",
+              "pairs": 1,
+              "second": "timeout"
+            },
+            {
+              "first": "timeout",
+              "pairs": 37,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "fr",
+          "total_pairs": 48
+        },
+        {
+          "any_unscored": 38,
+          "axis": "catalogue",
+          "both_correct": 10,
+          "both_valid_choices": 10,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 10,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "all",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 10,
+              "second": "ok"
+            },
+            {
+              "first": "ok",
+              "pairs": 1,
+              "second": "timeout"
+            },
+            {
+              "first": "timeout",
+              "pairs": 37,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "en",
+          "total_pairs": 48
+        },
+        {
+          "any_unscored": 18,
+          "axis": "catalogue",
+          "both_correct": 6,
+          "both_valid_choices": 6,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 6,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "train",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 6,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 18,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "all",
+          "total_pairs": 24
+        },
+        {
+          "any_unscored": 9,
+          "axis": "catalogue",
+          "both_correct": 3,
+          "both_valid_choices": 3,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 3,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "train",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 3,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 9,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "fr",
+          "total_pairs": 12
+        },
+        {
+          "any_unscored": 9,
+          "axis": "catalogue",
+          "both_correct": 3,
+          "both_valid_choices": 3,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 3,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "train",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 3,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 9,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "en",
+          "total_pairs": 12
+        },
+        {
+          "any_unscored": 18,
+          "axis": "catalogue",
+          "both_correct": 6,
+          "both_valid_choices": 6,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 6,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "calibration",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 6,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 18,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "all",
+          "total_pairs": 24
+        },
+        {
+          "any_unscored": 9,
+          "axis": "catalogue",
+          "both_correct": 3,
+          "both_valid_choices": 3,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 3,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "calibration",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 3,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 9,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "fr",
+          "total_pairs": 12
+        },
+        {
+          "any_unscored": 9,
+          "axis": "catalogue",
+          "both_correct": 3,
+          "both_valid_choices": 3,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 3,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "calibration",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 3,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 9,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "en",
+          "total_pairs": 12
+        },
+        {
+          "any_unscored": 40,
+          "axis": "catalogue",
+          "both_correct": 8,
+          "both_valid_choices": 8,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 8,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "test",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 8,
+              "second": "ok"
+            },
+            {
+              "first": "ok",
+              "pairs": 2,
+              "second": "timeout"
+            },
+            {
+              "first": "timeout",
+              "pairs": 38,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "all",
+          "total_pairs": 48
+        },
+        {
+          "any_unscored": 20,
+          "axis": "catalogue",
+          "both_correct": 4,
+          "both_valid_choices": 4,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 4,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "test",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 4,
+              "second": "ok"
+            },
+            {
+              "first": "ok",
+              "pairs": 1,
+              "second": "timeout"
+            },
+            {
+              "first": "timeout",
+              "pairs": 19,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "fr",
+          "total_pairs": 24
+        },
+        {
+          "any_unscored": 20,
+          "axis": "catalogue",
+          "both_correct": 4,
+          "both_valid_choices": 4,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "compact",
+          "neither_correct": 0,
+          "same_choice": 4,
+          "second_only_correct": 0,
+          "second_view": "expanded",
+          "split": "test",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 4,
+              "second": "ok"
+            },
+            {
+              "first": "ok",
+              "pairs": 1,
+              "second": "timeout"
+            },
+            {
+              "first": "timeout",
+              "pairs": 19,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "en",
+          "total_pairs": 24
+        }
+      ],
+      "paired_language_views": [
+        {
+          "any_unscored": 75,
+          "axis": "language",
+          "both_correct": 21,
+          "both_valid_choices": 21,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 21,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "all",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 21,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 75,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "all",
+          "total_pairs": 96
+        },
+        {
+          "any_unscored": 37,
+          "axis": "language",
+          "both_correct": 11,
+          "both_valid_choices": 11,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 11,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "all",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 11,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 37,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "compact",
+          "total_pairs": 48
+        },
+        {
+          "any_unscored": 38,
+          "axis": "language",
+          "both_correct": 10,
+          "both_valid_choices": 10,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 10,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "all",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 10,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 38,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "expanded",
+          "total_pairs": 48
+        },
+        {
+          "any_unscored": 18,
+          "axis": "language",
+          "both_correct": 6,
+          "both_valid_choices": 6,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 6,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "train",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 6,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 18,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "all",
+          "total_pairs": 24
+        },
+        {
+          "any_unscored": 9,
+          "axis": "language",
+          "both_correct": 3,
+          "both_valid_choices": 3,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 3,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "train",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 3,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 9,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "compact",
+          "total_pairs": 12
+        },
+        {
+          "any_unscored": 9,
+          "axis": "language",
+          "both_correct": 3,
+          "both_valid_choices": 3,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 3,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "train",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 3,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 9,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "expanded",
+          "total_pairs": 12
+        },
+        {
+          "any_unscored": 18,
+          "axis": "language",
+          "both_correct": 6,
+          "both_valid_choices": 6,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 6,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "calibration",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 6,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 18,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "all",
+          "total_pairs": 24
+        },
+        {
+          "any_unscored": 9,
+          "axis": "language",
+          "both_correct": 3,
+          "both_valid_choices": 3,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 3,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "calibration",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 3,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 9,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "compact",
+          "total_pairs": 12
+        },
+        {
+          "any_unscored": 9,
+          "axis": "language",
+          "both_correct": 3,
+          "both_valid_choices": 3,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 3,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "calibration",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 3,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 9,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "expanded",
+          "total_pairs": 12
+        },
+        {
+          "any_unscored": 39,
+          "axis": "language",
+          "both_correct": 9,
+          "both_valid_choices": 9,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 9,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "test",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 9,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 39,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "all",
+          "total_pairs": 48
+        },
+        {
+          "any_unscored": 19,
+          "axis": "language",
+          "both_correct": 5,
+          "both_valid_choices": 5,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 5,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "test",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 5,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 19,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "compact",
+          "total_pairs": 24
+        },
+        {
+          "any_unscored": 20,
+          "axis": "language",
+          "both_correct": 4,
+          "both_valid_choices": 4,
+          "different_choice": 0,
+          "first_only_correct": 0,
+          "first_view": "fr",
+          "neither_correct": 0,
+          "same_choice": 4,
+          "second_only_correct": 0,
+          "second_view": "en",
+          "split": "test",
+          "status_pairs": [
+            {
+              "first": "ok",
+              "pairs": 4,
+              "second": "ok"
+            },
+            {
+              "first": "timeout",
+              "pairs": 20,
+              "second": "timeout"
+            }
+          ],
+          "stratum": "expanded",
+          "total_pairs": 24
+        }
+      ],
+      "resources": {
+        "adapter_initialization_ms": 8785.88604199831,
+        "load_ms": 5346.378082998854,
+        "rss_peak_mib": 3483.6,
+        "rss_scope": "maximum of the worker's own ru_maxrss after loading and after each case; single CPU worker process, not a process-group sample",
+        "stop_reason": null
+      },
+      "role": "full_frozen_pack",
+      "timing": {
+        "first_corpus_call": {
+          "adapter_ms": 20073.180208997655,
+          "status": "ok"
+        },
+        "scope": "corpus calls through the persistent CPU worker; no synthetic warm-up precedes the first case",
+        "successful_after_first": {
+          "adapter_ms": {
+            "count": 41,
+            "max": 53073.87270899926,
+            "median": 28743.53854199944,
+            "min": 14080.862375001743,
+            "p95": 45331.66245800021
+          }
+        }
+      }
+    }
+  },
+  "reference_review": "agent_only_pending_human",
+  "report_date": "2026-10-30",
+  "runtime": {
+    "adapter": "d3",
+    "device": "cpu",
+    "loading_mode": "native-d3-bf16-readout-fp32",
+    "max_length": 4096,
+    "max_rss_mb": 12288,
+    "pins": {
+      "accelerate": "1.15.0",
+      "einops": "0.8.2",
+      "numpy": "2.5.3",
+      "python": "3.12.16",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.23.2",
+      "torch": "2.14.0",
+      "transformers": "5.17.0"
+    },
+    "platform": "macOS arm64",
+    "profile": "profiles/d3-nano-macos-cpu.json",
+    "profile_id": "d3-nano-macos-cpu-v1",
+    "runtime_lock": "runtimes/d3-macos/runtime.lock",
+    "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+    "threads": 2
+  },
+  "schema_version": "deposium.cpu-pack-campaign-public/v1",
+  "source": {
+    "bench_head": "1997271a413f0defdcfb8bfecb36b2ca7795bb6c",
+    "local_changes_present": true,
+    "protocol": "docs/D3_NANO_MACOS_CPU_PROTOCOL_20261030.md",
+    "scorer_sha256": "c57a02c8ba3d75c81d49c2bb94775d99d7b387d0d74f6376a0bac85bd5ab6f63"
+  }
+}
