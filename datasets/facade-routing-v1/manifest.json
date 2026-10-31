@@ -1,0 +1,53 @@
+{
+  "schema_version": "deposium.research-dataset/v1",
+  "dataset_id": "facade-routing-v1",
+  "version": "1.0.0-exploratory",
+  "frozen_date": "2026-10-31",
+  "status": "frozen_before_first_candidate_prediction",
+  "case_schema": "deposium.case/v2",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "03f30a621298ecb45f78aefc50e048b6737024245a49a347dd982e28bca72c18",
+  "spec_sha256": "4514ae9403ce6e2ffc66543d27e20bd6ea620adca3a439ec6887710ff6ca8218",
+  "case_count": 80,
+  "family_count": 40,
+  "options_per_case": 8,
+  "counts_by_language": {
+    "en": 40,
+    "fr": 40
+  },
+  "counts_by_split": {
+    "calibration": 16,
+    "test": 48,
+    "train": 16
+  },
+  "counts_by_category": {
+    "analyze": 10,
+    "evaluate": 10,
+    "graph": 10,
+    "none": 10,
+    "process": 10,
+    "search": 10,
+    "system": 10,
+    "visualize": 10
+  },
+  "counts_by_kind": {
+    "ambiguous": 4,
+    "direct": 28,
+    "multi": 4,
+    "negation": 10,
+    "out_of_scope": 6,
+    "paraphrase": 28
+  },
+  "counts_by_answer_position": {
+    "a": 12,
+    "b": 8,
+    "c": 12,
+    "d": 8,
+    "e": 12,
+    "f": 8,
+    "g": 12,
+    "h": 8
+  },
+  "reference_review": "agent_only_pending_human",
+  "authoring": "Requests and references written without access to any router rule or keyword list; generic category descriptions."
+}

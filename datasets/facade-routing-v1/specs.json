@@ -1,0 +1,481 @@
+{
+  "schema_version": "deposium.facade-routing-spec/v1",
+  "dataset_id": "facade-routing-v1",
+  "authoring": "Requests and references written without access to any router rule or keyword list; generic category descriptions.",
+  "categories": {
+    "search": {
+      "fr": "Rechercher : retrouver des documents ou des passages pertinents dans le corpus.",
+      "en": "Search: find relevant documents or passages in the corpus."
+    },
+    "analyze": {
+      "fr": "Analyser : examiner le contenu et en dégager des thèmes, des tendances ou des motifs.",
+      "en": "Analyse: examine content and identify themes, trends or patterns."
+    },
+    "visualize": {
+      "fr": "Visualiser : produire un graphique, un diagramme ou un tableau de bord.",
+      "en": "Visualise: produce a chart, a diagram or a dashboard."
+    },
+    "graph": {
+      "fr": "Graphe : parcourir des entités et leurs relations (voisins, chemins, groupes).",
+      "en": "Graph: traverse entities and their relations (neighbours, paths, groups)."
+    },
+    "evaluate": {
+      "fr": "Évaluer : mesurer la qualité, la fiabilité ou des indicateurs du corpus ou des réponses.",
+      "en": "Evaluate: measure quality, reliability or metrics of the corpus or of answers."
+    },
+    "process": {
+      "fr": "Traiter : importer, nettoyer, convertir, découper ou exporter des données.",
+      "en": "Process: import, clean, convert, split or export data."
+    },
+    "system": {
+      "fr": "Système : vérifier l'état, la santé, les ressources ou les journaux du service.",
+      "en": "System: check the service's status, health, resources or logs."
+    },
+    "none": {
+      "fr": "Aucune de ces catégories : demander une précision ou signaler que la demande sort du périmètre.",
+      "en": "None of these: ask for clarification or report that the request is out of scope."
+    }
+  },
+  "families": [
+    {
+      "id": "search-01",
+      "intent": "search",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Trouve les documents qui parlent du renouvellement du bail commercial.",
+        "en": "Find the documents that discuss the renewal of the commercial lease."
+      },
+      "rationale": "Retrieve documents on a named topic."
+    },
+    {
+      "id": "search-02",
+      "intent": "search",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Recherche les passages où le contrat mentionne une clause de pénalité.",
+        "en": "Search for passages where the contract mentions a penalty clause."
+      },
+      "rationale": "Retrieve passages matching a clause."
+    },
+    {
+      "id": "search-03",
+      "intent": "search",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Où est-ce qu'on parle des délais de livraison dans les fichiers de l'espace ?",
+        "en": "Where do the files in this space talk about delivery deadlines?"
+      },
+      "rationale": "Locating content is retrieval, phrased as a question."
+    },
+    {
+      "id": "search-04",
+      "intent": "search",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "J'ai besoin des notes de réunion de mars sur le budget.",
+        "en": "I need the March meeting notes about the budget."
+      },
+      "rationale": "Fetching specific notes is retrieval."
+    },
+    {
+      "id": "search-05",
+      "intent": "search",
+      "difficulty": "D3",
+      "kind": "negation",
+      "request": {
+        "fr": "Pas besoin de graphique : retrouve seulement le rapport qui cite le chiffre d'affaires 2025.",
+        "en": "No chart needed: just locate the report that quotes the 2025 revenue."
+      },
+      "rationale": "An explicitly refused visualisation; the task is retrieval."
+    },
+    {
+      "id": "analyze-01",
+      "intent": "analyze",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Analyse les comptes rendus et dégage les thèmes récurrents.",
+        "en": "Analyse the minutes and identify the recurring themes."
+      },
+      "rationale": "Theme extraction is analysis."
+    },
+    {
+      "id": "analyze-02",
+      "intent": "analyze",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Quelles tendances ressortent des réclamations clients de l'année ?",
+        "en": "What trends emerge from this year's customer complaints?"
+      },
+      "rationale": "Trend identification is analysis."
+    },
+    {
+      "id": "analyze-03",
+      "intent": "analyze",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Qu'est-ce qui revient le plus souvent dans les retours des utilisateurs ?",
+        "en": "What comes up most often in the user feedback?"
+      },
+      "rationale": "Recurring-pattern question without the word analyse."
+    },
+    {
+      "id": "analyze-04",
+      "intent": "analyze",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Compare le ton des deux rapports annuels et résume les différences.",
+        "en": "Compare the tone of the two annual reports and summarise the differences."
+      },
+      "rationale": "Comparison of content is analysis."
+    },
+    {
+      "id": "analyze-05",
+      "intent": "analyze",
+      "difficulty": "D3",
+      "kind": "negation",
+      "request": {
+        "fr": "Je ne veux pas une liste de documents : dis-moi quels motifs communs relient ces incidents.",
+        "en": "I don't want a list of documents: tell me which common patterns connect these incidents."
+      },
+      "rationale": "Refused retrieval; the task is pattern analysis."
+    },
+    {
+      "id": "visualize-01",
+      "intent": "visualize",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Fais un graphique de l'évolution des dépenses par mois.",
+        "en": "Make a chart of monthly spending over time."
+      },
+      "rationale": "Explicit chart."
+    },
+    {
+      "id": "visualize-02",
+      "intent": "visualize",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Crée un tableau de bord des indicateurs de ventes.",
+        "en": "Create a dashboard of the sales indicators."
+      },
+      "rationale": "Explicit dashboard."
+    },
+    {
+      "id": "visualize-03",
+      "intent": "visualize",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Montre-moi visuellement la répartition des contrats par région.",
+        "en": "Show me visually how the contracts are distributed by region."
+      },
+      "rationale": "Visual distribution without naming a chart."
+    },
+    {
+      "id": "visualize-04",
+      "intent": "visualize",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Dessine un diagramme des étapes de validation d'une facture.",
+        "en": "Draw a diagram of the invoice approval steps."
+      },
+      "rationale": "A diagram is a visualisation."
+    },
+    {
+      "id": "visualize-05",
+      "intent": "visualize",
+      "difficulty": "D3",
+      "kind": "multi",
+      "request": {
+        "fr": "À partir des documents retrouvés hier, trace une courbe des volumes livrés.",
+        "en": "From the documents found yesterday, plot a curve of the delivered volumes."
+      },
+      "rationale": "Retrieval already done; the requested action is the plot."
+    },
+    {
+      "id": "graph-01",
+      "intent": "graph",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Quelles entités sont liées à la société Alpha dans le graphe ?",
+        "en": "Which entities are linked to the company Alpha in the graph?"
+      },
+      "rationale": "Explicit graph neighbourhood."
+    },
+    {
+      "id": "graph-02",
+      "intent": "graph",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Trouve le chemin le plus court entre le fournisseur X et le client Y.",
+        "en": "Find the shortest path between supplier X and customer Y."
+      },
+      "rationale": "Shortest path is graph traversal."
+    },
+    {
+      "id": "graph-03",
+      "intent": "graph",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Qui sont les voisins directs de cette personne dans le réseau de relations ?",
+        "en": "Who are this person's direct neighbours in the relationship network?"
+      },
+      "rationale": "Neighbourhood in a relationship network."
+    },
+    {
+      "id": "graph-04",
+      "intent": "graph",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Quels groupes d'organisations travaillent ensemble le plus souvent ?",
+        "en": "Which groups of organisations work together most often?"
+      },
+      "rationale": "Community detection over relations."
+    },
+    {
+      "id": "graph-05",
+      "intent": "graph",
+      "difficulty": "D3",
+      "kind": "negation",
+      "request": {
+        "fr": "Sans résumer les documents, remonte les relations de propriété entre ces filiales sur trois niveaux.",
+        "en": "Without summarising the documents, trace the ownership relations between these subsidiaries across three levels."
+      },
+      "rationale": "Refused summary; multi-hop relations."
+    },
+    {
+      "id": "evaluate-01",
+      "intent": "evaluate",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Évalue la qualité des réponses fournies la semaine dernière.",
+        "en": "Evaluate the quality of the answers given last week."
+      },
+      "rationale": "Explicit quality evaluation."
+    },
+    {
+      "id": "evaluate-02",
+      "intent": "evaluate",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Calcule les métriques de couverture du corpus.",
+        "en": "Compute the coverage metrics of the corpus."
+      },
+      "rationale": "Metrics computation."
+    },
+    {
+      "id": "evaluate-03",
+      "intent": "evaluate",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Est-ce que nos réponses citent correctement leurs sources ?",
+        "en": "Do our answers cite their sources correctly?"
+      },
+      "rationale": "Citation correctness is an evaluation."
+    },
+    {
+      "id": "evaluate-04",
+      "intent": "evaluate",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Quelle part des documents n'a pas de métadonnées exploitables ?",
+        "en": "What share of documents lack usable metadata?"
+      },
+      "rationale": "A corpus quality indicator."
+    },
+    {
+      "id": "evaluate-05",
+      "intent": "evaluate",
+      "difficulty": "D3",
+      "kind": "negation",
+      "request": {
+        "fr": "Ne cherche pas de nouveaux documents : note la fiabilité des extraits déjà retenus.",
+        "en": "Don't search for new documents: score the reliability of the excerpts already selected."
+      },
+      "rationale": "Refused retrieval; reliability scoring."
+    },
+    {
+      "id": "process-01",
+      "intent": "process",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Convertis ces tableaux en CSV propre.",
+        "en": "Convert these tables into clean CSV."
+      },
+      "rationale": "Format conversion."
+    },
+    {
+      "id": "process-02",
+      "intent": "process",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Importe les fichiers du dossier partagé et normalise les dates.",
+        "en": "Import the files from the shared folder and normalise the dates."
+      },
+      "rationale": "Import and normalisation."
+    },
+    {
+      "id": "process-03",
+      "intent": "process",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Retire les doublons de la liste des fournisseurs et fusionne les variantes de noms.",
+        "en": "Remove duplicates from the supplier list and merge the name variants."
+      },
+      "rationale": "Data cleaning."
+    },
+    {
+      "id": "process-04",
+      "intent": "process",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Exporte les résultats au format Parquet pour l'équipe data.",
+        "en": "Export the results as Parquet for the data team."
+      },
+      "rationale": "Export."
+    },
+    {
+      "id": "process-05",
+      "intent": "process",
+      "difficulty": "D3",
+      "kind": "multi",
+      "request": {
+        "fr": "Avant toute analyse, découpe les PDF en pages et extrais les tableaux.",
+        "en": "Before any analysis, split the PDFs into pages and extract the tables."
+      },
+      "rationale": "Analysis deferred; the requested action is splitting and extraction."
+    },
+    {
+      "id": "system-01",
+      "intent": "system",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Le service est-il opérationnel en ce moment ?",
+        "en": "Is the service up right now?"
+      },
+      "rationale": "Service status."
+    },
+    {
+      "id": "system-02",
+      "intent": "system",
+      "difficulty": "D1",
+      "kind": "direct",
+      "request": {
+        "fr": "Affiche les journaux d'erreurs de la dernière heure.",
+        "en": "Show the error logs from the last hour."
+      },
+      "rationale": "Logs."
+    },
+    {
+      "id": "system-03",
+      "intent": "system",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Pourquoi l'indexation semble-t-elle bloquée depuis ce matin ?",
+        "en": "Why does indexing seem stuck since this morning?"
+      },
+      "rationale": "Operational health of a pipeline."
+    },
+    {
+      "id": "system-04",
+      "intent": "system",
+      "difficulty": "D2",
+      "kind": "paraphrase",
+      "request": {
+        "fr": "Combien de mémoire le moteur de recherche utilise-t-il actuellement ?",
+        "en": "How much memory is the search engine using right now?"
+      },
+      "rationale": "Resource usage, despite the word search."
+    },
+    {
+      "id": "system-05",
+      "intent": "system",
+      "difficulty": "D3",
+      "kind": "negation",
+      "request": {
+        "fr": "Je ne veux pas de graphique : vérifie juste si la base de données répond.",
+        "en": "I don't want a chart: just check whether the database responds."
+      },
+      "rationale": "Refused visualisation; health check."
+    },
+    {
+      "id": "none-01",
+      "intent": "none",
+      "difficulty": "D1",
+      "kind": "out_of_scope",
+      "request": {
+        "fr": "Réserve-moi une salle de réunion pour jeudi.",
+        "en": "Book me a meeting room for Thursday."
+      },
+      "rationale": "Room booking is outside the document assistant."
+    },
+    {
+      "id": "none-02",
+      "intent": "none",
+      "difficulty": "D1",
+      "kind": "out_of_scope",
+      "request": {
+        "fr": "Commande des fournitures de bureau.",
+        "en": "Order some office supplies."
+      },
+      "rationale": "Purchasing is out of scope."
+    },
+    {
+      "id": "none-03",
+      "intent": "none",
+      "difficulty": "D2",
+      "kind": "ambiguous",
+      "request": {
+        "fr": "Occupe-toi de ça.",
+        "en": "Take care of that."
+      },
+      "rationale": "No identifiable task: ask for clarification."
+    },
+    {
+      "id": "none-04",
+      "intent": "none",
+      "difficulty": "D2",
+      "kind": "ambiguous",
+      "request": {
+        "fr": "Tu peux m'aider ?",
+        "en": "Can you help me?"
+      },
+      "rationale": "No identifiable task: ask for clarification."
+    },
+    {
+      "id": "none-05",
+      "intent": "none",
+      "difficulty": "D3",
+      "kind": "out_of_scope",
+      "request": {
+        "fr": "Envoie un courriel au client pour confirmer la livraison.",
+        "en": "Email the customer to confirm the delivery."
+      },
+      "rationale": "Sending email is out of scope even with a business term."
+    }
+  ]
+}
