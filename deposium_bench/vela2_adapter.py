@@ -580,6 +580,9 @@ class Vela2Adapter:
         started = time.monotonic()
         deadline = started + (300 if self._model["repo_id"] == VELA4_REPO_ID else INITIALIZATION_SECONDS)
         try:
+            # No process is running here, so this checks the remembered worker,
+            # runtime, adapter and asset identities before anything executes.
+            self._guard()
             if self._host_available_mb() < minimum_available_mib(self._model["repo_id"]):
                 raise MemoryError("vela2_host_memory_low")
             self._launch_worker(deadline, self._profile)

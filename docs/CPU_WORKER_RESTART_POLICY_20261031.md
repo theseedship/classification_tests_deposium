@@ -22,9 +22,14 @@ shows the effect: one measured timeout, 149 unattempted cases.
 | Memory or protocol errors | Unchanged: fail closed immediately |
 
 The adapter's provenance records `restart_policy` and the list of
-`worker_restarts` (sequence, reason, relaunch time). The public CPU pack
-exporter reports `attempts.worker_restarts` beside attempted and cached
-counts, so a reader can tell measured timeouts from unattempted cases.
+`worker_restarts` (sequence, reason, relaunch time). Because the campaign
+manifest holds the provenance at start, `run_campaign` now writes the final
+provenance to `adapter-final.json` inside the sealed archive. Before a
+replacement worker is spawned, the adapter re-verifies the remembered worker,
+runtime, adapter and asset identities; a changed file is refused before it
+executes. The public CPU pack exporter reports `attempts.worker_restarts` and
+the restart events beside attempted and cached counts, so a reader can tell
+measured timeouts from unattempted cases.
 
 ## What it does not change
 

@@ -584,6 +584,9 @@ class D3Adapter:
         started = time.monotonic()
         deadline = started + MODELS[self._model["repo_id"]][4]
         try:
+            # No process is running here, so this checks the remembered worker,
+            # runtime, adapter and asset identities before anything executes.
+            self._guard()
             if self._host_available_mb() < minimum_available_mib(self._model["repo_id"]):
                 raise MemoryError("d3_host_memory_low")
             self._launch_worker(deadline, self._profile)
