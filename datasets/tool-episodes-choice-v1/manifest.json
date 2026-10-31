@@ -1,0 +1,83 @@
+{
+  "schema_version": "deposium.tool-episodes-choice-manifest/v1",
+  "dataset_id": "tool-episodes-choice-v1",
+  "contract_id": "bench.tool-episode",
+  "frozen_date": "2026-10-31",
+  "status": "frozen_before_first_candidate_prediction",
+  "policy_mode": "closed_choice_step_menu_v1",
+  "input_schema_version": "deposium.tool-episode-input/v3",
+  "budgets": {
+    "max_steps": 5,
+    "max_tool_calls": 3,
+    "max_lookup_attempts": 2,
+    "max_elapsed_ms": 600000
+  },
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "f249752d4ab464a50fd96c0b573f36adf54d59995856e0d872962f9fa6dafab9",
+  "case_count": 32,
+  "family_count": 16,
+  "counts_by_language": {
+    "en": 16,
+    "fr": 16
+  },
+  "counts_by_split": {
+    "train": 20,
+    "calibration": 0,
+    "test": 12
+  },
+  "sources": [
+    {
+      "dataset_id": "tool-episodes-v1",
+      "cases_sha256": "afe600a4a6d39c09a9d45259067ac2e659b941219f505000549553c9a434aff9",
+      "episode_case_ids": [
+        "ep001-fr",
+        "ep001-en",
+        "ep002-fr",
+        "ep002-en",
+        "ep003-fr",
+        "ep003-en",
+        "ep004-fr",
+        "ep004-en",
+        "ep005-fr",
+        "ep005-en",
+        "ep006-fr",
+        "ep006-en",
+        "ep007-fr",
+        "ep007-en"
+      ]
+    },
+    {
+      "dataset_id": "tool-policy-canary-v1",
+      "cases_sha256": "6add6d14904e16cc39449368ff932316409c294dd43674f4fb9a1a1fcdbc2a6d",
+      "episode_case_ids": [
+        "tp003-fr",
+        "tp003-en",
+        "tp004-fr",
+        "tp004-en",
+        "tp005-fr",
+        "tp005-en"
+      ]
+    },
+    {
+      "dataset_id": "tool-policy-heldout-v1",
+      "cases_sha256": "7f7ed8f08fe15d5b897744fe71f2a5ed76344b5ccd7a0df43492b2dc3371bac7",
+      "episode_case_ids": [
+        "th107-fr",
+        "th107-en",
+        "th108-fr",
+        "th108-en",
+        "th109-fr",
+        "th109-en",
+        "th110-fr",
+        "th110-en",
+        "th111-fr",
+        "th111-en",
+        "th112-fr",
+        "th112-en"
+      ]
+    }
+  ],
+  "derivation": "Input schema v3 and max_elapsed_ms only; identities, requests, fixtures, faults and references unchanged.",
+  "reference_review": "agent_only_pending_human",
+  "exposure_note": "The held-out source cases were exposed once to the generative Qwen3-4B policy (prompt v2); no closed-choice candidate has seen any case."
+}

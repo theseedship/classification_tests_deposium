@@ -90,7 +90,7 @@ def _validate_profile(profile: dict) -> None:
     if profile["schema_version"] != "deposium.candidate/v1" or not isinstance(profile["profile_id"], str) or not profile["profile_id"].strip():
         raise AdapterError("Invalid candidate profile identity.")
     adapter = profile["adapter"]
-    if not isinstance(adapter, str) or adapter not in {"mcps", "mcps_resident", "recorded", "fixture_arguments", "fixture_episode", "llama_cpp_json", "julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
+    if not isinstance(adapter, str) or adapter not in {"mcps", "mcps_resident", "recorded", "fixture_arguments", "fixture_episode", "choice_episode", "llama_cpp_json", "julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
         raise AdapterError("Unknown candidate adapter.")
     capabilities = profile["capabilities"]
     allowed = set(CONTRACTS) | ({"mcps.search"} if adapter == "recorded" else set())
@@ -98,7 +98,7 @@ def _validate_profile(profile: dict) -> None:
         allowed.update({"bench.tool-plan", "bench.tool-discovery"})
     if adapter == "fixture_arguments":
         allowed = {"bench.tool-arguments"}
-    if adapter == "fixture_episode":
+    if adapter in {"fixture_episode", "choice_episode"}:
         allowed = {"bench.tool-episode"}
     if adapter == "llama_cpp_json":
         from .local_tool_policy import CONTRACTS as TOOL_CONTRACTS
@@ -116,6 +116,10 @@ def _validate_profile(profile: dict) -> None:
         raise AdapterError("Fixture episode profiles require at least the bounded one-second envelope.")
     if adapter == "llama_cpp_json":
         from .local_tool_policy import validate_model_profile
+        validate_model_profile(profile)
+        return
+    if adapter == "choice_episode":
+        from .choice_episodes import validate_model_profile
         validate_model_profile(profile)
         return
     if adapter == "julia":
@@ -451,6 +455,9 @@ def create_adapter(profile: dict, profile_path: str | Path, stack_root: str | Pa
     if profile["adapter"] == "fixture_episode":
         from .tool_episodes import FixtureEpisodeAdapter
         return FixtureEpisodeAdapter(profile, path, recordings_data)
+    if profile["adapter"] == "choice_episode":
+        from .choice_episodes import ChoiceEpisodeAdapter
+        return ChoiceEpisodeAdapter(profile, path)
     if profile["adapter"] == "fixture_arguments":
         from .tool_arguments import FixtureArgumentsAdapter
         return FixtureArgumentsAdapter(profile, path, recordings_data)

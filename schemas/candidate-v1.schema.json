@@ -45,6 +45,7 @@
         "decision3_http",
         "fixture_arguments",
         "fixture_episode",
+        "choice_episode",
         "llama_cpp_json"
       ]
     },
@@ -1289,6 +1290,85 @@
                 "maximum": 30
               }
             }
+          },
+          {
+            "properties": {
+              "adapter": {
+                "const": "choice_episode"
+              },
+              "qualification": {
+                "const": "model_isolated"
+              },
+              "model": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "inner_profile"
+                ],
+                "properties": {
+                  "inner_profile": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "revision": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "recordings": {
+                "type": "null"
+              },
+              "capabilities": {
+                "const": [
+                  "bench.tool-episode"
+                ]
+              },
+              "timeout_seconds": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 3600
+              }
+            }
+          },
+          {
+            "properties": {
+              "adapter": {
+                "const": "choice_episode"
+              },
+              "qualification": {
+                "const": "harness_control"
+              },
+              "model": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "inner_profile"
+                ],
+                "properties": {
+                  "inner_profile": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "revision": {
+                "type": "null"
+              },
+              "recordings": {
+                "type": "null"
+              },
+              "capabilities": {
+                "const": [
+                  "bench.tool-episode"
+                ]
+              },
+              "timeout_seconds": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 3600
+              }
+            }
           }
         ]
       }
@@ -1338,6 +1418,98 @@
             "maximum": 30
           }
         }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "choice_episode"
+          }
+        }
+      },
+      "then": {
+        "anyOf": [
+          {
+            "properties": {
+              "adapter": {
+                "const": "choice_episode"
+              },
+              "qualification": {
+                "const": "model_isolated"
+              },
+              "model": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "inner_profile"
+                ],
+                "properties": {
+                  "inner_profile": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "revision": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "recordings": {
+                "type": "null"
+              },
+              "capabilities": {
+                "const": [
+                  "bench.tool-episode"
+                ]
+              },
+              "timeout_seconds": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 3600
+              }
+            }
+          },
+          {
+            "properties": {
+              "adapter": {
+                "const": "choice_episode"
+              },
+              "qualification": {
+                "const": "harness_control"
+              },
+              "model": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "inner_profile"
+                ],
+                "properties": {
+                  "inner_profile": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "revision": {
+                "type": "null"
+              },
+              "recordings": {
+                "type": "null"
+              },
+              "capabilities": {
+                "const": [
+                  "bench.tool-episode"
+                ]
+              },
+              "timeout_seconds": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 3600
+              }
+            }
+          }
+        ]
       }
     }
   ],
