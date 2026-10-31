@@ -1,8 +1,6 @@
 # Full results
 
-[README](../README.md) · [Coverage overview](#coverage-overview) · [Harness coverage](#harness-coverage) · [Quality](#model-quality) ·
-[Updated task rankings](#updated-task-rankings) · [Language and task complexity](#language-and-task-complexity) · [Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·
-[Other evaluated protocols](#other-evaluated-protocols) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)
+[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · [Passages and other campaigns](leaderboard/other-benchmarks.md) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)
 
 **34 context model/runtime observations through 31 October 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.
 Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;
@@ -11,6 +9,50 @@ quantizations and devices remain separate. Rendering this page does not rerun or
 **Exploratory evidence:** synthetic, agent-authored references and translations await human review.
 The ranking uses all 132 cases (train + calibration + test); the separate test column uses 66 cases.
 FR/EN translations form 66 families. Differences of a few answers do not establish a general model ranking.
+
+## Contents
+
+- [At a glance](#at-a-glance)
+- [Coverage overview](#coverage-overview)
+  - [Context model/runtime observations](#context-modelruntime-observations)
+  - [Passage-only observations and ranking methods](#passage-only-observations-and-ranking-methods)
+  - [Generated-JSON tool-policy observations](#generated-json-tool-policy-observations)
+- [Harness coverage](#harness-coverage)
+- [Updated task rankings](#updated-task-rankings)
+  - [Capability choices](#capability-choices)
+  - [Physics choices](#physics-choices)
+  - [Passage relevance](#passage-relevance)
+  - [Claim support](#claim-support)
+  - [Answerability](#answerability)
+  - [Campaign latency and memory](#campaign-latency-and-memory)
+- [Model quality](#model-quality)
+- [Language and task complexity](#language-and-task-complexity)
+- [Speed and memory](#speed-and-memory)
+- [Other evaluated protocols](#other-evaluated-protocols)
+  - [Passage ranking and evidence](#passage-ranking-and-evidence)
+  - [Passage latency and memory](#passage-latency-and-memory)
+  - [Longer contexts](#longer-contexts)
+  - [Repeated timing and stability](#repeated-timing-and-stability)
+  - [Initial documentary routing pilot](#initial-documentary-routing-pilot)
+- [Every task and downloadable data](#every-task-and-downloadable-data)
+- [Provenance and reproduction](#provenance-and-reproduction)
+
+## At a glance
+
+One line per task. **Leader over all cases** counts every case of the pack, including failures; **leader on held-out test** uses only the test cases, the better signal against tuning. Ties are listed together. Tasks are never pooled into one score; a lead of a few cases on correlated FR/EN variants is not a general ranking. References are agent-authored and pending human review.
+
+| Task | Cases | Observations | Leader over all cases | Leader on held-out test | Details |
+|---|---|---:|---|---|---|
+| Context choices | 132 (66 test) | 34 | D3 27B · Q4 Metal (128/132) | D3 27B · Q4 Metal (65/66 test) | [Model quality](#model-quality) |
+| First-tool proposals | 24 (no test split) | 32 | D3 27B · Q4 Metal (24/24) | provisional agreement, not routing accuracy | [Model quality](#model-quality) |
+| Capability and workflow choices | 192 (96 test) | 6 | Clef Flash Q8 · direct Metal (192/192), D3 Flash Q8 · gateway Metal (192/192), D3 mini · macOS CPU (192/192) (tie) | Clef Flash Q8 · direct Metal (96/96 test), D3 Flash Q8 · gateway Metal (96/96 test), D3 mini · macOS CPU (96/96 test) (tie) | [Capability](#capability-choices) |
+| Physics choices | 48 (36 test) | 6 | Clef Flash Q8 · direct Metal (41/48) | D3 Flash Q8 · direct Metal (32/36 test), D3 mini · macOS CPU (32/36 test) (tie) | [Physics choices](#physics-choices) |
+| Passage relevance | 512 (rotation 0) | 3 | Clef Flash Q8 · direct Metal (261/512) | no split ranking | [Passage relevance](#passage-relevance) |
+| Claim support | 768 (rotation 0) | 4 | D3 Flash Q8 · direct Metal (460/768) | no split ranking | [Claim support](#claim-support) |
+| Answerability | 128 (rotation 0) | 4 | D3 Flash Q8 · direct Metal (122/128) | no split ranking | [Answerability](#answerability) |
+| Generated-JSON tool policy | 10 + 6 + 18 (TRAIN canary + held-out) | 1 | Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2: discovery 3/10; arguments 6/6; episodes 7/18 passed (single observation, unranked) | held-out pack 9/24 over the three contracts; see the report | [Generated-JSON observations](#generated-json-tool-policy-observations) |
+
+Rows further down keep every observation, partial campaigns included, with their denominators and statuses.
 
 ## Coverage overview
 

@@ -12,6 +12,7 @@ import hashlib
 import importlib.util
 import io
 import json
+import re
 import os
 from pathlib import Path
 import shutil
@@ -498,6 +499,20 @@ class FullResultsTests(unittest.TestCase):
         self.assertEqual(unrun["counts"]["statuses"]["missing"], 128)
         self.assertEqual(rows["passage_relevance_four_rotations", "Jev114"]["counts"]["total"], 2048)
         self.assertNotIn(("passage_relevance", "Jev114"), rows)
+
+    def test_contents_and_at_a_glance_open_the_page_and_every_anchor_resolves(self):
+        text = results.render(self.data)
+        lines = text.splitlines()
+        self.assertLess(lines.index("## Contents"), lines.index("## At a glance"))
+        self.assertLess(lines.index("## At a glance"), lines.index("## Coverage overview"))
+        headings = {results.anchor(l[3:] if l.startswith("## ") else l[4:]) for l in lines if l.startswith(("## ", "### "))}
+        anchors = re.findall(r"\]\(#([a-z0-9-]+)\)", text)
+        self.assertTrue(anchors)
+        self.assertEqual(set(anchors) - headings, set())
+        glance = [l for l in lines if l.startswith("| ") and "| 192 (96 test) |" in l]
+        self.assertEqual(len(glance), 1)
+        self.assertIn("D3 mini · macOS CPU (192/192)", glance[0])
+        self.assertIn("(tie)", glance[0])
 
     def test_coverage_matrix_keeps_runtime_boundaries_and_actual_missing_examples(self):
         coverage = self.data["coverage"]
