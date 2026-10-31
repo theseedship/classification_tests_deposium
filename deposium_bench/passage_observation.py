@@ -19,6 +19,7 @@ from .adapters import _normalize_envelope, create_adapter, load_profile
 from .campaigns import (_close_adapter, _decode, _destination, _encode, _hash,
                         _prepare_profile, _source_fingerprint, _stack_context, _write_new)
 from .d3_adapter import minimum_available_mib
+from .vela2_adapter import minimum_available_mib as vela2_minimum_available_mib
 from .mastra_observation import memory_snapshot
 from .native_supervision import NativeSupervisionError, require_native_supervision
 from .passage_dataset import (CHOICE_LABELS, DEFAULT_DATASET, candidate_row,
@@ -28,6 +29,14 @@ from .passage_dataset import (CHOICE_LABELS, DEFAULT_DATASET, candidate_row,
 AXES = ("relevance", "support", "answerability")
 MAX_UNIQUE_CALLS = 1200
 FLOOR_MIB = 4096
+# Local CPU classifiers admitted for passage choices: the pinned historical D3-lite
+# profile and the macOS CPU runtime identities of the small capability rows.
+LOCAL_CHOICE_MODELS = {"d3": {"vllm-sr/d3-lite", "vllm-sr/d3-nano", "vllm-sr/d3-mini"},
+                       "vela2": {"vllm-sr/Vela-2.0-0.3B"}}
+# One sealed pass may outlast an hour on CPU for 728 physical calls; remote and
+# native sessions keep the original one-hour bound.
+LOCAL_MAX_SECONDS = 4 * 3600
+MACOS_RUNTIME_LOCK = "d3-macos/runtime.lock"
 REMOTE_DATASET_SHA256 = "35a8b8982d12959985218b5bc6e10e932ba30970bd7ab9a81c6f10d17a7fe476"
 
 
@@ -228,8 +237,8 @@ def observe_choice(profile_path: str | Path, output: str | Path, *, split: str =
                    memory_reader=None, allow_remote: bool = False,
                    resume_archive: str | Path | None = None) -> dict:
     """One sealed, no-retry pass; every physical response is fsynced."""
-    if type(max_seconds) is not int or not 1 <= max_seconds <= 3600:
-        raise PassageObservationError("Wall budget must be 1..3600 seconds")
+    if type(max_seconds) is not int or not 1 <= max_seconds <= LOCAL_MAX_SECONDS:
+        raise PassageObservationError(f"Wall budget must be 1..{LOCAL_MAX_SECONDS} seconds")
     if split not in ("train", "calibration", "test"):
         raise PassageObservationError("Unknown split")
     path = Path(profile_path).resolve()
@@ -244,9 +253,14 @@ def observe_choice(profile_path: str | Path, output: str | Path, *, split: str =
             raise PassageObservationError("Jev HTTP requires explicit --allow-remote")
     elif native:
         supervision = require_native_supervision(profile, path)
-    elif (profile["adapter"] != "d3" or profile["model"]["repo_id"] != "vllm-sr/d3-lite"
-          or profile["capabilities"] != ["bench.context-choice"] or profile["recordings"] is not None):
-        raise PassageObservationError("Only the pinned local D3-lite choice profile is admitted")
+    elif (profile["adapter"] not in LOCAL_CHOICE_MODELS
+          or profile["model"]["repo_id"] not in LOCAL_CHOICE_MODELS[profile["adapter"]]
+          or profile["capabilities"] != ["bench.context-choice"] or profile["recordings"] is not None
+          or (profile["model"]["repo_id"] != "vllm-sr/d3-lite"
+              and Path(profile["model"]["runtime_lock"]).as_posix().rsplit("runtimes/", 1)[-1] != MACOS_RUNTIME_LOCK)):
+        raise PassageObservationError("Only the pinned D3-lite profile or a macOS CPU D3/Vela 2.0 choice profile is admitted")
+    if (remote or native) and max_seconds > 3600:
+        raise PassageObservationError("Remote and native passage sessions keep the one-hour wall budget")
     archived_profile, normalized_hash, recordings = _prepare_profile(path)
     if normalized_hash != source_hash or recordings is not None:
         raise PassageObservationError("Profile changed during preparation")
@@ -273,7 +287,7 @@ def observe_choice(profile_path: str | Path, output: str | Path, *, split: str =
     # model. Require its full host reserve, without reserving its RSS twice.
     floor = supervision.min_free_mb if native else FLOOR_MIB
     minimum = (floor if remote or native else
-               max(minimum_available_mib(profile["model"]["repo_id"]),
+               max((vela2_minimum_available_mib if profile["adapter"] == "vela2" else minimum_available_mib)(profile["model"]["repo_id"]),
                    profile["model"]["max_rss_mb"] + 1024))
     before = memory_reader()
     if before.get("MemAvailable_mib", 0) < minimum:
