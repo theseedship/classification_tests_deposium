@@ -160,7 +160,7 @@ def _prepare_profile(profile_path: Path) -> tuple[dict, str, bytes | None]:
         model = dict(profile["model"])
         model["budget_ledger"] = os.path.abspath(profile_path.parent / model["budget_ledger"])
         profile = {**profile, "model": model}
-    elif profile["adapter"] in {"systemone_local", "llama_cpp_json"}:
+    elif profile["adapter"] in {"systemone_local", "uzu_systemone_local", "llama_cpp_json"}:
         model = dict(profile["model"])
         model["session_manifest"] = os.path.abspath(profile_path.parent / model["session_manifest"])
         profile = {**profile, "model": model}
@@ -174,7 +174,7 @@ def _prepare_profile(profile_path: Path) -> tuple[dict, str, bytes | None]:
 
 
 def _validate_output_scope(cases: list[dict], profile: dict) -> None:
-    if profile["adapter"] not in {"julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
+    if profile["adapter"] not in {"julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "uzu_systemone_local", "gliclass", "vela3_fast"}:
         return
     supported = [case for case in cases if case["contract_id"] in profile["capabilities"]]
     if not supported:

@@ -12,6 +12,13 @@ and end-to-end quality are distinct qualifications.
 
 ## Work order and exit criteria
 
+Additional engine preparation, 31 October 2026: the [Uzu decision CPU contribution](UZU_DECISION_CPU_20261031.md)
+adds a separate pack/session identity, shared System One transport and bounded
+controller with no-model fixtures. It does not change the original cohort,
+datasets or scores. The real Uzu-renderer preparation producer, runtime build,
+OS policy and native campaign remain unqualified; no model launch follows from
+the CPU checks. Existing campaigns may continue independently.
+
 The documentation/coverage consolidation and contributor guide were delivered
 by merged [PR #24](https://github.com/theseedship/classification_tests_deposium/pull/24).
 The initial #9 contract has a recorded offline fixture, ready as a foundation

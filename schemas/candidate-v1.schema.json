@@ -46,7 +46,8 @@
         "fixture_arguments",
         "fixture_episode",
         "choice_episode",
-        "llama_cpp_json"
+        "llama_cpp_json",
+        "uzu_systemone_local"
       ]
     },
     "qualification": {
@@ -124,6 +125,9 @@
         },
         {
           "$ref": "#/$defs/llama_cpp_json_model_config"
+        },
+        {
+          "$ref": "#/$defs/uzu_systemone_model_config"
         }
       ]
     },
@@ -1511,6 +1515,39 @@
           }
         ]
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "adapter": {
+            "const": "uzu_systemone_local"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "qualification": {
+            "const": "model_isolated"
+          },
+          "revision": {
+            "const": "86f617b67e3f0ce02fe678c38801e2296a303777"
+          },
+          "recordings": {
+            "type": "null"
+          },
+          "capabilities": {
+            "const": [
+              "bench.context-choice"
+            ]
+          },
+          "timeout_seconds": {
+            "maximum": 30
+          },
+          "model": {
+            "$ref": "#/$defs/uzu_systemone_model_config"
+          }
+        }
+      }
     }
   ],
   "$defs": {
@@ -2762,6 +2799,56 @@
         },
         "credential_env": {
           "const": "DEPOSIUM_BENCH_LOCAL_KEY"
+        }
+      }
+    },
+    "uzu_systemone_model_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoint",
+        "model_id",
+        "repo_id",
+        "session_manifest",
+        "session_sha256",
+        "max_length",
+        "max_rss_mb",
+        "credential_env"
+      ],
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "pattern": "^http://127\\.0\\.0\\.1:[0-9]+/v1/systemone$"
+        },
+        "model_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "repo_id": {
+          "const": "trymirai/d3-flash-M"
+        },
+        "session_manifest": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "session_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "max_length": {
+          "type": "integer",
+          "minimum": 128,
+          "maximum": 32768
+        },
+        "max_rss_mb": {
+          "type": "integer",
+          "minimum": 256,
+          "maximum": 49152
+        },
+        "credential_env": {
+          "type": "null"
         }
       }
     }
