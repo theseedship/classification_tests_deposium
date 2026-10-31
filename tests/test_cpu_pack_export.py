@@ -129,6 +129,19 @@ class PublishedCpuPackTests(unittest.TestCase):
         complete = json.loads((ROOT / "docs/evidence/d3-nano-macos-20261031/physics.json").read_text())["phases"]["physics"]
         self.assertEqual((complete["attempts"]["cached_unattempted"], complete["attempts"]["fail_closed_after_first_failure"]), (0, False))
 
+    def test_mini_complete_packs_under_calibrated_timeouts_with_no_restart(self):
+        evidence = ROOT / "docs/evidence/d3-mini-macos-20261031"
+        capability = json.loads((evidence / "capability.json").read_text())["phases"]["capability"]
+        physics = json.loads((evidence / "physics.json").read_text())["phases"]["physics"]
+        context = json.loads((evidence / "context.json").read_text())["phases"]["context"]
+        self.assertEqual((capability["counts"]["passed_cases"], capability["counts"]["counts_by_split"]["test"]["passed_cases"]), (192, 96))
+        self.assertEqual((physics["counts"]["passed_cases"], physics["counts"]["counts_by_split"]["test"]["passed_cases"]), (39, 32))
+        self.assertEqual((context["counts"]["passed_cases"], context["counts"]["counts_by_split"]["test"]["passed_cases"]), (119, 60))
+        for phase, limit in ((capability, 300000), (physics, 120000), (context, 120000)):
+            self.assertEqual(phase["counts"]["counts_by_status"]["timeout"], 0)
+            self.assertLessEqual(phase["latency_ms"]["max"], limit)
+            self.assertEqual((phase["attempts"]["worker_restarts"], phase["attempts"]["worker_restart_events"], phase["attempts"]["cached_unattempted"]), (0, [], 0))
+
     def test_published_files_contain_no_local_paths_or_raw_output(self):
         for name in ("analysis.json", "capability.json", "physics.json", "report.md"):
             text = (self.EVIDENCE / name).read_text()

@@ -1,6 +1,6 @@
 # D3 mini on macOS CPU: complementary-pack protocol
 
-**Fixed on 31 October 2026, before any prediction.** Fourth Wave B candidate
+**Fixed on 31 October 2026, before any prediction.** Executed the same day; see the [results](D3_MINI_MACOS_RESULTS_20261031.md): context 119/132, tool 20/24, capability 192/192, physics 39/48, no timeout. Fourth Wave B candidate
 in the revised execution order of the
 [capability cohort](CAPABILITY_CAMPAIGN_PLAN.md#initial-cohort-and-order),
 after [D3 lite](D3_LITE_MACOS_CPU_PROTOCOL_20261030.md),

@@ -1577,6 +1577,1251 @@
     {
       "adapter_ms": {
         "count": 192,
+        "max": 134858.3421250005,
+        "median": 78891.5805835004,
+        "min": 37871.25033399934,
+        "p95": 126723.15579200222
+      },
+      "counts": {
+        "by_split": {
+          "calibration": {
+            "correct": 48,
+            "scored": 48,
+            "total": 48
+          },
+          "test": {
+            "correct": 96,
+            "scored": 96,
+            "total": 96
+          },
+          "train": {
+            "correct": 48,
+            "scored": 48,
+            "total": 48
+          }
+        },
+        "correct": 192,
+        "families": 48,
+        "scored": 192,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 192,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 192
+      },
+      "groups": {
+        "benchmark_pack": {
+          "capability-choice-v1": {
+            "by_split": {
+              "calibration": {
+                "correct": 48,
+                "scored": 48,
+                "total": 48
+              },
+              "test": {
+                "correct": 96,
+                "scored": 96,
+                "total": 96
+              },
+              "train": {
+                "correct": 48,
+                "scored": 48,
+                "total": 48
+              }
+            },
+            "correct": 192,
+            "families": 48,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          }
+        },
+        "catalogue_variant": {
+          "compact": {
+            "by_split": {
+              "calibration": {
+                "correct": 24,
+                "scored": 24,
+                "total": 24
+              },
+              "test": {
+                "correct": 48,
+                "scored": 48,
+                "total": 48
+              },
+              "train": {
+                "correct": 24,
+                "scored": 24,
+                "total": 24
+              }
+            },
+            "correct": 96,
+            "families": 48,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "expanded": {
+            "by_split": {
+              "calibration": {
+                "correct": 24,
+                "scored": 24,
+                "total": 24
+              },
+              "test": {
+                "correct": 48,
+                "scored": 48,
+                "total": 48
+              },
+              "train": {
+                "correct": 24,
+                "scored": 24,
+                "total": 24
+              }
+            },
+            "correct": 96,
+            "families": 48,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "difficulty": {
+          "D1": {
+            "by_split": {
+              "calibration": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              },
+              "test": {
+                "correct": 32,
+                "scored": 32,
+                "total": 32
+              },
+              "train": {
+                "correct": 16,
+                "scored": 16,
+                "total": 16
+              }
+            },
+            "correct": 52,
+            "families": 13,
+            "scored": 52,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 52,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 52
+          },
+          "D2": {
+            "by_split": {
+              "calibration": {
+                "correct": 32,
+                "scored": 32,
+                "total": 32
+              },
+              "test": {
+                "correct": 24,
+                "scored": 24,
+                "total": 24
+              },
+              "train": {
+                "correct": 28,
+                "scored": 28,
+                "total": 28
+              }
+            },
+            "correct": 84,
+            "families": 21,
+            "scored": 84,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 84,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 84
+          },
+          "D3": {
+            "by_split": {
+              "calibration": {
+                "correct": 12,
+                "scored": 12,
+                "total": 12
+              },
+              "test": {
+                "correct": 40,
+                "scored": 40,
+                "total": 40
+              },
+              "train": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 56,
+            "families": 14,
+            "scored": 56,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 56,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 56
+          }
+        },
+        "domain": {
+          "documentary": {
+            "by_split": {
+              "calibration": {
+                "correct": 48,
+                "scored": 48,
+                "total": 48
+              },
+              "test": {
+                "correct": 96,
+                "scored": 96,
+                "total": 96
+              },
+              "train": {
+                "correct": 48,
+                "scored": 48,
+                "total": 48
+              }
+            },
+            "correct": 192,
+            "families": 48,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          }
+        },
+        "language": {
+          "en": {
+            "by_split": {
+              "calibration": {
+                "correct": 24,
+                "scored": 24,
+                "total": 24
+              },
+              "test": {
+                "correct": 48,
+                "scored": 48,
+                "total": 48
+              },
+              "train": {
+                "correct": 24,
+                "scored": 24,
+                "total": 24
+              }
+            },
+            "correct": 96,
+            "families": 48,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr": {
+            "by_split": {
+              "calibration": {
+                "correct": 24,
+                "scored": 24,
+                "total": 24
+              },
+              "test": {
+                "correct": 48,
+                "scored": 48,
+                "total": 48
+              },
+              "train": {
+                "correct": 24,
+                "scored": 24,
+                "total": 24
+              }
+            },
+            "correct": 96,
+            "families": 48,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "split": {
+          "calibration": {
+            "by_split": {
+              "calibration": {
+                "correct": 48,
+                "scored": 48,
+                "total": 48
+              }
+            },
+            "correct": 48,
+            "families": 12,
+            "scored": 48,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 48
+          },
+          "test": {
+            "by_split": {
+              "test": {
+                "correct": 96,
+                "scored": 96,
+                "total": 96
+              }
+            },
+            "correct": 96,
+            "families": 24,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "train": {
+            "by_split": {
+              "train": {
+                "correct": 48,
+                "scored": 48,
+                "total": 48
+              }
+            },
+            "correct": 48,
+            "families": 12,
+            "scored": 48,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 48
+          }
+        },
+        "task_type": {
+          "capability.arguments.argument-binding": {
+            "by_split": {
+              "calibration": {
+                "correct": 12,
+                "scored": 12,
+                "total": 12
+              },
+              "test": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              }
+            },
+            "correct": 20,
+            "families": 5,
+            "scored": 20,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 20,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 20
+          },
+          "capability.arguments.clarification": {
+            "by_split": {
+              "calibration": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              },
+              "test": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              },
+              "train": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 12,
+            "families": 3,
+            "scored": 12,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 12
+          },
+          "capability.arguments.dependency-order": {
+            "by_split": {
+              "test": {
+                "correct": 12,
+                "scored": 12,
+                "total": 12
+              }
+            },
+            "correct": 12,
+            "families": 3,
+            "scored": 12,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 12
+          },
+          "capability.arguments.resource-choice": {
+            "by_split": {
+              "test": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              },
+              "train": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 12,
+            "families": 3,
+            "scored": 12,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 12
+          },
+          "capability.arguments.scope-guard": {
+            "by_split": {
+              "train": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              }
+            },
+            "correct": 8,
+            "families": 2,
+            "scored": 8,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 8,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 8
+          },
+          "capability.observations.clarify-after-partial": {
+            "by_split": {
+              "calibration": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.clarify-provenance": {
+            "by_split": {
+              "calibration": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.empty-result": {
+            "by_split": {
+              "train": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.ignore-observation-instructions": {
+            "by_split": {
+              "test": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.next-tool": {
+            "by_split": {
+              "train": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.next-tool-binding": {
+            "by_split": {
+              "test": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.no-success-without-artifact": {
+            "by_split": {
+              "test": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.partial-answer": {
+            "by_split": {
+              "train": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.refresh-schema-after-error": {
+            "by_split": {
+              "calibration": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.repair-prerequisite": {
+            "by_split": {
+              "train": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.retry": {
+            "by_split": {
+              "test": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.stop-budget-exhausted": {
+            "by_split": {
+              "test": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.stop-cancelled": {
+            "by_split": {
+              "test": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.stop-incomparable": {
+            "by_split": {
+              "test": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.stop-sufficient-evidence": {
+            "by_split": {
+              "test": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.observations.stop-unavailable": {
+            "by_split": {
+              "calibration": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 4,
+            "families": 1,
+            "scored": 4,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 4,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 4
+          },
+          "capability.selection.multi-tool": {
+            "by_split": {
+              "calibration": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              },
+              "test": {
+                "correct": 24,
+                "scored": 24,
+                "total": 24
+              },
+              "train": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              }
+            },
+            "correct": 40,
+            "families": 10,
+            "scored": 40,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 40,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 40
+          },
+          "capability.selection.single-tool": {
+            "by_split": {
+              "calibration": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              },
+              "test": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              },
+              "train": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 16,
+            "families": 4,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "capability.selection.source-choice": {
+            "by_split": {
+              "calibration": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              },
+              "train": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 8,
+            "families": 2,
+            "scored": 8,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 8,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 8
+          }
+        },
+        "track": {
+          "arguments": {
+            "by_split": {
+              "calibration": {
+                "correct": 16,
+                "scored": 16,
+                "total": 16
+              },
+              "test": {
+                "correct": 32,
+                "scored": 32,
+                "total": 32
+              },
+              "train": {
+                "correct": 16,
+                "scored": 16,
+                "total": 16
+              }
+            },
+            "correct": 64,
+            "families": 16,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "observations": {
+            "by_split": {
+              "calibration": {
+                "correct": 16,
+                "scored": 16,
+                "total": 16
+              },
+              "test": {
+                "correct": 32,
+                "scored": 32,
+                "total": 32
+              },
+              "train": {
+                "correct": 16,
+                "scored": 16,
+                "total": 16
+              }
+            },
+            "correct": 64,
+            "families": 16,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "selection": {
+            "by_split": {
+              "calibration": {
+                "correct": 16,
+                "scored": 16,
+                "total": 16
+              },
+              "test": {
+                "correct": 32,
+                "scored": 32,
+                "total": 32
+              },
+              "train": {
+                "correct": 16,
+                "scored": 16,
+                "total": 16
+              }
+            },
+            "correct": 64,
+            "families": 16,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "use_case": {
+          "cross_source": {
+            "by_split": {
+              "calibration": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              },
+              "test": {
+                "correct": 16,
+                "scored": 16,
+                "total": 16
+              },
+              "train": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              }
+            },
+            "correct": 28,
+            "families": 7,
+            "scored": 28,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 28,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 28
+          },
+          "geospatial": {
+            "by_split": {
+              "calibration": {
+                "correct": 12,
+                "scored": 12,
+                "total": 12
+              },
+              "test": {
+                "correct": 28,
+                "scored": 28,
+                "total": 28
+              },
+              "train": {
+                "correct": 12,
+                "scored": 12,
+                "total": 12
+              }
+            },
+            "correct": 52,
+            "families": 13,
+            "scored": 52,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 52,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 52
+          },
+          "local_rag": {
+            "by_split": {
+              "calibration": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              },
+              "test": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              },
+              "train": {
+                "correct": 16,
+                "scored": 16,
+                "total": 16
+              }
+            },
+            "correct": 32,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "open_data": {
+            "by_split": {
+              "calibration": {
+                "correct": 12,
+                "scored": 12,
+                "total": 12
+              },
+              "test": {
+                "correct": 28,
+                "scored": 28,
+                "total": 28
+              },
+              "train": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              }
+            },
+            "correct": 48,
+            "families": 12,
+            "scored": 48,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 48
+          },
+          "web": {
+            "by_split": {
+              "calibration": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              },
+              "test": {
+                "correct": 16,
+                "scored": 16,
+                "total": 16
+              },
+              "train": {
+                "correct": 8,
+                "scored": 8,
+                "total": 8
+              }
+            },
+            "correct": 32,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          }
+        }
+      },
+      "identity": {
+        "analysis_sha256": "d35d9dd76f5daee678395714da4de3ac315904a6fe870263eecac38a9d3a5f04",
+        "dataset_sha256": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+        "manifest_sha256": "08978cd06296a72f2f1d69cbfb88475aec3474f0db6d560ded26a7e982730766",
+        "outer_seal_sha256": "6961abbbdfbe8857459d54ab8b37b025de23af08baac2d3c497cd2cdcdb93aa3",
+        "raw_sha256": "f8da6666a7c0cdc4b4519478d27c22bbc80d71f5d84b1e68820e27d33ca7ab7a",
+        "scorer_sha256": "c57a02c8ba3d75c81d49c2bb94775d99d7b387d0d74f6376a0bac85bd5ab6f63"
+      },
+      "model": "D3 mini · macOS CPU",
+      "model_identity": {
+        "model_assets_sha256": "6ef2321ba6d5eb304741c2fe2f44064aa95120469684aa160ea6c1f7bf954ca4",
+        "model_repo_id": "vllm-sr/d3-mini",
+        "model_revision": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4",
+        "runtime": {
+          "adapter": "d3",
+          "device": "cpu",
+          "loading_mode": "native-d3-bf16-readout-fp32",
+          "max_length": 4096,
+          "max_rss_mb": 14336,
+          "pins": {
+            "accelerate": "1.15.0",
+            "einops": "0.8.2",
+            "numpy": "2.5.3",
+            "python": "3.12.16",
+            "safetensors": "0.8.0",
+            "tokenizers": "0.23.2",
+            "torch": "2.14.0",
+            "transformers": "5.17.0"
+          },
+          "platform": "macOS arm64",
+          "profile": "profiles/d3-mini-macos-cpu-capability.json",
+          "profile_id": "d3-mini-macos-cpu-capability-v1",
+          "runtime_lock": "runtimes/d3-macos/runtime.lock",
+          "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+          "threads": 2
+        }
+      },
+      "observation": "D3miniMacos",
+      "rank_all": 1,
+      "rank_test": 1,
+      "report": "D3_MINI_MACOS_RESULTS_20261031.md",
+      "rss_scope": "maximum of the worker's own ru_maxrss after loading and after each case; single CPU worker process, not a process-group sample",
+      "session_group_peak_rss_mib": 8008.9,
+      "source": "docs/evidence/d3-mini-macos-20261031/capability.json",
+      "status": "complete",
+      "task": "capability"
+    },
+    {
+      "adapter_ms": {
+        "count": 192,
         "max": 64103.64429099991,
         "median": 29439.408937499877,
         "min": 14547.34462500005,
@@ -2810,8 +4055,8 @@
         }
       },
       "observation": "D3nanoMacos",
-      "rank_all": 3,
-      "rank_test": 3,
+      "rank_all": 4,
+      "rank_test": 4,
       "report": "D3_NANO_MACOS_RESULTS_20261031.md",
       "rss_scope": "maximum of the worker's own ru_maxrss after loading and after each case; single CPU worker process, not a process-group sample",
       "session_group_peak_rss_mib": 3554.0,
@@ -4055,8 +5300,8 @@
         }
       },
       "observation": "D3liteMacos",
-      "rank_all": 4,
-      "rank_test": 4,
+      "rank_all": 5,
+      "rank_test": 5,
       "report": "D3_LITE_MACOS_RESULTS_20261030.md",
       "rss_scope": "maximum of the worker's own ru_maxrss after loading and after each case; single CPU worker process, not a process-group sample",
       "session_group_peak_rss_mib": 1872.7,
@@ -5300,8 +6545,8 @@
         }
       },
       "observation": "Vela03Macos",
-      "rank_all": 5,
-      "rank_test": 5,
+      "rank_all": 6,
+      "rank_test": 6,
       "report": "VELA2_03_MACOS_RESULTS_20261030.md",
       "rss_scope": "maximum of the worker's own ru_maxrss after loading and after each case; single CPU worker process, not a process-group sample",
       "session_group_peak_rss_mib": 1290.8,
@@ -12355,7 +13600,7 @@
       },
       "observation": "ClefFlashQ8",
       "rank_all": 1,
-      "rank_test": 2,
+      "rank_test": 3,
       "report": "CLEF_FLASH_RESULTS_20261029.md",
       "rss_scope": "Sampled owned process-group peak over fresh session startup, controls, warm-up and this pack; not total GPU memory",
       "session_group_peak_rss_mib": 9781.78125,
@@ -13170,6 +14415,885 @@
       "rss_scope": "Sampled owned process-group peak over fresh session startup, controls, warm-up and this pack; not total GPU memory",
       "session_group_peak_rss_mib": 9589.40625,
       "source": "docs/evidence/physics-flash-20261029/analysis.json",
+      "status": "complete",
+      "task": "physics"
+    },
+    {
+      "adapter_ms": {
+        "count": 48,
+        "max": 21524.815708999085,
+        "median": 16936.153125499914,
+        "min": 14157.927666998148,
+        "p95": 21044.93637500127
+      },
+      "counts": {
+        "by_split": {
+          "calibration": {
+            "correct": 7,
+            "scored": 12,
+            "total": 12
+          },
+          "test": {
+            "correct": 32,
+            "scored": 36,
+            "total": 36
+          }
+        },
+        "correct": 39,
+        "families": 24,
+        "scored": 48,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 48,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 48
+      },
+      "groups": {
+        "benchmark_pack": {
+          "physics-choice-v1": {
+            "by_split": {
+              "calibration": {
+                "correct": 7,
+                "scored": 12,
+                "total": 12
+              },
+              "test": {
+                "correct": 32,
+                "scored": 36,
+                "total": 36
+              }
+            },
+            "correct": 39,
+            "families": 24,
+            "scored": 48,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 48
+          }
+        },
+        "catalogue_variant": {
+          "not_applicable": {
+            "by_split": {
+              "calibration": {
+                "correct": 7,
+                "scored": 12,
+                "total": 12
+              },
+              "test": {
+                "correct": 32,
+                "scored": 36,
+                "total": 36
+              }
+            },
+            "correct": 39,
+            "families": 24,
+            "scored": 48,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 48
+          }
+        },
+        "difficulty": {
+          "D1": {
+            "by_split": {
+              "calibration": {
+                "correct": 4,
+                "scored": 4,
+                "total": 4
+              },
+              "test": {
+                "correct": 12,
+                "scored": 12,
+                "total": 12
+              }
+            },
+            "correct": 16,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "D2": {
+            "by_split": {
+              "calibration": {
+                "correct": 2,
+                "scored": 4,
+                "total": 4
+              },
+              "test": {
+                "correct": 8,
+                "scored": 12,
+                "total": 12
+              }
+            },
+            "correct": 10,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "D3": {
+            "by_split": {
+              "calibration": {
+                "correct": 1,
+                "scored": 4,
+                "total": 4
+              },
+              "test": {
+                "correct": 12,
+                "scored": 12,
+                "total": 12
+              }
+            },
+            "correct": 13,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "domain": {
+          "physics": {
+            "by_split": {
+              "calibration": {
+                "correct": 7,
+                "scored": 12,
+                "total": 12
+              },
+              "test": {
+                "correct": 32,
+                "scored": 36,
+                "total": 36
+              }
+            },
+            "correct": 39,
+            "families": 24,
+            "scored": 48,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 48
+          }
+        },
+        "language": {
+          "en": {
+            "by_split": {
+              "calibration": {
+                "correct": 4,
+                "scored": 6,
+                "total": 6
+              },
+              "test": {
+                "correct": 16,
+                "scored": 18,
+                "total": 18
+              }
+            },
+            "correct": 20,
+            "families": 24,
+            "scored": 24,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 24,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 24
+          },
+          "fr": {
+            "by_split": {
+              "calibration": {
+                "correct": 3,
+                "scored": 6,
+                "total": 6
+              },
+              "test": {
+                "correct": 16,
+                "scored": 18,
+                "total": 18
+              }
+            },
+            "correct": 19,
+            "families": 24,
+            "scored": 24,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 24,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 24
+          }
+        },
+        "split": {
+          "calibration": {
+            "by_split": {
+              "calibration": {
+                "correct": 7,
+                "scored": 12,
+                "total": 12
+              }
+            },
+            "correct": 7,
+            "families": 6,
+            "scored": 12,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 12,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 12
+          },
+          "test": {
+            "by_split": {
+              "test": {
+                "correct": 32,
+                "scored": 36,
+                "total": 36
+              }
+            },
+            "correct": 32,
+            "families": 18,
+            "scored": 36,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 36,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 36
+          }
+        },
+        "task_type": {
+          "accelerated-distance": {
+            "by_split": {
+              "calibration": {
+                "correct": 0,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 0,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "accelerated-velocity": {
+            "by_split": {
+              "calibration": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "capacitor-energy": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "echo-distance": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "electrical-power": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "heat-energy": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "hydrostatic-pressure": {
+            "by_split": {
+              "test": {
+                "correct": 0,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 0,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "inelastic-collision": {
+            "by_split": {
+              "calibration": {
+                "correct": 0,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 0,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "isobaric-gas": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "joule-energy": {
+            "by_split": {
+              "test": {
+                "correct": 0,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 0,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "kinetic-energy": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "lift-efficiency": {
+            "by_split": {
+              "calibration": {
+                "correct": 1,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 1,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "missing-capacity": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "missing-mass": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "opposed-forces": {
+            "by_split": {
+              "calibration": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "parallel-resistance": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "period": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "potential-energy": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "series-current": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "spring-energy": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "thermal-mixing": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "thin-lens": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "uniform-distance": {
+            "by_split": {
+              "calibration": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          },
+          "wave-speed": {
+            "by_split": {
+              "test": {
+                "correct": 2,
+                "scored": 2,
+                "total": 2
+              }
+            },
+            "correct": 2,
+            "families": 1,
+            "scored": 2,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 2,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 2
+          }
+        },
+        "use_case": {
+          "not_annotated": {
+            "by_split": {
+              "calibration": {
+                "correct": 7,
+                "scored": 12,
+                "total": 12
+              },
+              "test": {
+                "correct": 32,
+                "scored": 36,
+                "total": 36
+              }
+            },
+            "correct": 39,
+            "families": 24,
+            "scored": 48,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 48
+          }
+        }
+      },
+      "identity": {
+        "analysis_sha256": "55278715f868e4790ad04644c0b5ac0f13202c9e6c9125a63ccc21c14ad1bd9d",
+        "dataset_sha256": "e21cd2e0f4e35465b56158ba1fa07c8d8203be81a969c6edf4b7630d2f0d7307",
+        "manifest_sha256": "dc84e6eee5cc248ed30d5e8e9f9b4fcae9250025aa10689ecfad748b8dcb5362",
+        "outer_seal_sha256": "bb3830206514ddda59726d12f6cf48dca64e1ebfea01668f3f8f1f34a8281bb1",
+        "raw_sha256": "cb1d6c8bcbc3a7154d3946f5d89ef00772828968a9137165c6a4a6c15fdb1a23",
+        "scorer_sha256": "c57a02c8ba3d75c81d49c2bb94775d99d7b387d0d74f6376a0bac85bd5ab6f63"
+      },
+      "model": "D3 mini · macOS CPU",
+      "model_identity": {
+        "model_assets_sha256": "6ef2321ba6d5eb304741c2fe2f44064aa95120469684aa160ea6c1f7bf954ca4",
+        "model_repo_id": "vllm-sr/d3-mini",
+        "model_revision": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4",
+        "runtime": {
+          "adapter": "d3",
+          "device": "cpu",
+          "loading_mode": "native-d3-bf16-readout-fp32",
+          "max_length": 4096,
+          "max_rss_mb": 14336,
+          "pins": {
+            "accelerate": "1.15.0",
+            "einops": "0.8.2",
+            "numpy": "2.5.3",
+            "python": "3.12.16",
+            "safetensors": "0.8.0",
+            "tokenizers": "0.23.2",
+            "torch": "2.14.0",
+            "transformers": "5.17.0"
+          },
+          "platform": "macOS arm64",
+          "profile": "profiles/d3-mini-macos-cpu.json",
+          "profile_id": "d3-mini-macos-cpu-v1",
+          "runtime_lock": "runtimes/d3-macos/runtime.lock",
+          "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+          "threads": 2
+        }
+      },
+      "observation": "D3miniMacos",
+      "rank_all": 2,
+      "rank_test": 1,
+      "report": "D3_MINI_MACOS_RESULTS_20261031.md",
+      "rss_scope": "maximum of the worker's own ru_maxrss after loading and after each case; single CPU worker process, not a process-group sample",
+      "session_group_peak_rss_mib": 7514.9,
+      "source": "docs/evidence/d3-mini-macos-20261031/physics.json",
       "status": "complete",
       "task": "physics"
     },
@@ -14043,8 +16167,8 @@
         }
       },
       "observation": "D3nanoMacos",
-      "rank_all": 3,
-      "rank_test": 3,
+      "rank_all": 4,
+      "rank_test": 4,
       "report": "D3_NANO_MACOS_RESULTS_20261031.md",
       "rss_scope": "maximum of the worker's own ru_maxrss after loading and after each case; single CPU worker process, not a process-group sample",
       "session_group_peak_rss_mib": 3266.6,
@@ -14922,8 +17046,8 @@
         }
       },
       "observation": "Vela03Macos",
-      "rank_all": 4,
-      "rank_test": 4,
+      "rank_all": 5,
+      "rank_test": 5,
       "report": "VELA2_03_MACOS_RESULTS_20261030.md",
       "rss_scope": "maximum of the worker's own ru_maxrss after loading and after each case; single CPU worker process, not a process-group sample",
       "session_group_peak_rss_mib": 1186.0,
@@ -15801,8 +17925,8 @@
         }
       },
       "observation": "D3liteMacos",
-      "rank_all": 5,
-      "rank_test": 5,
+      "rank_all": 6,
+      "rank_test": 6,
       "report": "D3_LITE_MACOS_RESULTS_20261030.md",
       "rss_scope": "maximum of the worker's own ru_maxrss after loading and after each case; single CPU worker process, not a process-group sample",
       "session_group_peak_rss_mib": 1601.9,
@@ -17611,6 +19735,176 @@
         "id": "D3mini",
         "model": "D3 mini · CPU",
         "runtime": "historical_cpu",
+        "size": "4.539B backbone"
+      },
+      {
+        "cells": {
+          "capability": {
+            "evidence_present": true,
+            "metric": "correct_choice",
+            "numerator": 192,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "review_pending": true,
+            "scored_or_valid": 192,
+            "source": "docs/evidence/d3-mini-macos-20261031/capability.json",
+            "status": "complete",
+            "total": 192
+          },
+          "context": {
+            "evidence_present": true,
+            "metric": "correct_choice",
+            "numerator": 119,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 132,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "review_pending": true,
+            "scored_or_valid": 132,
+            "source": "docs/evidence/d3-mini-macos-20261031/analysis.json",
+            "status": "complete",
+            "total": 132
+          },
+          "passage_answerability": {
+            "evidence_present": false,
+            "metric": "correct_choice",
+            "numerator": null,
+            "outcomes": null,
+            "review_pending": true,
+            "scored_or_valid": null,
+            "source": null,
+            "status": "not_run",
+            "total": 128
+          },
+          "passage_ranking": {
+            "evidence_present": false,
+            "metric": "ndcg@1",
+            "numerator": null,
+            "outcomes": null,
+            "review_pending": true,
+            "scored_or_valid": null,
+            "source": null,
+            "status": "not_run",
+            "total": 512
+          },
+          "passage_relevance": {
+            "evidence_present": false,
+            "metric": "correct_choice",
+            "numerator": null,
+            "outcomes": null,
+            "review_pending": true,
+            "scored_or_valid": null,
+            "source": null,
+            "status": "not_run",
+            "total": 512
+          },
+          "passage_relevance_four_rotations": {
+            "evidence_present": false,
+            "metric": "correct_choice",
+            "numerator": null,
+            "outcomes": null,
+            "review_pending": true,
+            "scored_or_valid": null,
+            "source": null,
+            "status": "not_run",
+            "total": 2048
+          },
+          "passage_support": {
+            "evidence_present": false,
+            "metric": "correct_choice",
+            "numerator": null,
+            "outcomes": null,
+            "review_pending": true,
+            "scored_or_valid": null,
+            "source": null,
+            "status": "not_run",
+            "total": 768
+          },
+          "physics": {
+            "evidence_present": true,
+            "metric": "correct_choice",
+            "numerator": 39,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 48,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "review_pending": true,
+            "scored_or_valid": 48,
+            "source": "docs/evidence/d3-mini-macos-20261031/physics.json",
+            "status": "complete",
+            "total": 48
+          },
+          "tool_arguments": {
+            "evidence_present": false,
+            "metric": "case_pass",
+            "numerator": null,
+            "outcomes": null,
+            "review_pending": true,
+            "scored_or_valid": null,
+            "source": null,
+            "status": "not_run",
+            "total": 6
+          },
+          "tool_discovery": {
+            "evidence_present": false,
+            "metric": "case_pass",
+            "numerator": null,
+            "outcomes": null,
+            "review_pending": true,
+            "scored_or_valid": null,
+            "source": null,
+            "status": "not_run",
+            "total": 10
+          },
+          "tool_episodes": {
+            "evidence_present": false,
+            "metric": "case_pass",
+            "numerator": null,
+            "outcomes": null,
+            "review_pending": true,
+            "scored_or_valid": null,
+            "source": null,
+            "status": "not_run",
+            "total": 18
+          },
+          "tool_proposal": {
+            "evidence_present": true,
+            "metric": "provisional_agreement",
+            "numerator": 20,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 24,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "review_pending": true,
+            "scored_or_valid": 24,
+            "source": "docs/evidence/d3-mini-macos-20261031/analysis.json",
+            "status": "complete",
+            "total": 24
+          }
+        },
+        "context_observation": true,
+        "generative_observation": false,
+        "id": "D3miniMacos",
+        "model": "D3 mini · macOS CPU",
+        "runtime": "cpu_new",
         "size": "4.539B backbone"
       },
       {
@@ -22721,6 +25015,8 @@
       "docs/D3_LARGER_CPU_PILOT.md": "fff448300435de571ec4372ca3c2216b1baf53dc50d616af68a369b3ee01adc5",
       "docs/D3_LITE_MACOS_CPU_PROTOCOL_20261030.md": "2cb6f644789f6d22082340a035aad2e73b351adeb21e54788f1a7edd4dc99a28",
       "docs/D3_LITE_MACOS_RESULTS_20261030.md": "4b8ff65a006fa1970c96de6091df71130c43d45f165c1bda51787fdfd35c5e3c",
+      "docs/D3_MINI_MACOS_CPU_PROTOCOL_20261031.md": "68bdd18e4669cea6a2e7088666be210778755ff677d0f733d757162b4ee25e49",
+      "docs/D3_MINI_MACOS_RESULTS_20261031.md": "cdcca85a9e56bb09c0b8a2a9a151e84811abb831d5bd84c52ae0decc426c9af2",
       "docs/D3_NANO_MACOS_CPU_PROTOCOL_20261030.md": "14e0e42587a0114fb230023b7b28ecfbc80423db92b4d517575ee7e141abe641",
       "docs/D3_NANO_MACOS_RESULTS_20261031.md": "f416845dfd6f60847ab979ac4d3a60ae2a1ca900180ae0904a47198359941ce6",
       "docs/GLICLASS_V4_RESULTS_20261017.md": "9b2795a6c3a90b05ca7dbf8ede7d950873dfb7637fc097f79405d72bc01d065d",
@@ -22746,6 +25042,9 @@
       "docs/evidence/d3-lite-macos-20261030/analysis.json": "df7f64795ce2f86ac2e4919a90135df129fb8c6234ae25cfa33e1f779bfc9052",
       "docs/evidence/d3-lite-macos-20261030/capability.json": "c2f259c7e215a53d815b008c8809999cf1fde12b55e9efdf0b2a195d9e35aa10",
       "docs/evidence/d3-lite-macos-20261030/physics.json": "d322064f3922e2030e1332de741b5bd53b09eb924415fe1883e3ea612dab6118",
+      "docs/evidence/d3-mini-macos-20261031/analysis.json": "0dcb65838ee19df6cc3785b54508f8ff2c2f62cb09f9008d620ab5175a8e77f1",
+      "docs/evidence/d3-mini-macos-20261031/capability.json": "08f5846b9a964f7cb947f9f3e4a8e40071f2309aa12c38f0d4750b2b65831ce2",
+      "docs/evidence/d3-mini-macos-20261031/physics.json": "55350b031a2d167469f7975d27a6369ed88d219ba0e54dee9c7bfa57b56a7934",
       "docs/evidence/d3-nano-macos-20261031/analysis.json": "f0ec4987332398b2c1666482d4e1543e0dfed8a25575aadd9006aa30d56c576d",
       "docs/evidence/d3-nano-macos-20261031/capability-002.json": "4d038ab1f5014753f770ac7519bb3c5215c5d0ce4b66c9fda365691ff88985c9",
       "docs/evidence/d3-nano-macos-20261031/physics.json": "27d205837cf83e44b7366ad898071000a03ff25c4e50a18af40d8d3100e077ee",
@@ -22779,12 +25078,15 @@
       "docs/evidence/vela2-03-macos-20261030/capability.json": "f478cddebf09f67250860947836e15ed843ad7b7ddf70811190008ed4462e1ff",
       "docs/evidence/vela2-03-macos-20261030/physics.json": "8a52a92bd08244accdbff5b9b61098701b0954a2f6bf3e0d7085a282e7d78cd3",
       "docs/evidence/vela3-fast-20261028/analysis.json": "83c06bdf377353541aba7944231654f3c794f19ab17016de99e3b0fdba70ae4e",
-      "docs/leaderboard/model-metadata.json": "5cd227aad3679917db6e3f03ae33c8b1a02fe391f3cb204f33307bd3eec17059",
+      "docs/leaderboard/model-metadata.json": "f48d109b5762a4202ff9bb7b2eb38f43bfc72ddb77691eb74733575b30f010a6",
       "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
       "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
       "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
       "profiles/d3-lite-assets.json": "0a165940562c277e7050631651b5e59d9a351345c041695e43d48f4de4f4fa71",
       "profiles/d3-lite-macos-cpu.json": "01abd2d2bad5d6b92ab2bc71c5135b8a3984098b30ebdbd2a162e5c734bcbde9",
+      "profiles/d3-mini-assets.json": "1e2e953b0dd4c956cef407eb4608e880fecf64c58cc9d9c70961af705042b898",
+      "profiles/d3-mini-macos-cpu-capability.json": "a703b45a4875b6c0114b5942073d42c11967003bd8ae7526f1136c2c43aea592",
+      "profiles/d3-mini-macos-cpu.json": "a07b80d131a19c68ea34daea31186bef0f9f5b61698dbdc5dc231a96c7360aa8",
       "profiles/d3-nano-assets.json": "5d07ba7ec2220bc0e34eed2f18fc42f6306dac2a0b5d85a4721d61505fc6dcec",
       "profiles/d3-nano-macos-cpu-capability.json": "3c4049a93842fb9905b27d93c1d525767addbd617e28927f14787056d3a1ebf7",
       "profiles/d3-nano-macos-cpu.json": "134bb4384ff9543fed3dbe286ac4d17ee1e50b22b32789633ea6a345f5fee4f0",
@@ -22796,10 +25098,10 @@
       "profiles/vela2-03-assets.json": "989bf962c6665767e00d39a5cd828b82d22556da71361c42f86a34e2a4546fd4",
       "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
       "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-      "scripts/build-full-results.py": "e9e27e7574255606d09bc2a5f98c9faa629d290d8f23e24016602650f7f148a8",
+      "scripts/build-full-results.py": "c4994ea7bf9e9bb2986984e03f4887d0817f64c38c1dd930844cda567d825dbe",
       "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
       "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-      "scripts/consolidated-campaigns.py": "6f589da992829cbd87f4d9e480002b0e898dbc1b28c9c63f63c5ed586266cd93"
+      "scripts/consolidated-campaigns.py": "829e26f688a980f4b68ffa4e99909300e7282693d887dd5ae425e1b6aa21035e"
     },
     "tasks": [
       {
@@ -22876,7 +25178,7 @@
       }
     ]
   },
-  "historical_context_observations": 31,
+  "historical_context_observations": 32,
   "observations": [
     {
       "context": {
@@ -34129,7 +36431,7 @@
         "source_analysis": "docs/evidence/native-model-comparison-20261016/analysis.json"
       },
       "rank_all_splits": 6,
-      "rank_test_splits": 10,
+      "rank_test_splits": 11,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -36154,6 +38456,1933 @@
     {
       "context": {
         "counts": {
+          "correct": 119,
+          "scored": 132,
+          "statuses": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "total": 132
+        },
+        "groups": {
+          "difficulty": {
+            "D1": {
+              "correct": 40,
+              "scored": 40,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 40,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 40
+            },
+            "D2": {
+              "correct": 38,
+              "scored": 40,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 40,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 40
+            },
+            "D3": {
+              "correct": 41,
+              "scored": 52,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 52,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 52
+            }
+          },
+          "documentary_task": {
+            "ambiguous-selection": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-active-inventory": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-catalog-not-source-count": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-corrected-request": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-count-and-names": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-distinct-identities": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-metadata-owners": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-metadata-table-language": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-negative-summary": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-quoted-summary-command": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-scope-after-interlude": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-selected-titles": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-selection-reuse": {
+              "correct": 1,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-date": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-exact-clause": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-explanation": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-filtered-list": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-not-summary": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-refutation": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-total-unit": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-distant-report-reference": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-followup-cause": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-quoted-instruction-content": {
+              "correct": 0,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-relations-mermaid": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-stale-summary-check": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-cached-descriptions": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-do-not-reread": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-existing-per-file": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-inherit-summary-constraint": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-language-followup": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-quotation-not-budget-question": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-remaining-summaries": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-resume-after-content": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-summary-bundle": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-summary-count-title": {
+              "correct": 0,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-translate-summary-table": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-validated-abstracts": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "unanchored-language": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            }
+          },
+          "domain": {
+            "chemistry": {
+              "correct": 24,
+              "scored": 28,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 28,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 28
+            },
+            "documentary": {
+              "correct": 71,
+              "scored": 76,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 76,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 76
+            },
+            "mathematics": {
+              "correct": 24,
+              "scored": 28,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 28,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 28
+            }
+          },
+          "domain_language": {
+            "chemistry / en": {
+              "correct": 12,
+              "scored": 14,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 14,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 14
+            },
+            "chemistry / fr": {
+              "correct": 12,
+              "scored": 14,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 14,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 14
+            },
+            "documentary / en": {
+              "correct": 35,
+              "scored": 38,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 38,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 38
+            },
+            "documentary / fr": {
+              "correct": 36,
+              "scored": 38,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 38,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 38
+            },
+            "mathematics / en": {
+              "correct": 12,
+              "scored": 14,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 14,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 14
+            },
+            "mathematics / fr": {
+              "correct": 12,
+              "scored": 14,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 14,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 14
+            }
+          },
+          "domain_split": {
+            "chemistry / calibration": {
+              "correct": 6,
+              "scored": 8,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 8,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 8
+            },
+            "chemistry / test": {
+              "correct": 12,
+              "scored": 14,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 14,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 14
+            },
+            "chemistry / train": {
+              "correct": 6,
+              "scored": 6,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 6,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 6
+            },
+            "documentary / calibration": {
+              "correct": 14,
+              "scored": 14,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 14,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 14
+            },
+            "documentary / test": {
+              "correct": 36,
+              "scored": 38,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 38,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 38
+            },
+            "documentary / train": {
+              "correct": 21,
+              "scored": 24,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 24,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 24
+            },
+            "mathematics / calibration": {
+              "correct": 8,
+              "scored": 8,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 8,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 8
+            },
+            "mathematics / test": {
+              "correct": 12,
+              "scored": 14,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 14,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 14
+            },
+            "mathematics / train": {
+              "correct": 4,
+              "scored": 6,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 6,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 6
+            }
+          },
+          "language": {
+            "en": {
+              "correct": 59,
+              "scored": 66,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 66,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 66
+            },
+            "fr": {
+              "correct": 60,
+              "scored": 66,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 66,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 66
+            }
+          },
+          "split": {
+            "calibration": {
+              "correct": 28,
+              "scored": 30,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 30,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 30
+            },
+            "test": {
+              "correct": 60,
+              "scored": 66,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 66,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 66
+            },
+            "train": {
+              "correct": 31,
+              "scored": 36,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 36,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 36
+            }
+          },
+          "task_type": {
+            "aliquot-and-mix": {
+              "correct": 0,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "ambiguous-selection": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "atoms-and-charge": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "cancel-keep-domain": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-active-inventory": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-catalog-not-source-count": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-corrected-request": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-count-and-names": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-distinct-identities": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-metadata-owners": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-metadata-table-language": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-negative-summary": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-quoted-summary-command": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-scope-after-interlude": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-selected-titles": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "catalog-selection-reuse": {
+              "correct": 1,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "chain-derivative": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "combustion-balance": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "conditional-probability": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "conserved-dilution": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "extraneous-equation-root": {
+              "correct": 0,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "formula-not-structure": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "fraction-addition": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "function-types": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "group-atom-count": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "hydrate-water-fraction": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "ionic-neutrality": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "limiting-reactant": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "matrix-product": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "missing-final-volume": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "molar-concentration": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "nested-complex-count": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "polynomial-remainder": {
+              "correct": 0,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "precipitate-mass": {
+              "correct": 0,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "principal-root": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "quantity-dimension": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-date": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-exact-clause": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-explanation": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-filtered-list": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-not-summary": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-refutation": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-content-total-unit": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-distant-report-reference": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-followup-cause": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-quoted-instruction-content": {
+              "correct": 0,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-relations-mermaid": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "retrieve_answer-stale-summary-check": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "square-expansion": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-cached-descriptions": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-do-not-reread": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-existing-per-file": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-inherit-summary-constraint": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-language-followup": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-quotation-not-budget-question": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-remaining-summaries": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-resume-after-content": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-summary-bundle": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-summary-count-title": {
+              "correct": 0,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-translate-summary-table": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "stored_summaries-validated-abstracts": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "transpose-chain": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "unanchored-language": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "underdetermined-linear": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "unknown-function-values": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            },
+            "water-balance": {
+              "correct": 2,
+              "scored": 2,
+              "statuses": {
+                "abstain": 0,
+                "error": 0,
+                "missing": 0,
+                "ok": 2,
+                "timeout": 0,
+                "unsupported": 0
+              },
+              "total": 2
+            }
+          }
+        },
+        "source": {
+          "dataset_sha256": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+          "manifest_sha256": "498759d704262c139d693fb3b8939b9679bc428c84eb0b0ffea0f8d952f4d863",
+          "projection_version": null,
+          "raw_sha256": "8947c355c4a07c52c76ebcfbb1b12cb5e7025c80bf08fbbdf3e426c52bde36e4",
+          "requests_sha256": null,
+          "scorer_sha256": "c57a02c8ba3d75c81d49c2bb94775d99d7b387d0d74f6376a0bac85bd5ab6f63",
+          "seal_fingerprint": "f8ae395b7e7e8ff7621d2cbb71690b3ed36ef8a9c6d2235ccf8b08c969258daa",
+          "seal_sha256": "e3abd9171a72d0534eebf681e9cbb45482055c6864721c0e878c68c9919acfa0"
+        }
+      },
+      "historical_rank_all_splits": 6,
+      "id": "D3miniMacos",
+      "identity": {
+        "adapter": "d3",
+        "device": "cpu",
+        "hashes": {
+          "adapter_sha256": "c9b0684cc21fa0e7cf001899e50fc2c2d04a91c1305d7503e55f130ec664bbd5",
+          "model_assets_sha256": "6ef2321ba6d5eb304741c2fe2f44064aa95120469684aa160ea6c1f7bf954ca4",
+          "prompt_sha256": "316eebad75df81666e9d4003e8949f9106b3398299381d8d6ca9cbe616771d31",
+          "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+          "worker_sha256": "b60cbf5bce6ab63f775d9fbb9d14c377cac4c5d45307ac1f8b587c617b9b6125"
+        },
+        "identity_sha256": "571833f52154040e7113a939c14cbcb7b13a34fbb5b7dc0c36fc2d78c5163202",
+        "model_assets_sha256": "6ef2321ba6d5eb304741c2fe2f44064aa95120469684aa160ea6c1f7bf954ca4",
+        "model_id": null,
+        "model_repo_id": "vllm-sr/d3-mini",
+        "model_revision": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4",
+        "profile_id": "d3-mini-macos-cpu-v1",
+        "revisions": {
+          "model_revision": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4"
+        },
+        "runtime": {
+          "accelerate": "1.15.0",
+          "annotated-doc": "0.0.5",
+          "anyio": "4.15.1",
+          "certifi": "2026.10.23",
+          "click": "8.5.0",
+          "einops": "0.8.2",
+          "filelock": "4.2.5",
+          "fsspec": "2026.9.0",
+          "h11": "0.16.0",
+          "hf-xet": "1.8.0",
+          "httpcore": "1.0.9",
+          "httpx": "0.28.1",
+          "huggingface-hub": "1.33.0",
+          "idna": "3.20",
+          "jinja2": "3.1.6",
+          "markdown-it-py": "4.2.0",
+          "markupsafe": "3.0.4",
+          "mpmath": "1.3.0",
+          "networkx": "3.7",
+          "numpy": "2.5.3",
+          "packaging": "26.3",
+          "pillow": "12.3.0",
+          "psutil": "7.2.2",
+          "pygments": "2.21.0",
+          "python": "3.12.16",
+          "pyyaml": "6.0.3",
+          "regex": "2026.9.29",
+          "rich": "15.0.0",
+          "safetensors": "0.8.0",
+          "setuptools": "84.2.1",
+          "shellingham": "1.5.4",
+          "sympy": "1.14.0",
+          "torch": "2.14.0",
+          "tqdm": "4.70.1",
+          "transformers": "5.17.0",
+          "typer": "0.27.3",
+          "typing-extensions": "4.16.0"
+        },
+        "settings": {
+          "backbone_dtype": "bfloat16",
+          "device": "cpu",
+          "encoding_preflight": "native-d3-prepare-complete",
+          "loading_mode": "native-d3-bf16-readout-fp32",
+          "max_length": 4096,
+          "max_rss_mb": 14336,
+          "readout_dtype": "float32",
+          "shared_context": false,
+          "threads": 2
+        },
+        "source_revision": null
+      },
+      "metadata": {
+        "date_label": null,
+        "display_name": "D3 mini · macOS CPU",
+        "evidence": [
+          {
+            "path": "docs/D3_MINI_MACOS_CPU_PROTOCOL_20261031.md"
+          }
+        ],
+        "family": "Decision 3.0",
+        "hardware_group": "Apple M5 Pro CPU; 64 GiB unified memory",
+        "model_size": {
+          "basis": "checkpoint_tensor_count",
+          "label": "4.539B backbone",
+          "parameters": 4539265536,
+          "scope": "BF16 backbone; separate FP32 readout excluded",
+          "source": {
+            "path": "docs/D3_LARGER_CPU_PILOT.md"
+          }
+        },
+        "observed_date": "2026-10-31",
+        "precision": "BF16 backbone / FP32 readout",
+        "runtime_group": "cpu_new",
+        "source_analysis": "docs/evidence/d3-mini-macos-20261031/analysis.json"
+      },
+      "rank_all_splits": 7,
+      "rank_test_splits": 9,
+      "resources": {
+        "adapter_ms": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 22494.914917000642,
+          "median": 17251.68137500077,
+          "min": 12839.022250000198,
+          "p95": 20198.16987500053
+        },
+        "initialization_ms": 12279.568875001132,
+        "rss_scope": "Per-response worker RSS, context-choice phase; not total host memory",
+        "sampled_gpu_allocated_peak_mib": null,
+        "session_process_group_peak_rss_mib": null,
+        "worker_rss_mib": {
+          "count": 132,
+          "interpretation": "exploratory descriptive observations; no repeated-run or tail guarantee",
+          "max": 7525.1875,
+          "median": 7476.03125,
+          "min": 7467.015625,
+          "p95": 7525.1875,
+          "unreported_calls": 0
+        }
+      },
+      "tool_proposal": {
+        "cases_scored": 0,
+        "counts": {
+          "agreement_count": 20,
+          "total": 24,
+          "valid_decisions": 24
+        },
+        "groups": {
+          "by_language": {
+            "en": {
+              "agreement_count": 10,
+              "total": 12,
+              "valid_decisions": 12
+            },
+            "fr": {
+              "agreement_count": 10,
+              "total": 12,
+              "valid_decisions": 12
+            }
+          },
+          "by_proposed_action": {
+            "fallback": {
+              "agreement_count": 4,
+              "total": 8,
+              "valid_decisions": 8
+            },
+            "search": {
+              "agreement_count": 8,
+              "total": 8,
+              "valid_decisions": 8
+            },
+            "stats": {
+              "agreement_count": 8,
+              "total": 8,
+              "valid_decisions": 8
+            }
+          },
+          "by_split": {
+            "calibration": {
+              "agreement_count": 4,
+              "total": 6,
+              "valid_decisions": 6
+            },
+            "test": {
+              "agreement_count": 16,
+              "total": 18,
+              "valid_decisions": 18
+            }
+          }
+        },
+        "qualification": "provisional_agreement_pending_human_review",
+        "source": {
+          "dataset_sha256": "d66ec51d9b8d89f46b87b90b80bcd0d45abf1570fa9857c24d9ce39117935497",
+          "manifest_sha256": "ed6ebfc0ce975cfc61d4d952a9a436cee3762b48130422cfe600e18a6f9ad363",
+          "projection_version": "mastra-read-choice/v1",
+          "raw_sha256": "9f2b9a6757cce5e7839600a88ac2dd7d945cf8a32c6c1db322bb19eb05bfef34",
+          "requests_sha256": "c076aedc2810c758d830c59bb21d404dcbad41df353f7df218950935381f7752",
+          "scorer_sha256": null,
+          "seal_fingerprint": "f430c7a46ab7e17f48af02d3c3629385b67c62046d99bbcef5010599f0f013d8",
+          "seal_sha256": "2c830d0026cc2970c9ee482339023f9299964cb06377d411bafdf326489bde68"
+        },
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 24,
+          "timeout": 0,
+          "unsupported": 0
+        }
+      }
+    },
+    {
+      "context": {
+        "counts": {
           "correct": 117,
           "scored": 132,
           "statuses": {
@@ -37885,7 +42114,7 @@
           "seal_sha256": "0af804904f4852b01cdf9a79792ab11fa6a9df5664773661d97e6e423392b09c"
         }
       },
-      "historical_rank_all_splits": 7,
+      "historical_rank_all_splits": 8,
       "id": "D3nano",
       "identity": {
         "adapter": "d3",
@@ -37982,7 +42211,7 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-d3-20261011/analysis.json"
       },
-      "rank_all_splits": 8,
+      "rank_all_splits": 9,
       "rank_test_splits": 4,
       "resources": {
         "adapter_ms": {
@@ -39812,7 +44041,7 @@
           "seal_sha256": "e14f306847964285038fa7fcbb85cd1816638c5facb97a6a58346d492c75eac2"
         }
       },
-      "historical_rank_all_splits": 7,
+      "historical_rank_all_splits": 8,
       "id": "D3nanoMacos",
       "identity": {
         "adapter": "d3",
@@ -39909,7 +44138,7 @@
         "runtime_group": "cpu_new",
         "source_analysis": "docs/evidence/d3-nano-macos-20261031/analysis.json"
       },
-      "rank_all_splits": 8,
+      "rank_all_splits": 9,
       "rank_test_splits": 4,
       "resources": {
         "adapter_ms": {
@@ -41739,7 +45968,7 @@
           "seal_sha256": "380131bff843a36c3ecc2764e45b0c64dd0080c86d1d9f8bea1a82485c01f2ac"
         }
       },
-      "historical_rank_all_splits": 7,
+      "historical_rank_all_splits": 8,
       "id": "GLiClass9B",
       "identity": {
         "adapter": "gliclass",
@@ -41844,7 +46073,7 @@
         "runtime_group": "apple_mps",
         "source_analysis": "docs/evidence/gliclass-model-comparison-20261017/analysis.json"
       },
-      "rank_all_splits": 8,
+      "rank_all_splits": 9,
       "rank_test_splits": 2,
       "resources": {
         "adapter_ms": {
@@ -43803,8 +48032,8 @@
         "runtime_group": "apple_metal_upstream",
         "source_analysis": "docs/evidence/clef-flash-20261029/analysis.json"
       },
-      "rank_all_splits": 11,
-      "rank_test_splits": 10,
+      "rank_all_splits": 12,
+      "rank_test_splits": 11,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -45562,7 +49791,7 @@
           "seal_sha256": "66e09768d4134489f1b636d956cd459968c27c31608bacc40c4ea162d28640d8"
         }
       },
-      "historical_rank_all_splits": 10,
+      "historical_rank_all_splits": 11,
       "id": "Vela4",
       "identity": {
         "adapter": "vela2",
@@ -45654,8 +49883,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json"
       },
-      "rank_all_splits": 12,
-      "rank_test_splits": 12,
+      "rank_all_splits": 13,
+      "rank_test_splits": 13,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -47484,7 +51713,7 @@
           "seal_sha256": "fc4fa5f2c5929f588612a9f463bd18cae6038e001d62510d349ae5f8c0141cc3"
         }
       },
-      "historical_rank_all_splits": 11,
+      "historical_rank_all_splits": 12,
       "id": "Nox",
       "identity": {
         "adapter": "decision2",
@@ -47575,8 +51804,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json"
       },
-      "rank_all_splits": 13,
-      "rank_test_splits": 13,
+      "rank_all_splits": 14,
+      "rank_test_splits": 14,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -49405,7 +53634,7 @@
           "seal_sha256": "fd0f1a96216136526b17d7b386ca785c24b2a8d58a4da99282c33159aaba18ef"
         }
       },
-      "historical_rank_all_splits": 12,
+      "historical_rank_all_splits": 13,
       "id": "Liquid3",
       "identity": {
         "adapter": "small_model",
@@ -49497,8 +53726,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-larger-cpu-20261011/analysis.json"
       },
-      "rank_all_splits": 14,
-      "rank_test_splits": 13,
+      "rank_all_splits": 15,
+      "rank_test_splits": 14,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -51327,7 +55556,7 @@
           "seal_sha256": "268071e334111fea9e0fee5e51cb2a2eb5ae1e771170ac1f751c530ec48ff410"
         }
       },
-      "historical_rank_all_splits": 13,
+      "historical_rank_all_splits": 14,
       "id": "Noma",
       "identity": {
         "adapter": "noma",
@@ -51423,8 +55652,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json"
       },
-      "rank_all_splits": 15,
-      "rank_test_splits": 15,
+      "rank_all_splits": 16,
+      "rank_test_splits": 16,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -53253,7 +57482,7 @@
           "seal_sha256": "2e0d1f44a624c54fe75c2c884f4d7f716a137f7b7e8bb43b9bc9019d97d227b1"
         }
       },
-      "historical_rank_all_splits": 14,
+      "historical_rank_all_splits": 15,
       "id": "D3lite",
       "identity": {
         "adapter": "d3",
@@ -53350,8 +57579,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-d3-20261011/analysis.json"
       },
-      "rank_all_splits": 16,
-      "rank_test_splits": 16,
+      "rank_all_splits": 17,
+      "rank_test_splits": 17,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -55180,7 +59409,7 @@
           "seal_sha256": "1c32e3c38dda36fb600cb93592cb5f6fc9ce719d2ac7d811110c56d472f213a2"
         }
       },
-      "historical_rank_all_splits": 15,
+      "historical_rank_all_splits": 16,
       "id": "D3liteMacos",
       "identity": {
         "adapter": "d3",
@@ -55277,8 +59506,8 @@
         "runtime_group": "cpu_new",
         "source_analysis": "docs/evidence/d3-lite-macos-20261030/analysis.json"
       },
-      "rank_all_splits": 17,
-      "rank_test_splits": 17,
+      "rank_all_splits": 18,
+      "rank_test_splits": 18,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -57107,7 +61336,7 @@
           "seal_sha256": "6d0200c5f90edbe8560dce764d9ba4c4dfb4d91a7e5559fa5b600213ddd19d72"
         }
       },
-      "historical_rank_all_splits": 16,
+      "historical_rank_all_splits": 17,
       "id": "Sol",
       "identity": {
         "adapter": "decision2",
@@ -57198,8 +61427,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-complete-20261010-sol/analysis.json"
       },
-      "rank_all_splits": 18,
-      "rank_test_splits": 18,
+      "rank_all_splits": 19,
+      "rank_test_splits": 19,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -59028,7 +63257,7 @@
           "seal_sha256": "f6d2cd6aff59b4bb70f2cec778b040bf8ab9f977f99888b77df3dc314f8e4653"
         }
       },
-      "historical_rank_all_splits": 17,
+      "historical_rank_all_splits": 18,
       "id": "Vela08",
       "identity": {
         "adapter": "vela2",
@@ -59120,8 +63349,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-vela2-20261011/analysis.json"
       },
-      "rank_all_splits": 19,
-      "rank_test_splits": 19,
+      "rank_all_splits": 20,
+      "rank_test_splits": 20,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -60950,7 +65179,7 @@
           "seal_sha256": "87a6467f3323a2aa042796333e8c804c588ff5d45d611acd1ac6ae04a754468b"
         }
       },
-      "historical_rank_all_splits": 18,
+      "historical_rank_all_splits": 19,
       "id": "Eos",
       "identity": {
         "adapter": "decision2",
@@ -61041,8 +65270,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json"
       },
-      "rank_all_splits": 20,
-      "rank_test_splits": 20,
+      "rank_all_splits": 21,
+      "rank_test_splits": 21,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -62871,7 +67100,7 @@
           "seal_sha256": "f35092e78f524a719a4d2fce9504abcbc489758b2cc688df56dcf7d7769a3fc5"
         }
       },
-      "historical_rank_all_splits": 18,
+      "historical_rank_all_splits": 19,
       "id": "EosQ8",
       "identity": {
         "adapter": "systemone_local",
@@ -62935,8 +67164,8 @@
         "runtime_group": "apple_metal_native",
         "source_analysis": "docs/evidence/native-model-comparison-20261016/analysis.json"
       },
-      "rank_all_splits": 20,
-      "rank_test_splits": 20,
+      "rank_all_splits": 21,
+      "rank_test_splits": 21,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -64765,7 +68994,7 @@
           "seal_sha256": "596ade9a250746a384e64196e78ae9b6a22ca9d3ad946092e5e27e25ab69666f"
         }
       },
-      "historical_rank_all_splits": 20,
+      "historical_rank_all_splits": 21,
       "id": "D3edge",
       "identity": {
         "adapter": "d3",
@@ -64862,8 +69091,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-d3-20261011/analysis.json"
       },
-      "rank_all_splits": 22,
-      "rank_test_splits": 23,
+      "rank_all_splits": 23,
+      "rank_test_splits": 24,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -66692,7 +70921,7 @@
           "seal_sha256": "06943a6761be19f1572eeff8fe95836b9c4192bbbbbfdab758d57be40ee5a663"
         }
       },
-      "historical_rank_all_splits": 21,
+      "historical_rank_all_splits": 22,
       "id": "Kai",
       "identity": {
         "adapter": "decision2",
@@ -66783,8 +71012,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-complete-20261010/analysis.json"
       },
-      "rank_all_splits": 23,
-      "rank_test_splits": 26,
+      "rank_all_splits": 24,
+      "rank_test_splits": 27,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -68613,7 +72842,7 @@
           "seal_sha256": "3ee75bdc3e3d556404fb44182165475ee117a3b0bf0b0b25287b869344f6e72d"
         }
       },
-      "historical_rank_all_splits": 22,
+      "historical_rank_all_splits": 23,
       "id": "Vela03",
       "identity": {
         "adapter": "vela2",
@@ -68705,8 +72934,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-vela2-20261011/analysis.json"
       },
-      "rank_all_splits": 24,
-      "rank_test_splits": 23,
+      "rank_all_splits": 25,
+      "rank_test_splits": 24,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -70535,7 +74764,7 @@
           "seal_sha256": "cc7ff693bc6517150911e8876c849a7bbec94e93658ec5045e1c642b71d4430d"
         }
       },
-      "historical_rank_all_splits": 22,
+      "historical_rank_all_splits": 23,
       "id": "Vela03Macos",
       "identity": {
         "adapter": "vela2",
@@ -70631,8 +74860,8 @@
         "runtime_group": "cpu_new",
         "source_analysis": "docs/evidence/vela2-03-macos-20261030/analysis.json"
       },
-      "rank_all_splits": 24,
-      "rank_test_splits": 23,
+      "rank_all_splits": 25,
+      "rank_test_splits": 24,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -72461,7 +76690,7 @@
           "seal_sha256": "879f5bfeafb01e96b8569598eff541835dabb850b2701908ce52504d6503caec"
         }
       },
-      "historical_rank_all_splits": 24,
+      "historical_rank_all_splits": 25,
       "id": "GLiNER",
       "identity": {
         "adapter": "gliner",
@@ -72524,8 +76753,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json"
       },
-      "rank_all_splits": 26,
-      "rank_test_splits": 22,
+      "rank_all_splits": 27,
+      "rank_test_splits": 23,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -74354,7 +78583,7 @@
           "seal_sha256": "7e1cfac841b828db3eb3d0b73528196dafa764428ed2d6331a415d27b9062446"
         }
       },
-      "historical_rank_all_splits": 25,
+      "historical_rank_all_splits": 26,
       "id": "Vela3Fast",
       "identity": {
         "adapter": "vela3_fast",
@@ -74445,8 +78674,8 @@
         "runtime_group": "cpu_new",
         "source_analysis": "docs/evidence/vela3-fast-20261028/analysis.json"
       },
-      "rank_all_splits": 27,
-      "rank_test_splits": 28,
+      "rank_all_splits": 28,
+      "rank_test_splits": 29,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -76275,7 +80504,7 @@
           "seal_sha256": "9018c034ca90bb34c57d24c4a542af2576b223b9801d90c9d7d200817dac57de"
         }
       },
-      "historical_rank_all_splits": 26,
+      "historical_rank_all_splits": 27,
       "id": "Laya",
       "identity": {
         "adapter": "laya",
@@ -76371,8 +80600,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json"
       },
-      "rank_all_splits": 28,
-      "rank_test_splits": 27,
+      "rank_all_splits": 29,
+      "rank_test_splits": 28,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -78201,7 +82430,7 @@
           "seal_sha256": "e4251947040dd812ffcbac6f930bb45fca25874d7a055c02b12c97e1de7c7f43"
         }
       },
-      "historical_rank_all_splits": 27,
+      "historical_rank_all_splits": 28,
       "id": "Julia",
       "identity": {
         "adapter": "julia",
@@ -78264,8 +82493,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json"
       },
-      "rank_all_splits": 29,
-      "rank_test_splits": 29,
+      "rank_all_splits": 30,
+      "rank_test_splits": 30,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -80094,7 +84323,7 @@
           "seal_sha256": "5fc53e524eeb8fd5efbdf1c3c98ab8944af2a3c6bd54dbfdcee01ecd6428f004"
         }
       },
-      "historical_rank_all_splits": 28,
+      "historical_rank_all_splits": 29,
       "id": "Omni",
       "identity": {
         "adapter": "small_model",
@@ -80186,8 +84415,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-complete-20261010/analysis.json"
       },
-      "rank_all_splits": 30,
-      "rank_test_splits": 29,
+      "rank_all_splits": 31,
+      "rank_test_splits": 30,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -82016,7 +86245,7 @@
           "seal_sha256": "ed5291f2c094568cdb5869df36d04f66b876ded44630fbb3ab6167cfe3597bcf"
         }
       },
-      "historical_rank_all_splits": 29,
+      "historical_rank_all_splits": 30,
       "id": "Indecis",
       "identity": {
         "adapter": "indecis",
@@ -82082,8 +86311,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-complete-20261004/analysis.json"
       },
-      "rank_all_splits": 31,
-      "rank_test_splits": 32,
+      "rank_all_splits": 32,
+      "rank_test_splits": 33,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -83912,7 +88141,7 @@
           "seal_sha256": "ad9124cf14e794afaf5294369da85343f08120991ae2e37ebca5fbc11e1eebf3"
         }
       },
-      "historical_rank_all_splits": 30,
+      "historical_rank_all_splits": 31,
       "id": "ModernJEV",
       "identity": {
         "adapter": "small_model",
@@ -84003,8 +88232,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-complete-20261010/analysis.json"
       },
-      "rank_all_splits": 32,
-      "rank_test_splits": 31,
+      "rank_all_splits": 33,
+      "rank_test_splits": 32,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -85833,7 +90062,7 @@
           "seal_sha256": "a483ce3c660034a3aad1581f98e1a9a1ab8313a9039cf6ce44c94f6d8751aee8"
         }
       },
-      "historical_rank_all_splits": 31,
+      "historical_rank_all_splits": 32,
       "id": "Muose",
       "identity": {
         "adapter": "small_model",
@@ -85924,8 +90153,8 @@
         "runtime_group": "historical_cpu",
         "source_analysis": "docs/evidence/model-comparison-complete-20261010/analysis.json"
       },
-      "rank_all_splits": 33,
-      "rank_test_splits": 33,
+      "rank_all_splits": 34,
+      "rank_test_splits": 34,
       "resources": {
         "adapter_ms": {
           "count": 132,
@@ -115239,6 +119468,8 @@
     "docs/D3_LARGER_CPU_PILOT.md": "fff448300435de571ec4372ca3c2216b1baf53dc50d616af68a369b3ee01adc5",
     "docs/D3_LITE_MACOS_CPU_PROTOCOL_20261030.md": "2cb6f644789f6d22082340a035aad2e73b351adeb21e54788f1a7edd4dc99a28",
     "docs/D3_LITE_MACOS_RESULTS_20261030.md": "4b8ff65a006fa1970c96de6091df71130c43d45f165c1bda51787fdfd35c5e3c",
+    "docs/D3_MINI_MACOS_CPU_PROTOCOL_20261031.md": "68bdd18e4669cea6a2e7088666be210778755ff677d0f733d757162b4ee25e49",
+    "docs/D3_MINI_MACOS_RESULTS_20261031.md": "cdcca85a9e56bb09c0b8a2a9a151e84811abb831d5bd84c52ae0decc426c9af2",
     "docs/D3_NANO_MACOS_CPU_PROTOCOL_20261030.md": "14e0e42587a0114fb230023b7b28ecfbc80423db92b4d517575ee7e141abe641",
     "docs/D3_NANO_MACOS_RESULTS_20261031.md": "f416845dfd6f60847ab979ac4d3a60ae2a1ca900180ae0904a47198359941ce6",
     "docs/GLICLASS_V4_RESULTS_20261017.md": "9b2795a6c3a90b05ca7dbf8ede7d950873dfb7637fc097f79405d72bc01d065d",
@@ -115264,6 +119495,9 @@
     "docs/evidence/d3-lite-macos-20261030/analysis.json": "df7f64795ce2f86ac2e4919a90135df129fb8c6234ae25cfa33e1f779bfc9052",
     "docs/evidence/d3-lite-macos-20261030/capability.json": "c2f259c7e215a53d815b008c8809999cf1fde12b55e9efdf0b2a195d9e35aa10",
     "docs/evidence/d3-lite-macos-20261030/physics.json": "d322064f3922e2030e1332de741b5bd53b09eb924415fe1883e3ea612dab6118",
+    "docs/evidence/d3-mini-macos-20261031/analysis.json": "0dcb65838ee19df6cc3785b54508f8ff2c2f62cb09f9008d620ab5175a8e77f1",
+    "docs/evidence/d3-mini-macos-20261031/capability.json": "08f5846b9a964f7cb947f9f3e4a8e40071f2309aa12c38f0d4750b2b65831ce2",
+    "docs/evidence/d3-mini-macos-20261031/physics.json": "55350b031a2d167469f7975d27a6369ed88d219ba0e54dee9c7bfa57b56a7934",
     "docs/evidence/d3-nano-macos-20261031/analysis.json": "f0ec4987332398b2c1666482d4e1543e0dfed8a25575aadd9006aa30d56c576d",
     "docs/evidence/d3-nano-macos-20261031/capability-002.json": "4d038ab1f5014753f770ac7519bb3c5215c5d0ce4b66c9fda365691ff88985c9",
     "docs/evidence/d3-nano-macos-20261031/physics.json": "27d205837cf83e44b7366ad898071000a03ff25c4e50a18af40d8d3100e077ee",
@@ -115297,12 +119531,15 @@
     "docs/evidence/vela2-03-macos-20261030/capability.json": "f478cddebf09f67250860947836e15ed843ad7b7ddf70811190008ed4462e1ff",
     "docs/evidence/vela2-03-macos-20261030/physics.json": "8a52a92bd08244accdbff5b9b61098701b0954a2f6bf3e0d7085a282e7d78cd3",
     "docs/evidence/vela3-fast-20261028/analysis.json": "83c06bdf377353541aba7944231654f3c794f19ab17016de99e3b0fdba70ae4e",
-    "docs/leaderboard/model-metadata.json": "5cd227aad3679917db6e3f03ae33c8b1a02fe391f3cb204f33307bd3eec17059",
+    "docs/leaderboard/model-metadata.json": "f48d109b5762a4202ff9bb7b2eb38f43bfc72ddb77691eb74733575b30f010a6",
     "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
     "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
     "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
     "profiles/d3-lite-assets.json": "0a165940562c277e7050631651b5e59d9a351345c041695e43d48f4de4f4fa71",
     "profiles/d3-lite-macos-cpu.json": "01abd2d2bad5d6b92ab2bc71c5135b8a3984098b30ebdbd2a162e5c734bcbde9",
+    "profiles/d3-mini-assets.json": "1e2e953b0dd4c956cef407eb4608e880fecf64c58cc9d9c70961af705042b898",
+    "profiles/d3-mini-macos-cpu-capability.json": "a703b45a4875b6c0114b5942073d42c11967003bd8ae7526f1136c2c43aea592",
+    "profiles/d3-mini-macos-cpu.json": "a07b80d131a19c68ea34daea31186bef0f9f5b61698dbdc5dc231a96c7360aa8",
     "profiles/d3-nano-assets.json": "5d07ba7ec2220bc0e34eed2f18fc42f6306dac2a0b5d85a4721d61505fc6dcec",
     "profiles/d3-nano-macos-cpu-capability.json": "3c4049a93842fb9905b27d93c1d525767addbd617e28927f14787056d3a1ebf7",
     "profiles/d3-nano-macos-cpu.json": "134bb4384ff9543fed3dbe286ac4d17ee1e50b22b32789633ea6a345f5fee4f0",
@@ -115314,9 +119551,9 @@
     "profiles/vela2-03-assets.json": "989bf962c6665767e00d39a5cd828b82d22556da71361c42f86a34e2a4546fd4",
     "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "e9e27e7574255606d09bc2a5f98c9faa629d290d8f23e24016602650f7f148a8",
+    "scripts/build-full-results.py": "c4994ea7bf9e9bb2986984e03f4887d0817f64c38c1dd930844cda567d825dbe",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-    "scripts/consolidated-campaigns.py": "6f589da992829cbd87f4d9e480002b0e898dbc1b28c9c63f63c5ed586266cd93"
+    "scripts/consolidated-campaigns.py": "829e26f688a980f4b68ffa4e99909300e7282693d887dd5ae425e1b6aa21035e"
   }
 }

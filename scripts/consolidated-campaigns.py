@@ -24,6 +24,10 @@ D3NANO_MACOS_CAPABILITY = EVIDENCE + "d3-nano-macos-20261031/capability-002.json
 D3NANO_MACOS_CAPABILITY_PROFILE = "profiles/d3-nano-macos-cpu-capability.json"
 D3NANO_MACOS_PHYSICS = EVIDENCE + "d3-nano-macos-20261031/physics.json"
 D3NANO_MACOS_REPORT = "D3_NANO_MACOS_RESULTS_20261031.md"
+D3MINI_MACOS_CAPABILITY = EVIDENCE + "d3-mini-macos-20261031/capability.json"
+D3MINI_MACOS_CAPABILITY_PROFILE = "profiles/d3-mini-macos-cpu-capability.json"
+D3MINI_MACOS_PHYSICS = EVIDENCE + "d3-mini-macos-20261031/physics.json"
+D3MINI_MACOS_REPORT = "D3_MINI_MACOS_RESULTS_20261031.md"
 NEW_CONTEXT_IDS = {"ClefFlashQ8", "D3FlashQ8Upstream"}
 STATUSES = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
 DATASETS = {
@@ -317,6 +321,9 @@ class Campaigns:
             ("D3nanoMacos", "D3 nano · macOS CPU", "profiles/d3-nano-assets.json", D3NANO_MACOS_REPORT,
              ((D3NANO_MACOS_CAPABILITY, "capability", 192, 48, D3NANO_MACOS_CAPABILITY_PROFILE),
               (D3NANO_MACOS_PHYSICS, "physics", 48, 24, "profiles/d3-nano-macos-cpu.json"))),
+            ("D3miniMacos", "D3 mini · macOS CPU", "profiles/d3-mini-assets.json", D3MINI_MACOS_REPORT,
+             ((D3MINI_MACOS_CAPABILITY, "capability", 192, 48, D3MINI_MACOS_CAPABILITY_PROFILE),
+              (D3MINI_MACOS_PHYSICS, "physics", 48, 24, "profiles/d3-mini-macos-cpu.json"))),
         )
         for observation, model, assets, report, packs in cpu_campaigns:
             self.inputs.read("docs/" + report)
