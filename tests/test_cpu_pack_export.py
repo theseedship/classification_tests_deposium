@@ -115,6 +115,16 @@ class PublishedCpuPackTests(unittest.TestCase):
             self.assertEqual(data["runtime"]["pins"]["torch"], "2.14.0")
             self.assertEqual(data["model"]["model_revision"], "a8d25a91ef75552803f7009d25b7bd435991abd9")
 
+    def test_nano_partial_capability_distinguishes_attempted_from_cached_timeouts(self):
+        data = json.loads((ROOT / "docs/evidence/d3-nano-macos-20261031/capability.json").read_text())
+        phase = data["phases"]["capability"]
+        self.assertEqual(phase["counts"]["counts_by_status"]["timeout"], 150)
+        self.assertEqual(phase["attempts"], {**phase["attempts"], "attempted_cases": 43, "unsuccessful_attempted": 1,
+                                             "cached_unattempted": 149, "fail_closed_after_first_failure": True,
+                                             "first_failure_case_index": 42})
+        complete = json.loads((ROOT / "docs/evidence/d3-nano-macos-20261031/physics.json").read_text())["phases"]["physics"]
+        self.assertEqual((complete["attempts"]["cached_unattempted"], complete["attempts"]["fail_closed_after_first_failure"]), (0, False))
+
     def test_published_files_contain_no_local_paths_or_raw_output(self):
         for name in ("analysis.json", "capability.json", "physics.json", "report.md"):
             text = (self.EVIDENCE / name).read_text()

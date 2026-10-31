@@ -1,5 +1,5 @@
 {
-  "aggregate_producer_sha256": "26ab65ea82f34e8c3fb6ad5173dd241e346e90094776db90dcf69c46c530c866",
+  "aggregate_producer_sha256": "95955fc1af4b0e07741a6530c58e2b66e40a34fdff637d4ea63c74543b3d3bd9",
   "execution_scope": "isolated_cpu_worker_no_application_gateway",
   "limits": [
     "Agent-authored references and translations await independent human review.",
@@ -31,6 +31,15 @@
         "threads": 2
       },
       "attempt": 1,
+      "attempts": {
+        "attempted_cases": 43,
+        "cached_unattempted": 149,
+        "fail_closed_after_first_failure": true,
+        "first_failure_case_index": 42,
+        "note": "cached_unattempted cases keep their archived status in every denominator; they are unobserved, not measured",
+        "recorded_cases": 192,
+        "unsuccessful_attempted": 1
+      },
       "completion_status": "complete",
       "counts": {
         "accuracy_over_all": 0.21875,
@@ -5319,7 +5328,7 @@
         }
       },
       "identity": {
-        "analysis_sha256": "617260a8b9b70e41c07eb37ce692d665efb1a971320d0e4a9f1e217c9272e768",
+        "analysis_sha256": "239a8a17f83e78dea57d1bf09d28c083af812b24544b8368707a67b0ac38c796",
         "dataset_sha256": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
         "manifest_sha256": "356417cad9ba55d1b07ad467fd4744b39785a9e531b5d4f85a6be691d520a4d7",
         "outer_seal_sha256": "b2fe2efc6ef48fae7055b8534d76f4a39ba379bf3292c5ccd4c6939e6da8e105",
