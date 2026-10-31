@@ -1042,20 +1042,20 @@ def render_at_a_glance(data):
     observations = data["observations"]
     campaigns = data["campaigns"]
     rows = []
-    rows.append(("Context choices", "132 (66 test)", len(observations),
+    rows.append(("RAG decision", "Context choices", "132 (66 test)", len(observations),
                  leaders(observations, "rank_all_splits", name, lambda r: f"{r['context']['counts']['correct']}/132"),
                  leaders(observations, "rank_test_splits", name, lambda r: f"{r['context']['groups']['split']['test']['correct']}/66 test"),
                  "[Model quality](#model-quality)"))
     tools = [r for r in observations if r["tool_proposal"] and r["tool_proposal"]["counts"]["valid_decisions"] == 24]
     best = max((r["tool_proposal"]["counts"]["agreement_count"] for r in tools), default=None)
     tool_leaders = ", ".join(name(r) + f" ({best}/24)" for r in tools if r["tool_proposal"]["counts"]["agreement_count"] == best)
-    rows.append(("First-tool proposals", "24 (no test split)", len([r for r in observations if r["tool_proposal"]]),
+    rows.append(("RAG decision", "First-tool proposals", "24 (no test split)", len([r for r in observations if r["tool_proposal"]]),
                  (tool_leaders + (" (tie)" if tool_leaders.count("(") > 1 else "")) if best is not None else "no complete observation",
                  "provisional agreement, not routing accuracy", "[Model quality](#model-quality)"))
-    for task, title, total, test_total, section in (("capability", "Capability and workflow choices", 192, 96, "#capability-choices"),
-                                                    ("physics", "Physics choices", 48, 36, "#physics-choices")):
+    for family, task, title, total, test_total, section in (("Tool workflow", "capability", "Capability and workflow choices", 192, 96, "#capability-choices"),
+                                                            ("Reasoning with a supplied law", "physics", "Physics choices", 48, 36, "#physics-choices")):
         task_rows = [r for r in campaigns if r["task"] == task]
-        rows.append((title, f"{total} ({test_total} test)", len(task_rows),
+        rows.append((family, title, f"{total} ({test_total} test)", len(task_rows),
                      leaders(task_rows, "rank_all", lambda r: r["model"], lambda r: f"{r['counts']['correct']}/{total}"),
                      leaders(task_rows, "rank_test", lambda r: r["model"], lambda r: f"{r['counts']['by_split']['test']['correct']}/{test_total} test"),
                      f"[{title.split(' and ')[0]}]({section})"))
@@ -1063,7 +1063,7 @@ def render_at_a_glance(data):
                                         ("support", "Claim support", 768, "#claim-support"),
                                         ("answerability", "Answerability", 128, "#answerability")):
         task_rows = [r for r in campaigns if r["task"] == "passage_" + axis]
-        rows.append((title, f"{total} (rotation 0)", len(task_rows),
+        rows.append(("Retrieved evidence", title, f"{total} (rotation 0)", len(task_rows),
                      leaders(task_rows, "rank_all", lambda r: r["model"], lambda r: f"{r['counts']['correct']}/{total}"),
                      "no split ranking", f"[{title}]({section})"))
     generative = [r for r in data["coverage"]["observations"] if r.get("generative_observation")]
@@ -1072,18 +1072,21 @@ def render_at_a_glance(data):
         text = "; ".join(f"{label} {cells[task]['numerator']}/{cells[task]['total']}"
                          for task, label in (("tool_discovery", "discovery"), ("tool_arguments", "arguments"), ("tool_episodes", "episodes"))
                          if cells[task]["status"] == "complete")
-        rows.append(("Generated-JSON tool policy", "10 + 6 + 18 (TRAIN canary + held-out)", 1,
+        rows.append(("Tool policy, generated", "Generated-JSON tool policy", "10 + 6 + 18 (TRAIN canary + held-out)", 1,
                      f"{r['model']}: {text} passed (single observation, unranked)", "held-out pack 9/24 over the three contracts; see the report",
                      "[Generated-JSON observations](#generated-json-tool-policy-observations)"))
     lines = ["## At a glance", "",
-             "One line per task. **Leader over all cases** counts every case of the pack, including failures; "
+             "One line per task, grouped by family: **RAG decision** (which source or first tool to use for a request), "
+             "**Retrieved evidence** (judging passages: relevance, claim support, answerability), **Tool workflow** (selection, arguments, "
+             "next step after observations), **Reasoning** (physics with the law supplied) and **Tool policy, generated** (free-form JSON actions). "
+             "**Leader over all cases** counts every case of the pack, including failures; "
              "**leader on held-out test** uses only the test cases, the better signal against tuning. "
              "Ties are listed together. Tasks are never pooled into one score; a lead of a few cases on correlated FR/EN "
              "variants is not a general ranking. References are agent-authored and pending human review.", "",
-             "| Task | Cases | Observations | Leader over all cases | Leader on held-out test | Details |",
-             "|---|---|---:|---|---|---|"]
-    for title, cases, count, all_leader, test_leader, link in rows:
-        lines.append(f"| {title} | {cases} | {count} | {all_leader} | {test_leader} | {link} |")
+             "| Family | Task | Cases | Observations | Leader over all cases | Leader on held-out test | Details |",
+             "|---|---|---|---:|---|---|---|"]
+    for family, title, cases, count, all_leader, test_leader, link in rows:
+        lines.append(f"| {family} | {title} | {cases} | {count} | {all_leader} | {test_leader} | {link} |")
     lines += ["", "Rows further down keep every observation, partial campaigns included, with their denominators and statuses.", ""]
     return lines
 

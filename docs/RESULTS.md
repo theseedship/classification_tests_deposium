@@ -39,18 +39,18 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
 
 ## At a glance
 
-One line per task. **Leader over all cases** counts every case of the pack, including failures; **leader on held-out test** uses only the test cases, the better signal against tuning. Ties are listed together. Tasks are never pooled into one score; a lead of a few cases on correlated FR/EN variants is not a general ranking. References are agent-authored and pending human review.
+One line per task, grouped by family: **RAG decision** (which source or first tool to use for a request), **Retrieved evidence** (judging passages: relevance, claim support, answerability), **Tool workflow** (selection, arguments, next step after observations), **Reasoning** (physics with the law supplied) and **Tool policy, generated** (free-form JSON actions). **Leader over all cases** counts every case of the pack, including failures; **leader on held-out test** uses only the test cases, the better signal against tuning. Ties are listed together. Tasks are never pooled into one score; a lead of a few cases on correlated FR/EN variants is not a general ranking. References are agent-authored and pending human review.
 
-| Task | Cases | Observations | Leader over all cases | Leader on held-out test | Details |
-|---|---|---:|---|---|---|
-| Context choices | 132 (66 test) | 34 | D3 27B · Q4 Metal (128/132) | D3 27B · Q4 Metal (65/66 test) | [Model quality](#model-quality) |
-| First-tool proposals | 24 (no test split) | 32 | D3 27B · Q4 Metal (24/24) | provisional agreement, not routing accuracy | [Model quality](#model-quality) |
-| Capability and workflow choices | 192 (96 test) | 6 | Clef Flash Q8 · direct Metal (192/192), D3 Flash Q8 · gateway Metal (192/192), D3 mini · macOS CPU (192/192) (tie) | Clef Flash Q8 · direct Metal (96/96 test), D3 Flash Q8 · gateway Metal (96/96 test), D3 mini · macOS CPU (96/96 test) (tie) | [Capability](#capability-choices) |
-| Physics choices | 48 (36 test) | 6 | Clef Flash Q8 · direct Metal (41/48) | D3 Flash Q8 · direct Metal (32/36 test), D3 mini · macOS CPU (32/36 test) (tie) | [Physics choices](#physics-choices) |
-| Passage relevance | 512 (rotation 0) | 3 | Clef Flash Q8 · direct Metal (261/512) | no split ranking | [Passage relevance](#passage-relevance) |
-| Claim support | 768 (rotation 0) | 4 | D3 Flash Q8 · direct Metal (460/768) | no split ranking | [Claim support](#claim-support) |
-| Answerability | 128 (rotation 0) | 4 | D3 Flash Q8 · direct Metal (122/128) | no split ranking | [Answerability](#answerability) |
-| Generated-JSON tool policy | 10 + 6 + 18 (TRAIN canary + held-out) | 1 | Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2: discovery 3/10; arguments 6/6; episodes 7/18 passed (single observation, unranked) | held-out pack 9/24 over the three contracts; see the report | [Generated-JSON observations](#generated-json-tool-policy-observations) |
+| Family | Task | Cases | Observations | Leader over all cases | Leader on held-out test | Details |
+|---|---|---|---:|---|---|---|
+| RAG decision | Context choices | 132 (66 test) | 34 | D3 27B · Q4 Metal (128/132) | D3 27B · Q4 Metal (65/66 test) | [Model quality](#model-quality) |
+| RAG decision | First-tool proposals | 24 (no test split) | 32 | D3 27B · Q4 Metal (24/24) | provisional agreement, not routing accuracy | [Model quality](#model-quality) |
+| Tool workflow | Capability and workflow choices | 192 (96 test) | 6 | Clef Flash Q8 · direct Metal (192/192), D3 Flash Q8 · gateway Metal (192/192), D3 mini · macOS CPU (192/192) (tie) | Clef Flash Q8 · direct Metal (96/96 test), D3 Flash Q8 · gateway Metal (96/96 test), D3 mini · macOS CPU (96/96 test) (tie) | [Capability](#capability-choices) |
+| Reasoning with a supplied law | Physics choices | 48 (36 test) | 6 | Clef Flash Q8 · direct Metal (41/48) | D3 Flash Q8 · direct Metal (32/36 test), D3 mini · macOS CPU (32/36 test) (tie) | [Physics choices](#physics-choices) |
+| Retrieved evidence | Passage relevance | 512 (rotation 0) | 3 | Clef Flash Q8 · direct Metal (261/512) | no split ranking | [Passage relevance](#passage-relevance) |
+| Retrieved evidence | Claim support | 768 (rotation 0) | 4 | D3 Flash Q8 · direct Metal (460/768) | no split ranking | [Claim support](#claim-support) |
+| Retrieved evidence | Answerability | 128 (rotation 0) | 4 | D3 Flash Q8 · direct Metal (122/128) | no split ranking | [Answerability](#answerability) |
+| Tool policy, generated | Generated-JSON tool policy | 10 + 6 + 18 (TRAIN canary + held-out) | 1 | Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2: discovery 3/10; arguments 6/6; episodes 7/18 passed (single observation, unranked) | held-out pack 9/24 over the three contracts; see the report | [Generated-JSON observations](#generated-json-tool-policy-observations) |
 
 Rows further down keep every observation, partial campaigns included, with their denominators and statuses.
 
