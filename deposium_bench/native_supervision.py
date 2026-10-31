@@ -45,7 +45,7 @@ class _NativeSupervision:
                  max_rss_mb, min_free_mb):
         self.profile_path = Path(profile_path).resolve()
         profile, self.profile_sha256 = load_profile(self.profile_path)
-        if (profile["adapter"] not in {"systemone_local", "llama_cpp_json"}
+        if (profile["adapter"] not in {"systemone_local", "uzu_systemone_local", "llama_cpp_json"}
                 or type(max_rss_mb) is not int or max_rss_mb != profile["model"]["max_rss_mb"]
                 or type(min_free_mb) is not int or not 2048 <= min_free_mb <= 16384):
             raise NativeSupervisionError("native_supervision_budget_mismatch")
