@@ -21,7 +21,7 @@ Twelve cases are success-eligible (normal and one-retry routes); the other
 twenty end in a clarification (missing identifier, partial data) or a stop
 (no data, tool unavailable, persistent error). References are agent-authored
 and pending human review. The held-out sources were exposed once to the
-generative Qwen3-4B policy; no closed-choice candidate has seen any case.
+generative Qwen3-4B policy. First closed-choice results, 31 October 2026: [pilot report](../../docs/TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md) (D3 mini 28/32 (test 10/12), D3 nano 16/32, D3 lite 14/32, Vela 2.0 0.3B 0/32).
 
 ```bash
 python3 -m deposium_bench validate-cases --dataset datasets/tool-episodes-choice-v1/cases.jsonl

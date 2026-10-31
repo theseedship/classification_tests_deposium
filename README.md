@@ -115,7 +115,7 @@ A separate [closed-choice step policy](docs/TOOL_EPISODES_CHOICE_MODE_V1.md)
 (31 October) lets a classifier drive the same executed episodes by choosing
 from a harness-derived menu at each step, on a frozen
 [32-case pack](datasets/tool-episodes-choice-v1/README.md); it is a narrow
-architecture pilot, not comparable with the generative scores.
+architecture pilot, not comparable with the generative scores. First results ([report](docs/TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md)): D3 mini 28/32 (test 10/12), D3 nano 16/32, D3 lite 14/32, Vela 2.0 0.3B 0/32 procedure-correct episodes.
 
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their

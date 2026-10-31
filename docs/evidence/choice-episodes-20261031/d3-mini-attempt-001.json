@@ -1,0 +1,318 @@
+{
+  "dataset_sha256": "f249752d4ab464a50fd96c0b573f36adf54d59995856e0d872962f9fa6dafab9",
+  "limits": [
+    "32 correlated synthetic cases on seven fault routes; 20 TRAIN, 12 TEST",
+    "menu and wording are fixed by the harness; premature success and malformed actions are impossible by construction",
+    "not comparable with the generated-JSON contract; no live service or product workflow"
+  ],
+  "pack": "tool-episodes-choice-v1",
+  "policy_mode": "closed_choice_step_menu_v1",
+  "reference_review": "agent_only_pending_human",
+  "runs": [
+    {
+      "chosen_position": {
+        "1": 21,
+        "2": 7,
+        "3": 6,
+        "4": 2,
+        "5": 2,
+        "6": 4
+      },
+      "counts": {
+        "all": {
+          "procedure_correct_cases": 15,
+          "statuses": {
+            "error": 16,
+            "ok": 16
+          },
+          "task_success_cases": 6,
+          "task_success_eligible_cases": 12,
+          "total_cases": 32
+        },
+        "en": {
+          "procedure_correct_cases": 8,
+          "statuses": {
+            "error": 8,
+            "ok": 8
+          },
+          "task_success_cases": 3,
+          "task_success_eligible_cases": 6,
+          "total_cases": 16
+        },
+        "fr": {
+          "procedure_correct_cases": 7,
+          "statuses": {
+            "error": 8,
+            "ok": 8
+          },
+          "task_success_cases": 3,
+          "task_success_eligible_cases": 6,
+          "total_cases": 16
+        },
+        "test": {
+          "procedure_correct_cases": 0,
+          "statuses": {
+            "error": 12
+          },
+          "task_success_cases": 0,
+          "task_success_eligible_cases": 4,
+          "total_cases": 12
+        },
+        "train": {
+          "procedure_correct_cases": 15,
+          "statuses": {
+            "error": 4,
+            "ok": 16
+          },
+          "task_success_cases": 6,
+          "task_success_eligible_cases": 8,
+          "total_cases": 20
+        }
+      },
+      "display_name": "d3-mini-macos-choice-episodes-v1",
+      "execution": {
+        "cases_with_execution_trace": 32,
+        "inner_call_statuses": {
+          "error": 16,
+          "ok": 42
+        },
+        "inner_inference_ms": {
+          "count": 42,
+          "max": 94142.97708399681,
+          "median": 75819.27585399899,
+          "p95": 90917.90845899959
+        },
+        "inner_worker_rss_mib_max": 7870.140625,
+        "load_ms": 5566.296958000748,
+        "policy_steps": 58,
+        "tool_call_attempts": 26,
+        "tool_calls_executed": 26,
+        "worker_restarts": 0
+      },
+      "expected_to_final_reason": [
+        {
+          "cases": 6,
+          "expected": "complete",
+          "final": "candidate_error"
+        },
+        {
+          "cases": 6,
+          "expected": "complete",
+          "final": "complete"
+        },
+        {
+          "cases": 2,
+          "expected": "missing_information",
+          "final": "candidate_error"
+        },
+        {
+          "cases": 2,
+          "expected": "missing_information",
+          "final": "missing_information"
+        },
+        {
+          "cases": 2,
+          "expected": "no_data",
+          "final": "candidate_error"
+        },
+        {
+          "cases": 2,
+          "expected": "no_data",
+          "final": "no_data"
+        },
+        {
+          "cases": 2,
+          "expected": "partial_data",
+          "final": "candidate_error"
+        },
+        {
+          "cases": 2,
+          "expected": "partial_data",
+          "final": "partial_data"
+        },
+        {
+          "cases": 2,
+          "expected": "persistent_error",
+          "final": "candidate_error"
+        },
+        {
+          "cases": 2,
+          "expected": "persistent_error",
+          "final": "persistent_error"
+        },
+        {
+          "cases": 2,
+          "expected": "unavailable",
+          "final": "candidate_error"
+        },
+        {
+          "cases": 2,
+          "expected": "unavailable",
+          "final": "unavailable"
+        }
+      ],
+      "families": [
+        {
+          "expected": "complete",
+          "family": "tool-episode-family-001-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-episode-family-002-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "persistent_error",
+          "family": "tool-episode-family-003-fr-en",
+          "passed": 1,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "no_data",
+          "family": "tool-episode-family-004-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "partial_data",
+          "family": "tool-episode-family-005-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "missing_information",
+          "family": "tool-episode-family-006-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "unavailable",
+          "family": "tool-episode-family-007-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-canary-family-003-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-canary-family-004-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "missing_information",
+          "family": "tool-policy-canary-family-005-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-heldout-family-107-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-heldout-family-108-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "persistent_error",
+          "family": "tool-policy-heldout-family-109-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "no_data",
+          "family": "tool-policy-heldout-family-110-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "partial_data",
+          "family": "tool-policy-heldout-family-111-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "unavailable",
+          "family": "tool-policy-heldout-family-112-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        }
+      ],
+      "first_step_choice": {
+        "call-lookup": 15,
+        "finish-missing_information": 2
+      },
+      "identity": {
+        "dataset_sha256": "f249752d4ab464a50fd96c0b573f36adf54d59995856e0d872962f9fa6dafab9",
+        "inner_identity_sha256": "571833f52154040e7113a939c14cbcb7b13a34fbb5b7dc0c36fc2d78c5163202",
+        "inner_profile": "profiles/d3-mini-macos-cpu.json",
+        "model_repo_id": "vllm-sr/d3-mini",
+        "model_revision": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4",
+        "outer_identity_sha256": "9df2a60d7fc6ea541faa75f11f300e4bae7f90d62e170b06907445550eef6ef4",
+        "profile": "profiles/d3-mini-macos-choice-episodes.json",
+        "raw_sha256": "77500ded3dcbc8a4622133c34c8d611313d70b02c75b1cb118f8e651e674352f",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "seal_sha256": "81c79eec2a8b649962cf05d2acf4eb52f010f5ce3ff94e66219fd13f386e5e8e"
+      },
+      "label": "D3miniMacos",
+      "stages": {
+        "arguments": {
+          "correct": 14,
+          "eligible": 28
+        },
+        "binding": {
+          "correct": 6,
+          "eligible": 12
+        },
+        "budget": {
+          "correct": 16,
+          "eligible": 32
+        },
+        "execution": {
+          "correct": 13,
+          "eligible": 28
+        },
+        "result": {
+          "correct": 6,
+          "eligible": 12
+        },
+        "stopping": {
+          "correct": 15,
+          "eligible": 32
+        },
+        "tool": {
+          "correct": 14,
+          "eligible": 28
+        }
+      }
+    }
+  ],
+  "schema_version": "deposium.choice-episodes-public/v1"
+}

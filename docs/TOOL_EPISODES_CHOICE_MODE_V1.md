@@ -1,6 +1,6 @@
 # Closed-choice step policy for bounded tool episodes (pilot)
 
-**Fixed on 31 October 2026, before any candidate prediction.** A narrow pilot
+**Fixed on 31 October 2026, before any candidate prediction.** Executed the same day: [results](TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md) (D3 mini 28/32 (test 10/12), D3 nano 16/32, D3 lite 14/32, Vela 2.0 0.3B 0/32). A narrow pilot
 that answers one architectural question: *can a small CPU classifier drive a
 bounded tool loop of three to five steps when the harness enumerates the
 candidate actions?* It reuses the [episode contract](TOOL_EPISODES_CONTRACT_V1.md)
@@ -61,7 +61,7 @@ other packs; the outer profiles mirror their revision:
 | 1 | `profiles/d3-lite-macos-choice-episodes.json` | `d3-lite-macos-cpu.json` | 60 s |
 | 2 | `profiles/vela2-03-macos-choice-episodes.json` | `vela2-03-macos-cpu.json` | 30 s |
 | 3 | `profiles/d3-nano-macos-choice-episodes.json` | `d3-nano-macos-cpu.json` | 60 s |
-| later | D3 mini | after its own macOS protocol completes | 120 s |
+| 4 | `profiles/d3-mini-macos-choice-episodes.json` | `d3-mini-macos-cpu.json` | 120 s |
 
 One archive per candidate, fresh worker, no other CPU campaign running on the
 host at the same time. Inner timeouts end the episode as `candidate_timeout`

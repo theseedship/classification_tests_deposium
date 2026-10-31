@@ -24,6 +24,7 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
   - [Passage relevance](#passage-relevance)
   - [Claim support](#claim-support)
   - [Answerability](#answerability)
+  - [Executed tool episodes (closed choice)](#executed-tool-episodes-closed-choice)
   - [Campaign latency and memory](#campaign-latency-and-memory)
 - [Model quality](#model-quality)
 - [Language and task complexity](#language-and-task-complexity)
@@ -39,7 +40,7 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
 
 ## At a glance
 
-One line per task, grouped by family: **RAG decision** (which source or first tool to use for a request), **Retrieved evidence** (judging passages: relevance, claim support, answerability), **Tool workflow** (selection, arguments, next step after observations), **Reasoning** (physics with the law supplied) and **Tool policy, generated** (free-form JSON actions). **Leader over all cases** counts every case of the pack, including failures; **leader on held-out test** uses only the test cases, the better signal against tuning. Ties are listed together. Tasks are never pooled into one score; a lead of a few cases on correlated FR/EN variants is not a general ranking. References are agent-authored and pending human review.
+One line per task, grouped by family: **RAG decision** (which source or first tool to use for a request), **Retrieved evidence** (judging passages: relevance, claim support, answerability), **Tool workflow** (selection, arguments, next step after observations; **executed** when real fixture tools run step by step), **Reasoning** (physics with the law supplied) and **Tool policy, generated** (free-form JSON actions). **Leader over all cases** counts every case of the pack, including failures; **leader on held-out test** uses only the test cases, the better signal against tuning. Ties are listed together. Tasks are never pooled into one score; a lead of a few cases on correlated FR/EN variants is not a general ranking. References are agent-authored and pending human review.
 
 | Family | Task | Cases | Observations | Leader over all cases | Leader on held-out test | Details |
 |---|---|---|---:|---|---|---|
@@ -47,6 +48,7 @@ One line per task, grouped by family: **RAG decision** (which source or first to
 | RAG decision | First-tool proposals | 24 (no test split) | 32 | D3 27B · Q4 Metal (24/24) | provisional agreement, not routing accuracy | [Model quality](#model-quality) |
 | Tool workflow | Capability and workflow choices | 192 (96 test) | 6 | Clef Flash Q8 · direct Metal (192/192), D3 Flash Q8 · gateway Metal (192/192), D3 mini · macOS CPU (192/192) (tie) | Clef Flash Q8 · direct Metal (96/96 test), D3 Flash Q8 · gateway Metal (96/96 test), D3 mini · macOS CPU (96/96 test) (tie) | [Capability](#capability-choices) |
 | Reasoning with a supplied law | Physics choices | 48 (36 test) | 6 | Clef Flash Q8 · direct Metal (41/48) | D3 Flash Q8 · direct Metal (32/36 test), D3 mini · macOS CPU (32/36 test) (tie) | [Physics choices](#physics-choices) |
+| Tool workflow, executed | Executed tool episodes (closed choice) | 32 (12 test) | 4 | D3 mini · macOS CPU (28/32) | D3 mini · macOS CPU (10/12 test) | [Executed episodes](#executed-tool-episodes-closed-choice) |
 | Retrieved evidence | Passage relevance | 512 (rotation 0) | 3 | Clef Flash Q8 · direct Metal (261/512) | no split ranking | [Passage relevance](#passage-relevance) |
 | Retrieved evidence | Claim support | 768 (rotation 0) | 4 | D3 Flash Q8 · direct Metal (460/768) | no split ranking | [Claim support](#claim-support) |
 | Retrieved evidence | Answerability | 128 (rotation 0) | 4 | D3 Flash Q8 · direct Metal (122/128) | no split ranking | [Answerability](#answerability) |
@@ -64,42 +66,42 @@ Rows further down keep every observation, partial campaigns included, with their
 
 The 34 rows below preserve quantization and runtime identities; sizes are publisher classes or declared counts, not independent measurements. **Metal gateway** and **direct Metal** are different paths; scores and task rankings follow below. Context/132 contains text/76, mathematics/28 and chemistry/28; [their scores and held-out test results](#model-quality) remain separate.
 
-| Model / runtime observation | Size | Context /132 | Tool proposal /24 | Capability /192 | Physics /48 | Relevance R0 /512 | Support R0 /768 | Answerability R0 /128 | Relevance R0–3 /2048 | Ranking R0–3 /512 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| D3 27B · Q4 Metal | 27B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 flash · Q8 Metal (gateway) | 9B class | complete 132/132 | complete 24/24 | complete 192/192 | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 flash · Q8 direct Metal | 9B class | complete 132/132 | not_run | not_run | complete 48/48 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
-| D3 flash · CPU | 8.393B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Jev 1.13 · HTTP API | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 flash · Q4 Metal | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 mini · CPU | 4.539B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 mini · macOS CPU | 4.539B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | not_run | not_run | not_run | not_run | not_run |
-| D3 nano · CPU | 2.213B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 nano · macOS CPU | 2.213B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | not_run | not_run | not_run | not_run | not_run |
-| GLiClass v4 9B · BF16 MPS | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Clef Flash · Q8 direct Metal | 9B class | complete 132/132 | not_run | complete 192/192 | complete 48/48 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
-| Vela 2.0 4B · CPU | 4.211B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Decision 2.0 Nox 4B · CPU | 4.208B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Liquid d1-3B · CPU | 3.123B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Noma · CPU | ~2.67B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 lite · CPU | 0.853B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 lite · macOS CPU | 0.853B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | not_run | not_run | not_run | not_run | not_run |
-| Decision 2.0 Sol 2B · CPU | 2B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Vela 2.0 0.8B · CPU | 0.755B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Decision 2.0 Eos 0.8B · CPU | 0.8B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Decision 2.0 Eos 0.8B · Q8 Metal | 0.8B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 edge · CPU | 0.594B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Decision 2.0 Kai 0.6B · CPU | 0.6B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Vela 2.0 0.3B · CPU | 0.309B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Vela 2.0 0.3B · macOS CPU | 0.309B declared | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | not_run | not_run | not_run | not_run | not_run |
-| GLiNER2.5-multi-Decide · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Vela 3.0 fast · decision only · CPU | 0.380B decision backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Laya multilingual · CPU | 322M declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Julia-1 · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Liquid d1-omni-600M · CPU | 600M class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Indecis · untrained open mode · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| ModernJEV-Decide-Preview · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Muose-50M-Decision · CPU | 50M class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Model / runtime observation | Size | Context /132 | Tool proposal /24 | Capability /192 | Physics /48 | Episodes (choice) /32 | Relevance R0 /512 | Support R0 /768 | Answerability R0 /128 | Relevance R0–3 /2048 | Ranking R0–3 /512 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| D3 27B · Q4 Metal | 27B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 flash · Q8 Metal (gateway) | 9B class | complete 132/132 | complete 24/24 | complete 192/192 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 flash · Q8 direct Metal | 9B class | complete 132/132 | not_run | not_run | complete 48/48 | not_run | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
+| D3 flash · CPU | 8.393B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Jev 1.13 · HTTP API | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 flash · Q4 Metal | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 mini · CPU | 4.539B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 mini · macOS CPU | 4.539B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | not_run | not_run | not_run | not_run | not_run |
+| D3 nano · CPU | 2.213B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 nano · macOS CPU | 2.213B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | not_run | not_run | not_run | not_run | not_run |
+| GLiClass v4 9B · BF16 MPS | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Clef Flash · Q8 direct Metal | 9B class | complete 132/132 | not_run | complete 192/192 | complete 48/48 | not_run | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
+| Vela 2.0 4B · CPU | 4.211B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Decision 2.0 Nox 4B · CPU | 4.208B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Liquid d1-3B · CPU | 3.123B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Noma · CPU | ~2.67B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 lite · CPU | 0.853B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 lite · macOS CPU | 0.853B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | not_run | not_run | not_run | not_run | not_run |
+| Decision 2.0 Sol 2B · CPU | 2B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Vela 2.0 0.8B · CPU | 0.755B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Decision 2.0 Eos 0.8B · CPU | 0.8B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Decision 2.0 Eos 0.8B · Q8 Metal | 0.8B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| D3 edge · CPU | 0.594B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Decision 2.0 Kai 0.6B · CPU | 0.6B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Vela 2.0 0.3B · CPU | 0.309B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Vela 2.0 0.3B · macOS CPU | 0.309B declared | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | not_run | not_run | not_run | not_run | not_run |
+| GLiNER2.5-multi-Decide · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Vela 3.0 fast · decision only · CPU | 0.380B decision backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Laya multilingual · CPU | 322M declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Julia-1 · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Liquid d1-omni-600M · CPU | 600M class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Indecis · untrained open mode · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| ModernJEV-Decide-Preview · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
+| Muose-50M-Decision · CPU | 50M class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 
 ### Passage-only observations and ranking methods
 
@@ -253,6 +255,23 @@ Class macro accuracy averages the scored class accuracies. Jev's partial support
 Jev's published relevance export is **1260/2048**, scored 2048/2048, over four rotations. It is retained in the downloads as `passage_relevance_four_rotations`, outside the 512-decision relevance ranking. Replayed rotations are not extra independent model calls.
 
 Support insufficiency/refutation remains weak for both Flash candidates. Clef accepts 12/16 pools annotated as conflicting as answerable; D3 accepts none in this finite run. See [paired outcomes and confusion matrices](PASSAGE_CLEF_RESULTS_20261029.md). This is not factual-verifier or end-to-end qualification.
+
+### Executed tool episodes (closed choice)
+
+32 synthetic episodes (20 TRAIN, 12 TEST) run with real fixture tools: at each step the harness lists the possible next actions, the model picks one, the tool runs and its actual result feeds the next step. A case passes when the whole procedure is valid, the stop is correct and budgets hold; **task success** counts the twelve episodes whose correct end is a computed total. Premature success and malformed actions are impossible by construction, so these scores are not comparable with the generated-JSON policy. [Pilot report](TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md).
+
+<sub>**Rank all**: competition rank by correct answers over every case of the pack (all splits); **Rank test**: the same rank over the held-out test cases only, the better signal against tuning; equal totals share a rank. **Correct / all** keeps failed, missing and unsupported cases in the denominator; **Scored / all** shows how many cases produced a valid answer.</sub>
+
+**Leading on held-out test**: D3 mini · macOS CPU (10/12 test); **leading over all cases**: D3 mini · macOS CPU (28/32).
+
+| Rank all | Rank test | Model / runtime | Procedure correct / all | Test correct / all | Task success / eligible | Stop correct / all | Execution | Steps | Tool calls | Median call s |
+|---:|---:|---|---:|---:|---:|---:|---|---:|---:|---:|
+| 1 | 1 | D3 mini · macOS CPU | 28/32 | 10/12 | 10/12 | 28/32 | all `ok` | 76 | 44 | 74.0 |
+| 2 | 3 | D3 nano · macOS CPU | 16/32 | 4/12 | 10/12 | 17/32 | all `ok` | 118 | 53 | 31.3 |
+| 3 | 2 | D3 lite · macOS CPU | 14/32 | 5/12 | 9/12 | 15/32 | all `ok` | 125 | 52 | 13.8 |
+| 4 | 4 | Vela 2.0 0.3B · macOS CPU | 0/32 | 0/12 | 0/12 | 0/32 | all `ok` | 32 | 0 | 0.2 |
+
+**Steps** counts model decisions; **tool calls** counts actual fixture executions. A model that keeps choosing the first option or always the same stop shows it in the chosen-position distribution of the report.
 
 ### Campaign latency and memory
 

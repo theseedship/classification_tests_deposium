@@ -128,6 +128,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -291,6 +302,17 @@
           "status": "complete",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -446,6 +468,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -624,6 +657,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -779,6 +823,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -936,6 +991,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -1091,6 +1157,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -1255,6 +1332,24 @@
           "status": "complete",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": true,
+          "metric": "case_pass",
+          "numerator": 28,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 32,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 32,
+          "source": "docs/evidence/choice-episodes-20261031/analysis.json",
+          "status": "complete",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -1417,6 +1512,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -1581,6 +1687,24 @@
           "status": "complete",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": true,
+          "metric": "case_pass",
+          "numerator": 16,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 32,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 32,
+          "source": "docs/evidence/choice-episodes-20261031/analysis.json",
+          "status": "complete",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -1744,6 +1868,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -1906,6 +2041,17 @@
           "source": "docs/evidence/clef-flash-20261029/analysis.json",
           "status": "complete",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -2084,6 +2230,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -2239,6 +2396,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -2396,6 +2564,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -2552,6 +2731,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -2707,6 +2897,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -2871,6 +3072,24 @@
           "status": "complete",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": true,
+          "metric": "case_pass",
+          "numerator": 14,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 32,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 32,
+          "source": "docs/evidence/choice-episodes-20261031/analysis.json",
+          "status": "complete",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -3034,6 +3253,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -3189,6 +3419,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -3346,6 +3587,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -3501,6 +3753,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -3658,6 +3921,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -3814,6 +4088,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -3969,6 +4254,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -4133,6 +4429,24 @@
           "status": "complete",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": true,
+          "metric": "case_pass",
+          "numerator": 0,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 32,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 32,
+          "source": "docs/evidence/choice-episodes-20261031/analysis.json",
+          "status": "complete",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -4296,6 +4610,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -4451,6 +4776,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -4608,6 +4944,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -4763,6 +5110,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -4920,6 +5278,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -5075,6 +5444,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": true,
@@ -5232,6 +5612,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -5388,6 +5779,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": true,
           "metric": "correct_choice",
@@ -5543,6 +5945,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": false,
@@ -5724,6 +6137,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": false,
           "metric": "correct_choice",
@@ -5897,6 +6321,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": false,
           "metric": "correct_choice",
@@ -6048,6 +6483,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": false,
@@ -6201,6 +6647,17 @@
           "status": "not_run",
           "total": 192
         },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
         "context": {
           "evidence_present": false,
           "metric": "correct_choice",
@@ -6352,6 +6809,17 @@
           "source": null,
           "status": "not_run",
           "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
         },
         "context": {
           "evidence_present": false,
@@ -6531,11 +6999,13 @@
     "docs/PASSAGE_FLASH_RESULTS_20261029.md": "cf376c533151ac8e2427fb13f8b4229e439556b514f9e128c83668ec16dbbd67",
     "docs/PASSAGE_JEV_RESULTS_20261015.md": "ba48c94fe882498e397b0bf7b7c5d07da3edb776403526e8bdab4cde67710848",
     "docs/PHYSICS_FLASH_RESULTS_20261029.md": "356dfd041f7d4646235767601f5272f446f814b4448712910f37c6056d546819",
+    "docs/TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md": "49649e91b8769aa595323c6911719f59e83f89fba46c0316d849d8a5b0cd4423",
     "docs/VELA2_03_MACOS_CPU_PROTOCOL_20261030.md": "4817578dfd85225ede51a6d4c1a06774cb9574f23f3e05c997b63054e250958d",
     "docs/VELA2_03_MACOS_RESULTS_20261030.md": "21ac1f63c1bd4f89d10675e1c59e8ba1af1aea1a194a7472606b35efbc742856",
     "docs/VELA2_PILOT.md": "6743665f0102fe20a5c51810c880b7a3d87d0cd1bb69a7927b55397f32deaf40",
     "docs/VELA3_FAST_RESULTS_20261028.md": "6cad54a1cd023ec2abd554cb099d881959ef9061c90dc47cf027de52c01a0101",
     "docs/evidence/capability-flash-20261029/analysis.json": "df15bea59de4a762655dc601eb4cdad88a368977b4c65c688b0cfc2b95931a80",
+    "docs/evidence/choice-episodes-20261031/analysis.json": "e2eeff772a2ecb23a4c779f4a6d064730d9f1638c64472add1d956c18d7ac0bf",
     "docs/evidence/clef-flash-20261029/analysis.json": "a1b5b8124d8fa2097eb6d603b5bb88bd4306481764ed0438742b6fbbdf9390eb",
     "docs/evidence/d3-lite-macos-20261030/analysis.json": "df7f64795ce2f86ac2e4919a90135df129fb8c6234ae25cfa33e1f779bfc9052",
     "docs/evidence/d3-lite-macos-20261030/capability.json": "c2f259c7e215a53d815b008c8809999cf1fde12b55e9efdf0b2a195d9e35aa10",
@@ -6581,11 +7051,14 @@
     "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
     "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
     "profiles/d3-lite-assets.json": "0a165940562c277e7050631651b5e59d9a351345c041695e43d48f4de4f4fa71",
+    "profiles/d3-lite-macos-choice-episodes.json": "91cabbae4edb9b2c01f74a414efb6e8b912e425f930d918d374e72fe1491c03f",
     "profiles/d3-lite-macos-cpu.json": "01abd2d2bad5d6b92ab2bc71c5135b8a3984098b30ebdbd2a162e5c734bcbde9",
     "profiles/d3-mini-assets.json": "1e2e953b0dd4c956cef407eb4608e880fecf64c58cc9d9c70961af705042b898",
+    "profiles/d3-mini-macos-choice-episodes.json": "70c2952669acc833ba5547c2ed45c3a8129d4513d232de1cef27b9ae2941928a",
     "profiles/d3-mini-macos-cpu-capability.json": "a703b45a4875b6c0114b5942073d42c11967003bd8ae7526f1136c2c43aea592",
     "profiles/d3-mini-macos-cpu.json": "a07b80d131a19c68ea34daea31186bef0f9f5b61698dbdc5dc231a96c7360aa8",
     "profiles/d3-nano-assets.json": "5d07ba7ec2220bc0e34eed2f18fc42f6306dac2a0b5d85a4721d61505fc6dcec",
+    "profiles/d3-nano-macos-choice-episodes.json": "6afa47adb2a7015a2a1e18cdfeae99c81c5606e3741c996caf77009dd11cc546",
     "profiles/d3-nano-macos-cpu-capability.json": "3c4049a93842fb9905b27d93c1d525767addbd617e28927f14787056d3a1ebf7",
     "profiles/d3-nano-macos-cpu.json": "134bb4384ff9543fed3dbe286ac4d17ee1e50b22b32789633ea6a345f5fee4f0",
     "profiles/decision2-eos-assets.json": "31675c97916270d1744f9ea2446f591bc04165ef531bc2a12aedd159f16e3d1c",
@@ -6594,9 +7067,10 @@
     "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
     "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
     "profiles/vela2-03-assets.json": "989bf962c6665767e00d39a5cd828b82d22556da71361c42f86a34e2a4546fd4",
+    "profiles/vela2-03-macos-choice-episodes.json": "0dd5e3e87bbea50d56d7701325adde78646816b262bcd4a85f74b065a10764f3",
     "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "f37a23324bb36e9c286d3634f1cba1509d1d14aff94cdb59c12c57cf7fc45989",
+    "scripts/build-full-results.py": "06f907fa5eb2943ccf763aef70e67a01551d65c64c85e6dffc1b330602d81448",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
     "scripts/consolidated-campaigns.py": "829e26f688a980f4b68ffa4e99909300e7282693d887dd5ae425e1b6aa21035e"
@@ -6625,6 +7099,12 @@
       "label": "Physics",
       "protocol": "physics-choice-v1; calibration+test; test=36",
       "total": 48
+    },
+    {
+      "id": "choice_episodes",
+      "label": "Episodes (choice)",
+      "protocol": "tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases",
+      "total": 32
     },
     {
       "id": "passage_relevance",

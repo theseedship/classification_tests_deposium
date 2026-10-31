@@ -3,6 +3,7 @@ D3Q4,D3 27B · Q4 Metal,27B class,apple_metal_native,True,False,context,context-
 D3Q4,D3 27B · Q4 Metal,27B class,apple_metal_native,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,24,,,,docs/evidence/native-model-comparison-20261016/analysis.json,0,0,0,24,0,0
 D3Q4,D3 27B · Q4 Metal,27B class,apple_metal_native,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 D3Q4,D3 27B · Q4 Metal,27B class,apple_metal_native,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+D3Q4,D3 27B · Q4 Metal,27B class,apple_metal_native,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 D3Q4,D3 27B · Q4 Metal,27B class,apple_metal_native,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3Q4,D3 27B · Q4 Metal,27B class,apple_metal_native,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3Q4,D3 27B · Q4 Metal,27B class,apple_metal_native,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -15,6 +16,7 @@ D3FlashQ8,D3 flash · Q8 Metal,9B class,apple_metal_native,True,False,context,co
 D3FlashQ8,D3 flash · Q8 Metal,9B class,apple_metal_native,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,20,,,,docs/evidence/native-model-comparison-20261016/analysis.json,0,0,0,24,0,0
 D3FlashQ8,D3 flash · Q8 Metal,9B class,apple_metal_native,True,False,capability,capability-choice-v1; four supplied proposals; test=96,complete,True,True,192,192,correct_choice,192,,,,docs/evidence/capability-flash-20261029/analysis.json,0,0,0,192,0,0
 D3FlashQ8,D3 flash · Q8 Metal,9B class,apple_metal_native,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+D3FlashQ8,D3 flash · Q8 Metal,9B class,apple_metal_native,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 D3FlashQ8,D3 flash · Q8 Metal,9B class,apple_metal_native,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3FlashQ8,D3 flash · Q8 Metal,9B class,apple_metal_native,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3FlashQ8,D3 flash · Q8 Metal,9B class,apple_metal_native,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -27,6 +29,7 @@ D3FlashQ8Upstream,D3 flash · Q8 direct Metal,9B class,apple_metal_upstream,True
 D3FlashQ8Upstream,D3 flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,not_run,False,True,,24,provisional_agreement,,,,,,,,,,,
 D3FlashQ8Upstream,D3 flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 D3FlashQ8Upstream,D3 flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,physics,physics-choice-v1; calibration+test; test=36,complete,True,True,48,48,correct_choice,39,,,,docs/evidence/physics-flash-20261029/analysis.json,0,0,0,48,0,0
+D3FlashQ8Upstream,D3 flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 D3FlashQ8Upstream,D3 flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,complete,True,True,512,512,correct_choice,252,,,,docs/evidence/passage-flash-20261029/analysis.json,0,0,0,512,0,0
 D3FlashQ8Upstream,D3 flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,complete,True,True,768,768,correct_choice,460,,,,docs/evidence/passage-flash-20261029/analysis.json,0,0,0,768,0,0
 D3FlashQ8Upstream,D3 flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,complete,True,True,128,128,correct_choice,122,,,,docs/evidence/passage-flash-20261029/analysis.json,0,0,0,128,0,0
@@ -39,6 +42,7 @@ D3flash,D3 flash · CPU,8.393B backbone,historical_cpu,True,False,context,contex
 D3flash,D3 flash · CPU,8.393B backbone,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,20,,,,docs/evidence/model-comparison-d3-larger-20261011/analysis.json,0,0,0,24,0,0
 D3flash,D3 flash · CPU,8.393B backbone,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 D3flash,D3 flash · CPU,8.393B backbone,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+D3flash,D3 flash · CPU,8.393B backbone,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 D3flash,D3 flash · CPU,8.393B backbone,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3flash,D3 flash · CPU,8.393B backbone,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3flash,D3 flash · CPU,8.393B backbone,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -51,6 +55,7 @@ Jev,Jev 1.13 · HTTP API,,remote_api,True,False,context,context-choice-v1; all s
 Jev,Jev 1.13 · HTTP API,,remote_api,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,20,,,,docs/evidence/model-comparison-complete-20261004/analysis.json,0,0,0,24,0,0
 Jev,Jev 1.13 · HTTP API,,remote_api,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Jev,Jev 1.13 · HTTP API,,remote_api,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Jev,Jev 1.13 · HTTP API,,remote_api,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Jev,Jev 1.13 · HTTP API,,remote_api,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Jev,Jev 1.13 · HTTP API,,remote_api,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Jev,Jev 1.13 · HTTP API,,remote_api,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -63,6 +68,7 @@ D3FlashQ4,D3 flash · Q4 Metal,9B class,apple_metal_native,True,False,context,co
 D3FlashQ4,D3 flash · Q4 Metal,9B class,apple_metal_native,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,21,,,,docs/evidence/native-model-comparison-20261016/analysis.json,0,0,0,24,0,0
 D3FlashQ4,D3 flash · Q4 Metal,9B class,apple_metal_native,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 D3FlashQ4,D3 flash · Q4 Metal,9B class,apple_metal_native,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+D3FlashQ4,D3 flash · Q4 Metal,9B class,apple_metal_native,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 D3FlashQ4,D3 flash · Q4 Metal,9B class,apple_metal_native,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3FlashQ4,D3 flash · Q4 Metal,9B class,apple_metal_native,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3FlashQ4,D3 flash · Q4 Metal,9B class,apple_metal_native,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -75,6 +81,7 @@ D3mini,D3 mini · CPU,4.539B backbone,historical_cpu,True,False,context,context-
 D3mini,D3 mini · CPU,4.539B backbone,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,20,,,,docs/evidence/model-comparison-d3-larger-20261011/analysis.json,0,0,0,24,0,0
 D3mini,D3 mini · CPU,4.539B backbone,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 D3mini,D3 mini · CPU,4.539B backbone,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+D3mini,D3 mini · CPU,4.539B backbone,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 D3mini,D3 mini · CPU,4.539B backbone,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3mini,D3 mini · CPU,4.539B backbone,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3mini,D3 mini · CPU,4.539B backbone,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -87,6 +94,7 @@ D3miniMacos,D3 mini · macOS CPU,4.539B backbone,cpu_new,True,False,context,cont
 D3miniMacos,D3 mini · macOS CPU,4.539B backbone,cpu_new,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,20,,,,docs/evidence/d3-mini-macos-20261031/analysis.json,0,0,0,24,0,0
 D3miniMacos,D3 mini · macOS CPU,4.539B backbone,cpu_new,True,False,capability,capability-choice-v1; four supplied proposals; test=96,complete,True,True,192,192,correct_choice,192,,,,docs/evidence/d3-mini-macos-20261031/capability.json,0,0,0,192,0,0
 D3miniMacos,D3 mini · macOS CPU,4.539B backbone,cpu_new,True,False,physics,physics-choice-v1; calibration+test; test=36,complete,True,True,48,48,correct_choice,39,,,,docs/evidence/d3-mini-macos-20261031/physics.json,0,0,0,48,0,0
+D3miniMacos,D3 mini · macOS CPU,4.539B backbone,cpu_new,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,complete,True,True,32,32,case_pass,28,,,,docs/evidence/choice-episodes-20261031/analysis.json,0,0,0,32,0,0
 D3miniMacos,D3 mini · macOS CPU,4.539B backbone,cpu_new,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3miniMacos,D3 mini · macOS CPU,4.539B backbone,cpu_new,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3miniMacos,D3 mini · macOS CPU,4.539B backbone,cpu_new,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -99,6 +107,7 @@ D3nano,D3 nano · CPU,2.213B backbone,historical_cpu,True,False,context,context-
 D3nano,D3 nano · CPU,2.213B backbone,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,18,,,,docs/evidence/model-comparison-d3-20261011/analysis.json,0,0,0,24,0,0
 D3nano,D3 nano · CPU,2.213B backbone,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 D3nano,D3 nano · CPU,2.213B backbone,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+D3nano,D3 nano · CPU,2.213B backbone,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 D3nano,D3 nano · CPU,2.213B backbone,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3nano,D3 nano · CPU,2.213B backbone,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3nano,D3 nano · CPU,2.213B backbone,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -111,6 +120,7 @@ D3nanoMacos,D3 nano · macOS CPU,2.213B backbone,cpu_new,True,False,context,cont
 D3nanoMacos,D3 nano · macOS CPU,2.213B backbone,cpu_new,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,18,,,,docs/evidence/d3-nano-macos-20261031/analysis.json,0,0,0,24,0,0
 D3nanoMacos,D3 nano · macOS CPU,2.213B backbone,cpu_new,True,False,capability,capability-choice-v1; four supplied proposals; test=96,complete,True,True,192,192,correct_choice,188,,,,docs/evidence/d3-nano-macos-20261031/capability-002.json,0,0,0,192,0,0
 D3nanoMacos,D3 nano · macOS CPU,2.213B backbone,cpu_new,True,False,physics,physics-choice-v1; calibration+test; test=36,complete,True,True,48,48,correct_choice,28,,,,docs/evidence/d3-nano-macos-20261031/physics.json,0,0,0,48,0,0
+D3nanoMacos,D3 nano · macOS CPU,2.213B backbone,cpu_new,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,complete,True,True,32,32,case_pass,16,,,,docs/evidence/choice-episodes-20261031/analysis.json,0,0,0,32,0,0
 D3nanoMacos,D3 nano · macOS CPU,2.213B backbone,cpu_new,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3nanoMacos,D3 nano · macOS CPU,2.213B backbone,cpu_new,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3nanoMacos,D3 nano · macOS CPU,2.213B backbone,cpu_new,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -123,6 +133,7 @@ GLiClass9B,GLiClass v4 9B · BF16 MPS,9B class,apple_mps,True,False,context,cont
 GLiClass9B,GLiClass v4 9B · BF16 MPS,9B class,apple_mps,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,20,,,,docs/evidence/gliclass-model-comparison-20261017/analysis.json,0,0,0,24,0,0
 GLiClass9B,GLiClass v4 9B · BF16 MPS,9B class,apple_mps,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 GLiClass9B,GLiClass v4 9B · BF16 MPS,9B class,apple_mps,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+GLiClass9B,GLiClass v4 9B · BF16 MPS,9B class,apple_mps,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 GLiClass9B,GLiClass v4 9B · BF16 MPS,9B class,apple_mps,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 GLiClass9B,GLiClass v4 9B · BF16 MPS,9B class,apple_mps,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 GLiClass9B,GLiClass v4 9B · BF16 MPS,9B class,apple_mps,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -135,6 +146,7 @@ ClefFlashQ8,Clef Flash · Q8 direct Metal,9B class,apple_metal_upstream,True,Fal
 ClefFlashQ8,Clef Flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,not_run,False,True,,24,provisional_agreement,,,,,,,,,,,
 ClefFlashQ8,Clef Flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,capability,capability-choice-v1; four supplied proposals; test=96,complete,True,True,192,192,correct_choice,192,,,,docs/evidence/clef-flash-20261029/analysis.json,0,0,0,192,0,0
 ClefFlashQ8,Clef Flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,physics,physics-choice-v1; calibration+test; test=36,complete,True,True,48,48,correct_choice,41,,,,docs/evidence/clef-flash-20261029/analysis.json,0,0,0,48,0,0
+ClefFlashQ8,Clef Flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 ClefFlashQ8,Clef Flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,complete,True,True,512,512,correct_choice,261,,,,docs/evidence/passage-clef-flash-20261029/analysis.json,0,0,0,512,0,0
 ClefFlashQ8,Clef Flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,complete,True,True,768,768,correct_choice,446,,,,docs/evidence/passage-clef-flash-20261029/analysis.json,0,0,0,768,0,0
 ClefFlashQ8,Clef Flash · Q8 direct Metal,9B class,apple_metal_upstream,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,complete,True,True,128,128,correct_choice,109,,,,docs/evidence/passage-clef-flash-20261029/analysis.json,0,0,0,128,0,0
@@ -147,6 +159,7 @@ Vela4,Vela 2.0 4B · CPU,4.211B,historical_cpu,True,False,context,context-choice
 Vela4,Vela 2.0 4B · CPU,4.211B,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,18,,,,docs/evidence/model-comparison-larger-cpu-20261011/analysis.json,0,0,0,24,0,0
 Vela4,Vela 2.0 4B · CPU,4.211B,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Vela4,Vela 2.0 4B · CPU,4.211B,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Vela4,Vela 2.0 4B · CPU,4.211B,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Vela4,Vela 2.0 4B · CPU,4.211B,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Vela4,Vela 2.0 4B · CPU,4.211B,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Vela4,Vela 2.0 4B · CPU,4.211B,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -159,6 +172,7 @@ Nox,Decision 2.0 Nox 4B · CPU,4.208B,historical_cpu,True,False,context,context-
 Nox,Decision 2.0 Nox 4B · CPU,4.208B,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,18,,,,docs/evidence/model-comparison-larger-cpu-20261011/analysis.json,0,0,0,24,0,0
 Nox,Decision 2.0 Nox 4B · CPU,4.208B,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Nox,Decision 2.0 Nox 4B · CPU,4.208B,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Nox,Decision 2.0 Nox 4B · CPU,4.208B,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Nox,Decision 2.0 Nox 4B · CPU,4.208B,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Nox,Decision 2.0 Nox 4B · CPU,4.208B,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Nox,Decision 2.0 Nox 4B · CPU,4.208B,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -171,6 +185,7 @@ Liquid3,Liquid d1-3B · CPU,3.123B,historical_cpu,True,False,context,context-cho
 Liquid3,Liquid d1-3B · CPU,3.123B,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,16,,,,docs/evidence/model-comparison-larger-cpu-20261011/analysis.json,0,0,0,24,0,0
 Liquid3,Liquid d1-3B · CPU,3.123B,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Liquid3,Liquid d1-3B · CPU,3.123B,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Liquid3,Liquid d1-3B · CPU,3.123B,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Liquid3,Liquid d1-3B · CPU,3.123B,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Liquid3,Liquid d1-3B · CPU,3.123B,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Liquid3,Liquid d1-3B · CPU,3.123B,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -183,6 +198,7 @@ Noma,Noma · CPU,~2.67B declared,historical_cpu,True,False,context,context-choic
 Noma,Noma · CPU,~2.67B declared,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,18,,,,docs/evidence/model-comparison-complete-20261004/analysis.json,0,0,0,24,0,0
 Noma,Noma · CPU,~2.67B declared,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Noma,Noma · CPU,~2.67B declared,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Noma,Noma · CPU,~2.67B declared,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Noma,Noma · CPU,~2.67B declared,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Noma,Noma · CPU,~2.67B declared,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Noma,Noma · CPU,~2.67B declared,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -195,6 +211,7 @@ D3lite,D3 lite · CPU,0.853B backbone,historical_cpu,True,False,context,context-
 D3lite,D3 lite · CPU,0.853B backbone,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,19,,,,docs/evidence/model-comparison-d3-20261011/analysis.json,0,0,0,24,0,0
 D3lite,D3 lite · CPU,0.853B backbone,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 D3lite,D3 lite · CPU,0.853B backbone,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+D3lite,D3 lite · CPU,0.853B backbone,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 D3lite,D3 lite · CPU,0.853B backbone,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3lite,D3 lite · CPU,0.853B backbone,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3lite,D3 lite · CPU,0.853B backbone,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -207,6 +224,7 @@ D3liteMacos,D3 lite · macOS CPU,0.853B backbone,cpu_new,True,False,context,cont
 D3liteMacos,D3 lite · macOS CPU,0.853B backbone,cpu_new,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,19,,,,docs/evidence/d3-lite-macos-20261030/analysis.json,0,0,0,24,0,0
 D3liteMacos,D3 lite · macOS CPU,0.853B backbone,cpu_new,True,False,capability,capability-choice-v1; four supplied proposals; test=96,complete,True,True,192,192,correct_choice,168,,,,docs/evidence/d3-lite-macos-20261030/capability.json,0,0,0,192,0,0
 D3liteMacos,D3 lite · macOS CPU,0.853B backbone,cpu_new,True,False,physics,physics-choice-v1; calibration+test; test=36,complete,True,True,48,48,correct_choice,14,,,,docs/evidence/d3-lite-macos-20261030/physics.json,0,0,0,48,0,0
+D3liteMacos,D3 lite · macOS CPU,0.853B backbone,cpu_new,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,complete,True,True,32,32,case_pass,14,,,,docs/evidence/choice-episodes-20261031/analysis.json,0,0,0,32,0,0
 D3liteMacos,D3 lite · macOS CPU,0.853B backbone,cpu_new,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3liteMacos,D3 lite · macOS CPU,0.853B backbone,cpu_new,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3liteMacos,D3 lite · macOS CPU,0.853B backbone,cpu_new,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -219,6 +237,7 @@ Sol,Decision 2.0 Sol 2B · CPU,2B class,historical_cpu,True,False,context,contex
 Sol,Decision 2.0 Sol 2B · CPU,2B class,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,19,,,,docs/evidence/model-comparison-complete-20261010-sol/analysis.json,0,0,0,24,0,0
 Sol,Decision 2.0 Sol 2B · CPU,2B class,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Sol,Decision 2.0 Sol 2B · CPU,2B class,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Sol,Decision 2.0 Sol 2B · CPU,2B class,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Sol,Decision 2.0 Sol 2B · CPU,2B class,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Sol,Decision 2.0 Sol 2B · CPU,2B class,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Sol,Decision 2.0 Sol 2B · CPU,2B class,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -231,6 +250,7 @@ Vela08,Vela 2.0 0.8B · CPU,0.755B declared,historical_cpu,True,False,context,co
 Vela08,Vela 2.0 0.8B · CPU,0.755B declared,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,14,,,,docs/evidence/model-comparison-vela2-20261011/analysis.json,0,0,0,24,0,0
 Vela08,Vela 2.0 0.8B · CPU,0.755B declared,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Vela08,Vela 2.0 0.8B · CPU,0.755B declared,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Vela08,Vela 2.0 0.8B · CPU,0.755B declared,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Vela08,Vela 2.0 0.8B · CPU,0.755B declared,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Vela08,Vela 2.0 0.8B · CPU,0.755B declared,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Vela08,Vela 2.0 0.8B · CPU,0.755B declared,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -243,6 +263,7 @@ Eos,Decision 2.0 Eos 0.8B · CPU,0.8B class,historical_cpu,True,False,context,co
 Eos,Decision 2.0 Eos 0.8B · CPU,0.8B class,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,19,,,,docs/evidence/model-comparison-complete-20261004/analysis.json,0,0,0,24,0,0
 Eos,Decision 2.0 Eos 0.8B · CPU,0.8B class,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Eos,Decision 2.0 Eos 0.8B · CPU,0.8B class,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Eos,Decision 2.0 Eos 0.8B · CPU,0.8B class,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Eos,Decision 2.0 Eos 0.8B · CPU,0.8B class,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Eos,Decision 2.0 Eos 0.8B · CPU,0.8B class,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Eos,Decision 2.0 Eos 0.8B · CPU,0.8B class,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -255,6 +276,7 @@ EosQ8,Decision 2.0 Eos 0.8B · Q8 Metal,0.8B class,apple_metal_native,True,False
 EosQ8,Decision 2.0 Eos 0.8B · Q8 Metal,0.8B class,apple_metal_native,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,19,,,,docs/evidence/native-model-comparison-20261016/analysis.json,0,0,0,24,0,0
 EosQ8,Decision 2.0 Eos 0.8B · Q8 Metal,0.8B class,apple_metal_native,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 EosQ8,Decision 2.0 Eos 0.8B · Q8 Metal,0.8B class,apple_metal_native,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+EosQ8,Decision 2.0 Eos 0.8B · Q8 Metal,0.8B class,apple_metal_native,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 EosQ8,Decision 2.0 Eos 0.8B · Q8 Metal,0.8B class,apple_metal_native,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 EosQ8,Decision 2.0 Eos 0.8B · Q8 Metal,0.8B class,apple_metal_native,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 EosQ8,Decision 2.0 Eos 0.8B · Q8 Metal,0.8B class,apple_metal_native,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -267,6 +289,7 @@ D3edge,D3 edge · CPU,0.594B backbone,historical_cpu,True,False,context,context-
 D3edge,D3 edge · CPU,0.594B backbone,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,18,,,,docs/evidence/model-comparison-d3-20261011/analysis.json,0,0,0,24,0,0
 D3edge,D3 edge · CPU,0.594B backbone,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 D3edge,D3 edge · CPU,0.594B backbone,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+D3edge,D3 edge · CPU,0.594B backbone,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 D3edge,D3 edge · CPU,0.594B backbone,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3edge,D3 edge · CPU,0.594B backbone,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3edge,D3 edge · CPU,0.594B backbone,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -279,6 +302,7 @@ Kai,Decision 2.0 Kai 0.6B · CPU,0.6B class,historical_cpu,True,False,context,co
 Kai,Decision 2.0 Kai 0.6B · CPU,0.6B class,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,16,,,,docs/evidence/model-comparison-complete-20261010/analysis.json,0,0,0,24,0,0
 Kai,Decision 2.0 Kai 0.6B · CPU,0.6B class,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Kai,Decision 2.0 Kai 0.6B · CPU,0.6B class,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Kai,Decision 2.0 Kai 0.6B · CPU,0.6B class,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Kai,Decision 2.0 Kai 0.6B · CPU,0.6B class,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Kai,Decision 2.0 Kai 0.6B · CPU,0.6B class,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Kai,Decision 2.0 Kai 0.6B · CPU,0.6B class,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -291,6 +315,7 @@ Vela03,Vela 2.0 0.3B · CPU,0.309B declared,historical_cpu,True,False,context,co
 Vela03,Vela 2.0 0.3B · CPU,0.309B declared,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,18,,,,docs/evidence/model-comparison-vela2-20261011/analysis.json,0,0,0,24,0,0
 Vela03,Vela 2.0 0.3B · CPU,0.309B declared,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Vela03,Vela 2.0 0.3B · CPU,0.309B declared,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Vela03,Vela 2.0 0.3B · CPU,0.309B declared,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Vela03,Vela 2.0 0.3B · CPU,0.309B declared,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Vela03,Vela 2.0 0.3B · CPU,0.309B declared,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Vela03,Vela 2.0 0.3B · CPU,0.309B declared,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -303,6 +328,7 @@ Vela03Macos,Vela 2.0 0.3B · macOS CPU,0.309B declared,cpu_new,True,False,contex
 Vela03Macos,Vela 2.0 0.3B · macOS CPU,0.309B declared,cpu_new,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,18,,,,docs/evidence/vela2-03-macos-20261030/analysis.json,0,0,0,24,0,0
 Vela03Macos,Vela 2.0 0.3B · macOS CPU,0.309B declared,cpu_new,True,False,capability,capability-choice-v1; four supplied proposals; test=96,complete,True,True,192,192,correct_choice,128,,,,docs/evidence/vela2-03-macos-20261030/capability.json,0,0,0,192,0,0
 Vela03Macos,Vela 2.0 0.3B · macOS CPU,0.309B declared,cpu_new,True,False,physics,physics-choice-v1; calibration+test; test=36,complete,True,True,48,48,correct_choice,18,,,,docs/evidence/vela2-03-macos-20261030/physics.json,0,0,0,48,0,0
+Vela03Macos,Vela 2.0 0.3B · macOS CPU,0.309B declared,cpu_new,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,complete,True,True,32,32,case_pass,0,,,,docs/evidence/choice-episodes-20261031/analysis.json,0,0,0,32,0,0
 Vela03Macos,Vela 2.0 0.3B · macOS CPU,0.309B declared,cpu_new,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Vela03Macos,Vela 2.0 0.3B · macOS CPU,0.309B declared,cpu_new,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Vela03Macos,Vela 2.0 0.3B · macOS CPU,0.309B declared,cpu_new,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -315,6 +341,7 @@ GLiNER,GLiNER2.5-multi-Decide · CPU,,historical_cpu,True,False,context,context-
 GLiNER,GLiNER2.5-multi-Decide · CPU,,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,12,,,,docs/evidence/model-comparison-complete-20261004/analysis.json,0,0,0,24,0,0
 GLiNER,GLiNER2.5-multi-Decide · CPU,,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 GLiNER,GLiNER2.5-multi-Decide · CPU,,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+GLiNER,GLiNER2.5-multi-Decide · CPU,,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 GLiNER,GLiNER2.5-multi-Decide · CPU,,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 GLiNER,GLiNER2.5-multi-Decide · CPU,,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 GLiNER,GLiNER2.5-multi-Decide · CPU,,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -327,6 +354,7 @@ Vela3Fast,Vela 3.0 fast · decision only · CPU,0.380B decision backbone,cpu_new
 Vela3Fast,Vela 3.0 fast · decision only · CPU,0.380B decision backbone,cpu_new,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,18,,,,docs/evidence/vela3-fast-20261028/analysis.json,0,0,0,24,0,0
 Vela3Fast,Vela 3.0 fast · decision only · CPU,0.380B decision backbone,cpu_new,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Vela3Fast,Vela 3.0 fast · decision only · CPU,0.380B decision backbone,cpu_new,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Vela3Fast,Vela 3.0 fast · decision only · CPU,0.380B decision backbone,cpu_new,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Vela3Fast,Vela 3.0 fast · decision only · CPU,0.380B decision backbone,cpu_new,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Vela3Fast,Vela 3.0 fast · decision only · CPU,0.380B decision backbone,cpu_new,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Vela3Fast,Vela 3.0 fast · decision only · CPU,0.380B decision backbone,cpu_new,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -339,6 +367,7 @@ Laya,Laya multilingual · CPU,322M declared,historical_cpu,True,False,context,co
 Laya,Laya multilingual · CPU,322M declared,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,10,,,,docs/evidence/model-comparison-complete-20261004/analysis.json,0,0,0,24,0,0
 Laya,Laya multilingual · CPU,322M declared,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Laya,Laya multilingual · CPU,322M declared,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Laya,Laya multilingual · CPU,322M declared,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Laya,Laya multilingual · CPU,322M declared,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Laya,Laya multilingual · CPU,322M declared,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Laya,Laya multilingual · CPU,322M declared,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -351,6 +380,7 @@ Julia,Julia-1 · CPU,,historical_cpu,True,False,context,context-choice-v1; all s
 Julia,Julia-1 · CPU,,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,11,,,,docs/evidence/model-comparison-complete-20261004/analysis.json,0,0,0,24,0,0
 Julia,Julia-1 · CPU,,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Julia,Julia-1 · CPU,,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Julia,Julia-1 · CPU,,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Julia,Julia-1 · CPU,,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Julia,Julia-1 · CPU,,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Julia,Julia-1 · CPU,,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -363,6 +393,7 @@ Omni,Liquid d1-omni-600M · CPU,600M class,historical_cpu,True,False,context,con
 Omni,Liquid d1-omni-600M · CPU,600M class,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,16,,,,docs/evidence/model-comparison-complete-20261010/analysis.json,0,0,0,24,0,0
 Omni,Liquid d1-omni-600M · CPU,600M class,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Omni,Liquid d1-omni-600M · CPU,600M class,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Omni,Liquid d1-omni-600M · CPU,600M class,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Omni,Liquid d1-omni-600M · CPU,600M class,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Omni,Liquid d1-omni-600M · CPU,600M class,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Omni,Liquid d1-omni-600M · CPU,600M class,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -375,6 +406,7 @@ Indecis,Indecis · untrained open mode · CPU,,historical_cpu,True,False,context
 Indecis,Indecis · untrained open mode · CPU,,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,11,,,,docs/evidence/model-comparison-complete-20261004/analysis.json,0,0,0,24,0,0
 Indecis,Indecis · untrained open mode · CPU,,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Indecis,Indecis · untrained open mode · CPU,,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Indecis,Indecis · untrained open mode · CPU,,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Indecis,Indecis · untrained open mode · CPU,,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Indecis,Indecis · untrained open mode · CPU,,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Indecis,Indecis · untrained open mode · CPU,,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -387,6 +419,7 @@ ModernJEV,ModernJEV-Decide-Preview · CPU,,historical_cpu,True,False,context,con
 ModernJEV,ModernJEV-Decide-Preview · CPU,,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,8,,,,docs/evidence/model-comparison-complete-20261010/analysis.json,0,0,0,24,0,0
 ModernJEV,ModernJEV-Decide-Preview · CPU,,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 ModernJEV,ModernJEV-Decide-Preview · CPU,,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+ModernJEV,ModernJEV-Decide-Preview · CPU,,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 ModernJEV,ModernJEV-Decide-Preview · CPU,,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 ModernJEV,ModernJEV-Decide-Preview · CPU,,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 ModernJEV,ModernJEV-Decide-Preview · CPU,,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -399,6 +432,7 @@ Muose,Muose-50M-Decision · CPU,50M class,historical_cpu,True,False,context,cont
 Muose,Muose-50M-Decision · CPU,50M class,historical_cpu,True,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,complete,True,True,24,24,provisional_agreement,10,,,,docs/evidence/model-comparison-complete-20261010/analysis.json,0,0,0,24,0,0
 Muose,Muose-50M-Decision · CPU,50M class,historical_cpu,True,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Muose,Muose-50M-Decision · CPU,50M class,historical_cpu,True,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Muose,Muose-50M-Decision · CPU,50M class,historical_cpu,True,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Muose,Muose-50M-Decision · CPU,50M class,historical_cpu,True,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Muose,Muose-50M-Decision · CPU,50M class,historical_cpu,True,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Muose,Muose-50M-Decision · CPU,50M class,historical_cpu,True,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -411,6 +445,7 @@ D3litePassage,D3 lite · CPU passage session,0.853B backbone,historical_cpu,Fals
 D3litePassage,D3 lite · CPU passage session,0.853B backbone,historical_cpu,False,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,not_run,False,True,,24,provisional_agreement,,,,,,,,,,,
 D3litePassage,D3 lite · CPU passage session,0.853B backbone,historical_cpu,False,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 D3litePassage,D3 lite · CPU passage session,0.853B backbone,historical_cpu,False,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+D3litePassage,D3 lite · CPU passage session,0.853B backbone,historical_cpu,False,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 D3litePassage,D3 lite · CPU passage session,0.853B backbone,historical_cpu,False,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,complete,True,True,512,512,correct_choice,229,,,,docs/evidence/passage-cpu-20261015/analysis.json,0,0,0,512,0,0
 D3litePassage,D3 lite · CPU passage session,0.853B backbone,historical_cpu,False,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,complete,True,True,768,768,correct_choice,443,,,,docs/evidence/passage-cpu-20261015/analysis.json,0,0,0,768,0,0
 D3litePassage,D3 lite · CPU passage session,0.853B backbone,historical_cpu,False,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,complete,True,True,128,128,correct_choice,88,,,,docs/evidence/passage-cpu-20261015/analysis.json,0,0,0,128,0,0
@@ -423,6 +458,7 @@ Jev114,Jev 1.14 · HTTP API,Unreported,remote_api,False,False,context,context-ch
 Jev114,Jev 1.14 · HTTP API,Unreported,remote_api,False,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,not_run,False,True,,24,provisional_agreement,,,,,,,,,,,
 Jev114,Jev 1.14 · HTTP API,Unreported,remote_api,False,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Jev114,Jev 1.14 · HTTP API,Unreported,remote_api,False,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Jev114,Jev 1.14 · HTTP API,Unreported,remote_api,False,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Jev114,Jev 1.14 · HTTP API,Unreported,remote_api,False,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Jev114,Jev 1.14 · HTTP API,Unreported,remote_api,False,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,partial,True,True,514,768,correct_choice,394,,,,docs/evidence/passage-jev-20261015/analysis.json,0,2,252,514,0,0
 Jev114,Jev 1.14 · HTTP API,Unreported,remote_api,False,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,True,True,0,128,correct_choice,,,,,docs/evidence/passage-jev-20261015/analysis.json,0,0,128,0,0,0
@@ -435,6 +471,7 @@ BGEPassage,BGE v2-m3 · INT8 CPU,Unreported,native_cpu_reranker,False,False,cont
 BGEPassage,BGE v2-m3 · INT8 CPU,Unreported,native_cpu_reranker,False,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,not_run,False,True,,24,provisional_agreement,,,,,,,,,,,
 BGEPassage,BGE v2-m3 · INT8 CPU,Unreported,native_cpu_reranker,False,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 BGEPassage,BGE v2-m3 · INT8 CPU,Unreported,native_cpu_reranker,False,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+BGEPassage,BGE v2-m3 · INT8 CPU,Unreported,native_cpu_reranker,False,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 BGEPassage,BGE v2-m3 · INT8 CPU,Unreported,native_cpu_reranker,False,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 BGEPassage,BGE v2-m3 · INT8 CPU,Unreported,native_cpu_reranker,False,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 BGEPassage,BGE v2-m3 · INT8 CPU,Unreported,native_cpu_reranker,False,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -447,6 +484,7 @@ D3liteBGE,D3 lite + BGE tie-break · CPU,Two-model method,offline_ranking_projec
 D3liteBGE,D3 lite + BGE tie-break · CPU,Two-model method,offline_ranking_projection,False,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,not_run,False,True,,24,provisional_agreement,,,,,,,,,,,
 D3liteBGE,D3 lite + BGE tie-break · CPU,Two-model method,offline_ranking_projection,False,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 D3liteBGE,D3 lite + BGE tie-break · CPU,Two-model method,offline_ranking_projection,False,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+D3liteBGE,D3 lite + BGE tie-break · CPU,Two-model method,offline_ranking_projection,False,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 D3liteBGE,D3 lite + BGE tie-break · CPU,Two-model method,offline_ranking_projection,False,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 D3liteBGE,D3 lite + BGE tie-break · CPU,Two-model method,offline_ranking_projection,False,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 D3liteBGE,D3 lite + BGE tie-break · CPU,Two-model method,offline_ranking_projection,False,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -459,6 +497,7 @@ Jev114BGE,Jev 1.14 + BGE tie-break,Two-model method,offline_ranking_projection,F
 Jev114BGE,Jev 1.14 + BGE tie-break,Two-model method,offline_ranking_projection,False,False,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,not_run,False,True,,24,provisional_agreement,,,,,,,,,,,
 Jev114BGE,Jev 1.14 + BGE tie-break,Two-model method,offline_ranking_projection,False,False,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 Jev114BGE,Jev 1.14 + BGE tie-break,Two-model method,offline_ranking_projection,False,False,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+Jev114BGE,Jev 1.14 + BGE tie-break,Two-model method,offline_ranking_projection,False,False,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 Jev114BGE,Jev 1.14 + BGE tie-break,Two-model method,offline_ranking_projection,False,False,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 Jev114BGE,Jev 1.14 + BGE tie-break,Two-model method,offline_ranking_projection,False,False,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 Jev114BGE,Jev 1.14 + BGE tie-break,Two-model method,offline_ranking_projection,False,False,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
@@ -471,6 +510,7 @@ QwenToolPolicyV2,"Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v
 QwenToolPolicyV2,"Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2",4B class,native_metal_generated_json,False,True,tool_proposal,mastra-read-pilot-v0; provisional agreement; zero qualified cases,not_run,False,True,,24,provisional_agreement,,,,,,,,,,,
 QwenToolPolicyV2,"Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2",4B class,native_metal_generated_json,False,True,capability,capability-choice-v1; four supplied proposals; test=96,not_run,False,True,,192,correct_choice,,,,,,,,,,,
 QwenToolPolicyV2,"Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2",4B class,native_metal_generated_json,False,True,physics,physics-choice-v1; calibration+test; test=36,not_run,False,True,,48,correct_choice,,,,,,,,,,,
+QwenToolPolicyV2,"Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2",4B class,native_metal_generated_json,False,True,choice_episodes,tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases,not_run,False,True,,32,case_pass,,,,,,,,,,,
 QwenToolPolicyV2,"Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2",4B class,native_metal_generated_json,False,True,passage_relevance,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,512,correct_choice,,,,,,,,,,,
 QwenToolPolicyV2,"Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2",4B class,native_metal_generated_json,False,True,passage_support,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,768,correct_choice,,,,,,,,,,,
 QwenToolPolicyV2,"Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2",4B class,native_metal_generated_json,False,True,passage_answerability,passage-evidence-v1; test; rotation 0; 128 pools,not_run,False,True,,128,correct_choice,,,,,,,,,,,
