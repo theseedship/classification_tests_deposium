@@ -1,7 +1,9 @@
 # Amendment: per-call timeout for D3 nano's capability pack on macOS CPU
 
 **Fixed on 31 October 2026, after the partial first capability attempt and
-before any further prediction on that pack.** This amends the
+before any further prediction on that pack.** Executed the same day: attempt
+002 collected all 192 cases, 188/192, no timeout, slowest case 64.1 s
+([results](D3_NANO_MACOS_RESULTS_20261031.md)). This amends the
 [D3 nano macOS CPU protocol](D3_NANO_MACOS_CPU_PROTOCOL_20261030.md) for one
 pack of one candidate. It changes one envelope value (the per-call timeout)
 and the adapter bound that admits it. It changes no reference, dataset,

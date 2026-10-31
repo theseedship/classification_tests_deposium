@@ -12,12 +12,15 @@ and not merged with it. References are agent-authored and pending human review.
 | Technical canary (12 calibration) | 12 / 12 valid (12 correct, no gate) | 12 | — | — |
 | Context 132 (anchor) | **117 / 132** | 132 | 61 / 66 | 132 `ok` |
 | Tool proposal 24 (provisional) | 18 agreements / 24 valid | 24 | — | 24 `ok`; zero qualified cases |
-| Capability 192, attempt 001 | **42 / 42 scored** | 192 | 18 / 18 scored of 96 | 42 `ok`, **150 `timeout`** (1 actual, 149 cached, unattempted) |
+| Capability 192, attempt 001 (60 s per call) | 42 / 42 scored | 192 | 18 / 18 scored of 96 | 42 `ok`, 150 `timeout` (1 actual, 149 cached, unattempted) |
+| Capability 192, attempt 002 (300 s per call, [amendment](D3_NANO_MACOS_TIMEOUT_AMENDMENT_20261031.md)) | **188 / 192** | 192 | 92 / 96 | 192 `ok` |
 | Physics 48 | **28 / 48** | 48 | 22 / 36 | 48 `ok` |
 
 Aggregates: [context and tool](evidence/d3-nano-macos-20261031/analysis.json),
-[capability](evidence/d3-nano-macos-20261031/capability.json),
-[physics](evidence/d3-nano-macos-20261031/physics.json). Raw outputs, local
+[capability attempt 001](evidence/d3-nano-macos-20261031/capability.json),
+[capability attempt 002](evidence/d3-nano-macos-20261031/capability-002.json),
+[physics](evidence/d3-nano-macos-20261031/physics.json). The coverage matrix
+and rankings use attempt 002; attempt 001 stays published as recorded. Raw outputs, local
 paths and process data stay in the ignored archives.
 
 ## Identity
@@ -26,7 +29,7 @@ paths and process data stay in the ignored archives.
 |---|---|
 | Model | `vllm-sr/d3-nano` at `3aeb1c22…`, 30 files verified against the public manifest; backbone 2,213,241,664 parameters, readout [255, 2048] |
 | Runtime | macOS arm64 CPU, Python 3.12.16, Torch 2.14.0 (macOS wheel), Transformers 5.17.0, Tokenizers 0.23.2, Safetensors 0.8.0, NumPy 2.5.3; lock `runtimes/d3-macos/runtime.lock`; worker versions equal the lock |
-| Settings | two threads, 4096 tokens, backbone bfloat16, readout float32, 12,288 MiB worker ceiling, **60 s per call** |
+| Settings | two threads, 4096 tokens, backbone bfloat16, readout float32, 12,288 MiB worker ceiling; **60 s per call** for context, tool and physics, **300 s** for capability attempt 002 (dedicated profile `d3-nano-macos-cpu-capability-v1`, otherwise identical) |
 | Host | Apple M5 Pro, 64 GiB unified memory |
 | Load | 5.3–6.4 s model load, 8.8 s adapter initialization; 717 MiB after load |
 
@@ -38,7 +41,29 @@ checkpoint also scored **117/132**. Tool proposals: 24 valid decisions, 18
 provisional agreements, zero semantically qualified cases. Median 7.3 s per
 case.
 
-## Capability 192: partial collection after one timeout
+## Capability 192, attempt 002: 188/192 under the amended timeout
+
+Under the [dated amendment](D3_NANO_MACOS_TIMEOUT_AMENDMENT_20261031.md)
+(300 s per call, everything else unchanged), all 192 cases were attempted and
+answered: no timeout, 14.5–64.1 s per case (median 29.4 s, p95 49.1 s). The
+slowest case stayed well under the amended limit and above the old one.
+
+| Measure | Correct / total |
+|---|---:|
+| All cases | 188 / 192 |
+| Test split | 92 / 96 |
+| FR / EN | 94 / 96 · 94 / 96 |
+| Compact / expanded catalogue | 94 / 96 · 94 / 96 |
+| Observations track | 64 / 64 |
+| Selection track | 63 / 64 (multi-tool 39/40) |
+| Arguments track | 61 / 64 (dependency order 9/12) |
+
+Peak worker RSS 3,554 MiB. For scale only: D3 Flash Q8 and Clef Flash Q8
+reached 192/192 under native Metal; D3 lite 168/192 and Vela 2.0 0.3B 128/192
+on this CPU runtime. The four errors are all dependency-order or multi-tool
+selection cases.
+
+## Capability 192, attempt 001: partial collection after one timeout
 
 Every case has a recorded outcome, but only **43 of 192 were actually
 attempted**. The first 42 cases in pack order (all selection-track, by
@@ -78,9 +103,9 @@ lens, uniform distance, wave speed), four are 1/2 and eight are 0/2. Median
   catalogue variants are correlated within families.
 - A new macOS CPU runtime identity: the identical 117/132 context total with
   the historical Linux row is an observation, not a claim of bitwise parity.
-- The capability column is a partial collection: one timeout, then a
-  fail-closed adapter; the 42 completed cases are the first 42 in pack order,
-  not a sample of the pack.
+- Capability attempt 001 is a partial collection (one timeout, then a
+  fail-closed adapter); attempt 002 under the amended 300 s limit is the
+  complete observation used in the matrix. Both are published.
 - Closed choices among supplied proposals: no tool execution, arguments,
   agent loop, retrieval or product qualification.
 - Worker RSS is the process's own `ru_maxrss`; latency is descriptive.

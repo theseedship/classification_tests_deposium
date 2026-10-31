@@ -2,8 +2,10 @@
 
 **Fixed on 30 October 2026, before any prediction on the capability or physics
 packs.** Executed 30–31 October; see the [results](D3_NANO_MACOS_RESULTS_20261031.md):
-the capability pack is a partial collection (one 60 s timeout, then 149 cases
-unattempted because the adapter fails closed), retained as recorded. Third Wave B candidate in the revised execution order of the
+the first capability attempt is a partial collection (one 60 s timeout, then
+149 cases unattempted because the adapter fails closed), retained as recorded;
+attempt 002 under the [timeout amendment](D3_NANO_MACOS_TIMEOUT_AMENDMENT_20261031.md)
+is complete at 188/192. Third Wave B candidate in the revised execution order of the
 [capability cohort](CAPABILITY_CAMPAIGN_PLAN.md#initial-cohort-and-order), after
 [D3 lite](D3_LITE_MACOS_CPU_PROTOCOL_20261030.md) and
 [Vela 2.0 0.3B](VELA2_03_MACOS_CPU_PROTOCOL_20261030.md). Candidate, packs,
