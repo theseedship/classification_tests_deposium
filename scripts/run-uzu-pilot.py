@@ -2,7 +2,7 @@
 """Explicit Uzu decision pilot using the shared campaign engine.
 
 CPU fixtures qualify this controller only. No Uzu build, preparation producer,
-model, native sandbox, Metal backend or performance is qualified by those tests.
+model, Metal backend or performance is qualified by those tests.
 """
 from __future__ import annotations
 
@@ -36,14 +36,11 @@ SPEC = importlib.util.spec_from_file_location("uzu_shared_supervision", ROOT / "
 shared = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(shared)
 
-# Stock CLI contains a downloader. Restrict remote egress even for accidentally
-# incomplete local packs. This OS policy needs its own real Mac qualification.
-NETWORK_POLICY = '(version 1)(allow default)(deny network-outbound)(allow network-outbound (remote ip "127.0.0.1:*"))'
-
-
 def launch_command(binary, pack, port):
     require(type(port) is int and 1024 <= port <= 65535, "uzu_port_invalid")
-    return ["/usr/bin/sandbox-exec", "-p", NETWORK_POLICY, str(binary), "server",
+    # The stock CLI initializes its online catalogue even for local directories.
+    # Verified local assets do not imply offline startup or isolated egress.
+    return [str(binary), "server",
             "--model", str(pack), "--host", "127.0.0.1", "--port", str(port), "--no-prefix-cache"]
 
 
@@ -138,14 +135,16 @@ def pilot(args):
     environment = {"PATH": os.defpath, "LANG": "C.UTF-8", "TZ": "UTC",
                    "XDG_CACHE_HOME": str(cache), "TMPDIR": str(cache)}
     command = launch_command(binary, pack, args.port)
-    shared.write_new(output / "launch.json", {"command": command, "network": "loopback_only_requested"})
+    shared.write_new(output / "launch.json", {"command": command,
+        "network": "catalogue_bootstrap_allowed_api_loopback_only", "egress_isolated": False})
     stop = threading.Event()
     guard = {"stop_reason": None, "rss_peak_mib": 0, "min_available_mib": before["MemAvailable_mib"]}
     process = watcher = None
     owned = False
     result = {"schema_version": "deposium.uzu-pilot/v1", "created_at": datetime.now(timezone.utc).isoformat(),
               "dataset_sha256": dataset_sha, "eligible_cases": len(cases), "completed": False,
-              "cleanup": "not_started", "backend_requested": "metal", "backend_observed": None}
+              "cleanup": "not_started", "backend_requested": "metal", "backend_observed": None,
+              "egress_isolated": False}
     try:
         with (output / "engine.log").open("xb") as log:
             process = Popen(command, env=environment, stdout=log, stderr=subprocess.STDOUT,

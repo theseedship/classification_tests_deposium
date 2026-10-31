@@ -89,7 +89,9 @@ class UzuPilotTests(UzuFixture):
         self.assertFalse(any("private-cache" in name for name in seal["files"]))
         self.assertEqual(self.dataset.read_bytes(), before)
         command = self.spawn.call_args.args[0]
-        self.assertEqual(command[:3], ["/usr/bin/sandbox-exec", "-p", pilot.NETWORK_POLICY])
+        self.assertEqual(command[:3], [str(self.binary), "server", "--model"])
+        self.assertEqual(command[command.index("--host") + 1], "127.0.0.1")
+        self.assertIs(result["egress_isolated"], False)
         self.assertEqual(command[command.index("--model") + 1], str(self.pack))
         self.assertIn("--no-prefix-cache", command)
         self.assertIs(self.spawn.call_args.kwargs["start_new_session"], True)
