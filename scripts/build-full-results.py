@@ -56,8 +56,9 @@ RECENT_INPUTS = (CAMPAIGN_MODULE, EVIDENCE + "clef-flash-20261029/analysis.json"
                  "docs/D3_LITE_MACOS_RESULTS_20261030.md",
                  EVIDENCE + "vela2-03-macos-20261030/capability.json", EVIDENCE + "vela2-03-macos-20261030/physics.json",
                  "profiles/vela2-03-assets.json", "profiles/vela2-03-macos-cpu.json", "docs/VELA2_03_MACOS_RESULTS_20261030.md",
-                 EVIDENCE + "d3-nano-macos-20261031/capability.json", EVIDENCE + "d3-nano-macos-20261031/physics.json",
-                 "profiles/d3-nano-assets.json", "profiles/d3-nano-macos-cpu.json", "docs/D3_NANO_MACOS_RESULTS_20261031.md",
+                 EVIDENCE + "d3-nano-macos-20261031/capability.json", EVIDENCE + "d3-nano-macos-20261031/capability-002.json",
+                 EVIDENCE + "d3-nano-macos-20261031/physics.json", "profiles/d3-nano-assets.json", "profiles/d3-nano-macos-cpu.json",
+                 "profiles/d3-nano-macos-cpu-capability.json", "docs/D3_NANO_MACOS_RESULTS_20261031.md",
                  "docs/PASSAGE_CPU_RESULTS_20261015.md", "docs/PASSAGE_JEV_RESULTS_20261015.md",
                  "docs/PASSAGE_FLASH_RESULTS_20261029.md", "docs/PASSAGE_CLEF_RESULTS_20261029.md")
 STATUS_KEYS = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}

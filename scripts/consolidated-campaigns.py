@@ -18,7 +18,10 @@ D3LITE_MACOS_REPORT = "D3_LITE_MACOS_RESULTS_20261030.md"
 VELA03_MACOS_CAPABILITY = EVIDENCE + "vela2-03-macos-20261030/capability.json"
 VELA03_MACOS_PHYSICS = EVIDENCE + "vela2-03-macos-20261030/physics.json"
 VELA03_MACOS_REPORT = "VELA2_03_MACOS_RESULTS_20261030.md"
-D3NANO_MACOS_CAPABILITY = EVIDENCE + "d3-nano-macos-20261031/capability.json"
+# Attempt 001 (60 s per call, partial) stays published; the capability row uses the
+# complete attempt 002 under the dated timeout amendment and its own profile.
+D3NANO_MACOS_CAPABILITY = EVIDENCE + "d3-nano-macos-20261031/capability-002.json"
+D3NANO_MACOS_CAPABILITY_PROFILE = "profiles/d3-nano-macos-cpu-capability.json"
 D3NANO_MACOS_PHYSICS = EVIDENCE + "d3-nano-macos-20261031/physics.json"
 D3NANO_MACOS_REPORT = "D3_NANO_MACOS_RESULTS_20261031.md"
 NEW_CONTEXT_IDS = {"ClefFlashQ8", "D3FlashQ8Upstream"}
@@ -303,17 +306,21 @@ class Campaigns:
                            CLEF, "CLEF_FLASH_RESULTS_20261029.md", 48, 24),
                 self.phase(physics, "physics", "physics", "D3FlashQ8Upstream", "D3 Flash Q8 · direct Metal",
                            PHYSICS, "PHYSICS_FLASH_RESULTS_20261029.md", 48, 24)]
+        # (observation, model, assets, report, [(aggregate, pack, total, families, profile), ...])
         cpu_campaigns = (
-            ("D3liteMacos", "D3 lite · macOS CPU", "profiles/d3-lite-assets.json", "profiles/d3-lite-macos-cpu.json",
-             D3LITE_MACOS_REPORT, D3LITE_MACOS_CAPABILITY, D3LITE_MACOS_PHYSICS),
-            ("Vela03Macos", "Vela 2.0 0.3B · macOS CPU", "profiles/vela2-03-assets.json", "profiles/vela2-03-macos-cpu.json",
-             VELA03_MACOS_REPORT, VELA03_MACOS_CAPABILITY, VELA03_MACOS_PHYSICS),
-            ("D3nanoMacos", "D3 nano · macOS CPU", "profiles/d3-nano-assets.json", "profiles/d3-nano-macos-cpu.json",
-             D3NANO_MACOS_REPORT, D3NANO_MACOS_CAPABILITY, D3NANO_MACOS_PHYSICS),
+            ("D3liteMacos", "D3 lite · macOS CPU", "profiles/d3-lite-assets.json", D3LITE_MACOS_REPORT,
+             ((D3LITE_MACOS_CAPABILITY, "capability", 192, 48, "profiles/d3-lite-macos-cpu.json"),
+              (D3LITE_MACOS_PHYSICS, "physics", 48, 24, "profiles/d3-lite-macos-cpu.json"))),
+            ("Vela03Macos", "Vela 2.0 0.3B · macOS CPU", "profiles/vela2-03-assets.json", VELA03_MACOS_REPORT,
+             ((VELA03_MACOS_CAPABILITY, "capability", 192, 48, "profiles/vela2-03-macos-cpu.json"),
+              (VELA03_MACOS_PHYSICS, "physics", 48, 24, "profiles/vela2-03-macos-cpu.json"))),
+            ("D3nanoMacos", "D3 nano · macOS CPU", "profiles/d3-nano-assets.json", D3NANO_MACOS_REPORT,
+             ((D3NANO_MACOS_CAPABILITY, "capability", 192, 48, D3NANO_MACOS_CAPABILITY_PROFILE),
+              (D3NANO_MACOS_PHYSICS, "physics", 48, 24, "profiles/d3-nano-macos-cpu.json"))),
         )
-        for observation, model, assets, profile, report, capability_path, physics_path in cpu_campaigns:
+        for observation, model, assets, report, packs in cpu_campaigns:
             self.inputs.read("docs/" + report)
-            for path, pack, total, families in ((capability_path, "capability", 192, 48), (physics_path, "physics", 48, 24)):
+            for path, pack, total, families, profile in packs:
                 data, _ = self.cpu(path, assets, "runtimes/d3-macos/runtime.lock", profile)
                 rows.append(self.phase(data, pack, pack, observation, model, path, report, total, families))
         cp = capability["phases"]["capability"]
