@@ -35,7 +35,7 @@ LOCAL_CHOICE_MODELS = {"d3": {"vllm-sr/d3-lite", "vllm-sr/d3-nano", "vllm-sr/d3-
                        "vela2": {"vllm-sr/Vela-2.0-0.3B"}}
 # One sealed pass may outlast an hour on CPU for 728 physical calls; remote and
 # native sessions keep the original one-hour bound.
-LOCAL_MAX_SECONDS = 4 * 3600
+LOCAL_MAX_SECONDS = 6 * 3600
 MACOS_RUNTIME_LOCK = "d3-macos/runtime.lock"
 REMOTE_DATASET_SHA256 = "35a8b8982d12959985218b5bc6e10e932ba30970bd7ab9a81c6f10d17a7fe476"
 

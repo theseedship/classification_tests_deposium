@@ -478,7 +478,7 @@ class PassageObservationTests(unittest.TestCase):
                 self.assertEqual(summary["completion_status"], "complete")
         with tempfile.TemporaryDirectory() as folder, self.assertRaises(PassageObservationError):
             observe_choice(PROFILE, Path(folder) / "choice", adapter_factory=FakeAdapter,
-                           max_seconds=4 * 3600 + 1, memory_reader=lambda: {"MemAvailable_mib": 40000})
+                           max_seconds=6 * 3600 + 1, memory_reader=lambda: {"MemAvailable_mib": 40000})
 
     def test_memory_floor_stops_and_closes_with_no_empty_pass(self):
         readings = iter(({"MemAvailable_mib": 20000}, {"MemAvailable_mib": 3000}))
