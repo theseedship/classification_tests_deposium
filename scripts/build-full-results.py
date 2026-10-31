@@ -1015,17 +1015,88 @@ def render_other_protocols(text):
     return lines
 
 
+
+def anchor(title):
+    """GitHub-style heading anchor: lowercase, punctuation dropped, spaces to hyphens."""
+    text = re.sub(r"[^\w\s-]", "", title.lower().replace("·", " "))
+    return re.sub(r"\s+", "-", text.strip())
+
+
+def render_toc(body):
+    lines = ["## Contents", ""]
+    # Some sections are rendered as one multi-line string; scan physical lines.
+    for line in (part for chunk in body for part in chunk.split("\n")):
+        if line.startswith("## "):
+            title = line[3:].strip()
+            lines.append(f"- [{title}](#{anchor(title)})")
+        elif line.startswith("### "):
+            title = line[4:].strip()
+            lines.append(f"  - [{title}](#{anchor(title)})")
+    return lines + [""]
+
+
+def render_at_a_glance(data):
+    """One row per task: cases, observations, who leads over all cases and on the held-out test, where to read more."""
+    def name(r):
+        return r["metadata"]["display_name"]
+    observations = data["observations"]
+    campaigns = data["campaigns"]
+    rows = []
+    rows.append(("Context choices", "132 (66 test)", len(observations),
+                 leaders(observations, "rank_all_splits", name, lambda r: f"{r['context']['counts']['correct']}/132"),
+                 leaders(observations, "rank_test_splits", name, lambda r: f"{r['context']['groups']['split']['test']['correct']}/66 test"),
+                 "[Model quality](#model-quality)"))
+    tools = [r for r in observations if r["tool_proposal"] and r["tool_proposal"]["counts"]["valid_decisions"] == 24]
+    best = max((r["tool_proposal"]["counts"]["agreement_count"] for r in tools), default=None)
+    tool_leaders = ", ".join(name(r) + f" ({best}/24)" for r in tools if r["tool_proposal"]["counts"]["agreement_count"] == best)
+    rows.append(("First-tool proposals", "24 (no test split)", len([r for r in observations if r["tool_proposal"]]),
+                 (tool_leaders + (" (tie)" if tool_leaders.count("(") > 1 else "")) if best is not None else "no complete observation",
+                 "provisional agreement, not routing accuracy", "[Model quality](#model-quality)"))
+    for task, title, total, test_total, section in (("capability", "Capability and workflow choices", 192, 96, "#capability-choices"),
+                                                    ("physics", "Physics choices", 48, 36, "#physics-choices")):
+        task_rows = [r for r in campaigns if r["task"] == task]
+        rows.append((title, f"{total} ({test_total} test)", len(task_rows),
+                     leaders(task_rows, "rank_all", lambda r: r["model"], lambda r: f"{r['counts']['correct']}/{total}"),
+                     leaders(task_rows, "rank_test", lambda r: r["model"], lambda r: f"{r['counts']['by_split']['test']['correct']}/{test_total} test"),
+                     f"[{title.split(' and ')[0]}]({section})"))
+    for axis, title, total, section in (("relevance", "Passage relevance", 512, "#passage-relevance"),
+                                        ("support", "Claim support", 768, "#claim-support"),
+                                        ("answerability", "Answerability", 128, "#answerability")):
+        task_rows = [r for r in campaigns if r["task"] == "passage_" + axis]
+        rows.append((title, f"{total} (rotation 0)", len(task_rows),
+                     leaders(task_rows, "rank_all", lambda r: r["model"], lambda r: f"{r['counts']['correct']}/{total}"),
+                     "no split ranking", f"[{title}]({section})"))
+    generative = [r for r in data["coverage"]["observations"] if r.get("generative_observation")]
+    for r in generative:
+        cells = r["cells"]
+        text = "; ".join(f"{label} {cells[task]['numerator']}/{cells[task]['total']}"
+                         for task, label in (("tool_discovery", "discovery"), ("tool_arguments", "arguments"), ("tool_episodes", "episodes"))
+                         if cells[task]["status"] == "complete")
+        rows.append(("Generated-JSON tool policy", "10 + 6 + 18 (TRAIN canary + held-out)", 1,
+                     f"{r['model']}: {text} passed (single observation, unranked)", "held-out pack 9/24 over the three contracts; see the report",
+                     "[Generated-JSON observations](#generated-json-tool-policy-observations)"))
+    lines = ["## At a glance", "",
+             "One line per task. **Leader over all cases** counts every case of the pack, including failures; "
+             "**leader on held-out test** uses only the test cases, the better signal against tuning. "
+             "Ties are listed together. Tasks are never pooled into one score; a lead of a few cases on correlated FR/EN "
+             "variants is not a general ranking. References are agent-authored and pending human review.", "",
+             "| Task | Cases | Observations | Leader over all cases | Leader on held-out test | Details |",
+             "|---|---|---:|---|---|---|"]
+    for title, cases, count, all_leader, test_leader, link in rows:
+        lines.append(f"| {title} | {cases} | {count} | {all_leader} | {test_leader} | {link} |")
+    lines += ["", "Rows further down keep every observation, partial campaigns included, with their denominators and statuses.", ""]
+    return lines
+
 def render(data):
-    lines = ["# Full results", "", "[README](../README.md) · [Coverage overview](#coverage-overview) · [Harness coverage](#harness-coverage) · [Quality](#model-quality) ·",
-             "[Updated task rankings](#updated-task-rankings) · [Language and task complexity](#language-and-task-complexity) · "
-             "[Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·",
-             "[Other evaluated protocols](#other-evaluated-protocols) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
+    lines = ["# Full results", "", "[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · "
+             "[Passages and other campaigns](leaderboard/other-benchmarks.md) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
              f"**{len(data['observations'])} context model/runtime observations through 31 October 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.",
              "Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;",
              "quantizations and devices remain separate. Rendering this page does not rerun or rescore models.", "",
              "**Exploratory evidence:** synthetic, agent-authored references and translations await human review.",
              "The ranking uses all 132 cases (train + calibration + test); the separate test column uses 66 cases.",
              "FR/EN translations form 66 families. Differences of a few answers do not establish a general model ranking.", ""]
+    header, lines = lines, []
     lines += render_coverage(data["coverage"])
     lines += render_campaign_rankings(data)
     lines += ["## Model quality", "",
@@ -1114,7 +1185,8 @@ def render(data):
               "python3 scripts/build-full-results.py --write", "```", "",
               "See the [protocol](PROTOCOL.md), [historical campaign archive](RESULTS_INDEX.md), and",
               "[planned intent, MCP-tool, and model-routing experiment](INTENT_AND_MODEL_ROUTING.md).", ""]
-    return "\n".join(lines)
+    glance = render_at_a_glance(data)
+    return "\n".join(header + render_toc(glance + lines) + glance + lines)
 
 
 def outputs(data):
