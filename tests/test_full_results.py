@@ -436,10 +436,12 @@ class FullResultsTests(unittest.TestCase):
     def test_outputs_are_deterministic_across_builds_and_hash_seeds(self):
         first = results.outputs(self.data)
         self.assertEqual(first, results.outputs(results.build(self.root)))
-        self.assertEqual(set(first), {"docs/RESULTS.md", "docs/leaderboard/models.csv",
-                                      "docs/leaderboard/task-breakdown.csv", "docs/leaderboard/results.json",
-                                      "docs/leaderboard/campaigns.csv", "docs/leaderboard/coverage.csv",
-                                      "docs/leaderboard/coverage.json"})
+        fixed = {"docs/RESULTS.md", "docs/leaderboard/models.csv", "docs/leaderboard/task-breakdown.csv",
+                 "docs/leaderboard/results.json", "docs/leaderboard/campaigns.csv", "docs/leaderboard/coverage.csv",
+                 "docs/leaderboard/coverage.json"}
+        pages = {k for k in first if k.startswith(results.MODEL_PAGES_DIR)}
+        self.assertEqual(set(first) - pages, fixed)
+        self.assertEqual(len(pages), len(self.data["coverage"]["observations"]) + 1)
         code = (
             "import hashlib,json,pathlib,runpy,sys;root=pathlib.Path(sys.argv[1]);"
             "m=runpy.run_path(str(root/'scripts/build-full-results.py'));"
@@ -514,12 +516,59 @@ class FullResultsTests(unittest.TestCase):
         self.assertIn("D3 mini · macOS CPU (192/192)", glance[0])
         self.assertIn("(tie)", glance[0])
 
+    def test_executed_episodes_join_by_identity_and_rank_procedure_correct_cases(self):
+        rows = {r["observation"]: r for r in self.data["choice_episodes"]}
+        self.assertEqual(set(rows), {"D3liteMacos", "Vela03Macos", "D3nanoMacos", "D3miniMacos"})
+        self.assertEqual(rows["Vela03Macos"]["counts"]["all"]["procedure_correct_cases"], 0)
+        self.assertEqual(rows["Vela03Macos"]["execution"]["tool_calls_executed"], 0)
+        for row in rows.values():
+            ranked_above = sum(o["counts"]["all"]["procedure_correct_cases"] > row["counts"]["all"]["procedure_correct_cases"] for o in rows.values())
+            self.assertEqual(row["rank_all"], 1 + ranked_above)
+        coverage = {r["id"]: r for r in self.data["coverage"]["observations"]}
+        for oid, row in rows.items():
+            cell = coverage[oid]["cells"]["choice_episodes"]
+            self.assertEqual((cell["numerator"], cell["total"]), (row["counts"]["all"]["procedure_correct_cases"], 32))
+        self.assertEqual(coverage["D3Q4"]["cells"]["choice_episodes"]["status"], "not_run")
+        text = results.render(self.data)
+        self.assertIn("### Executed tool episodes (closed choice)", text)
+        self.assertIn("| Tool workflow, executed | Executed tool episodes (closed choice) | 32 (12 test) | 4 |", text)
+        with self.changed_json(results.CHOICE_EPISODES, lambda d: d["runs"][0]["identity"].update(model_revision="0" * 40)):
+            with self.assertRaisesRegex(ValueError, "identity join failed"):
+                results.build(self.root)
+
+    def test_model_pages_show_every_task_with_ranks_execution_and_reports(self):
+        pages = results.render_model_pages(self.data)
+        index = pages[results.MODEL_PAGES_DIR + "README.md"]
+        self.assertIn("| [D3 mini · macOS CPU](D3miniMacos.md) | 119/132 (#", index)
+        self.assertIn("| 192/192 (#1) | 39/48 (#2) |", index)
+        mini = pages[results.MODEL_PAGES_DIR + "D3miniMacos.md"]
+        self.assertIn("| Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 192/192 | 96/96 | 1 | 1 | all `ok` | [report](../../D3_MINI_MACOS_RESULTS_20261031.md) |", mini)
+        self.assertIn("| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |", mini)
+        nano = pages[results.MODEL_PAGES_DIR + "D3nanoMacos.md"]
+        self.assertIn("| 188/192 | 92/96 |", nano)
+        jev = pages[results.MODEL_PAGES_DIR + "Jev114.md"]
+        self.assertIn("partial", jev)
+        # An attempted campaign with nothing scored keeps its outcomes; it is not "not run".
+        self.assertIn("| 0/128 scored (attempted, nothing scored) | — | — | — | 128 `missing` |", jev)
+        bge = pages[results.MODEL_PAGES_DIR + "BGEPassage.md"]
+        self.assertIn("nDCG@1 0.922 (480/480 defined of 512)", bge)
+        self.assertNotIn("0/512", bge)
+        self.assertNotIn("0/512", index)
+        for path in pages:
+            self.assertFalse(results.MODEL_PAGES_DIR.rstrip("/").endswith("/models"))
+            ignored = subprocess.run(["git", "check-ignore", "-q", path], cwd=ROOT).returncode == 0
+            self.assertFalse(ignored, f"generated page would be ignored by git: {path}")
+        for path, text in pages.items():
+            for link in re.findall(r"\]\((\.\./\.\./[^)#]+)", text):
+                target = ROOT / link[9:] if link.startswith("../../../") else ROOT / "docs" / link[6:]
+                self.assertTrue(target.exists(), (path, link))
+
     def test_coverage_matrix_keeps_runtime_boundaries_and_actual_missing_examples(self):
         coverage = self.data["coverage"]
         rows = {r["id"]: r for r in coverage["observations"]}
         self.assertEqual({k for k, r in rows.items() if r["context_observation"]}, EXPECTED_LABELS)
         self.assertEqual(len(rows), 40)
-        self.assertEqual({len(r["cells"]) for r in rows.values()}, {12})
+        self.assertEqual({len(r["cells"]) for r in rows.values()}, {13})
         generative = rows["QwenToolPolicyV2"]
         self.assertTrue(generative["generative_observation"])
         self.assertFalse(generative["context_observation"])
@@ -559,7 +608,7 @@ class FullResultsTests(unittest.TestCase):
         rendered = results.render(self.data)
         self.assertLess(rendered.index("## Coverage overview"), rendered.index("## Updated task rankings"))
         csv_rows = list(csv.DictReader(io.StringIO(results.outputs(self.data)["docs/leaderboard/coverage.csv"])))
-        self.assertEqual(len(csv_rows), 40 * 12)
+        self.assertEqual(len(csv_rows), 40 * 13)
         self.assertIn("### Generated-JSON tool-policy observations", rendered)
         self.assertNotIn("| Discovery (JSON) /10 | Arguments", rendered.split("### Passage-only")[0])
         blank = next(r for r in csv_rows if r["observation"] == "ClefFlashQ8" and r["task"] == "tool_proposal")

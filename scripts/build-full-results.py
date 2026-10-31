@@ -32,6 +32,8 @@ D3LITE_MACOS = EVIDENCE + "d3-lite-macos-20261030/analysis.json"
 VELA03_MACOS = EVIDENCE + "vela2-03-macos-20261030/analysis.json"
 D3NANO_MACOS = EVIDENCE + "d3-nano-macos-20261031/analysis.json"
 D3MINI_MACOS = EVIDENCE + "d3-mini-macos-20261031/analysis.json"
+CHOICE_EPISODES = EVIDENCE + "choice-episodes-20261031/analysis.json"
+CHOICE_EPISODES_REPORT = "TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md"
 CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
 LOCAL_POLICY = (EVIDENCE + "local-tool-policy-20261030/analysis.json",
                 EVIDENCE + "local-tool-policy-v2-train-20261030/analysis.json",
@@ -63,6 +65,10 @@ RECENT_INPUTS = (CAMPAIGN_MODULE, EVIDENCE + "clef-flash-20261029/analysis.json"
                  EVIDENCE + "d3-mini-macos-20261031/context.json", EVIDENCE + "d3-mini-macos-20261031/capability.json",
                  EVIDENCE + "d3-mini-macos-20261031/physics.json", "profiles/d3-mini-assets.json", "profiles/d3-mini-macos-cpu.json",
                  "profiles/d3-mini-macos-cpu-capability.json", "docs/D3_MINI_MACOS_RESULTS_20261031.md",
+                 EVIDENCE + "choice-episodes-20261031/analysis.json", "docs/TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md",
+                 "profiles/d3-lite-macos-choice-episodes.json", "profiles/vela2-03-macos-choice-episodes.json",
+                 "profiles/d3-nano-macos-choice-episodes.json", "profiles/d3-mini-macos-choice-episodes.json",
+                 "profiles/vela2-03-macos-cpu.json",
                  "docs/PASSAGE_CPU_RESULTS_20261015.md", "docs/PASSAGE_JEV_RESULTS_20261015.md",
                  "docs/PASSAGE_FLASH_RESULTS_20261029.md", "docs/PASSAGE_CLEF_RESULTS_20261029.md")
 STATUS_KEYS = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
@@ -430,10 +436,21 @@ def build(root=ROOT):
         others[key] = {"source": path, "summary": summary,
                        "scope": "Published overall, per-target or balanced-ranking summaries; detailed cross-groups, rotations and per-case rows remain in the linked source"}
     coverage = build_coverage(rows, campaign_rows, others, inputs)
+    names = {r["id"]: r["metadata"]["display_name"] for r in rows}
+    choice_episodes = []
+    for run in inputs.load(CHOICE_EPISODES)["runs"]:
+        choice_episodes.append({"observation": run["label"], "model": names[run["label"]], "counts": run["counts"],
+                                "stages": run["stages"], "execution": run["execution"],
+                                "chosen_position": run["chosen_position"], "report": CHOICE_EPISODES_REPORT})
+    for row in choice_episodes:
+        row["rank_all"] = 1 + sum(o["counts"]["all"]["procedure_correct_cases"] > row["counts"]["all"]["procedure_correct_cases"] for o in choice_episodes)
+        row["rank_test"] = 1 + sum(o["counts"]["test"]["procedure_correct_cases"] > row["counts"]["test"]["procedure_correct_cases"] for o in choice_episodes)
+    choice_episodes.sort(key=lambda r: (r["rank_all"], r["model"]))
     inputs.read("scripts/build-full-results.py")
     coverage["sources_sha256"] = dict(sorted(inputs.hashes.items()))
     return {"schema_version": "deposium.public-results/v1", "observations": rows,
             "campaigns": campaign_rows, "coverage": coverage, "historical_context_observations": len(base),
+            "choice_episodes": choice_episodes,
             "other_campaigns": others, "other_benchmarks_markdown": other_guide,
             "capability_campaign": complementary,
             "scope": "aggregate_presentation_only_no_inference_or_raw_archive_verification",
@@ -447,6 +464,8 @@ COVERAGE_TASKS = (
     ("tool_proposal", "Tool proposal", 24, "mastra-read-pilot-v0; provisional agreement; zero qualified cases"),
     ("capability", "Capability", 192, "capability-choice-v1; four supplied proposals; test=96"),
     ("physics", "Physics", 48, "physics-choice-v1; calibration+test; test=36"),
+    ("choice_episodes", "Episodes (choice)", 32,
+     "tool-episodes-choice-v1; executed fixture tools; closed-choice step menu; train 20 + test 12; procedure-correct cases"),
     ("passage_relevance", "Relevance R0", 512, "passage-evidence-v1; test; rotation 0; 128 pools"),
     ("passage_support", "Support R0", 768, "passage-evidence-v1; test; rotation 0; 128 pools"),
     ("passage_answerability", "Answerability R0", 128, "passage-evidence-v1; test; rotation 0; 128 pools"),
@@ -463,7 +482,7 @@ COVERAGE_TASKS = (
     ("tool_episodes", "Episodes (JSON)", 18,
      "tool-policy-canary-v1 train 6 + tool-policy-heldout-v1 test 12; generated actions, actual bounded feedback; prompt v2"),
 )
-CLOSED_CHOICE_TASKS = 9  # the first tasks are the classifier matrix; the rest are generated-JSON columns
+CLOSED_CHOICE_TASKS = 10  # the first tasks are the classifier matrix; the rest are generated-JSON columns
 ISSUES = "https://github.com/theseedship/classification_tests_deposium/issues/"
 
 
@@ -555,7 +574,7 @@ def build_coverage(observations, campaigns, others, inputs):
     def unobserved():
         return {key: coverage_cell(None, total, metric="provisional_agreement" if key == "tool_proposal"
                                    else "ndcg@1" if key == "passage_ranking"
-                                   else "case_pass" if key.startswith("tool_") else "correct_choice")
+                                   else "case_pass" if key.startswith("tool_") or key == "choice_episodes" else "correct_choice")
                 for key, total in totals.items()}
     by_id = {}
     for row in observations:
@@ -619,6 +638,26 @@ def build_coverage(observations, campaigns, others, inputs):
         cell = by_id[target]["cells"][row["task"]]
         require(not cell["evidence_present"], "coverage: duplicate task observation")
         by_id[target]["cells"][row["task"]] = coverage_cell(row["counts"], totals[row["task"]], row["source"])
+
+    # Closed-choice executed episodes: joined to a context observation only when the
+    # inner model revision and runtime lock are those of that observation's runtime.
+    episodes = inputs.load(CHOICE_EPISODES)
+    require(episodes.get("schema_version") == "deposium.choice-episodes-public/v1"
+            and episodes.get("reference_review") == "agent_only_pending_human", "choice episodes: changed qualification")
+    inputs.read("docs/" + CHOICE_EPISODES_REPORT)
+    for run in episodes["runs"]:
+        target = context_ids.get(run["label"])
+        require(target is not None and target["identity"].get("model_revision") == run["identity"]["model_revision"],
+                f"choice episodes: identity join failed for {run['label']}")
+        inputs.read(run["identity"]["profile"])
+        inputs.read(run["identity"]["inner_profile"])
+        c = run["counts"]["all"]
+        statuses = {**{k: 0 for k in STATUS_KEYS}, **c["statuses"]}
+        cell = by_id[run["label"]]["cells"]["choice_episodes"]
+        require(not cell["evidence_present"], "choice episodes: duplicate observation")
+        by_id[run["label"]]["cells"]["choice_episodes"] = coverage_cell(
+            {"total": c["total_cases"], "scored": statuses["ok"] + statuses["abstain"], "correct": c["procedure_correct_cases"],
+             "statuses": statuses}, totals["choice_episodes"], CHOICE_EPISODES, metric="case_pass")
 
     # Ranking is a distinct task, including derived class-order and tie-break methods.
     order = others["passage_order"]["summary"]
@@ -769,12 +808,12 @@ def render_coverage(coverage):
               "These do not add context models. D3-lite's passage session has a different runtime/settings "
               "identity fingerprint from its historical context session. Jev 1.14 is distinct from context "
               "Jev 1.13. BGE and tie-break methods are ranking observations, not newly evaluated context models.", "",
-              "| Model / method | " + " | ".join(f"{t['label']} /{t['total']}" for t in tasks[4:]) + " |",
-              "|---|" + "---|" * len(tasks[4:])]
+              "| Model / method | " + " | ".join(f"{t['label']} /{t['total']}" for t in tasks[5:]) + " |",
+              "|---|" + "---|" * len(tasks[5:])]
     for row in coverage["observations"]:
         if row["context_observation"] or row.get("generative_observation"):
             continue
-        lines.append(f"| {row['model']} | " + " | ".join(cell_text(row["cells"][t["id"]]) for t in tasks[4:]) + " |")
+        lines.append(f"| {row['model']} | " + " | ".join(cell_text(row["cells"][t["id"]]) for t in tasks[5:]) + " |")
     lines += ["", "R0 means rotation 0 (128 pools, eight families, two correlated views). "
               "Relevance/512 and replayed relevance/2048 have different protocols; neither is ranking/512. "
               "Ranking cells cover 512 pools over four balanced rotations; nDCG@1 is defined on 480/480 eligible pools. "
@@ -909,6 +948,35 @@ LEGEND_RANKS = ("<sub>**Rank all**: competition rank by correct answers over eve
                 "**Scored / all** shows how many cases produced a valid answer.</sub>")
 
 
+def render_choice_episodes(data):
+    rows = data["choice_episodes"]
+    if not rows:
+        return []
+    lines = ["### Executed tool episodes (closed choice)", "",
+             "32 synthetic episodes (20 TRAIN, 12 TEST) run with real fixture tools: at each step the harness lists the possible "
+             "next actions, the model picks one, the tool runs and its actual result feeds the next step. A case passes when the "
+             "whole procedure is valid, the stop is correct and budgets hold; **task success** counts the twelve episodes whose "
+             "correct end is a computed total. Premature success and malformed actions are impossible by construction, so these "
+             "scores are not comparable with the generated-JSON policy. [Pilot report](" + rows[0]["report"] + ").", "",
+             LEGEND_RANKS, "",
+             f"**Leading on held-out test**: {leaders(rows, 'rank_test', lambda r: r['model'], lambda r: str(r['counts']['test']['procedure_correct_cases']) + '/12 test')}; "
+             f"**leading over all cases**: {leaders(rows, 'rank_all', lambda r: r['model'], lambda r: str(r['counts']['all']['procedure_correct_cases']) + '/32')}.", "",
+             "| Rank all | Rank test | Model / runtime | Procedure correct / all | Test correct / all | Task success / eligible | Stop correct / all | Execution | Steps | Tool calls | Median call s |",
+             "|---:|---:|---|---:|---:|---:|---:|---|---:|---:|---:|"]
+    for r in rows:
+        c, st, ex = r["counts"], r["stages"], r["execution"]
+        bad = {k: v for k, v in c["all"]["statuses"].items() if k != "ok" and v}
+        execution = "all `ok`" if not bad else ", ".join(f"{v} `{k}`" for k, v in sorted(bad.items()))
+        median = ex["inner_inference_ms"]["median"]
+        lines.append(f"| {r['rank_all']} | {r['rank_test']} | {r['model']} | {c['all']['procedure_correct_cases']}/{c['all']['total_cases']} | "
+                     f"{c['test']['procedure_correct_cases']}/{c['test']['total_cases']} | {c['all']['task_success_cases']}/{c['all']['task_success_eligible_cases']} | "
+                     f"{st['stopping']['correct']}/{st['stopping']['eligible']} | {execution} | {ex['policy_steps']} | {ex['tool_calls_executed']} | "
+                     f"{number(median / 1000 if median is not None else None)} |")
+    lines += ["", "**Steps** counts model decisions; **tool calls** counts actual fixture executions. A model that keeps choosing the first "
+              "option or always the same stop shows it in the chosen-position distribution of the report.", ""]
+    return lines
+
+
 def render_campaign_rankings(data):
     lines = ["## Updated task rankings", "",
              "These tables include every published campaign on these packs. "
@@ -975,6 +1043,7 @@ def render_campaign_rankings(data):
               "as conflicting as answerable; D3 accepts none in this finite run. See "
               "[paired outcomes and confusion matrices](PASSAGE_CLEF_RESULTS_20261029.md). "
               "This is not factual-verifier or end-to-end qualification.", "",
+              *render_choice_episodes(data),
               "### Campaign latency and memory", "",
               "Physical-call timings are kept separate from reused logical decisions; session RSS scopes differ "
               "from the historical context + tool sessions. NR means unreported. No controlled speed ranking is inferred.", "",
@@ -1042,28 +1111,34 @@ def render_at_a_glance(data):
     observations = data["observations"]
     campaigns = data["campaigns"]
     rows = []
-    rows.append(("Context choices", "132 (66 test)", len(observations),
+    rows.append(("RAG decision", "Context choices", "132 (66 test)", len(observations),
                  leaders(observations, "rank_all_splits", name, lambda r: f"{r['context']['counts']['correct']}/132"),
                  leaders(observations, "rank_test_splits", name, lambda r: f"{r['context']['groups']['split']['test']['correct']}/66 test"),
                  "[Model quality](#model-quality)"))
     tools = [r for r in observations if r["tool_proposal"] and r["tool_proposal"]["counts"]["valid_decisions"] == 24]
     best = max((r["tool_proposal"]["counts"]["agreement_count"] for r in tools), default=None)
     tool_leaders = ", ".join(name(r) + f" ({best}/24)" for r in tools if r["tool_proposal"]["counts"]["agreement_count"] == best)
-    rows.append(("First-tool proposals", "24 (no test split)", len([r for r in observations if r["tool_proposal"]]),
+    rows.append(("RAG decision", "First-tool proposals", "24 (no test split)", len([r for r in observations if r["tool_proposal"]]),
                  (tool_leaders + (" (tie)" if tool_leaders.count("(") > 1 else "")) if best is not None else "no complete observation",
                  "provisional agreement, not routing accuracy", "[Model quality](#model-quality)"))
-    for task, title, total, test_total, section in (("capability", "Capability and workflow choices", 192, 96, "#capability-choices"),
-                                                    ("physics", "Physics choices", 48, 36, "#physics-choices")):
+    for family, task, title, total, test_total, section in (("Tool workflow", "capability", "Capability and workflow choices", 192, 96, "#capability-choices"),
+                                                            ("Reasoning with a supplied law", "physics", "Physics choices", 48, 36, "#physics-choices")):
         task_rows = [r for r in campaigns if r["task"] == task]
-        rows.append((title, f"{total} ({test_total} test)", len(task_rows),
+        rows.append((family, title, f"{total} ({test_total} test)", len(task_rows),
                      leaders(task_rows, "rank_all", lambda r: r["model"], lambda r: f"{r['counts']['correct']}/{total}"),
                      leaders(task_rows, "rank_test", lambda r: r["model"], lambda r: f"{r['counts']['by_split']['test']['correct']}/{test_total} test"),
                      f"[{title.split(' and ')[0]}]({section})"))
+    episode_rows = data["choice_episodes"]
+    if episode_rows:
+        rows.append(("Tool workflow, executed", "Executed tool episodes (closed choice)", "32 (12 test)", len(episode_rows),
+                     leaders(episode_rows, "rank_all", lambda r: r["model"], lambda r: f"{r['counts']['all']['procedure_correct_cases']}/32"),
+                     leaders(episode_rows, "rank_test", lambda r: r["model"], lambda r: f"{r['counts']['test']['procedure_correct_cases']}/12 test"),
+                     "[Executed episodes](#executed-tool-episodes-closed-choice)"))
     for axis, title, total, section in (("relevance", "Passage relevance", 512, "#passage-relevance"),
                                         ("support", "Claim support", 768, "#claim-support"),
                                         ("answerability", "Answerability", 128, "#answerability")):
         task_rows = [r for r in campaigns if r["task"] == "passage_" + axis]
-        rows.append((title, f"{total} (rotation 0)", len(task_rows),
+        rows.append(("Retrieved evidence", title, f"{total} (rotation 0)", len(task_rows),
                      leaders(task_rows, "rank_all", lambda r: r["model"], lambda r: f"{r['counts']['correct']}/{total}"),
                      "no split ranking", f"[{title}]({section})"))
     generative = [r for r in data["coverage"]["observations"] if r.get("generative_observation")]
@@ -1072,23 +1147,27 @@ def render_at_a_glance(data):
         text = "; ".join(f"{label} {cells[task]['numerator']}/{cells[task]['total']}"
                          for task, label in (("tool_discovery", "discovery"), ("tool_arguments", "arguments"), ("tool_episodes", "episodes"))
                          if cells[task]["status"] == "complete")
-        rows.append(("Generated-JSON tool policy", "10 + 6 + 18 (TRAIN canary + held-out)", 1,
+        rows.append(("Tool policy, generated", "Generated-JSON tool policy", "10 + 6 + 18 (TRAIN canary + held-out)", 1,
                      f"{r['model']}: {text} passed (single observation, unranked)", "held-out pack 9/24 over the three contracts; see the report",
                      "[Generated-JSON observations](#generated-json-tool-policy-observations)"))
     lines = ["## At a glance", "",
-             "One line per task. **Leader over all cases** counts every case of the pack, including failures; "
+             "One line per task, grouped by family: **RAG decision** (which source or first tool to use for a request), "
+             "**Retrieved evidence** (judging passages: relevance, claim support, answerability), **Tool workflow** (selection, arguments, "
+             "next step after observations; **executed** when real fixture tools run step by step), **Reasoning** (physics with the law supplied) and **Tool policy, generated** (free-form JSON actions). "
+             "**Leader over all cases** counts every case of the pack, including failures; "
              "**leader on held-out test** uses only the test cases, the better signal against tuning. "
              "Ties are listed together. Tasks are never pooled into one score; a lead of a few cases on correlated FR/EN "
              "variants is not a general ranking. References are agent-authored and pending human review.", "",
-             "| Task | Cases | Observations | Leader over all cases | Leader on held-out test | Details |",
-             "|---|---|---:|---|---|---|"]
-    for title, cases, count, all_leader, test_leader, link in rows:
-        lines.append(f"| {title} | {cases} | {count} | {all_leader} | {test_leader} | {link} |")
-    lines += ["", "Rows further down keep every observation, partial campaigns included, with their denominators and statuses.", ""]
+             "| Family | Task | Cases | Observations | Leader over all cases | Leader on held-out test | Details |",
+             "|---|---|---|---:|---|---|---|"]
+    for family, title, cases, count, all_leader, test_leader, link in rows:
+        lines.append(f"| {family} | {title} | {cases} | {count} | {all_leader} | {test_leader} | {link} |")
+    lines += ["", "Rows further down keep every observation, partial campaigns included, with their denominators and statuses. "
+              "For one model across every task, open [Every model, every task](leaderboard/by-model/README.md): one page per observation with scores, ranks, execution outcomes, speed and reports.", ""]
     return lines
 
 def render(data):
-    lines = ["# Full results", "", "[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · "
+    lines = ["# Full results", "", "[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · [Every model, every task](leaderboard/by-model/README.md) · "
              "[Passages and other campaigns](leaderboard/other-benchmarks.md) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
              f"**{len(data['observations'])} context model/runtime observations through 31 October 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.",
              "Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;",
@@ -1189,6 +1268,179 @@ def render(data):
     return "\n".join(header + render_toc(glance + lines) + glance + lines)
 
 
+
+MODEL_PAGES_DIR = "docs/leaderboard/by-model/"  # not "models/": that name is a privacy ignore rule for weights
+RUNTIME_LABELS = {"historical_cpu": "Historical Linux/WSL CPU (processor not identified)", "remote_api": "Remote HTTP API (server hardware unknown)",
+                  "apple_metal_native": "Native llama.cpp Metal, Apple M5 Pro", "apple_mps": "PyTorch MPS, Apple M5 Pro",
+                  "cpu_new": "macOS arm64 CPU, pinned runtime", "apple_metal_upstream": "Direct upstream native Metal, Apple M5 Pro"}
+PAGE_TASKS = (("context", "Context choices", "RAG decision", "RESULTS.md#model-quality"),
+              ("tool_proposal", "First-tool proposals", "RAG decision", "RESULTS.md#model-quality"),
+              ("capability", "Capability and workflow choices", "Tool workflow", "RESULTS.md#capability-choices"),
+              ("physics", "Physics choices", "Reasoning with a supplied law", "RESULTS.md#physics-choices"),
+              ("choice_episodes", "Executed tool episodes (closed choice)", "Tool workflow, executed", "RESULTS.md#executed-tool-episodes-closed-choice"),
+              ("passage_relevance", "Passage relevance", "Retrieved evidence", "RESULTS.md#passage-relevance"),
+              ("passage_support", "Claim support", "Retrieved evidence", "RESULTS.md#claim-support"),
+              ("passage_answerability", "Answerability", "Retrieved evidence", "RESULTS.md#answerability"),
+              ("passage_relevance_four_rotations", "Passage relevance, four rotations", "Retrieved evidence", "RESULTS.md#passage-relevance"),
+              ("passage_ranking", "Passage ranking", "Retrieved evidence", "leaderboard/other-benchmarks.md#passage-ranking-and-evidence"),
+              ("tool_discovery", "Tool discovery (generated JSON)", "Tool policy, generated", "RESULTS.md#generated-json-tool-policy-observations"),
+              ("tool_arguments", "Tool arguments (generated JSON)", "Tool policy, generated", "RESULTS.md#generated-json-tool-policy-observations"),
+              ("tool_episodes", "Tool episodes (generated JSON)", "Tool policy, generated", "RESULTS.md#generated-json-tool-policy-observations"))
+
+
+def _page_link(path):
+    """Relative link from the model-pages directory to a repository path."""
+    path = str(path)
+    return "../../" + path[len("docs/"):] if path.startswith("docs/") else "../../../" + path
+
+
+def _score_text(cell):
+    """Score of an observed cell; never invent a correct count for a metric that has none."""
+    if cell["metric"] == "ndcg@1":
+        return f"nDCG@1 {cell['metric_value']:.3f} ({cell['metric_defined']}/{cell['metric_eligible']} defined of {cell['total']})"
+    if cell["numerator"] is None:
+        return f"0/{cell['total']} scored"
+    return f"{cell['numerator']}/{cell['total']}"
+
+
+def _page_cell(cell, rank=None):
+    if not cell["evidence_present"]:
+        return "not run"
+    text = _score_text(cell)
+    if cell["status"] == "partial":
+        text += f" (partial, {cell['scored_or_valid']} scored)"
+    elif cell["status"] == "not_run":
+        text += " (attempted, nothing scored)"
+    if rank:
+        text += f" · rank {rank}"
+    return text
+
+
+def _outcomes_text(cell):
+    if not cell["evidence_present"]:
+        return "—"
+    bad = {k: v for k, v in cell["outcomes"].items() if k != "ok" and v}
+    return "all `ok`" if not bad else ", ".join(f"{v} `{k}`" for k, v in sorted(bad.items()))
+
+
+def render_model_pages(data):
+    """One page per observation with every task, its rank, its execution outcomes and the report links; plus an index."""
+    context = {r["id"]: r for r in data["observations"]}
+    ranks = {}
+    for row in data["campaigns"]:
+        ranks[(row["task"], row["observation"])] = row
+    def campaign_row(task, oid):
+        return ranks.get((task, oid)) or ranks.get((task, oid.removesuffix("Passage")))
+    pages, index_rows = {}, []
+    for obs in data["coverage"]["observations"]:
+        oid, cells = obs["id"], obs["cells"]
+        ctx = context.get(oid)
+        meta = ctx["metadata"] if ctx else None
+        name = meta["display_name"] if meta else obs["model"]
+        lines = [f"# {name}", "",
+                 f"[All results](../../RESULTS.md) · [All models](README.md) · [Coverage overview](../../RESULTS.md#coverage-overview)", "",
+                 "One observation: one checkpoint, one runtime, one pass per case. Scores are **correct / all cases** with "
+                 "failures kept in the denominator; **rank** is the competition rank among completely scored observations on the "
+                 "same task. References are agent-authored and pending human review; a few-case lead on correlated FR/EN variants "
+                 "is not a general ranking.", "",
+                 "## Identity", "", "| Item | Value |", "|---|---|",
+                 f"| Size | {meta['model_size']['label'] if meta and meta['model_size']['label'] else obs.get('size') or 'NR'} |",
+                 f"| Runtime | {RUNTIME_LABELS.get(meta['runtime_group'], meta['runtime_group']) if meta else obs.get('runtime') or 'NR'} |"]
+        if meta:
+            lines += [f"| Family | {meta['family']} |", f"| Precision | {meta['precision']} |",
+                      f"| Hardware | {meta['hardware_group']} |", f"| Observed | {meta['observed_date']} |",
+                      "| Protocol / evidence | " + ", ".join(f"[{Path(e['path']).name}]({_page_link(e['path'])})" for e in meta["evidence"]) + " |"]
+        lines += ["", "## Results by task", "",
+                  "| Family | Task | Correct / all | Held-out test | Rank all | Rank test | Execution | Report |", "|---|---|---:|---:|---:|---:|---|---|"]
+        index = {"name": name, "id": oid, "ctx": ctx}
+        for task, title, family, section in PAGE_TASKS:
+            cell = cells.get(task)
+            if cell is None:
+                continue
+            if task == "context" and ctx:
+                test = f"{ctx['context']['groups']['split']['test']['correct']}/66"
+                rank_all, rank_test = ctx["rank_all_splits"], ctx["rank_test_splits"]
+                report = ", ".join(f"[{Path(e['path']).stem}]({_page_link(e['path'])})" for e in meta["evidence"])
+            elif task == "tool_proposal" and ctx and ctx["tool_proposal"]:
+                test, rank_all, rank_test = "no test split", "—", "—"
+                report = "provisional agreement, zero qualified cases"
+            elif task == "choice_episodes":
+                row = next((r for r in data["choice_episodes"] if r["observation"] == oid), None)
+                if row:
+                    test = f"{row['counts']['test']['procedure_correct_cases']}/{row['counts']['test']['total_cases']}"
+                    rank_all, rank_test = row["rank_all"], row["rank_test"]
+                    report = f"[report](../../{row['report']})"
+                else:
+                    test, rank_all, rank_test, report = "—", "—", "—", "—"
+            else:
+                row = campaign_row(task, oid)
+                if row:
+                    by_split = row["counts"].get("by_split") or {}
+                    test = f"{by_split['test']['correct']}/{by_split['test']['total']}" if "test" in by_split else "no split ranking"
+                    rank_all, rank_test = row.get("rank_all") or "—", row.get("rank_test") or "—"
+                    report = f"[report](../../{row['report']})" if row.get("report") else "—"
+                else:
+                    test, rank_all, rank_test, report = "—", "—", "—", "—"
+            if cell["status"] == "not_run":
+                test, rank_all, rank_test = "—", "—", "—"
+                if not cell["evidence_present"]:
+                    report = "—"
+            section_link = f"[{title}](../../{section})"
+            lines.append(f"| {family} | {section_link} | {_page_cell(cell)} | {test} | {rank_all} | {rank_test} | {_outcomes_text(cell)} | {report} |")
+            index[task] = (cell, rank_all if cell["status"] == "complete" else None)
+        if ctx and ctx.get("resources"):
+            r = ctx["resources"]
+            gpu = r.get("sampled_gpu_allocated_peak_mib")
+            rss = r.get("session_process_group_peak_rss_mib")
+            worker = (r.get("worker_rss_mib") or {}).get("max")
+            lines += ["", "## Speed and memory (context session)", "", "| Median call ms | p95 call ms | Timed calls | Initialization ms | Session RSS GiB | Worker RSS GiB | GPU allocated GiB |", "|---:|---:|---:|---:|---:|---:|---:|",
+                      f"| {number(r['adapter_ms']['median'])} | {number(r['adapter_ms']['p95'])} | {r['adapter_ms']['count']} | {number(r.get('initialization_ms'))} | "
+                      f"{number(rss / 1024 if rss is not None else None, 2)} | {number(worker / 1024 if worker is not None else None, 2)} | {number(gpu / 1024 if gpu is not None else None, 2)} |", "",
+                      f"Scope: {r.get('rss_scope', 'as recorded in the source aggregate')}. Latency is descriptive, not a throughput guarantee."]
+        lines += ["", "## Reading this page", "",
+                  "- **Execution** says whether the campaign ran cleanly: `all ok` means every case produced a valid answer; other statuses "
+                  "(`timeout`, `error`, `missing`, `unsupported`, `abstain`) are counted and stay in the denominator of the score.",
+                  "- **not run** means no public observation for this task on this runtime; it is not a zero.",
+                  "- Partial campaigns are shown with their scored count and are never ranked.",
+                  "- Generated regularly from the sealed public aggregates by `scripts/build-full-results.py`; nothing here reruns a model.", ""]
+        pages[MODEL_PAGES_DIR + oid + ".md"] = "\n".join(lines)
+        index_rows.append(index)
+    def sort_key(row):
+        ctx = row["ctx"]
+        return (0 if ctx else 1, ctx["rank_all_splits"] if ctx else 0, row["name"])
+    index_rows.sort(key=sort_key)
+    def index_cell(row, task):
+        entry = row.get(task)
+        if entry is None or not entry[0]["evidence_present"]:
+            return "—"
+        cell, rank = entry
+        text = _score_text(cell)
+        if cell["status"] == "partial":
+            text += " partial"
+        elif cell["status"] == "not_run":
+            text += ", attempted"
+        elif rank and rank != "—":
+            text += f" (#{rank})"
+        return text
+    lines = ["# Every model, every task", "",
+             f"[All results](../../RESULTS.md) · [At a glance](../../RESULTS.md#at-a-glance) · [Coverage overview](../../RESULTS.md#coverage-overview)", "",
+             f"{len(index_rows)} observations. One line per model/runtime observation; each cell is **correct / all cases** on that task with its "
+             "competition rank in parentheses, `partial` when the campaign did not complete, and **—** when the task was not run on that runtime. "
+             "Context observations come first, in context rank order; passage-only methods and the generative candidate follow. "
+             "Click the model for its page with every task, execution outcomes, speed and reports.", "",
+             "| Model / runtime | Context /132 | Tool /24 | Capability /192 | Physics /48 | Episodes (choice) /32 | Relevance /512 | Support /768 | Answerability /128 | Generated JSON (discovery, arguments, episodes) |",
+             "|---|---:|---:|---:|---:|---:|---:|---:|---:|---|"]
+    for row in index_rows:
+        generated = ", ".join(index_cell(row, t) for t in ("tool_discovery", "tool_arguments", "tool_episodes"))
+        generated = "—" if generated == "—, —, —" else generated
+        lines.append(f"| [{row['name']}]({row['id']}.md) | {index_cell(row, 'context')} | {index_cell(row, 'tool_proposal')} | {index_cell(row, 'capability')} | "
+                     f"{index_cell(row, 'physics')} | {index_cell(row, 'choice_episodes')} | {index_cell(row, 'passage_relevance')} | {index_cell(row, 'passage_support')} | {index_cell(row, 'passage_answerability')} | {generated} |")
+    lines += ["", "Tool /24 is provisional agreement with agent-authored first-tool proposals, not routing accuracy; it has no rank. "
+              "Passage scores are rotation 0 (128 pools × decisions); the four-rotation Jev export and the ranking methods are on each model page and in "
+              "[other benchmarks](../other-benchmarks.md). Generated regularly by `scripts/build-full-results.py`.", ""]
+    pages[MODEL_PAGES_DIR + "README.md"] = "\n".join(lines)
+    return pages
+
 def outputs(data):
     models, tasks = flat_rows(data)
     return {"docs/RESULTS.md": render(data), "docs/leaderboard/models.csv": csv_text(models),
@@ -1196,7 +1448,8 @@ def outputs(data):
             "docs/leaderboard/coverage.json": json.dumps(data["coverage"], ensure_ascii=False, sort_keys=True, indent=2, allow_nan=False) + "\n",
             "docs/leaderboard/campaigns.csv": csv_text(campaign_csv_rows(data)),
             "docs/leaderboard/task-breakdown.csv": csv_text(tasks),
-            "docs/leaderboard/results.json": json.dumps(data, ensure_ascii=False, sort_keys=True, indent=2, allow_nan=False) + "\n"}
+            "docs/leaderboard/results.json": json.dumps(data, ensure_ascii=False, sort_keys=True, indent=2, allow_nan=False) + "\n",
+            **render_model_pages(data)}
 
 
 def main(argv=None):

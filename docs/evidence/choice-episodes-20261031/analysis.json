@@ -1,0 +1,1152 @@
+{
+  "dataset_sha256": "f249752d4ab464a50fd96c0b573f36adf54d59995856e0d872962f9fa6dafab9",
+  "limits": [
+    "32 correlated synthetic cases on seven fault routes; 20 TRAIN, 12 TEST",
+    "menu and wording are fixed by the harness; premature success and malformed actions are impossible by construction",
+    "not comparable with the generated-JSON contract; no live service or product workflow"
+  ],
+  "pack": "tool-episodes-choice-v1",
+  "policy_mode": "closed_choice_step_menu_v1",
+  "reference_review": "agent_only_pending_human",
+  "runs": [
+    {
+      "chosen_position": {
+        "1": 77,
+        "2": 36,
+        "3": 9,
+        "4": 1,
+        "6": 2
+      },
+      "counts": {
+        "all": {
+          "procedure_correct_cases": 14,
+          "statuses": {
+            "ok": 32
+          },
+          "task_success_cases": 9,
+          "task_success_eligible_cases": 12,
+          "total_cases": 32
+        },
+        "en": {
+          "procedure_correct_cases": 6,
+          "statuses": {
+            "ok": 16
+          },
+          "task_success_cases": 4,
+          "task_success_eligible_cases": 6,
+          "total_cases": 16
+        },
+        "fr": {
+          "procedure_correct_cases": 8,
+          "statuses": {
+            "ok": 16
+          },
+          "task_success_cases": 5,
+          "task_success_eligible_cases": 6,
+          "total_cases": 16
+        },
+        "test": {
+          "procedure_correct_cases": 5,
+          "statuses": {
+            "ok": 12
+          },
+          "task_success_cases": 4,
+          "task_success_eligible_cases": 4,
+          "total_cases": 12
+        },
+        "train": {
+          "procedure_correct_cases": 9,
+          "statuses": {
+            "ok": 20
+          },
+          "task_success_cases": 5,
+          "task_success_eligible_cases": 8,
+          "total_cases": 20
+        }
+      },
+      "display_name": "d3-lite-macos-choice-episodes-v1",
+      "execution": {
+        "cases_with_execution_trace": 32,
+        "inner_call_statuses": {
+          "ok": 125
+        },
+        "inner_inference_ms": {
+          "count": 125,
+          "max": 17368.811374999495,
+          "median": 13845.344457997271,
+          "p95": 16296.697667003173
+        },
+        "inner_worker_rss_mib_max": 1749.140625,
+        "load_ms": 5846.278582997911,
+        "policy_steps": 125,
+        "tool_call_attempts": 109,
+        "tool_calls_executed": 52,
+        "worker_restarts": 0
+      },
+      "expected_to_final_reason": [
+        {
+          "cases": 9,
+          "expected": "complete",
+          "final": "complete"
+        },
+        {
+          "cases": 3,
+          "expected": "complete",
+          "final": "step_limit"
+        },
+        {
+          "cases": 4,
+          "expected": "missing_information",
+          "final": "missing_information"
+        },
+        {
+          "cases": 4,
+          "expected": "no_data",
+          "final": "step_limit"
+        },
+        {
+          "cases": 4,
+          "expected": "partial_data",
+          "final": "step_limit"
+        },
+        {
+          "cases": 4,
+          "expected": "persistent_error",
+          "final": "step_limit"
+        },
+        {
+          "cases": 1,
+          "expected": "unavailable",
+          "final": "partial_data"
+        },
+        {
+          "cases": 1,
+          "expected": "unavailable",
+          "final": "step_limit"
+        },
+        {
+          "cases": 2,
+          "expected": "unavailable",
+          "final": "unavailable"
+        }
+      ],
+      "families": [
+        {
+          "expected": "complete",
+          "family": "tool-episode-family-001-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-episode-family-002-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "persistent_error",
+          "family": "tool-episode-family-003-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "no_data",
+          "family": "tool-episode-family-004-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "partial_data",
+          "family": "tool-episode-family-005-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "missing_information",
+          "family": "tool-episode-family-006-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "unavailable",
+          "family": "tool-episode-family-007-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-canary-family-003-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-canary-family-004-fr-en",
+          "passed": 1,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "missing_information",
+          "family": "tool-policy-canary-family-005-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-heldout-family-107-fr-en",
+          "passed": 2,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-heldout-family-108-fr-en",
+          "passed": 2,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "persistent_error",
+          "family": "tool-policy-heldout-family-109-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "no_data",
+          "family": "tool-policy-heldout-family-110-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "partial_data",
+          "family": "tool-policy-heldout-family-111-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "unavailable",
+          "family": "tool-policy-heldout-family-112-fr-en",
+          "passed": 1,
+          "split": "test",
+          "total": 2
+        }
+      ],
+      "first_step_choice": {
+        "call-lookup": 28,
+        "finish-missing_information": 4
+      },
+      "identity": {
+        "dataset_sha256": "f249752d4ab464a50fd96c0b573f36adf54d59995856e0d872962f9fa6dafab9",
+        "inner_identity_sha256": "064411a56c61977d8375a4b4e6ce896e8aec072ff60990a472c1a158452db483",
+        "inner_profile": "profiles/d3-lite-macos-cpu.json",
+        "model_repo_id": "vllm-sr/d3-lite",
+        "model_revision": "a8d25a91ef75552803f7009d25b7bd435991abd9",
+        "outer_identity_sha256": "9816449959e1fe19a8f38f5c04e20fa9d79a2ae12bdf4bc89a57dfe3fd1b7da8",
+        "profile": "profiles/d3-lite-macos-choice-episodes.json",
+        "raw_sha256": "e533680e42ba61fc2f479ccaa0b4bc15ed5b5b08903c8977ab3c000effb6ae6c",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "seal_sha256": "edc5be5eccfcc2f70d7f539ce18828e984c23391f51bb42d8d95796aa07f5b8a"
+      },
+      "label": "D3liteMacos",
+      "stages": {
+        "arguments": {
+          "correct": 28,
+          "eligible": 28
+        },
+        "binding": {
+          "correct": 11,
+          "eligible": 12
+        },
+        "budget": {
+          "correct": 15,
+          "eligible": 32
+        },
+        "execution": {
+          "correct": 10,
+          "eligible": 28
+        },
+        "result": {
+          "correct": 9,
+          "eligible": 12
+        },
+        "stopping": {
+          "correct": 15,
+          "eligible": 32
+        },
+        "tool": {
+          "correct": 18,
+          "eligible": 28
+        }
+      }
+    },
+    {
+      "chosen_position": {
+        "3": 4,
+        "4": 4,
+        "5": 24
+      },
+      "counts": {
+        "all": {
+          "procedure_correct_cases": 0,
+          "statuses": {
+            "ok": 32
+          },
+          "task_success_cases": 0,
+          "task_success_eligible_cases": 12,
+          "total_cases": 32
+        },
+        "en": {
+          "procedure_correct_cases": 0,
+          "statuses": {
+            "ok": 16
+          },
+          "task_success_cases": 0,
+          "task_success_eligible_cases": 6,
+          "total_cases": 16
+        },
+        "fr": {
+          "procedure_correct_cases": 0,
+          "statuses": {
+            "ok": 16
+          },
+          "task_success_cases": 0,
+          "task_success_eligible_cases": 6,
+          "total_cases": 16
+        },
+        "test": {
+          "procedure_correct_cases": 0,
+          "statuses": {
+            "ok": 12
+          },
+          "task_success_cases": 0,
+          "task_success_eligible_cases": 4,
+          "total_cases": 12
+        },
+        "train": {
+          "procedure_correct_cases": 0,
+          "statuses": {
+            "ok": 20
+          },
+          "task_success_cases": 0,
+          "task_success_eligible_cases": 8,
+          "total_cases": 20
+        }
+      },
+      "display_name": "vela2-03-macos-choice-episodes-v1",
+      "execution": {
+        "cases_with_execution_trace": 32,
+        "inner_call_statuses": {
+          "ok": 32
+        },
+        "inner_inference_ms": {
+          "count": 32,
+          "max": 230.3545410031802,
+          "median": 168.23841650329996,
+          "p95": 205.56433300225763
+        },
+        "inner_worker_rss_mib_max": 1225.03125,
+        "load_ms": 4784.985958001926,
+        "policy_steps": 32,
+        "tool_call_attempts": 0,
+        "tool_calls_executed": 0,
+        "worker_restarts": 0
+      },
+      "expected_to_final_reason": [
+        {
+          "cases": 1,
+          "expected": "complete",
+          "final": "partial_data"
+        },
+        {
+          "cases": 11,
+          "expected": "complete",
+          "final": "unavailable"
+        },
+        {
+          "cases": 4,
+          "expected": "missing_information",
+          "final": "unavailable"
+        },
+        {
+          "cases": 4,
+          "expected": "no_data",
+          "final": "unavailable"
+        },
+        {
+          "cases": 1,
+          "expected": "partial_data",
+          "final": "partial_data"
+        },
+        {
+          "cases": 3,
+          "expected": "partial_data",
+          "final": "unavailable"
+        },
+        {
+          "cases": 1,
+          "expected": "persistent_error",
+          "final": "partial_data"
+        },
+        {
+          "cases": 3,
+          "expected": "persistent_error",
+          "final": "unavailable"
+        },
+        {
+          "cases": 1,
+          "expected": "unavailable",
+          "final": "partial_data"
+        },
+        {
+          "cases": 3,
+          "expected": "unavailable",
+          "final": "unavailable"
+        }
+      ],
+      "families": [
+        {
+          "expected": "complete",
+          "family": "tool-episode-family-001-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-episode-family-002-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "persistent_error",
+          "family": "tool-episode-family-003-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "no_data",
+          "family": "tool-episode-family-004-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "partial_data",
+          "family": "tool-episode-family-005-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "missing_information",
+          "family": "tool-episode-family-006-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "unavailable",
+          "family": "tool-episode-family-007-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-canary-family-003-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-canary-family-004-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "missing_information",
+          "family": "tool-policy-canary-family-005-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-heldout-family-107-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-heldout-family-108-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "persistent_error",
+          "family": "tool-policy-heldout-family-109-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "no_data",
+          "family": "tool-policy-heldout-family-110-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "partial_data",
+          "family": "tool-policy-heldout-family-111-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "unavailable",
+          "family": "tool-policy-heldout-family-112-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        }
+      ],
+      "first_step_choice": {
+        "finish-partial_data": 4,
+        "finish-unavailable": 28
+      },
+      "identity": {
+        "dataset_sha256": "f249752d4ab464a50fd96c0b573f36adf54d59995856e0d872962f9fa6dafab9",
+        "inner_identity_sha256": "7b630580833366ee5ae3b76fd13b96bdc7588ae39f861409503474b0be28e393",
+        "inner_profile": "profiles/vela2-03-macos-cpu.json",
+        "model_repo_id": "vllm-sr/Vela-2.0-0.3B",
+        "model_revision": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+        "outer_identity_sha256": "f3dc4d723abcd355c68d9bf36a499ae3c83a41de37aad3fd06ff1ead51a3e39f",
+        "profile": "profiles/vela2-03-macos-choice-episodes.json",
+        "raw_sha256": "a13b85db76e039cf6a8fd3179040eda560da61a75f1bbeeec522b0f38d6bb6a4",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "seal_sha256": "110056d7e449ef339a24bf16a895ef1d49eaec7fef1a9ebf5a4cb09b66df5e24"
+      },
+      "label": "Vela03Macos",
+      "stages": {
+        "arguments": {
+          "correct": 0,
+          "eligible": 28
+        },
+        "binding": {
+          "correct": 0,
+          "eligible": 12
+        },
+        "budget": {
+          "correct": 32,
+          "eligible": 32
+        },
+        "execution": {
+          "correct": 0,
+          "eligible": 28
+        },
+        "result": {
+          "correct": 0,
+          "eligible": 12
+        },
+        "stopping": {
+          "correct": 0,
+          "eligible": 32
+        },
+        "tool": {
+          "correct": 0,
+          "eligible": 28
+        }
+      }
+    },
+    {
+      "chosen_position": {
+        "1": 80,
+        "2": 21,
+        "3": 10,
+        "4": 1,
+        "5": 5,
+        "6": 1
+      },
+      "counts": {
+        "all": {
+          "procedure_correct_cases": 16,
+          "statuses": {
+            "ok": 32
+          },
+          "task_success_cases": 10,
+          "task_success_eligible_cases": 12,
+          "total_cases": 32
+        },
+        "en": {
+          "procedure_correct_cases": 10,
+          "statuses": {
+            "ok": 16
+          },
+          "task_success_cases": 6,
+          "task_success_eligible_cases": 6,
+          "total_cases": 16
+        },
+        "fr": {
+          "procedure_correct_cases": 6,
+          "statuses": {
+            "ok": 16
+          },
+          "task_success_cases": 4,
+          "task_success_eligible_cases": 6,
+          "total_cases": 16
+        },
+        "test": {
+          "procedure_correct_cases": 4,
+          "statuses": {
+            "ok": 12
+          },
+          "task_success_cases": 3,
+          "task_success_eligible_cases": 4,
+          "total_cases": 12
+        },
+        "train": {
+          "procedure_correct_cases": 12,
+          "statuses": {
+            "ok": 20
+          },
+          "task_success_cases": 7,
+          "task_success_eligible_cases": 8,
+          "total_cases": 20
+        }
+      },
+      "display_name": "d3-nano-macos-choice-episodes-v1",
+      "execution": {
+        "cases_with_execution_trace": 32,
+        "inner_call_statuses": {
+          "ok": 118
+        },
+        "inner_inference_ms": {
+          "count": 118,
+          "max": 46441.948458996194,
+          "median": 31302.68556250303,
+          "p95": 36246.76362500031
+        },
+        "inner_worker_rss_mib_max": 3452.203125,
+        "load_ms": 5417.547834003926,
+        "policy_steps": 118,
+        "tool_call_attempts": 99,
+        "tool_calls_executed": 53,
+        "worker_restarts": 0
+      },
+      "expected_to_final_reason": [
+        {
+          "cases": 10,
+          "expected": "complete",
+          "final": "complete"
+        },
+        {
+          "cases": 2,
+          "expected": "complete",
+          "final": "step_limit"
+        },
+        {
+          "cases": 2,
+          "expected": "missing_information",
+          "final": "missing_information"
+        },
+        {
+          "cases": 2,
+          "expected": "missing_information",
+          "final": "persistent_error"
+        },
+        {
+          "cases": 3,
+          "expected": "no_data",
+          "final": "no_data"
+        },
+        {
+          "cases": 1,
+          "expected": "no_data",
+          "final": "step_limit"
+        },
+        {
+          "cases": 1,
+          "expected": "partial_data",
+          "final": "partial_data"
+        },
+        {
+          "cases": 3,
+          "expected": "partial_data",
+          "final": "step_limit"
+        },
+        {
+          "cases": 4,
+          "expected": "persistent_error",
+          "final": "step_limit"
+        },
+        {
+          "cases": 3,
+          "expected": "unavailable",
+          "final": "step_limit"
+        },
+        {
+          "cases": 1,
+          "expected": "unavailable",
+          "final": "unavailable"
+        }
+      ],
+      "families": [
+        {
+          "expected": "complete",
+          "family": "tool-episode-family-001-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-episode-family-002-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "persistent_error",
+          "family": "tool-episode-family-003-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "no_data",
+          "family": "tool-episode-family-004-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "partial_data",
+          "family": "tool-episode-family-005-fr-en",
+          "passed": 1,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "missing_information",
+          "family": "tool-episode-family-006-fr-en",
+          "passed": 1,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "unavailable",
+          "family": "tool-episode-family-007-fr-en",
+          "passed": 0,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-canary-family-003-fr-en",
+          "passed": 1,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-canary-family-004-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "missing_information",
+          "family": "tool-policy-canary-family-005-fr-en",
+          "passed": 1,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-heldout-family-107-fr-en",
+          "passed": 1,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-heldout-family-108-fr-en",
+          "passed": 2,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "persistent_error",
+          "family": "tool-policy-heldout-family-109-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "no_data",
+          "family": "tool-policy-heldout-family-110-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "partial_data",
+          "family": "tool-policy-heldout-family-111-fr-en",
+          "passed": 0,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "unavailable",
+          "family": "tool-policy-heldout-family-112-fr-en",
+          "passed": 1,
+          "split": "test",
+          "total": 2
+        }
+      ],
+      "first_step_choice": {
+        "call-lookup": 28,
+        "finish-missing_information": 2,
+        "finish-persistent_error": 2
+      },
+      "identity": {
+        "dataset_sha256": "f249752d4ab464a50fd96c0b573f36adf54d59995856e0d872962f9fa6dafab9",
+        "inner_identity_sha256": "c8615190245453aef26d732e2c296ff1a8f32aac961e9b822cb25e585439d8c4",
+        "inner_profile": "profiles/d3-nano-macos-cpu.json",
+        "model_repo_id": "vllm-sr/d3-nano",
+        "model_revision": "3aeb1c22a5632aac72353c36b3d0111c40e7dbf4",
+        "outer_identity_sha256": "e7f5661eb9e72cbb251f46263e097cfcaec1807e1004aa9719bd1fd1d7a79fc9",
+        "profile": "profiles/d3-nano-macos-choice-episodes.json",
+        "raw_sha256": "60eff678d161de8494305bcdca3d93fc8ccd66fb2d664ba316f25eb43ec99b0b",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "seal_sha256": "cac87536d675c5b3326c87fe40391567fd2de3fea7864210434e5ef0a89f0be9"
+      },
+      "label": "D3nanoMacos",
+      "stages": {
+        "arguments": {
+          "correct": 28,
+          "eligible": 28
+        },
+        "binding": {
+          "correct": 10,
+          "eligible": 12
+        },
+        "budget": {
+          "correct": 18,
+          "eligible": 32
+        },
+        "execution": {
+          "correct": 14,
+          "eligible": 28
+        },
+        "result": {
+          "correct": 10,
+          "eligible": 12
+        },
+        "stopping": {
+          "correct": 17,
+          "eligible": 32
+        },
+        "tool": {
+          "correct": 23,
+          "eligible": 28
+        }
+      }
+    },
+    {
+      "chosen_position": {
+        "1": 38,
+        "2": 10,
+        "3": 10,
+        "4": 4,
+        "5": 4,
+        "6": 10
+      },
+      "counts": {
+        "all": {
+          "procedure_correct_cases": 28,
+          "statuses": {
+            "ok": 32
+          },
+          "task_success_cases": 10,
+          "task_success_eligible_cases": 12,
+          "total_cases": 32
+        },
+        "en": {
+          "procedure_correct_cases": 16,
+          "statuses": {
+            "ok": 16
+          },
+          "task_success_cases": 6,
+          "task_success_eligible_cases": 6,
+          "total_cases": 16
+        },
+        "fr": {
+          "procedure_correct_cases": 12,
+          "statuses": {
+            "ok": 16
+          },
+          "task_success_cases": 4,
+          "task_success_eligible_cases": 6,
+          "total_cases": 16
+        },
+        "test": {
+          "procedure_correct_cases": 10,
+          "statuses": {
+            "ok": 12
+          },
+          "task_success_cases": 3,
+          "task_success_eligible_cases": 4,
+          "total_cases": 12
+        },
+        "train": {
+          "procedure_correct_cases": 18,
+          "statuses": {
+            "ok": 20
+          },
+          "task_success_cases": 7,
+          "task_success_eligible_cases": 8,
+          "total_cases": 20
+        }
+      },
+      "display_name": "d3-mini-macos-choice-episodes-v1",
+      "execution": {
+        "cases_with_execution_trace": 32,
+        "inner_call_statuses": {
+          "ok": 76
+        },
+        "inner_inference_ms": {
+          "count": 76,
+          "max": 92707.26904099865,
+          "median": 73950.11818750208,
+          "p95": 89537.77479199925
+        },
+        "inner_worker_rss_mib_max": 7883.609375,
+        "load_ms": 5295.470541001123,
+        "policy_steps": 76,
+        "tool_call_attempts": 44,
+        "tool_calls_executed": 44,
+        "worker_restarts": 0
+      },
+      "expected_to_final_reason": [
+        {
+          "cases": 10,
+          "expected": "complete",
+          "final": "complete"
+        },
+        {
+          "cases": 2,
+          "expected": "complete",
+          "final": "persistent_error"
+        },
+        {
+          "cases": 4,
+          "expected": "missing_information",
+          "final": "missing_information"
+        },
+        {
+          "cases": 4,
+          "expected": "no_data",
+          "final": "no_data"
+        },
+        {
+          "cases": 4,
+          "expected": "partial_data",
+          "final": "partial_data"
+        },
+        {
+          "cases": 4,
+          "expected": "persistent_error",
+          "final": "persistent_error"
+        },
+        {
+          "cases": 4,
+          "expected": "unavailable",
+          "final": "unavailable"
+        }
+      ],
+      "families": [
+        {
+          "expected": "complete",
+          "family": "tool-episode-family-001-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-episode-family-002-fr-en",
+          "passed": 1,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "persistent_error",
+          "family": "tool-episode-family-003-fr-en",
+          "passed": 1,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "no_data",
+          "family": "tool-episode-family-004-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "partial_data",
+          "family": "tool-episode-family-005-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "missing_information",
+          "family": "tool-episode-family-006-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "unavailable",
+          "family": "tool-episode-family-007-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-canary-family-003-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-canary-family-004-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "missing_information",
+          "family": "tool-policy-canary-family-005-fr-en",
+          "passed": 2,
+          "split": "train",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-heldout-family-107-fr-en",
+          "passed": 2,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "complete",
+          "family": "tool-policy-heldout-family-108-fr-en",
+          "passed": 1,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "persistent_error",
+          "family": "tool-policy-heldout-family-109-fr-en",
+          "passed": 1,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "no_data",
+          "family": "tool-policy-heldout-family-110-fr-en",
+          "passed": 2,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "partial_data",
+          "family": "tool-policy-heldout-family-111-fr-en",
+          "passed": 2,
+          "split": "test",
+          "total": 2
+        },
+        {
+          "expected": "unavailable",
+          "family": "tool-policy-heldout-family-112-fr-en",
+          "passed": 2,
+          "split": "test",
+          "total": 2
+        }
+      ],
+      "first_step_choice": {
+        "call-lookup": 28,
+        "finish-missing_information": 4
+      },
+      "identity": {
+        "dataset_sha256": "f249752d4ab464a50fd96c0b573f36adf54d59995856e0d872962f9fa6dafab9",
+        "inner_identity_sha256": "571833f52154040e7113a939c14cbcb7b13a34fbb5b7dc0c36fc2d78c5163202",
+        "inner_profile": "profiles/d3-mini-macos-cpu.json",
+        "model_repo_id": "vllm-sr/d3-mini",
+        "model_revision": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4",
+        "outer_identity_sha256": "0cdc0fdf3c88daa41d76683a2ed7e3d9351e6a3e0023ad20ab68c74559e0c49b",
+        "profile": "profiles/d3-mini-macos-choice-episodes.json",
+        "raw_sha256": "43253cf07f1118d52623c9c739ec6518e44779eed7015fceea0262e21d6c5161",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "seal_sha256": "b38f49b06473dfa308a5853f481e04eeb00298d99077a2a2650724785f3a1be3"
+      },
+      "label": "D3miniMacos",
+      "stages": {
+        "arguments": {
+          "correct": 28,
+          "eligible": 28
+        },
+        "binding": {
+          "correct": 10,
+          "eligible": 12
+        },
+        "budget": {
+          "correct": 32,
+          "eligible": 32
+        },
+        "execution": {
+          "correct": 24,
+          "eligible": 28
+        },
+        "result": {
+          "correct": 10,
+          "eligible": 12
+        },
+        "stopping": {
+          "correct": 28,
+          "eligible": 32
+        },
+        "tool": {
+          "correct": 28,
+          "eligible": 28
+        }
+      }
+    }
+  ],
+  "schema_version": "deposium.choice-episodes-public/v1"
+}
