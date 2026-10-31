@@ -43,6 +43,9 @@ MODEL_TENSORS = {
 WORKER = Path(__file__).resolve().parents[1] / "bridges" / "d3-worker.py"
 CHOICE_PROTOCOL = Path(__file__).with_name("choice_protocol.py")
 TRANSPORT_FILE = Path(__file__).with_name("worker_transport.py")
+# A per-call timeout no longer fails the whole campaign closed: the worker is
+# restarted a bounded number of times and later cases are still attempted.
+MAX_WORKER_RESTARTS = 3
 RUNTIME_NAMES = {"torch", "transformers", "tokenizers", "safetensors", "accelerate", "einops"}
 LOADING_MODE = "native-d3-bf16-readout-fp32"
 
@@ -153,6 +156,8 @@ class D3Adapter:
         self._states = {}
         self._failure = None
         self._sequence = 0
+        self._restarts = 0
+        self._restart_pending = False
         self._peak_rss_mb = 0.0
         self._timeout = float(profile["timeout_seconds"])
         self.provenance = {"adapter": "d3", "qualification": "model_isolated", "available": False,
@@ -160,6 +165,10 @@ class D3Adapter:
                            "model_revision": profile["revision"], "model_repo_id": self._model["repo_id"],
                            "profile_sha256": hashlib.sha256(_wire(profile)).hexdigest(),
                            "capabilities": self.capabilities}
+        self.provenance["restart_policy"] = {"max_worker_restarts": MAX_WORKER_RESTARTS,
+                                             "trigger": "d3_inference_timeout",
+                                             "timed_out_case_status": "timeout_not_cached"}
+        self.provenance["worker_restarts"] = []
         self.provenance["adapter_sha256"] = self._remember(Path(__file__))
         self.provenance["worker_sha256"] = self._remember(WORKER)
         self.provenance["choice_protocol_sha256"] = self._remember(CHOICE_PROTOCOL)
@@ -170,54 +179,7 @@ class D3Adapter:
             self._prepare(deadline)
             if self._host_available_mb() < minimum_available_mib(self._model["repo_id"]):
                 raise MemoryError("d3_host_memory_low")
-            cache = Path(__file__).resolve().parents[1] / "results" / ".cache" / "d3-worker"
-            cache.mkdir(parents=True, exist_ok=True)
-            self._pycache = Path(tempfile.mkdtemp(prefix="pycache-", dir=cache))
-            env = {"PATH": os.defpath, "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC",
-                   "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1", "HF_DATASETS_OFFLINE": "1",
-                   "HF_HUB_DISABLE_TELEMETRY": "1", "CUDA_VISIBLE_DEVICES": "", "PYTHONDONTWRITEBYTECODE": "1",
-                   "PYTHONNOUSERSITE": "1", "TOKENIZERS_PARALLELISM": "false", "HF_HOME": str(cache),
-                   "XDG_CACHE_HOME": str(cache), "TMPDIR": str(cache),
-                   "OMP_NUM_THREADS": str(self._model["threads"]), "MKL_NUM_THREADS": str(self._model["threads"])}
-            self._process = subprocess.Popen([str(self._paths["runtime_python"]), "-I", "-B",
-                                              "-X", f"pycache_prefix={self._pycache}", str(WORKER)],
-                                             stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                                             stderr=subprocess.DEVNULL, env=env, start_new_session=True)
-            os.set_blocking(self._process.stdin.fileno(), False)
-            os.set_blocking(self._process.stdout.fileno(), False)
-            ready = self._exchange({"op": "initialize", "config": {
-                "local_dir": str(self._root), "revision": profile["revision"],
-                "repo_id": self._model["repo_id"],
-                "max_length": self._model["max_length"], "threads": self._model["threads"],
-                "pins": self._pins, "assets_manifest": str(self._paths["assets_manifest"]),
-                "assets_manifest_sha256": self.provenance["assets_manifest_sha256"]}},
-                max(0, deadline - time.monotonic()))
-            if not isinstance(ready, dict) or ready.get("status") != "ready":
-                if isinstance(ready, dict) and ready.get("error") in {"d3_model_missing", "d3_runtime_missing"}:
-                    raise FileNotFoundError(ready["error"])
-                raise ValueError("d3_initialization_failed")
-            if (set(ready) != {"status", "runtime", "load_ms", "rss_mb", "native_max_input_tokens", "checkpoint_max_input_tokens", "backbone_dtype", "readout_dtype", "device", "loading_mode", "backbone_parameters", "readout_shape"}
-                    or ready["device"] != "cpu" or ready["backbone_dtype"] != "bfloat16" or ready["readout_dtype"] != "float32"
-                    or ready["loading_mode"] != LOADING_MODE
-                    or type(ready["native_max_input_tokens"]) is not int
-                    or ready["native_max_input_tokens"] != self._model["max_length"]
-                    or ready["checkpoint_max_input_tokens"] is not None
-                    or type(ready["backbone_parameters"]) is not int
-                    or (ready["backbone_parameters"], ready["readout_shape"]) != MODEL_TENSORS[self._model["repo_id"]]
-                    or not isinstance(ready["runtime"], dict)
-                    or any(ready["runtime"].get(name) != version for name, version in self._pins.items())
-                    or not self._nonnegative(ready["load_ms"]) or not self._nonnegative(ready["rss_mb"])):
-                raise ValueError("d3_invalid_ready")
-            self._guard()
-            if max(self._peak_rss_mb, ready["rss_mb"]) > self._model["max_rss_mb"]:
-                raise MemoryError("d3_rss_limit")
-            self.provenance.update(available=True, runtime=ready["runtime"], device="cpu", backbone_dtype="bfloat16", readout_dtype="float32",
-                                   backbone_parameters=ready["backbone_parameters"], readout_shape=ready["readout_shape"],
-                                   loading_mode=ready["loading_mode"],
-                                   native_max_input_tokens=ready["native_max_input_tokens"],
-                                   checkpoint_max_input_tokens=ready["checkpoint_max_input_tokens"],
-                                   effective_max_input_tokens=self._model["max_length"],
-                                   load_ms=ready["load_ms"], load_rss_mb=max(self._peak_rss_mb, ready["rss_mb"]))
+            self._launch_worker(deadline, profile)
         except TimeoutError:
             self._fail("timeout", "d3_initialization_timeout")
         except MemoryError as exc:
@@ -232,6 +194,57 @@ class D3Adapter:
         finally:
             self._identity()
             self.provenance["init_wall_ms"] = (time.monotonic() - initialized_at) * 1000
+
+    def _launch_worker(self, deadline, profile):
+        """Start the single CPU worker and verify its ready report; used at init and after a restart."""
+        cache = Path(__file__).resolve().parents[1] / "results" / ".cache" / "d3-worker"
+        cache.mkdir(parents=True, exist_ok=True)
+        self._pycache = Path(tempfile.mkdtemp(prefix="pycache-", dir=cache))
+        env = {"PATH": os.defpath, "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC",
+               "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1", "HF_DATASETS_OFFLINE": "1",
+               "HF_HUB_DISABLE_TELEMETRY": "1", "CUDA_VISIBLE_DEVICES": "", "PYTHONDONTWRITEBYTECODE": "1",
+               "PYTHONNOUSERSITE": "1", "TOKENIZERS_PARALLELISM": "false", "HF_HOME": str(cache),
+               "XDG_CACHE_HOME": str(cache), "TMPDIR": str(cache),
+               "OMP_NUM_THREADS": str(self._model["threads"]), "MKL_NUM_THREADS": str(self._model["threads"])}
+        self._process = subprocess.Popen([str(self._paths["runtime_python"]), "-I", "-B",
+                                          "-X", f"pycache_prefix={self._pycache}", str(WORKER)],
+                                         stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                         stderr=subprocess.DEVNULL, env=env, start_new_session=True)
+        os.set_blocking(self._process.stdin.fileno(), False)
+        os.set_blocking(self._process.stdout.fileno(), False)
+        ready = self._exchange({"op": "initialize", "config": {
+            "local_dir": str(self._root), "revision": profile["revision"],
+            "repo_id": self._model["repo_id"],
+            "max_length": self._model["max_length"], "threads": self._model["threads"],
+            "pins": self._pins, "assets_manifest": str(self._paths["assets_manifest"]),
+            "assets_manifest_sha256": self.provenance["assets_manifest_sha256"]}},
+            max(0, deadline - time.monotonic()))
+        if not isinstance(ready, dict) or ready.get("status") != "ready":
+            if isinstance(ready, dict) and ready.get("error") in {"d3_model_missing", "d3_runtime_missing"}:
+                raise FileNotFoundError(ready["error"])
+            raise ValueError("d3_initialization_failed")
+        if (set(ready) != {"status", "runtime", "load_ms", "rss_mb", "native_max_input_tokens", "checkpoint_max_input_tokens", "backbone_dtype", "readout_dtype", "device", "loading_mode", "backbone_parameters", "readout_shape"}
+                or ready["device"] != "cpu" or ready["backbone_dtype"] != "bfloat16" or ready["readout_dtype"] != "float32"
+                or ready["loading_mode"] != LOADING_MODE
+                or type(ready["native_max_input_tokens"]) is not int
+                or ready["native_max_input_tokens"] != self._model["max_length"]
+                or ready["checkpoint_max_input_tokens"] is not None
+                or type(ready["backbone_parameters"]) is not int
+                or (ready["backbone_parameters"], ready["readout_shape"]) != MODEL_TENSORS[self._model["repo_id"]]
+                or not isinstance(ready["runtime"], dict)
+                or any(ready["runtime"].get(name) != version for name, version in self._pins.items())
+                or not self._nonnegative(ready["load_ms"]) or not self._nonnegative(ready["rss_mb"])):
+            raise ValueError("d3_invalid_ready")
+        self._guard()
+        if max(self._peak_rss_mb, ready["rss_mb"]) > self._model["max_rss_mb"]:
+            raise MemoryError("d3_rss_limit")
+        self.provenance.update(available=True, runtime=ready["runtime"], device="cpu", backbone_dtype="bfloat16", readout_dtype="float32",
+                               backbone_parameters=ready["backbone_parameters"], readout_shape=ready["readout_shape"],
+                               loading_mode=ready["loading_mode"],
+                               native_max_input_tokens=ready["native_max_input_tokens"],
+                               checkpoint_max_input_tokens=ready["checkpoint_max_input_tokens"],
+                               effective_max_input_tokens=self._model["max_length"],
+                               load_ms=ready["load_ms"], load_rss_mb=max(self._peak_rss_mb, ready["rss_mb"]))
 
     @staticmethod
     def _nonnegative(value):
@@ -493,6 +506,10 @@ class D3Adapter:
         if (not isinstance(request, dict) or request.get("contract_id") != CONTEXT_CHOICE_CONTRACT
                 or not isinstance(request.get("input"), dict)):
             return _envelope("unsupported", error="unsupported_contract")
+        if self._restart_pending:
+            self._relaunch()
+            if self._failure is not None:
+                return dict(self._failure)
         validate_json(request["input"])
         _no_annotations(request["input"])
         validate_choice_input(request["input"])
@@ -507,9 +524,11 @@ class D3Adapter:
             response = self._exchange(message, self._timeout)
             self._guard()
             self._audit(response, request["input"])
+            if isinstance(response.get("raw_output"), dict):
+                response["raw_output"]["worker_generation"] = self._restarts
             return {key: response[key] for key in ("status", "output", "raw_output", "error")}
         except TimeoutError:
-            self._fail("timeout", "d3_inference_timeout")
+            return self._timeout_outcome()
         except MemoryError as exc:
             self._fail("error", "d3_host_memory_low" if str(exc) == "d3_host_memory_low" else "d3_rss_limit")
         except FileNotFoundError:
@@ -521,30 +540,73 @@ class D3Adapter:
             raise
         return dict(self._failure)
 
+    def _terminate_worker(self):
+        """Stop the owned worker process only; the adapter stays open for a bounded restart."""
+        process = self._process
+        self._process = None
+        if process is None:
+            return
+        try:
+            # EPERM: the group already has no signalable member (macOS reports it for a reaped worker).
+            try:
+                os.killpg(process.pid, signal.SIGTERM)
+            except (ProcessLookupError, PermissionError):
+                pass
+            try:
+                process.wait(timeout=1)
+            except subprocess.TimeoutExpired:
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except (ProcessLookupError, PermissionError):
+                    pass
+                process.wait(timeout=1)
+        finally:
+            if process.stdin:
+                process.stdin.close()
+            if process.stdout:
+                process.stdout.close()
+
+    def _timeout_outcome(self):
+        """The timed-out case is recorded as attempted; later cases get a restarted worker."""
+        if self._restarts >= MAX_WORKER_RESTARTS:
+            self._fail("timeout", "d3_inference_timeout")
+            return dict(self._failure)
+        self._restarts += 1
+        self._terminate_worker()
+        self._restart_pending = True
+        self.provenance["worker_restarts"].append({"after_sequence": self._sequence, "restart": self._restarts,
+                                                   "reason": "d3_inference_timeout"})
+        return _envelope("timeout", error="d3_inference_timeout",
+                         raw_output={"forward_executed": None, "cached_failure": False,
+                                     "worker_restart_scheduled": self._restarts, "worker_generation": self._restarts - 1})
+
+    def _relaunch(self):
+        started = time.monotonic()
+        deadline = started + MODELS[self._model["repo_id"]][4]
+        try:
+            if self._host_available_mb() < minimum_available_mib(self._model["repo_id"]):
+                raise MemoryError("d3_host_memory_low")
+            self._launch_worker(deadline, self._profile)
+            self.provenance["worker_restarts"][-1]["relaunch_ms"] = (time.monotonic() - started) * 1000
+        except TimeoutError:
+            self._fail("timeout", "d3_initialization_timeout")
+        except MemoryError as exc:
+            self._fail("error", "d3_host_memory_low" if str(exc) == "d3_host_memory_low" else "d3_rss_limit")
+        except FileNotFoundError:
+            self._fail("missing", "d3_assets_or_runtime_missing")
+        except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
+            self._fail("error", "d3_initialization_invalid")
+        finally:
+            self._restart_pending = False
+
     def close(self):
         self._closed = True
         process = self._process
         self._process = None
         try:
-            if process is not None:
-                try:
-                    os.killpg(process.pid, signal.SIGTERM)
-                except ProcessLookupError:
-                    pass
-                try:
-                    process.wait(timeout=1)
-                except subprocess.TimeoutExpired:
-                    try:
-                        os.killpg(process.pid, signal.SIGKILL)
-                    except ProcessLookupError:
-                        pass
-                    process.wait(timeout=1)
+            self._process = process
+            self._terminate_worker()
         finally:
-            if process is not None:
-                if process.stdin:
-                    process.stdin.close()
-                if process.stdout:
-                    process.stdout.close()
             if self._pycache is not None:
                 # This directory was created uniquely for this worker; never sweep shared caches.
                 owned, self._pycache = self._pycache, None

@@ -141,7 +141,10 @@ def export(args):
     # say how many unsuccessful cases were actually attempted.
     cached = [r for r in records if (r.get("raw_output") or {}).get("cached_failure") is True]
     unsuccessful = [r for r in records if r["status"] != "ok"]
+    generations = [(r.get("raw_output") or {}).get("worker_generation") for r in records]
+    restarts = max([g for g in generations if type(g) is int] or [0])
     attempts = {"recorded_cases": len(records), "attempted_cases": len(records) - len(cached),
+                "worker_restarts": restarts,
                 "unsuccessful_attempted": len(unsuccessful) - len(cached), "cached_unattempted": len(cached),
                 "fail_closed_after_first_failure": bool(cached),
                 "first_failure_case_index": next((i for i, r in enumerate(records) if r["status"] != "ok"), None),
