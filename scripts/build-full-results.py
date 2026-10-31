@@ -1087,11 +1087,12 @@ def render_at_a_glance(data):
              "|---|---|---|---:|---|---|---|"]
     for family, title, cases, count, all_leader, test_leader, link in rows:
         lines.append(f"| {family} | {title} | {cases} | {count} | {all_leader} | {test_leader} | {link} |")
-    lines += ["", "Rows further down keep every observation, partial campaigns included, with their denominators and statuses.", ""]
+    lines += ["", "Rows further down keep every observation, partial campaigns included, with their denominators and statuses. "
+              "For one model across every task, open [Every model, every task](leaderboard/models/README.md): one page per observation with scores, ranks, execution outcomes, speed and reports.", ""]
     return lines
 
 def render(data):
-    lines = ["# Full results", "", "[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · "
+    lines = ["# Full results", "", "[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · [Every model, every task](leaderboard/models/README.md) · "
              "[Passages and other campaigns](leaderboard/other-benchmarks.md) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
              f"**{len(data['observations'])} context model/runtime observations through 31 October 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.",
              "Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;",
@@ -1192,6 +1193,155 @@ def render(data):
     return "\n".join(header + render_toc(glance + lines) + glance + lines)
 
 
+
+MODEL_PAGES_DIR = "docs/leaderboard/models/"
+RUNTIME_LABELS = {"historical_cpu": "Historical Linux/WSL CPU (processor not identified)", "remote_api": "Remote HTTP API (server hardware unknown)",
+                  "apple_metal_native": "Native llama.cpp Metal, Apple M5 Pro", "apple_mps": "PyTorch MPS, Apple M5 Pro",
+                  "cpu_new": "macOS arm64 CPU, pinned runtime", "apple_metal_upstream": "Direct upstream native Metal, Apple M5 Pro"}
+PAGE_TASKS = (("context", "Context choices", "RAG decision", "RESULTS.md#model-quality"),
+              ("tool_proposal", "First-tool proposals", "RAG decision", "RESULTS.md#model-quality"),
+              ("capability", "Capability and workflow choices", "Tool workflow", "RESULTS.md#capability-choices"),
+              ("physics", "Physics choices", "Reasoning with a supplied law", "RESULTS.md#physics-choices"),
+              ("passage_relevance", "Passage relevance", "Retrieved evidence", "RESULTS.md#passage-relevance"),
+              ("passage_support", "Claim support", "Retrieved evidence", "RESULTS.md#claim-support"),
+              ("passage_answerability", "Answerability", "Retrieved evidence", "RESULTS.md#answerability"),
+              ("passage_relevance_four_rotations", "Passage relevance, four rotations", "Retrieved evidence", "RESULTS.md#passage-relevance"),
+              ("passage_ranking", "Passage ranking", "Retrieved evidence", "leaderboard/other-benchmarks.md#passage-ranking-and-evidence"),
+              ("tool_discovery", "Tool discovery (generated JSON)", "Tool policy, generated", "RESULTS.md#generated-json-tool-policy-observations"),
+              ("tool_arguments", "Tool arguments (generated JSON)", "Tool policy, generated", "RESULTS.md#generated-json-tool-policy-observations"),
+              ("tool_episodes", "Tool episodes (generated JSON)", "Tool policy, generated", "RESULTS.md#generated-json-tool-policy-observations"))
+
+
+def _page_link(path):
+    """Relative link from docs/leaderboard/models/ to a repository path."""
+    path = str(path)
+    return "../../" + path[len("docs/"):] if path.startswith("docs/") else "../../../" + path
+
+
+def _page_cell(cell, rank=None):
+    if cell["status"] == "not_run":
+        return "not run"
+    text = f"{cell['numerator']}/{cell['total']}" if cell["numerator"] is not None else f"0/{cell['total']}"
+    if cell["status"] == "partial":
+        text += f" (partial, {cell['scored_or_valid']} scored)"
+    if rank:
+        text += f" · rank {rank}"
+    return text
+
+
+def _outcomes_text(cell):
+    if cell["status"] == "not_run":
+        return "—"
+    bad = {k: v for k, v in cell["outcomes"].items() if k != "ok" and v}
+    return "all `ok`" if not bad else ", ".join(f"{v} `{k}`" for k, v in sorted(bad.items()))
+
+
+def render_model_pages(data):
+    """One page per observation with every task, its rank, its execution outcomes and the report links; plus an index."""
+    context = {r["id"]: r for r in data["observations"]}
+    ranks = {}
+    for row in data["campaigns"]:
+        ranks[(row["task"], row["observation"])] = row
+    def campaign_row(task, oid):
+        return ranks.get((task, oid)) or ranks.get((task, oid.removesuffix("Passage")))
+    pages, index_rows = {}, []
+    for obs in data["coverage"]["observations"]:
+        oid, cells = obs["id"], obs["cells"]
+        ctx = context.get(oid)
+        meta = ctx["metadata"] if ctx else None
+        name = meta["display_name"] if meta else obs["model"]
+        lines = [f"# {name}", "",
+                 f"[All results](../../RESULTS.md) · [All models](README.md) · [Coverage overview](../../RESULTS.md#coverage-overview)", "",
+                 "One observation: one checkpoint, one runtime, one pass per case. Scores are **correct / all cases** with "
+                 "failures kept in the denominator; **rank** is the competition rank among completely scored observations on the "
+                 "same task. References are agent-authored and pending human review; a few-case lead on correlated FR/EN variants "
+                 "is not a general ranking.", "",
+                 "## Identity", "", "| Item | Value |", "|---|---|",
+                 f"| Size | {meta['model_size']['label'] if meta and meta['model_size']['label'] else obs.get('size') or 'NR'} |",
+                 f"| Runtime | {RUNTIME_LABELS.get(meta['runtime_group'], meta['runtime_group']) if meta else obs.get('runtime') or 'NR'} |"]
+        if meta:
+            lines += [f"| Family | {meta['family']} |", f"| Precision | {meta['precision']} |",
+                      f"| Hardware | {meta['hardware_group']} |", f"| Observed | {meta['observed_date']} |",
+                      "| Protocol / evidence | " + ", ".join(f"[{Path(e['path']).name}]({_page_link(e['path'])})" for e in meta["evidence"]) + " |"]
+        lines += ["", "## Results by task", "",
+                  "| Family | Task | Correct / all | Held-out test | Rank all | Rank test | Execution | Report |", "|---|---|---:|---:|---:|---:|---|---|"]
+        index = {"name": name, "id": oid, "ctx": ctx}
+        for task, title, family, section in PAGE_TASKS:
+            cell = cells.get(task)
+            if cell is None:
+                continue
+            if task == "context" and ctx:
+                test = f"{ctx['context']['groups']['split']['test']['correct']}/66"
+                rank_all, rank_test = ctx["rank_all_splits"], ctx["rank_test_splits"]
+                report = ", ".join(f"[{Path(e['path']).stem}]({_page_link(e['path'])})" for e in meta["evidence"])
+            elif task == "tool_proposal" and ctx and ctx["tool_proposal"]:
+                test, rank_all, rank_test = "no test split", "—", "—"
+                report = "provisional agreement, zero qualified cases"
+            else:
+                row = campaign_row(task, oid)
+                if row:
+                    by_split = row["counts"].get("by_split") or {}
+                    test = f"{by_split['test']['correct']}/{by_split['test']['total']}" if "test" in by_split else "no split ranking"
+                    rank_all, rank_test = row.get("rank_all") or "—", row.get("rank_test") or "—"
+                    report = f"[report](../../{row['report']})" if row.get("report") else "—"
+                else:
+                    test, rank_all, rank_test, report = "—", "—", "—", "—"
+            if cell["status"] == "not_run":
+                test, rank_all, rank_test = "—", "—", "—"
+            section_link = f"[{title}](../../{section})"
+            lines.append(f"| {family} | {section_link} | {_page_cell(cell)} | {test} | {rank_all} | {rank_test} | {_outcomes_text(cell)} | {report} |")
+            index[task] = (cell, rank_all if cell["status"] != "not_run" else None)
+        if ctx and ctx.get("resources"):
+            r = ctx["resources"]
+            gpu = r.get("sampled_gpu_allocated_peak_mib")
+            rss = r.get("session_process_group_peak_rss_mib")
+            worker = (r.get("worker_rss_mib") or {}).get("max")
+            lines += ["", "## Speed and memory (context session)", "", "| Median call ms | p95 call ms | Timed calls | Initialization ms | Session RSS GiB | Worker RSS GiB | GPU allocated GiB |", "|---:|---:|---:|---:|---:|---:|---:|",
+                      f"| {number(r['adapter_ms']['median'])} | {number(r['adapter_ms']['p95'])} | {r['adapter_ms']['count']} | {number(r.get('initialization_ms'))} | "
+                      f"{number(rss / 1024 if rss is not None else None, 2)} | {number(worker / 1024 if worker is not None else None, 2)} | {number(gpu / 1024 if gpu is not None else None, 2)} |", "",
+                      f"Scope: {r.get('rss_scope', 'as recorded in the source aggregate')}. Latency is descriptive, not a throughput guarantee."]
+        lines += ["", "## Reading this page", "",
+                  "- **Execution** says whether the campaign ran cleanly: `all ok` means every case produced a valid answer; other statuses "
+                  "(`timeout`, `error`, `missing`, `unsupported`, `abstain`) are counted and stay in the denominator of the score.",
+                  "- **not run** means no public observation for this task on this runtime; it is not a zero.",
+                  "- Partial campaigns are shown with their scored count and are never ranked.",
+                  "- Generated regularly from the sealed public aggregates by `scripts/build-full-results.py`; nothing here reruns a model.", ""]
+        pages[MODEL_PAGES_DIR + oid + ".md"] = "\n".join(lines)
+        index_rows.append(index)
+    def sort_key(row):
+        ctx = row["ctx"]
+        return (0 if ctx else 1, ctx["rank_all_splits"] if ctx else 0, row["name"])
+    index_rows.sort(key=sort_key)
+    def index_cell(row, task):
+        entry = row.get(task)
+        if entry is None or entry[0]["status"] == "not_run":
+            return "—"
+        cell, rank = entry
+        text = f"{cell['numerator']}/{cell['total']}" if cell["numerator"] is not None else f"0/{cell['total']}"
+        if cell["status"] == "partial":
+            text += " partial"
+        elif rank and rank != "—":
+            text += f" (#{rank})"
+        return text
+    lines = ["# Every model, every task", "",
+             f"[All results](../../RESULTS.md) · [At a glance](../../RESULTS.md#at-a-glance) · [Coverage overview](../../RESULTS.md#coverage-overview)", "",
+             f"{len(index_rows)} observations. One line per model/runtime observation; each cell is **correct / all cases** on that task with its "
+             "competition rank in parentheses, `partial` when the campaign did not complete, and **—** when the task was not run on that runtime. "
+             "Context observations come first, in context rank order; passage-only methods and the generative candidate follow. "
+             "Click the model for its page with every task, execution outcomes, speed and reports.", "",
+             "| Model / runtime | Context /132 | Tool /24 | Capability /192 | Physics /48 | Relevance /512 | Support /768 | Answerability /128 | Generated JSON (discovery, arguments, episodes) |",
+             "|---|---:|---:|---:|---:|---:|---:|---:|---|"]
+    for row in index_rows:
+        generated = ", ".join(index_cell(row, t) for t in ("tool_discovery", "tool_arguments", "tool_episodes"))
+        generated = "—" if generated == "—, —, —" else generated
+        lines.append(f"| [{row['name']}]({row['id']}.md) | {index_cell(row, 'context')} | {index_cell(row, 'tool_proposal')} | {index_cell(row, 'capability')} | "
+                     f"{index_cell(row, 'physics')} | {index_cell(row, 'passage_relevance')} | {index_cell(row, 'passage_support')} | {index_cell(row, 'passage_answerability')} | {generated} |")
+    lines += ["", "Tool /24 is provisional agreement with agent-authored first-tool proposals, not routing accuracy; it has no rank. "
+              "Passage scores are rotation 0 (128 pools × decisions); the four-rotation Jev export and the ranking methods are on each model page and in "
+              "[other benchmarks](../other-benchmarks.md). Generated regularly by `scripts/build-full-results.py`.", ""]
+    pages[MODEL_PAGES_DIR + "README.md"] = "\n".join(lines)
+    return pages
+
 def outputs(data):
     models, tasks = flat_rows(data)
     return {"docs/RESULTS.md": render(data), "docs/leaderboard/models.csv": csv_text(models),
@@ -1199,7 +1349,8 @@ def outputs(data):
             "docs/leaderboard/coverage.json": json.dumps(data["coverage"], ensure_ascii=False, sort_keys=True, indent=2, allow_nan=False) + "\n",
             "docs/leaderboard/campaigns.csv": csv_text(campaign_csv_rows(data)),
             "docs/leaderboard/task-breakdown.csv": csv_text(tasks),
-            "docs/leaderboard/results.json": json.dumps(data, ensure_ascii=False, sort_keys=True, indent=2, allow_nan=False) + "\n"}
+            "docs/leaderboard/results.json": json.dumps(data, ensure_ascii=False, sort_keys=True, indent=2, allow_nan=False) + "\n",
+            **render_model_pages(data)}
 
 
 def main(argv=None):

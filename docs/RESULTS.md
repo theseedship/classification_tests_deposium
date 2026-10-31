@@ -1,6 +1,6 @@
 # Full results
 
-[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · [Passages and other campaigns](leaderboard/other-benchmarks.md) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)
+[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · [Every model, every task](leaderboard/models/README.md) · [Passages and other campaigns](leaderboard/other-benchmarks.md) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)
 
 **34 context model/runtime observations through 31 October 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.
 Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;
@@ -52,7 +52,7 @@ One line per task, grouped by family: **RAG decision** (which source or first to
 | Retrieved evidence | Answerability | 128 (rotation 0) | 4 | D3 Flash Q8 · direct Metal (122/128) | no split ranking | [Answerability](#answerability) |
 | Tool policy, generated | Generated-JSON tool policy | 10 + 6 + 18 (TRAIN canary + held-out) | 1 | Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2: discovery 3/10; arguments 6/6; episodes 7/18 passed (single observation, unranked) | held-out pack 9/24 over the three contracts; see the report | [Generated-JSON observations](#generated-json-tool-policy-observations) |
 
-Rows further down keep every observation, partial campaigns included, with their denominators and statuses.
+Rows further down keep every observation, partial campaigns included, with their denominators and statuses. For one model across every task, open [Every model, every task](leaderboard/models/README.md): one page per observation with scores, ranks, execution outcomes, speed and reports.
 
 ## Coverage overview
 

@@ -436,10 +436,12 @@ class FullResultsTests(unittest.TestCase):
     def test_outputs_are_deterministic_across_builds_and_hash_seeds(self):
         first = results.outputs(self.data)
         self.assertEqual(first, results.outputs(results.build(self.root)))
-        self.assertEqual(set(first), {"docs/RESULTS.md", "docs/leaderboard/models.csv",
-                                      "docs/leaderboard/task-breakdown.csv", "docs/leaderboard/results.json",
-                                      "docs/leaderboard/campaigns.csv", "docs/leaderboard/coverage.csv",
-                                      "docs/leaderboard/coverage.json"})
+        fixed = {"docs/RESULTS.md", "docs/leaderboard/models.csv", "docs/leaderboard/task-breakdown.csv",
+                 "docs/leaderboard/results.json", "docs/leaderboard/campaigns.csv", "docs/leaderboard/coverage.csv",
+                 "docs/leaderboard/coverage.json"}
+        pages = {k for k in first if k.startswith("docs/leaderboard/models/")}
+        self.assertEqual(set(first) - pages, fixed)
+        self.assertEqual(len(pages), len(self.data["coverage"]["observations"]) + 1)
         code = (
             "import hashlib,json,pathlib,runpy,sys;root=pathlib.Path(sys.argv[1]);"
             "m=runpy.run_path(str(root/'scripts/build-full-results.py'));"
@@ -513,6 +515,23 @@ class FullResultsTests(unittest.TestCase):
         self.assertEqual(len(glance), 1)
         self.assertIn("D3 mini · macOS CPU (192/192)", glance[0])
         self.assertIn("(tie)", glance[0])
+
+    def test_model_pages_show_every_task_with_ranks_execution_and_reports(self):
+        pages = results.render_model_pages(self.data)
+        index = pages["docs/leaderboard/models/README.md"]
+        self.assertIn("| [D3 mini · macOS CPU](D3miniMacos.md) | 119/132 (#", index)
+        self.assertIn("| 192/192 (#1) | 39/48 (#2) |", index)
+        mini = pages["docs/leaderboard/models/D3miniMacos.md"]
+        self.assertIn("| Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 192/192 | 96/96 | 1 | 1 | all `ok` | [report](../../D3_MINI_MACOS_RESULTS_20261031.md) |", mini)
+        self.assertIn("| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |", mini)
+        nano = pages["docs/leaderboard/models/D3nanoMacos.md"]
+        self.assertIn("| 188/192 | 92/96 |", nano)
+        jev = pages["docs/leaderboard/models/Jev114.md"]
+        self.assertIn("partial", jev)
+        for path, text in pages.items():
+            for link in re.findall(r"\]\((\.\./\.\./[^)#]+)", text):
+                target = ROOT / link[9:] if link.startswith("../../../") else ROOT / "docs" / link[6:]
+                self.assertTrue(target.exists(), (path, link))
 
     def test_coverage_matrix_keeps_runtime_boundaries_and_actual_missing_examples(self):
         coverage = self.data["coverage"]
