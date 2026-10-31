@@ -439,7 +439,7 @@ class FullResultsTests(unittest.TestCase):
         fixed = {"docs/RESULTS.md", "docs/leaderboard/models.csv", "docs/leaderboard/task-breakdown.csv",
                  "docs/leaderboard/results.json", "docs/leaderboard/campaigns.csv", "docs/leaderboard/coverage.csv",
                  "docs/leaderboard/coverage.json"}
-        pages = {k for k in first if k.startswith("docs/leaderboard/models/")}
+        pages = {k for k in first if k.startswith(results.MODEL_PAGES_DIR)}
         self.assertEqual(set(first) - pages, fixed)
         self.assertEqual(len(pages), len(self.data["coverage"]["observations"]) + 1)
         code = (
@@ -538,16 +538,26 @@ class FullResultsTests(unittest.TestCase):
 
     def test_model_pages_show_every_task_with_ranks_execution_and_reports(self):
         pages = results.render_model_pages(self.data)
-        index = pages["docs/leaderboard/models/README.md"]
+        index = pages[results.MODEL_PAGES_DIR + "README.md"]
         self.assertIn("| [D3 mini · macOS CPU](D3miniMacos.md) | 119/132 (#", index)
         self.assertIn("| 192/192 (#1) | 39/48 (#2) |", index)
-        mini = pages["docs/leaderboard/models/D3miniMacos.md"]
+        mini = pages[results.MODEL_PAGES_DIR + "D3miniMacos.md"]
         self.assertIn("| Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 192/192 | 96/96 | 1 | 1 | all `ok` | [report](../../D3_MINI_MACOS_RESULTS_20261031.md) |", mini)
         self.assertIn("| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |", mini)
-        nano = pages["docs/leaderboard/models/D3nanoMacos.md"]
+        nano = pages[results.MODEL_PAGES_DIR + "D3nanoMacos.md"]
         self.assertIn("| 188/192 | 92/96 |", nano)
-        jev = pages["docs/leaderboard/models/Jev114.md"]
+        jev = pages[results.MODEL_PAGES_DIR + "Jev114.md"]
         self.assertIn("partial", jev)
+        # An attempted campaign with nothing scored keeps its outcomes; it is not "not run".
+        self.assertIn("| 0/128 scored (attempted, nothing scored) | — | — | — | 128 `missing` |", jev)
+        bge = pages[results.MODEL_PAGES_DIR + "BGEPassage.md"]
+        self.assertIn("nDCG@1 0.922 (480/480 defined of 512)", bge)
+        self.assertNotIn("0/512", bge)
+        self.assertNotIn("0/512", index)
+        for path in pages:
+            self.assertFalse(results.MODEL_PAGES_DIR.rstrip("/").endswith("/models"))
+            ignored = subprocess.run(["git", "check-ignore", "-q", path], cwd=ROOT).returncode == 0
+            self.assertFalse(ignored, f"generated page would be ignored by git: {path}")
         for path, text in pages.items():
             for link in re.findall(r"\]\((\.\./\.\./[^)#]+)", text):
                 target = ROOT / link[9:] if link.startswith("../../../") else ROOT / "docs" / link[6:]

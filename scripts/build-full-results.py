@@ -1163,11 +1163,11 @@ def render_at_a_glance(data):
     for family, title, cases, count, all_leader, test_leader, link in rows:
         lines.append(f"| {family} | {title} | {cases} | {count} | {all_leader} | {test_leader} | {link} |")
     lines += ["", "Rows further down keep every observation, partial campaigns included, with their denominators and statuses. "
-              "For one model across every task, open [Every model, every task](leaderboard/models/README.md): one page per observation with scores, ranks, execution outcomes, speed and reports.", ""]
+              "For one model across every task, open [Every model, every task](leaderboard/by-model/README.md): one page per observation with scores, ranks, execution outcomes, speed and reports.", ""]
     return lines
 
 def render(data):
-    lines = ["# Full results", "", "[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · [Every model, every task](leaderboard/models/README.md) · "
+    lines = ["# Full results", "", "[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · [Every model, every task](leaderboard/by-model/README.md) · "
              "[Passages and other campaigns](leaderboard/other-benchmarks.md) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
              f"**{len(data['observations'])} context model/runtime observations through 31 October 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.",
              "Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;",
@@ -1269,7 +1269,7 @@ def render(data):
 
 
 
-MODEL_PAGES_DIR = "docs/leaderboard/models/"
+MODEL_PAGES_DIR = "docs/leaderboard/by-model/"  # not "models/": that name is a privacy ignore rule for weights
 RUNTIME_LABELS = {"historical_cpu": "Historical Linux/WSL CPU (processor not identified)", "remote_api": "Remote HTTP API (server hardware unknown)",
                   "apple_metal_native": "Native llama.cpp Metal, Apple M5 Pro", "apple_mps": "PyTorch MPS, Apple M5 Pro",
                   "cpu_new": "macOS arm64 CPU, pinned runtime", "apple_metal_upstream": "Direct upstream native Metal, Apple M5 Pro"}
@@ -1289,24 +1289,35 @@ PAGE_TASKS = (("context", "Context choices", "RAG decision", "RESULTS.md#model-q
 
 
 def _page_link(path):
-    """Relative link from docs/leaderboard/models/ to a repository path."""
+    """Relative link from the model-pages directory to a repository path."""
     path = str(path)
     return "../../" + path[len("docs/"):] if path.startswith("docs/") else "../../../" + path
 
 
+def _score_text(cell):
+    """Score of an observed cell; never invent a correct count for a metric that has none."""
+    if cell["metric"] == "ndcg@1":
+        return f"nDCG@1 {cell['metric_value']:.3f} ({cell['metric_defined']}/{cell['metric_eligible']} defined of {cell['total']})"
+    if cell["numerator"] is None:
+        return f"0/{cell['total']} scored"
+    return f"{cell['numerator']}/{cell['total']}"
+
+
 def _page_cell(cell, rank=None):
-    if cell["status"] == "not_run":
+    if not cell["evidence_present"]:
         return "not run"
-    text = f"{cell['numerator']}/{cell['total']}" if cell["numerator"] is not None else f"0/{cell['total']}"
+    text = _score_text(cell)
     if cell["status"] == "partial":
         text += f" (partial, {cell['scored_or_valid']} scored)"
+    elif cell["status"] == "not_run":
+        text += " (attempted, nothing scored)"
     if rank:
         text += f" · rank {rank}"
     return text
 
 
 def _outcomes_text(cell):
-    if cell["status"] == "not_run":
+    if not cell["evidence_present"]:
         return "—"
     bad = {k: v for k, v in cell["outcomes"].items() if k != "ok" and v}
     return "all `ok`" if not bad else ", ".join(f"{v} `{k}`" for k, v in sorted(bad.items()))
@@ -1372,9 +1383,11 @@ def render_model_pages(data):
                     test, rank_all, rank_test, report = "—", "—", "—", "—"
             if cell["status"] == "not_run":
                 test, rank_all, rank_test = "—", "—", "—"
+                if not cell["evidence_present"]:
+                    report = "—"
             section_link = f"[{title}](../../{section})"
             lines.append(f"| {family} | {section_link} | {_page_cell(cell)} | {test} | {rank_all} | {rank_test} | {_outcomes_text(cell)} | {report} |")
-            index[task] = (cell, rank_all if cell["status"] != "not_run" else None)
+            index[task] = (cell, rank_all if cell["status"] == "complete" else None)
         if ctx and ctx.get("resources"):
             r = ctx["resources"]
             gpu = r.get("sampled_gpu_allocated_peak_mib")
@@ -1398,12 +1411,14 @@ def render_model_pages(data):
     index_rows.sort(key=sort_key)
     def index_cell(row, task):
         entry = row.get(task)
-        if entry is None or entry[0]["status"] == "not_run":
+        if entry is None or not entry[0]["evidence_present"]:
             return "—"
         cell, rank = entry
-        text = f"{cell['numerator']}/{cell['total']}" if cell["numerator"] is not None else f"0/{cell['total']}"
+        text = _score_text(cell)
         if cell["status"] == "partial":
             text += " partial"
+        elif cell["status"] == "not_run":
+            text += ", attempted"
         elif rank and rank != "—":
             text += f" (#{rank})"
         return text
