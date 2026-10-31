@@ -3,8 +3,9 @@
 31 October 2026. This contribution connects a separate
 `uzu_systemone_local` candidate to the existing campaign engine, System One
 request projection, response validator and scorer. It includes a controller
-tested with synthetic files, mocked processes and HTTP. **Zero Uzu model cases
-have run.** There is no model score, measured speed, RAM saving, Metal
+tested with synthetic files, mocked processes and HTTP. **Zero Uzu benchmark cases
+have run.** The separate [functional API check](UZU_D3_FUNCTIONAL_CHECK_20261031.md)
+observed three decision types, without a dataset campaign. There is no model score, measured speed, RAM saving, Metal
 qualification or product integration to add to the results table.
 
 The three initial packs remain unchanged: context (132), capability (192) and
@@ -57,7 +58,8 @@ The private `deposium.uzu-model-session/v1` binds:
 - `preparation`: preparation receipt path/hash;
 - endpoint, PID and supervisor PID;
 - `settings`: `client_max_tokens`, concurrency 1, one question per call,
-  `implicit_acquisition:false`; and `max_rss_mb`.
+  `implicit_acquisition:false`; and `max_rss_mb`. Here acquisition refers to
+  model assets, not catalogue metadata; offline startup is not claimed.
 
 The matching live `native_supervision` scope is required before construction
 can hash the resident pack, and before/after each request. A saved profile,
@@ -106,9 +108,11 @@ Initial admission precedes hashing weights; the reserve is rechecked afterward.
 An expired prelaunch deadline cannot start the service.
 
 The command uses the pinned local directory, IPv4 loopback and no prefix cache.
-Because the stock CLI includes a downloader, macOS `sandbox-exec` requests
-loopback-only network egress; this policy itself still needs a bounded real Mac
-check before a model campaign. Child environment excludes inherited provider
+The functional check found that the stock CLI fetches its online catalogue even
+for local model directories. The launcher therefore permits this bootstrap and
+records `egress_isolated:false`; a loopback-bound API does not imply offline
+inference startup. Pack files are still verified locally with no fallback to a
+remote model identifier. Child environment excludes inherited provider
 credentials. Readiness verifies the served ID. Resource supervision and campaign
 execution reuse the existing code. The selected dataset is copied unchanged.
 
@@ -136,8 +140,8 @@ They exercise synthetic multi-file identities, preparation bindings, mapping,
 invalid probabilities, timeout/no retry, guard loss, resource preflight,
 readiness failures, cleanup uncertainty/deadlines and a sealed campaign through
 the actual shared scorer. Every Uzu process and socket is mocked.
-They do not certify Uzu compilation, the native preparation producer, the
-macOS network policy, actual Metal use or model quality.
+They do not certify Uzu compilation, the native preparation producer,
+offline operation, actual Metal use or model quality.
 
 Next: review the CPU contribution, prepare/verify the real renderer producer
 and runtime build without modifying historical receipts, then freeze a separate

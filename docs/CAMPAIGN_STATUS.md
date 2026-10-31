@@ -16,8 +16,11 @@ Additional engine preparation, 31 October 2026: the [Uzu decision CPU contributi
 adds a separate pack/session identity, shared System One transport and bounded
 controller with no-model fixtures. It does not change the original cohort,
 datasets or scores. The real Uzu-renderer preparation producer, runtime build,
-OS policy and native campaign remain unqualified; no model launch follows from
-the CPU checks. Existing campaigns may continue independently.
+offline operation and native campaign remain unqualified; no model launch follows from
+the CPU checks. A separate [unscored functional API check](UZU_D3_FUNCTIONAL_CHECK_20261031.md)
+observed choice/yes-no/score responses and a closed server; it exposed the stock
+CLI's online catalogue bootstrap requirement. No benchmark score was added.
+Existing campaigns may continue independently.
 
 The documentation/coverage consolidation and contributor guide were delivered
 by merged [PR #24](https://github.com/theseedship/classification_tests_deposium/pull/24).
