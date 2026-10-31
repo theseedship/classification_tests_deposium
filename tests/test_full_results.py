@@ -31,7 +31,7 @@ EXPECTED_LABELS = {
     "Indecis", "Jev", "Julia", "Kai", "Laya", "Liquid3", "ModernJEV",
     "Muose", "Noma", "Nox", "Omni", "Sol", "Vela03", "Vela08", "Vela4",
     "D3FlashQ4", "D3FlashQ8", "D3Q4", "EosQ8", "GLiClass9B", "Vela3Fast",
-    "ClefFlashQ8", "D3FlashQ8Upstream", "D3liteMacos", "Vela03Macos", "D3nanoMacos",
+    "ClefFlashQ8", "D3FlashQ8Upstream", "D3liteMacos", "Vela03Macos", "D3nanoMacos", "D3miniMacos",
 }
 
 
@@ -145,11 +145,11 @@ class FullResultsTests(unittest.TestCase):
 
     def test_join_contains_30_unique_context_observations_and_preserves_historical_scores(self):
         self.assertEqual(set(self.by_id), EXPECTED_LABELS)
-        self.assertEqual(len(self.data["observations"]), 33)
-        self.assertEqual(self.data["historical_context_observations"], 31)
+        self.assertEqual(len(self.data["observations"]), 34)
+        self.assertEqual(self.data["historical_context_observations"], 32)
         for phase in ("context", "tool_proposal"):
             observed = [r[phase] for r in self.by_id.values() if r[phase] is not None]
-            self.assertEqual(len({r["source"]["seal_sha256"] for r in observed}), 33 if phase == "context" else 31)
+            self.assertEqual(len({r["source"]["seal_sha256"] for r in observed}), 34 if phase == "context" else 32)
             self.assertEqual(len({r["source"]["dataset_sha256"] for r in observed}), 1)
         self.assertEqual(self.by_id["D3Q4"]["context"]["counts"]["correct"], 128)
         self.assertEqual(self.by_id["GLiClass9B"]["context"]["groups"]["split"]["test"]["correct"], 63)
@@ -426,9 +426,9 @@ class FullResultsTests(unittest.TestCase):
             expected = 1 + sum(r["context"]["counts"]["correct"] > correct for r in rows)
             self.assertEqual(row["rank_all_splits"], expected)
         models, tasks = results.flat_rows(self.data)
-        self.assertEqual(len(models), 33)
+        self.assertEqual(len(models), 34)
         test_tasks = [r for r in tasks if r["task"] == "context" and r["axis"] == "split" and r["group"] == "test"]
-        self.assertEqual(len(test_tasks), 33)
+        self.assertEqual(len(test_tasks), 34)
         self.assertEqual({r["total"] for r in test_tasks}, {66})
         self.assertEqual({r["metric"] for r in tasks if r["task"] == "tool_proposal"}, {"provisional_agreement"})
 
@@ -472,7 +472,7 @@ class FullResultsTests(unittest.TestCase):
     def test_independent_task_rankings_keep_physics_test_reversal_and_capability_tie(self):
         rows = {(r["task"], r["observation"]): r for r in self.data["campaigns"]}
         clef, d3 = rows["physics", "ClefFlashQ8"], rows["physics", "D3FlashQ8Upstream"]
-        self.assertEqual((clef["rank_all"], clef["rank_test"]), (1, 2))
+        self.assertEqual((clef["rank_all"], clef["rank_test"]), (1, 3))
         self.assertEqual((d3["rank_all"], d3["rank_test"]), (2, 1))
         self.assertEqual((clef["counts"]["correct"], clef["counts"]["by_split"]["test"]["correct"]), (41, 31))
         for key in ("ClefFlashQ8", "D3FlashQ8"):
@@ -503,7 +503,7 @@ class FullResultsTests(unittest.TestCase):
         coverage = self.data["coverage"]
         rows = {r["id"]: r for r in coverage["observations"]}
         self.assertEqual({k for k, r in rows.items() if r["context_observation"]}, EXPECTED_LABELS)
-        self.assertEqual(len(rows), 39)
+        self.assertEqual(len(rows), 40)
         self.assertEqual({len(r["cells"]) for r in rows.values()}, {12})
         generative = rows["QwenToolPolicyV2"]
         self.assertTrue(generative["generative_observation"])
@@ -544,7 +544,7 @@ class FullResultsTests(unittest.TestCase):
         rendered = results.render(self.data)
         self.assertLess(rendered.index("## Coverage overview"), rendered.index("## Updated task rankings"))
         csv_rows = list(csv.DictReader(io.StringIO(results.outputs(self.data)["docs/leaderboard/coverage.csv"])))
-        self.assertEqual(len(csv_rows), 39 * 12)
+        self.assertEqual(len(csv_rows), 40 * 12)
         self.assertIn("### Generated-JSON tool-policy observations", rendered)
         self.assertNotIn("| Discovery (JSON) /10 | Arguments", rendered.split("### Passage-only")[0])
         blank = next(r for r in csv_rows if r["observation"] == "ClefFlashQ8" and r["task"] == "tool_proposal")

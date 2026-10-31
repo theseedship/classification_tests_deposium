@@ -23,7 +23,7 @@ runtime, then the 27B Q4 Metal and GLiClass MPS candidates. The reason is cost
 of qualification, not expected quality: the 27B path needs a 32 GiB admission,
 a rebuilt native toolchain and a public preparation driver. Membership, packs,
 references, canary selection and phases are unchanged; each macOS run is a new
-runtime identity beside the historical Linux/WSL row. First protocol:
+runtime identity beside the historical Linux/WSL row. Wave B completed on 31 October 2026: lite 168/192, Vela 0.3B 128/192, nano 188/192, mini 192/192 ([mini results](D3_MINI_MACOS_RESULTS_20261031.md)). First protocol:
 [D3 lite on macOS CPU](D3_LITE_MACOS_CPU_PROTOCOL_20261030.md).
 
 
