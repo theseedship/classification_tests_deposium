@@ -17,6 +17,8 @@ from .synthetic_tools import FixtureStore, ToolError, artifact_id, canonical, va
 CONTRACT = "bench.tool-episode"
 INPUT_VERSION = "deposium.tool-episode-input/v1"
 INPUT_VERSION_V2 = "deposium.tool-episode-input/v2"
+# v3 admits CPU classifier wall time for the closed-choice step policy (ten minutes per episode).
+INPUT_VERSION_V3 = "deposium.tool-episode-input/v3"
 OUTPUT_VERSION = "deposium.tool-episode-output/v1"
 PROJECTION_VERSION = "deposium.tool-episode-candidate-input/v1"
 METRICS_VERSION = "deposium.tool-episode-metrics/v1"
@@ -30,7 +32,7 @@ def _object(value, fields, where):
 
 def validate_input(task):
     _object(task, {"schema_version", "request", "scope_id", "dataset", "known_dataset_id", "faults", "budgets"}, "input")
-    if task["schema_version"] not in (INPUT_VERSION, INPUT_VERSION_V2):
+    if task["schema_version"] not in (INPUT_VERSION, INPUT_VERSION_V2, INPUT_VERSION_V3):
         raise CaseError("tool-episode: invalid input version")
     request = task["request"]
     if (not isinstance(request, str) or not request.strip() or len(request) > 8192
@@ -53,7 +55,7 @@ def validate_input(task):
     # v1 stays at its original one-second fixture limit. A separately versioned
     # input permits a predeclared real-policy envelope; elapsed model time is
     # still counted by the same state machine and retained receipt checker.
-    elapsed_bound = 1000 if task["schema_version"] == INPUT_VERSION else 60000
+    elapsed_bound = {INPUT_VERSION: 1000, INPUT_VERSION_V2: 60000, INPUT_VERSION_V3: 600000}[task["schema_version"]]
     bounds = {"max_steps": 5, "max_tool_calls": 3, "max_lookup_attempts": 2, "max_elapsed_ms": elapsed_bound}
     _object(task["budgets"], bounds, "budget")
     if any(type(task["budgets"][k]) is not int or not 1 <= task["budgets"][k] <= v for k, v in bounds.items()):
@@ -465,6 +467,9 @@ def summarize_metrics(cases, rows, results):
                 if isinstance(retained, dict) and retained.get("schema_version") == "deposium.local-tool-model-trace/v1":
                     from .local_tool_policy import validate_trace
                     validate_trace(case, result)
+                elif isinstance(retained, dict) and retained.get("schema_version") == "deposium.choice-episode-trace/v1":
+                    from .choice_episodes import validate_trace as validate_choice_trace
+                    validate_choice_trace(case, result)
                 validate_receipt(case["input"], output)
             except (CaseError, TypeError, KeyError):
                 continue
