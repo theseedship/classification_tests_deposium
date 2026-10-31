@@ -122,6 +122,10 @@ class PublishedCpuPackTests(unittest.TestCase):
         self.assertEqual(phase["attempts"], {**phase["attempts"], "attempted_cases": 43, "unsuccessful_attempted": 1,
                                              "cached_unattempted": 149, "fail_closed_after_first_failure": True,
                                              "first_failure_case_index": 42})
+        second = json.loads((ROOT / "docs/evidence/d3-nano-macos-20261031/capability-002.json").read_text())["phases"]["capability"]
+        self.assertEqual((second["counts"]["passed_cases"], second["counts"]["scored_cases"], second["counts"]["counts_by_status"]["timeout"]), (188, 192, 0))
+        self.assertEqual((second["attempts"]["attempted_cases"], second["attempts"]["cached_unattempted"]), (192, 0))
+        self.assertLessEqual(second["latency_ms"]["max"], 300000)
         complete = json.loads((ROOT / "docs/evidence/d3-nano-macos-20261031/physics.json").read_text())["phases"]["physics"]
         self.assertEqual((complete["attempts"]["cached_unattempted"], complete["attempts"]["fail_closed_after_first_failure"]), (0, False))
 

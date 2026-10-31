@@ -32,7 +32,7 @@ The 33 rows below preserve quantization and runtime identities; sizes are publis
 | D3 flash · Q4 Metal | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 mini · CPU | 4.539B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 nano · CPU | 2.213B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 nano · macOS CPU | 2.213B backbone | complete 132/132 | complete 24/24 | partial 42/192 | complete 48/48 | not_run | not_run | not_run | not_run | not_run |
+| D3 nano · macOS CPU | 2.213B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | not_run | not_run | not_run | not_run | not_run |
 | GLiClass v4 9B · BF16 MPS | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Clef Flash · Q8 direct Metal | 9B class | complete 132/132 | not_run | complete 192/192 | complete 48/48 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | Vela 2.0 4B · CPU | 4.211B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
@@ -120,9 +120,9 @@ These tables include every published campaign on these packs. Each task has its 
 |---:|---:|---|---:|---:|---:|---|
 | 1 | 1 | Clef Flash Q8 · direct Metal | 192/192 | 192/192 | 96/96 | [Report](CLEF_FLASH_RESULTS_20261029.md) |
 | 1 | 1 | D3 Flash Q8 · gateway Metal | 192/192 | 192/192 | 96/96 | [Report](CAPABILITY_FLASH_RESULTS_20261029.md) |
-| 3 | 3 | D3 lite · macOS CPU | 168/192 | 192/192 | 80/96 | [Report](D3_LITE_MACOS_RESULTS_20261030.md) |
-| 4 | 4 | Vela 2.0 0.3B · macOS CPU | 128/192 | 192/192 | 62/96 | [Report](VELA2_03_MACOS_RESULTS_20261030.md) |
-| — | — | D3 nano · macOS CPU | 42/192 | 42/192 | 18/96 | [Report](D3_NANO_MACOS_RESULTS_20261031.md) |
+| 3 | 3 | D3 nano · macOS CPU | 188/192 | 192/192 | 92/96 | [Report](D3_NANO_MACOS_RESULTS_20261031.md) |
+| 4 | 4 | D3 lite · macOS CPU | 168/192 | 192/192 | 80/96 | [Report](D3_LITE_MACOS_RESULTS_20261030.md) |
+| 5 | 5 | Vela 2.0 0.3B · macOS CPU | 128/192 | 192/192 | 62/96 | [Report](VELA2_03_MACOS_RESULTS_20261030.md) |
 
 Clef Flash Q8 · direct Metal, D3 Flash Q8 · gateway Metal reach the ceiling on these supplied proposals; a perfect or near-perfect closed-choice score does not qualify executable tools. Runtimes differ per row (gateway-backed Metal, direct native listener, CPU worker) and are not pooled.
 
@@ -136,15 +136,15 @@ Clef Flash Q8 · direct Metal, D3 Flash Q8 · gateway Metal reach the ceiling on
 | D3 Flash Q8 · gateway Metal | Capability selection | 64/64 | 32/32 |
 | D3 Flash Q8 · gateway Metal | Arguments and dependencies | 64/64 | 32/32 |
 | D3 Flash Q8 · gateway Metal | Next step after fixed observations | 64/64 | 32/32 |
+| D3 nano · macOS CPU | Capability selection | 63/64 | 31/32 |
+| D3 nano · macOS CPU | Arguments and dependencies | 61/64 | 29/32 |
+| D3 nano · macOS CPU | Next step after fixed observations | 64/64 | 32/32 |
 | D3 lite · macOS CPU | Capability selection | 47/64 | 23/32 |
 | D3 lite · macOS CPU | Arguments and dependencies | 57/64 | 25/32 |
 | D3 lite · macOS CPU | Next step after fixed observations | 64/64 | 32/32 |
 | Vela 2.0 0.3B · macOS CPU | Capability selection | 53/64 | 26/32 |
 | Vela 2.0 0.3B · macOS CPU | Arguments and dependencies | 30/64 | 11/32 |
 | Vela 2.0 0.3B · macOS CPU | Next step after fixed observations | 45/64 | 25/32 |
-| D3 nano · macOS CPU | Capability selection | 42/64 | 18/32 |
-| D3 nano · macOS CPU | Arguments and dependencies | 0/64 | 0/32 |
-| D3 nano · macOS CPU | Next step after fixed observations | 0/64 | 0/32 |
 
 ### Physics choices
 
@@ -214,9 +214,9 @@ Physical-call timings are kept separate from reused logical decisions; session R
 |---|---|---:|---:|---:|---:|
 | Clef Flash Q8 · direct Metal | capability | 192 | 616.9 | 953.5 | 10.60 |
 | D3 Flash Q8 · gateway Metal | capability | 192 | 576.9 | 985.8 | 9.48 |
+| D3 nano · macOS CPU | capability | 192 | 29,439.4 | 49,101.0 | 3.47 |
 | D3 lite · macOS CPU | capability | 192 | 13,298.7 | 23,008.6 | 1.83 |
 | Vela 2.0 0.3B · macOS CPU | capability | 192 | 344.5 | 528.2 | 1.26 |
-| D3 nano · macOS CPU | capability | 42 | 28,396.6 | 45,331.7 | 3.40 |
 | D3 Flash Q8 · direct Metal | passage_answerability | 72 | 278.2 | 748.7 | 9.45 |
 | Clef Flash Q8 · direct Metal | passage_answerability | 72 | 282.3 | 864.7 | 10.40 |
 | Clef Flash Q8 · direct Metal | passage_relevance | 264 | 202.1 | 376.2 | 10.40 |

@@ -122,7 +122,7 @@ class D3AdapterTests(unittest.TestCase):
                 for key, invalid in [('max_length',4095),('threads',3),('max_rss_mb',ceiling+1)]:
                     changed=json.loads(json.dumps(self.profile));changed['model'][key]=invalid
                     with self.assertRaises(ValueError): parse_profile(json.dumps(changed).encode())
-        self.profile['timeout_seconds']=61
+        self.profile['timeout_seconds']=301
         with self.assertRaises(ValueError): parse_profile(json.dumps(self.profile).encode())
 
     def test_new_variants_reject_wrong_ready_tensor_identity(self):

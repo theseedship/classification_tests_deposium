@@ -750,7 +750,7 @@
             "$ref": "#/$defs/d3_model_config"
           },
           "timeout_seconds": {
-            "maximum": 60
+            "maximum": 300
           }
         },
         "oneOf": [

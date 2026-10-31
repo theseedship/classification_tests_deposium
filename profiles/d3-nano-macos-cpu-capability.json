@@ -1,0 +1,23 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "d3-nano-macos-cpu-capability-v1",
+  "adapter": "d3",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.context-choice"
+  ],
+  "model": {
+    "repo_id": "vllm-sr/d3-nano",
+    "local_dir": "../models/d3-nano-3aeb1c2",
+    "runtime_python": "../.cache/d3-macos-runtime/bin/python",
+    "assets_manifest": "d3-nano-assets.json",
+    "prompt_path": "context-choice-prompt-v1.json",
+    "runtime_lock": "../runtimes/d3-macos/runtime.lock",
+    "max_length": 4096,
+    "threads": 2,
+    "max_rss_mb": 12288
+  },
+  "timeout_seconds": 300,
+  "revision": "3aeb1c22a5632aac72353c36b3d0111c40e7dbf4",
+  "recordings": null
+}

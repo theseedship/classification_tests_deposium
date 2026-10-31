@@ -1396,19 +1396,19 @@
         "capability": {
           "evidence_present": true,
           "metric": "correct_choice",
-          "numerator": 42,
+          "numerator": 188,
           "outcomes": {
             "abstain": 0,
             "error": 0,
             "missing": 0,
-            "ok": 42,
-            "timeout": 150,
+            "ok": 192,
+            "timeout": 0,
             "unsupported": 0
           },
           "review_pending": true,
-          "scored_or_valid": 42,
-          "source": "docs/evidence/d3-nano-macos-20261031/capability.json",
-          "status": "partial",
+          "scored_or_valid": 192,
+          "source": "docs/evidence/d3-nano-macos-20261031/capability-002.json",
+          "status": "complete",
           "total": 192
         },
         "context": {
@@ -6343,8 +6343,8 @@
     "docs/D3_LARGER_CPU_PILOT.md": "fff448300435de571ec4372ca3c2216b1baf53dc50d616af68a369b3ee01adc5",
     "docs/D3_LITE_MACOS_CPU_PROTOCOL_20261030.md": "2cb6f644789f6d22082340a035aad2e73b351adeb21e54788f1a7edd4dc99a28",
     "docs/D3_LITE_MACOS_RESULTS_20261030.md": "4b8ff65a006fa1970c96de6091df71130c43d45f165c1bda51787fdfd35c5e3c",
-    "docs/D3_NANO_MACOS_CPU_PROTOCOL_20261030.md": "4edab8cd8cddfcf05985e721a53a57b46fd8c4c7529638626ab9804484888d26",
-    "docs/D3_NANO_MACOS_RESULTS_20261031.md": "c62853fe0c3eb9646fbdcb9bfb3a085a026ccc662a3f8537142d7ae0dd8d9f42",
+    "docs/D3_NANO_MACOS_CPU_PROTOCOL_20261030.md": "14e0e42587a0114fb230023b7b28ecfbc80423db92b4d517575ee7e141abe641",
+    "docs/D3_NANO_MACOS_RESULTS_20261031.md": "f416845dfd6f60847ab979ac4d3a60ae2a1ca900180ae0904a47198359941ce6",
     "docs/GLICLASS_V4_RESULTS_20261017.md": "9b2795a6c3a90b05ca7dbf8ede7d950873dfb7637fc097f79405d72bc01d065d",
     "docs/GLINER_PILOT.md": "70d485a2a84cde3fd039398a8d35c250fc6368fed16138ed1987342d39c0439c",
     "docs/INDECIS_PILOT.md": "7f2c1b72608d86166832837313c40e7f016558bd9a98c11f589ae3426602db71",
@@ -6369,7 +6369,7 @@
     "docs/evidence/d3-lite-macos-20261030/capability.json": "c2f259c7e215a53d815b008c8809999cf1fde12b55e9efdf0b2a195d9e35aa10",
     "docs/evidence/d3-lite-macos-20261030/physics.json": "d322064f3922e2030e1332de741b5bd53b09eb924415fe1883e3ea612dab6118",
     "docs/evidence/d3-nano-macos-20261031/analysis.json": "f0ec4987332398b2c1666482d4e1543e0dfed8a25575aadd9006aa30d56c576d",
-    "docs/evidence/d3-nano-macos-20261031/capability.json": "d67e9430e32e9613eae3389ec5935e93d2667c74a14f245998a85303f6c3b01b",
+    "docs/evidence/d3-nano-macos-20261031/capability-002.json": "4d038ab1f5014753f770ac7519bb3c5215c5d0ce4b66c9fda365691ff88985c9",
     "docs/evidence/d3-nano-macos-20261031/physics.json": "27d205837cf83e44b7366ad898071000a03ff25c4e50a18af40d8d3100e077ee",
     "docs/evidence/gliclass-model-comparison-20261017/analysis.json": "62e3280544704ede362a8be9d8be4244dc34935a4a30dbe8d4f2bbcad8fd354a",
     "docs/evidence/gliclass-model-comparison-20261017/gliclass-session.json": "938b445cac5d50ddde7776c43dad22e0ac9e8c4e14246db73232f3a00fb19639",
@@ -6408,6 +6408,7 @@
     "profiles/d3-lite-assets.json": "0a165940562c277e7050631651b5e59d9a351345c041695e43d48f4de4f4fa71",
     "profiles/d3-lite-macos-cpu.json": "01abd2d2bad5d6b92ab2bc71c5135b8a3984098b30ebdbd2a162e5c734bcbde9",
     "profiles/d3-nano-assets.json": "5d07ba7ec2220bc0e34eed2f18fc42f6306dac2a0b5d85a4721d61505fc6dcec",
+    "profiles/d3-nano-macos-cpu-capability.json": "3c4049a93842fb9905b27d93c1d525767addbd617e28927f14787056d3a1ebf7",
     "profiles/d3-nano-macos-cpu.json": "134bb4384ff9543fed3dbe286ac4d17ee1e50b22b32789633ea6a345f5fee4f0",
     "profiles/decision2-eos-assets.json": "31675c97916270d1744f9ea2446f591bc04165ef531bc2a12aedd159f16e3d1c",
     "profiles/decision2-kai-assets.json": "88a103ac103b1c21a9b8aca6cb3caba6d807a588a390d42d6c0ae5da1aea101d",
@@ -6417,10 +6418,10 @@
     "profiles/vela2-03-assets.json": "989bf962c6665767e00d39a5cd828b82d22556da71361c42f86a34e2a4546fd4",
     "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "f555fc6a96a6a5d35c104f536c75e8e8ad613d6dff6297c0a26715046b3bd7ff",
+    "scripts/build-full-results.py": "e9e27e7574255606d09bc2a5f98c9faa629d290d8f23e24016602650f7f148a8",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-    "scripts/consolidated-campaigns.py": "b44e06fbe164a0366b4a8229cf7fd2604f558e5645fe40d85c160c3268617b1c"
+    "scripts/consolidated-campaigns.py": "6f589da992829cbd87f4d9e480002b0e898dbc1b28c9c63f63c5ed586266cd93"
   },
   "tasks": [
     {

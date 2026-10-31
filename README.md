@@ -46,8 +46,7 @@ The [coverage overview](docs/RESULTS.md#coverage-overview) shows which candidate
 actually ran each task. Two Flash-class native runtimes and, since 30 October
 2026, three small CPU candidates on macOS ([D3 lite](docs/D3_LITE_MACOS_RESULTS_20261030.md),
 capability 168/192, physics 14/48; [Vela 2.0 0.3B](docs/VELA2_03_MACOS_RESULTS_20261030.md),
-128/192 and 18/48; [D3 nano](docs/D3_NANO_MACOS_RESULTS_20261031.md), physics 28/48
-and a partial capability collection: one 60 s timeout, then 149 unattempted cases) have the
+128/192 and 18/48; [D3 nano](docs/D3_NANO_MACOS_RESULTS_20261031.md), 188/192 and 28/48) have the
 complementary packs; most rows still have only the context and first-tool columns. Its [harness overview](docs/RESULTS.md#harness-coverage)
 separates implemented scripted discovery, arguments and feedback fixtures from
 untested real-model output paths, empirical model allocation, application replay,

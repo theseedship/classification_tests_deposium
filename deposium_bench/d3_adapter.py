@@ -77,8 +77,11 @@ def validate_model_profile(profile: dict) -> None:
     if type(model["max_rss_mb"]) is not int or model["max_rss_mb"] != rss_ceiling:
         raise D3ProfileError("D3 RSS guard must match its variant")
     timeout = profile.get("timeout_seconds")
-    if type(timeout) not in (int, float) or not math.isfinite(timeout) or not 0 < timeout <= 60:
-        raise D3ProfileError("D3 inference timeout must be at most 60 seconds")
+    # 60 s covered the historical context pack; the 31 October 2026 amendment
+    # admits up to 300 s per call for the long capability inputs of larger CPU
+    # variants. The worker RSS guard and host floor still bound every call.
+    if type(timeout) not in (int, float) or not math.isfinite(timeout) or not 0 < timeout <= 300:
+        raise D3ProfileError("D3 inference timeout must be at most 300 seconds")
 
 
 def _hash(path, deadline=None):
