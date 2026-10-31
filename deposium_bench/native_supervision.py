@@ -40,6 +40,17 @@ def _identity(value):
                                     ensure_ascii=True, allow_nan=False).encode()).hexdigest()
 
 
+def _profile_identity(profile, profile_path):
+    # Campaign loading rebases relative session paths. The new Uzu adapter
+    # accepts that equivalent representation; the original profile's bytes
+    # are still checked separately, and legacy identities remain unchanged.
+    if profile["adapter"] == "uzu_systemone_local":
+        model = dict(profile["model"])
+        model["session_manifest"] = os.path.abspath(Path(profile_path).parent / model["session_manifest"])
+        profile = {**profile, "model": model}
+    return _identity(profile)
+
+
 class _NativeSupervision:
     def __init__(self, profile_path, *, process, watcher, stop, guard,
                  max_rss_mb, min_free_mb):
@@ -49,7 +60,7 @@ class _NativeSupervision:
                 or type(max_rss_mb) is not int or max_rss_mb != profile["model"]["max_rss_mb"]
                 or type(min_free_mb) is not int or not 2048 <= min_free_mb <= 16384):
             raise NativeSupervisionError("native_supervision_budget_mismatch")
-        self.profile_identity = _identity(profile)
+        self.profile_identity = _profile_identity(profile, self.profile_path)
         self.session_path = self.profile_path.parent / profile["model"]["session_manifest"]
         self.session_sha256 = profile["model"]["session_sha256"]
         session_data = _read(self.session_path)
@@ -81,7 +92,7 @@ class _NativeSupervision:
                 raise NativeSupervisionError("native_supervision_not_live")
             if (os.getpid() != self.owner_pid
                     or Path(profile_path).resolve() != self.profile_path
-                    or _identity(profile) != self.profile_identity
+                    or _profile_identity(profile, self.profile_path) != self.profile_identity
                     or hashlib.sha256(_read(self.profile_path)).hexdigest() != self.profile_sha256
                     or hashlib.sha256(_read(self.session_path)).hexdigest() != self.session_sha256):
                 raise NativeSupervisionError("native_supervision_binding_changed")

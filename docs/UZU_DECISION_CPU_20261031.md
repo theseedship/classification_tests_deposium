@@ -147,9 +147,9 @@ archives and the normal result generator; passage evidence remains a later step.
 Mirai-M/Uzu versus GGUF/llama.cpp compares two deployments and cannot isolate
 the causal effect of quantization, Uzu or Memfit.
 
-Local validation on macOS/Python 3.12.16: 142 targeted adapter/controller,
-campaign, supervision, schema and regression checks, 128 passed and 14 optional
-skips, including 31 new no-model Uzu checks. Ruff F/E9, result-view generation
+Local validation on macOS/Python 3.12.16: 143 targeted adapter/controller,
+campaign, supervision, schema and regression checks, 129 passed and 14 optional
+skips, including 32 new no-model Uzu checks. Ruff F/E9, result-view generation
 check and staged-public-content checks also pass. This is targeted validation.
 The existing GLiNER temporary-path assertion also fails on the unchanged public
 base when macOS returns the `/var` alias; using canonical `TMPDIR=/private/tmp`

@@ -268,6 +268,17 @@ class UzuAdapterTests(UzuFixture):
         profile, _, _ = _prepare_profile(path)
         self.assertEqual(profile["model"]["session_manifest"], str(self.session_path))
 
+    def test_relative_session_survives_campaign_rebasing_under_the_same_live_scope(self):
+        relative = deepcopy(self.profile)
+        relative["model"]["session_manifest"] = "session.json"
+        self.path.write_text(json.dumps(relative))
+        prepared, _, _ = _prepare_profile(self.path)
+        with self.scope(), patch.object(local, "http_request", return_value=self.http()):
+            adapter = create_adapter(prepared, self.path)
+            self.addCleanup(adapter.close)
+            self.assertTrue(adapter.provenance["available"])
+            self.assertEqual(adapter.predict(self.request)["status"], "ok")
+
     def test_no_uzu_or_model_dependency_is_imported(self):
         import sys
         self.assertFalse(any(k == "uzu" or k.startswith("uzu.") for k in sys.modules))
