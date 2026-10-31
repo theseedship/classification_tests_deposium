@@ -141,7 +141,18 @@ def export(args):
     # say how many unsuccessful cases were actually attempted.
     cached = [r for r in records if (r.get("raw_output") or {}).get("cached_failure") is True]
     unsuccessful = [r for r in records if r["status"] != "ok"]
+    generations = [(r.get("raw_output") or {}).get("worker_generation") for r in records]
+    restarts = max([g for g in generations if type(g) is int] or [0])
+    final_path = archive / "adapter-final.json"
+    restart_events = []
+    if final_path.is_file():
+        final = load(final_path)
+        restart_events = final.get("worker_restarts") or []
+        require(len(restart_events) == restarts, "restart events in the final provenance differ from the raw records")
     attempts = {"recorded_cases": len(records), "attempted_cases": len(records) - len(cached),
+                "worker_restarts": restarts,
+                "worker_restart_events": [{k: e.get(k) for k in ("after_sequence", "restart", "reason", "relaunch_ms")}
+                                          for e in restart_events],
                 "unsuccessful_attempted": len(unsuccessful) - len(cached), "cached_unattempted": len(cached),
                 "fail_closed_after_first_failure": bool(cached),
                 "first_failure_case_index": next((i for i, r in enumerate(records) if r["status"] != "ok"), None),

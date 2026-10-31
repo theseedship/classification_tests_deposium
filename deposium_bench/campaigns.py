@@ -477,6 +477,10 @@ def run_campaign(dataset_path: str | Path, profile_path: str | Path, output_dir:
         _create_archive(output, manifest, dataset, profile, recordings, preflight)
         records, interrupted = _execute(output, cases, adapter, [], max_new_cases=max_new_cases,
                                         stop_requested=stop_requested)
+        # The manifest holds the adapter's provenance at start; an adapter may add
+        # execution-time facts (worker restarts, relaunch timings, availability
+        # changes). Persist the final view inside the sealed archive.
+        _write_new(output / "adapter-final.json", _encode(getattr(adapter, "provenance", {})))
         return _finish(output, manifest, cases, records, interrupted)
     finally:
         _close_adapter(adapter)
@@ -486,7 +490,7 @@ def _archive(archive_dir: str | Path) -> tuple[Path, dict, list[dict], list[dict
     root = Path(archive_dir).resolve()
     payloads = {}
     names = ("manifest.json", "cases.jsonl", "profile.json", "raw.jsonl", "recordings.jsonl",
-             "stack-preflight.json", "summary.json", "report.md", "seal.json")
+             "stack-preflight.json", "adapter-final.json", "summary.json", "report.md", "seal.json")
     for name in names:
         path = root / name
         if path.is_symlink():

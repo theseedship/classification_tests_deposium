@@ -170,6 +170,25 @@ class ConsolidatedCpuLoaderTests(unittest.TestCase):
                                                           "runtimes/d3-macos/runtime.lock", "profiles/d3-lite-macos-cpu.json")
 
 
+class Vela2RestartPolicyTests(unittest.TestCase):
+    def test_vela2_timeout_schedules_a_bounded_restart_instead_of_failing_closed(self):
+        from deposium_bench import vela2_adapter as vela2
+        adapter = vela2.Vela2Adapter.__new__(vela2.Vela2Adapter)
+        adapter._restarts, adapter._restart_pending, adapter._sequence, adapter._process = 0, False, 7, None
+        adapter._failure, adapter._closed = None, False
+        adapter.provenance = {"worker_restarts": [], "available": True}
+        adapter._model = {"repo_id": vela2.REPO_ID}
+        outcome = adapter._timeout_outcome()
+        self.assertEqual((outcome["status"], outcome["error"], adapter._restart_pending), ("timeout", "vela2_inference_timeout", True))
+        self.assertEqual(outcome["raw_output"]["cached_failure"], False)
+        self.assertEqual(adapter.provenance["worker_restarts"], [{"after_sequence": 7, "restart": 1, "reason": "vela2_inference_timeout"}])
+        adapter._restarts = vela2.MAX_WORKER_RESTARTS
+        with patch.object(vela2.Vela2Adapter, "close"):
+            closed = adapter._timeout_outcome()
+        self.assertEqual((closed["status"], adapter._failure["error"], adapter.provenance["available"]),
+                         ("timeout", "vela2_inference_timeout", False))
+
+
 class Vela2MacosProbeTests(unittest.TestCase):
     def test_vela2_adapter_and_worker_use_platform_probes(self):
         from deposium_bench import vela2_adapter as vela2

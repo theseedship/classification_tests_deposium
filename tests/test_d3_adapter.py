@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INPUT = {"context": "Une demande en français.", "question": "Quelle action ?",
          "options": [{"id": "private-a", "description": "Rechercher"},
                      {"id": "private-b", "description": "Compter"}]}
-WORKER = r'''import hashlib,json,math,sys
+WORKER = r'''import hashlib,json,math,sys,time
 mode=MODE
 def send(v): print(json.dumps(v,allow_nan=False),flush=True)
 config=json.loads(sys.stdin.readline())['config']
@@ -47,9 +47,11 @@ send({'status':'ready','runtime':config['pins'],'load_ms':1.0,'rss_mb':10.0,
       'backbone_parameters':count,'readout_shape':shape})
 for line in sys.stdin:
  request=json.loads(line); value=request['input'];ids=[o['id'] for o in value['options']]
+ if mode=='slow_second' and request['sequence']==2: time.sleep(6)
+ if mode=='slow_always': time.sleep(6)
  blob=(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False)+'\n').encode()
- probabilities={'c0':0.25,'c1':0.75}
- confidence=1+sum(p*math.log(p) for p in probabilities.values())/math.log(2)
+ probabilities={f'c{i}':(0.75 if i==1 else 0.25/(len(ids)-1)) for i in range(len(ids))}
+ confidence=1+sum(p*math.log(p) for p in probabilities.values())/math.log(len(ids))
  answer={'type':'choice','choice':'c1','probabilities':probabilities,'confidence':confidence}
  if mode=='bad_id': answer['choice']='private-b'
  if mode=='bad_probability': answer['probabilities']['c0']=-0.25
@@ -90,8 +92,12 @@ class D3AdapterTests(unittest.TestCase):
             'files':[{'path':'config.json','size':len(blob),'sha256':hashlib.sha256(blob).hexdigest()}]}))
 
     def adapter(self):
-        with patch.object(module, 'WORKER', self.worker), patch.object(
-                module.D3Adapter, '_host_available_mb', return_value=100000):
+        # The fake worker must stay in place for the adapter's whole life: a
+        # restart after a timeout relaunches module.WORKER.
+        worker = patch.object(module, 'WORKER', self.worker)
+        worker.start()
+        self.addCleanup(worker.stop)
+        with patch.object(module.D3Adapter, '_host_available_mb', return_value=100000):
             adapter = module.D3Adapter(self.profile, self.root / 'profile.json')
         memory = patch.object(adapter, '_host_available_mb', return_value=100000)
         memory.start()
@@ -232,6 +238,74 @@ class D3AdapterTests(unittest.TestCase):
                 self.assertEqual(worker._rss(), 2.0)
             with patch.object(worker.sys, 'platform', 'linux'):
                 self.assertEqual(worker._rss(), 2048.0)
+
+    def test_timeout_restarts_the_worker_once_and_later_cases_are_still_attempted(self):
+        self.worker.write_text(WORKER.replace('MODE', repr('slow_second')))
+        adapter = self.adapter()
+        first = adapter.predict({'contract_id': 'bench.context-choice', 'input': INPUT})
+        self.assertEqual((first['status'], first['raw_output']['worker_generation']), ('ok', 0))
+        second = adapter.predict({'contract_id': 'bench.context-choice', 'input': INPUT})
+        self.assertEqual((second['status'], second['error']), ('timeout', 'd3_inference_timeout'))
+        self.assertEqual(second['raw_output'], {'forward_executed': None, 'cached_failure': False,
+                                                'worker_restart_scheduled': 1, 'worker_generation': 0})
+        third = adapter.predict({'contract_id': 'bench.context-choice', 'input': INPUT})
+        self.assertEqual((third['status'], third['output'], third['raw_output']['worker_generation']), ('ok', {'choice_id': 'private-b'}, 1))
+        self.assertTrue(adapter.provenance['available'])
+        self.assertEqual(len(adapter.provenance['worker_restarts']), 1)
+        self.assertEqual(adapter.provenance['worker_restarts'][0]['after_sequence'], 2)
+        self.assertGreater(adapter.provenance['worker_restarts'][0]['relaunch_ms'], 0)
+        self.assertEqual(adapter.provenance['restart_policy']['max_worker_restarts'], module.MAX_WORKER_RESTARTS)
+
+    def test_repeated_timeouts_exhaust_the_restart_budget_then_fail_closed(self):
+        self.worker.write_text(WORKER.replace('MODE', repr('slow_always')))
+        adapter = self.adapter()
+        outcomes = [adapter.predict({'contract_id': 'bench.context-choice', 'input': INPUT})
+                    for _ in range(module.MAX_WORKER_RESTARTS + 2)]
+        self.assertTrue(all(o['status'] == 'timeout' for o in outcomes))
+        attempted = [o for o in outcomes if o['raw_output'] and o['raw_output'].get('cached_failure') is False]
+        cached = [o for o in outcomes if o['raw_output'] and o['raw_output'].get('cached_failure') is True]
+        # restarts after timeouts 1..3; the fourth timeout exhausts the budget and fails closed; the fifth is cached
+        self.assertEqual((len(attempted), len(cached)), (module.MAX_WORKER_RESTARTS, 1))
+        self.assertEqual(len(adapter.provenance['worker_restarts']), module.MAX_WORKER_RESTARTS)
+        self.assertFalse(adapter.provenance['available'])
+
+    def test_campaign_archive_seals_the_final_provenance_with_restart_events(self):
+        from deposium_bench.campaigns import run_campaign
+        self.worker.write_text(WORKER.replace('MODE', repr('slow_second')))
+        # Three real cases; the fake worker answers the second option of any catalogue.
+        cases = [json.loads(line) for line in (ROOT / 'datasets/context-choice-v1/cases.jsonl').read_text().splitlines()[:3]]
+        dataset = self.root / 'three.jsonl'
+        dataset.write_text(''.join(json.dumps(c, ensure_ascii=False) + '\n' for c in cases))
+        output = self.root / 'archive'
+        (self.root / 'profile.json').write_text(json.dumps(self.profile))
+        worker = patch.object(module, 'WORKER', self.worker)
+        worker.start()
+        self.addCleanup(worker.stop)
+        with patch.object(module.D3Adapter, '_host_available_mb', return_value=100000):
+            summary = run_campaign(dataset, self.root / 'profile.json', output)
+        statuses = [json.loads(line)['status'] for line in (output / 'raw.jsonl').read_text().splitlines()]
+        self.assertEqual(statuses, ['ok', 'timeout', 'ok'])
+        seal = json.loads((output / 'seal.json').read_text())
+        self.assertIn('adapter-final.json', seal['files'])
+        final = json.loads((output / 'adapter-final.json').read_text())
+        self.assertEqual(len(final['worker_restarts']), 1)
+        self.assertGreater(final['worker_restarts'][0]['relaunch_ms'], 0)
+        self.assertTrue(final['available'])
+        self.assertEqual(json.loads((output / 'manifest.json').read_text())['adapter_provenance']['worker_restarts'], [])
+        self.assertEqual(summary['metrics']['counts_by_status']['timeout'], 1)
+
+    def test_changed_worker_source_is_refused_before_a_replacement_executes(self):
+        self.worker.write_text(WORKER.replace('MODE', repr('slow_second')))
+        adapter = self.adapter()
+        adapter.predict({'contract_id': 'bench.context-choice', 'input': INPUT})
+        timed_out = adapter.predict({'contract_id': 'bench.context-choice', 'input': INPUT})
+        self.assertEqual(timed_out['status'], 'timeout')
+        sentinel = self.root / 'executed-after-change.txt'
+        self.worker.write_text(f"import pathlib; pathlib.Path({str(sentinel)!r}).write_text('ran')\n" + WORKER.replace('MODE', repr('ok')))
+        outcome = adapter.predict({'contract_id': 'bench.context-choice', 'input': INPUT})
+        self.assertEqual((outcome['status'], outcome['error']), ('error', 'd3_initialization_invalid'))
+        self.assertFalse(sentinel.exists(), 'a changed worker script must not execute')
+        self.assertFalse(adapter.provenance['available'])
 
     def test_fake_worker_prediction_is_independent_of_host_available_memory(self):
         with patch.object(module.D3Adapter, '_host_available_mb', return_value=1024):
