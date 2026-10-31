@@ -122,6 +122,8 @@ def _prepare_profile(profile_path: Path) -> tuple[dict, str, bytes | None]:
             # Preserve venv executable symlinks; resolving them loses the venv.
             model[name] = os.path.abspath(profile_path.parent / model[name])
         profile = {**profile, "model": model}
+    elif profile["adapter"] == "choice_episode":
+        profile = {**profile, "model": {"inner_profile": os.path.abspath(profile_path.parent / profile["model"]["inner_profile"])}}
     elif profile["adapter"] == "noma":
         from .noma_adapter import PATH_FIELDS
         model = dict(profile["model"])
@@ -239,6 +241,7 @@ def _manifest(cases: list[dict], dataset: bytes, profile: dict, source_profile_h
         "proof_level": "harness_control" if profile["qualification"] == "harness_control" else "A",
         "input_protocol": ("generated_tool_proposals_v1" if profile["adapter"] == "llama_cpp_json" else
                            "fixture_episode_control" if profile["adapter"] == "fixture_episode" else
+                           "closed_choice_episode_v1" if profile["adapter"] == "choice_episode" else
                            "fixture_arguments_control" if profile["adapter"] == "fixture_arguments" else
                            "recorded_control" if profile["adapter"] == "recorded" else
                            "context_choice" if "bench.context-choice" in profile["capabilities"] else "current_equivalent"),

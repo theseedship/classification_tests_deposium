@@ -1,0 +1,15 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "d3-nano-macos-choice-episodes-v1",
+  "adapter": "choice_episode",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.tool-episode"
+  ],
+  "model": {
+    "inner_profile": "d3-nano-macos-cpu.json"
+  },
+  "timeout_seconds": 600,
+  "revision": "3aeb1c22a5632aac72353c36b3d0111c40e7dbf4",
+  "recordings": null
+}

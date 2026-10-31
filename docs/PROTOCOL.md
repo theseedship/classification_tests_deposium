@@ -334,6 +334,15 @@ attempt 002 collected all 24 cases: **9/24**
 contract outcome has been observed once; the nonselection and stop outcomes
 fail, including a self-computed success when the sum tool was unavailable.
 
+The [closed-choice step policy](TOOL_EPISODES_CHOICE_MODE_V1.md) (31 October
+2026) is a third way to drive the episode contract: the harness derives the
+candidate actions from the projection at each step, a context-choice adapter
+picks one, the runtime executes it. Menus, rendered inputs and inner responses
+are retained and re-derived at rescore. It uses the frozen
+[32-case pack](../datasets/tool-episodes-choice-v1/README.md) (input schema v3,
+ten-minute envelope). It removes premature-success and malformed actions by
+construction, so its scores are not comparable with the generative contract.
+
 ### Retrieved passages and evidence
 
 The [passage-evidence pack](../datasets/passage-evidence-v1/README.md) contains

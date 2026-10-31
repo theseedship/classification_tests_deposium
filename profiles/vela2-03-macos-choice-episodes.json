@@ -1,0 +1,15 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "vela2-03-macos-choice-episodes-v1",
+  "adapter": "choice_episode",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.tool-episode"
+  ],
+  "model": {
+    "inner_profile": "vela2-03-macos-cpu.json"
+  },
+  "timeout_seconds": 600,
+  "revision": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+  "recordings": null
+}

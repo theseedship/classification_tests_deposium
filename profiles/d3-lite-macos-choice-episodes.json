@@ -1,0 +1,15 @@
+{
+  "schema_version": "deposium.candidate/v1",
+  "profile_id": "d3-lite-macos-choice-episodes-v1",
+  "adapter": "choice_episode",
+  "qualification": "model_isolated",
+  "capabilities": [
+    "bench.tool-episode"
+  ],
+  "model": {
+    "inner_profile": "d3-lite-macos-cpu.json"
+  },
+  "timeout_seconds": 600,
+  "revision": "a8d25a91ef75552803f7009d25b7bd435991abd9",
+  "recordings": null
+}

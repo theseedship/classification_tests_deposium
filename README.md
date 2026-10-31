@@ -110,6 +110,11 @@ partial (9/18 scored of 24, RSS guard). After a dated amendment disabled the
 server's host prompt cache, a byte-for-byte content control and a **complete
 second attempt scored 9/24** ([report](docs/LOCAL_TOOL_POLICY_HELDOUT_RESULTS_20261030.md)):
 positive routes pass, nearly every nonselection or stop outcome fails.
+A separate [closed-choice step policy](docs/TOOL_EPISODES_CHOICE_MODE_V1.md)
+(31 October) lets a classifier drive the same executed episodes by choosing
+from a harness-derived menu at each step, on a frozen
+[32-case pack](datasets/tool-episodes-choice-v1/README.md); it is a narrow
+architecture pilot, not comparable with the generative scores.
 
 Synthetic scenarios represent workflow properties, rather than production
 conversations. Translations, catalogue views and passage orders stay in their
@@ -139,6 +144,8 @@ python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-policy-canary-v1/cases.jsonl
 python3 -m deposium_bench validate-cases \
   --dataset datasets/tool-policy-heldout-v1/cases.jsonl
+python3 -m deposium_bench validate-cases \
+  --dataset datasets/tool-episodes-choice-v1/cases.jsonl
 python3 -m deposium_bench validate-mastra-read
 python3 -m deposium_bench.passage_dataset validate
 python3 -m deposium_bench.passage_corpus --check
