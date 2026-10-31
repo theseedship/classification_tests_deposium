@@ -208,79 +208,89 @@ def http_request(port, method, path, body, key, timeout):
 
 class LocalSystemOneAdapter:
     capabilities = (CONTEXT_CHOICE_CONTRACT,)
+    profile_validator = staticmethod(validate_model_profile)
+    adapter_name = "systemone_local"
+    requires_auth = True
 
     def __init__(self, profile, profile_path):
-        validate_model_profile(profile)
+        self.profile_validator(profile)
         self._profile = copy.deepcopy(profile)
         self._model = self._profile["model"]
-        self._key = os.environ.get(AUTH_ENV, "")
+        self._key = os.environ.get(AUTH_ENV, "") if self.requires_auth else ""
         self._port = urlsplit(self._model["endpoint"]).port
         self._lock = threading.Lock()
         self._states = {}
         self._prepared_tokens = None
         self._failure = None
         self._closed = False
-        self.provenance = {"adapter": "systemone_local", "qualification": "model_isolated",
+        self.provenance = {"adapter": self.adapter_name, "qualification": "model_isolated",
                            "capabilities": list(self.capabilities), "available": False,
                            "transport": "loopback_http_no_proxy_no_redirect_no_retry",
                            "model_execution": "not_observed", "input_protocol": "context_choice"}
         try:
-            if (not self._key or not self._key.isascii()
+            if self.requires_auth and (not self._key or not self._key.isascii()
                     or any(ord(c) <= 32 or ord(c) >= 127 for c in self._key)):
                 raise ValueError("systemone_local_key_missing_or_invalid")
-            path = Path(profile_path).absolute().parent / self._model["session_manifest"]
-            self._remember(path, self._model["session_sha256"])
-            if path.stat().st_size > MAX_BYTES:
-                raise ValueError("systemone_session_too_large")
-            self._session = decode(path.read_bytes())
-            session = self._session
-            if (session["schema_version"] != "deposium.local-model-session/v1"
-                    or session["model"]["revision"] != profile["revision"]
-                    or session["model"]["repo_id"] != self._model["repo_id"]
-                    or session["model"]["alias"] != self._model["model_id"]
-                    or session["endpoint"] != self._model["endpoint"]
-                    or session["settings"] != {"context": self._model["max_length"],
-                        "parallel": 1, "concurrency": 1, "questions_per_call": 1,
-                        "truncation": "reject_in_pinned_native_engine"}
-                    or session["max_rss_mb"] != self._model["max_rss_mb"]):
-                raise ValueError("systemone_session_identity_mismatch")
-            for record, name in ((session["model"], "path"), (session["runtime"], "binary"),
-                                 (session["gateway"], "binary"), (session["harness"], "path"),
-                                 (session["runtime_pin"], "path")):
-                self._remember(Path(record[name]), record["sha256"])
-            if "native_preparation" in session:
-                binding = session["native_preparation"]
-                preparation_path = Path(binding["path"])
-                self._remember(preparation_path, binding["sha256"])
-                if preparation_path.stat().st_size > MAX_BYTES:
-                    raise ValueError("systemone_preparation_invalid")
-                preparation = decode(preparation_path.read_bytes())
-                entries = preparation.get("request_tokens")
-                if (preparation.get("schema_version") != "deposium.native-preparation-map/v1"
-                        or preparation.get("model_id") != self._model["model_id"]
-                        or preparation.get("source_revision") != session["runtime"]["revision"]
-                        or preparation.get("max_tokens") != self._model["max_length"]
-                        or not isinstance(entries, dict) or not entries
-                        or any(not re.fullmatch(r"[0-9a-f]{64}", key)
-                               or type(count) is not int or not 0 < count <= self._model["max_length"]
-                               for key, count in entries.items())):
-                    raise ValueError("systemone_preparation_invalid")
-                self._prepared_tokens = entries
-            self._remember(Path(__file__), digest(__file__))
-            self._remember(Path(__file__).with_name("choice_protocol.py"),
-                           digest(Path(__file__).with_name("choice_protocol.py")))
-            identity = {key: session[key] for key in
-                        ("model", "runtime", "gateway", "harness", "runtime_pin", "settings", "max_rss_mb")}
-            identity["adapter_sha256"] = digest(__file__)
-            identity["choice_protocol_sha256"] = digest(Path(__file__).with_name("choice_protocol.py"))
-            if self._prepared_tokens is not None:
-                identity["native_preparation"] = session["native_preparation"]
-            self.provenance.update(available=True, identity=identity,
-                identity_sha256=hashlib.sha256(_wire(identity)).hexdigest(), session_sha256=self._model["session_sha256"])
+            self._bind_session(profile_path)
         except FileNotFoundError:
             self._fail("missing", "systemone_asset_missing")
         except (OSError, ValueError, KeyError, TypeError):
             self._fail("error", "systemone_identity_invalid")
+
+    def _bind_session(self, profile_path):
+        profile = self._profile
+        path = Path(profile_path).absolute().parent / self._model["session_manifest"]
+        self._remember(path, self._model["session_sha256"])
+        if path.stat().st_size > MAX_BYTES:
+            raise ValueError("systemone_session_too_large")
+        self._session = decode(path.read_bytes())
+        session = self._session
+        if (session["schema_version"] != "deposium.local-model-session/v1"
+                or session["model"]["revision"] != profile["revision"]
+                or session["model"]["repo_id"] != self._model["repo_id"]
+                or session["model"]["alias"] != self._model["model_id"]
+                or session["endpoint"] != self._model["endpoint"]
+                or session["settings"] != {"context": self._model["max_length"],
+                    "parallel": 1, "concurrency": 1, "questions_per_call": 1,
+                    "truncation": "reject_in_pinned_native_engine"}
+                or session["max_rss_mb"] != self._model["max_rss_mb"]):
+            raise ValueError("systemone_session_identity_mismatch")
+        for record, name in ((session["model"], "path"), (session["runtime"], "binary"),
+                             (session["gateway"], "binary"), (session["harness"], "path"),
+                             (session["runtime_pin"], "path")):
+            self._remember(Path(record[name]), record["sha256"])
+        if "native_preparation" in session:
+            binding = session["native_preparation"]
+            preparation_path = Path(binding["path"])
+            self._remember(preparation_path, binding["sha256"])
+            if preparation_path.stat().st_size > MAX_BYTES:
+                raise ValueError("systemone_preparation_invalid")
+            preparation = decode(preparation_path.read_bytes())
+            entries = preparation.get("request_tokens")
+            if (preparation.get("schema_version") != "deposium.native-preparation-map/v1"
+                    or preparation.get("model_id") != self._model["model_id"]
+                    or preparation.get("source_revision") != session["runtime"]["revision"]
+                    or preparation.get("max_tokens") != self._model["max_length"]
+                    or not isinstance(entries, dict) or not entries
+                    or any(not re.fullmatch(r"[0-9a-f]{64}", key)
+                           or type(count) is not int or not 0 < count <= self._model["max_length"]
+                           for key, count in entries.items())):
+                raise ValueError("systemone_preparation_invalid")
+            self._prepared_tokens = entries
+        self._remember(Path(__file__), digest(__file__))
+        self._remember(Path(__file__).with_name("choice_protocol.py"),
+                       digest(Path(__file__).with_name("choice_protocol.py")))
+        identity = {key: session[key] for key in
+                    ("model", "runtime", "gateway", "harness", "runtime_pin", "settings", "max_rss_mb")}
+        identity["adapter_sha256"] = digest(__file__)
+        identity["choice_protocol_sha256"] = digest(Path(__file__).with_name("choice_protocol.py"))
+        if self._prepared_tokens is not None:
+            identity["native_preparation"] = session["native_preparation"]
+        self.provenance.update(available=True, identity=identity,
+            identity_sha256=hashlib.sha256(_wire(identity)).hexdigest(), session_sha256=self._model["session_sha256"])
+
+    def _overflow_response(self, data):
+        return native_overflow(data, self._model["max_length"])
 
     def _remember(self, path, expected):
         if path.is_symlink() or not path.is_file():
@@ -321,7 +331,7 @@ class LocalSystemOneAdapter:
             try:
                 value = request.get("input")
                 payload, mapping, body = native_request(value, self._model["model_id"])
-                if self._key in body.decode():
+                if self._key and self._key in body.decode():
                     raise ValueError("systemone_input_secret_rejected")
                 if len(body) > 131072:
                     return {"status": "unsupported", "output": None, "raw_output": raw,
@@ -339,14 +349,14 @@ class LocalSystemOneAdapter:
                            response_sha256=hashlib.sha256(data).hexdigest())
                 self._guard()
                 if status != 200:
-                    overflow = native_overflow(data, self._model["max_length"]) if status in {400, 500} else None
+                    overflow = self._overflow_response(data) if status in {400, 500} else None
                     if overflow is not None:
                         raw.update(native_error=overflow, forward_executed=False)
                         return {"status": "unsupported", "output": None, "raw_output": raw,
                                 "error": "systemone_native_context_overflow"}
                     return self._fail("error", "systemone_http_status_" + str(status), raw)
                 native = decode(data)
-                if self._key in json.dumps(native):
+                if self._key and self._key in json.dumps(native):
                     raise ValueError("systemone_response_secret_rejected")
                 raw["native_result"] = native
                 try:

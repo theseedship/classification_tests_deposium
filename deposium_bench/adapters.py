@@ -90,7 +90,7 @@ def _validate_profile(profile: dict) -> None:
     if profile["schema_version"] != "deposium.candidate/v1" or not isinstance(profile["profile_id"], str) or not profile["profile_id"].strip():
         raise AdapterError("Invalid candidate profile identity.")
     adapter = profile["adapter"]
-    if not isinstance(adapter, str) or adapter not in {"mcps", "mcps_resident", "recorded", "fixture_arguments", "fixture_episode", "choice_episode", "llama_cpp_json", "julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast"}:
+    if not isinstance(adapter, str) or adapter not in {"mcps", "mcps_resident", "recorded", "fixture_arguments", "fixture_episode", "choice_episode", "llama_cpp_json", "julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "uzu_systemone_local", "gliclass", "vela3_fast"}:
         raise AdapterError("Unknown candidate adapter.")
     capabilities = profile["capabilities"]
     allowed = set(CONTRACTS) | ({"mcps.search"} if adapter == "recorded" else set())
@@ -103,7 +103,7 @@ def _validate_profile(profile: dict) -> None:
     if adapter == "llama_cpp_json":
         from .local_tool_policy import CONTRACTS as TOOL_CONTRACTS
         allowed = set(TOOL_CONTRACTS)
-    if adapter in {"julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "gliclass", "vela3_fast", "recorded"}:
+    if adapter in {"julia", "gliner", "jev_http", "decision3_http", "indecis", "decision2", "vela2", "d3", "noma", "laya", "small_model", "systemone_local", "uzu_systemone_local", "gliclass", "vela3_fast", "recorded"}:
         allowed.add("bench.context-choice")
     if (not isinstance(capabilities, list) or not capabilities
             or any(not isinstance(item, str) or item not in allowed for item in capabilities)
@@ -140,6 +140,10 @@ def _validate_profile(profile: dict) -> None:
         return
     if adapter == "jev_http":
         from .jev_http_adapter import validate_model_profile
+        validate_model_profile(profile)
+        return
+    if adapter == "uzu_systemone_local":
+        from .uzu_local import validate_model_profile
         validate_model_profile(profile)
         return
     if adapter == "systemone_local":
@@ -478,6 +482,9 @@ def create_adapter(profile: dict, profile_path: str | Path, stack_root: str | Pa
     if profile["adapter"] == "jev_http":
         from .jev_http_adapter import JevHTTPAdapter
         return JevHTTPAdapter(profile, path)
+    if profile["adapter"] == "uzu_systemone_local":
+        from .uzu_local import UzuSystemOneAdapter
+        return UzuSystemOneAdapter(profile, path)
     if profile["adapter"] == "systemone_local":
         from .systemone_local import LocalSystemOneAdapter
         return LocalSystemOneAdapter(profile, path)
