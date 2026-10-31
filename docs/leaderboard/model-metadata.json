@@ -790,6 +790,30 @@
           "path": "docs/VELA2_03_MACOS_CPU_PROTOCOL_20261030.md"
         }
       ]
+    },
+    "D3nanoMacos": {
+      "display_name": "D3 nano · macOS CPU",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": 2213241664,
+        "label": "2.213B backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "BF16 backbone including vision module; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      },
+      "runtime_group": "cpu_new",
+      "precision": "BF16 backbone / FP32 readout",
+      "hardware_group": "Apple M5 Pro CPU; 64 GiB unified memory",
+      "source_analysis": "docs/evidence/d3-nano-macos-20261031/analysis.json",
+      "observed_date": "2026-10-31",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_NANO_MACOS_CPU_PROTOCOL_20261030.md"
+        }
+      ]
     }
   }
 }

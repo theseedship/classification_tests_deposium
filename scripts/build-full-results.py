@@ -30,6 +30,7 @@ GLICLASS = EVIDENCE + "gliclass-model-comparison-20261017/analysis.json"
 FAST = EVIDENCE + "vela3-fast-20261028/analysis.json"
 D3LITE_MACOS = EVIDENCE + "d3-lite-macos-20261030/analysis.json"
 VELA03_MACOS = EVIDENCE + "vela2-03-macos-20261030/analysis.json"
+D3NANO_MACOS = EVIDENCE + "d3-nano-macos-20261031/analysis.json"
 CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
 LOCAL_POLICY = (EVIDENCE + "local-tool-policy-20261030/analysis.json",
                 EVIDENCE + "local-tool-policy-v2-train-20261030/analysis.json",
@@ -55,6 +56,8 @@ RECENT_INPUTS = (CAMPAIGN_MODULE, EVIDENCE + "clef-flash-20261029/analysis.json"
                  "docs/D3_LITE_MACOS_RESULTS_20261030.md",
                  EVIDENCE + "vela2-03-macos-20261030/capability.json", EVIDENCE + "vela2-03-macos-20261030/physics.json",
                  "profiles/vela2-03-assets.json", "profiles/vela2-03-macos-cpu.json", "docs/VELA2_03_MACOS_RESULTS_20261030.md",
+                 EVIDENCE + "d3-nano-macos-20261031/capability.json", EVIDENCE + "d3-nano-macos-20261031/physics.json",
+                 "profiles/d3-nano-assets.json", "profiles/d3-nano-macos-cpu.json", "docs/D3_NANO_MACOS_RESULTS_20261031.md",
                  "docs/PASSAGE_CPU_RESULTS_20261015.md", "docs/PASSAGE_JEV_RESULTS_20261015.md",
                  "docs/PASSAGE_FLASH_RESULTS_20261029.md", "docs/PASSAGE_CLEF_RESULTS_20261029.md")
 STATUS_KEYS = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
@@ -308,7 +311,7 @@ def build(root=ROOT):
     require(len(base) == 22, "historical roster changed")
     for path, selected in ((NATIVE, {"D3Q4", "D3FlashQ4", "D3FlashQ8", "EosQ8"}),
                            (GLICLASS, {"GLiClass9B"}), (FAST, {"Vela3Fast"}), (D3LITE_MACOS, {"D3liteMacos"}),
-                           (VELA03_MACOS, {"Vela03Macos"})):
+                           (VELA03_MACOS, {"Vela03Macos"}), (D3NANO_MACOS, {"D3nanoMacos"})):
         export = inputs.load(path)
         require(export.get("scope") == "isolated_model_observations"
                 and export.get("base_reference_review") == "agent_only_pending_human",
@@ -919,7 +922,8 @@ def render_campaign_rankings(data):
                   "|---:|---:|---|---:|---:|---:|---|"]
         for row in rows:
             c, test = row["counts"], row["counts"]["by_split"]["test"]
-            lines.append(f"| {row['rank_all']} | {row['rank_test']} | {row['model']} | {c['correct']}/{c['total']} | "
+            # Partial collections stay visible but unranked; a dash, never a rank or a zero.
+            lines.append(f"| {row['rank_all'] or '—'} | {row['rank_test'] or '—'} | {row['model']} | {c['correct']}/{c['total']} | "
                          f"{c['scored']}/{c['total']} | {test['correct']}/{test['total']} | [Report]({row['report']}) |")
         if task == "capability":
             ceiling = [r["model"] for r in rows if r["counts"]["correct"] == r["counts"]["total"]]
@@ -1010,7 +1014,7 @@ def render(data):
              "[Updated task rankings](#updated-task-rankings) · [Language and task complexity](#language-and-task-complexity) · "
              "[Speed and memory](#speed-and-memory) · [Passages and other campaigns](leaderboard/other-benchmarks.md) ·",
              "[Other evaluated protocols](#other-evaluated-protocols) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
-             f"**{len(data['observations'])} context model/runtime observations through 30 October 2026**: 28 earlier observations, the macOS CPU D3 lite and Vela 2.0 0.3B runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.",
+             f"**{len(data['observations'])} context model/runtime observations through 31 October 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B and D3 nano runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.",
              "Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;",
              "quantizations and devices remain separate. Rendering this page does not rerun or rescore models.", "",
              "**Exploratory evidence:** synthetic, agent-authored references and translations await human review.",

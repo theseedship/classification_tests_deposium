@@ -44,10 +44,11 @@ tracks the work described by the status page.
 
 The [coverage overview](docs/RESULTS.md#coverage-overview) shows which candidates
 actually ran each task. Two Flash-class native runtimes and, since 30 October
-2026, two small CPU candidates ([D3 lite](docs/D3_LITE_MACOS_RESULTS_20261030.md),
+2026, three small CPU candidates on macOS ([D3 lite](docs/D3_LITE_MACOS_RESULTS_20261030.md),
 capability 168/192, physics 14/48; [Vela 2.0 0.3B](docs/VELA2_03_MACOS_RESULTS_20261030.md),
-capability 128/192, physics 18/48, both on macOS) have the complementary packs;
-most rows still have only the context and first-tool columns. Its [harness overview](docs/RESULTS.md#harness-coverage)
+128/192 and 18/48; [D3 nano](docs/D3_NANO_MACOS_RESULTS_20261031.md), physics 28/48
+and a partial capability collection: one 60 s timeout, then 149 unattempted cases) have the
+complementary packs; most rows still have only the context and first-tool columns. Its [harness overview](docs/RESULTS.md#harness-coverage)
 separates implemented scripted discovery, arguments and feedback fixtures from
 untested real-model output paths, empirical model allocation, application replay,
 and final answer/citation quality. Closed-choice success does not fill those cells.

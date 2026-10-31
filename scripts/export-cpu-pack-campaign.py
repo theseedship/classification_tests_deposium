@@ -136,6 +136,16 @@ def export(args):
         groups["track"] = {key: flash.public_counts(_counts(rows)) for key, rows in sorted(tracks.items())}
 
     ok_rows = [r for r in records if r["status"] == "ok"]
+    # A CPU worker fails closed: after its first timeout/error every later case
+    # returns a cached failure without an attempt. Keep statuses as archived, but
+    # say how many unsuccessful cases were actually attempted.
+    cached = [r for r in records if (r.get("raw_output") or {}).get("cached_failure") is True]
+    unsuccessful = [r for r in records if r["status"] != "ok"]
+    attempts = {"recorded_cases": len(records), "attempted_cases": len(records) - len(cached),
+                "unsuccessful_attempted": len(unsuccessful) - len(cached), "cached_unattempted": len(cached),
+                "fail_closed_after_first_failure": bool(cached),
+                "first_failure_case_index": next((i for i, r in enumerate(records) if r["status"] != "ok"), None),
+                "note": "cached_unattempted cases keep their archived status in every denominator; they are unobserved, not measured"}
     rss = [((r.get("raw_output") or {}).get("rss_mb")) for r in records]
     rss = [v for v in rss if type(v) in (int, float) and math.isfinite(v)]
     peak = max([provenance.get("load_rss_mb") or 0, *rss])
@@ -151,6 +161,7 @@ def export(args):
                      "scorer_sha256": manifest["scorer"]["sha256"],
                      "analysis_sha256": sha(json.dumps(analysis, sort_keys=True, ensure_ascii=False).encode())},
         "included_in_full_pack_quality_denominator": True,
+        "attempts": attempts,
         "latency_ms": flash.stats(_stats([r["duration_ms"] for r in ok_rows])),
         "actual_backend": {"kind": "cpu", "device": "cpu", "threads": profile["model"]["threads"], **precision,
                            "loading_mode": provenance["loading_mode"]},
