@@ -1,0 +1,53 @@
+{
+  "schema_version": "deposium.research-dataset/v1",
+  "dataset_id": "facade-routing-advanced-v1",
+  "version": "1.0.0-exploratory",
+  "frozen_date": "2026-11-01",
+  "status": "frozen_before_first_candidate_prediction",
+  "case_schema": "deposium.case/v2",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "42364fed544e842a02f68314242b767a7c3fae0dde8505bd66499063930337f3",
+  "spec_sha256": "bfe3e93cbe68bfc66df6a69390b8c9a9350f3f061096212ead25eeb7bb3e63d0",
+  "case_count": 96,
+  "family_count": 48,
+  "options_per_case": 8,
+  "counts_by_language": {
+    "en": 48,
+    "fr": 48
+  },
+  "counts_by_split": {
+    "calibration": 16,
+    "test": 64,
+    "train": 16
+  },
+  "counts_by_category": {
+    "analyze": 12,
+    "evaluate": 12,
+    "graph": 12,
+    "none": 12,
+    "process": 12,
+    "search": 12,
+    "system": 12,
+    "visualize": 12
+  },
+  "counts_by_kind": {
+    "ambiguous": 6,
+    "implicit": 28,
+    "lexical_trap": 28,
+    "near_miss": 14,
+    "noisy": 14,
+    "out_of_scope": 6
+  },
+  "counts_by_answer_position": {
+    "a": 12,
+    "b": 12,
+    "c": 12,
+    "d": 12,
+    "e": 12,
+    "f": 12,
+    "g": 12,
+    "h": 12
+  },
+  "reference_review": "agent_only_pending_human",
+  "authoring": "Advanced tier: implicit requests, lexical traps toward another category, near misses between neighbouring categories and informal or misspelt requests. Written without access to any router rule or keyword list; generic category descriptions identical to facade-routing-v1."
+}

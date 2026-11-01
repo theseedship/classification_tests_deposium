@@ -1,0 +1,569 @@
+{
+  "schema_version": "deposium.facade-routing-spec/v1",
+  "dataset_id": "facade-routing-advanced-v1",
+  "authoring": "Advanced tier: implicit requests, lexical traps toward another category, near misses between neighbouring categories and informal or misspelt requests. Written without access to any router rule or keyword list; generic category descriptions identical to facade-routing-v1.",
+  "categories": {
+    "search": {
+      "fr": "Rechercher : retrouver des documents ou des passages pertinents dans le corpus.",
+      "en": "Search: find relevant documents or passages in the corpus."
+    },
+    "analyze": {
+      "fr": "Analyser : examiner le contenu et en dégager des thèmes, des tendances ou des motifs.",
+      "en": "Analyse: examine content and identify themes, trends or patterns."
+    },
+    "visualize": {
+      "fr": "Visualiser : produire un graphique, un diagramme ou un tableau de bord.",
+      "en": "Visualise: produce a chart, a diagram or a dashboard."
+    },
+    "graph": {
+      "fr": "Graphe : parcourir des entités et leurs relations (voisins, chemins, groupes).",
+      "en": "Graph: traverse entities and their relations (neighbours, paths, groups)."
+    },
+    "evaluate": {
+      "fr": "Évaluer : mesurer la qualité, la fiabilité ou des indicateurs du corpus ou des réponses.",
+      "en": "Evaluate: measure quality, reliability or metrics of the corpus or of answers."
+    },
+    "process": {
+      "fr": "Traiter : importer, nettoyer, convertir, découper ou exporter des données.",
+      "en": "Process: import, clean, convert, split or export data."
+    },
+    "system": {
+      "fr": "Système : vérifier l'état, la santé, les ressources ou les journaux du service.",
+      "en": "System: check the service's status, health, resources or logs."
+    },
+    "none": {
+      "fr": "Aucune de ces catégories : demander une précision ou signaler que la demande sort du périmètre.",
+      "en": "None of these: ask for clarification or report that the request is out of scope."
+    }
+  },
+  "families": [
+    {
+      "id": "search-01",
+      "intent": "search",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Où est-ce qu'on parle des pénalités de retard dans nos marchés publics ?",
+        "en": "Where do our public contracts talk about late-delivery penalties?"
+      },
+      "rationale": "Locate passages on a topic without naming the action."
+    },
+    {
+      "id": "search-02",
+      "intent": "search",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Il me faut les PV d'AG de 2023 qui actent l'augmentation de capital.",
+        "en": "I need the 2023 shareholder meeting minutes that record the capital increase."
+      },
+      "rationale": "Retrieve specific documents named in business jargon."
+    },
+    {
+      "id": "search-03",
+      "intent": "search",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Sors-moi les articles qui traitent des graphes de connaissances en santé.",
+        "en": "Pull up the articles that cover knowledge graphs in healthcare."
+      },
+      "rationale": "'Graph' is the topic of the documents, not an operation on entities."
+    },
+    {
+      "id": "search-04",
+      "intent": "search",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Retrouve la note qui décrit le futur tableau de bord commercial.",
+        "en": "Locate the memo that describes the upcoming sales dashboard."
+      },
+      "rationale": "'Dashboard' is the subject of the memo to find, not something to produce."
+    },
+    {
+      "id": "search-05",
+      "intent": "search",
+      "difficulty": "D2",
+      "kind": "near_miss",
+      "request": {
+        "fr": "Quels documents citent le fournisseur Delta ? Juste la liste, pas d'analyse.",
+        "en": "Which documents mention the supplier Delta? Just the list, no analysis."
+      },
+      "rationale": "A list of matching documents, explicitly not an analysis."
+    },
+    {
+      "id": "search-06",
+      "intent": "search",
+      "difficulty": "D2",
+      "kind": "noisy",
+      "request": {
+        "fr": "stp tu peux me retrouver le contrat cadre avec acme, je l'ai plus",
+        "en": "pls can u dig up the master agreement w/ acme, cant find it anymore"
+      },
+      "rationale": "Informal request to retrieve one document."
+    },
+    {
+      "id": "analyze-01",
+      "intent": "analyze",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Qu'est-ce qui revient le plus souvent dans les réclamations clients de ce trimestre ?",
+        "en": "What comes up most often in this quarter's customer complaints?"
+      },
+      "rationale": "Identify recurring themes in content."
+    },
+    {
+      "id": "analyze-02",
+      "intent": "analyze",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Est-ce que le ton des rapports d'audit s'est durci depuis 2022 ?",
+        "en": "Has the tone of the audit reports become harsher since 2022?"
+      },
+      "rationale": "Detect a trend in the content over time."
+    },
+    {
+      "id": "analyze-03",
+      "intent": "analyze",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Trouve les grandes tendances qui se dégagent des comptes rendus de chantier.",
+        "en": "Find the main trends that emerge from the site meeting reports."
+      },
+      "rationale": "'Find' asks for trends, an analysis, not documents."
+    },
+    {
+      "id": "analyze-04",
+      "intent": "analyze",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Dans les entretiens, quels thèmes reviennent quand les salariés parlent de leurs relations avec la direction ?",
+        "en": "In the interviews, which themes come up when employees talk about their relations with management?"
+      },
+      "rationale": "'Relations' is the topic; the task is thematic analysis, not entity traversal."
+    },
+    {
+      "id": "analyze-05",
+      "intent": "analyze",
+      "difficulty": "D2",
+      "kind": "near_miss",
+      "request": {
+        "fr": "Compare les arguments des deux rapports d'experts et dis-moi sur quoi ils divergent.",
+        "en": "Compare the arguments of the two expert reports and tell me where they diverge."
+      },
+      "rationale": "Compare content and find differences, not score its quality."
+    },
+    {
+      "id": "analyze-06",
+      "intent": "analyze",
+      "difficulty": "D2",
+      "kind": "noisy",
+      "request": {
+        "fr": "en gros c koi les sujets qui reviennent ds les mails du support ?",
+        "en": "basically what r the topics that keep coming up in the support emails?"
+      },
+      "rationale": "Informal request for recurring topics."
+    },
+    {
+      "id": "visualize-01",
+      "intent": "visualize",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Je veux voir d'un coup d'œil la répartition des dépenses par service.",
+        "en": "I want to see at a glance how spending is split across departments."
+      },
+      "rationale": "A visual overview is requested without naming a chart."
+    },
+    {
+      "id": "visualize-02",
+      "intent": "visualize",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Fais apparaître visuellement les étapes du processus d'achat, de la demande au paiement.",
+        "en": "Lay out the purchasing process visually, from request to payment."
+      },
+      "rationale": "A process diagram is requested."
+    },
+    {
+      "id": "visualize-03",
+      "intent": "visualize",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Pour l'analyse de demain, prépare un camembert des motifs de résiliation.",
+        "en": "For tomorrow's analysis, prepare a pie chart of cancellation reasons."
+      },
+      "rationale": "'Analysis' is the purpose; the deliverable is a chart."
+    },
+    {
+      "id": "visualize-04",
+      "intent": "visualize",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Montre sur une carte de chaleur les heures où les recherches des utilisateurs sont les plus nombreuses.",
+        "en": "Show on a heatmap the hours when user searches peak."
+      },
+      "rationale": "'Searches' is the measured data; the deliverable is a heatmap."
+    },
+    {
+      "id": "visualize-05",
+      "intent": "visualize",
+      "difficulty": "D2",
+      "kind": "near_miss",
+      "request": {
+        "fr": "Dessine l'organigramme du service juridique tel qu'il figure dans la note RH.",
+        "en": "Draw the legal department's org chart as described in the HR memo."
+      },
+      "rationale": "A drawn diagram, not a traversal of entity relations."
+    },
+    {
+      "id": "visualize-06",
+      "intent": "visualize",
+      "difficulty": "D2",
+      "kind": "noisy",
+      "request": {
+        "fr": "tu me ferais un ptit graph des ventes par région ? genre barres",
+        "en": "could u make me a lil chart of sales by region? bars or smth"
+      },
+      "rationale": "Informal request for a bar chart."
+    },
+    {
+      "id": "graph-01",
+      "intent": "graph",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Par quels intermédiaires la société Orion est-elle reliée au fonds Atlas ?",
+        "en": "Through which intermediaries is the company Orion connected to the Atlas fund?"
+      },
+      "rationale": "A path between two entities."
+    },
+    {
+      "id": "graph-02",
+      "intent": "graph",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Qui gravite autour du directeur financier dans les échanges du dossier fusion ?",
+        "en": "Who revolves around the CFO in the exchanges of the merger file?"
+      },
+      "rationale": "Neighbours of an entity."
+    },
+    {
+      "id": "graph-03",
+      "intent": "graph",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Cherche tous les signataires qui sont liés à la fois au contrat A et au contrat B.",
+        "en": "Look for every signatory linked to both contract A and contract B."
+      },
+      "rationale": "'Look for' asks for shared neighbours of two entities."
+    },
+    {
+      "id": "graph-04",
+      "intent": "graph",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Les entités liées au fournisseur sanctionné ont-elles tendance à former un même groupe ?",
+        "en": "Do the entities linked to the sanctioned supplier tend to form a single cluster?"
+      },
+      "rationale": "'Tend' is not a content trend; the question is about entity groups."
+    },
+    {
+      "id": "graph-05",
+      "intent": "graph",
+      "difficulty": "D2",
+      "kind": "near_miss",
+      "request": {
+        "fr": "Pas les documents eux-mêmes : les personnes qui relient l'avocat Martin aux deux filiales.",
+        "en": "Not the documents themselves: the people who connect lawyer Martin to the two subsidiaries."
+      },
+      "rationale": "Entities on the paths, explicitly not documents."
+    },
+    {
+      "id": "graph-06",
+      "intent": "graph",
+      "difficulty": "D2",
+      "kind": "noisy",
+      "request": {
+        "fr": "c qui les voisins directs de 'Projet Hermès' dans le graphe stp",
+        "en": "who r the direct neighbours of 'Project Hermes' in the graph pls"
+      },
+      "rationale": "Informal request for direct neighbours."
+    },
+    {
+      "id": "evaluate-01",
+      "intent": "evaluate",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Est-ce qu'on peut se fier aux réponses données hier sur la conformité RGPD ?",
+        "en": "Can we trust the answers given yesterday about GDPR compliance?"
+      },
+      "rationale": "Reliability of answers."
+    },
+    {
+      "id": "evaluate-02",
+      "intent": "evaluate",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Quelle part de nos fiches produit a encore des champs vides ou périmés ?",
+        "en": "What share of our product sheets still has empty or outdated fields?"
+      },
+      "rationale": "A quality metric of the corpus."
+    },
+    {
+      "id": "evaluate-03",
+      "intent": "evaluate",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Donne une note de fiabilité à l'analyse produite ce matin sur le contrat Delta.",
+        "en": "Give a reliability score to the analysis produced this morning on the Delta contract."
+      },
+      "rationale": "'Analysis' is the object scored; the task is evaluation."
+    },
+    {
+      "id": "evaluate-04",
+      "intent": "evaluate",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Mesure la précision des résultats de recherche renvoyés pour les vingt dernières questions.",
+        "en": "Measure the precision of the search results returned for the last twenty questions."
+      },
+      "rationale": "'Search' is the object measured; the task is a metric."
+    },
+    {
+      "id": "evaluate-05",
+      "intent": "evaluate",
+      "difficulty": "D2",
+      "kind": "near_miss",
+      "request": {
+        "fr": "Le taux de réponses sans source a-t-il augmenté cette semaine ?",
+        "en": "Has the rate of answers without a source gone up this week?"
+      },
+      "rationale": "A quality metric of answers, not service health."
+    },
+    {
+      "id": "evaluate-06",
+      "intent": "evaluate",
+      "difficulty": "D2",
+      "kind": "noisy",
+      "request": {
+        "fr": "ça vaut koi niveau qualité les extraits qu'on a sortis ? sois honnête",
+        "en": "how good r the excerpts we pulled, quality-wise? be honest"
+      },
+      "rationale": "Informal request to judge quality."
+    },
+    {
+      "id": "process-01",
+      "intent": "process",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Les scans du fonds Dupont sont illisibles par la recherche : rends-les exploitables.",
+        "en": "The scans of the Dupont collection can't be used by search: make them usable."
+      },
+      "rationale": "Convert scans into usable text; search is only the motive."
+    },
+    {
+      "id": "process-02",
+      "intent": "process",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Il faudrait que le tableur des fournisseurs rentre dans la base, avec des dates au bon format.",
+        "en": "The supplier spreadsheet needs to go into the database, with dates in the right format."
+      },
+      "rationale": "Import and clean data."
+    },
+    {
+      "id": "process-03",
+      "intent": "process",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Exporte en CSV les données qui ont servi au graphique du rapport annuel.",
+        "en": "Export to CSV the data behind the annual report's chart."
+      },
+      "rationale": "'Chart' names the source; the task is an export."
+    },
+    {
+      "id": "process-04",
+      "intent": "process",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Avant toute analyse, retire les doublons et les pages blanches du lot importé hier.",
+        "en": "Before any analysis, remove the duplicates and blank pages from yesterday's imported batch."
+      },
+      "rationale": "Cleaning comes first; analysis is later."
+    },
+    {
+      "id": "process-05",
+      "intent": "process",
+      "difficulty": "D2",
+      "kind": "near_miss",
+      "request": {
+        "fr": "Relance l'ingestion des fichiers qui ont échoué lors du dernier import.",
+        "en": "Rerun the ingestion of the files that failed in the last import."
+      },
+      "rationale": "Importing data again, not inspecting the service."
+    },
+    {
+      "id": "process-06",
+      "intent": "process",
+      "difficulty": "D2",
+      "kind": "noisy",
+      "request": {
+        "fr": "convertis moi ces docx en pdf vite fait stp",
+        "en": "convert these docx to pdf real quick pls"
+      },
+      "rationale": "Informal format conversion."
+    },
+    {
+      "id": "system-01",
+      "intent": "system",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Pourquoi tout rame depuis ce matin quand j'ouvre un dossier ?",
+        "en": "Why has everything been crawling since this morning when I open a folder?"
+      },
+      "rationale": "Service performance."
+    },
+    {
+      "id": "system-02",
+      "intent": "system",
+      "difficulty": "D2",
+      "kind": "implicit",
+      "request": {
+        "fr": "Il reste combien de place pour stocker de nouveaux documents ?",
+        "en": "How much room is left to store new documents?"
+      },
+      "rationale": "Service resources."
+    },
+    {
+      "id": "system-03",
+      "intent": "system",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "La recherche renvoie une erreur 500 : regarde ce que disent les journaux du service.",
+        "en": "Search returns a 500 error: check what the service logs say."
+      },
+      "rationale": "'Search' is the failing feature; the task is reading logs."
+    },
+    {
+      "id": "system-04",
+      "intent": "system",
+      "difficulty": "D2",
+      "kind": "lexical_trap",
+      "request": {
+        "fr": "Le tableau de bord ne se charge plus : le service est-il en panne ?",
+        "en": "The dashboard no longer loads: is the service down?"
+      },
+      "rationale": "'Dashboard' is the symptom; the task is service status."
+    },
+    {
+      "id": "system-05",
+      "intent": "system",
+      "difficulty": "D2",
+      "kind": "near_miss",
+      "request": {
+        "fr": "Combien de requêtes ont échoué par timeout depuis minuit ?",
+        "en": "How many requests have failed with a timeout since midnight?"
+      },
+      "rationale": "Service health from logs, not answer quality."
+    },
+    {
+      "id": "system-06",
+      "intent": "system",
+      "difficulty": "D2",
+      "kind": "noisy",
+      "request": {
+        "fr": "le serveur est up là ? j'ai l'impression qu'il répond plus",
+        "en": "is the server up rn? feels like it's not responding"
+      },
+      "rationale": "Informal status check."
+    },
+    {
+      "id": "none-01",
+      "intent": "none",
+      "difficulty": "D2",
+      "kind": "out_of_scope",
+      "request": {
+        "fr": "Signe électroniquement le contrat Delta à ma place.",
+        "en": "Sign the Delta contract electronically on my behalf."
+      },
+      "rationale": "Acting on the user's behalf is outside every category."
+    },
+    {
+      "id": "none-02",
+      "intent": "none",
+      "difficulty": "D2",
+      "kind": "out_of_scope",
+      "request": {
+        "fr": "Envoie le rapport d'audit au commissaire aux comptes par la poste.",
+        "en": "Mail the audit report to the statutory auditor by post."
+      },
+      "rationale": "Physical mailing is out of scope despite document vocabulary."
+    },
+    {
+      "id": "none-03",
+      "intent": "none",
+      "difficulty": "D2",
+      "kind": "ambiguous",
+      "request": {
+        "fr": "Fais quelque chose avec les documents du projet.",
+        "en": "Do something with the project documents."
+      },
+      "rationale": "No category can be chosen without clarification."
+    },
+    {
+      "id": "none-04",
+      "intent": "none",
+      "difficulty": "D2",
+      "kind": "ambiguous",
+      "request": {
+        "fr": "Le dossier Martin, tu t'en occupes ?",
+        "en": "The Martin file, can you deal with it?"
+      },
+      "rationale": "The expected action is unspecified."
+    },
+    {
+      "id": "none-05",
+      "intent": "none",
+      "difficulty": "D2",
+      "kind": "out_of_scope",
+      "request": {
+        "fr": "Rappelle-moi d'appeler le client demain à 9 h.",
+        "en": "Remind me to call the client tomorrow at 9."
+      },
+      "rationale": "A reminder is outside the categories."
+    },
+    {
+      "id": "none-06",
+      "intent": "none",
+      "difficulty": "D2",
+      "kind": "ambiguous",
+      "request": {
+        "fr": "euh tu peux regarder ça vite fait ?",
+        "en": "uh can u take a quick look at this?"
+      },
+      "rationale": "Informal and unspecified."
+    }
+  ]
+}

@@ -26,6 +26,9 @@ python3 scripts/build-facade-routing-pack.py --check
 python3 -m deposium_bench validate-cases --dataset datasets/facade-routing-v1/cases.jsonl
 ```
 
+Harder tiers with the same categories: [advanced](../facade-routing-advanced-v1/README.md)
+and [complex](../facade-routing-complex-v1/README.md).
+
 A correct choice shows agreement with an authored category on short synthetic
 requests. It does not qualify a production router, tool execution or answer
 quality.

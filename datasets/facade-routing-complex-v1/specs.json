@@ -1,0 +1,633 @@
+{
+  "schema_version": "deposium.facade-routing-spec/v1",
+  "dataset_id": "facade-routing-complex-v1",
+  "authoring": "Complex tier: multi-step requests (the reference is the category of the first step), requests that depend on a previous exchange, compound refusals, goals stated without the action, and genuine ambiguity or out-of-scope first steps. The question asks for the category to use first. Written without access to any router rule or keyword list; generic category descriptions identical to facade-routing-v1.",
+  "categories": {
+    "search": {
+      "fr": "Rechercher : retrouver des documents ou des passages pertinents dans le corpus.",
+      "en": "Search: find relevant documents or passages in the corpus."
+    },
+    "analyze": {
+      "fr": "Analyser : examiner le contenu et en dégager des thèmes, des tendances ou des motifs.",
+      "en": "Analyse: examine content and identify themes, trends or patterns."
+    },
+    "visualize": {
+      "fr": "Visualiser : produire un graphique, un diagramme ou un tableau de bord.",
+      "en": "Visualise: produce a chart, a diagram or a dashboard."
+    },
+    "graph": {
+      "fr": "Graphe : parcourir des entités et leurs relations (voisins, chemins, groupes).",
+      "en": "Graph: traverse entities and their relations (neighbours, paths, groups)."
+    },
+    "evaluate": {
+      "fr": "Évaluer : mesurer la qualité, la fiabilité ou des indicateurs du corpus ou des réponses.",
+      "en": "Evaluate: measure quality, reliability or metrics of the corpus or of answers."
+    },
+    "process": {
+      "fr": "Traiter : importer, nettoyer, convertir, découper ou exporter des données.",
+      "en": "Process: import, clean, convert, split or export data."
+    },
+    "system": {
+      "fr": "Système : vérifier l'état, la santé, les ressources ou les journaux du service.",
+      "en": "System: check the service's status, health, resources or logs."
+    },
+    "none": {
+      "fr": "Aucune de ces catégories : demander une précision ou signaler que la demande sort du périmètre.",
+      "en": "None of these: ask for clarification or report that the request is out of scope."
+    }
+  },
+  "families": [
+    {
+      "id": "search-01",
+      "intent": "search",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Retrouve les avenants du contrat Delta, puis fais-moi une frise de leurs dates.",
+        "en": "Find the amendments to the Delta contract, then make me a timeline of their dates."
+      },
+      "rationale": "Retrieval comes before the timeline."
+    },
+    {
+      "id": "search-02",
+      "intent": "search",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Avant de comparer les offres, il me faut les trois propositions reçues pour l'appel d'offres voirie.",
+        "en": "Before comparing the bids, I need the three proposals received for the roadworks tender."
+      },
+      "rationale": "The proposals must be retrieved before any comparison."
+    },
+    {
+      "id": "search-03",
+      "intent": "search",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Montre-moi les avis exacts qui parlent d'emballage.",
+        "en": "Show me the exact reviews that mention packaging."
+      },
+      "rationale": "After a thematic answer, the user asks for the matching documents.",
+      "previous": {
+        "fr": "Utilisateur : Quels thèmes reviennent dans les avis clients ? Assistant : Surtout les délais de livraison et l'emballage.",
+        "en": "User: Which themes come up in customer reviews? Assistant: Mostly delivery times and packaging."
+      }
+    },
+    {
+      "id": "search-04",
+      "intent": "search",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "D'accord. Maintenant les statuts de la troisième, le document lui-même.",
+        "en": "OK. Now the articles of association of the third one, the document itself."
+      },
+      "rationale": "After a graph answer, the user asks for one document.",
+      "previous": {
+        "fr": "Utilisateur : Trace le graphe des filiales d'Orion. Assistant : Voici les 12 filiales et leurs liens.",
+        "en": "User: Draw the graph of Orion's subsidiaries. Assistant: Here are the 12 subsidiaries and their links."
+      }
+    },
+    {
+      "id": "search-05",
+      "intent": "search",
+      "difficulty": "D3",
+      "kind": "compound_negation",
+      "request": {
+        "fr": "Ni graphique ni résumé, et pas besoin de vérifier leur fiabilité : seulement les passages qui citent l'article 12.",
+        "en": "No chart, no summary, and no need to check their reliability: only the passages that quote article 12."
+      },
+      "rationale": "Three other categories are refused; passages remain."
+    },
+    {
+      "id": "search-06",
+      "intent": "search",
+      "difficulty": "D3",
+      "kind": "implicit_goal",
+      "request": {
+        "fr": "Je dois citer mot pour mot la clause de non-concurrence au client dans une heure.",
+        "en": "I have to quote the non-compete clause word for word to the client in an hour."
+      },
+      "rationale": "The goal requires retrieving the exact clause."
+    },
+    {
+      "id": "analyze-01",
+      "intent": "analyze",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Dégage les causes récurrentes des incidents de sécurité, puis on en fera un tableau de bord.",
+        "en": "Identify the recurring causes of the safety incidents, then we'll build a dashboard from them."
+      },
+      "rationale": "Analysis precedes the dashboard."
+    },
+    {
+      "id": "analyze-02",
+      "intent": "analyze",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Identifie les thèmes des entretiens de départ, et ensuite exporte-les dans le tableur RH.",
+        "en": "Identify the themes of the exit interviews, and afterwards export them to the HR spreadsheet."
+      },
+      "rationale": "Themes must exist before the export."
+    },
+    {
+      "id": "analyze-03",
+      "intent": "analyze",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Globalement, qu'est-ce qu'ils disent de l'évolution des retours clients ?",
+        "en": "Overall, what do they say about how customer returns have evolved?"
+      },
+      "rationale": "After retrieval, the user asks for a synthesis of trends.",
+      "previous": {
+        "fr": "Utilisateur : Retrouve les comptes rendus du comité qualité 2025. Assistant : J'en ai trouvé 9.",
+        "en": "User: Find the 2025 quality committee minutes. Assistant: I found 9 of them."
+      }
+    },
+    {
+      "id": "analyze-04",
+      "intent": "analyze",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Pourquoi mars ? Qu'est-ce qui distingue les réclamations de ce mois-là ?",
+        "en": "Why March? What sets that month's complaints apart?"
+      },
+      "rationale": "After a chart, the user asks to explain a pattern in the content.",
+      "previous": {
+        "fr": "Utilisateur : Fais un histogramme des réclamations par mois. Assistant : Voici l'histogramme ; mars est le pic.",
+        "en": "User: Make a histogram of complaints per month. Assistant: Here is the histogram; March is the peak."
+      }
+    },
+    {
+      "id": "analyze-05",
+      "intent": "analyze",
+      "difficulty": "D3",
+      "kind": "compound_negation",
+      "request": {
+        "fr": "Je ne veux ni la liste des documents ni une note de qualité : explique ce que les rapports ont en commun.",
+        "en": "I want neither the list of documents nor a quality score: explain what the reports have in common."
+      },
+      "rationale": "Search and evaluation are refused; common patterns remain."
+    },
+    {
+      "id": "analyze-06",
+      "intent": "analyze",
+      "difficulty": "D3",
+      "kind": "implicit_goal",
+      "request": {
+        "fr": "Je présente demain ce qui a changé dans la stratégie entre les plans 2023 et 2026 ; aide-moi à le comprendre.",
+        "en": "Tomorrow I present what changed in the strategy between the 2023 and 2026 plans; help me understand it."
+      },
+      "rationale": "Understanding changes requires analysis of the two plans."
+    },
+    {
+      "id": "visualize-01",
+      "intent": "visualize",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Sur les chiffres déjà extraits, trace la courbe des volumes, puis on la commentera.",
+        "en": "From the figures already extracted, plot the volume curve, then we'll comment on it."
+      },
+      "rationale": "The data is available; the first action is the chart."
+    },
+    {
+      "id": "visualize-02",
+      "intent": "visualize",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Fais d'abord un diagramme du circuit de validation des factures ; on vérifiera ensuite s'il est conforme.",
+        "en": "First draw a diagram of the invoice approval workflow; we'll check afterwards whether it complies."
+      },
+      "rationale": "The diagram is explicitly first."
+    },
+    {
+      "id": "visualize-03",
+      "intent": "visualize",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Mets ça en barres, je veux le montrer à l'équipe.",
+        "en": "Put that in bars, I want to show the team."
+      },
+      "rationale": "After a textual answer, the user asks for a chart of it.",
+      "previous": {
+        "fr": "Utilisateur : Quelles régions vendent le plus ? Assistant : Le Sud et l'Ouest, loin devant.",
+        "en": "User: Which regions sell the most? Assistant: The South and the West, far ahead."
+      }
+    },
+    {
+      "id": "visualize-04",
+      "intent": "visualize",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Fais-en une courbe sur les douze semaines.",
+        "en": "Turn that into a curve over the twelve weeks."
+      },
+      "rationale": "After a metric, the user asks for its chart.",
+      "previous": {
+        "fr": "Utilisateur : Mesure le taux de réponses sourcées par semaine. Assistant : Il varie entre 71 % et 88 %.",
+        "en": "User: Measure the weekly rate of sourced answers. Assistant: It ranges from 71% to 88%."
+      }
+    },
+    {
+      "id": "visualize-05",
+      "intent": "visualize",
+      "difficulty": "D3",
+      "kind": "compound_negation",
+      "request": {
+        "fr": "Pas de nouvelle recherche et pas d'analyse supplémentaire : juste un camembert des résultats déjà obtenus.",
+        "en": "No new search and no further analysis: just a pie chart of the results we already have."
+      },
+      "rationale": "Search and analysis are refused; the chart remains."
+    },
+    {
+      "id": "visualize-06",
+      "intent": "visualize",
+      "difficulty": "D3",
+      "kind": "implicit_goal",
+      "request": {
+        "fr": "Le comité ne lit pas les tableaux de chiffres ; il faut qu'il comprenne la répartition du budget en un coup d'œil.",
+        "en": "The committee doesn't read tables of figures; it must grasp the budget split at a glance."
+      },
+      "rationale": "The goal requires a visual."
+    },
+    {
+      "id": "graph-01",
+      "intent": "graph",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Trouve qui relie le fournisseur Delta à notre acheteur, puis rédige une alerte conformité.",
+        "en": "Find who links supplier Delta to our buyer, then draft a compliance alert."
+      },
+      "rationale": "The first step is a path between entities."
+    },
+    {
+      "id": "graph-02",
+      "intent": "graph",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Regroupe d'abord les sociétés par liens d'actionnariat, ensuite on visualisera les groupes.",
+        "en": "First group the companies by shareholding links; we'll visualise the groups afterwards."
+      },
+      "rationale": "Grouping by relations comes first."
+    },
+    {
+      "id": "graph-03",
+      "intent": "graph",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Avec qui d'autre a-t-il cosigné, et ces personnes sont-elles liées entre elles ?",
+        "en": "Who else did he co-sign with, and are those people linked to each other?"
+      },
+      "rationale": "After retrieval, the user asks about relations between entities.",
+      "previous": {
+        "fr": "Utilisateur : Retrouve les contrats signés par Martin. Assistant : Il en a signé 14.",
+        "en": "User: Find the contracts signed by Martin. Assistant: He signed 14 of them."
+      }
+    },
+    {
+      "id": "graph-04",
+      "intent": "graph",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Sur la gouvernance, qui sont les acteurs et comment sont-ils reliés ?",
+        "en": "On governance, who are the actors and how are they connected?"
+      },
+      "rationale": "After a thematic answer, the user asks for entities and links.",
+      "previous": {
+        "fr": "Utilisateur : Analyse les thèmes des notes du dossier fusion. Assistant : Gouvernance, prix et calendrier.",
+        "en": "User: Analyse the themes of the merger file notes. Assistant: Governance, price and timeline."
+      }
+    },
+    {
+      "id": "graph-05",
+      "intent": "graph",
+      "difficulty": "D3",
+      "kind": "compound_negation",
+      "request": {
+        "fr": "Je ne veux pas les documents ni un dessin : seulement le chemin le plus court entre Orion et Atlas.",
+        "en": "I don't want the documents or a drawing: only the shortest path between Orion and Atlas."
+      },
+      "rationale": "Search and visualisation are refused; the path remains."
+    },
+    {
+      "id": "graph-06",
+      "intent": "graph",
+      "difficulty": "D3",
+      "kind": "implicit_goal",
+      "request": {
+        "fr": "Je dois savoir si deux de nos fournisseurs appartiennent en fait au même groupe.",
+        "en": "I need to know whether two of our suppliers actually belong to the same group."
+      },
+      "rationale": "Group membership through entity relations."
+    },
+    {
+      "id": "evaluate-01",
+      "intent": "evaluate",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Vérifie d'abord la fiabilité des sources citées dans la synthèse, puis on décidera s'il faut la republier.",
+        "en": "First check how reliable the sources cited in the summary are, then we'll decide whether to republish it."
+      },
+      "rationale": "Reliability check is first."
+    },
+    {
+      "id": "evaluate-02",
+      "intent": "evaluate",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Mesure le taux de doublons du corpus avant qu'on lance le nettoyage.",
+        "en": "Measure the duplicate rate of the corpus before we start cleaning."
+      },
+      "rationale": "The metric precedes the cleaning."
+    },
+    {
+      "id": "evaluate-03",
+      "intent": "evaluate",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Combien d'entre elles s'appuyaient vraiment sur un document ?",
+        "en": "How many of them were actually grounded in a document?"
+      },
+      "rationale": "After a summary, the user asks for a grounding metric.",
+      "previous": {
+        "fr": "Utilisateur : Résume les réponses données à l'équipe juridique cette semaine. Assistant : 23 réponses, surtout sur les délais.",
+        "en": "User: Summarise the answers given to the legal team this week. Assistant: 23 answers, mostly about deadlines."
+      }
+    },
+    {
+      "id": "evaluate-04",
+      "intent": "evaluate",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Sont-elles complètes et à jour ? Donne-moi un score.",
+        "en": "Are they complete and up to date? Give me a score."
+      },
+      "rationale": "After retrieval, the user asks for a quality score.",
+      "previous": {
+        "fr": "Utilisateur : Retrouve les fiches produit de la gamme Nova. Assistant : 40 fiches trouvées.",
+        "en": "User: Find the product sheets of the Nova range. Assistant: 40 sheets found."
+      }
+    },
+    {
+      "id": "evaluate-05",
+      "intent": "evaluate",
+      "difficulty": "D3",
+      "kind": "compound_negation",
+      "request": {
+        "fr": "Sans relancer de recherche ni produire de graphique, dis-moi si les extraits retenus sont exacts.",
+        "en": "Without running a new search or producing a chart, tell me whether the selected excerpts are accurate."
+      },
+      "rationale": "Search and chart are refused; accuracy assessment remains."
+    },
+    {
+      "id": "evaluate-06",
+      "intent": "evaluate",
+      "difficulty": "D3",
+      "kind": "implicit_goal",
+      "request": {
+        "fr": "Avant de montrer ces réponses au client, je veux être sûr qu'elles ne contiennent pas d'affirmations sans preuve.",
+        "en": "Before showing these answers to the client, I want to be sure they contain no unsupported claims."
+      },
+      "rationale": "Checking support of answers is an evaluation."
+    },
+    {
+      "id": "process-01",
+      "intent": "process",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Importe les factures de mars, puis compare-les à celles de février.",
+        "en": "Import the March invoices, then compare them with February's."
+      },
+      "rationale": "The import comes first."
+    },
+    {
+      "id": "process-02",
+      "intent": "process",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Il faut d'abord découper ce PDF de 600 pages en chapitres avant que quiconque puisse le lire.",
+        "en": "This 600-page PDF must first be split into chapters before anyone can read it."
+      },
+      "rationale": "Splitting is first."
+    },
+    {
+      "id": "process-03",
+      "intent": "process",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Uniformise tout ça et fusionne-les en un seul fichier.",
+        "en": "Make all of that consistent and merge them into a single file."
+      },
+      "rationale": "After retrieval, the user asks to clean and merge data.",
+      "previous": {
+        "fr": "Utilisateur : Retrouve les relevés de température de l'entrepôt. Assistant : J'ai trouvé 52 fichiers CSV, avec des formats de date différents.",
+        "en": "User: Find the warehouse temperature logs. Assistant: I found 52 CSV files with different date formats."
+      }
+    },
+    {
+      "id": "process-04",
+      "intent": "process",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Corrige ce qui peut l'être à partir des noms de fichiers.",
+        "en": "Fix what can be fixed from the file names."
+      },
+      "rationale": "After a quality metric, the user asks to clean metadata.",
+      "previous": {
+        "fr": "Utilisateur : Évalue la qualité des métadonnées du fonds photo. Assistant : 30 % des fichiers n'ont pas de date.",
+        "en": "User: Evaluate the metadata quality of the photo collection. Assistant: 30% of the files have no date."
+      }
+    },
+    {
+      "id": "process-05",
+      "intent": "process",
+      "difficulty": "D3",
+      "kind": "compound_negation",
+      "request": {
+        "fr": "Ne cherche rien et n'analyse rien : convertis simplement les tableaux du rapport en CSV.",
+        "en": "Don't search or analyse anything: just convert the report's tables to CSV."
+      },
+      "rationale": "Search and analysis are refused; conversion remains."
+    },
+    {
+      "id": "process-06",
+      "intent": "process",
+      "difficulty": "D3",
+      "kind": "implicit_goal",
+      "request": {
+        "fr": "Le cabinet comptable ne sait lire que l'Excel ; il lui faut nos relevés d'ici ce soir.",
+        "en": "The accounting firm can only read Excel; they need our statements by tonight."
+      },
+      "rationale": "The goal requires a format conversion or export."
+    },
+    {
+      "id": "system-01",
+      "intent": "system",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Vérifie que le service d'indexation tourne, puis relance la recherche sur les contrats.",
+        "en": "Check that the indexing service is running, then rerun the search on the contracts."
+      },
+      "rationale": "The service check is first."
+    },
+    {
+      "id": "system-02",
+      "intent": "system",
+      "difficulty": "D3",
+      "kind": "first_step",
+      "request": {
+        "fr": "Avant l'import massif de ce soir, regarde s'il reste assez de mémoire et de disque.",
+        "en": "Before tonight's bulk import, check whether there's enough memory and disk left."
+      },
+      "rationale": "Resources are checked before the import."
+    },
+    {
+      "id": "system-03",
+      "intent": "system",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "C'est la deuxième fois aujourd'hui. Qu'est-ce qui ne va pas côté serveur ?",
+        "en": "That's the second time today. What's wrong on the server side?"
+      },
+      "rationale": "After a failed chart, the user asks about service health.",
+      "previous": {
+        "fr": "Utilisateur : Trace la courbe des volumes. Assistant : Je n'ai pas pu générer la courbe : délai dépassé.",
+        "en": "User: Plot the volume curve. Assistant: I couldn't generate the curve: timeout exceeded."
+      }
+    },
+    {
+      "id": "system-04",
+      "intent": "system",
+      "difficulty": "D3",
+      "kind": "context_turn",
+      "request": {
+        "fr": "Regarde dans les journaux ce qui l'a interrompu.",
+        "en": "Check the logs for what interrupted it."
+      },
+      "rationale": "After a failed import, the user asks to read service logs.",
+      "previous": {
+        "fr": "Utilisateur : Importe les scans du fonds Dupont. Assistant : L'import s'est arrêté à 40 %.",
+        "en": "User: Import the scans of the Dupont collection. Assistant: The import stopped at 40%."
+      }
+    },
+    {
+      "id": "system-05",
+      "intent": "system",
+      "difficulty": "D3",
+      "kind": "compound_negation",
+      "request": {
+        "fr": "Je ne te demande ni de refaire l'import ni d'évaluer les données : dis-moi seulement si la base répond.",
+        "en": "I'm asking neither to redo the import nor to evaluate the data: just tell me whether the database responds."
+      },
+      "rationale": "Process and evaluation are refused; the status check remains."
+    },
+    {
+      "id": "system-06",
+      "intent": "system",
+      "difficulty": "D3",
+      "kind": "implicit_goal",
+      "request": {
+        "fr": "Les utilisateurs se plaignent d'attendre trente secondes pour chaque réponse depuis la mise à jour.",
+        "en": "Users complain they've been waiting thirty seconds per answer since the update."
+      },
+      "rationale": "A latency problem of the service."
+    },
+    {
+      "id": "none-01",
+      "intent": "none",
+      "difficulty": "D3",
+      "kind": "ambiguous",
+      "request": {
+        "fr": "Occupe-toi des fichiers du client, tu sais ce qu'il faut faire.",
+        "en": "Handle the client's files, you know what to do."
+      },
+      "rationale": "The action is unspecified; ask for clarification."
+    },
+    {
+      "id": "none-02",
+      "intent": "none",
+      "difficulty": "D3",
+      "kind": "ambiguous",
+      "request": {
+        "fr": "Fais le nécessaire pour la réunion de lundi.",
+        "en": "Do what's needed for Monday's meeting."
+      },
+      "rationale": "The action is unspecified; ask for clarification."
+    },
+    {
+      "id": "none-03",
+      "intent": "none",
+      "difficulty": "D3",
+      "kind": "context_vague",
+      "request": {
+        "fr": "Et pour les autres ?",
+        "en": "And what about the others?"
+      },
+      "rationale": "The previous turn does not say which others or what to do.",
+      "previous": {
+        "fr": "Utilisateur : Retrouve les contrats fournisseurs. Assistant : J'en ai trouvé 120.",
+        "en": "User: Find the supplier contracts. Assistant: I found 120 of them."
+      }
+    },
+    {
+      "id": "none-04",
+      "intent": "none",
+      "difficulty": "D3",
+      "kind": "context_vague",
+      "request": {
+        "fr": "Non, pas ça. L'autre chose.",
+        "en": "No, not that. The other thing."
+      },
+      "rationale": "The previous turn does not identify the other thing.",
+      "previous": {
+        "fr": "Utilisateur : Fais une courbe des ventes. Assistant : Voici la courbe.",
+        "en": "User: Make a sales curve. Assistant: Here is the curve."
+      }
+    },
+    {
+      "id": "none-05",
+      "intent": "none",
+      "difficulty": "D3",
+      "kind": "out_of_scope",
+      "request": {
+        "fr": "Négocie avec le fournisseur Delta une remise de 10 % sur le prochain contrat.",
+        "en": "Negotiate a 10% discount with supplier Delta on the next contract."
+      },
+      "rationale": "Negotiating is outside every category."
+    },
+    {
+      "id": "none-06",
+      "intent": "none",
+      "difficulty": "D3",
+      "kind": "out_of_scope",
+      "request": {
+        "fr": "D'abord, réserve un billet de train pour Lyon, puis retrouve le contrat du client lyonnais.",
+        "en": "First book a train ticket to Lyon, then find the Lyon client's contract."
+      },
+      "rationale": "The first requested action is out of scope."
+    }
+  ]
+}
