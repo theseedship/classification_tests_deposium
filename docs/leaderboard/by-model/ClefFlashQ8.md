@@ -25,8 +25,8 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 192/192 | 96/96 | 1 | 1 | all `ok` | [report](../../CLEF_FLASH_RESULTS_20261029.md) |
 | Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 41/48 | 31/36 | 1 | 3 | all `ok` | [report](../../CLEF_FLASH_RESULTS_20261029.md) |
 | Tool workflow, executed | [Executed tool episodes (closed choice)](../../RESULTS.md#executed-tool-episodes-closed-choice) | not run | — | — | — | — | — |
-| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 261/512 | no split ranking | 1 | — | all `ok` | [report](../../PASSAGE_CLEF_RESULTS_20261029.md) |
-| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 446/768 | no split ranking | 2 | — | all `ok` | [report](../../PASSAGE_CLEF_RESULTS_20261029.md) |
+| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 261/512 | no split ranking | 2 | — | all `ok` | [report](../../PASSAGE_CLEF_RESULTS_20261029.md) |
+| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 446/768 | no split ranking | 3 | — | all `ok` | [report](../../PASSAGE_CLEF_RESULTS_20261029.md) |
 | Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 109/128 | no split ranking | 2 | — | all `ok` | [report](../../PASSAGE_CLEF_RESULTS_20261029.md) |
 | Retrieved evidence | [Passage relevance, four rotations](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |
 | Retrieved evidence | [Passage ranking](../../leaderboard/other-benchmarks.md#passage-ranking-and-evidence) | not run | — | — | — | — | — |

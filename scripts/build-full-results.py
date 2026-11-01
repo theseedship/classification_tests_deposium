@@ -70,7 +70,13 @@ RECENT_INPUTS = (CAMPAIGN_MODULE, EVIDENCE + "clef-flash-20261029/analysis.json"
                  "profiles/d3-nano-macos-choice-episodes.json", "profiles/d3-mini-macos-choice-episodes.json",
                  "profiles/vela2-03-macos-cpu.json",
                  "docs/PASSAGE_CPU_RESULTS_20261015.md", "docs/PASSAGE_JEV_RESULTS_20261015.md",
-                 "docs/PASSAGE_FLASH_RESULTS_20261029.md", "docs/PASSAGE_CLEF_RESULTS_20261029.md")
+                 "docs/PASSAGE_FLASH_RESULTS_20261029.md", "docs/PASSAGE_CLEF_RESULTS_20261029.md",
+                 EVIDENCE + "passage-small-cpu-20261031/d3-lite.json", EVIDENCE + "passage-small-cpu-20261031/vela2-03.json",
+                 EVIDENCE + "passage-small-cpu-20261031/d3-nano.json", EVIDENCE + "passage-small-cpu-20261031/d3-mini.json",
+                 "docs/PASSAGE_SMALL_CPU_RESULTS_20261031.md", "docs/PASSAGE_SMALL_CPU_PROTOCOL_20261031.md")
+# Constant majority-class answer on passage-evidence-v1, rotation 0 (dataset sha pinned in campaigns).
+PASSAGE_MAJORITY = {"relevance": ("grade 1", 224, 512), "support": ("`insufficient`", 584, 768),
+                    "answerability": ("`answerable`", 88, 128)}
 STATUS_KEYS = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
 IDENTITY_KEYS = ("adapter", "profile_id", "device", "model_repo_id", "model_id",
                  "model_revision", "source_revision", "model_assets_sha256",
@@ -1019,7 +1025,10 @@ def render_campaign_rankings(data):
                       "the law and assumptions are supplied in each input."]
         lines.append("")
     for axis, title in (("relevance", "Passage relevance"), ("support", "Claim support"), ("answerability", "Answerability")):
-        lines += [f"### {title}", "", "Rotation 0: 128 pools, eight families, eight language directions, two correlated views.", "",
+        label, hits, total = PASSAGE_MAJORITY[axis]
+        lines += [f"### {title}", "", "Rotation 0: 128 pools, eight families, eight language directions, two correlated views. "
+                  f"Classes are imbalanced: always answering {label} scores **{hits}/{total}**, so compare macro class accuracy, "
+                  "not totals alone.", "",
                   "<sub>**Rank**: by correct/all among completely scored observations (— when partial or not run); "
                   "**Macro class accuracy**: mean of the per-class accuracies, so a rare class weighs as much as a frequent one.</sub>", "",
                   "| Rank | Model / runtime | Correct / all | Scored / all | Macro class accuracy | Observation |",
@@ -1042,7 +1051,9 @@ def render_campaign_rankings(data):
               "Support insufficiency/refutation remains weak for both Flash candidates. Clef accepts 12/16 pools annotated "
               "as conflicting as answerable; D3 accepts none in this finite run. See "
               "[paired outcomes and confusion matrices](PASSAGE_CLEF_RESULTS_20261029.md). "
-              "This is not factual-verifier or end-to-end qualification.", "",
+              "This is not factual-verifier or end-to-end qualification. The four macOS CPU rows (D3 lite, nano, mini, "
+              "Vela 2.0 0.3B), their per-class errors and their cost per call are in the "
+              "[small-CPU passage report](PASSAGE_SMALL_CPU_RESULTS_20261031.md).", "",
               *render_choice_episodes(data),
               "### Campaign latency and memory", "",
               "Physical-call timings are kept separate from reused logical decisions; session RSS scopes differ "

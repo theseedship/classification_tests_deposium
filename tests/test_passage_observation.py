@@ -468,6 +468,18 @@ class PassageObservationTests(unittest.TestCase):
             self.assertFalse(output.exists())
             self.assertFalse(FakeAdapter.instances)
 
+    def test_macos_small_cpu_profiles_are_admitted_with_a_longer_local_budget(self):
+        for name in ("d3-nano-macos-cpu", "d3-mini-macos-cpu", "vela2-03-macos-cpu", "d3-lite-macos-cpu"):
+            FakeAdapter.instances.clear()
+            with self.subTest(profile=name), tempfile.TemporaryDirectory() as folder:
+                summary = observe_choice(ROOT / f"profiles/{name}.json", Path(folder) / "choice",
+                                         adapter_factory=FakeAdapter, max_seconds=4 * 3600,
+                                         memory_reader=lambda: {"MemAvailable_mib": 40000})
+                self.assertEqual(summary["completion_status"], "complete")
+        with tempfile.TemporaryDirectory() as folder, self.assertRaises(PassageObservationError):
+            observe_choice(PROFILE, Path(folder) / "choice", adapter_factory=FakeAdapter,
+                           max_seconds=6 * 3600 + 1, memory_reader=lambda: {"MemAvailable_mib": 40000})
+
     def test_memory_floor_stops_and_closes_with_no_empty_pass(self):
         readings = iter(({"MemAvailable_mib": 20000}, {"MemAvailable_mib": 3000}))
         with tempfile.TemporaryDirectory() as folder:

@@ -488,9 +488,27 @@ class FullResultsTests(unittest.TestCase):
 
     def test_passage_rankings_retain_partial_and_unrun_cases_and_separate_rotations(self):
         rows = {(r["task"], r["observation"]): r for r in self.data["campaigns"]}
-        for obs, correct, rank in (("D3FlashQ8Upstream", 122, 1), ("ClefFlashQ8", 109, 2), ("D3lite", 88, 3)):
+        for obs, correct, rank in (("D3FlashQ8Upstream", 122, 1), ("ClefFlashQ8", 109, 2), ("D3miniMacos", 104, 3),
+                                   ("D3nanoMacos", 93, 4), ("Vela03Macos", 93, 4), ("D3lite", 88, 6), ("D3liteMacos", 88, 6)):
             row = rows["passage_answerability", obs]
             self.assertEqual((row["counts"]["correct"], row["counts"]["total"], row["rank_all"]), (correct, 128, rank))
+        for task, obs, correct, total in (("passage_relevance", "D3miniMacos", 266, 512),
+                                          ("passage_support", "D3miniMacos", 527, 768),
+                                          ("passage_support", "Vela03Macos", 151, 768)):
+            row = rows[task, obs]
+            self.assertEqual((row["counts"]["correct"], row["counts"]["scored"], row["counts"]["total"]), (correct, total, total))
+            self.assertEqual(row["status"], "complete")
+        # The constant majority-class baselines quoted on the page match the scored class distribution.
+        for change in ({"completion_status": "incomplete", "stop_reason": "bench_source_changed"},
+                       {"stop_reason": "bench_source_changed"}):
+            with self.changed_json(results.EVIDENCE + "passage-small-cpu-20261031/d3-lite.json",
+                                   lambda d, change=change: d.update(change)):
+                with self.assertRaisesRegex(ValueError, "not a complete verified run: D3liteMacos"):
+                    results.build(self.root)
+        score = json.loads((self.root / results.EVIDENCE / "passage-small-cpu-20261031/d3-mini.json").read_text())
+        for axis, (_, hits, total) in results.PASSAGE_MAJORITY.items():
+            classes = [v["total_decisions"] for v in score["choice_scores"][axis]["by_expected_label"].values()]
+            self.assertEqual((max(classes), sum(classes)), (hits, total))
         partial = rows["passage_support", "Jev114"]
         self.assertEqual(partial["status"], "partial")
         self.assertIsNone(partial["rank_all"])
@@ -543,7 +561,8 @@ class FullResultsTests(unittest.TestCase):
         self.assertIn("| 192/192 (#1) | 39/48 (#2) |", index)
         mini = pages[results.MODEL_PAGES_DIR + "D3miniMacos.md"]
         self.assertIn("| Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 192/192 | 96/96 | 1 | 1 | all `ok` | [report](../../D3_MINI_MACOS_RESULTS_20261031.md) |", mini)
-        self.assertIn("| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |", mini)
+        self.assertIn("| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 266/512 | no split ranking | 1 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |", mini)
+        self.assertIn("| Retrieved evidence | [Passage ranking](../../leaderboard/other-benchmarks.md#passage-ranking-and-evidence) | not run | — | — | — | — | — |", mini)
         nano = pages[results.MODEL_PAGES_DIR + "D3nanoMacos.md"]
         self.assertIn("| 188/192 | 92/96 |", nano)
         jev = pages[results.MODEL_PAGES_DIR + "Jev114.md"]
