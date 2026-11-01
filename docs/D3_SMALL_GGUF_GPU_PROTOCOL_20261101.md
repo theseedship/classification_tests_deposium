@@ -81,6 +81,17 @@ D3 mini passages attempt 001 stopped at its technical warm-up because the
 preparation did not include the launcher's calibration warm-up input. The
 preparation driver now includes it, and both phases are rerun as new attempts.
 
+## Amendment, 1 November 2026, before any D3 mini Q4 prediction
+
+D3 mini is added as **Q4_K_M** (same ggml-org repository and revision,
+[`profiles/d3-mini-q4-assets.json`](../profiles/d3-mini-q4-assets.json), 3.7 GB
+against 5.2 GB for Q8), alias `d3-mini-q4`, on the same Metal runtime and
+`small-gguf-8g-v1` envelope, to measure the quality cost of 4-bit weights.
+Packs: facade routing easy/advanced/complex, context, capability, physics,
+passage evidence rotation 0, passage relevance v2, and both human-confirmation
+variants. It is a separate runtime row; comparisons with Q8 and the CPU row are
+paired by case.
+
 ## Reporting
 
 Per model, backend and pack: correct / all with every non-`ok` status kept;

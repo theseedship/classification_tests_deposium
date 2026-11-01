@@ -1,0 +1,12 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "ggml-org/vllm-d3-mini-GGUF",
+  "revision": "e7230e2309c186c80182fbeed6fef70680b20c64",
+  "files": [
+    {
+      "path": "vllm-d3-mini-Q4_K_M.gguf",
+      "size": 3707523552,
+      "sha256": "ab3d4378c268f7f3238a63607af40c0cb516e4482278b01c2f48e9d0698ce522"
+    }
+  ]
+}
