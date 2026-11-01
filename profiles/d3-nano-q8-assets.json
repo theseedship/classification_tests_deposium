@@ -1,0 +1,12 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "ggml-org/vllm-d3-nano-GGUF",
+  "revision": "50dea2057df10c4b393559a155ab3bf0bc7532c6",
+  "files": [
+    {
+      "path": "vllm-d3-nano-Q8_0.gguf",
+      "size": 2552358464,
+      "sha256": "4867d306fd22aec8c5ebd1851b7f1074f480702655e8000ceedf0c47c6a6f337"
+    }
+  ]
+}
