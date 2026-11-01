@@ -1,0 +1,46 @@
+{
+  "schema_version": "deposium.research-dataset/v1",
+  "dataset_id": "facade-routing-hitl-v1",
+  "version": "1.0.0-exploratory",
+  "frozen_date": "2026-11-01",
+  "status": "frozen_before_first_candidate_prediction",
+  "case_schema": "deposium.case/v2",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "0bd9506d617d5d1bd1df08212c8c453a48064e8d00d61b206d647d75c2c16382",
+  "spec_sha256": "7daab682307ff83c3a6bb9e4681f8bec925c90ce838ae5c791a0e3b700c79bf9",
+  "case_count": 90,
+  "family_count": 45,
+  "options_per_case": 9,
+  "counts_by_split": {
+    "calibration": 14,
+    "test": 62,
+    "train": 14
+  },
+  "counts_by_language": {
+    "en": 45,
+    "fr": 45
+  },
+  "counts_by_intent": {
+    "analyze": 6,
+    "evaluate": 6,
+    "graph": 6,
+    "hitl": 32,
+    "none": 16,
+    "process": 6,
+    "search": 6,
+    "system": 6,
+    "visualize": 6
+  },
+  "counts_by_kind": {
+    "ambiguous": 8,
+    "control": 42,
+    "hitl_choose": 16,
+    "hitl_confirm": 16,
+    "out_of_scope": 8
+  },
+  "counts_by_assertion": {
+    "equals": 90
+  },
+  "reference_review": "agent_only_pending_human",
+  "authoring": "Human-confirmation tier: requests that hesitate between two categories, irreversible or sensitive actions, close safe controls, and out-of-scope or vague requests. One specification, two frozen packs: with a ninth 'human confirmation' option, and with the eight usual options (hesitation cases then accept either candidate). Written without access to any router rule or keyword list."
+}

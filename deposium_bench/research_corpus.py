@@ -542,6 +542,10 @@ def validate_oracle(case):
         from .facade_corpus import validate_oracle as validate_facade_oracle
         return validate_facade_oracle(case)
     if (isinstance(case, dict) and isinstance(case.get("evaluation"), dict)
+            and str(case["evaluation"].get("base_case_id", "")).startswith(("frh1-", "frg1-"))):
+        from .facade_hitl_corpus import validate_oracle as validate_hitl_oracle
+        return validate_hitl_oracle(case)
+    if (isinstance(case, dict) and isinstance(case.get("evaluation"), dict)
             and str(case["evaluation"].get("base_case_id", "")).startswith("prv2-")):
         from .passage_relevance_v2 import validate_oracle as validate_relevance_v2_oracle
         return validate_relevance_v2_oracle(case)
