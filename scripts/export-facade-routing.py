@@ -120,6 +120,8 @@ def main():
     parser.add_argument("--run", action="append", default=[], help="LABEL=ARCHIVE=PROFILE (CPU worker archive)")
     parser.add_argument("--gpu-run", action="append", default=[],
                         help="LABEL=PILOT_ARCHIVE=ASSETS (run-upstream-native-pilot.py archive and tracked asset manifest)")
+    parser.add_argument("--uzu-run", action="append", default=[],
+                        help="LABEL=PILOT_ARCHIVE=ASSETS (run-uzu-pilot.py archive and tracked asset manifest)")
     parser.add_argument("--backend", choices=("metal", "cuda", "rocm", "vulkan"), default="metal")
     parser.add_argument("--router", required=True, type=Path)
     parser.add_argument("--router-revision", required=True)
@@ -128,7 +130,7 @@ def main():
     try:
         require(not args.output.exists(), "refusing to overwrite the output")
         require(re.fullmatch(r"[0-9a-f]{40}", args.router_revision), "router revision must be a full commit hash")
-        require(args.run or args.gpu_run, "at least one candidate run is required")
+        require(args.run or args.gpu_run or args.uzu_run, "at least one candidate run is required")
         data = (ROOT / "datasets" / args.pack / "cases.jsonl").read_bytes()
         dataset_sha = sha(data)
         require(load(ROOT / "datasets" / args.pack / "manifest.json")["cases_sha256"] == dataset_sha, "frozen pack manifest mismatch")
@@ -190,6 +192,30 @@ def main():
                                       "seal_sha256": sha((pilot / "pilot-seal.json").read_bytes())},
                          "counts": summarize(result, cases), "paired_with_router": paired(result, router, cases),
                          "inference_ms": stats(latency), "worker_rss_mib_max": pilot_result["resources"]["rss_peak_mib"],
+                         "latency_scope": "adapter call duration, including loopback HTTP"})
+        if args.uzu_run:
+            spec_ = importlib.util.spec_from_file_location("deployment_export", ROOT / "scripts/export-deployment-variants.py")
+            uzu = importlib.util.module_from_spec(spec_)
+            spec_.loader.exec_module(uzu)
+        for spec in args.uzu_run:
+            label, pilot, assets_path = spec.split("=")
+            pilot, assets_path = Path(pilot), (ROOT / assets_path).resolve()
+            require(assets_path.is_relative_to(ROOT / "profiles"), "asset manifest must be tracked under profiles/")
+            identity = uzu.verify_uzu(pilot, assets_path)
+            require(identity["dataset_sha256"] == dataset_sha, "pilot dataset differs from the frozen pack")
+            manifest, summary, rows, result = decisions(pilot / "campaign", cases, dataset_sha)
+            latency = [r["duration_ms"] for r in rows if r["status"] == "ok"]
+            runs.append({"label": label, "kind": "classifier",
+                         "identity": {"adapter": "uzu_local", "backend": "uzu", "backend_requested": "metal",
+                                      "model_repo_id": load(assets_path)["repo_id"], "model_revision": load(assets_path)["revision"],
+                                      "model_sha256": sha(assets_path.read_bytes()),
+                                      "assets_manifest": str(assets_path.relative_to(ROOT)),
+                                      "uzu_revision": identity["runtime"]["uzu_revision"],
+                                      "binary_sha256": identity["runtime"]["binary_sha256"],
+                                      "raw_sha256": summary["raw_sha256"],
+                                      "seal_sha256": sha((pilot / "pilot-seal.json").read_bytes())},
+                         "counts": summarize(result, cases), "paired_with_router": paired(result, router, cases),
+                         "inference_ms": stats(latency), "worker_rss_mib_max": identity["rss_peak_mib"],
                          "latency_scope": "adapter call duration, including loopback HTTP"})
         out = {"schema_version": SCHEMA, "pack": args.pack, "dataset_sha256": dataset_sha, "cases": len(cases),
                "qualification": "exploratory; agent-authored references pending human review",

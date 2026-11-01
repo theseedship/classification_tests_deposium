@@ -1,0 +1,1287 @@
+{
+  "cases": 96,
+  "dataset_sha256": "42364fed544e842a02f68314242b767a7c3fae0dde8505bd66499063930337f3",
+  "pack": "facade-routing-advanced-v1",
+  "qualification": "exploratory; agent-authored references pending human review",
+  "router": {
+    "counts": {
+      "all": {
+        "correct": 24,
+        "statuses": {
+          "ok": 96
+        },
+        "total": 96
+      },
+      "by_category": {
+        "analyze": {
+          "correct": 0,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "evaluate": {
+          "correct": 3,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "graph": {
+          "correct": 2,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "none": {
+          "correct": 7,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "process": {
+          "correct": 4,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "search": {
+          "correct": 4,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "system": {
+          "correct": 0,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "visualize": {
+          "correct": 4,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        }
+      },
+      "by_kind": {
+        "ambiguous": {
+          "correct": 3,
+          "statuses": {
+            "ok": 6
+          },
+          "total": 6
+        },
+        "implicit": {
+          "correct": 0,
+          "statuses": {
+            "ok": 28
+          },
+          "total": 28
+        },
+        "lexical_trap": {
+          "correct": 6,
+          "statuses": {
+            "ok": 28
+          },
+          "total": 28
+        },
+        "near_miss": {
+          "correct": 4,
+          "statuses": {
+            "ok": 14
+          },
+          "total": 14
+        },
+        "noisy": {
+          "correct": 7,
+          "statuses": {
+            "ok": 14
+          },
+          "total": 14
+        },
+        "out_of_scope": {
+          "correct": 4,
+          "statuses": {
+            "ok": 6
+          },
+          "total": 6
+        }
+      },
+      "by_language": {
+        "en": {
+          "correct": 13,
+          "statuses": {
+            "ok": 48
+          },
+          "total": 48
+        },
+        "fr": {
+          "correct": 11,
+          "statuses": {
+            "ok": 48
+          },
+          "total": 48
+        }
+      },
+      "by_split": {
+        "calibration": {
+          "correct": 2,
+          "statuses": {
+            "ok": 16
+          },
+          "total": 16
+        },
+        "test": {
+          "correct": 20,
+          "statuses": {
+            "ok": 64
+          },
+          "total": 64
+        },
+        "train": {
+          "correct": 2,
+          "statuses": {
+            "ok": 16
+          },
+          "total": 16
+        }
+      },
+      "confusion": {
+        "analyze": {
+          "graph": 2,
+          "none": 5,
+          "search": 1,
+          "visualize": 4
+        },
+        "evaluate": {
+          "evaluate": 3,
+          "none": 6,
+          "search": 1,
+          "visualize": 2
+        },
+        "graph": {
+          "graph": 2,
+          "none": 3,
+          "search": 3,
+          "visualize": 4
+        },
+        "none": {
+          "graph": 2,
+          "none": 7,
+          "search": 3
+        },
+        "process": {
+          "none": 3,
+          "process": 4,
+          "search": 1,
+          "visualize": 4
+        },
+        "search": {
+          "none": 3,
+          "search": 4,
+          "visualize": 5
+        },
+        "system": {
+          "none": 6,
+          "search": 3,
+          "visualize": 3
+        },
+        "visualize": {
+          "none": 5,
+          "process": 2,
+          "search": 1,
+          "visualize": 4
+        }
+      },
+      "predicted_distribution": {
+        "evaluate": 3,
+        "graph": 6,
+        "none": 38,
+        "process": 6,
+        "search": 17,
+        "visualize": 26
+      },
+      "test_by_category": {
+        "analyze": {
+          "correct": 0,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "evaluate": {
+          "correct": 3,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "graph": {
+          "correct": 2,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "none": {
+          "correct": 3,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "process": {
+          "correct": 4,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "search": {
+          "correct": 4,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "system": {
+          "correct": 0,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "visualize": {
+          "correct": 4,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        }
+      }
+    },
+    "identity": {
+      "identity_sha256": "9daeb5e50a93551eba8381a51fe94d56c24a13cc194db859a7585bd7ef4c19f4",
+      "raw_sha256": "6499b79598fc4cd01ad4eb4b6b1dacc62954800203c8cf8b4356c1a2e259d3ab",
+      "recordings_sha256": "92a22824a1e28012f932707348e57c083bd62842f15051621fac4c7a2f1fb1e5",
+      "router_source_revision": "2847d2d9193dfe7e20f8742694af5560e4c10765",
+      "seal_sha256": "5a722d148ed05e6f9e4d05af9c63a17afd3dbfede9fa849bdc5aa58a746de534"
+    },
+    "kind": "private_router_replay",
+    "label": "FacadeRouterReplay"
+  },
+  "runs": [
+    {
+      "counts": {
+        "all": {
+          "correct": 94,
+          "statuses": {
+            "ok": 96
+          },
+          "total": 96
+        },
+        "by_category": {
+          "analyze": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "evaluate": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "graph": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "none": {
+            "correct": 10,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "process": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "search": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "system": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "visualize": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          }
+        },
+        "by_kind": {
+          "ambiguous": {
+            "correct": 4,
+            "statuses": {
+              "ok": 6
+            },
+            "total": 6
+          },
+          "implicit": {
+            "correct": 28,
+            "statuses": {
+              "ok": 28
+            },
+            "total": 28
+          },
+          "lexical_trap": {
+            "correct": 28,
+            "statuses": {
+              "ok": 28
+            },
+            "total": 28
+          },
+          "near_miss": {
+            "correct": 14,
+            "statuses": {
+              "ok": 14
+            },
+            "total": 14
+          },
+          "noisy": {
+            "correct": 14,
+            "statuses": {
+              "ok": 14
+            },
+            "total": 14
+          },
+          "out_of_scope": {
+            "correct": 6,
+            "statuses": {
+              "ok": 6
+            },
+            "total": 6
+          }
+        },
+        "by_language": {
+          "en": {
+            "correct": 48,
+            "statuses": {
+              "ok": 48
+            },
+            "total": 48
+          },
+          "fr": {
+            "correct": 46,
+            "statuses": {
+              "ok": 48
+            },
+            "total": 48
+          }
+        },
+        "by_split": {
+          "calibration": {
+            "correct": 16,
+            "statuses": {
+              "ok": 16
+            },
+            "total": 16
+          },
+          "test": {
+            "correct": 62,
+            "statuses": {
+              "ok": 64
+            },
+            "total": 64
+          },
+          "train": {
+            "correct": 16,
+            "statuses": {
+              "ok": 16
+            },
+            "total": 16
+          }
+        },
+        "confusion": {
+          "analyze": {
+            "analyze": 12
+          },
+          "evaluate": {
+            "evaluate": 12
+          },
+          "graph": {
+            "graph": 12
+          },
+          "none": {
+            "none": 10,
+            "search": 2
+          },
+          "process": {
+            "process": 12
+          },
+          "search": {
+            "search": 12
+          },
+          "system": {
+            "system": 12
+          },
+          "visualize": {
+            "visualize": 12
+          }
+        },
+        "predicted_distribution": {
+          "analyze": 12,
+          "evaluate": 12,
+          "graph": 12,
+          "none": 10,
+          "process": 12,
+          "search": 14,
+          "system": 12,
+          "visualize": 12
+        },
+        "test_by_category": {
+          "analyze": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "evaluate": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "graph": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "none": {
+            "correct": 6,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "process": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "search": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "system": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "visualize": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          }
+        }
+      },
+      "identity": {
+        "adapter": "systemone_local",
+        "assets_manifest": "profiles/d3-mini-q4-assets.json",
+        "backend": "metal",
+        "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+        "layers": 33,
+        "model_repo_id": "ggml-org/vllm-d3-mini-GGUF",
+        "model_revision": "e7230e2309c186c80182fbeed6fef70680b20c64",
+        "model_sha256": "ab3d4378c268f7f3238a63607af40c0cb516e4482278b01c2f48e9d0698ce522",
+        "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+        "raw_sha256": "febf1985d716b54094c88d6a0083fbbe5b6880adc8dde016b83d042a2fb62a6d",
+        "seal_sha256": "d482a15ea83fa3013744723cf51a78cfd4a3c49180522c9e9ad16e973bc7e039"
+      },
+      "inference_ms": {
+        "count": 96,
+        "max": 184.3220839946298,
+        "median": 170.38793799292762,
+        "p95": 182.4721250013681
+      },
+      "kind": "classifier",
+      "label": "D3miniQ4Metal",
+      "latency_scope": "adapter call duration, including loopback HTTP",
+      "paired_with_router": {
+        "all": {
+          "both": 22,
+          "model_only": 72,
+          "neither": 0,
+          "router_only": 2
+        },
+        "by_category": {
+          "analyze": {
+            "both": 0,
+            "model_only": 12,
+            "neither": 0,
+            "router_only": 0
+          },
+          "evaluate": {
+            "both": 3,
+            "model_only": 9,
+            "neither": 0,
+            "router_only": 0
+          },
+          "graph": {
+            "both": 2,
+            "model_only": 10,
+            "neither": 0,
+            "router_only": 0
+          },
+          "none": {
+            "both": 5,
+            "model_only": 5,
+            "neither": 0,
+            "router_only": 2
+          },
+          "process": {
+            "both": 4,
+            "model_only": 8,
+            "neither": 0,
+            "router_only": 0
+          },
+          "search": {
+            "both": 4,
+            "model_only": 8,
+            "neither": 0,
+            "router_only": 0
+          },
+          "system": {
+            "both": 0,
+            "model_only": 12,
+            "neither": 0,
+            "router_only": 0
+          },
+          "visualize": {
+            "both": 4,
+            "model_only": 8,
+            "neither": 0,
+            "router_only": 0
+          }
+        },
+        "test": {
+          "both": 18,
+          "model_only": 44,
+          "neither": 0,
+          "router_only": 2
+        }
+      },
+      "worker_rss_mib_max": 4038.96875
+    },
+    {
+      "counts": {
+        "all": {
+          "correct": 94,
+          "statuses": {
+            "ok": 96
+          },
+          "total": 96
+        },
+        "by_category": {
+          "analyze": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "evaluate": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "graph": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "none": {
+            "correct": 10,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "process": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "search": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "system": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "visualize": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          }
+        },
+        "by_kind": {
+          "ambiguous": {
+            "correct": 4,
+            "statuses": {
+              "ok": 6
+            },
+            "total": 6
+          },
+          "implicit": {
+            "correct": 28,
+            "statuses": {
+              "ok": 28
+            },
+            "total": 28
+          },
+          "lexical_trap": {
+            "correct": 28,
+            "statuses": {
+              "ok": 28
+            },
+            "total": 28
+          },
+          "near_miss": {
+            "correct": 14,
+            "statuses": {
+              "ok": 14
+            },
+            "total": 14
+          },
+          "noisy": {
+            "correct": 14,
+            "statuses": {
+              "ok": 14
+            },
+            "total": 14
+          },
+          "out_of_scope": {
+            "correct": 6,
+            "statuses": {
+              "ok": 6
+            },
+            "total": 6
+          }
+        },
+        "by_language": {
+          "en": {
+            "correct": 47,
+            "statuses": {
+              "ok": 48
+            },
+            "total": 48
+          },
+          "fr": {
+            "correct": 47,
+            "statuses": {
+              "ok": 48
+            },
+            "total": 48
+          }
+        },
+        "by_split": {
+          "calibration": {
+            "correct": 16,
+            "statuses": {
+              "ok": 16
+            },
+            "total": 16
+          },
+          "test": {
+            "correct": 62,
+            "statuses": {
+              "ok": 64
+            },
+            "total": 64
+          },
+          "train": {
+            "correct": 16,
+            "statuses": {
+              "ok": 16
+            },
+            "total": 16
+          }
+        },
+        "confusion": {
+          "analyze": {
+            "analyze": 12
+          },
+          "evaluate": {
+            "evaluate": 12
+          },
+          "graph": {
+            "graph": 12
+          },
+          "none": {
+            "none": 10,
+            "search": 2
+          },
+          "process": {
+            "process": 12
+          },
+          "search": {
+            "search": 12
+          },
+          "system": {
+            "system": 12
+          },
+          "visualize": {
+            "visualize": 12
+          }
+        },
+        "predicted_distribution": {
+          "analyze": 12,
+          "evaluate": 12,
+          "graph": 12,
+          "none": 10,
+          "process": 12,
+          "search": 14,
+          "system": 12,
+          "visualize": 12
+        },
+        "test_by_category": {
+          "analyze": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "evaluate": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "graph": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "none": {
+            "correct": 6,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "process": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "search": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "system": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "visualize": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          }
+        }
+      },
+      "identity": {
+        "adapter": "systemone_local",
+        "assets_manifest": "profiles/d3-flash-q4-assets.json",
+        "backend": "metal",
+        "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+        "layers": 33,
+        "model_repo_id": "ggml-org/vllm-d3-flash-GGUF",
+        "model_revision": "3d53d13778bf8035e6e1e534ce489ed052ee5663",
+        "model_sha256": "8140de6f2e0939b435ac585ecdec97f4aef1545ff01d072fe7f7e4c88ebaa611",
+        "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+        "raw_sha256": "610e57dfc1915aedd55b3f251a9c3843ee9be80b2af1f968d40815b418546fb7",
+        "seal_sha256": "cf5516b13b9f92fa157928ed76aa329bc97272cb24bcf9cf3b8bb918212b759e"
+      },
+      "inference_ms": {
+        "count": 96,
+        "max": 308.2794579968322,
+        "median": 289.827853506722,
+        "p95": 297.44158301036805
+      },
+      "kind": "classifier",
+      "label": "D3FlashQ4Metal",
+      "latency_scope": "adapter call duration, including loopback HTTP",
+      "paired_with_router": {
+        "all": {
+          "both": 22,
+          "model_only": 72,
+          "neither": 0,
+          "router_only": 2
+        },
+        "by_category": {
+          "analyze": {
+            "both": 0,
+            "model_only": 12,
+            "neither": 0,
+            "router_only": 0
+          },
+          "evaluate": {
+            "both": 3,
+            "model_only": 9,
+            "neither": 0,
+            "router_only": 0
+          },
+          "graph": {
+            "both": 2,
+            "model_only": 10,
+            "neither": 0,
+            "router_only": 0
+          },
+          "none": {
+            "both": 5,
+            "model_only": 5,
+            "neither": 0,
+            "router_only": 2
+          },
+          "process": {
+            "both": 4,
+            "model_only": 8,
+            "neither": 0,
+            "router_only": 0
+          },
+          "search": {
+            "both": 4,
+            "model_only": 8,
+            "neither": 0,
+            "router_only": 0
+          },
+          "system": {
+            "both": 0,
+            "model_only": 12,
+            "neither": 0,
+            "router_only": 0
+          },
+          "visualize": {
+            "both": 4,
+            "model_only": 8,
+            "neither": 0,
+            "router_only": 0
+          }
+        },
+        "test": {
+          "both": 18,
+          "model_only": 44,
+          "neither": 0,
+          "router_only": 2
+        }
+      },
+      "worker_rss_mib_max": 6812.296875
+    },
+    {
+      "counts": {
+        "all": {
+          "correct": 92,
+          "statuses": {
+            "ok": 96
+          },
+          "total": 96
+        },
+        "by_category": {
+          "analyze": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "evaluate": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "graph": {
+            "correct": 11,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "none": {
+            "correct": 10,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "process": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "search": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "system": {
+            "correct": 11,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "visualize": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          }
+        },
+        "by_kind": {
+          "ambiguous": {
+            "correct": 4,
+            "statuses": {
+              "ok": 6
+            },
+            "total": 6
+          },
+          "implicit": {
+            "correct": 27,
+            "statuses": {
+              "ok": 28
+            },
+            "total": 28
+          },
+          "lexical_trap": {
+            "correct": 27,
+            "statuses": {
+              "ok": 28
+            },
+            "total": 28
+          },
+          "near_miss": {
+            "correct": 14,
+            "statuses": {
+              "ok": 14
+            },
+            "total": 14
+          },
+          "noisy": {
+            "correct": 14,
+            "statuses": {
+              "ok": 14
+            },
+            "total": 14
+          },
+          "out_of_scope": {
+            "correct": 6,
+            "statuses": {
+              "ok": 6
+            },
+            "total": 6
+          }
+        },
+        "by_language": {
+          "en": {
+            "correct": 46,
+            "statuses": {
+              "ok": 48
+            },
+            "total": 48
+          },
+          "fr": {
+            "correct": 46,
+            "statuses": {
+              "ok": 48
+            },
+            "total": 48
+          }
+        },
+        "by_split": {
+          "calibration": {
+            "correct": 16,
+            "statuses": {
+              "ok": 16
+            },
+            "total": 16
+          },
+          "test": {
+            "correct": 61,
+            "statuses": {
+              "ok": 64
+            },
+            "total": 64
+          },
+          "train": {
+            "correct": 15,
+            "statuses": {
+              "ok": 16
+            },
+            "total": 16
+          }
+        },
+        "confusion": {
+          "analyze": {
+            "analyze": 12
+          },
+          "evaluate": {
+            "evaluate": 12
+          },
+          "graph": {
+            "graph": 11,
+            "search": 1
+          },
+          "none": {
+            "none": 10,
+            "search": 2
+          },
+          "process": {
+            "process": 12
+          },
+          "search": {
+            "search": 12
+          },
+          "system": {
+            "none": 1,
+            "system": 11
+          },
+          "visualize": {
+            "visualize": 12
+          }
+        },
+        "predicted_distribution": {
+          "analyze": 12,
+          "evaluate": 12,
+          "graph": 11,
+          "none": 11,
+          "process": 12,
+          "search": 15,
+          "system": 11,
+          "visualize": 12
+        },
+        "test_by_category": {
+          "analyze": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "evaluate": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "graph": {
+            "correct": 7,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "none": {
+            "correct": 6,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "process": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "search": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "system": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "visualize": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          }
+        }
+      },
+      "identity": {
+        "adapter": "uzu_local",
+        "assets_manifest": "profiles/d3-flash-m-uzu-assets.json",
+        "backend": "uzu",
+        "backend_requested": "metal",
+        "binary_sha256": "c3e5798127eb037f6b8571817203096ab8a1ae4bcd24a06b951a25d044896f21",
+        "model_repo_id": "trymirai/d3-flash-M",
+        "model_revision": "86f617b67e3f0ce02fe678c38801e2296a303777",
+        "model_sha256": "44704e4506b4749133aa14a630ca07afe8eeb0176084e475db54b2db455cbe18",
+        "raw_sha256": "a8a0841364db73948545164d69e4239249e925cb74ef772f3fc6b99b271d2bf2",
+        "seal_sha256": "12ee76c6b4382dad6edea54a9abb2ca78382b437d6fd25122278551db0c564b6",
+        "uzu_revision": "d3d3a5b20a3de507522e1099457d1dae0243effb"
+      },
+      "inference_ms": {
+        "count": 96,
+        "max": 134.48104199778754,
+        "median": 110.60100000031525,
+        "p95": 119.28783298935741
+      },
+      "kind": "classifier",
+      "label": "D3FlashMUzu",
+      "latency_scope": "adapter call duration, including loopback HTTP",
+      "paired_with_router": {
+        "all": {
+          "both": 22,
+          "model_only": 70,
+          "neither": 2,
+          "router_only": 2
+        },
+        "by_category": {
+          "analyze": {
+            "both": 0,
+            "model_only": 12,
+            "neither": 0,
+            "router_only": 0
+          },
+          "evaluate": {
+            "both": 3,
+            "model_only": 9,
+            "neither": 0,
+            "router_only": 0
+          },
+          "graph": {
+            "both": 2,
+            "model_only": 9,
+            "neither": 1,
+            "router_only": 0
+          },
+          "none": {
+            "both": 5,
+            "model_only": 5,
+            "neither": 0,
+            "router_only": 2
+          },
+          "process": {
+            "both": 4,
+            "model_only": 8,
+            "neither": 0,
+            "router_only": 0
+          },
+          "search": {
+            "both": 4,
+            "model_only": 8,
+            "neither": 0,
+            "router_only": 0
+          },
+          "system": {
+            "both": 0,
+            "model_only": 11,
+            "neither": 1,
+            "router_only": 0
+          },
+          "visualize": {
+            "both": 4,
+            "model_only": 8,
+            "neither": 0,
+            "router_only": 0
+          }
+        },
+        "test": {
+          "both": 18,
+          "model_only": 43,
+          "neither": 1,
+          "router_only": 2
+        }
+      },
+      "worker_rss_mib_max": 4319.734375
+    }
+  ],
+  "schema_version": "deposium.facade-routing-public/v1"
+}

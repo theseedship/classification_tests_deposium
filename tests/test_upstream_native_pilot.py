@@ -117,6 +117,18 @@ class UpstreamPilotTests(unittest.TestCase):
             upstream.execution_envelope(upstream_args(execution_envelope=upstream.SMALL_ENVELOPE, max_rss_mb=18432, phase=None),
                                         small, Path("m.gguf"), [])
 
+    def test_flash_q4_envelope_is_bound_to_the_pinned_file(self):
+        flash = upstream.FLASH_Q4_ASSETS
+        name = Path(flash["files"][0]["path"])
+        args = upstream_args(execution_envelope=upstream.FLASH_Q4_ENVELOPE, max_rss_mb=12288, phase=None)
+        self.assertEqual(upstream.execution_envelope(args, flash, name, [])[0], {"name": upstream.FLASH_Q4_ENVELOPE})
+        other = {**flash, "files": [{**flash["files"][0], "sha256": "0" * 64}]}
+        with self.assertRaisesRegex(ValueError, "requires_the_pinned_d3_flash_q4"):
+            upstream.execution_envelope(args, other, name, [])
+        with self.assertRaisesRegex(ValueError, "fixed_envelope_required"):
+            upstream.execution_envelope(upstream_args(execution_envelope=upstream.FLASH_Q4_ENVELOPE, max_rss_mb=18432, phase=None),
+                                        flash, name, [])
+
     def test_runtime_refuses_wrong_source_and_binary_hash(self):
         binary = self.root / "llama-server"
         binary.write_bytes(b"synthetic-never-executed")

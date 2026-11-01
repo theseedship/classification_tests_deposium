@@ -92,6 +92,41 @@ passage evidence rotation 0, passage relevance v2, and both human-confirmation
 variants. It is a separate runtime row; comparisons with Q8 and the CPU row are
 paired by case.
 
+## Amendment, 1 November 2026: direct D3 Flash Q4 and repeated timing
+
+The envelope below was coded and tested before the first direct D3 Flash Q4
+prediction; this text was written while the campaign ran.
+
+To compare engines on the same model, **D3 Flash Q4_K_M** (ggml-org
+`vllm-d3-flash-GGUF` at the revision of
+[`profiles/d3-flash-q4-assets.json`](../profiles/d3-flash-q4-assets.json),
+6.6 GB, alias `d3-flash-q4`) runs on the same pinned Metal runtime as the small
+models, against Mirai's 4-bit D3 Flash pack on Uzu
+([protocol](UZU_D3_FLASH_M_PROTOCOL_20261101.md)). Its earlier 16 October row
+went through the application gateway and stays a separate observation.
+
+The file exceeds the 6 GiB limit of `small-gguf-8g-v1`, and the 18 GiB
+envelope was refused at admission (26 GiB required, 25.4 GiB estimated
+available, before any model load or archive). A dedicated envelope,
+`d3-flash-q4-12g-v1`, is bound to that exact file (repository, revision, size
+and SHA-256): **12 GiB sampled RSS ceiling**, the same 8 GiB host reserve
+(admission at 20 GiB), same context, timeouts and 1,200 s per phase. The gateway
+row peaked at 6.7 GiB sampled RSS.
+
+Packs: the nine packs of the D3 mini Q4 amendment and passage evidence
+rotation 0. Then three interleaved timing rounds on `context-choice-v1` and
+`facade-routing-v1`: each round starts D3 mini Q8, D3 mini Q4, D3 Flash Q4 and
+Uzu once, in a rotated order, with a fresh server per pass; the main passes are
+not reused as timing rounds. A first launch of the rounds wrote Uzu-only passes
+to another directory while every GGUF pass was refused at preparation (output
+outside the working tree's `results/`); those Uzu passes are kept locally and
+not used. A second set of rounds lost five of six Uzu passes at Uzu's fixed
+memory admission (14 GiB ceiling + 8 GiB reserve), refused right after a
+llama.cpp server exited; no prediction was made. The reported rounds are a
+third set, with every pass waiting (at most five minutes) for its own
+envelope's admission threshold before starting; the earlier sets are kept
+locally and not used.
+
 ## Reporting
 
 Per model, backend and pack: correct / all with every non-`ok` status kept;

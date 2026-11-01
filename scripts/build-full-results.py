@@ -53,9 +53,17 @@ REVIEW_HITL_REPORT = "FACADE_ROUTING_HITL_RESULTS_20261101.md"
 REVIEW_PACKS = {"passage-relevance-v2": "f95b3a604af5c1762ac5a59e096f35de6c88ff7a601e67c5483cf87516f154a0",
                 "facade-routing-hitl-v1": "0bd9506d617d5d1bd1df08212c8c453a48064e8d00d61b206d647d75c2c16382",
                 "facade-routing-hitl-8opt-v1": "50bc08928060a61ce32fb10f829b8bfb7544a2db36d3343a327bd97344fd3cc6"}
-# Deployment variants of the small D3 models: Q8 and Q4 GGUF on Metal, Mirai's 4-bit D3 Flash on Uzu.
+# Deployment variants: D3 mini Q8/Q4 and D3 Flash Q4 GGUF on Metal, Mirai's 4-bit D3 Flash on Uzu.
 DEPLOYMENT = EVIDENCE + "deployment-variants-20261101/analysis.json"
 DEPLOYMENT_REPORT = "DEPLOYMENT_VARIANTS_RESULTS_20261101.md"
+DEPLOYMENT_VARIANTS = {"D3miniQ8Metal": "D3 mini · Q8 Metal", "D3miniQ4Metal": "D3 mini · Q4 Metal",
+                       "D3FlashQ4Metal": "D3 flash · Q4 direct Metal", "D3FlashMUzu": "D3 flash · 4-bit Uzu"}
+# The same variants on the routing tiers and review packs: complementary exports, merged by identity.
+FACADE_VARIANTS = {"easy": EVIDENCE + "deployment-variants-20261101/facade-easy.json",
+                   "advanced": EVIDENCE + "deployment-variants-20261101/facade-advanced.json",
+                   "complex": EVIDENCE + "deployment-variants-20261101/facade-complex.json"}
+REVIEW_VARIANTS = {"relevance": EVIDENCE + "deployment-variants-20261101/passage-relevance-v2.json",
+                   "hitl": EVIDENCE + "deployment-variants-20261101/facade-hitl.json"}
 CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
 LOCAL_POLICY = (EVIDENCE + "local-tool-policy-20261030/analysis.json",
                 EVIDENCE + "local-tool-policy-v2-train-20261030/analysis.json",
@@ -107,7 +115,11 @@ RECENT_INPUTS = (CAMPAIGN_MODULE, EVIDENCE + "clef-flash-20261029/analysis.json"
                  EVIDENCE + "review-packs-20261101/passage-relevance-v2.json", EVIDENCE + "review-packs-20261101/facade-hitl.json",
                  "docs/PASSAGE_RELEVANCE_V2_RESULTS_20261101.md", "docs/FACADE_ROUTING_HITL_RESULTS_20261101.md",
                  EVIDENCE + "deployment-variants-20261101/analysis.json", "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md",
-                 "profiles/d3-mini-q4-assets.json", "profiles/d3-flash-m-uzu-assets.json")
+                 "profiles/d3-mini-q4-assets.json", "profiles/d3-flash-m-uzu-assets.json",
+                 "profiles/d3-flash-q4-assets.json", "docs/UZU_D3_FLASH_M_PROTOCOL_20261101.md",
+                 *(EVIDENCE + "deployment-variants-20261101/" + name for name in (
+                     "d3-mini-q4.json", "d3-flash-q4.json", "uzu-d3-flash-m.json", "facade-easy.json", "facade-advanced.json",
+                     "facade-complex.json", "passage-relevance-v2.json", "facade-hitl.json")))
 # Constant majority-class answer on passage-evidence-v1, rotation 0 (dataset sha pinned in campaigns).
 PASSAGE_MAJORITY = {"relevance": ("grade 1 (thematic)", 224, 512), "support": ("`insufficient`", 584, 768),
                     "answerability": ("`answerable`", 88, 128)}
@@ -512,11 +524,21 @@ def build(root=ROOT):
     easy_metal = inputs.load(FACADE_EASY_METAL)
     require(easy_metal.get("pack") == "facade-routing-v1" and easy_metal["dataset_sha256"] == FACADE_DATASET_SHA256
             and easy_metal["router"]["identity"] == facade["router"]["identity"], "facade routing: Metal export uses another router replay")
+    variant_tiers = {tier: inputs.load(path) for tier, path in FACADE_VARIANTS.items()}
+    for tier, data_ in variant_tiers.items():
+        pack, digest_ = (("facade-routing-v1", FACADE_DATASET_SHA256) if tier == "easy"
+                         else (f"facade-routing-{tier}-v1", FACADE_TIERS[tier][1]))
+        require(data_.get("pack") == pack and data_["dataset_sha256"] == digest_
+                and data_["router"]["identity"]["router_source_revision"] == facade["router"]["identity"]["router_source_revision"]
+                and (tier != "easy" or data_["router"]["identity"] == facade["router"]["identity"])
+                and {r["label"] for r in data_["runs"]} == set(DEPLOYMENT_VARIANTS) - {"D3miniQ8Metal"},
+                f"facade variants: {tier} export uses another pack, router or roster")
     facade_routing = [{"observation": run["label"], "model": facade_names[run["label"]], "kind": run["kind"],
                        "counts": run["counts"], "paired": run.get("paired_with_router"),
                        "inference_ms": run.get("inference_ms"),
-                       "report": FACADE_TIERS_REPORT if run in easy_metal["runs"] else FACADE_REPORT}
-                      for run in (facade["router"], *facade["runs"], *easy_metal["runs"])]
+                       "report": (FACADE_TIERS_REPORT if run in easy_metal["runs"] else
+                                  DEPLOYMENT_REPORT if run in variant_tiers["easy"]["runs"] else FACADE_REPORT)}
+                      for run in (facade["router"], *facade["runs"], *easy_metal["runs"], *variant_tiers["easy"]["runs"])]
     for row in facade_routing:
         row["rank_all"] = 1 + sum(o["counts"]["all"]["correct"] > row["counts"]["all"]["correct"] for o in facade_routing)
         row["rank_test"] = 1 + sum(o["counts"]["by_split"]["test"]["correct"] > row["counts"]["by_split"]["test"]["correct"]
@@ -528,8 +550,10 @@ def build(root=ROOT):
         require(data_.get("pack") == f"facade-routing-{tier}-v1" and data_["dataset_sha256"] == digest_ and data_["cases"] == 96
                 and data_["router"]["identity"]["router_source_revision"] == facade["router"]["identity"]["router_source_revision"],
                 f"facade tiers: changed {tier} pack or router revision")
+        require(variant_tiers[tier]["router"]["identity"] == data_["router"]["identity"],
+                f"facade variants: {tier} export uses another router replay")
         observations = {r["id"]: r for r in rows}
-        for run in (data_["router"], *data_["runs"]):
+        for run in (data_["router"], *data_["runs"], *variant_tiers[tier]["runs"]):
             require(run["label"] in tiers, f"facade tiers: {run['label']} has no easy-tier row")
             facade_join(run, observations, inputs)
             tiers[run["label"]][tier] = run["counts"]
@@ -545,8 +569,14 @@ def build(root=ROOT):
     review = review_packs(inputs, rows)
     deployment = inputs.load(DEPLOYMENT)
     require(deployment.get("schema_version") == "deposium.deployment-variants-public/v1"
-            and set(deployment["variants"]) == {"D3miniQ8Metal", "D3miniQ4Metal", "D3FlashMUzu"},
+            and set(deployment["variants"]) == set(DEPLOYMENT_VARIANTS)
+            and set(deployment.get("timing", {})) == {"context-choice-v1", "facade-routing-v1"},
             "deployment variants: changed schema or variants")
+    observations = {r["id"]: r for r in rows}
+    for label, variant in deployment["variants"].items():
+        target = observations[label]["identity"]
+        require(target["runtime"]["binary_sha256"] == variant["runtime"]["binary_sha256"],
+                f"deployment variants: {label} ran on another runtime than its observation")
     for variant in deployment["variants"].values():
         inputs.read(variant["assets_manifest"])
     inputs.read("docs/" + DEPLOYMENT_REPORT)
@@ -780,7 +810,8 @@ def build_coverage(observations, campaigns, others, inputs):
                                "runtime": "private_replay", "context_observation": False,
                                "generative_observation": False, "router_observation": True, "cells": unobserved()}
     easy_metal = inputs.load(FACADE_EASY_METAL)
-    sourced = [(run, FACADE) for run in (facade["router"], *facade["runs"])] + [(run, FACADE_EASY_METAL) for run in easy_metal["runs"]]
+    sourced = ([(run, FACADE) for run in (facade["router"], *facade["runs"])] + [(run, FACADE_EASY_METAL) for run in easy_metal["runs"]]
+               + [(run, FACADE_VARIANTS["easy"]) for run in inputs.load(FACADE_VARIANTS["easy"])["runs"]])
     for run, source in sourced:
         facade_join(run, context_ids, inputs)
         c = run["counts"]["all"]
@@ -1120,12 +1151,16 @@ def review_packs(inputs, observations):
     for key, path, report, mode in (("relevance", REVIEW_RELEVANCE, REVIEW_RELEVANCE_REPORT, "relevance"),
                                      ("hitl", REVIEW_HITL, REVIEW_HITL_REPORT, "hitl")):
         data = inputs.load(path)
-        require(data.get("schema_version") == "deposium.review-packs-public/v1" and data["mode"] == mode
-                and all(REVIEW_PACKS[pack] == digest for pack, digest in data["packs"].items()),
-                f"review packs: changed {mode} pack or schema")
+        extra = inputs.load(REVIEW_VARIANTS[key])
+        for d in (data, extra):
+            require(d.get("schema_version") == "deposium.review-packs-public/v1" and d["mode"] == mode
+                    and d["packs"] == data["packs"] and all(REVIEW_PACKS[pack] == digest for pack, digest in d["packs"].items()),
+                    f"review packs: changed {mode} pack or schema")
+        require({c["label"] for c in extra["candidates"]} == set(DEPLOYMENT_VARIANTS) - {"D3miniQ8Metal"}
+                and (mode != "hitl" or extra["router"] == data["router"]), f"review packs: changed {mode} variant roster")
         inputs.read("docs/" + report)
         rows = []
-        for candidate in data["candidates"]:
+        for candidate in (*data["candidates"], *extra["candidates"]):
             for identity in candidate["identities"]:
                 facade_join({"kind": "classifier", "label": candidate["label"], "identity": identity}, by_id, inputs)
             rows.append({"observation": candidate["label"], "model": by_id[candidate["label"]]["metadata"]["display_name"], **candidate})
@@ -1180,12 +1215,12 @@ def render_deployment(data):
     deployment = data.get("deployment")
     if not deployment:
         return []
-    names = {"D3miniQ8Metal": "D3 mini Q8 · Metal", "D3miniQ4Metal": "D3 mini Q4 · Metal", "D3FlashMUzu": "D3 Flash 4-bit · Uzu"}
+    names = DEPLOYMENT_VARIANTS
     lines = ["### Deployment variants: Q4 and Uzu", "",
-             "Same packs, three ways to serve a small D3 model on the Mac: D3 mini Q8 and Q4_K_M GGUF on llama.cpp Metal, "
-             "and Mirai's 4-bit D3 Flash pack (9B, INT4) on the Uzu engine. Cells: correct / all, median call time, sampled "
-             "process RSS. A deployment comparison: weights, quantization and engine change together. "
-             f"[Report]({DEPLOYMENT_REPORT}).", "",
+             "Same packs, four ways to serve a D3 decision model on the Mac: D3 mini (4.5B) as Q8 and Q4_K_M GGUF and D3 Flash "
+             "(9B class) as Q4_K_M GGUF on the same llama.cpp Metal runtime, and Mirai's 4-bit D3 Flash pack on the Uzu engine. "
+             "Cells: correct / all, median call time, sampled process RSS, one pass per case. Weights format, quantization and "
+             f"engine change together. [Report]({DEPLOYMENT_REPORT}).", "",
              "| Pack | " + " | ".join(names.values()) + " |", "|---|" + "---:|" * len(names)]
     for pack, entry in deployment["packs"].items():
         cells = []
@@ -1193,8 +1228,31 @@ def render_deployment(data):
             v = entry["variants"][key]
             cells.append(f"{v['correct']}/{v['total']} · {number(v['median_call_ms'])} ms · {number(v['rss_peak_mib'] / 1024, 1)} GiB")
         lines.append(f"| {pack} | " + " | ".join(cells) + " |")
+    same = [(pack, e["variants"]["D3FlashMUzu"]["paired_with_same_model"], e["variants"]["D3FlashMUzu"]["total"])
+            for pack, e in deployment["packs"].items()]
+    identical = sum(s["identical_answers"] for _, s, _ in same)
+    total = sum(n for *_, n in same)
+    lines += ["", "**Same model, two engines.** D3 Flash on Uzu (Mirai INT4) and on llama.cpp Metal (Q4_K_M) give the same answer "
+              f"on {identical}/{total} cases over the nine packs ({number(100 * identical / total, 1)}%); the two 4-bit "
+              "quantizations differ, so part of the gap is the weights, not the engine.", "",
+              "**Repeated timing.** After the main passes, three interleaved rounds on two packs: each round starts every variant "
+              "once, in a rotated order, with a fresh server per pass. Median call time per round (min–max of the three round "
+              "medians); answers are compared with the main pass.", "",
+              "| Pack | " + " | ".join(names.values()) + " |", "|---|" + "---:|" * len(names)]
+    for pack, variants in deployment["timing"].items():
+        cells = []
+        for key in names:
+            v = variants[key]
+            low, high = v["round_median_range_ms"]
+            same_answers = min(r["identical_to_main_pass"] for r in v["rounds"])
+            cases = deployment["packs"][pack]["cases"]
+            agreement = ("same answers every round" if same_answers == cases
+                         else f"at least {same_answers}/{cases} answers as main pass")
+            cells.append(f"{number(v['median_of_round_medians_ms'])} ms ({number(low)}–{number(high)}) · {agreement}")
+        lines.append(f"| {pack} | " + " | ".join(cells) + " |")
     lines += ["", "Uzu does not report its compute backend; Metal is requested, not observed. Its stock CLI fetches an online "
-              "catalogue at start (no offline claim). Latency is one pass per case.", ""]
+              "catalogue at start (no offline claim). Timing covers the loopback HTTP call of each engine's server on one Mac; "
+              "it is not a throughput benchmark.", ""]
     return lines
 
 
@@ -1432,6 +1490,28 @@ def render_at_a_glance(data):
                          leaders(tier_rows, "rank_test_" + tier, lambda r, tier=tier: r["model"],
                                  lambda r, tier=tier: f"{r[tier]['by_split']['test']['correct']}/64 test"),
                          "[Harder tiers](#facade-routing-harder-tiers)"))
+    review = data.get("review_packs") or {}
+    if review:
+        rel = [dict(r) for r in review["relevance"]["rows"]]
+        for r in rel:
+            r["rank_all"] = 1 + sum(o["counts"]["all"]["correct"] > r["counts"]["all"]["correct"] for o in rel)
+            r["rank_test"] = 1 + sum(o["counts"]["test"]["correct"] > r["counts"]["test"]["correct"] for o in rel)
+        rows.append(("Retrieved evidence", "Passage relevance v2 (three levels)", "512 (256 test)", len(rel),
+                     leaders(rel, "rank_all", lambda r: r["model"], lambda r: f"{r['counts']['all']['correct']}/512"),
+                     leaders(rel, "rank_test", lambda r: r["model"], lambda r: f"{r['counts']['test']['correct']}/256 test"),
+                     "[Relevance v2](#passage-relevance-v2-three-levels)"))
+        def asked(r, kinds):
+            return sum(r["explicit_option"]["test_by_kind"][k].get("asks_human", 0) for k in kinds)
+        hitl = [dict(r) for r in review["hitl"]["rows"] if r["observation"] != FACADE_ROUTER[0]]
+        for r in hitl:
+            r["needs_human_asked"] = asked(r, ("hitl_confirm", "hitl_choose"))
+        for r in hitl:
+            r["rank_hitl"] = 1 + sum(o["needs_human_asked"] > r["needs_human_asked"] for o in hitl)
+        rows.append(("Tool routing", "Human confirmation (explicit option)", "90 (62 test)", len(hitl),
+                     leaders(hitl, "rank_hitl", lambda r: r["model"],
+                             lambda r: f"asks on {r['needs_human_asked']}/24 test requests needing a human, "
+                                       f"{asked(r, ('control', 'out_of_scope', 'ambiguous'))}/38 false alarms"),
+                     "TEST only; own-confidence detection in the section", "[Human confirmation](#facade-routing-human-confirmation)"))
     for axis, title, total, section in (("relevance", "Passage relevance", 512, "#passage-relevance"),
                                         ("support", "Claim support", 768, "#claim-support"),
                                         ("answerability", "Answerability", 128, "#answerability")):
@@ -1467,7 +1547,7 @@ def render_at_a_glance(data):
 def render(data):
     lines = ["# Full results", "", "[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · [Every model, every task](leaderboard/by-model/README.md) · "
              "[Passages and other campaigns](leaderboard/other-benchmarks.md) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
-             f"**{len(data['observations'])} context model/runtime observations through 31 October 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.",
+             f"**{len(data['observations'])} context model/runtime observations through 1 November 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8, the direct upstream D3 Flash Q8 runtime, D3 lite, nano and mini Q8 on Metal, and the deployment variants D3 mini Q4 and D3 Flash Q4 on Metal and D3 Flash 4-bit on Uzu.",
              "Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;",
              "quantizations and devices remain separate. Rendering this page does not rerun or rescore models.", "",
              "**Exploratory evidence:** synthetic, agent-authored references and translations await human review.",
@@ -1492,7 +1572,7 @@ def render(data):
              "| Rank all | Rank test | Model observation | Size¹ | Runtime² | All /132 | Test /66 | Text /76 | Math /28 | Chem /28 | Tool /24 |",
              "|---:|---:|---|---|---|---:|---:|---:|---:|---:|---:|"]
     runtime_codes = {"historical_cpu": "CPU-H", "remote_api": "API", "apple_metal_native": "Metal",
-                     "apple_mps": "MPS", "cpu_new": "CPU-N", "apple_metal_upstream": "Metal-U"}
+                     "apple_mps": "MPS", "cpu_new": "CPU-N", "apple_metal_upstream": "Metal-U", "apple_uzu": "Uzu"}
     for row in data["observations"]:
         m, c, g = row["metadata"], row["context"]["counts"], row["context"]["groups"]
         tool = row["tool_proposal"]
@@ -1506,7 +1586,7 @@ def render(data):
               "The historical 27B D3 is neither an Ultra nor a Turbo observation; neither variant was evaluated here.", "",
               "² CPU-H: historical Linux/WSL CPU runs (processor not identified here); API: remote service with unknown server hardware;",
               "Metal: native llama.cpp on Apple M5 Pro; MPS: official PyTorch pipeline on Apple M5 Pro;",
-              "CPU-N: newer macOS CPU run; Metal-U: direct upstream native listener, separate from gateway-backed historical runs. Runtime, readout, serializer, precision, and input lengths differ.",
+              "CPU-N: newer macOS CPU run; Metal-U: direct upstream native listener, separate from gateway-backed historical runs; Uzu: Mirai Uzu 0.6.15 release CLI, Metal requested but not reported. Runtime, readout, serializer, precision, and input lengths differ.",
               "Not run in the tool column means no 24-case first-tool observation was published for that runtime; it is not zero accuracy. "
               "Later passage anchors reproduce the published D3 124/132 (test 61/66) and Clef 110/132 (test 59/66) totals; "
               "those repeated checks are not additional leaderboard models.", "",
@@ -1528,7 +1608,8 @@ def render(data):
               "**RSS and GPU allocations are different measurements: never add them.** Neither establishes total unified-memory use.",
               "RSS below is worker peak for the context phase unless marked **S**, which is a sampled process-group peak over",
               "the session specified in the CSV (historical context + tool, or a fresh context-only session). An allocation or peak is not a minimum-memory requirement; allow runtime/OS headroom.",
-              "Metal/MPS observations used a 64 GiB Apple M5 Pro. CPU-H observations are not assumed to share controlled hardware.", "",
+              "Metal/MPS/Uzu observations used a 64 GiB Apple M5 Pro. CPU-H observations are not assumed to share controlled hardware. "
+              "Repeated, interleaved timing of the deployment variants is in [Deployment variants](#deployment-variants-q4-and-uzu).", "",
               "| Model observation | Runtime | Median ms | p95 ms | Timed /132 | Init ms | RSS GiB³ | GPU alloc GiB |",
               "|---|---|---:|---:|---:|---:|---:|---:|"]
     for row in data["observations"]:
@@ -1571,7 +1652,8 @@ MODEL_PAGES_DIR = "docs/leaderboard/by-model/"  # not "models/": that name is a 
 RUNTIME_LABELS = {"historical_cpu": "Historical Linux/WSL CPU (processor not identified)", "remote_api": "Remote HTTP API (server hardware unknown)",
                   "apple_metal_native": "Native llama.cpp Metal, Apple M5 Pro", "apple_mps": "PyTorch MPS, Apple M5 Pro",
                   "cpu_new": "macOS arm64 CPU, pinned runtime",
-                  "private_replay": "Private local replay at a pinned revision; not externally reproducible", "apple_metal_upstream": "Direct upstream native Metal, Apple M5 Pro"}
+                  "private_replay": "Private local replay at a pinned revision; not externally reproducible", "apple_metal_upstream": "Direct upstream native Metal, Apple M5 Pro",
+                  "apple_uzu": "Uzu 0.6.15 release CLI (Metal requested, not reported), Apple M5 Pro"}
 PAGE_TASKS = (("context", "Context choices", "RAG decision", "RESULTS.md#model-quality"),
               ("tool_proposal", "First-tool proposals", "RAG decision", "RESULTS.md#model-quality"),
               ("capability", "Capability and workflow choices", "Tool workflow", "RESULTS.md#capability-choices"),
@@ -1621,6 +1703,48 @@ def _outcomes_text(cell):
         return "—"
     bad = {k: v for k, v in cell["outcomes"].items() if k != "ok" and v}
     return "all `ok`" if not bad else ", ".join(f"{v} `{k}`" for k, v in sorted(bad.items()))
+
+
+def extra_pack_rows(data, oid):
+    """Routing tiers, relevance v2 and human-confirmation rows of one observation (already joined by identity)."""
+    out = []
+    tier = next((r for r in data.get("facade_tiers") or [] if r["observation"] == oid), None)
+    if tier:
+        for key, title in (("advanced", "Facade routing, advanced tier"), ("complex", "Facade routing, complex tier")):
+            c = tier[key]
+            out.append((title, f"{c['all']['correct']}/{c['all']['total']} (test {c['by_split']['test']['correct']}/{c['by_split']['test']['total']})",
+                        tier["rank_" + key], FACADE_TIERS_REPORT))
+    review = data.get("review_packs") or {}
+    rel = next((r for r in (review.get("relevance") or {}).get("rows", []) if r["observation"] == oid), None)
+    if rel:
+        c = rel["counts"]
+        rank = 1 + sum(o["counts"]["all"]["correct"] > c["all"]["correct"] for o in review["relevance"]["rows"])
+        out.append(("Passage relevance v2", f"{c['all']['correct']}/{c['all']['total']} (test {c['test']['correct']}/{c['test']['total']}; "
+                    f"macro {number(100 * c['macro_accuracy'], 1)}%)", rank, review["relevance"]["report"]))
+    hitl = next((r for r in (review.get("hitl") or {}).get("rows", []) if r["observation"] == oid), None)
+    if hitl:
+        k = hitl["explicit_option"]["test_by_kind"]
+        clear = sum(k[x].get("asks_human", 0) for x in ("control", "out_of_scope", "ambiguous"))
+        out.append(("Human confirmation, explicit option", f"asks before {k['hitl_confirm'].get('asks_human', 0)}/12 irreversible actions and "
+                    f"{k['hitl_choose'].get('asks_human', 0)}/12 hesitations; {clear}/38 false alarms", "—", review["hitl"]["report"]))
+        th = hitl["own_confidence"].get("threshold")
+        out.append(("Human confirmation, own confidence", (f"detects {th['test_detected']}/{th['test_needs_human']}; {th['test_false_alarms']}/"
+                    f"{th['test_clear']} false alarms; AUC {number(th['test_auc'], 2)}") if th else "no probabilities", "—", review["hitl"]["report"]))
+    return out
+
+
+def extra_index_cells(data, oid):
+    cells = {}
+    tier = next((r for r in data.get("facade_tiers") or [] if r["observation"] == oid), None)
+    if tier:
+        for key in ("advanced", "complex"):
+            cells["tier_" + key] = f"{tier[key]['all']['correct']}/96 (#{tier['rank_' + key]})"
+    rows = ((data.get("review_packs") or {}).get("relevance") or {}).get("rows", [])
+    rel = next((r for r in rows if r["observation"] == oid), None)
+    if rel:
+        rank = 1 + sum(o["counts"]["all"]["correct"] > rel["counts"]["all"]["correct"] for o in rows)
+        cells["relevance_v2"] = f"{rel['counts']['all']['correct']}/512 (#{rank})"
+    return cells
 
 
 def render_model_pages(data):
@@ -1696,6 +1820,15 @@ def render_model_pages(data):
             section_link = f"[{title}](../../{section})"
             lines.append(f"| {family} | {section_link} | {_page_cell(cell)} | {test} | {rank_all} | {rank_test} | {_outcomes_text(cell)} | {report} |")
             index[task] = (cell, rank_all if cell["status"] == "complete" else None)
+        extra = extra_pack_rows(data, oid)
+        if extra:
+            lines += ["", "## Routing tiers, relevance v2 and human confirmation", "",
+                      "Packs added on 1 November 2026, joined to this observation by weights and runtime identity. "
+                      "Human confirmation counts are on TEST.", "",
+                      "| Pack | Result | Rank | Report |", "|---|---|---:|---|"]
+            for pack, result, rank, report in extra:
+                lines.append(f"| {pack} | {result} | {rank} | [report](../../{report}) |")
+        index.update(extra_index_cells(data, oid))
         if ctx and ctx.get("resources"):
             r = ctx["resources"]
             gpu = r.get("sampled_gpu_allocated_peak_mib")
@@ -1736,13 +1869,15 @@ def render_model_pages(data):
              "competition rank in parentheses, `partial` when the campaign did not complete, and **—** when the task was not run on that runtime. "
              "Context observations come first, in context rank order; passage-only methods and the generative candidate follow. "
              "Click the model for its page with every task, execution outcomes, speed and reports.", "",
-             "| Model / runtime | Context /132 | Tool /24 | Capability /192 | Physics /48 | Episodes (choice) /32 | Facade routing /80 | Relevance /512 | Support /768 | Answerability /128 | Generated JSON (discovery, arguments, episodes) |",
-             "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|"]
+             "| Model / runtime | Context /132 | Tool /24 | Capability /192 | Physics /48 | Episodes (choice) /32 | Facade routing /80 | Advanced /96 | Complex /96 | Relevance /512 | Relevance v2 /512 | Support /768 | Answerability /128 | Generated JSON (discovery, arguments, episodes) |",
+             "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|"]
     for row in index_rows:
         generated = ", ".join(index_cell(row, t) for t in ("tool_discovery", "tool_arguments", "tool_episodes"))
         generated = "—" if generated == "—, —, —" else generated
         lines.append(f"| [{row['name']}]({row['id']}.md) | {index_cell(row, 'context')} | {index_cell(row, 'tool_proposal')} | {index_cell(row, 'capability')} | "
-                     f"{index_cell(row, 'physics')} | {index_cell(row, 'choice_episodes')} | {index_cell(row, 'facade_routing')} | {index_cell(row, 'passage_relevance')} | {index_cell(row, 'passage_support')} | {index_cell(row, 'passage_answerability')} | {generated} |")
+                     f"{index_cell(row, 'physics')} | {index_cell(row, 'choice_episodes')} | {index_cell(row, 'facade_routing')} | "
+                     f"{row.get('tier_advanced', '—')} | {row.get('tier_complex', '—')} | {index_cell(row, 'passage_relevance')} | "
+                     f"{row.get('relevance_v2', '—')} | {index_cell(row, 'passage_support')} | {index_cell(row, 'passage_answerability')} | {generated} |")
     lines += ["", "Tool /24 is provisional agreement with agent-authored first-tool proposals, not routing accuracy; it has no rank. "
               "Passage scores are rotation 0 (128 pools × decisions); the four-rotation Jev export and the ranking methods are on each model page and in "
               "[other benchmarks](../other-benchmarks.md). Generated regularly by `scripts/build-full-results.py`.", ""]

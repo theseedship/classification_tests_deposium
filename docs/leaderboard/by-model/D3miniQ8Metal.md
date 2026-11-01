@@ -20,20 +20,32 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 
 | Family | Task | Correct / all | Held-out test | Rank all | Rank test | Execution | Report |
 |---|---|---:|---:|---:|---:|---|---|
-| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 119/132 | 60/66 | 7 | 10 | all `ok` | [D3_SMALL_GGUF_GPU_PROTOCOL_20261101](../../D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md) |
+| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 119/132 | 60/66 | 8 | 11 | all `ok` | [D3_SMALL_GGUF_GPU_PROTOCOL_20261101](../../D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md) |
 | RAG decision | [First-tool proposals](../../RESULTS.md#model-quality) | not run | — | — | — | — | — |
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 192/192 | 96/96 | 1 | 1 | all `ok` | [report](../../D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
-| Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 39/48 | 32/36 | 2 | 1 | all `ok` | [report](../../D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 39/48 | 32/36 | 3 | 1 | all `ok` | [report](../../D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
 | Tool workflow, executed | [Executed tool episodes (closed choice)](../../RESULTS.md#executed-tool-episodes-closed-choice) | not run | — | — | — | — | — |
 | Tool routing | [Facade routing (model vs router)](../../RESULTS.md#facade-routing-model-vs-router) | 79/80 | 47/48 | 1 | 1 | all `ok` | [report](../../FACADE_ROUTING_TIERS_RESULTS_20261101.md) |
-| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 266/512 | no split ranking | 1 | — | all `ok` | [report](../../D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
-| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 517/768 | no split ranking | 2 | — | all `ok` | [report](../../D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
-| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 102/128 | no split ranking | 4 | — | all `ok` | [report](../../D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 266/512 | no split ranking | 2 | — | all `ok` | [report](../../D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 517/768 | no split ranking | 3 | — | all `ok` | [report](../../D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 102/128 | no split ranking | 5 | — | all `ok` | [report](../../D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
 | Retrieved evidence | [Passage relevance, four rotations](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |
 | Retrieved evidence | [Passage ranking](../../leaderboard/other-benchmarks.md#passage-ranking-and-evidence) | not run | — | — | — | — | — |
 | Tool policy, generated | [Tool discovery (generated JSON)](../../RESULTS.md#generated-json-tool-policy-observations) | not run | — | — | — | — | — |
 | Tool policy, generated | [Tool arguments (generated JSON)](../../RESULTS.md#generated-json-tool-policy-observations) | not run | — | — | — | — | — |
 | Tool policy, generated | [Tool episodes (generated JSON)](../../RESULTS.md#generated-json-tool-policy-observations) | not run | — | — | — | — | — |
+
+## Routing tiers, relevance v2 and human confirmation
+
+Packs added on 1 November 2026, joined to this observation by weights and runtime identity. Human confirmation counts are on TEST.
+
+| Pack | Result | Rank | Report |
+|---|---|---:|---|
+| Facade routing, advanced tier | 94/96 (test 62/64) | 1 | [report](../../FACADE_ROUTING_TIERS_RESULTS_20261101.md) |
+| Facade routing, complex tier | 92/96 (test 60/64) | 2 | [report](../../FACADE_ROUTING_TIERS_RESULTS_20261101.md) |
+| Passage relevance v2 | 406/512 (test 200/256; macro 90.8%) | 1 | [report](../../PASSAGE_RELEVANCE_V2_RESULTS_20261101.md) |
+| Human confirmation, explicit option | asks before 9/12 irreversible actions and 0/12 hesitations; 0/38 false alarms | — | [report](../../FACADE_ROUTING_HITL_RESULTS_20261101.md) |
+| Human confirmation, own confidence | detects 18/24; 12/38 false alarms; AUC 0.83 | — | [report](../../FACADE_ROUTING_HITL_RESULTS_20261101.md) |
 
 ## Speed and memory (context session)
 

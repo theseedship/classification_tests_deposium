@@ -30,7 +30,9 @@ references flagged in the tier and passage reports (#8).
 
 Deployment variants, 1 November 2026: D3 mini Q4 on Metal and Mirai's
 4-bit D3 Flash on Uzu ([results](DEPLOYMENT_VARIANTS_RESULTS_20261101.md)) both
-serve the packs in about 4 GiB. Uzu is now runnable end to end (pinned
+serve the packs in about 4 GiB; against D3 Flash Q4 on the same llama.cpp Metal
+runtime, Uzu is about 2.6× faster over three interleaved timing rounds. The
+four variants are full observations in RESULTS.md. Uzu is now runnable end to end (pinned
 `hanashi` input preparation, release 0.6.15); converting D3 mini itself for Uzu
 needs a decision-model recipe that the public converter does not provide.
 

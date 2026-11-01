@@ -23,12 +23,12 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 | RAG decision | [Context choices](../../RESULTS.md#model-quality) | 124/132 | 61/66 | 2 | 4 | all `ok` | [PHYSICS_FLASH_RESULTS_20261029](../../PHYSICS_FLASH_RESULTS_20261029.md) |
 | RAG decision | [First-tool proposals](../../RESULTS.md#model-quality) | not run | — | — | — | — | — |
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | not run | — | — | — | — | — |
-| Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 39/48 | 32/36 | 2 | 1 | all `ok` | [report](../../PHYSICS_FLASH_RESULTS_20261029.md) |
+| Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 39/48 | 32/36 | 3 | 1 | all `ok` | [report](../../PHYSICS_FLASH_RESULTS_20261029.md) |
 | Tool workflow, executed | [Executed tool episodes (closed choice)](../../RESULTS.md#executed-tool-episodes-closed-choice) | not run | — | — | — | — | — |
 | Tool routing | [Facade routing (model vs router)](../../RESULTS.md#facade-routing-model-vs-router) | not run | — | — | — | — | — |
-| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 252/512 | no split ranking | 4 | — | all `ok` | [report](../../PASSAGE_FLASH_RESULTS_20261029.md) |
-| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 460/768 | no split ranking | 3 | — | all `ok` | [report](../../PASSAGE_FLASH_RESULTS_20261029.md) |
-| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 122/128 | no split ranking | 1 | — | all `ok` | [report](../../PASSAGE_FLASH_RESULTS_20261029.md) |
+| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 252/512 | no split ranking | 5 | — | all `ok` | [report](../../PASSAGE_FLASH_RESULTS_20261029.md) |
+| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 460/768 | no split ranking | 4 | — | all `ok` | [report](../../PASSAGE_FLASH_RESULTS_20261029.md) |
+| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 122/128 | no split ranking | 2 | — | all `ok` | [report](../../PASSAGE_FLASH_RESULTS_20261029.md) |
 | Retrieved evidence | [Passage relevance, four rotations](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |
 | Retrieved evidence | [Passage ranking](../../leaderboard/other-benchmarks.md#passage-ranking-and-evidence) | not run | — | — | — | — | — |
 | Tool policy, generated | [Tool discovery (generated JSON)](../../RESULTS.md#generated-json-tool-policy-observations) | not run | — | — | — | — | — |

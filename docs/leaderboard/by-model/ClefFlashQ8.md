@@ -20,15 +20,15 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 
 | Family | Task | Correct / all | Held-out test | Rank all | Rank test | Execution | Report |
 |---|---|---:|---:|---:|---:|---|---|
-| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 110/132 | 59/66 | 14 | 13 | all `ok` | [CLEF_FLASH_RESULTS_20261029](../../CLEF_FLASH_RESULTS_20261029.md) |
+| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 110/132 | 59/66 | 17 | 14 | all `ok` | [CLEF_FLASH_RESULTS_20261029](../../CLEF_FLASH_RESULTS_20261029.md) |
 | RAG decision | [First-tool proposals](../../RESULTS.md#model-quality) | not run | — | — | — | — | — |
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 192/192 | 96/96 | 1 | 1 | all `ok` | [report](../../CLEF_FLASH_RESULTS_20261029.md) |
-| Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 41/48 | 31/36 | 1 | 4 | all `ok` | [report](../../CLEF_FLASH_RESULTS_20261029.md) |
+| Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 41/48 | 31/36 | 1 | 6 | all `ok` | [report](../../CLEF_FLASH_RESULTS_20261029.md) |
 | Tool workflow, executed | [Executed tool episodes (closed choice)](../../RESULTS.md#executed-tool-episodes-closed-choice) | not run | — | — | — | — | — |
 | Tool routing | [Facade routing (model vs router)](../../RESULTS.md#facade-routing-model-vs-router) | not run | — | — | — | — | — |
-| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 261/512 | no split ranking | 3 | — | all `ok` | [report](../../PASSAGE_CLEF_RESULTS_20261029.md) |
-| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 446/768 | no split ranking | 5 | — | all `ok` | [report](../../PASSAGE_CLEF_RESULTS_20261029.md) |
-| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 109/128 | no split ranking | 2 | — | all `ok` | [report](../../PASSAGE_CLEF_RESULTS_20261029.md) |
+| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 261/512 | no split ranking | 4 | — | all `ok` | [report](../../PASSAGE_CLEF_RESULTS_20261029.md) |
+| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 446/768 | no split ranking | 6 | — | all `ok` | [report](../../PASSAGE_CLEF_RESULTS_20261029.md) |
+| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 109/128 | no split ranking | 3 | — | all `ok` | [report](../../PASSAGE_CLEF_RESULTS_20261029.md) |
 | Retrieved evidence | [Passage relevance, four rotations](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |
 | Retrieved evidence | [Passage ranking](../../leaderboard/other-benchmarks.md#passage-ranking-and-evidence) | not run | — | — | — | — | — |
 | Tool policy, generated | [Tool discovery (generated JSON)](../../RESULTS.md#generated-json-tool-policy-observations) | not run | — | — | — | — | — |

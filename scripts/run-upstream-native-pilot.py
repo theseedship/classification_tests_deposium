@@ -44,6 +44,12 @@ DEFAULT_ENVELOPE = "flash-clef-18g-v1"
 # Small GGUF decision models (file at most 6 GiB): 8 GiB sampled RSS ceiling, same 8 GiB reserve.
 SMALL_ENVELOPE = "small-gguf-8g-v1"
 SMALL_MAX_FILE_BYTES = 6 * 1024 ** 3
+# D3 Flash Q4_K_M only (engine comparison with Uzu): 12 GiB sampled RSS ceiling, same 8 GiB reserve.
+FLASH_Q4_ENVELOPE = "d3-flash-q4-12g-v1"
+FLASH_Q4_ASSETS = {"schema_version": "deposium.model-assets/v1",
+    "repo_id": "ggml-org/vllm-d3-flash-GGUF", "revision": "3d53d13778bf8035e6e1e534ce489ed052ee5663",
+    "files": [{"path": "vllm-d3-flash-Q4_K_M.gguf", "size": 6603024832,
+               "sha256": "8140de6f2e0939b435ac585ecdec97f4aef1545ff01d072fe7f7e4c88ebaa611"}]}
 # Declared GPU backend and the load-time log line proving the model buffer lives on it.
 # Metal keeps its historical check; the others require a device model buffer of that backend.
 BACKEND_BUFFERS = {"metal": None, "cuda": r"\bCUDA\d+\S* model buffer size",
@@ -132,6 +138,14 @@ def execution_envelope(args, assets, model, cases):
                 "upstream_pilot_fixed_envelope_required")
         require(assets.get("repo_id") != D327_ASSETS["repo_id"] and assets["files"][0]["size"] <= SMALL_MAX_FILE_BYTES,
                 "small_envelope_requires_a_small_model")
+        return {"name": name}, cases, None
+    if name == FLASH_Q4_ENVELOPE:
+        require(args.max_rss_mb == 12288 and 0 < args.max_seconds <= 1200 and phase is None
+                and getattr(args, "preparation_receipt", None) is None
+                and getattr(args, "calibration_receipt", None) is None,
+                "upstream_pilot_fixed_envelope_required")
+        require(typed_equal(assets, FLASH_Q4_ASSETS) and model.name == FLASH_Q4_ASSETS["files"][0]["path"],
+                "flash_q4_envelope_requires_the_pinned_d3_flash_q4")
         return {"name": name}, cases, None
     require(name == D327_ENVELOPE and typed_equal(assets, D327_ASSETS) and model.name == D327_ASSETS["files"][0]["path"]
             and getattr(args, "backend", "metal") == "metal"
@@ -659,7 +673,7 @@ def main(argv=None):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--model-id", required=True)
     parser.add_argument("--decision-type", choices=("d3", "clef"), default="d3")
-    parser.add_argument("--execution-envelope", choices=(DEFAULT_ENVELOPE, SMALL_ENVELOPE, D327_ENVELOPE), default=DEFAULT_ENVELOPE)
+    parser.add_argument("--execution-envelope", choices=(DEFAULT_ENVELOPE, SMALL_ENVELOPE, FLASH_Q4_ENVELOPE, D327_ENVELOPE), default=DEFAULT_ENVELOPE)
     parser.add_argument("--phase", choices=("canary", "anchor", "capability"))
     parser.add_argument("--preparation-receipt", type=Path)
     parser.add_argument("--calibration-receipt", type=Path)
