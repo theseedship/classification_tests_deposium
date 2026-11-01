@@ -55,3 +55,14 @@ confusion between *human confirmation*, the categories and *none*, split by
 kind; for approach 2 the TEST detection rate, false-alarm rate and routing
 accuracy on the cases not sent to a human, at the fixed τ. A few-case
 difference on correlated FR/EN pairs is not a general ranking.
+
+## Amendment, 1 November 2026, before any model prediction on the eight-option pack
+
+The engine refused the eight-option pack for isolated models: it accepted only
+one exact `choice_id` reference, while hesitation cases accept either of two
+listed options (`one_of`). The engine now also accepts `one_of` when every
+value is a listed option (tested). The packs are unchanged. The first D3 runs
+of the eight-option pack (attempt 001) stopped at campaign start with no
+prediction beyond the excluded warm-up; they stay recorded and are rerun as
+attempt 002. The router replay, a recorded harness control, was already
+scored and is unaffected.

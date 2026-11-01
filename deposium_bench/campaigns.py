@@ -183,9 +183,14 @@ def _validate_output_scope(cases: list[dict], profile: dict) -> None:
         assertions = case["reference"]["assertions"]
         if case["contract_id"] == "bench.context-choice":
             ids = {option["id"] for option in case["input"]["options"]}
-            if (len(assertions) != 1 or assertions[0]["path"] != "/choice_id"
-                    or assertions[0]["op"] != "equals" or assertions[0]["value"] not in ids):
-                raise CampaignError("Choice candidate requires one exact choice_id reference.")
+            # One exact option, or (for packs that accept either of several options) a list of listed options.
+            exact = (len(assertions) == 1 and assertions[0]["path"] == "/choice_id"
+                     and assertions[0]["op"] == "equals" and assertions[0]["value"] in ids)
+            either = (len(assertions) == 1 and assertions[0]["path"] == "/choice_id" and assertions[0]["op"] == "one_of"
+                      and isinstance(assertions[0]["value"], list) and len(assertions[0]["value"]) >= 2
+                      and all(value in ids for value in assertions[0]["value"]))
+            if not (exact or either):
+                raise CampaignError("Choice candidate requires one choice_id reference among the listed options.")
             continue
         if (len(assertions) != 1 or assertions[0]["path"] != "/task"
                 or assertions[0]["op"] != "equals"

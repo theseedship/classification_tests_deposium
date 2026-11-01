@@ -37,6 +37,16 @@ class FacadeRoutingHitlTests(unittest.TestCase):
             self.assertEqual(sorted(b["evaluation"]["oracle"]["choices"][x] for x in chosen8), sorted(params["candidates"]))
         self.assertEqual(Counter(c["evaluation"]["oracle"]["params"]["needs_human"] for c in nine), {True: 32, False: 58})
 
+    def test_isolated_models_accept_either_listed_option_but_nothing_else(self):
+        from deposium_bench.campaigns import CampaignError, _validate_output_scope
+        cases = self.load("facade-routing-hitl-8opt-v1")
+        _validate_output_scope(cases, {"adapter": "d3", "capabilities": ["bench.context-choice"]})
+        for value in (["a", "z"], ["a"], "a,b"):
+            bad = deepcopy(cases[0])
+            bad["reference"]["assertions"] = [{"path": "/choice_id", "op": "one_of", "value": value}]
+            with self.subTest(value=value), self.assertRaises(CampaignError):
+                _validate_output_scope([bad], {"adapter": "d3", "capabilities": ["bench.context-choice"]})
+
     def test_altered_case_is_rejected(self):
         for dataset_id in hitl.PACKS:
             case = deepcopy(self.load(dataset_id)[5])
