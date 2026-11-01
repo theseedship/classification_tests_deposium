@@ -623,6 +623,16 @@ class FullResultsTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "changed complex pack"):
                 results.build(self.root)
 
+    def test_deployment_variants_render_and_reject_changed_variants(self):
+        deployment = self.data["deployment"]
+        self.assertEqual(set(deployment["variants"]), {"D3miniQ8Metal", "D3miniQ4Metal", "D3FlashMUzu"})
+        facade = deployment["packs"]["facade-routing-v1"]["variants"]
+        self.assertEqual((facade["D3miniQ4Metal"]["correct"], facade["D3FlashMUzu"]["correct"]), (79, 78))
+        self.assertIn("### Deployment variants: Q4 and Uzu", results.render(self.data))
+        with self.changed_json(results.DEPLOYMENT, lambda d: d["variants"].pop("D3FlashMUzu")):
+            with self.assertRaisesRegex(ValueError, "changed schema or variants"):
+                results.build(self.root)
+
     def test_executed_episodes_join_by_identity_and_rank_procedure_correct_cases(self):
         rows = {r["observation"]: r for r in self.data["choice_episodes"]}
         self.assertEqual(set(rows), {"D3liteMacos", "Vela03Macos", "D3nanoMacos", "D3miniMacos"})

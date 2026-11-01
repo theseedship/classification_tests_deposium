@@ -45,6 +45,9 @@ FACADE_TIERS = {"advanced": (EVIDENCE + "facade-routing-tiers-20261101/advanced.
                 "complex": (EVIDENCE + "facade-routing-tiers-20261101/complex.json",
                             "389d362dafa7696b3cb4fb18f0d44a1ae98569a1ae661133f7ec9db44b6930d6")}
 FACADE_TIERS_REPORT = "FACADE_ROUTING_TIERS_RESULTS_20261101.md"
+# Deployment variants of the small D3 models: Q8 and Q4 GGUF on Metal, Mirai's 4-bit D3 Flash on Uzu.
+DEPLOYMENT = EVIDENCE + "deployment-variants-20261101/analysis.json"
+DEPLOYMENT_REPORT = "DEPLOYMENT_VARIANTS_RESULTS_20261101.md"
 CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
 LOCAL_POLICY = (EVIDENCE + "local-tool-policy-20261030/analysis.json",
                 EVIDENCE + "local-tool-policy-v2-train-20261030/analysis.json",
@@ -92,7 +95,9 @@ RECENT_INPUTS = (CAMPAIGN_MODULE, EVIDENCE + "clef-flash-20261029/analysis.json"
                  "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md", "profiles/d3-lite-q8-assets.json",
                  "profiles/d3-nano-q8-assets.json", "profiles/d3-mini-q8-assets.json",
                  EVIDENCE + "facade-routing-tiers-20261101/easy-metal.json", EVIDENCE + "facade-routing-tiers-20261101/advanced.json",
-                 EVIDENCE + "facade-routing-tiers-20261101/complex.json", "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md")
+                 EVIDENCE + "facade-routing-tiers-20261101/complex.json", "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md",
+                 EVIDENCE + "deployment-variants-20261101/analysis.json", "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md",
+                 "profiles/d3-mini-q4-assets.json", "profiles/d3-flash-m-uzu-assets.json")
 # Constant majority-class answer on passage-evidence-v1, rotation 0 (dataset sha pinned in campaigns).
 PASSAGE_MAJORITY = {"relevance": ("grade 1", 224, 512), "support": ("`insufficient`", 584, 768),
                     "answerability": ("`answerable`", 88, 128)}
@@ -527,11 +532,19 @@ def build(root=ROOT):
             row["rank_test_" + tier] = 1 + sum(o[tier]["by_split"]["test"]["correct"] > row[tier]["by_split"]["test"]["correct"]
                                                for o in facade_tiers)
     facade_tiers.sort(key=lambda r: (r["rank_complex"], r["model"]))
+    deployment = inputs.load(DEPLOYMENT)
+    require(deployment.get("schema_version") == "deposium.deployment-variants-public/v1"
+            and set(deployment["variants"]) == {"D3miniQ8Metal", "D3miniQ4Metal", "D3FlashMUzu"},
+            "deployment variants: changed schema or variants")
+    for variant in deployment["variants"].values():
+        inputs.read(variant["assets_manifest"])
+    inputs.read("docs/" + DEPLOYMENT_REPORT)
     inputs.read("scripts/build-full-results.py")
     coverage["sources_sha256"] = dict(sorted(inputs.hashes.items()))
     return {"schema_version": "deposium.public-results/v1", "observations": rows,
             "campaigns": campaign_rows, "coverage": coverage, "historical_context_observations": len(base),
             "choice_episodes": choice_episodes, "facade_routing": facade_routing, "facade_tiers": facade_tiers,
+            "deployment": deployment,
             "other_campaigns": others, "other_benchmarks_markdown": other_guide,
             "capability_campaign": complementary,
             "scope": "aggregate_presentation_only_no_inference_or_raw_archive_verification",
@@ -1088,6 +1101,28 @@ def render_choice_episodes(data):
     return lines
 
 
+def render_deployment(data):
+    deployment = data.get("deployment")
+    if not deployment:
+        return []
+    names = {"D3miniQ8Metal": "D3 mini Q8 · Metal", "D3miniQ4Metal": "D3 mini Q4 · Metal", "D3FlashMUzu": "D3 Flash 4-bit · Uzu"}
+    lines = ["### Deployment variants: Q4 and Uzu", "",
+             "Same packs, three ways to serve a small D3 model on the Mac: D3 mini Q8 and Q4_K_M GGUF on llama.cpp Metal, "
+             "and Mirai's 4-bit D3 Flash pack (9B, INT4) on the Uzu engine. Cells: correct / all, median call time, sampled "
+             "process RSS. A deployment comparison: weights, quantization and engine change together. "
+             f"[Report]({DEPLOYMENT_REPORT}).", "",
+             "| Pack | " + " | ".join(names.values()) + " |", "|---|" + "---:|" * len(names)]
+    for pack, entry in deployment["packs"].items():
+        cells = []
+        for key in names:
+            v = entry["variants"][key]
+            cells.append(f"{v['correct']}/{v['total']} · {number(v['median_call_ms'])} ms · {number(v['rss_peak_mib'] / 1024, 1)} GiB")
+        lines.append(f"| {pack} | " + " | ".join(cells) + " |")
+    lines += ["", "Uzu does not report its compute backend; Metal is requested, not observed. Its stock CLI fetches an online "
+              "catalogue at start (no offline claim). Latency is one pass per case.", ""]
+    return lines
+
+
 def render_facade_routing(data):
     rows = data["facade_routing"]
     if not rows:
@@ -1216,6 +1251,7 @@ def render_campaign_rankings(data):
               "[small-CPU passage report](PASSAGE_SMALL_CPU_RESULTS_20261031.md).", "",
               *render_choice_episodes(data),
               *render_facade_routing(data),
+              *render_deployment(data),
               "### Campaign latency and memory", "",
               "Physical-call timings are kept separate from reused logical decisions; session RSS scopes differ "
               "from the historical context + tool sessions. NR means unreported. No controlled speed ranking is inferred.", "",
