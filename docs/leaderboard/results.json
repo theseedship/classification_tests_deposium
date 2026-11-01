@@ -7564,6 +7564,1584 @@
     },
     {
       "counts": {
+        "correct": 104,
+        "families": 8,
+        "scored": 128,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 128,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 128
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en->en": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en->fr": {
+            "correct": 13,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "es->es": {
+            "correct": 10,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr->en": {
+            "correct": 13,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr->fr": {
+            "correct": 16,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "it->it": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt->pt": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en": {
+            "correct": 27,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "es": {
+            "correct": 10,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr": {
+            "correct": 29,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "it": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 70,
+            "families": 6,
+            "scored": 88,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 88,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 88
+          },
+          "conflicting_visible_evidence": {
+            "correct": 10,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "insufficient_visible_evidence": {
+            "correct": 24,
+            "families": 2,
+            "scored": 24,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 24,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 24
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en": {
+            "correct": 27,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "es": {
+            "correct": 10,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr": {
+            "correct": 29,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "it": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 12,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "conflicting_evidence": {
+            "correct": 10,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "distributed_binding": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "heading_value_truncation": {
+            "correct": 14,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "missing_evidence": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "negation_exception": {
+            "correct": 4,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "unit_condition_collision": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "variant_scope": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 104,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 51,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "head_384": {
+            "correct": 53,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        }
+      },
+      "identity": {
+        "adapter": "d3",
+        "identity_sha256": "571833f52154040e7113a939c14cbcb7b13a34fbb5b7dc0c36fc2d78c5163202",
+        "model_repo_id": "vllm-sr/d3-mini",
+        "model_revision": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4",
+        "profile": "profiles/d3-mini-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.8068181818181818,
+      "model": "D3 mini · macOS CPU",
+      "observation": "D3miniMacos",
+      "rank_all": 3,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/d3-mini.json",
+      "status": "complete",
+      "task": "passage_answerability"
+    },
+    {
+      "counts": {
+        "correct": 93,
+        "families": 8,
+        "scored": 128,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 128,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 128
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en->en": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en->fr": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "es->es": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr->en": {
+            "correct": 7,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr->fr": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "it->it": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt->pt": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en": {
+            "correct": 21,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "es": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr": {
+            "correct": 22,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "it": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 53,
+            "families": 6,
+            "scored": 88,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 88,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 88
+          },
+          "conflicting_visible_evidence": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "insufficient_visible_evidence": {
+            "correct": 24,
+            "families": 2,
+            "scored": 24,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 24,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 24
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en": {
+            "correct": 25,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "es": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr": {
+            "correct": 18,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "it": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 4,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "conflicting_evidence": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "distributed_binding": {
+            "correct": 14,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "heading_value_truncation": {
+            "correct": 11,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "missing_evidence": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "negation_exception": {
+            "correct": 4,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "unit_condition_collision": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "variant_scope": {
+            "correct": 12,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 93,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 44,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "head_384": {
+            "correct": 49,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        }
+      },
+      "identity": {
+        "adapter": "d3",
+        "identity_sha256": "c8615190245453aef26d732e2c296ff1a8f32aac961e9b822cb25e585439d8c4",
+        "model_repo_id": "vllm-sr/d3-nano",
+        "model_revision": "3aeb1c22a5632aac72353c36b3d0111c40e7dbf4",
+        "profile": "profiles/d3-nano-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.8674242424242425,
+      "model": "D3 nano · macOS CPU",
+      "observation": "D3nanoMacos",
+      "rank_all": 4,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/d3-nano.json",
+      "status": "complete",
+      "task": "passage_answerability"
+    },
+    {
+      "counts": {
+        "correct": 93,
+        "families": 8,
+        "scored": 128,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 128,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 128
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en->en": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en->fr": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "es->es": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr->en": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr->fr": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "it->it": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt->pt": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en": {
+            "correct": 25,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "es": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr": {
+            "correct": 24,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "it": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 83,
+            "families": 6,
+            "scored": 88,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 88,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 88
+          },
+          "conflicting_visible_evidence": {
+            "correct": 2,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "insufficient_visible_evidence": {
+            "correct": 8,
+            "families": 2,
+            "scored": 24,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 24,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 24
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en": {
+            "correct": 26,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "es": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr": {
+            "correct": 23,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "it": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "conflicting_evidence": {
+            "correct": 2,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "distributed_binding": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "heading_value_truncation": {
+            "correct": 11,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "missing_evidence": {
+            "correct": 0,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "negation_exception": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "unit_condition_collision": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "variant_scope": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 93,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 44,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "head_384": {
+            "correct": 49,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        }
+      },
+      "identity": {
+        "adapter": "vela2",
+        "identity_sha256": "7b630580833366ee5ae3b76fd13b96bdc7588ae39f861409503474b0be28e393",
+        "model_repo_id": "vllm-sr/Vela-2.0-0.3B",
+        "model_revision": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+        "profile": "profiles/vela2-03-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.4671717171717172,
+      "model": "Vela 2.0 0.3B · macOS CPU",
+      "observation": "Vela03Macos",
+      "rank_all": 4,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/vela2-03.json",
+      "status": "complete",
+      "task": "passage_answerability"
+    },
+    {
+      "counts": {
         "correct": 88,
         "families": 8,
         "scored": 128,
@@ -8089,10 +9667,536 @@
       "macro_accuracy": 0.8080808080808081,
       "model": "D3-lite · CPU",
       "observation": "D3lite",
-      "rank_all": 3,
+      "rank_all": 6,
       "rank_test": null,
       "report": "PASSAGE_CPU_RESULTS_20261015.md",
       "source": "docs/evidence/passage-cpu-20261015/analysis.json",
+      "status": "complete",
+      "task": "passage_answerability"
+    },
+    {
+      "counts": {
+        "correct": 88,
+        "families": 8,
+        "scored": 128,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 128,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 128
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en->en": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en->fr": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "es->es": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr->en": {
+            "correct": 9,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr->fr": {
+            "correct": 10,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "it->it": {
+            "correct": 9,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt->pt": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en": {
+            "correct": 21,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "es": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr": {
+            "correct": 21,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "it": {
+            "correct": 9,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 52,
+            "families": 6,
+            "scored": 88,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 88,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 88
+          },
+          "conflicting_visible_evidence": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "insufficient_visible_evidence": {
+            "correct": 20,
+            "families": 2,
+            "scored": 24,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 24,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 24
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 14,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "en": {
+            "correct": 23,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "es": {
+            "correct": 12,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "fr": {
+            "correct": 19,
+            "families": 8,
+            "scored": 32,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 32,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 32
+          },
+          "it": {
+            "correct": 9,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "pt": {
+            "correct": 11,
+            "families": 8,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 2,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "conflicting_evidence": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "distributed_binding": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "heading_value_truncation": {
+            "correct": 12,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "missing_evidence": {
+            "correct": 12,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "negation_exception": {
+            "correct": 0,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "unit_condition_collision": {
+            "correct": 16,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          },
+          "variant_scope": {
+            "correct": 14,
+            "families": 1,
+            "scored": 16,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 16,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 16
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 88,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 42,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "head_384": {
+            "correct": 46,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        }
+      },
+      "identity": {
+        "adapter": "d3",
+        "identity_sha256": "064411a56c61977d8375a4b4e6ce896e8aec072ff60990a472c1a158452db483",
+        "model_repo_id": "vllm-sr/d3-lite",
+        "model_revision": "a8d25a91ef75552803f7009d25b7bd435991abd9",
+        "profile": "profiles/d3-lite-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.8080808080808081,
+      "model": "D3 lite · macOS CPU",
+      "observation": "D3liteMacos",
+      "rank_all": 6,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/d3-lite.json",
       "status": "complete",
       "task": "passage_answerability"
     },
@@ -8621,6 +10725,532 @@
       "task": "passage_answerability"
     },
     {
+      "counts": {
+        "correct": 266,
+        "families": 8,
+        "scored": 512,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 512,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 512
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 36,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en->en": {
+            "correct": 34,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en->fr": {
+            "correct": 36,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "es->es": {
+            "correct": 32,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr->en": {
+            "correct": 30,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr->fr": {
+            "correct": 34,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "it->it": {
+            "correct": 32,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt->pt": {
+            "correct": 32,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 36,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en": {
+            "correct": 64,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "es": {
+            "correct": 32,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr": {
+            "correct": 70,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "it": {
+            "correct": 32,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt": {
+            "correct": 32,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 170,
+            "families": 6,
+            "scored": 352,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 352,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 352
+          },
+          "conflicting_visible_evidence": {
+            "correct": 48,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "insufficient_visible_evidence": {
+            "correct": 48,
+            "families": 2,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 36,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en": {
+            "correct": 70,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "es": {
+            "correct": 32,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr": {
+            "correct": 64,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "it": {
+            "correct": 32,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt": {
+            "correct": 32,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 30,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "conflicting_evidence": {
+            "correct": 48,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "distributed_binding": {
+            "correct": 16,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "heading_value_truncation": {
+            "correct": 50,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "missing_evidence": {
+            "correct": 16,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "negation_exception": {
+            "correct": 42,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "unit_condition_collision": {
+            "correct": 32,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "variant_scope": {
+            "correct": 32,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 266,
+            "families": 8,
+            "scored": 512,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 512,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 512
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 126,
+            "families": 8,
+            "scored": 256,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 256,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 256
+          },
+          "head_384": {
+            "correct": 140,
+            "families": 8,
+            "scored": 256,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 256,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 256
+          }
+        }
+      },
+      "identity": {
+        "adapter": "d3",
+        "identity_sha256": "571833f52154040e7113a939c14cbcb7b13a34fbb5b7dc0c36fc2d78c5163202",
+        "model_repo_id": "vllm-sr/d3-mini",
+        "model_revision": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4",
+        "profile": "profiles/d3-mini-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.6056156015037594,
+      "model": "D3 mini · macOS CPU",
+      "observation": "D3miniMacos",
+      "rank_all": 1,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/d3-mini.json",
+      "status": "complete",
+      "task": "passage_relevance"
+    },
+    {
       "adapter_ms": {
         "count": 264,
         "max": 407.4547500058543,
@@ -9125,7 +11755,7 @@
       "model": "Clef Flash Q8 · direct Metal",
       "observation": "ClefFlashQ8",
       "physical_calls": 264,
-      "rank_all": 1,
+      "rank_all": 2,
       "rank_test": null,
       "report": "PASSAGE_CLEF_RESULTS_20261029.md",
       "rss_scope": "Sampled whole passage session, all axes including startup/controls/warm-up; not per-axis or total GPU allocation",
@@ -9636,12 +12266,538 @@
       "model": "D3 Flash Q8 · direct Metal",
       "observation": "D3FlashQ8Upstream",
       "physical_calls": 264,
-      "rank_all": 2,
+      "rank_all": 3,
       "rank_test": null,
       "report": "PASSAGE_FLASH_RESULTS_20261029.md",
       "rss_scope": "Sampled whole passage session, all axes including startup/controls/warm-up; not per-axis or total GPU allocation",
       "session_group_peak_rss_mib": 9671.96875,
       "source": "docs/evidence/passage-flash-20261029/analysis.json",
+      "status": "complete",
+      "task": "passage_relevance"
+    },
+    {
+      "counts": {
+        "correct": 252,
+        "families": 8,
+        "scored": 512,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 512,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 512
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 28,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en->en": {
+            "correct": 34,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en->fr": {
+            "correct": 29,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "es->es": {
+            "correct": 30,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr->en": {
+            "correct": 29,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr->fr": {
+            "correct": 34,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "it->it": {
+            "correct": 34,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt->pt": {
+            "correct": 34,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 28,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en": {
+            "correct": 63,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "es": {
+            "correct": 30,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr": {
+            "correct": 63,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "it": {
+            "correct": 34,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt": {
+            "correct": 34,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 166,
+            "families": 6,
+            "scored": 352,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 352,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 352
+          },
+          "conflicting_visible_evidence": {
+            "correct": 40,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "insufficient_visible_evidence": {
+            "correct": 46,
+            "families": 2,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 28,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en": {
+            "correct": 63,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "es": {
+            "correct": 30,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr": {
+            "correct": 63,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "it": {
+            "correct": 34,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt": {
+            "correct": 34,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 30,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "conflicting_evidence": {
+            "correct": 40,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "distributed_binding": {
+            "correct": 30,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "heading_value_truncation": {
+            "correct": 46,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "missing_evidence": {
+            "correct": 14,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "negation_exception": {
+            "correct": 30,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "unit_condition_collision": {
+            "correct": 30,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "variant_scope": {
+            "correct": 32,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 252,
+            "families": 8,
+            "scored": 512,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 512,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 512
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 117,
+            "families": 8,
+            "scored": 256,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 256,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 256
+          },
+          "head_384": {
+            "correct": 135,
+            "families": 8,
+            "scored": 256,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 256,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 256
+          }
+        }
+      },
+      "identity": {
+        "adapter": "d3",
+        "identity_sha256": "c8615190245453aef26d732e2c296ff1a8f32aac961e9b822cb25e585439d8c4",
+        "model_repo_id": "vllm-sr/d3-nano",
+        "model_revision": "3aeb1c22a5632aac72353c36b3d0111c40e7dbf4",
+        "profile": "profiles/d3-nano-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.628406954887218,
+      "model": "D3 nano · macOS CPU",
+      "observation": "D3nanoMacos",
+      "rank_all": 3,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/d3-nano.json",
       "status": "complete",
       "task": "passage_relevance"
     },
@@ -10172,10 +13328,1062 @@
       "macro_accuracy": 0.4960146761133603,
       "model": "D3-lite · CPU",
       "observation": "D3lite",
-      "rank_all": 3,
+      "rank_all": 5,
       "rank_test": null,
       "report": "PASSAGE_CPU_RESULTS_20261015.md",
       "source": "docs/evidence/passage-cpu-20261015/analysis.json",
+      "status": "complete",
+      "task": "passage_relevance"
+    },
+    {
+      "counts": {
+        "correct": 229,
+        "families": 8,
+        "scored": 512,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 512,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 512
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 30,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en->en": {
+            "correct": 30,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en->fr": {
+            "correct": 28,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "es->es": {
+            "correct": 27,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr->en": {
+            "correct": 25,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr->fr": {
+            "correct": 33,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "it->it": {
+            "correct": 28,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt->pt": {
+            "correct": 28,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 30,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en": {
+            "correct": 55,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "es": {
+            "correct": 27,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr": {
+            "correct": 61,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "it": {
+            "correct": 28,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt": {
+            "correct": 28,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 139,
+            "families": 6,
+            "scored": 352,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 352,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 352
+          },
+          "conflicting_visible_evidence": {
+            "correct": 44,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "insufficient_visible_evidence": {
+            "correct": 46,
+            "families": 2,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 30,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en": {
+            "correct": 58,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "es": {
+            "correct": 27,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr": {
+            "correct": 58,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "it": {
+            "correct": 28,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt": {
+            "correct": 28,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 32,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "conflicting_evidence": {
+            "correct": 44,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "distributed_binding": {
+            "correct": 8,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "heading_value_truncation": {
+            "correct": 45,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "missing_evidence": {
+            "correct": 14,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "negation_exception": {
+            "correct": 26,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "unit_condition_collision": {
+            "correct": 38,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "variant_scope": {
+            "correct": 22,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 229,
+            "families": 8,
+            "scored": 512,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 512,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 512
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 105,
+            "families": 8,
+            "scored": 256,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 256,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 256
+          },
+          "head_384": {
+            "correct": 124,
+            "families": 8,
+            "scored": 256,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 256,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 256
+          }
+        }
+      },
+      "identity": {
+        "adapter": "d3",
+        "identity_sha256": "064411a56c61977d8375a4b4e6ce896e8aec072ff60990a472c1a158452db483",
+        "model_repo_id": "vllm-sr/d3-lite",
+        "model_revision": "a8d25a91ef75552803f7009d25b7bd435991abd9",
+        "profile": "profiles/d3-lite-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.49601467611336036,
+      "model": "D3 lite · macOS CPU",
+      "observation": "D3liteMacos",
+      "rank_all": 5,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/d3-lite.json",
+      "status": "complete",
+      "task": "passage_relevance"
+    },
+    {
+      "counts": {
+        "correct": 112,
+        "families": 8,
+        "scored": 512,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 512,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 512
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 8,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en->en": {
+            "correct": 10,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en->fr": {
+            "correct": 10,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "es->es": {
+            "correct": 18,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr->en": {
+            "correct": 15,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr->fr": {
+            "correct": 17,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "it->it": {
+            "correct": 17,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt->pt": {
+            "correct": 17,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 8,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en": {
+            "correct": 25,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "es": {
+            "correct": 18,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr": {
+            "correct": 27,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "it": {
+            "correct": 17,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt": {
+            "correct": 17,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 64,
+            "families": 6,
+            "scored": 352,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 352,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 352
+          },
+          "conflicting_visible_evidence": {
+            "correct": 20,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "insufficient_visible_evidence": {
+            "correct": 28,
+            "families": 2,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 8,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "en": {
+            "correct": 20,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "es": {
+            "correct": 18,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "fr": {
+            "correct": 32,
+            "families": 8,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "it": {
+            "correct": 17,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "pt": {
+            "correct": 17,
+            "families": 8,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 4,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "conflicting_evidence": {
+            "correct": 20,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "distributed_binding": {
+            "correct": 16,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "heading_value_truncation": {
+            "correct": 34,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "missing_evidence": {
+            "correct": 0,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "negation_exception": {
+            "correct": 14,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "unit_condition_collision": {
+            "correct": 14,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "variant_scope": {
+            "correct": 10,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 112,
+            "families": 8,
+            "scored": 512,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 512,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 512
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 45,
+            "families": 8,
+            "scored": 256,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 256,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 256
+          },
+          "head_384": {
+            "correct": 67,
+            "families": 8,
+            "scored": 256,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 256,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 256
+          }
+        }
+      },
+      "identity": {
+        "adapter": "vela2",
+        "identity_sha256": "7b630580833366ee5ae3b76fd13b96bdc7588ae39f861409503474b0be28e393",
+        "model_repo_id": "vllm-sr/Vela-2.0-0.3B",
+        "model_revision": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+        "profile": "profiles/vela2-03-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.32464574898785425,
+      "model": "Vela 2.0 0.3B · macOS CPU",
+      "observation": "Vela03Macos",
+      "rank_all": 7,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/vela2-03.json",
       "status": "complete",
       "task": "passage_relevance"
     },
@@ -10698,6 +14906,532 @@
       "task": "passage_relevance_four_rotations"
     },
     {
+      "counts": {
+        "correct": 527,
+        "families": 8,
+        "scored": 768,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 768,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 768
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 75,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en->en": {
+            "correct": 71,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en->fr": {
+            "correct": 57,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "es->es": {
+            "correct": 72,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr->en": {
+            "correct": 48,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr->fr": {
+            "correct": 69,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "it->it": {
+            "correct": 67,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt->pt": {
+            "correct": 68,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 75,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en": {
+            "correct": 119,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "es": {
+            "correct": 72,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr": {
+            "correct": 126,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "it": {
+            "correct": 67,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt": {
+            "correct": 68,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 369,
+            "families": 6,
+            "scored": 544,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 544,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 544
+          },
+          "conflicting_visible_evidence": {
+            "correct": 106,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "insufficient_visible_evidence": {
+            "correct": 52,
+            "families": 2,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 75,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en": {
+            "correct": 128,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "es": {
+            "correct": 72,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr": {
+            "correct": 117,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "it": {
+            "correct": 67,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt": {
+            "correct": 68,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 80,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "conflicting_evidence": {
+            "correct": 106,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "distributed_binding": {
+            "correct": 44,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "heading_value_truncation": {
+            "correct": 49,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "missing_evidence": {
+            "correct": 24,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "negation_exception": {
+            "correct": 76,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "unit_condition_collision": {
+            "correct": 100,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "variant_scope": {
+            "correct": 48,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 527,
+            "families": 8,
+            "scored": 768,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 768,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 768
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 260,
+            "families": 8,
+            "scored": 384,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 384,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 384
+          },
+          "head_384": {
+            "correct": 267,
+            "families": 8,
+            "scored": 384,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 384,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 384
+          }
+        }
+      },
+      "identity": {
+        "adapter": "d3",
+        "identity_sha256": "571833f52154040e7113a939c14cbcb7b13a34fbb5b7dc0c36fc2d78c5163202",
+        "model_repo_id": "vllm-sr/d3-mini",
+        "model_revision": "a475367de0d8133a3c1a2a0dc12303d89cfa2ab4",
+        "profile": "profiles/d3-mini-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.8413681067790657,
+      "model": "D3 mini · macOS CPU",
+      "observation": "D3miniMacos",
+      "rank_all": 1,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/d3-mini.json",
+      "status": "complete",
+      "task": "passage_support"
+    },
+    {
       "adapter_ms": {
         "count": 392,
         "max": 367.1226669976022,
@@ -11194,7 +15928,7 @@
       "model": "D3 Flash Q8 · direct Metal",
       "observation": "D3FlashQ8Upstream",
       "physical_calls": 392,
-      "rank_all": 1,
+      "rank_all": 2,
       "rank_test": null,
       "report": "PASSAGE_FLASH_RESULTS_20261029.md",
       "rss_scope": "Sampled whole passage session, all axes including startup/controls/warm-up; not per-axis or total GPU allocation",
@@ -11699,7 +16433,7 @@
       "model": "Clef Flash Q8 · direct Metal",
       "observation": "ClefFlashQ8",
       "physical_calls": 392,
-      "rank_all": 2,
+      "rank_all": 3,
       "rank_test": null,
       "report": "PASSAGE_CLEF_RESULTS_20261029.md",
       "rss_scope": "Sampled whole passage session, all axes including startup/controls/warm-up; not per-axis or total GPU allocation",
@@ -12235,10 +16969,1588 @@
       "macro_accuracy": 0.8092290129961363,
       "model": "D3-lite · CPU",
       "observation": "D3lite",
-      "rank_all": 3,
+      "rank_all": 4,
       "rank_test": null,
       "report": "PASSAGE_CPU_RESULTS_20261015.md",
       "source": "docs/evidence/passage-cpu-20261015/analysis.json",
+      "status": "complete",
+      "task": "passage_support"
+    },
+    {
+      "counts": {
+        "correct": 439,
+        "families": 8,
+        "scored": 768,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 768,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 768
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 44,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en->en": {
+            "correct": 72,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en->fr": {
+            "correct": 39,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "es->es": {
+            "correct": 59,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr->en": {
+            "correct": 47,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr->fr": {
+            "correct": 68,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "it->it": {
+            "correct": 51,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt->pt": {
+            "correct": 59,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 44,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en": {
+            "correct": 119,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "es": {
+            "correct": 59,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr": {
+            "correct": 107,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "it": {
+            "correct": 51,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt": {
+            "correct": 59,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 293,
+            "families": 6,
+            "scored": 544,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 544,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 544
+          },
+          "conflicting_visible_evidence": {
+            "correct": 92,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "insufficient_visible_evidence": {
+            "correct": 54,
+            "families": 2,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 44,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en": {
+            "correct": 111,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "es": {
+            "correct": 59,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr": {
+            "correct": 115,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "it": {
+            "correct": 51,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt": {
+            "correct": 59,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 62,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "conflicting_evidence": {
+            "correct": 92,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "distributed_binding": {
+            "correct": 36,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "heading_value_truncation": {
+            "correct": 47,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "missing_evidence": {
+            "correct": 22,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "negation_exception": {
+            "correct": 56,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "unit_condition_collision": {
+            "correct": 76,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "variant_scope": {
+            "correct": 48,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 439,
+            "families": 8,
+            "scored": 768,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 768,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 768
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 211,
+            "families": 8,
+            "scored": 384,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 384,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 384
+          },
+          "head_384": {
+            "correct": 228,
+            "families": 8,
+            "scored": 384,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 384,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 384
+          }
+        }
+      },
+      "identity": {
+        "adapter": "d3",
+        "identity_sha256": "064411a56c61977d8375a4b4e6ce896e8aec072ff60990a472c1a158452db483",
+        "model_repo_id": "vllm-sr/d3-lite",
+        "model_revision": "a8d25a91ef75552803f7009d25b7bd435991abd9",
+        "profile": "profiles/d3-lite-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.8069459079733052,
+      "model": "D3 lite · macOS CPU",
+      "observation": "D3liteMacos",
+      "rank_all": 5,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/d3-lite.json",
+      "status": "complete",
+      "task": "passage_support"
+    },
+    {
+      "counts": {
+        "correct": 366,
+        "families": 8,
+        "scored": 768,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 768,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 768
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 52,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en->en": {
+            "correct": 61,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en->fr": {
+            "correct": 33,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "es->es": {
+            "correct": 43,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr->en": {
+            "correct": 35,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr->fr": {
+            "correct": 51,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "it->it": {
+            "correct": 51,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt->pt": {
+            "correct": 40,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 52,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en": {
+            "correct": 96,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "es": {
+            "correct": 43,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr": {
+            "correct": 84,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "it": {
+            "correct": 51,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt": {
+            "correct": 40,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 260,
+            "families": 6,
+            "scored": 544,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 544,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 544
+          },
+          "conflicting_visible_evidence": {
+            "correct": 84,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "insufficient_visible_evidence": {
+            "correct": 22,
+            "families": 2,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 52,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en": {
+            "correct": 94,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "es": {
+            "correct": 43,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr": {
+            "correct": 86,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "it": {
+            "correct": 51,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt": {
+            "correct": 40,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 66,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "conflicting_evidence": {
+            "correct": 84,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "distributed_binding": {
+            "correct": 34,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "heading_value_truncation": {
+            "correct": 20,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "missing_evidence": {
+            "correct": 22,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "negation_exception": {
+            "correct": 40,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "unit_condition_collision": {
+            "correct": 54,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "variant_scope": {
+            "correct": 46,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 366,
+            "families": 8,
+            "scored": 768,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 768,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 768
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 193,
+            "families": 8,
+            "scored": 384,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 384,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 384
+          },
+          "head_384": {
+            "correct": 173,
+            "families": 8,
+            "scored": 384,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 384,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 384
+          }
+        }
+      },
+      "identity": {
+        "adapter": "d3",
+        "identity_sha256": "c8615190245453aef26d732e2c296ff1a8f32aac961e9b822cb25e585439d8c4",
+        "model_repo_id": "vllm-sr/d3-nano",
+        "model_revision": "3aeb1c22a5632aac72353c36b3d0111c40e7dbf4",
+        "profile": "profiles/d3-nano-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.767913593256059,
+      "model": "D3 nano · macOS CPU",
+      "observation": "D3nanoMacos",
+      "rank_all": 6,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/d3-nano.json",
+      "status": "complete",
+      "task": "passage_support"
+    },
+    {
+      "counts": {
+        "correct": 151,
+        "families": 8,
+        "scored": 768,
+        "statuses": {
+          "abstain": 0,
+          "error": 0,
+          "missing": 0,
+          "ok": 768,
+          "timeout": 0,
+          "unsupported": 0
+        },
+        "total": 768
+      },
+      "groups": {
+        "language_direction": {
+          "de->de": {
+            "correct": 21,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en->en": {
+            "correct": 16,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en->fr": {
+            "correct": 21,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "es->es": {
+            "correct": 13,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr->en": {
+            "correct": 19,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr->fr": {
+            "correct": 21,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "it->it": {
+            "correct": 17,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt->pt": {
+            "correct": 23,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "passage_language": {
+          "de": {
+            "correct": 21,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en": {
+            "correct": 35,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "es": {
+            "correct": 13,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr": {
+            "correct": 42,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "it": {
+            "correct": 17,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt": {
+            "correct": 23,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "query_status": {
+          "answerable": {
+            "correct": 91,
+            "families": 6,
+            "scored": 544,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 544,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 544
+          },
+          "conflicting_visible_evidence": {
+            "correct": 40,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "insufficient_visible_evidence": {
+            "correct": 20,
+            "families": 2,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "question_language": {
+          "de": {
+            "correct": 21,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "en": {
+            "correct": 37,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "es": {
+            "correct": 13,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "fr": {
+            "correct": 40,
+            "families": 8,
+            "scored": 192,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 192,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 192
+          },
+          "it": {
+            "correct": 17,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          },
+          "pt": {
+            "correct": 23,
+            "families": 8,
+            "scored": 96,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 96,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 96
+          }
+        },
+        "scenario_id": {
+          "component_relation_collision": {
+            "correct": 16,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "conflicting_evidence": {
+            "correct": 40,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "distributed_binding": {
+            "correct": 0,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "heading_value_truncation": {
+            "correct": 35,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "missing_evidence": {
+            "correct": 0,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          },
+          "negation_exception": {
+            "correct": 28,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "unit_condition_collision": {
+            "correct": 16,
+            "families": 1,
+            "scored": 128,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 128
+          },
+          "variant_scope": {
+            "correct": 16,
+            "families": 1,
+            "scored": 64,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 64,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 64
+          }
+        },
+        "split": {
+          "test": {
+            "correct": 151,
+            "families": 8,
+            "scored": 768,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 768,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 768
+          }
+        },
+        "view": {
+          "full": {
+            "correct": 73,
+            "families": 8,
+            "scored": 384,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 384,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 384
+          },
+          "head_384": {
+            "correct": 78,
+            "families": 8,
+            "scored": 384,
+            "statuses": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 384,
+              "timeout": 0,
+              "unsupported": 0
+            },
+            "total": 384
+          }
+        }
+      },
+      "identity": {
+        "adapter": "vela2",
+        "identity_sha256": "7b630580833366ee5ae3b76fd13b96bdc7588ae39f861409503474b0be28e393",
+        "model_repo_id": "vllm-sr/Vela-2.0-0.3B",
+        "model_revision": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+        "profile": "profiles/vela2-03-macos-cpu.json",
+        "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+        "worker_restarts": 0
+      },
+      "macro_accuracy": 0.4162715138742536,
+      "model": "Vela 2.0 0.3B · macOS CPU",
+      "observation": "Vela03Macos",
+      "rank_all": 7,
+      "rank_test": null,
+      "report": "PASSAGE_SMALL_CPU_RESULTS_20261031.md",
+      "source": "docs/evidence/passage-small-cpu-20261031/vela2-03.json",
       "status": "complete",
       "task": "passage_support"
     },
@@ -20309,14 +26621,21 @@
             "total": 132
           },
           "passage_answerability": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 104,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 128,
+            "source": "docs/evidence/passage-small-cpu-20261031/d3-mini.json",
+            "status": "complete",
             "total": 128
           },
           "passage_ranking": {
@@ -20331,14 +26650,21 @@
             "total": 512
           },
           "passage_relevance": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 266,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 512,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 512,
+            "source": "docs/evidence/passage-small-cpu-20261031/d3-mini.json",
+            "status": "complete",
             "total": 512
           },
           "passage_relevance_four_rotations": {
@@ -20353,14 +26679,21 @@
             "total": 2048
           },
           "passage_support": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 527,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 768,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 768,
+            "source": "docs/evidence/passage-small-cpu-20261031/d3-mini.json",
+            "status": "complete",
             "total": 768
           },
           "physics": {
@@ -20664,14 +26997,21 @@
             "total": 132
           },
           "passage_answerability": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 93,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 128,
+            "source": "docs/evidence/passage-small-cpu-20261031/d3-nano.json",
+            "status": "complete",
             "total": 128
           },
           "passage_ranking": {
@@ -20686,14 +27026,21 @@
             "total": 512
           },
           "passage_relevance": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 252,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 512,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 512,
+            "source": "docs/evidence/passage-small-cpu-20261031/d3-nano.json",
+            "status": "complete",
             "total": 512
           },
           "passage_relevance_four_rotations": {
@@ -20708,14 +27055,21 @@
             "total": 2048
           },
           "passage_support": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 366,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 768,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 768,
+            "source": "docs/evidence/passage-small-cpu-20261031/d3-nano.json",
+            "status": "complete",
             "total": 768
           },
           "physics": {
@@ -22049,14 +28403,21 @@
             "total": 132
           },
           "passage_answerability": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 88,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 128,
+            "source": "docs/evidence/passage-small-cpu-20261031/d3-lite.json",
+            "status": "complete",
             "total": 128
           },
           "passage_ranking": {
@@ -22071,14 +28432,21 @@
             "total": 512
           },
           "passage_relevance": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 229,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 512,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 512,
+            "source": "docs/evidence/passage-small-cpu-20261031/d3-lite.json",
+            "status": "complete",
             "total": 512
           },
           "passage_relevance_four_rotations": {
@@ -22093,14 +28461,21 @@
             "total": 2048
           },
           "passage_support": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 439,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 768,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 768,
+            "source": "docs/evidence/passage-small-cpu-20261031/d3-lite.json",
+            "status": "complete",
             "total": 768
           },
           "physics": {
@@ -23406,14 +29781,21 @@
             "total": 132
           },
           "passage_answerability": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 93,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 128,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 128,
+            "source": "docs/evidence/passage-small-cpu-20261031/vela2-03.json",
+            "status": "complete",
             "total": 128
           },
           "passage_ranking": {
@@ -23428,14 +29810,21 @@
             "total": 512
           },
           "passage_relevance": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 112,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 512,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 512,
+            "source": "docs/evidence/passage-small-cpu-20261031/vela2-03.json",
+            "status": "complete",
             "total": 512
           },
           "passage_relevance_four_rotations": {
@@ -23450,14 +29839,21 @@
             "total": 2048
           },
           "passage_support": {
-            "evidence_present": false,
+            "evidence_present": true,
             "metric": "correct_choice",
-            "numerator": null,
-            "outcomes": null,
+            "numerator": 151,
+            "outcomes": {
+              "abstain": 0,
+              "error": 0,
+              "missing": 0,
+              "ok": 768,
+              "timeout": 0,
+              "unsupported": 0
+            },
             "review_pending": true,
-            "scored_or_valid": null,
-            "source": null,
-            "status": "not_run",
+            "scored_or_valid": 768,
+            "source": "docs/evidence/passage-small-cpu-20261031/vela2-03.json",
+            "status": "complete",
             "total": 768
           },
           "physics": {
@@ -25938,6 +32334,7 @@
       "docs/PASSAGE_CPU_RESULTS_20261015.md": "32325371aa205b06321763bf40f4bcb17a3d42dcb8f52aae3610c8c3a522c3c5",
       "docs/PASSAGE_FLASH_RESULTS_20261029.md": "cf376c533151ac8e2427fb13f8b4229e439556b514f9e128c83668ec16dbbd67",
       "docs/PASSAGE_JEV_RESULTS_20261015.md": "ba48c94fe882498e397b0bf7b7c5d07da3edb776403526e8bdab4cde67710848",
+      "docs/PASSAGE_SMALL_CPU_RESULTS_20261031.md": "7cdb98fb57f3c741ead34eaddd06a4c7032a177c7447957e43bd02af5b07a12a",
       "docs/PHYSICS_FLASH_RESULTS_20261029.md": "356dfd041f7d4646235767601f5272f446f814b4448712910f37c6056d546819",
       "docs/TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md": "49649e91b8769aa595323c6911719f59e83f89fba46c0316d849d8a5b0cd4423",
       "docs/VELA2_03_MACOS_CPU_PROTOCOL_20261030.md": "4817578dfd85225ede51a6d4c1a06774cb9574f23f3e05c997b63054e250958d",
@@ -25980,6 +32377,10 @@
       "docs/evidence/passage-flash-20261029/analysis.json": "f49d97593d7346c013608e74e77c07c791237d97e5f580b1ae591f2a119b3ebf",
       "docs/evidence/passage-jev-20261015/analysis.json": "0c857281115a4a4fde627d708904c3eea9015f15c1973ffe1489ebfeeb756a97",
       "docs/evidence/passage-order-control-20261015/analysis.json": "c51e9c27a32c721efcf4be7353fbb12c7dfa897727533d2aa5e12689c30925d3",
+      "docs/evidence/passage-small-cpu-20261031/d3-lite.json": "d11ba8c029f2d44b29a25b67ac944fffdabcf52c8a3048681938744c0b679c95",
+      "docs/evidence/passage-small-cpu-20261031/d3-mini.json": "6b62e9c193d03c2ce9c3e291e1babbdeccc8f64b2621d8d9216398788cdbc7d6",
+      "docs/evidence/passage-small-cpu-20261031/d3-nano.json": "3ee147e61204fd99ffe0ebc8f8929eb6ffc4165ed1f1f4dd6e679d48c2aa7923",
+      "docs/evidence/passage-small-cpu-20261031/vela2-03.json": "dbfda7aae3b79df848599d291d3d4d6d8876b9df9eacf6cd9a5d32fd0ce038a4",
       "docs/evidence/physics-flash-20261029/analysis.json": "b7675cb4a17cf92ef66bc2107ace0d48dbcd37a37d676e1b0e3a280cc165ec56",
       "docs/evidence/timing-comparison-20261004/analysis.json": "eb8c5babe3dac5033291bd118b761e0e84b5aceb4c3b73b8ad0e429c2db65942",
       "docs/evidence/vela2-03-macos-20261030/analysis.json": "9feebff166f7b888ebc3762cadf51585c5de9b7b4cce429d929b9eb207eeae3c",
@@ -26010,10 +32411,10 @@
       "profiles/vela2-03-macos-choice-episodes.json": "0dd5e3e87bbea50d56d7701325adde78646816b262bcd4a85f74b065a10764f3",
       "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
       "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-      "scripts/build-full-results.py": "4bb8eaa3b7210dee7197f2a4c901c18a8d626094e7a72ae5e7c3b5db8fb9e4e7",
+      "scripts/build-full-results.py": "05e8bd78222a3b2bb1b68cc0eaa89f28d217dd3f6cfa16a24f221cd2d16a86a2",
       "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
       "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-      "scripts/consolidated-campaigns.py": "829e26f688a980f4b68ffa4e99909300e7282693d887dd5ae425e1b6aa21035e"
+      "scripts/consolidated-campaigns.py": "09b10e53ca850fadf704220f313af3493021ba6b533b44de32aad81dfb3a5bde"
     },
     "tasks": [
       {
@@ -120403,6 +126804,7 @@
     "docs/PASSAGE_CPU_RESULTS_20261015.md": "32325371aa205b06321763bf40f4bcb17a3d42dcb8f52aae3610c8c3a522c3c5",
     "docs/PASSAGE_FLASH_RESULTS_20261029.md": "cf376c533151ac8e2427fb13f8b4229e439556b514f9e128c83668ec16dbbd67",
     "docs/PASSAGE_JEV_RESULTS_20261015.md": "ba48c94fe882498e397b0bf7b7c5d07da3edb776403526e8bdab4cde67710848",
+    "docs/PASSAGE_SMALL_CPU_RESULTS_20261031.md": "7cdb98fb57f3c741ead34eaddd06a4c7032a177c7447957e43bd02af5b07a12a",
     "docs/PHYSICS_FLASH_RESULTS_20261029.md": "356dfd041f7d4646235767601f5272f446f814b4448712910f37c6056d546819",
     "docs/TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md": "49649e91b8769aa595323c6911719f59e83f89fba46c0316d849d8a5b0cd4423",
     "docs/VELA2_03_MACOS_CPU_PROTOCOL_20261030.md": "4817578dfd85225ede51a6d4c1a06774cb9574f23f3e05c997b63054e250958d",
@@ -120445,6 +126847,10 @@
     "docs/evidence/passage-flash-20261029/analysis.json": "f49d97593d7346c013608e74e77c07c791237d97e5f580b1ae591f2a119b3ebf",
     "docs/evidence/passage-jev-20261015/analysis.json": "0c857281115a4a4fde627d708904c3eea9015f15c1973ffe1489ebfeeb756a97",
     "docs/evidence/passage-order-control-20261015/analysis.json": "c51e9c27a32c721efcf4be7353fbb12c7dfa897727533d2aa5e12689c30925d3",
+    "docs/evidence/passage-small-cpu-20261031/d3-lite.json": "d11ba8c029f2d44b29a25b67ac944fffdabcf52c8a3048681938744c0b679c95",
+    "docs/evidence/passage-small-cpu-20261031/d3-mini.json": "6b62e9c193d03c2ce9c3e291e1babbdeccc8f64b2621d8d9216398788cdbc7d6",
+    "docs/evidence/passage-small-cpu-20261031/d3-nano.json": "3ee147e61204fd99ffe0ebc8f8929eb6ffc4165ed1f1f4dd6e679d48c2aa7923",
+    "docs/evidence/passage-small-cpu-20261031/vela2-03.json": "dbfda7aae3b79df848599d291d3d4d6d8876b9df9eacf6cd9a5d32fd0ce038a4",
     "docs/evidence/physics-flash-20261029/analysis.json": "b7675cb4a17cf92ef66bc2107ace0d48dbcd37a37d676e1b0e3a280cc165ec56",
     "docs/evidence/timing-comparison-20261004/analysis.json": "eb8c5babe3dac5033291bd118b761e0e84b5aceb4c3b73b8ad0e429c2db65942",
     "docs/evidence/vela2-03-macos-20261030/analysis.json": "9feebff166f7b888ebc3762cadf51585c5de9b7b4cce429d929b9eb207eeae3c",
@@ -120475,9 +126881,9 @@
     "profiles/vela2-03-macos-choice-episodes.json": "0dd5e3e87bbea50d56d7701325adde78646816b262bcd4a85f74b065a10764f3",
     "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "4bb8eaa3b7210dee7197f2a4c901c18a8d626094e7a72ae5e7c3b5db8fb9e4e7",
+    "scripts/build-full-results.py": "05e8bd78222a3b2bb1b68cc0eaa89f28d217dd3f6cfa16a24f221cd2d16a86a2",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-    "scripts/consolidated-campaigns.py": "829e26f688a980f4b68ffa4e99909300e7282693d887dd5ae425e1b6aa21035e"
+    "scripts/consolidated-campaigns.py": "09b10e53ca850fadf704220f313af3493021ba6b533b44de32aad81dfb3a5bde"
   }
 }

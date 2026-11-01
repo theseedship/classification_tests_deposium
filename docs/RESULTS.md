@@ -49,9 +49,9 @@ One line per task, grouped by family: **RAG decision** (which source or first to
 | Tool workflow | Capability and workflow choices | 192 (96 test) | 6 | Clef Flash Q8 · direct Metal (192/192), D3 Flash Q8 · gateway Metal (192/192), D3 mini · macOS CPU (192/192) (tie) | Clef Flash Q8 · direct Metal (96/96 test), D3 Flash Q8 · gateway Metal (96/96 test), D3 mini · macOS CPU (96/96 test) (tie) | [Capability](#capability-choices) |
 | Reasoning with a supplied law | Physics choices | 48 (36 test) | 6 | Clef Flash Q8 · direct Metal (41/48) | D3 Flash Q8 · direct Metal (32/36 test), D3 mini · macOS CPU (32/36 test) (tie) | [Physics choices](#physics-choices) |
 | Tool workflow, executed | Executed tool episodes (closed choice) | 32 (12 test) | 4 | D3 mini · macOS CPU (28/32) | D3 mini · macOS CPU (10/12 test) | [Executed episodes](#executed-tool-episodes-closed-choice) |
-| Retrieved evidence | Passage relevance | 512 (rotation 0) | 3 | Clef Flash Q8 · direct Metal (261/512) | no split ranking | [Passage relevance](#passage-relevance) |
-| Retrieved evidence | Claim support | 768 (rotation 0) | 4 | D3 Flash Q8 · direct Metal (460/768) | no split ranking | [Claim support](#claim-support) |
-| Retrieved evidence | Answerability | 128 (rotation 0) | 4 | D3 Flash Q8 · direct Metal (122/128) | no split ranking | [Answerability](#answerability) |
+| Retrieved evidence | Passage relevance | 512 (rotation 0) | 7 | D3 mini · macOS CPU (266/512) | no split ranking | [Passage relevance](#passage-relevance) |
+| Retrieved evidence | Claim support | 768 (rotation 0) | 8 | D3 mini · macOS CPU (527/768) | no split ranking | [Claim support](#claim-support) |
+| Retrieved evidence | Answerability | 128 (rotation 0) | 8 | D3 Flash Q8 · direct Metal (122/128) | no split ranking | [Answerability](#answerability) |
 | Tool policy, generated | Generated-JSON tool policy | 10 + 6 + 18 (TRAIN canary + held-out) | 1 | Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2: discovery 3/10; arguments 6/6; episodes 7/18 passed (single observation, unranked) | held-out pack 9/24 over the three contracts; see the report | [Generated-JSON observations](#generated-json-tool-policy-observations) |
 
 Rows further down keep every observation, partial campaigns included, with their denominators and statuses. For one model across every task, open [Every model, every task](leaderboard/by-model/README.md): one page per observation with scores, ranks, execution outcomes, speed and reports.
@@ -75,9 +75,9 @@ The 34 rows below preserve quantization and runtime identities; sizes are publis
 | Jev 1.13 · HTTP API | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 flash · Q4 Metal | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 mini · CPU | 4.539B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 mini · macOS CPU | 4.539B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | not_run | not_run | not_run | not_run | not_run |
+| D3 mini · macOS CPU | 4.539B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | D3 nano · CPU | 2.213B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 nano · macOS CPU | 2.213B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | not_run | not_run | not_run | not_run | not_run |
+| D3 nano · macOS CPU | 2.213B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | GLiClass v4 9B · BF16 MPS | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Clef Flash · Q8 direct Metal | 9B class | complete 132/132 | not_run | complete 192/192 | complete 48/48 | not_run | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | Vela 2.0 4B · CPU | 4.211B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
@@ -85,7 +85,7 @@ The 34 rows below preserve quantization and runtime identities; sizes are publis
 | Liquid d1-3B · CPU | 3.123B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Noma · CPU | ~2.67B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 lite · CPU | 0.853B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| D3 lite · macOS CPU | 0.853B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | not_run | not_run | not_run | not_run | not_run |
+| D3 lite · macOS CPU | 0.853B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | Decision 2.0 Sol 2B · CPU | 2B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Vela 2.0 0.8B · CPU | 0.755B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Decision 2.0 Eos 0.8B · CPU | 0.8B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
@@ -93,7 +93,7 @@ The 34 rows below preserve quantization and runtime identities; sizes are publis
 | D3 edge · CPU | 0.594B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Decision 2.0 Kai 0.6B · CPU | 0.6B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Vela 2.0 0.3B · CPU | 0.309B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
-| Vela 2.0 0.3B · macOS CPU | 0.309B declared | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | not_run | not_run | not_run | not_run | not_run |
+| Vela 2.0 0.3B · macOS CPU | 0.309B declared | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | GLiNER2.5-multi-Decide · CPU | NR | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Vela 3.0 fast · decision only · CPU | 0.380B decision backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Laya multilingual · CPU | 322M declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
@@ -214,32 +214,40 @@ Calibration (12) and test (36) are shown separately because the all-case and tes
 
 ### Passage relevance
 
-Rotation 0: 128 pools, eight families, eight language directions, two correlated views.
+Rotation 0: 128 pools, eight families, eight language directions, two correlated views. Classes are imbalanced: always answering grade 1 scores **224/512**, so compare macro class accuracy, not totals alone.
 
 <sub>**Rank**: by correct/all among completely scored observations (— when partial or not run); **Macro class accuracy**: mean of the per-class accuracies, so a rare class weighs as much as a frequent one.</sub>
 
 | Rank | Model / runtime | Correct / all | Scored / all | Macro class accuracy | Observation |
 |---:|---|---:|---:|---:|---|
-| 1 | Clef Flash Q8 · direct Metal | 261/512 | 512/512 | 60.40% | complete; [report](PASSAGE_CLEF_RESULTS_20261029.md) |
-| 2 | D3 Flash Q8 · direct Metal | 252/512 | 512/512 | 59.06% | complete; [report](PASSAGE_FLASH_RESULTS_20261029.md) |
-| 3 | D3-lite · CPU | 229/512 | 512/512 | 49.60% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
+| 1 | D3 mini · macOS CPU | 266/512 | 512/512 | 60.56% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 2 | Clef Flash Q8 · direct Metal | 261/512 | 512/512 | 60.40% | complete; [report](PASSAGE_CLEF_RESULTS_20261029.md) |
+| 3 | D3 Flash Q8 · direct Metal | 252/512 | 512/512 | 59.06% | complete; [report](PASSAGE_FLASH_RESULTS_20261029.md) |
+| 3 | D3 nano · macOS CPU | 252/512 | 512/512 | 62.84% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 5 | D3-lite · CPU | 229/512 | 512/512 | 49.60% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
+| 5 | D3 lite · macOS CPU | 229/512 | 512/512 | 49.60% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 7 | Vela 2.0 0.3B · macOS CPU | 112/512 | 512/512 | 32.46% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
 
 ### Claim support
 
-Rotation 0: 128 pools, eight families, eight language directions, two correlated views.
+Rotation 0: 128 pools, eight families, eight language directions, two correlated views. Classes are imbalanced: always answering `insufficient` scores **584/768**, so compare macro class accuracy, not totals alone.
 
 <sub>**Rank**: by correct/all among completely scored observations (— when partial or not run); **Macro class accuracy**: mean of the per-class accuracies, so a rare class weighs as much as a frequent one.</sub>
 
 | Rank | Model / runtime | Correct / all | Scored / all | Macro class accuracy | Observation |
 |---:|---|---:|---:|---:|---|
-| 1 | D3 Flash Q8 · direct Metal | 460/768 | 768/768 | 79.79% | complete; [report](PASSAGE_FLASH_RESULTS_20261029.md) |
-| 2 | Clef Flash Q8 · direct Metal | 446/768 | 768/768 | 81.09% | complete; [report](PASSAGE_CLEF_RESULTS_20261029.md) |
-| 3 | D3-lite · CPU | 443/768 | 768/768 | 80.92% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
+| 1 | D3 mini · macOS CPU | 527/768 | 768/768 | 84.14% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 2 | D3 Flash Q8 · direct Metal | 460/768 | 768/768 | 79.79% | complete; [report](PASSAGE_FLASH_RESULTS_20261029.md) |
+| 3 | Clef Flash Q8 · direct Metal | 446/768 | 768/768 | 81.09% | complete; [report](PASSAGE_CLEF_RESULTS_20261029.md) |
+| 4 | D3-lite · CPU | 443/768 | 768/768 | 80.92% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
+| 5 | D3 lite · macOS CPU | 439/768 | 768/768 | 80.69% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 6 | D3 nano · macOS CPU | 366/768 | 768/768 | 76.79% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 7 | Vela 2.0 0.3B · macOS CPU | 151/768 | 768/768 | 41.63% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
 | — | Jev 1.14 · API | 394/768 | 514/768 | 90.05% | partial; [report](PASSAGE_JEV_RESULTS_20261015.md) |
 
 ### Answerability
 
-Rotation 0: 128 pools, eight families, eight language directions, two correlated views.
+Rotation 0: 128 pools, eight families, eight language directions, two correlated views. Classes are imbalanced: always answering `answerable` scores **88/128**, so compare macro class accuracy, not totals alone.
 
 <sub>**Rank**: by correct/all among completely scored observations (— when partial or not run); **Macro class accuracy**: mean of the per-class accuracies, so a rare class weighs as much as a frequent one.</sub>
 
@@ -247,14 +255,18 @@ Rotation 0: 128 pools, eight families, eight language directions, two correlated
 |---:|---|---:|---:|---:|---|
 | 1 | D3 Flash Q8 · direct Metal | 122/128 | 128/128 | 97.73% | complete; [report](PASSAGE_FLASH_RESULTS_20261029.md) |
 | 2 | Clef Flash Q8 · direct Metal | 109/128 | 128/128 | 68.31% | complete; [report](PASSAGE_CLEF_RESULTS_20261029.md) |
-| 3 | D3-lite · CPU | 88/128 | 128/128 | 80.81% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
+| 3 | D3 mini · macOS CPU | 104/128 | 128/128 | 80.68% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 4 | D3 nano · macOS CPU | 93/128 | 128/128 | 86.74% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 4 | Vela 2.0 0.3B · macOS CPU | 93/128 | 128/128 | 46.72% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 6 | D3-lite · CPU | 88/128 | 128/128 | 80.81% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
+| 6 | D3 lite · macOS CPU | 88/128 | 128/128 | 80.81% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
 | — | Jev 1.14 · API | Not run | 0/128 | NR | not_run; [report](PASSAGE_JEV_RESULTS_20261015.md) |
 
 Class macro accuracy averages the scored class accuracies. Jev's partial support macro is conditional on its observed subset and is not a complete-coverage comparison; unobserved decisions remain missing in the totals.
 
 Jev's published relevance export is **1260/2048**, scored 2048/2048, over four rotations. It is retained in the downloads as `passage_relevance_four_rotations`, outside the 512-decision relevance ranking. Replayed rotations are not extra independent model calls.
 
-Support insufficiency/refutation remains weak for both Flash candidates. Clef accepts 12/16 pools annotated as conflicting as answerable; D3 accepts none in this finite run. See [paired outcomes and confusion matrices](PASSAGE_CLEF_RESULTS_20261029.md). This is not factual-verifier or end-to-end qualification.
+Support insufficiency/refutation remains weak for both Flash candidates. Clef accepts 12/16 pools annotated as conflicting as answerable; D3 accepts none in this finite run. See [paired outcomes and confusion matrices](PASSAGE_CLEF_RESULTS_20261029.md). This is not factual-verifier or end-to-end qualification. The four macOS CPU rows (D3 lite, nano, mini, Vela 2.0 0.3B), their per-class errors and their cost per call are in the [small-CPU passage report](PASSAGE_SMALL_CPU_RESULTS_20261031.md).
 
 ### Executed tool episodes (closed choice)
 

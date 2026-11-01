@@ -66,6 +66,21 @@ local bound in `passage_observation.py` with it. No D3 mini passage prediction
 existed when this was fixed; D3 lite's run was already under way and is
 unchanged (2 h budget); Vela 2.0 0.3B and D3 nano keep their budgets.
 
+## Amendment, 1 November 2026, before D3 lite attempt 002
+
+D3 lite attempt 001 started one minute before the amendment above was
+committed. That commit changed one constant in `passage_observation.py` (the
+local wall bound), so the end-of-run source check found a different engine
+fingerprint and recorded the run as `incomplete` with stop reason
+`bench_source_changed`, although all 728 physical calls returned `ok`. The
+sentence "D3 lite's run was already under way and is unchanged" above is
+therefore not what the guard recorded. Attempt 001 stays sealed and is reported
+unranked with its stop reason; it is not rescored or relabelled. D3 lite is
+rerun unchanged (same profile, 2 h budget) as attempt 002 after D3 mini, with no
+engine change during the run, and attempt 002 is the ranked D3 lite row.
+Vela 2.0 0.3B, D3 nano and D3 mini started after the amendment commit and are
+unaffected.
+
 ## Reporting
 
 Per axis: correct/all, scored/all, macro class accuracy, statuses, by

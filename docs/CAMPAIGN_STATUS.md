@@ -22,6 +22,15 @@ observed choice/yes-no/score responses and a closed server; it exposed the stock
 CLI's online catalogue bootstrap requirement. No benchmark score was added.
 Existing campaigns may continue independently.
 
+Passage evidence on the small CPU rows, 1 November 2026 ([#52](https://github.com/theseedship/classification_tests_deposium/issues/52)):
+D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini completed the 728 rotation-0 passage
+calls on the pinned macOS CPU runtime, all `ok` with no worker restart
+([results](PASSAGE_SMALL_CPU_RESULTS_20261031.md)). D3 mini has the best relevance
+(266/512) and support (527/768) totals of the complete rows; D3 Flash keeps the
+best answerability (122/128). D3 lite attempt 001 stays unranked because an
+engine constant changed during the run; its rerun (attempt 002) gave identical
+scores. Four-rotation relevance and ranking were not run on these rows.
+
 The documentation/coverage consolidation and contributor guide were delivered
 by merged [PR #24](https://github.com/theseedship/classification_tests_deposium/pull/24).
 The initial #9 contract has a recorded offline fixture, ready as a foundation

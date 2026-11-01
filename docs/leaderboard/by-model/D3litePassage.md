@@ -20,9 +20,9 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | not run | — | — | — | — | — |
 | Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | not run | — | — | — | — | — |
 | Tool workflow, executed | [Executed tool episodes (closed choice)](../../RESULTS.md#executed-tool-episodes-closed-choice) | not run | — | — | — | — | — |
-| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 229/512 | no split ranking | 3 | — | all `ok` | [report](../../PASSAGE_CPU_RESULTS_20261015.md) |
-| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 443/768 | no split ranking | 3 | — | all `ok` | [report](../../PASSAGE_CPU_RESULTS_20261015.md) |
-| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 88/128 | no split ranking | 3 | — | all `ok` | [report](../../PASSAGE_CPU_RESULTS_20261015.md) |
+| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 229/512 | no split ranking | 5 | — | all `ok` | [report](../../PASSAGE_CPU_RESULTS_20261015.md) |
+| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 443/768 | no split ranking | 4 | — | all `ok` | [report](../../PASSAGE_CPU_RESULTS_20261015.md) |
+| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 88/128 | no split ranking | 6 | — | all `ok` | [report](../../PASSAGE_CPU_RESULTS_20261015.md) |
 | Retrieved evidence | [Passage relevance, four rotations](../../RESULTS.md#passage-relevance) | 916/2048 | — | — | — | all `ok` | — |
 | Retrieved evidence | [Passage ranking](../../leaderboard/other-benchmarks.md#passage-ranking-and-evidence) | nDCG@1 0.701 (480/480 defined of 512) | — | — | — | all `ok` | — |
 | Tool policy, generated | [Tool discovery (generated JSON)](../../RESULTS.md#generated-json-tool-policy-observations) | not run | — | — | — | — | — |

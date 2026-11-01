@@ -25,9 +25,9 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 188/192 | 92/96 | 4 | 4 | all `ok` | [report](../../D3_NANO_MACOS_RESULTS_20261031.md) |
 | Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 28/48 | 22/36 | 4 | 4 | all `ok` | [report](../../D3_NANO_MACOS_RESULTS_20261031.md) |
 | Tool workflow, executed | [Executed tool episodes (closed choice)](../../RESULTS.md#executed-tool-episodes-closed-choice) | 16/32 | 4/12 | 2 | 3 | all `ok` | [report](../../TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md) |
-| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |
-| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | not run | — | — | — | — | — |
-| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | not run | — | — | — | — | — |
+| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 252/512 | no split ranking | 3 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 366/768 | no split ranking | 6 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 93/128 | no split ranking | 4 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
 | Retrieved evidence | [Passage relevance, four rotations](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |
 | Retrieved evidence | [Passage ranking](../../leaderboard/other-benchmarks.md#passage-ranking-and-evidence) | not run | — | — | — | — | — |
 | Tool policy, generated | [Tool discovery (generated JSON)](../../RESULTS.md#generated-json-tool-policy-observations) | not run | — | — | — | — | — |

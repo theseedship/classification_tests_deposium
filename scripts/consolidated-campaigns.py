@@ -12,6 +12,12 @@ PASSAGE_D3 = EVIDENCE + "passage-flash-20261029/analysis.json"
 PASSAGE_CLEF = EVIDENCE + "passage-clef-flash-20261029/analysis.json"
 PASSAGE_CPU = EVIDENCE + "passage-cpu-20261015/analysis.json"
 PASSAGE_JEV = EVIDENCE + "passage-jev-20261015/analysis.json"
+# Rotation-0 passage choices of the macOS CPU rows (issue #52); same pools as the Flash/Clef campaigns.
+PASSAGE_SMALL_CPU_REPORT = "PASSAGE_SMALL_CPU_RESULTS_20261031.md"
+PASSAGE_SMALL_CPU = (("D3liteMacos", "D3 lite · macOS CPU", EVIDENCE + "passage-small-cpu-20261031/d3-lite.json", "profiles/d3-lite-macos-cpu.json"),
+                     ("Vela03Macos", "Vela 2.0 0.3B · macOS CPU", EVIDENCE + "passage-small-cpu-20261031/vela2-03.json", "profiles/vela2-03-macos-cpu.json"),
+                     ("D3nanoMacos", "D3 nano · macOS CPU", EVIDENCE + "passage-small-cpu-20261031/d3-nano.json", "profiles/d3-nano-macos-cpu.json"),
+                     ("D3miniMacos", "D3 mini · macOS CPU", EVIDENCE + "passage-small-cpu-20261031/d3-mini.json", "profiles/d3-mini-macos-cpu.json"))
 D3LITE_MACOS_CAPABILITY = EVIDENCE + "d3-lite-macos-20261030/capability.json"
 D3LITE_MACOS_PHYSICS = EVIDENCE + "d3-lite-macos-20261030/physics.json"
 D3LITE_MACOS_REPORT = "D3_LITE_MACOS_RESULTS_20261030.md"
@@ -361,6 +367,23 @@ class Campaigns:
                              "groups": groups, "macro_accuracy": self.macro(score, count),
                              "source": source, "report": report, "identity": cpu["choice_model"] if obs == "D3lite" else
                      {k: jev["jev_http"][k] for k in ("adapter", "adapter_sha256", "identity_sha256", "profile_sha256", "returned_model")}})
+        for obs, model, source, profile in PASSAGE_SMALL_CPU:
+            data = self.inputs.load(source)
+            self.require(data.get("schema_version") == "deposium.passage-cpu-public/v1" and data["label"] == obs
+                         and data["dataset_sha256"] == DATASETS["passage"] and data["cases"] == 128
+                         and data["rotation"] == 0 and data["split"] == "test" and data["choice_model"]["profile"] == profile,
+                         f"campaign: small-CPU passage export mismatch: {obs}")
+            self.inputs.read(profile)
+            self.inputs.read("docs/" + PASSAGE_SMALL_CPU_REPORT)
+            for axis, score in data["choice_scores"].items():
+                count = self.legacy_score(score)
+                groups = {name: {key: self.legacy_score(value) for key, value in values.items()}
+                          for name, values in score["by"].items()}
+                for values in groups.values():
+                    self.partition(count, values)
+                rows.append({"task": "passage_" + axis, "observation": obs, "model": model, "counts": count,
+                             "groups": groups, "macro_accuracy": self.macro(score, count), "source": source,
+                             "report": PASSAGE_SMALL_CPU_REPORT, "identity": data["choice_model"]})
         # The Jev relevance export repeats decisions over four rotations: never put 2048 in the 512-choice ranking.
         rows.append({"task": "passage_relevance_four_rotations", "observation": "Jev114", "model": "Jev 1.14 · API",
                      "counts": self.legacy_score(jev["relevance_scores"]),
