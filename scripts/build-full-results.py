@@ -45,6 +45,14 @@ FACADE_TIERS = {"advanced": (EVIDENCE + "facade-routing-tiers-20261101/advanced.
                 "complex": (EVIDENCE + "facade-routing-tiers-20261101/complex.json",
                             "389d362dafa7696b3cb4fb18f0d44a1ae98569a1ae661133f7ec9db44b6930d6")}
 FACADE_TIERS_REPORT = "FACADE_ROUTING_TIERS_RESULTS_20261101.md"
+# Review follow-ups: realigned passage relevance and human confirmation in routing.
+REVIEW_RELEVANCE = EVIDENCE + "review-packs-20261101/passage-relevance-v2.json"
+REVIEW_HITL = EVIDENCE + "review-packs-20261101/facade-hitl.json"
+REVIEW_RELEVANCE_REPORT = "PASSAGE_RELEVANCE_V2_RESULTS_20261101.md"
+REVIEW_HITL_REPORT = "FACADE_ROUTING_HITL_RESULTS_20261101.md"
+REVIEW_PACKS = {"passage-relevance-v2": "f95b3a604af5c1762ac5a59e096f35de6c88ff7a601e67c5483cf87516f154a0",
+                "facade-routing-hitl-v1": "0bd9506d617d5d1bd1df08212c8c453a48064e8d00d61b206d647d75c2c16382",
+                "facade-routing-hitl-8opt-v1": "50bc08928060a61ce32fb10f829b8bfb7544a2db36d3343a327bd97344fd3cc6"}
 CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
 LOCAL_POLICY = (EVIDENCE + "local-tool-policy-20261030/analysis.json",
                 EVIDENCE + "local-tool-policy-v2-train-20261030/analysis.json",
@@ -92,9 +100,11 @@ RECENT_INPUTS = (CAMPAIGN_MODULE, EVIDENCE + "clef-flash-20261029/analysis.json"
                  "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md", "profiles/d3-lite-q8-assets.json",
                  "profiles/d3-nano-q8-assets.json", "profiles/d3-mini-q8-assets.json",
                  EVIDENCE + "facade-routing-tiers-20261101/easy-metal.json", EVIDENCE + "facade-routing-tiers-20261101/advanced.json",
-                 EVIDENCE + "facade-routing-tiers-20261101/complex.json", "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md")
+                 EVIDENCE + "facade-routing-tiers-20261101/complex.json", "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md",
+                 EVIDENCE + "review-packs-20261101/passage-relevance-v2.json", EVIDENCE + "review-packs-20261101/facade-hitl.json",
+                 "docs/PASSAGE_RELEVANCE_V2_RESULTS_20261101.md", "docs/FACADE_ROUTING_HITL_RESULTS_20261101.md")
 # Constant majority-class answer on passage-evidence-v1, rotation 0 (dataset sha pinned in campaigns).
-PASSAGE_MAJORITY = {"relevance": ("grade 1", 224, 512), "support": ("`insufficient`", 584, 768),
+PASSAGE_MAJORITY = {"relevance": ("grade 1 (thematic)", 224, 512), "support": ("`insufficient`", 584, 768),
                     "answerability": ("`answerable`", 88, 128)}
 STATUS_KEYS = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
 IDENTITY_KEYS = ("adapter", "profile_id", "device", "model_repo_id", "model_id",
@@ -527,11 +537,13 @@ def build(root=ROOT):
             row["rank_test_" + tier] = 1 + sum(o[tier]["by_split"]["test"]["correct"] > row[tier]["by_split"]["test"]["correct"]
                                                for o in facade_tiers)
     facade_tiers.sort(key=lambda r: (r["rank_complex"], r["model"]))
+    review = review_packs(inputs, rows)
     inputs.read("scripts/build-full-results.py")
     coverage["sources_sha256"] = dict(sorted(inputs.hashes.items()))
     return {"schema_version": "deposium.public-results/v1", "observations": rows,
             "campaigns": campaign_rows, "coverage": coverage, "historical_context_observations": len(base),
             "choice_episodes": choice_episodes, "facade_routing": facade_routing, "facade_tiers": facade_tiers,
+            "review_packs": review,
             "other_campaigns": others, "other_benchmarks_markdown": other_guide,
             "capability_campaign": complementary,
             "scope": "aggregate_presentation_only_no_inference_or_raw_archive_verification",
@@ -1088,6 +1100,69 @@ def render_choice_episodes(data):
     return lines
 
 
+def review_packs(inputs, observations):
+    """Realigned relevance and human-confirmation aggregates, joined to observations by identity."""
+    by_id = {r["id"]: r for r in observations}
+    out = {}
+    for key, path, report, mode in (("relevance", REVIEW_RELEVANCE, REVIEW_RELEVANCE_REPORT, "relevance"),
+                                     ("hitl", REVIEW_HITL, REVIEW_HITL_REPORT, "hitl")):
+        data = inputs.load(path)
+        require(data.get("schema_version") == "deposium.review-packs-public/v1" and data["mode"] == mode
+                and all(REVIEW_PACKS[pack] == digest for pack, digest in data["packs"].items()),
+                f"review packs: changed {mode} pack or schema")
+        inputs.read("docs/" + report)
+        rows = []
+        for candidate in data["candidates"]:
+            for identity in candidate["identities"]:
+                facade_join({"kind": "classifier", "label": candidate["label"], "identity": identity}, by_id, inputs)
+            rows.append({"observation": candidate["label"], "model": by_id[candidate["label"]]["metadata"]["display_name"], **candidate})
+        if mode == "hitl":
+            require(data["router"]["router_source_revision"] == "2847d2d9193dfe7e20f8742694af5560e4c10765",
+                    "review packs: router revision changed")
+            rows.append({"observation": data["router"]["label"], "model": "Production router · private replay", **data["router"]})
+        out[key] = {"source": path, "report": report, "rows": rows}
+    return out
+
+
+def render_review_packs(data):
+    review = data.get("review_packs")
+    if not review:
+        return []
+    rel = sorted(review["relevance"]["rows"], key=lambda r: (-r["counts"]["test"]["correct"], r["model"]))
+    lines = ["### Passage relevance v2 (three levels)", "",
+             "The v1 relevance grade 1 (\"concerns the topic\") was undecidable for decoy passages, and one grade-2 role "
+             "depended on another passage. [passage-relevance-v2](../datasets/passage-relevance-v2/README.md) keeps three "
+             "levels (direct, partial, no usable evidence), 512 unique inputs (256 TEST). Always answering *no usable evidence* "
+             f"scores **{rel[0]['counts']['majority_baseline']}/512**: compare the macro accuracy. "
+             f"[Report]({review['relevance']['report']}).", "",
+             "| Model / runtime | Correct / 512 | TEST / 256 | Direct | Partial | No usable evidence | Macro accuracy |",
+             "|---|---:|---:|---:|---:|---:|---:|"]
+    for r in rel:
+        c = r["counts"]
+        cls = " | ".join(f"{c['by_class'][k]['correct']}/{c['by_class'][k]['total']}" for k in ("direct", "partial", "no_usable_evidence"))
+        lines.append(f"| {r['model']} | {c['all']['correct']}/{c['all']['total']} | {c['test']['correct']}/{c['test']['total']} | {cls} | "
+                     f"{number(100 * c['macro_accuracy'], 1)}% |")
+    hitl = review["hitl"]["rows"]
+    lines += ["", "### Facade routing: human confirmation", "",
+              "Can a model tell when to ask a human before acting? 90 FR/EN requests (62 TEST): 12 TEST hesitations between two "
+              "categories, 12 irreversible or sensitive actions, 38 clear or out-of-scope requests. **Explicit**: a ninth "
+              "*human confirmation* option. **Own confidence**: eight options, ask when the top-1 probability is below a threshold "
+              f"fixed on TRAIN + calibration. Counts are on TEST. [Report]({review['hitl']['report']}).", "",
+              "| Model / runtime | Explicit: hesitations asked /12 | Explicit: irreversible asked /12 | Explicit: false alarms /38 | "
+              "Confidence: detected /24 | Confidence: false alarms /38 | Confidence AUC |",
+              "|---|---:|---:|---:|---:|---:|---:|"]
+    def asked(r, kind):
+        return r["explicit_option"]["test_by_kind"][kind].get("asks_human", 0)
+    for r in sorted(hitl, key=lambda r: (-(asked(r, "hitl_confirm") + asked(r, "hitl_choose")), r["model"])):
+        clear = sum(asked(r, k) for k in ("control", "out_of_scope", "ambiguous"))
+        t = r["own_confidence"].get("threshold")
+        conf = (f"{t['test_detected']}/{t['test_needs_human']} | {t['test_false_alarms']}/{t['test_clear']} | {number(t['test_auc'], 2)}"
+                if t else "— | — | no probabilities")
+        lines.append(f"| {r['model']} | {asked(r, 'hitl_choose')}/12 | {asked(r, 'hitl_confirm')}/12 | {clear}/38 | {conf} |")
+    lines += ["", "The router has no confirmation path; it is shown for reference.", ""]
+    return lines
+
+
 def render_facade_routing(data):
     rows = data["facade_routing"]
     if not rows:
@@ -1216,6 +1291,7 @@ def render_campaign_rankings(data):
               "[small-CPU passage report](PASSAGE_SMALL_CPU_RESULTS_20261031.md).", "",
               *render_choice_episodes(data),
               *render_facade_routing(data),
+              *render_review_packs(data),
               "### Campaign latency and memory", "",
               "Physical-call timings are kept separate from reused logical decisions; session RSS scopes differ "
               "from the historical context + tool sessions. NR means unreported. No controlled speed ranking is inferred.", "",

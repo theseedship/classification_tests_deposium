@@ -28,7 +28,7 @@ Correct / all decisions. Each axis is a separate task; there is no combined scor
 | *D3 Flash Q8 · Metal* | 252/512 | 460/768 | **122/128** |
 | *Clef Flash Q8 · Metal* | 261/512 | 446/768 | 109/128 |
 | *Historical D3-lite · Linux CPU* | 229/512 | 443/768 | 88/128 |
-| *Constant majority class* | 224/512 (grade 1) | 584/768 (`insufficient`) | 88/128 (`answerable`) |
+| *Constant majority class* | 224/512 (grade 1, thematic) | 584/768 (`insufficient`) | 88/128 (`answerable`) |
 
 The classes are imbalanced: always answering `insufficient` on support would
 score 584/768, more than every model's total. Totals alone therefore do not
@@ -64,9 +64,12 @@ Reading:
   674 of 768 claims `supports`, recognizes 6% of `insufficient` ones and never
   predicts relevance grade 1. Its answerability total is the majority-class
   baseline plus five.
-- Every row, GPU or CPU, fails relevance grade 1 (partially relevant, 224
-  decisions): 0–12% correct. This is a shared weakness of the projection or
-  of the references, not of one model.
+- Every row, GPU or CPU, fails relevance grade 1 ("concerns the topic without
+  deciding", 224 decisions): 0–12% correct. A later review traced this to the
+  projection, not the models: grade-1 passages are decoys that also fit
+  "irrelevant". See the [three-level realignment](PASSAGE_RELEVANCE_V2_DESIGN_20261101.md).
+  (Corrected on 1 November 2026: this line first called grade 1 "partially
+  relevant"; partial relevance is grade 2.)
 
 Correlated translations, two views (`full`, `head_384`) and eight families do
 not justify a population confidence interval or significance test.

@@ -27,6 +27,8 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
   - [Executed tool episodes (closed choice)](#executed-tool-episodes-closed-choice)
   - [Facade routing (model vs router)](#facade-routing-model-vs-router)
   - [Facade routing: harder tiers](#facade-routing-harder-tiers)
+  - [Passage relevance v2 (three levels)](#passage-relevance-v2-three-levels)
+  - [Facade routing: human confirmation](#facade-routing-human-confirmation)
   - [Campaign latency and memory](#campaign-latency-and-memory)
 - [Model quality](#model-quality)
 - [Language and task complexity](#language-and-task-complexity)
@@ -237,7 +239,7 @@ Calibration (12) and test (36) are shown separately because the all-case and tes
 
 ### Passage relevance
 
-Rotation 0: 128 pools, eight families, eight language directions, two correlated views. Classes are imbalanced: always answering grade 1 scores **224/512**, so compare macro class accuracy, not totals alone.
+Rotation 0: 128 pools, eight families, eight language directions, two correlated views. Classes are imbalanced: always answering grade 1 (thematic) scores **224/512**, so compare macro class accuracy, not totals alone.
 
 <sub>**Rank**: by correct/all among completely scored observations (— when partial or not run); **Macro class accuracy**: mean of the per-class accuracies, so a rare class weighs as much as a frequent one.</sub>
 
@@ -353,6 +355,31 @@ Same eight categories on two frozen harder tiers of 96 cases (64 TEST). **Advanc
 | 5 | Production router · private replay | 28/80 (10/48) | 24/96 (20/64) | 24/96 (17/64) | NR |
 
 D3 rows on these tiers ran as Q8 GGUF on Metal (same weights as their CPU rows); Vela 2.0 0.3B ran on CPU. Latency scopes differ: Metal rows time the whole adapter call (loopback HTTP included), the CPU row its worker inference. The router reads only the latest request, as in the application; the complex tier's previous exchange is visible to the classifiers only.
+
+### Passage relevance v2 (three levels)
+
+The v1 relevance grade 1 ("concerns the topic") was undecidable for decoy passages, and one grade-2 role depended on another passage. [passage-relevance-v2](../datasets/passage-relevance-v2/README.md) keeps three levels (direct, partial, no usable evidence), 512 unique inputs (256 TEST). Always answering *no usable evidence* scores **384/512**: compare the macro accuracy. [Report](PASSAGE_RELEVANCE_V2_RESULTS_20261101.md).
+
+| Model / runtime | Correct / 512 | TEST / 256 | Direct | Partial | No usable evidence | Macro accuracy |
+|---|---:|---:|---:|---:|---:|---:|
+| D3 mini · Q8 Metal | 406/512 | 200/256 | 112/112 | 16/16 | 278/384 | 90.8% |
+| D3 nano · Q8 Metal | 371/512 | 181/256 | 97/112 | 16/16 | 258/384 | 84.6% |
+| D3 lite · Q8 Metal | 338/512 | 168/256 | 100/112 | 5/16 | 233/384 | 60.4% |
+| Vela 2.0 0.3B · macOS CPU | 113/512 | 59/256 | 55/112 | 3/16 | 55/384 | 27.4% |
+
+### Facade routing: human confirmation
+
+Can a model tell when to ask a human before acting? 90 FR/EN requests (62 TEST): 12 TEST hesitations between two categories, 12 irreversible or sensitive actions, 38 clear or out-of-scope requests. **Explicit**: a ninth *human confirmation* option. **Own confidence**: eight options, ask when the top-1 probability is below a threshold fixed on TRAIN + calibration. Counts are on TEST. [Report](FACADE_ROUTING_HITL_RESULTS_20261101.md).
+
+| Model / runtime | Explicit: hesitations asked /12 | Explicit: irreversible asked /12 | Explicit: false alarms /38 | Confidence: detected /24 | Confidence: false alarms /38 | Confidence AUC |
+|---|---:|---:|---:|---:|---:|---:|
+| D3 mini · Q8 Metal | 0/12 | 9/12 | 0/38 | 18/24 | 12/38 | 0.83 |
+| D3 nano · Q8 Metal | 0/12 | 5/12 | 2/38 | 18/24 | 14/38 | 0.81 |
+| Vela 2.0 0.3B · macOS CPU | 0/12 | 1/12 | 4/38 | 20/24 | 22/38 | 0.72 |
+| D3 lite · Q8 Metal | 0/12 | 0/12 | 1/38 | 19/24 | 17/38 | 0.74 |
+| Production router · private replay | 0/12 | 0/12 | 0/38 | — | — | no probabilities |
+
+The router has no confirmation path; it is shown for reference.
 
 ### Campaign latency and memory
 

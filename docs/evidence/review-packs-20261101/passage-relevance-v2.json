@@ -1,0 +1,554 @@
+{
+  "candidates": [
+    {
+      "counts": {
+        "all": {
+          "correct": 113,
+          "total": 512
+        },
+        "by_class": {
+          "direct": {
+            "correct": 55,
+            "total": 112
+          },
+          "no_usable_evidence": {
+            "correct": 55,
+            "total": 384
+          },
+          "partial": {
+            "correct": 3,
+            "total": 16
+          }
+        },
+        "by_role": {
+          "base_variant": {
+            "correct": 0,
+            "total": 16
+          },
+          "binding_premise": {
+            "correct": 3,
+            "total": 16
+          },
+          "direct": {
+            "correct": 23,
+            "total": 64
+          },
+          "evidence_after_neutral_prefix": {
+            "correct": 4,
+            "total": 16
+          },
+          "evidence_outside_visible_projection": {
+            "correct": 14,
+            "total": 16
+          },
+          "explicit_conflict": {
+            "correct": 14,
+            "total": 16
+          },
+          "explicit_exception": {
+            "correct": 14,
+            "total": 16
+          },
+          "other_field": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_rule": {
+            "correct": 6,
+            "total": 16
+          },
+          "other_subject": {
+            "correct": 0,
+            "total": 32
+          },
+          "other_subject_same_number": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_zone": {
+            "correct": 2,
+            "total": 16
+          },
+          "sibling_variant": {
+            "correct": 0,
+            "total": 16
+          },
+          "unrelated": {
+            "correct": 15,
+            "total": 128
+          },
+          "wrong_component": {
+            "correct": 10,
+            "total": 32
+          },
+          "wrong_condition": {
+            "correct": 0,
+            "total": 16
+          },
+          "wrong_quantity_and_unit": {
+            "correct": 0,
+            "total": 16
+          },
+          "wrong_relation": {
+            "correct": 8,
+            "total": 48
+          }
+        },
+        "macro_accuracy": 0.27393353174603174,
+        "majority_baseline": 384,
+        "median_call_ms": 164.44912500446662,
+        "statuses": {
+          "ok": 512
+        },
+        "test": {
+          "correct": 59,
+          "total": 256
+        },
+        "test_by_class": {
+          "direct": {
+            "correct": 29,
+            "total": 56
+          },
+          "no_usable_evidence": {
+            "correct": 29,
+            "total": 192
+          },
+          "partial": {
+            "correct": 1,
+            "total": 8
+          }
+        },
+        "test_macro_accuracy": 0.2646329365079365
+      },
+      "identities": [
+        {
+          "adapter": "vela2",
+          "model_repo_id": "vllm-sr/Vela-2.0-0.3B",
+          "model_revision": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+          "profile": "profiles/vela2-03-macos-cpu.json",
+          "raw_sha256": "1c17212a64c9b8a5e0dfc0ee039d8073210b5e113906c9904b1c8373d0d7c86b",
+          "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+          "seal_sha256": "fb2ddaa25be57e051a32347c6f517523f6a571b989a62634e0344f4d196beacc"
+        }
+      ],
+      "label": "Vela03Macos"
+    },
+    {
+      "counts": {
+        "all": {
+          "correct": 338,
+          "total": 512
+        },
+        "by_class": {
+          "direct": {
+            "correct": 100,
+            "total": 112
+          },
+          "no_usable_evidence": {
+            "correct": 233,
+            "total": 384
+          },
+          "partial": {
+            "correct": 5,
+            "total": 16
+          }
+        },
+        "by_role": {
+          "base_variant": {
+            "correct": 0,
+            "total": 16
+          },
+          "binding_premise": {
+            "correct": 5,
+            "total": 16
+          },
+          "direct": {
+            "correct": 60,
+            "total": 64
+          },
+          "evidence_after_neutral_prefix": {
+            "correct": 8,
+            "total": 16
+          },
+          "evidence_outside_visible_projection": {
+            "correct": 16,
+            "total": 16
+          },
+          "explicit_conflict": {
+            "correct": 16,
+            "total": 16
+          },
+          "explicit_exception": {
+            "correct": 16,
+            "total": 16
+          },
+          "other_field": {
+            "correct": 9,
+            "total": 16
+          },
+          "other_rule": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_subject": {
+            "correct": 0,
+            "total": 32
+          },
+          "other_subject_same_number": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_zone": {
+            "correct": 0,
+            "total": 16
+          },
+          "sibling_variant": {
+            "correct": 5,
+            "total": 16
+          },
+          "unrelated": {
+            "correct": 104,
+            "total": 128
+          },
+          "wrong_component": {
+            "correct": 30,
+            "total": 32
+          },
+          "wrong_condition": {
+            "correct": 16,
+            "total": 16
+          },
+          "wrong_quantity_and_unit": {
+            "correct": 15,
+            "total": 16
+          },
+          "wrong_relation": {
+            "correct": 38,
+            "total": 48
+          }
+        },
+        "macro_accuracy": 0.6040426587301587,
+        "majority_baseline": 384,
+        "median_call_ms": 30.87674999551382,
+        "statuses": {
+          "ok": 512
+        },
+        "test": {
+          "correct": 168,
+          "total": 256
+        },
+        "test_by_class": {
+          "direct": {
+            "correct": 52,
+            "total": 56
+          },
+          "no_usable_evidence": {
+            "correct": 114,
+            "total": 192
+          },
+          "partial": {
+            "correct": 2,
+            "total": 8
+          }
+        },
+        "test_macro_accuracy": 0.5907738095238095
+      },
+      "identities": [
+        {
+          "adapter": "systemone_local",
+          "assets_manifest": "profiles/d3-lite-q8-assets.json",
+          "backend": "metal",
+          "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+          "model_repo_id": "ggml-org/vllm-d3-lite-GGUF",
+          "model_revision": "d4d6ebde7717eb37014a1c7401127fb48f26da42",
+          "model_sha256": "ffed04a9607034d641b95181d79abf36bec3a03ed647949bad8277d0e2984ddf",
+          "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+          "raw_sha256": "09a56a69ae8754176ec432d721bec1406eb4d43a5470cd3e6f075690bfa46a26",
+          "rss_peak_mib": 1418.21875,
+          "seal_sha256": "b52eed8c7d031f482051905735c0a5a696b6457771cc23f055ce1374e0d615bd"
+        }
+      ],
+      "label": "D3liteQ8Metal"
+    },
+    {
+      "counts": {
+        "all": {
+          "correct": 371,
+          "total": 512
+        },
+        "by_class": {
+          "direct": {
+            "correct": 97,
+            "total": 112
+          },
+          "no_usable_evidence": {
+            "correct": 258,
+            "total": 384
+          },
+          "partial": {
+            "correct": 16,
+            "total": 16
+          }
+        },
+        "by_role": {
+          "base_variant": {
+            "correct": 0,
+            "total": 16
+          },
+          "binding_premise": {
+            "correct": 16,
+            "total": 16
+          },
+          "direct": {
+            "correct": 56,
+            "total": 64
+          },
+          "evidence_after_neutral_prefix": {
+            "correct": 10,
+            "total": 16
+          },
+          "evidence_outside_visible_projection": {
+            "correct": 16,
+            "total": 16
+          },
+          "explicit_conflict": {
+            "correct": 15,
+            "total": 16
+          },
+          "explicit_exception": {
+            "correct": 16,
+            "total": 16
+          },
+          "other_field": {
+            "correct": 14,
+            "total": 16
+          },
+          "other_rule": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_subject": {
+            "correct": 0,
+            "total": 32
+          },
+          "other_subject_same_number": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_zone": {
+            "correct": 0,
+            "total": 16
+          },
+          "sibling_variant": {
+            "correct": 13,
+            "total": 16
+          },
+          "unrelated": {
+            "correct": 113,
+            "total": 128
+          },
+          "wrong_component": {
+            "correct": 30,
+            "total": 32
+          },
+          "wrong_condition": {
+            "correct": 16,
+            "total": 16
+          },
+          "wrong_quantity_and_unit": {
+            "correct": 15,
+            "total": 16
+          },
+          "wrong_relation": {
+            "correct": 41,
+            "total": 48
+          }
+        },
+        "macro_accuracy": 0.8459821428571429,
+        "majority_baseline": 384,
+        "median_call_ms": 55.529499499243684,
+        "statuses": {
+          "ok": 512
+        },
+        "test": {
+          "correct": 181,
+          "total": 256
+        },
+        "test_by_class": {
+          "direct": {
+            "correct": 47,
+            "total": 56
+          },
+          "no_usable_evidence": {
+            "correct": 126,
+            "total": 192
+          },
+          "partial": {
+            "correct": 8,
+            "total": 8
+          }
+        },
+        "test_macro_accuracy": 0.8318452380952381
+      },
+      "identities": [
+        {
+          "adapter": "systemone_local",
+          "assets_manifest": "profiles/d3-nano-q8-assets.json",
+          "backend": "metal",
+          "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+          "model_repo_id": "ggml-org/vllm-d3-nano-GGUF",
+          "model_revision": "50dea2057df10c4b393559a155ab3bf0bc7532c6",
+          "model_sha256": "4867d306fd22aec8c5ebd1851b7f1074f480702655e8000ceedf0c47c6a6f337",
+          "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+          "raw_sha256": "7617f5673e49ab1c682480f3614c9f7df1d93833a9b2f8153c1fd3c673ddc442",
+          "rss_peak_mib": 2828.875,
+          "seal_sha256": "7991c2d51a51d38b616c6c0e885ac3ee03549de3d77f2d77c592b7b12da812b3"
+        }
+      ],
+      "label": "D3nanoQ8Metal"
+    },
+    {
+      "counts": {
+        "all": {
+          "correct": 406,
+          "total": 512
+        },
+        "by_class": {
+          "direct": {
+            "correct": 112,
+            "total": 112
+          },
+          "no_usable_evidence": {
+            "correct": 278,
+            "total": 384
+          },
+          "partial": {
+            "correct": 16,
+            "total": 16
+          }
+        },
+        "by_role": {
+          "base_variant": {
+            "correct": 0,
+            "total": 16
+          },
+          "binding_premise": {
+            "correct": 16,
+            "total": 16
+          },
+          "direct": {
+            "correct": 64,
+            "total": 64
+          },
+          "evidence_after_neutral_prefix": {
+            "correct": 16,
+            "total": 16
+          },
+          "evidence_outside_visible_projection": {
+            "correct": 16,
+            "total": 16
+          },
+          "explicit_conflict": {
+            "correct": 16,
+            "total": 16
+          },
+          "explicit_exception": {
+            "correct": 16,
+            "total": 16
+          },
+          "other_field": {
+            "correct": 15,
+            "total": 16
+          },
+          "other_rule": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_subject": {
+            "correct": 0,
+            "total": 32
+          },
+          "other_subject_same_number": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_zone": {
+            "correct": 5,
+            "total": 16
+          },
+          "sibling_variant": {
+            "correct": 16,
+            "total": 16
+          },
+          "unrelated": {
+            "correct": 120,
+            "total": 128
+          },
+          "wrong_component": {
+            "correct": 30,
+            "total": 32
+          },
+          "wrong_condition": {
+            "correct": 16,
+            "total": 16
+          },
+          "wrong_quantity_and_unit": {
+            "correct": 16,
+            "total": 16
+          },
+          "wrong_relation": {
+            "correct": 44,
+            "total": 48
+          }
+        },
+        "macro_accuracy": 0.9079861111111112,
+        "majority_baseline": 384,
+        "median_call_ms": 110.05404149182141,
+        "statuses": {
+          "ok": 512
+        },
+        "test": {
+          "correct": 200,
+          "total": 256
+        },
+        "test_by_class": {
+          "direct": {
+            "correct": 56,
+            "total": 56
+          },
+          "no_usable_evidence": {
+            "correct": 136,
+            "total": 192
+          },
+          "partial": {
+            "correct": 8,
+            "total": 8
+          }
+        },
+        "test_macro_accuracy": 0.9027777777777778
+      },
+      "identities": [
+        {
+          "adapter": "systemone_local",
+          "assets_manifest": "profiles/d3-mini-q8-assets.json",
+          "backend": "metal",
+          "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+          "model_repo_id": "ggml-org/vllm-d3-mini-GGUF",
+          "model_revision": "e7230e2309c186c80182fbeed6fef70680b20c64",
+          "model_sha256": "f9f99be46b7ce1e5a5f09ed620de89106447646b34f7d2993e7563b48feb2858",
+          "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+          "raw_sha256": "9bb81edc26242125eecf740b59c247e7974fbae38702c348d74ca55f22ea25af",
+          "rss_peak_mib": 5429.71875,
+          "seal_sha256": "d6ece661c49d31abaac03fef3832aa74b9acdde185b8852c7151f209ea49de36"
+        }
+      ],
+      "label": "D3miniQ8Metal"
+    }
+  ],
+  "mode": "relevance",
+  "packs": {
+    "passage-relevance-v2": "f95b3a604af5c1762ac5a59e096f35de6c88ff7a601e67c5483cf87516f154a0"
+  },
+  "qualification": "exploratory; agent-authored references pending human review",
+  "schema_version": "deposium.review-packs-public/v1"
+}
