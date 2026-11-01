@@ -507,7 +507,8 @@ COVERAGE_TASKS = (
     ("tool_episodes", "Episodes (JSON)", 18,
      "tool-policy-canary-v1 train 6 + tool-policy-heldout-v1 test 12; generated actions, actual bounded feedback; prompt v2"),
 )
-CLOSED_CHOICE_TASKS = 10  # the first tasks are the classifier matrix; the rest are generated-JSON columns
+# Generated-JSON columns; every other task belongs to the classifier matrix. Partition by ID, never by position.
+GENERATED_TASKS = {"tool_discovery", "tool_arguments", "tool_episodes"}
 ISSUES = "https://github.com/theseedship/classification_tests_deposium/issues/"
 
 
@@ -698,7 +699,9 @@ def build_coverage(observations, campaigns, others, inputs):
     for run in (facade["router"], *facade["runs"]):
         if run["kind"] == "classifier":
             target = context_ids.get(run["label"])
-            require(target is not None and target["identity"].get("model_revision") == run["identity"]["model_revision"],
+            require(target is not None and target["identity"].get("model_revision") == run["identity"]["model_revision"]
+                    and run["identity"].get("runtime_lock_sha256") is not None
+                    and target["identity"].get("hashes", {}).get("runtime_lock_sha256") == run["identity"]["runtime_lock_sha256"],
                     f"facade routing: identity join failed for {run['label']}")
             inputs.read(run["identity"]["profile"])
         c = run["counts"]["all"]
@@ -706,7 +709,7 @@ def build_coverage(observations, campaigns, others, inputs):
         require(c["total"] == 80 and sum(statuses.values()) == 80, f"facade routing: denominator for {run['label']}")
         require(not by_id[run["label"]]["cells"]["facade_routing"]["evidence_present"], "facade routing: duplicate observation")
         by_id[run["label"]]["cells"]["facade_routing"] = coverage_cell(
-            {"total": 80, "scored": statuses["ok"], "correct": c["correct"], "statuses": statuses},
+            {"total": 80, "scored": statuses["ok"] + statuses["abstain"], "correct": c["correct"], "statuses": statuses},
             totals["facade_routing"], FACADE)
 
     # Ranking is a distinct task, including derived class-order and tie-break methods.
@@ -828,7 +831,8 @@ def render_coverage(coverage):
             return "not_run" + (f" 0/{total}" if cell["evidence_present"] else "")
         return f"{status} {n}/{total}"
     all_tasks = coverage["tasks"]
-    tasks, generated = all_tasks[:CLOSED_CHOICE_TASKS], all_tasks[CLOSED_CHOICE_TASKS:]
+    tasks = [t for t in all_tasks if t["id"] not in GENERATED_TASKS]
+    generated = [t for t in all_tasks if t["id"] in GENERATED_TASKS]
     lines = ["## Coverage overview", "",
              "**Execution coverage, not accuracy.** Each cell is `complete`, `partial`, or `not_run`, "
              "followed by scored/valid decisions over the planned denominator when observed. "

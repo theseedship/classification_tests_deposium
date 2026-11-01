@@ -562,6 +562,21 @@ class FullResultsTests(unittest.TestCase):
         with self.changed_json(results.FACADE, lambda d: d["runs"][0]["identity"].update(model_revision="0" * 40)):
             with self.assertRaisesRegex(ValueError, "identity join failed"):
                 results.build(self.root)
+        with self.changed_json(results.FACADE, lambda d: d["runs"][0]["identity"].update(runtime_lock_sha256="0" * 64)):
+            with self.assertRaisesRegex(ValueError, "identity join failed"):
+                results.build(self.root)
+        def abstain_once(d):
+            c = d["runs"][0]["counts"]["all"]
+            c["statuses"] = {"ok": 79, "abstain": 1}
+        with self.changed_json(results.FACADE, abstain_once):
+            data = results.build(self.root)
+            cell = next(r for r in data["coverage"]["observations"] if r["id"] == "D3liteMacos")["cells"]["facade_routing"]
+            self.assertEqual((cell["scored_or_valid"], cell["outcomes"]["abstain"]), (80, 1))
+        # Ranking stays a passage column: adding a task must not shift it into the generated-JSON columns.
+        bge = text.split("### Passage-only observations and ranking methods")[1].split("###")[0]
+        self.assertIn("BGE v2-m3", bge)
+        self.assertIn("Ranking R0–3 /512", bge)
+        self.assertNotIn("ranking None/None", text)
         with self.changed_json(results.FACADE, lambda d: d.update(dataset_sha256="0" * 64)):
             with self.assertRaisesRegex(ValueError, "changed pack"):
                 results.build(self.root)
