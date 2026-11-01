@@ -36,6 +36,10 @@ four variants are full observations in RESULTS.md. Uzu is now runnable end to en
 `hanashi` input preparation, release 0.6.15); converting D3 mini itself for Uzu
 needs a decision-model recipe that the public converter does not provide.
 
+NVIDIA, 1 November 2026: a [runbook](NVIDIA_RUNBOOK_20261101.md) gives the exact CUDA
+build, pinned downloads, series runs and the 8 GB budget check (D3 with
+LFM3-1.7B Q4 and the BGE v2-m3 reranker resident) for #65.
+
 GPU runtimes, 1 November 2026: D3 lite, nano and mini as Q8 GGUF on Apple Metal
 ([results](D3_SMALL_GGUF_METAL_RESULTS_20261101.md)) give the same decisions as
 their CPU rows on 97.9–100% of cases, 100–240× faster. NVIDIA CUDA

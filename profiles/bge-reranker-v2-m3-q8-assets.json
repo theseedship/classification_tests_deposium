@@ -1,0 +1,6 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "gpustack/bge-reranker-v2-m3-GGUF",
+  "revision": "3093af03b1a635e67b084b1d8c03c5f5e020fd05",
+  "files": [{"path": "bge-reranker-v2-m3-Q8_0.gguf", "size": 635676416, "sha256": "a43c7c9b11a4c1517e5bf95151960e1621d1b72f7a493364b01e386cf1aaa1d3"}]
+}
