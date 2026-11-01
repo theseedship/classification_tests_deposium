@@ -1,0 +1,641 @@
+{
+  "schema_version": "deposium.facade-routing-spec/v1",
+  "dataset_id": "facade-routing-hitl-v1",
+  "authoring": "Human-confirmation tier: requests that hesitate between two categories, irreversible or sensitive actions, close safe controls, and out-of-scope or vague requests. One specification, two frozen packs: with a ninth 'human confirmation' option, and with the eight usual options (hesitation cases then accept either candidate). Written without access to any router rule or keyword list.",
+  "categories": {
+    "search": {
+      "fr": "Rechercher : retrouver des documents ou des passages pertinents dans le corpus.",
+      "en": "Search: find relevant documents or passages in the corpus."
+    },
+    "analyze": {
+      "fr": "Analyser : examiner le contenu et en dégager des thèmes, des tendances ou des motifs.",
+      "en": "Analyse: examine content and identify themes, trends or patterns."
+    },
+    "visualize": {
+      "fr": "Visualiser : produire un graphique, un diagramme ou un tableau de bord.",
+      "en": "Visualise: produce a chart, a diagram or a dashboard."
+    },
+    "graph": {
+      "fr": "Graphe : parcourir des entités et leurs relations (voisins, chemins, groupes).",
+      "en": "Graph: traverse entities and their relations (neighbours, paths, groups)."
+    },
+    "evaluate": {
+      "fr": "Évaluer : mesurer la qualité, la fiabilité ou des indicateurs du corpus ou des réponses.",
+      "en": "Evaluate: measure quality, reliability or metrics of the corpus or of answers."
+    },
+    "process": {
+      "fr": "Traiter : importer, nettoyer, convertir, découper ou exporter des données.",
+      "en": "Process: import, clean, convert, split or export data."
+    },
+    "system": {
+      "fr": "Système : vérifier l'état, la santé, les ressources ou les journaux du service.",
+      "en": "System: check the service's status, health, resources or logs."
+    },
+    "none": {
+      "fr": "Aucune de ces catégories : la demande sort du périmètre, ou elle est trop vague pour proposer une catégorie (demander de reformuler).",
+      "en": "None of these: the request is out of scope, or too vague to propose any category (ask to rephrase)."
+    },
+    "hitl": {
+      "fr": "Confirmation humaine : avant d'agir, demander à l'utilisateur de choisir ou de valider — la demande hésite entre plusieurs catégories, ou engage une action irréversible ou sensible.",
+      "en": "Human confirmation: before acting, ask the user to choose or confirm — the request hesitates between several categories, or commits an irreversible or sensitive action."
+    }
+  },
+  "families": [
+    {
+      "id": "hitl-choose-01",
+      "intent": "hitl",
+      "kind": "hitl_choose",
+      "split": "train",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Fais-moi quelque chose de parlant avec les ventes du trimestre.",
+        "en": "Make me something telling out of the quarter's sales."
+      },
+      "rationale": "Two plausible categories (analyze or visualize) with different results; the user should choose.",
+      "candidates": [
+        "analyze",
+        "visualize"
+      ]
+    },
+    {
+      "id": "hitl-choose-02",
+      "intent": "hitl",
+      "kind": "hitl_choose",
+      "split": "calibration",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Regarde les liens entre nos fournisseurs et dis-moi ce qui ressort.",
+        "en": "Look at the links between our suppliers and tell me what stands out."
+      },
+      "rationale": "Two plausible categories (graph or analyze) with different results; the user should choose.",
+      "candidates": [
+        "graph",
+        "analyze"
+      ]
+    },
+    {
+      "id": "hitl-choose-03",
+      "intent": "hitl",
+      "kind": "hitl_choose",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Occupe-toi des doublons dans le corpus.",
+        "en": "Deal with the duplicates in the corpus."
+      },
+      "rationale": "Two plausible categories (evaluate or process) with different results; the user should choose.",
+      "candidates": [
+        "evaluate",
+        "process"
+      ]
+    },
+    {
+      "id": "hitl-choose-04",
+      "intent": "hitl",
+      "kind": "hitl_choose",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Je veux en savoir plus sur les contrats Delta.",
+        "en": "I want to know more about the Delta contracts."
+      },
+      "rationale": "Two plausible categories (search or analyze) with different results; the user should choose.",
+      "candidates": [
+        "search",
+        "analyze"
+      ]
+    },
+    {
+      "id": "hitl-choose-05",
+      "intent": "hitl",
+      "kind": "hitl_choose",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Vérifie la base clients.",
+        "en": "Check the customer database."
+      },
+      "rationale": "Two plausible categories (evaluate or system) with different results; the user should choose.",
+      "candidates": [
+        "evaluate",
+        "system"
+      ]
+    },
+    {
+      "id": "hitl-choose-06",
+      "intent": "hitl",
+      "kind": "hitl_choose",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Montre-moi l'activité du projet Hermès.",
+        "en": "Show me the activity of project Hermes."
+      },
+      "rationale": "Two plausible categories (search or visualize) with different results; the user should choose.",
+      "candidates": [
+        "search",
+        "visualize"
+      ]
+    },
+    {
+      "id": "hitl-choose-07",
+      "intent": "hitl",
+      "kind": "hitl_choose",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Prépare les données de l'audit pour la réunion.",
+        "en": "Get the audit data ready for the meeting."
+      },
+      "rationale": "Two plausible categories (process or visualize) with different results; the user should choose.",
+      "candidates": [
+        "process",
+        "visualize"
+      ]
+    },
+    {
+      "id": "hitl-choose-08",
+      "intent": "hitl",
+      "kind": "hitl_choose",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Fais le point sur la fiabilité et les performances de l'assistant.",
+        "en": "Give me a status on the assistant's reliability and performance."
+      },
+      "rationale": "Two plausible categories (evaluate or system) with different results; the user should choose.",
+      "candidates": [
+        "evaluate",
+        "system"
+      ]
+    },
+    {
+      "id": "hitl-confirm-01",
+      "intent": "hitl",
+      "kind": "hitl_confirm",
+      "split": "train",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Supprime tous les documents de 2019 du corpus.",
+        "en": "Delete all 2019 documents from the corpus."
+      },
+      "rationale": "Clearly process, but irreversible or sensitive: confirm before acting.",
+      "candidates": [
+        "process"
+      ]
+    },
+    {
+      "id": "hitl-confirm-02",
+      "intent": "hitl",
+      "kind": "hitl_confirm",
+      "split": "calibration",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Écrase la base actuelle avec l'import d'hier.",
+        "en": "Overwrite the current database with yesterday's import."
+      },
+      "rationale": "Clearly process, but irreversible or sensitive: confirm before acting.",
+      "candidates": [
+        "process"
+      ]
+    },
+    {
+      "id": "hitl-confirm-03",
+      "intent": "hitl",
+      "kind": "hitl_confirm",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Exporte tout le dossier RH, salaires compris, vers le partenaire externe.",
+        "en": "Export the whole HR file, salaries included, to the external partner."
+      },
+      "rationale": "Clearly process, but irreversible or sensitive: confirm before acting.",
+      "candidates": [
+        "process"
+      ]
+    },
+    {
+      "id": "hitl-confirm-04",
+      "intent": "hitl",
+      "kind": "hitl_confirm",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Redémarre le service de production maintenant, même s'il y a des utilisateurs connectés.",
+        "en": "Restart the production service now, even with users connected."
+      },
+      "rationale": "Clearly system, but irreversible or sensitive: confirm before acting.",
+      "candidates": [
+        "system"
+      ]
+    },
+    {
+      "id": "hitl-confirm-05",
+      "intent": "hitl",
+      "kind": "hitl_confirm",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Purge les journaux du service de plus de sept jours.",
+        "en": "Purge the service logs older than seven days."
+      },
+      "rationale": "Clearly system, but irreversible or sensitive: confirm before acting.",
+      "candidates": [
+        "system"
+      ]
+    },
+    {
+      "id": "hitl-confirm-06",
+      "intent": "hitl",
+      "kind": "hitl_confirm",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Fusionne définitivement les fiches clients en double.",
+        "en": "Permanently merge the duplicate customer records."
+      },
+      "rationale": "Clearly process, but irreversible or sensitive: confirm before acting.",
+      "candidates": [
+        "process"
+      ]
+    },
+    {
+      "id": "hitl-confirm-07",
+      "intent": "hitl",
+      "kind": "hitl_confirm",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Remplace toutes les occurrences de l'ancien nom du client dans les contrats.",
+        "en": "Replace every occurrence of the client's old name in the contracts."
+      },
+      "rationale": "Clearly process, but irreversible or sensitive: confirm before acting.",
+      "candidates": [
+        "process"
+      ]
+    },
+    {
+      "id": "hitl-confirm-08",
+      "intent": "hitl",
+      "kind": "hitl_confirm",
+      "split": "test",
+      "difficulty": "D3",
+      "request": {
+        "fr": "Rends le tableau de bord des salaires visible par toute l'entreprise.",
+        "en": "Make the salary dashboard visible to the whole company."
+      },
+      "rationale": "Clearly visualize, but irreversible or sensitive: confirm before acting.",
+      "candidates": [
+        "visualize"
+      ]
+    },
+    {
+      "id": "search-01",
+      "intent": "search",
+      "kind": "control",
+      "split": "train",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Retrouve les contrats Delta signés en 2024.",
+        "en": "Find the Delta contracts signed in 2024."
+      },
+      "rationale": "Clear, reversible search request: no confirmation needed."
+    },
+    {
+      "id": "search-02",
+      "intent": "search",
+      "kind": "control",
+      "split": "calibration",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Trouve les documents de 2019 qui mentionnent une pénalité.",
+        "en": "Find the 2019 documents that mention a penalty."
+      },
+      "rationale": "Clear, reversible search request: no confirmation needed."
+    },
+    {
+      "id": "search-03",
+      "intent": "search",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Liste les fiches clients créées cette semaine.",
+        "en": "List the customer records created this week."
+      },
+      "rationale": "Clear, reversible search request: no confirmation needed."
+    },
+    {
+      "id": "analyze-01",
+      "intent": "analyze",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Quels thèmes ressortent des commentaires des commerciaux sur les ventes du trimestre ?",
+        "en": "Which themes stand out in the sales reps' comments on the quarter's sales?"
+      },
+      "rationale": "Clear, reversible analyze request: no confirmation needed."
+    },
+    {
+      "id": "analyze-02",
+      "intent": "analyze",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Analyse les causes des retards dans les comptes rendus du projet Hermès.",
+        "en": "Analyse the causes of delays in the project Hermes reports."
+      },
+      "rationale": "Clear, reversible analyze request: no confirmation needed."
+    },
+    {
+      "id": "analyze-03",
+      "intent": "analyze",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Compare les clauses de résiliation des contrats Delta.",
+        "en": "Compare the termination clauses of the Delta contracts."
+      },
+      "rationale": "Clear, reversible analyze request: no confirmation needed."
+    },
+    {
+      "id": "visualize-01",
+      "intent": "visualize",
+      "kind": "control",
+      "split": "train",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Fais un graphique en barres des ventes du trimestre par région.",
+        "en": "Make a bar chart of the quarter's sales by region."
+      },
+      "rationale": "Clear, reversible visualize request: no confirmation needed."
+    },
+    {
+      "id": "visualize-02",
+      "intent": "visualize",
+      "kind": "control",
+      "split": "calibration",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Trace la courbe d'activité du projet Hermès semaine par semaine.",
+        "en": "Plot project Hermes' activity curve week by week."
+      },
+      "rationale": "Clear, reversible visualize request: no confirmation needed."
+    },
+    {
+      "id": "visualize-03",
+      "intent": "visualize",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Dessine un diagramme du circuit d'audit pour la réunion.",
+        "en": "Draw a diagram of the audit workflow for the meeting."
+      },
+      "rationale": "Clear, reversible visualize request: no confirmation needed."
+    },
+    {
+      "id": "graph-01",
+      "intent": "graph",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Quels fournisseurs partagent un actionnaire avec Delta ?",
+        "en": "Which suppliers share a shareholder with Delta?"
+      },
+      "rationale": "Clear, reversible graph request: no confirmation needed."
+    },
+    {
+      "id": "graph-02",
+      "intent": "graph",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Trouve le chemin le plus court entre Orion et Atlas.",
+        "en": "Find the shortest path between Orion and Atlas."
+      },
+      "rationale": "Clear, reversible graph request: no confirmation needed."
+    },
+    {
+      "id": "graph-03",
+      "intent": "graph",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Qui sont les voisins directs du directeur financier dans le graphe ?",
+        "en": "Who are the CFO's direct neighbours in the graph?"
+      },
+      "rationale": "Clear, reversible graph request: no confirmation needed."
+    },
+    {
+      "id": "evaluate-01",
+      "intent": "evaluate",
+      "kind": "control",
+      "split": "train",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Mesure le taux de doublons dans le corpus, sans rien supprimer.",
+        "en": "Measure the duplicate rate in the corpus, without deleting anything."
+      },
+      "rationale": "Clear, reversible evaluate request: no confirmation needed."
+    },
+    {
+      "id": "evaluate-02",
+      "intent": "evaluate",
+      "kind": "control",
+      "split": "calibration",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Donne un score de qualité aux fiches de la base clients.",
+        "en": "Give a quality score to the records of the customer database."
+      },
+      "rationale": "Clear, reversible evaluate request: no confirmation needed."
+    },
+    {
+      "id": "evaluate-03",
+      "intent": "evaluate",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Mesure la fiabilité des réponses de l'assistant cette semaine.",
+        "en": "Measure the reliability of the assistant's answers this week."
+      },
+      "rationale": "Clear, reversible evaluate request: no confirmation needed."
+    },
+    {
+      "id": "process-01",
+      "intent": "process",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Exporte une copie en CSV des factures de mars.",
+        "en": "Export a CSV copy of the March invoices."
+      },
+      "rationale": "Clear, reversible process request: no confirmation needed."
+    },
+    {
+      "id": "process-02",
+      "intent": "process",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Convertis en texte les PDF de l'audit.",
+        "en": "Convert the audit PDFs to text."
+      },
+      "rationale": "Clear, reversible process request: no confirmation needed."
+    },
+    {
+      "id": "process-03",
+      "intent": "process",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Importe le tableur des fournisseurs dans la base.",
+        "en": "Import the supplier spreadsheet into the database."
+      },
+      "rationale": "Clear, reversible process request: no confirmation needed."
+    },
+    {
+      "id": "system-01",
+      "intent": "system",
+      "kind": "control",
+      "split": "train",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Le service de production répond-il ?",
+        "en": "Is the production service responding?"
+      },
+      "rationale": "Clear, reversible system request: no confirmation needed."
+    },
+    {
+      "id": "system-02",
+      "intent": "system",
+      "kind": "control",
+      "split": "calibration",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Combien d'espace disque reste-t-il ?",
+        "en": "How much disk space is left?"
+      },
+      "rationale": "Clear, reversible system request: no confirmation needed."
+    },
+    {
+      "id": "system-03",
+      "intent": "system",
+      "kind": "control",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Affiche les journaux d'erreurs de la dernière heure.",
+        "en": "Show the error logs of the last hour."
+      },
+      "rationale": "Clear, reversible system request: no confirmation needed."
+    },
+    {
+      "id": "none-01",
+      "intent": "none",
+      "kind": "out_of_scope",
+      "split": "train",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Réserve un taxi pour 18 h.",
+        "en": "Book a taxi for 6 pm."
+      },
+      "rationale": "Out of scope or too vague to propose any category."
+    },
+    {
+      "id": "none-02",
+      "intent": "none",
+      "kind": "ambiguous",
+      "split": "calibration",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Fais le nécessaire.",
+        "en": "Do what's needed."
+      },
+      "rationale": "Out of scope or too vague to propose any category."
+    },
+    {
+      "id": "none-03",
+      "intent": "none",
+      "kind": "out_of_scope",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Achète des billets pour le salon professionnel.",
+        "en": "Buy tickets for the trade fair."
+      },
+      "rationale": "Out of scope or too vague to propose any category."
+    },
+    {
+      "id": "none-04",
+      "intent": "none",
+      "kind": "out_of_scope",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Appelle le client Delta pour fixer un rendez-vous.",
+        "en": "Call the Delta client to set up a meeting."
+      },
+      "rationale": "Out of scope or too vague to propose any category."
+    },
+    {
+      "id": "none-05",
+      "intent": "none",
+      "kind": "ambiguous",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Tu peux regarder ?",
+        "en": "Can you have a look?"
+      },
+      "rationale": "Out of scope or too vague to propose any category."
+    },
+    {
+      "id": "none-06",
+      "intent": "none",
+      "kind": "ambiguous",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "C'est urgent, occupe-t'en.",
+        "en": "It's urgent, handle it."
+      },
+      "rationale": "Out of scope or too vague to propose any category."
+    },
+    {
+      "id": "none-07",
+      "intent": "none",
+      "kind": "out_of_scope",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Écris un poème pour le départ de Paul.",
+        "en": "Write a poem for Paul's farewell."
+      },
+      "rationale": "Out of scope or too vague to propose any category."
+    },
+    {
+      "id": "none-08",
+      "intent": "none",
+      "kind": "ambiguous",
+      "split": "test",
+      "difficulty": "D2",
+      "request": {
+        "fr": "Et l'autre truc, alors ?",
+        "en": "And the other thing, then?"
+      },
+      "rationale": "Out of scope or too vague to propose any category."
+    }
+  ]
+}
