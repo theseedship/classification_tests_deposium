@@ -1,0 +1,54 @@
+{
+  "schema_version": "deposium.research-dataset/v1",
+  "dataset_id": "facade-routing-complex-v1",
+  "version": "1.0.0-exploratory",
+  "frozen_date": "2026-11-01",
+  "status": "frozen_before_first_candidate_prediction",
+  "case_schema": "deposium.case/v2",
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "389d362dafa7696b3cb4fb18f0d44a1ae98569a1ae661133f7ec9db44b6930d6",
+  "spec_sha256": "c1850a55a098c631c7929334899db1a7b4ebb5c0af32cac3669384ca84bb5ee5",
+  "case_count": 96,
+  "family_count": 48,
+  "options_per_case": 8,
+  "counts_by_language": {
+    "en": 48,
+    "fr": 48
+  },
+  "counts_by_split": {
+    "calibration": 16,
+    "test": 64,
+    "train": 16
+  },
+  "counts_by_category": {
+    "analyze": 12,
+    "evaluate": 12,
+    "graph": 12,
+    "none": 12,
+    "process": 12,
+    "search": 12,
+    "system": 12,
+    "visualize": 12
+  },
+  "counts_by_kind": {
+    "ambiguous": 4,
+    "compound_negation": 14,
+    "context_turn": 28,
+    "context_vague": 4,
+    "first_step": 28,
+    "implicit_goal": 14,
+    "out_of_scope": 4
+  },
+  "counts_by_answer_position": {
+    "a": 12,
+    "b": 12,
+    "c": 12,
+    "d": 12,
+    "e": 12,
+    "f": 12,
+    "g": 12,
+    "h": 12
+  },
+  "reference_review": "agent_only_pending_human",
+  "authoring": "Complex tier: multi-step requests (the reference is the category of the first step), requests that depend on a previous exchange, compound refusals, goals stated without the action, and genuine ambiguity or out-of-scope first steps. The question asks for the category to use first. Written without access to any router rule or keyword list; generic category descriptions identical to facade-routing-v1."
+}

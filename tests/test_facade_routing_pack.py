@@ -63,5 +63,50 @@ class FacadeRoutingPackTests(unittest.TestCase):
         self.assertEqual(facade_corpus.build_cases(), self.cases)
 
 
+class FacadeRoutingTierTests(unittest.TestCase):
+    TIERS = {"facade-routing-advanced-v1": "fra1", "facade-routing-complex-v1": "frc1"}
+
+    def load(self, dataset_id):
+        cases, digest = load_cases(ROOT / "datasets" / dataset_id / "cases.jsonl")
+        manifest = json.loads((ROOT / "datasets" / dataset_id / "manifest.json").read_text())
+        self.assertEqual(manifest["cases_sha256"], digest)
+        return cases
+
+    def test_each_tier_is_balanced_and_frozen(self):
+        for dataset_id, prefix in self.TIERS.items():
+            with self.subTest(dataset_id):
+                cases = self.load(dataset_id)
+                self.assertEqual(len(cases), 96)
+                self.assertTrue(all(c["case_id"].startswith(prefix + "-") for c in cases))
+                self.assertEqual(Counter(c["split"] for c in cases), {"test": 64, "train": 16, "calibration": 16})
+                self.assertEqual(set(Counter(c["evaluation"]["oracle"]["params"]["task"] for c in cases).values()), {12})
+                self.assertEqual(set(Counter(c["reference"]["assertions"][0]["value"] for c in cases).values()), {12})
+                self.assertEqual(facade_corpus.build_cases(dataset_id), cases)
+                validate_cases(cases)
+
+    def test_complex_tier_asks_for_the_first_category_and_carries_previous_turns(self):
+        cases = self.load("facade-routing-complex-v1")
+        self.assertEqual({c["input"]["question"] for c in cases}, set(facade_corpus.QUESTION_FIRST.values()))
+        with_turn = [c for c in cases if c["input"]["context"].startswith(("Échange précédent", "Previous exchange"))]
+        kinds = Counter(c["evaluation"]["oracle"]["params"]["kind"] for c in with_turn)
+        self.assertEqual(kinds, {"context_turn": 28, "context_vague": 4})
+        advanced = self.load("facade-routing-advanced-v1")
+        self.assertEqual({c["input"]["question"] for c in advanced}, set(facade_corpus.QUESTION.values()))
+
+    def test_tier_cases_are_validated_against_their_own_frozen_definition(self):
+        for dataset_id in self.TIERS:
+            case = deepcopy(self.load(dataset_id)[7])
+            validate_cases([deepcopy(case)])
+            case["reference"]["assertions"][0]["value"] = "a" if case["reference"]["assertions"][0]["value"] != "a" else "b"
+            with self.assertRaises(ValueError):
+                validate_cases([case])
+
+    def test_tier_text_names_no_application_component(self):
+        for dataset_id in self.TIERS:
+            text = (ROOT / "datasets" / dataset_id / "specs.json").read_text().lower()
+            for forbidden in ("deposium_", "mcp", "duckdb", "supabase", "mistral", "groq", "bed-llm", "intent-mapping"):
+                self.assertNotIn(forbidden, text)
+
+
 if __name__ == "__main__":
     unittest.main()

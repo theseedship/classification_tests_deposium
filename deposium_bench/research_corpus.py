@@ -538,7 +538,7 @@ def validate_oracle(case):
         from .physics_corpus import validate_oracle as validate_physics_oracle
         return validate_physics_oracle(case)
     if (isinstance(case, dict) and isinstance(case.get("evaluation"), dict)
-            and str(case["evaluation"].get("base_case_id", "")).startswith("frv1-")):
+            and str(case["evaluation"].get("base_case_id", "")).startswith(("frv1-", "fra1-", "frc1-"))):
         from .facade_corpus import validate_oracle as validate_facade_oracle
         return validate_facade_oracle(case)
     try:
