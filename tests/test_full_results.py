@@ -534,6 +534,53 @@ class FullResultsTests(unittest.TestCase):
         self.assertIn("D3 mini · macOS CPU (192/192)", glance[0])
         self.assertIn("(tie)", glance[0])
 
+    def test_facade_routing_ranks_models_with_the_private_router_row(self):
+        rows = {r["observation"]: r for r in self.data["facade_routing"]}
+        self.assertEqual(set(rows), {"FacadeRouterReplay", "D3liteMacos", "Vela03Macos", "D3nanoMacos", "D3miniMacos"})
+        router = rows["FacadeRouterReplay"]
+        self.assertEqual((router["kind"], router["counts"]["all"]["correct"], router["paired"]), ("private_router_replay", 28, None))
+        for row in rows.values():
+            above = sum(o["counts"]["all"]["correct"] > row["counts"]["all"]["correct"] for o in rows.values())
+            self.assertEqual(row["rank_all"], 1 + above)
+            if row["kind"] == "classifier":
+                pair = row["paired"]["all"]
+                self.assertEqual(pair["both"] + pair["router_only"], 28)
+                self.assertEqual(pair["both"] + pair["model_only"], row["counts"]["all"]["correct"])
+        coverage = {r["id"]: r for r in self.data["coverage"]["observations"]}
+        self.assertTrue(coverage["FacadeRouterReplay"]["router_observation"])
+        self.assertEqual([k for k, c in coverage["FacadeRouterReplay"]["cells"].items() if c["evidence_present"]], ["facade_routing"])
+        self.assertEqual(coverage["D3Q4"]["cells"]["facade_routing"]["status"], "not_run")
+        text = results.render(self.data)
+        self.assertIn("### Facade routing (model vs router)", text)
+        self.assertIn("| Tool routing | Facade routing (model vs router) | 80 (48 test) | 5 |", text)
+        passage_table = text.split("### Passage-only observations and ranking methods")[1].split("###")[0]
+        self.assertNotIn("Production router", passage_table)
+        self.assertNotIn("Facade routing", passage_table)
+        page = results.render_model_pages(self.data)[results.MODEL_PAGES_DIR + "FacadeRouterReplay.md"]
+        self.assertIn("not externally reproducible", page)
+        self.assertIn("| Tool routing | [Facade routing (model vs router)](../../RESULTS.md#facade-routing-model-vs-router) | 28/80 | 10/48 |", page)
+        with self.changed_json(results.FACADE, lambda d: d["runs"][0]["identity"].update(model_revision="0" * 40)):
+            with self.assertRaisesRegex(ValueError, "identity join failed"):
+                results.build(self.root)
+        with self.changed_json(results.FACADE, lambda d: d["runs"][0]["identity"].update(runtime_lock_sha256="0" * 64)):
+            with self.assertRaisesRegex(ValueError, "identity join failed"):
+                results.build(self.root)
+        def abstain_once(d):
+            c = d["runs"][0]["counts"]["all"]
+            c["statuses"] = {"ok": 79, "abstain": 1}
+        with self.changed_json(results.FACADE, abstain_once):
+            data = results.build(self.root)
+            cell = next(r for r in data["coverage"]["observations"] if r["id"] == "D3liteMacos")["cells"]["facade_routing"]
+            self.assertEqual((cell["scored_or_valid"], cell["outcomes"]["abstain"]), (80, 1))
+        # Ranking stays a passage column: adding a task must not shift it into the generated-JSON columns.
+        bge = text.split("### Passage-only observations and ranking methods")[1].split("###")[0]
+        self.assertIn("BGE v2-m3", bge)
+        self.assertIn("Ranking R0–3 /512", bge)
+        self.assertNotIn("ranking None/None", text)
+        with self.changed_json(results.FACADE, lambda d: d.update(dataset_sha256="0" * 64)):
+            with self.assertRaisesRegex(ValueError, "changed pack"):
+                results.build(self.root)
+
     def test_executed_episodes_join_by_identity_and_rank_procedure_correct_cases(self):
         rows = {r["observation"]: r for r in self.data["choice_episodes"]}
         self.assertEqual(set(rows), {"D3liteMacos", "Vela03Macos", "D3nanoMacos", "D3miniMacos"})
@@ -586,8 +633,9 @@ class FullResultsTests(unittest.TestCase):
         coverage = self.data["coverage"]
         rows = {r["id"]: r for r in coverage["observations"]}
         self.assertEqual({k for k, r in rows.items() if r["context_observation"]}, EXPECTED_LABELS)
-        self.assertEqual(len(rows), 40)
-        self.assertEqual({len(r["cells"]) for r in rows.values()}, {13})
+        # 34 context rows, five passage-only methods, one generative candidate, one private router replay.
+        self.assertEqual(len(rows), 41)
+        self.assertEqual({len(r["cells"]) for r in rows.values()}, {14})
         generative = rows["QwenToolPolicyV2"]
         self.assertTrue(generative["generative_observation"])
         self.assertFalse(generative["context_observation"])
@@ -627,7 +675,7 @@ class FullResultsTests(unittest.TestCase):
         rendered = results.render(self.data)
         self.assertLess(rendered.index("## Coverage overview"), rendered.index("## Updated task rankings"))
         csv_rows = list(csv.DictReader(io.StringIO(results.outputs(self.data)["docs/leaderboard/coverage.csv"])))
-        self.assertEqual(len(csv_rows), 40 * 13)
+        self.assertEqual(len(csv_rows), 41 * 14)
         self.assertIn("### Generated-JSON tool-policy observations", rendered)
         self.assertNotIn("| Discovery (JSON) /10 | Arguments", rendered.split("### Passage-only")[0])
         blank = next(r for r in csv_rows if r["observation"] == "ClefFlashQ8" and r["task"] == "tool_proposal")

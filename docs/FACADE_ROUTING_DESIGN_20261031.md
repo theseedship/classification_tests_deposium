@@ -56,3 +56,7 @@ review.
 3. The four classifiers, one CPU campaign at a time, after the passage campaigns
    of issue #52 have finished.
 4. One report and registration in the results generator.
+
+**Done, 1 November 2026:** [results](FACADE_ROUTING_RESULTS_20261101.md).
+Router 28/80 (test 10/48); D3 mini 79/80, D3 nano 76/80, D3 lite 71/80,
+Vela 2.0 0.3B 64/80, all cases `ok`.

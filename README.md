@@ -51,7 +51,10 @@ capability 168/192, physics 14/48; [Vela 2.0 0.3B](docs/VELA2_03_MACOS_RESULTS_2
 complementary packs; most rows still have only the context and first-tool columns. Those four
 CPU rows also ran the [rotation-0 passage evidence](docs/PASSAGE_SMALL_CPU_RESULTS_20261031.md)
 already observed on both Flash runtimes: D3 mini scored 266/512 relevance and 527/768 support,
-the best totals of the complete rows, at about 20 s per call. Its [harness overview](docs/RESULTS.md#harness-coverage)
+the best totals of the complete rows, at about 20 s per call. On
+[facade routing](docs/FACADE_ROUTING_RESULTS_20261101.md) (which tool category a request
+needs), the same four rows scored 64–79/80 against 28/80 for a private replay of the
+production router. Its [harness overview](docs/RESULTS.md#harness-coverage)
 separates implemented scripted discovery, arguments and feedback fixtures from
 untested real-model output paths, empirical model allocation, application replay,
 and final answer/citation quality. Closed-choice success does not fill those cells.
