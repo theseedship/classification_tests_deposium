@@ -22,6 +22,12 @@ observed choice/yes-no/score responses and a closed server; it exposed the stock
 CLI's online catalogue bootstrap requirement. No benchmark score was added.
 Existing campaigns may continue independently.
 
+Review follow-ups, 1 November 2026: the passage relevance projection was
+realigned to three decidable levels ([results](PASSAGE_RELEVANCE_V2_RESULTS_20261101.md);
+v1 kept unchanged), and a [human-confirmation routing pack](FACADE_ROUTING_HITL_RESULTS_20261101.md)
+measures when a model asks a human before acting. Next: human review of the
+references flagged in the tier and passage reports (#8).
+
 GPU runtimes, 1 November 2026: D3 lite, nano and mini as Q8 GGUF on Apple Metal
 ([results](D3_SMALL_GGUF_METAL_RESULTS_20261101.md)) give the same decisions as
 their CPU rows on 97.9–100% of cases, 100–240× faster. NVIDIA CUDA

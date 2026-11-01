@@ -623,6 +623,25 @@ class FullResultsTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "changed complex pack"):
                 results.build(self.root)
 
+    def test_review_packs_render_and_join_by_identity(self):
+        review = self.data["review_packs"]
+        rel = {r["observation"]: r for r in review["relevance"]["rows"]}
+        self.assertEqual((rel["D3miniQ8Metal"]["counts"]["all"]["correct"], rel["D3miniQ8Metal"]["counts"]["majority_baseline"]), (406, 384))
+        hitl = {r["observation"]: r for r in review["hitl"]["rows"]}
+        self.assertEqual(hitl["D3miniQ8Metal"]["explicit_option"]["test_by_kind"]["hitl_confirm"]["asks_human"], 9)
+        self.assertIsNone(hitl["FacadeRouterReplay"]["own_confidence"]["threshold"])
+        text = results.render(self.data)
+        self.assertIn("### Passage relevance v2 (three levels)", text)
+        self.assertIn("### Facade routing: human confirmation", text)
+        def change(d):
+            d["candidates"][-1]["identities"][0]["model_sha256"] = "0" * 64
+        with self.changed_json(results.REVIEW_HITL, change):
+            with self.assertRaisesRegex(ValueError, "identity join failed"):
+                results.build(self.root)
+        with self.changed_json(results.REVIEW_RELEVANCE, lambda d: d["packs"].update({"passage-relevance-v2": "0" * 64})):
+            with self.assertRaisesRegex(ValueError, "changed relevance pack"):
+                results.build(self.root)
+
     def test_executed_episodes_join_by_identity_and_rank_procedure_correct_cases(self):
         rows = {r["observation"]: r for r in self.data["choice_episodes"]}
         self.assertEqual(set(rows), {"D3liteMacos", "Vela03Macos", "D3nanoMacos", "D3miniMacos"})
