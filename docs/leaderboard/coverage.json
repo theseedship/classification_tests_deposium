@@ -7162,7 +7162,7 @@
     "scripts/build-full-results.py": "05e8bd78222a3b2bb1b68cc0eaa89f28d217dd3f6cfa16a24f221cd2d16a86a2",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-    "scripts/consolidated-campaigns.py": "09b10e53ca850fadf704220f313af3493021ba6b533b44de32aad81dfb3a5bde"
+    "scripts/consolidated-campaigns.py": "8a4d7cf5ccdf4b5e412cb440cee81e25fa80a6a4828302b43260d21bf1afa607"
   },
   "tasks": [
     {

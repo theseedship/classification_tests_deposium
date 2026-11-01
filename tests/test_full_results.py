@@ -499,6 +499,12 @@ class FullResultsTests(unittest.TestCase):
             self.assertEqual((row["counts"]["correct"], row["counts"]["scored"], row["counts"]["total"]), (correct, total, total))
             self.assertEqual(row["status"], "complete")
         # The constant majority-class baselines quoted on the page match the scored class distribution.
+        for change in ({"completion_status": "incomplete", "stop_reason": "bench_source_changed"},
+                       {"stop_reason": "bench_source_changed"}):
+            with self.changed_json(results.EVIDENCE + "passage-small-cpu-20261031/d3-lite.json",
+                                   lambda d, change=change: d.update(change)):
+                with self.assertRaisesRegex(ValueError, "not a complete verified run: D3liteMacos"):
+                    results.build(self.root)
         score = json.loads((self.root / results.EVIDENCE / "passage-small-cpu-20261031/d3-mini.json").read_text())
         for axis, (_, hits, total) in results.PASSAGE_MAJORITY.items():
             classes = [v["total_decisions"] for v in score["choice_scores"][axis]["by_expected_label"].values()]

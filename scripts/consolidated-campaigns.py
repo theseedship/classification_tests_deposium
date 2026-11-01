@@ -373,6 +373,10 @@ class Campaigns:
                          and data["dataset_sha256"] == DATASETS["passage"] and data["cases"] == 128
                          and data["rotation"] == 0 and data["split"] == "test" and data["choice_model"]["profile"] == profile,
                          f"campaign: small-CPU passage export mismatch: {obs}")
+            # Only source-verified complete runs are published rows; an archive sealed incomplete
+            # (for example bench_source_changed) stays out of every view, even with all decisions scored.
+            self.require(data["completion_status"] == "complete" and data["stop_reason"] is None,
+                         f"campaign: small-CPU passage export is not a complete verified run: {obs}")
             self.inputs.read(profile)
             self.inputs.read("docs/" + PASSAGE_SMALL_CPU_REPORT)
             for axis, score in data["choice_scores"].items():
