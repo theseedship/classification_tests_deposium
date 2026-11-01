@@ -106,6 +106,17 @@ class UpstreamPilotTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "d327_exact_candidate_required"):
             upstream.execution_envelope(args, upstream.D327_ASSETS, Path(upstream.D327_ASSETS["files"][0]["path"]), [])
 
+    def test_small_envelope_admits_only_small_models_at_eight_gib(self):
+        small = {"repo_id": "ggml-org/vllm-d3-mini-GGUF", "files": [{"path": "m.gguf", "size": 5 * 1024 ** 3, "sha256": "a" * 64}]}
+        args = upstream_args(execution_envelope=upstream.SMALL_ENVELOPE, max_rss_mb=8192, phase=None)
+        self.assertEqual(upstream.execution_envelope(args, small, Path("m.gguf"), [])[0], {"name": upstream.SMALL_ENVELOPE})
+        large = {**small, "files": [{**small["files"][0], "size": 7 * 1024 ** 3}]}
+        with self.assertRaisesRegex(ValueError, "small_envelope_requires_a_small_model"):
+            upstream.execution_envelope(args, large, Path("m.gguf"), [])
+        with self.assertRaisesRegex(ValueError, "fixed_envelope_required"):
+            upstream.execution_envelope(upstream_args(execution_envelope=upstream.SMALL_ENVELOPE, max_rss_mb=18432, phase=None),
+                                        small, Path("m.gguf"), [])
+
     def test_runtime_refuses_wrong_source_and_binary_hash(self):
         binary = self.root / "llama-server"
         binary.write_bytes(b"synthetic-never-executed")

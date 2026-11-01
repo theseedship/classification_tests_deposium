@@ -62,6 +62,25 @@ copy during a phase. Each phase starts one technical warm-up input, archived
 and excluded from the denominators. No canary threshold: a valid wrong answer
 is a result.
 
+## Amendment, 1 November 2026, before the remaining Metal phases
+
+The first Metal series refused most phases at admission, before any model
+load: the 18 GiB envelope requires 26 GiB of estimated available memory and
+the host hovered around 26 GiB. Observed sampled RSS was 1.4 GiB for D3 lite
+and 5.5 GiB for D3 mini. A dedicated envelope, `small-gguf-8g-v1`, now applies
+to every phase not yet run: **8 GiB sampled RSS ceiling**, the same 8 GiB host
+reserve (admission at 16 GiB), same context, timeouts and 1,200 s per phase;
+it is limited to model files of at most 6 GiB. Phases already completed under
+the 18 GiB envelope (D3 lite facade and context; D3 mini context, capability
+and physics) keep it and are reported with it. Refused admissions created no
+archive and no prediction.
+
+Two attempts are recorded and not ranked: D3 mini facade attempt 001 was
+interrupted by the operator while the series runner was stopped (unsealed);
+D3 mini passages attempt 001 stopped at its technical warm-up because the
+preparation did not include the launcher's calibration warm-up input. The
+preparation driver now includes it, and both phases are rerun as new attempts.
+
 ## Reporting
 
 Per model, backend and pack: correct / all with every non-`ok` status kept;

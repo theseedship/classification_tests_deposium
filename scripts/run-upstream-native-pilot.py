@@ -41,6 +41,9 @@ SPEC.loader.exec_module(shared)
 PIN = "efe3626b119ff81033e309c3ba07a770bef2c546"
 REPOSITORY = "https://github.com/ggml-org/llama.cpp.git"
 DEFAULT_ENVELOPE = "flash-clef-18g-v1"
+# Small GGUF decision models (file at most 6 GiB): 8 GiB sampled RSS ceiling, same 8 GiB reserve.
+SMALL_ENVELOPE = "small-gguf-8g-v1"
+SMALL_MAX_FILE_BYTES = 6 * 1024 ** 3
 # Declared GPU backend and the load-time log line proving the model buffer lives on it.
 # Metal keeps its historical check; the others require a device model buffer of that backend.
 BACKEND_BUFFERS = {"metal": None, "cuda": r"\bCUDA\d+\S* model buffer size",
@@ -121,6 +124,14 @@ def execution_envelope(args, assets, model, cases):
                 and model.name != D327_ASSETS["files"][0]["path"]
                 and assets["files"][0]["sha256"] != D327_ASSETS["files"][0]["sha256"],
                 "d327_explicit_envelope_required")
+        return {"name": name}, cases, None
+    if name == SMALL_ENVELOPE:
+        require(args.max_rss_mb == 8192 and 0 < args.max_seconds <= 1200 and phase is None
+                and getattr(args, "preparation_receipt", None) is None
+                and getattr(args, "calibration_receipt", None) is None,
+                "upstream_pilot_fixed_envelope_required")
+        require(assets.get("repo_id") != D327_ASSETS["repo_id"] and assets["files"][0]["size"] <= SMALL_MAX_FILE_BYTES,
+                "small_envelope_requires_a_small_model")
         return {"name": name}, cases, None
     require(name == D327_ENVELOPE and typed_equal(assets, D327_ASSETS) and model.name == D327_ASSETS["files"][0]["path"]
             and getattr(args, "backend", "metal") == "metal"
@@ -495,7 +506,7 @@ def pilot(args):
               "execution_scope": "isolated_upstream_llama_cpp_no_application_gateway", "dataset": dataset,
               "completed": False, "model_assets": assets, "runtime": runtime, "memory_before": before,
               "synthetic_control_calls_in_quality_denominator": False}
-    if canary is not None:
+    if canary is not None or envelope["name"] != DEFAULT_ENVELOPE:
         result["execution_envelope"] = envelope
     try:
         with (output / "engine.log").open("xb") as log:
@@ -648,7 +659,7 @@ def main(argv=None):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--model-id", required=True)
     parser.add_argument("--decision-type", choices=("d3", "clef"), default="d3")
-    parser.add_argument("--execution-envelope", choices=(DEFAULT_ENVELOPE, D327_ENVELOPE), default=DEFAULT_ENVELOPE)
+    parser.add_argument("--execution-envelope", choices=(DEFAULT_ENVELOPE, SMALL_ENVELOPE, D327_ENVELOPE), default=DEFAULT_ENVELOPE)
     parser.add_argument("--phase", choices=("canary", "anchor", "capability"))
     parser.add_argument("--preparation-receipt", type=Path)
     parser.add_argument("--calibration-receipt", type=Path)

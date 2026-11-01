@@ -80,7 +80,10 @@ def prepare(args):
     require(not model.is_symlink() and helper.is_file() and not helper.is_symlink(), "preparation_inputs_missing")
     assets = json.loads(args.assets_manifest.read_bytes())
     shared.validate_assets(assets, model)
-    _, dataset, cases, _, _ = upstream.selected_inputs(args)
+    _, dataset, cases, _, warmup = upstream.selected_inputs(args)
+    # The launcher's technical warm-up is a calibration input for passages; prepare it too.
+    if warmup["case_id"] not in {case["case_id"] for case in cases}:
+        cases = [*cases, warmup]
     main_payload, negative_payload = input_lines(cases, args.model_id, args.context)
     require(memory_snapshot()["MemAvailable_mib"] >= args.max_rss_mb + args.min_free_mb, "preparation_insufficient_memory")
     require(model.stat().st_size == assets["files"][0]["size"] and digest(model) == assets["files"][0]["sha256"],
