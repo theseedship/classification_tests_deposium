@@ -20,7 +20,7 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 
 | Family | Task | Correct / all | Held-out test | Rank all | Rank test | Execution | Report |
 |---|---|---:|---:|---:|---:|---|---|
-| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 117/132 | 63/66 | 9 | 2 | all `ok` | [GLICLASS_V4_RESULTS_20261017](../../GLICLASS_V4_RESULTS_20261017.md), [gliclass-session](../../evidence/gliclass-model-comparison-20261017/gliclass-session.json) |
+| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 117/132 | 63/66 | 10 | 2 | all `ok` | [GLICLASS_V4_RESULTS_20261017](../../GLICLASS_V4_RESULTS_20261017.md), [gliclass-session](../../evidence/gliclass-model-comparison-20261017/gliclass-session.json) |
 | RAG decision | [First-tool proposals](../../RESULTS.md#model-quality) | 20/24 | no test split | — | — | all `ok` | provisional agreement, zero qualified cases |
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | not run | — | — | — | — | — |
 | Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | not run | — | — | — | — | — |

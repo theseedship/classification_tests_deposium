@@ -2,7 +2,7 @@
 
 [README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · [Every model, every task](leaderboard/by-model/README.md) · [Passages and other campaigns](leaderboard/other-benchmarks.md) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)
 
-**34 context model/runtime observations through 31 October 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.
+**37 context model/runtime observations through 31 October 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8 and the direct upstream D3 Flash Q8 runtime.
 Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;
 quantizations and devices remain separate. Rendering this page does not rerun or rescore models.
 
@@ -26,6 +26,7 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
   - [Answerability](#answerability)
   - [Executed tool episodes (closed choice)](#executed-tool-episodes-closed-choice)
   - [Facade routing (model vs router)](#facade-routing-model-vs-router)
+  - [Facade routing: harder tiers](#facade-routing-harder-tiers)
   - [Campaign latency and memory](#campaign-latency-and-memory)
 - [Model quality](#model-quality)
 - [Language and task complexity](#language-and-task-complexity)
@@ -45,15 +46,17 @@ One line per task, grouped by family: **RAG decision** (which source or first to
 
 | Family | Task | Cases | Observations | Leader over all cases | Leader on held-out test | Details |
 |---|---|---|---:|---|---|---|
-| RAG decision | Context choices | 132 (66 test) | 34 | D3 27B · Q4 Metal (128/132) | D3 27B · Q4 Metal (65/66 test) | [Model quality](#model-quality) |
+| RAG decision | Context choices | 132 (66 test) | 37 | D3 27B · Q4 Metal (128/132) | D3 27B · Q4 Metal (65/66 test) | [Model quality](#model-quality) |
 | RAG decision | First-tool proposals | 24 (no test split) | 32 | D3 27B · Q4 Metal (24/24) | provisional agreement, not routing accuracy | [Model quality](#model-quality) |
-| Tool workflow | Capability and workflow choices | 192 (96 test) | 6 | Clef Flash Q8 · direct Metal (192/192), D3 Flash Q8 · gateway Metal (192/192), D3 mini · macOS CPU (192/192) (tie) | Clef Flash Q8 · direct Metal (96/96 test), D3 Flash Q8 · gateway Metal (96/96 test), D3 mini · macOS CPU (96/96 test) (tie) | [Capability](#capability-choices) |
-| Reasoning with a supplied law | Physics choices | 48 (36 test) | 6 | Clef Flash Q8 · direct Metal (41/48) | D3 Flash Q8 · direct Metal (32/36 test), D3 mini · macOS CPU (32/36 test) (tie) | [Physics choices](#physics-choices) |
+| Tool workflow | Capability and workflow choices | 192 (96 test) | 9 | Clef Flash Q8 · direct Metal (192/192), D3 Flash Q8 · gateway Metal (192/192), D3 mini · macOS CPU (192/192), D3 mini · Q8 Metal (192/192) (tie) | Clef Flash Q8 · direct Metal (96/96 test), D3 Flash Q8 · gateway Metal (96/96 test), D3 mini · macOS CPU (96/96 test), D3 mini · Q8 Metal (96/96 test) (tie) | [Capability](#capability-choices) |
+| Reasoning with a supplied law | Physics choices | 48 (36 test) | 9 | Clef Flash Q8 · direct Metal (41/48) | D3 Flash Q8 · direct Metal (32/36 test), D3 mini · macOS CPU (32/36 test), D3 mini · Q8 Metal (32/36 test) (tie) | [Physics choices](#physics-choices) |
 | Tool workflow, executed | Executed tool episodes (closed choice) | 32 (12 test) | 4 | D3 mini · macOS CPU (28/32) | D3 mini · macOS CPU (10/12 test) | [Executed episodes](#executed-tool-episodes-closed-choice) |
-| Tool routing | Facade routing (model vs router) | 80 (48 test) | 5 | D3 mini · macOS CPU (79/80) | D3 mini · macOS CPU (47/48 test) | [Facade routing](#facade-routing-model-vs-router) |
-| Retrieved evidence | Passage relevance | 512 (rotation 0) | 7 | D3 mini · macOS CPU (266/512) | no split ranking | [Passage relevance](#passage-relevance) |
-| Retrieved evidence | Claim support | 768 (rotation 0) | 8 | D3 mini · macOS CPU (527/768) | no split ranking | [Claim support](#claim-support) |
-| Retrieved evidence | Answerability | 128 (rotation 0) | 8 | D3 Flash Q8 · direct Metal (122/128) | no split ranking | [Answerability](#answerability) |
+| Tool routing | Facade routing (model vs router) | 80 (48 test) | 8 | D3 mini · Q8 Metal (79/80), D3 mini · macOS CPU (79/80) (tie) | D3 mini · Q8 Metal (47/48 test), D3 mini · macOS CPU (47/48 test) (tie) | [Facade routing](#facade-routing-model-vs-router) |
+| Tool routing | Facade routing, advanced tier | 96 (64 test) | 5 | D3 mini · Q8 Metal (94/96) | D3 mini · Q8 Metal (62/64 test) | [Harder tiers](#facade-routing-harder-tiers) |
+| Tool routing | Facade routing, complex tier | 96 (64 test) | 5 | D3 mini · Q8 Metal (92/96) | D3 mini · Q8 Metal (60/64 test) | [Harder tiers](#facade-routing-harder-tiers) |
+| Retrieved evidence | Passage relevance | 512 (rotation 0) | 10 | D3 mini · macOS CPU (266/512), D3 mini · Q8 Metal (266/512) (tie) | no split ranking | [Passage relevance](#passage-relevance) |
+| Retrieved evidence | Claim support | 768 (rotation 0) | 11 | D3 mini · macOS CPU (527/768) | no split ranking | [Claim support](#claim-support) |
+| Retrieved evidence | Answerability | 128 (rotation 0) | 11 | D3 Flash Q8 · direct Metal (122/128) | no split ranking | [Answerability](#answerability) |
 | Tool policy, generated | Generated-JSON tool policy | 10 + 6 + 18 (TRAIN canary + held-out) | 1 | Qwen3-4B Instruct 2507 · Q8 Metal · generated JSON, prompt v2: discovery 3/10; arguments 6/6; episodes 7/18 passed (single observation, unranked) | held-out pack 9/24 over the three contracts; see the report | [Generated-JSON observations](#generated-json-tool-policy-observations) |
 
 Rows further down keep every observation, partial campaigns included, with their denominators and statuses. For one model across every task, open [Every model, every task](leaderboard/by-model/README.md): one page per observation with scores, ranks, execution outcomes, speed and reports.
@@ -66,7 +69,7 @@ Rows further down keep every observation, partial campaigns included, with their
 
 ### Context model/runtime observations
 
-The 34 rows below preserve quantization and runtime identities; sizes are publisher classes or declared counts, not independent measurements. **Metal gateway** and **direct Metal** are different paths; scores and task rankings follow below. Context/132 contains text/76, mathematics/28 and chemistry/28; [their scores and held-out test results](#model-quality) remain separate.
+The 37 rows below preserve quantization and runtime identities; sizes are publisher classes or declared counts, not independent measurements. **Metal gateway** and **direct Metal** are different paths; scores and task rankings follow below. Context/132 contains text/76, mathematics/28 and chemistry/28; [their scores and held-out test results](#model-quality) remain separate.
 
 | Model / runtime observation | Size | Context /132 | Tool proposal /24 | Capability /192 | Physics /48 | Episodes (choice) /32 | Facade routing /80 | Relevance R0 /512 | Support R0 /768 | Answerability R0 /128 | Relevance R0–3 /2048 | Ranking R0–3 /512 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -78,8 +81,10 @@ The 34 rows below preserve quantization and runtime identities; sizes are publis
 | D3 flash · Q4 Metal | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 mini · CPU | 4.539B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 mini · macOS CPU | 4.539B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | complete 80/80 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
+| D3 mini · Q8 Metal | 4.539B backbone | complete 132/132 | not_run | complete 192/192 | complete 48/48 | not_run | complete 80/80 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | D3 nano · CPU | 2.213B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 nano · macOS CPU | 2.213B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | complete 80/80 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
+| D3 nano · Q8 Metal | 2.213B backbone | complete 132/132 | not_run | complete 192/192 | complete 48/48 | not_run | complete 80/80 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | GLiClass v4 9B · BF16 MPS | 9B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Clef Flash · Q8 direct Metal | 9B class | complete 132/132 | not_run | complete 192/192 | complete 48/48 | not_run | not_run | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | Vela 2.0 4B · CPU | 4.211B | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
@@ -88,6 +93,7 @@ The 34 rows below preserve quantization and runtime identities; sizes are publis
 | Noma · CPU | ~2.67B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 lite · CPU | 0.853B backbone | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | D3 lite · macOS CPU | 0.853B backbone | complete 132/132 | complete 24/24 | complete 192/192 | complete 48/48 | complete 32/32 | complete 80/80 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
+| D3 lite · Q8 Metal | 0.853B backbone | complete 132/132 | not_run | complete 192/192 | complete 48/48 | not_run | complete 80/80 | complete 512/512 | complete 768/768 | complete 128/128 | not_run | not_run |
 | Decision 2.0 Sol 2B · CPU | 2B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Vela 2.0 0.8B · CPU | 0.755B declared | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
 | Decision 2.0 Eos 0.8B · CPU | 0.8B class | complete 132/132 | complete 24/24 | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run | not_run |
@@ -161,18 +167,21 @@ These tables include every published campaign on these packs. Each task has its 
 
 <sub>**Rank all**: competition rank by correct answers over every case of the pack (all splits); **Rank test**: the same rank over the held-out test cases only, the better signal against tuning; equal totals share a rank. **Correct / all** keeps failed, missing and unsupported cases in the denominator; **Scored / all** shows how many cases produced a valid answer.</sub>
 
-**Leading on held-out test**: Clef Flash Q8 · direct Metal (96/96 test), D3 Flash Q8 · gateway Metal (96/96 test), D3 mini · macOS CPU (96/96 test) (tie); **leading over all cases**: Clef Flash Q8 · direct Metal (192/192), D3 Flash Q8 · gateway Metal (192/192), D3 mini · macOS CPU (192/192) (tie). A lead of a few cases on correlated FR/EN variants is not a general ranking.
+**Leading on held-out test**: Clef Flash Q8 · direct Metal (96/96 test), D3 Flash Q8 · gateway Metal (96/96 test), D3 mini · macOS CPU (96/96 test), D3 mini · Q8 Metal (96/96 test) (tie); **leading over all cases**: Clef Flash Q8 · direct Metal (192/192), D3 Flash Q8 · gateway Metal (192/192), D3 mini · macOS CPU (192/192), D3 mini · Q8 Metal (192/192) (tie). A lead of a few cases on correlated FR/EN variants is not a general ranking.
 
 | Rank all | Rank test | Model / execution path | Correct / all | Scored / all | Test correct / all | Source |
 |---:|---:|---|---:|---:|---:|---|
 | 1 | 1 | Clef Flash Q8 · direct Metal | 192/192 | 192/192 | 96/96 | [Report](CLEF_FLASH_RESULTS_20261029.md) |
 | 1 | 1 | D3 Flash Q8 · gateway Metal | 192/192 | 192/192 | 96/96 | [Report](CAPABILITY_FLASH_RESULTS_20261029.md) |
 | 1 | 1 | D3 mini · macOS CPU | 192/192 | 192/192 | 96/96 | [Report](D3_MINI_MACOS_RESULTS_20261031.md) |
-| 4 | 4 | D3 nano · macOS CPU | 188/192 | 192/192 | 92/96 | [Report](D3_NANO_MACOS_RESULTS_20261031.md) |
-| 5 | 5 | D3 lite · macOS CPU | 168/192 | 192/192 | 80/96 | [Report](D3_LITE_MACOS_RESULTS_20261030.md) |
-| 6 | 6 | Vela 2.0 0.3B · macOS CPU | 128/192 | 192/192 | 62/96 | [Report](VELA2_03_MACOS_RESULTS_20261030.md) |
+| 1 | 1 | D3 mini · Q8 Metal | 192/192 | 192/192 | 96/96 | [Report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 5 | 5 | D3 nano · macOS CPU | 188/192 | 192/192 | 92/96 | [Report](D3_NANO_MACOS_RESULTS_20261031.md) |
+| 6 | 6 | D3 nano · Q8 Metal | 187/192 | 192/192 | 91/96 | [Report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 7 | 7 | D3 lite · Q8 Metal | 170/192 | 192/192 | 82/96 | [Report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 8 | 8 | D3 lite · macOS CPU | 168/192 | 192/192 | 80/96 | [Report](D3_LITE_MACOS_RESULTS_20261030.md) |
+| 9 | 9 | Vela 2.0 0.3B · macOS CPU | 128/192 | 192/192 | 62/96 | [Report](VELA2_03_MACOS_RESULTS_20261030.md) |
 
-Clef Flash Q8 · direct Metal, D3 Flash Q8 · gateway Metal, D3 mini · macOS CPU reach the ceiling on these supplied proposals; a perfect or near-perfect closed-choice score does not qualify executable tools. Runtimes differ per row (gateway-backed Metal, direct native listener, CPU worker) and are not pooled.
+Clef Flash Q8 · direct Metal, D3 Flash Q8 · gateway Metal, D3 mini · macOS CPU, D3 mini · Q8 Metal reach the ceiling on these supplied proposals; a perfect or near-perfect closed-choice score does not qualify executable tools. Runtimes differ per row (gateway-backed Metal, direct native listener, CPU worker) and are not pooled.
 
 <sub>**Track**: the three case families of the pack; selection = choose capabilities/tool sets, arguments = bind arguments and dependencies, observations = choose the next step after fixed tool observations.</sub>
 
@@ -187,9 +196,18 @@ Clef Flash Q8 · direct Metal, D3 Flash Q8 · gateway Metal, D3 mini · macOS CP
 | D3 mini · macOS CPU | Capability selection | 64/64 | 32/32 |
 | D3 mini · macOS CPU | Arguments and dependencies | 64/64 | 32/32 |
 | D3 mini · macOS CPU | Next step after fixed observations | 64/64 | 32/32 |
+| D3 mini · Q8 Metal | Capability selection | 64/64 | 32/32 |
+| D3 mini · Q8 Metal | Arguments and dependencies | 64/64 | 32/32 |
+| D3 mini · Q8 Metal | Next step after fixed observations | 64/64 | 32/32 |
 | D3 nano · macOS CPU | Capability selection | 63/64 | 31/32 |
 | D3 nano · macOS CPU | Arguments and dependencies | 61/64 | 29/32 |
 | D3 nano · macOS CPU | Next step after fixed observations | 64/64 | 32/32 |
+| D3 nano · Q8 Metal | Capability selection | 63/64 | 31/32 |
+| D3 nano · Q8 Metal | Arguments and dependencies | 60/64 | 28/32 |
+| D3 nano · Q8 Metal | Next step after fixed observations | 64/64 | 32/32 |
+| D3 lite · Q8 Metal | Capability selection | 47/64 | 23/32 |
+| D3 lite · Q8 Metal | Arguments and dependencies | 59/64 | 27/32 |
+| D3 lite · Q8 Metal | Next step after fixed observations | 64/64 | 32/32 |
 | D3 lite · macOS CPU | Capability selection | 47/64 | 23/32 |
 | D3 lite · macOS CPU | Arguments and dependencies | 57/64 | 25/32 |
 | D3 lite · macOS CPU | Next step after fixed observations | 64/64 | 32/32 |
@@ -201,16 +219,19 @@ Clef Flash Q8 · direct Metal, D3 Flash Q8 · gateway Metal, D3 mini · macOS CP
 
 <sub>**Rank all**: competition rank by correct answers over every case of the pack (all splits); **Rank test**: the same rank over the held-out test cases only, the better signal against tuning; equal totals share a rank. **Correct / all** keeps failed, missing and unsupported cases in the denominator; **Scored / all** shows how many cases produced a valid answer.</sub>
 
-**Leading on held-out test**: D3 Flash Q8 · direct Metal (32/36 test), D3 mini · macOS CPU (32/36 test) (tie); **leading over all cases**: Clef Flash Q8 · direct Metal (41/48). A lead of a few cases on correlated FR/EN variants is not a general ranking.
+**Leading on held-out test**: D3 Flash Q8 · direct Metal (32/36 test), D3 mini · macOS CPU (32/36 test), D3 mini · Q8 Metal (32/36 test) (tie); **leading over all cases**: Clef Flash Q8 · direct Metal (41/48). A lead of a few cases on correlated FR/EN variants is not a general ranking.
 
 | Rank all | Rank test | Model / execution path | Correct / all | Scored / all | Test correct / all | Source |
 |---:|---:|---|---:|---:|---:|---|
-| 1 | 3 | Clef Flash Q8 · direct Metal | 41/48 | 48/48 | 31/36 | [Report](CLEF_FLASH_RESULTS_20261029.md) |
+| 1 | 4 | Clef Flash Q8 · direct Metal | 41/48 | 48/48 | 31/36 | [Report](CLEF_FLASH_RESULTS_20261029.md) |
 | 2 | 1 | D3 Flash Q8 · direct Metal | 39/48 | 48/48 | 32/36 | [Report](PHYSICS_FLASH_RESULTS_20261029.md) |
 | 2 | 1 | D3 mini · macOS CPU | 39/48 | 48/48 | 32/36 | [Report](D3_MINI_MACOS_RESULTS_20261031.md) |
-| 4 | 4 | D3 nano · macOS CPU | 28/48 | 48/48 | 22/36 | [Report](D3_NANO_MACOS_RESULTS_20261031.md) |
-| 5 | 5 | Vela 2.0 0.3B · macOS CPU | 18/48 | 48/48 | 14/36 | [Report](VELA2_03_MACOS_RESULTS_20261030.md) |
-| 6 | 6 | D3 lite · macOS CPU | 14/48 | 48/48 | 12/36 | [Report](D3_LITE_MACOS_RESULTS_20261030.md) |
+| 2 | 1 | D3 mini · Q8 Metal | 39/48 | 48/48 | 32/36 | [Report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 5 | 5 | D3 nano · macOS CPU | 28/48 | 48/48 | 22/36 | [Report](D3_NANO_MACOS_RESULTS_20261031.md) |
+| 6 | 6 | D3 nano · Q8 Metal | 27/48 | 48/48 | 21/36 | [Report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 7 | 7 | Vela 2.0 0.3B · macOS CPU | 18/48 | 48/48 | 14/36 | [Report](VELA2_03_MACOS_RESULTS_20261030.md) |
+| 8 | 8 | D3 lite · macOS CPU | 14/48 | 48/48 | 12/36 | [Report](D3_LITE_MACOS_RESULTS_20261030.md) |
+| 8 | 8 | D3 lite · Q8 Metal | 14/48 | 48/48 | 12/36 | [Report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
 
 Calibration (12) and test (36) are shown separately because the all-case and test leaders can differ; with four options, 12/48 is chance level. No result establishes general physics expertise: the law and assumptions are supplied in each input.
 
@@ -223,12 +244,15 @@ Rotation 0: 128 pools, eight families, eight language directions, two correlated
 | Rank | Model / runtime | Correct / all | Scored / all | Macro class accuracy | Observation |
 |---:|---|---:|---:|---:|---|
 | 1 | D3 mini · macOS CPU | 266/512 | 512/512 | 60.56% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
-| 2 | Clef Flash Q8 · direct Metal | 261/512 | 512/512 | 60.40% | complete; [report](PASSAGE_CLEF_RESULTS_20261029.md) |
-| 3 | D3 Flash Q8 · direct Metal | 252/512 | 512/512 | 59.06% | complete; [report](PASSAGE_FLASH_RESULTS_20261029.md) |
-| 3 | D3 nano · macOS CPU | 252/512 | 512/512 | 62.84% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
-| 5 | D3-lite · CPU | 229/512 | 512/512 | 49.60% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
-| 5 | D3 lite · macOS CPU | 229/512 | 512/512 | 49.60% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
-| 7 | Vela 2.0 0.3B · macOS CPU | 112/512 | 512/512 | 32.46% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 1 | D3 mini · Q8 Metal | 266/512 | 512/512 | 60.56% | complete; [report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 3 | Clef Flash Q8 · direct Metal | 261/512 | 512/512 | 60.40% | complete; [report](PASSAGE_CLEF_RESULTS_20261029.md) |
+| 4 | D3 Flash Q8 · direct Metal | 252/512 | 512/512 | 59.06% | complete; [report](PASSAGE_FLASH_RESULTS_20261029.md) |
+| 4 | D3 nano · macOS CPU | 252/512 | 512/512 | 62.84% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 4 | D3 nano · Q8 Metal | 252/512 | 512/512 | 62.84% | complete; [report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 7 | D3 lite · Q8 Metal | 231/512 | 512/512 | 49.82% | complete; [report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 8 | D3-lite · CPU | 229/512 | 512/512 | 49.60% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
+| 8 | D3 lite · macOS CPU | 229/512 | 512/512 | 49.60% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 10 | Vela 2.0 0.3B · macOS CPU | 112/512 | 512/512 | 32.46% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
 
 ### Claim support
 
@@ -239,12 +263,15 @@ Rotation 0: 128 pools, eight families, eight language directions, two correlated
 | Rank | Model / runtime | Correct / all | Scored / all | Macro class accuracy | Observation |
 |---:|---|---:|---:|---:|---|
 | 1 | D3 mini · macOS CPU | 527/768 | 768/768 | 84.14% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
-| 2 | D3 Flash Q8 · direct Metal | 460/768 | 768/768 | 79.79% | complete; [report](PASSAGE_FLASH_RESULTS_20261029.md) |
-| 3 | Clef Flash Q8 · direct Metal | 446/768 | 768/768 | 81.09% | complete; [report](PASSAGE_CLEF_RESULTS_20261029.md) |
-| 4 | D3-lite · CPU | 443/768 | 768/768 | 80.92% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
-| 5 | D3 lite · macOS CPU | 439/768 | 768/768 | 80.69% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
-| 6 | D3 nano · macOS CPU | 366/768 | 768/768 | 76.79% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
-| 7 | Vela 2.0 0.3B · macOS CPU | 151/768 | 768/768 | 41.63% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 2 | D3 mini · Q8 Metal | 517/768 | 768/768 | 83.83% | complete; [report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 3 | D3 Flash Q8 · direct Metal | 460/768 | 768/768 | 79.79% | complete; [report](PASSAGE_FLASH_RESULTS_20261029.md) |
+| 4 | D3 lite · Q8 Metal | 449/768 | 768/768 | 81.27% | complete; [report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 5 | Clef Flash Q8 · direct Metal | 446/768 | 768/768 | 81.09% | complete; [report](PASSAGE_CLEF_RESULTS_20261029.md) |
+| 6 | D3-lite · CPU | 443/768 | 768/768 | 80.92% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
+| 7 | D3 lite · macOS CPU | 439/768 | 768/768 | 80.69% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 8 | D3 nano · macOS CPU | 366/768 | 768/768 | 76.79% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 8 | D3 nano · Q8 Metal | 366/768 | 768/768 | 76.79% | complete; [report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 10 | Vela 2.0 0.3B · macOS CPU | 151/768 | 768/768 | 41.63% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
 | — | Jev 1.14 · API | 394/768 | 514/768 | 90.05% | partial; [report](PASSAGE_JEV_RESULTS_20261015.md) |
 
 ### Answerability
@@ -258,10 +285,13 @@ Rotation 0: 128 pools, eight families, eight language directions, two correlated
 | 1 | D3 Flash Q8 · direct Metal | 122/128 | 128/128 | 97.73% | complete; [report](PASSAGE_FLASH_RESULTS_20261029.md) |
 | 2 | Clef Flash Q8 · direct Metal | 109/128 | 128/128 | 68.31% | complete; [report](PASSAGE_CLEF_RESULTS_20261029.md) |
 | 3 | D3 mini · macOS CPU | 104/128 | 128/128 | 80.68% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
-| 4 | D3 nano · macOS CPU | 93/128 | 128/128 | 86.74% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
-| 4 | Vela 2.0 0.3B · macOS CPU | 93/128 | 128/128 | 46.72% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
-| 6 | D3-lite · CPU | 88/128 | 128/128 | 80.81% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
-| 6 | D3 lite · macOS CPU | 88/128 | 128/128 | 80.81% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 4 | D3 mini · Q8 Metal | 102/128 | 128/128 | 76.52% | complete; [report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 5 | D3 nano · Q8 Metal | 94/128 | 128/128 | 87.12% | complete; [report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
+| 6 | D3 nano · macOS CPU | 93/128 | 128/128 | 86.74% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 6 | Vela 2.0 0.3B · macOS CPU | 93/128 | 128/128 | 46.72% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 8 | D3-lite · CPU | 88/128 | 128/128 | 80.81% | complete; [report](PASSAGE_CPU_RESULTS_20261015.md) |
+| 8 | D3 lite · macOS CPU | 88/128 | 128/128 | 80.81% | complete; [report](PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| 8 | D3 lite · Q8 Metal | 88/128 | 128/128 | 80.81% | complete; [report](D3_SMALL_GGUF_METAL_RESULTS_20261101.md) |
 | — | Jev 1.14 · API | Not run | 0/128 | NR | not_run; [report](PASSAGE_JEV_RESULTS_20261015.md) |
 
 Class macro accuracy averages the scored class accuracies. Jev's partial support macro is conditional on its observed subset and is not a complete-coverage comparison; unobserved decisions remain missing in the totals.
@@ -289,21 +319,40 @@ Support insufficiency/refutation remains weak for both Flash candidates. Clef ac
 
 ### Facade routing (model vs router)
 
-80 synthetic FR/EN requests to a document assistant (16 TRAIN, 16 calibration, 48 TEST): which of eight tool categories should handle the request, or *none* (out of scope or too vague). The production router is a deterministic function replayed privately at a pinned revision; only its aggregate scores are public, so its row is **not externally reproducible**. References were written without access to its rules. [Report and limits](FACADE_ROUTING_RESULTS_20261101.md).
+80 synthetic FR/EN requests to a document assistant (16 TRAIN, 16 calibration, 48 TEST): which of eight tool categories should handle the request, or *none* (out of scope or too vague). The production router is a deterministic function replayed privately at a pinned revision; only its aggregate scores are public, so its row is **not externally reproducible**. References were written without access to its rules. [Report and limits](FACADE_ROUTING_TIERS_RESULTS_20261101.md).
 
 <sub>**Rank all**: competition rank by correct answers over every case of the pack (all splits); **Rank test**: the same rank over the held-out test cases only, the better signal against tuning; equal totals share a rank. **Correct / all** keeps failed, missing and unsupported cases in the denominator; **Scored / all** shows how many cases produced a valid answer.</sub>
 
-**Leading on held-out test**: D3 mini · macOS CPU (47/48 test); **leading over all cases**: D3 mini · macOS CPU (79/80).
+**Leading on held-out test**: D3 mini · Q8 Metal (47/48 test), D3 mini · macOS CPU (47/48 test) (tie); **leading over all cases**: D3 mini · Q8 Metal (79/80), D3 mini · macOS CPU (79/80) (tie).
 
 | Rank all | Rank test | Model / runtime | Correct / all | Test / 48 | Direct /28 | Paraphrase /28 | Refused alternative /10 | Two-step /4 | Out of scope or vague /10 | Right where router wrong / router right where model wrong | Median call ms |
 |---:|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 1 | D3 mini · Q8 Metal | 79/80 | 47/48 | 28/28 | 28/28 | 9/10 | 4/4 | 10/10 | 51 / 0 | 161.4 |
 | 1 | 1 | D3 mini · macOS CPU | 79/80 | 47/48 | 28/28 | 28/28 | 9/10 | 4/4 | 10/10 | 51 / 0 | 29,839.1 |
-| 2 | 2 | D3 nano · macOS CPU | 76/80 | 45/48 | 27/28 | 26/28 | 9/10 | 4/4 | 10/10 | 48 / 0 | 11,608.7 |
-| 3 | 3 | D3 lite · macOS CPU | 71/80 | 40/48 | 27/28 | 21/28 | 9/10 | 4/4 | 10/10 | 43 / 0 | 5,071.3 |
-| 4 | 4 | Vela 2.0 0.3B · macOS CPU | 64/80 | 34/48 | 26/28 | 17/28 | 9/10 | 2/4 | 10/10 | 37 / 1 | 63.6 |
-| 5 | 5 | Production router · private replay | 28/80 | 10/48 | 14/28 | 5/28 | 0/10 | 0/4 | 9/10 | reference | NR |
+| 3 | 3 | D3 nano · macOS CPU | 76/80 | 45/48 | 27/28 | 26/28 | 9/10 | 4/4 | 10/10 | 48 / 0 | 11,608.7 |
+| 4 | 4 | D3 nano · Q8 Metal | 75/80 | 44/48 | 27/28 | 25/28 | 9/10 | 4/4 | 10/10 | 47 / 0 | 71.1 |
+| 5 | 5 | D3 lite · Q8 Metal | 71/80 | 40/48 | 27/28 | 21/28 | 9/10 | 4/4 | 10/10 | 43 / 0 | 39.5 |
+| 5 | 5 | D3 lite · macOS CPU | 71/80 | 40/48 | 27/28 | 21/28 | 9/10 | 4/4 | 10/10 | 43 / 0 | 5,071.3 |
+| 7 | 7 | Vela 2.0 0.3B · macOS CPU | 64/80 | 34/48 | 26/28 | 17/28 | 9/10 | 2/4 | 10/10 | 37 / 1 | 63.6 |
+| 8 | 8 | Production router · private replay | 28/80 | 10/48 | 14/28 | 5/28 | 0/10 | 0/4 | 9/10 | reference | NR |
 
 The router's role in the application is narrower than this pack: a low score here does not mean the application fails on these requests. Paraphrases avoid the obvious word on purpose; correlated FR/EN pairs and ten requests per category do not support a general ranking.
+
+### Facade routing: harder tiers
+
+Same eight categories on two frozen harder tiers of 96 cases (64 TEST). **Advanced**: implicit requests, lexical traps toward another category, near misses, informal or misspelt requests. **Complex**: multi-step requests scored on the first step, requests that depend on a previous exchange, compound refusals, goals without the action, genuine ambiguity. Cells are correct / all (test). [Tiers report](FACADE_ROUTING_TIERS_RESULTS_20261101.md).
+
+**Leading on the complex tier (test)**: D3 mini · Q8 Metal (60/64 test).
+
+| Rank complex | Model / runtime | Easy /80 (test /48) | Advanced /96 (test /64) | Complex /96 (test /64) | Median call ms (advanced) |
+|---:|---|---:|---:|---:|---:|
+| 1 | D3 mini · Q8 Metal | 79/80 (47/48) | 94/96 (62/64) | 92/96 (60/64) | 161.6 |
+| 2 | D3 nano · Q8 Metal | 75/80 (44/48) | 86/96 (59/64) | 79/96 (49/64) | 71.3 |
+| 3 | D3 lite · Q8 Metal | 71/80 (40/48) | 71/96 (51/64) | 70/96 (41/64) | 38.9 |
+| 4 | Vela 2.0 0.3B · macOS CPU | 64/80 (34/48) | 71/96 (53/64) | 49/96 (24/64) | 59.0 |
+| 5 | Production router · private replay | 28/80 (10/48) | 24/96 (20/64) | 24/96 (17/64) | NR |
+
+D3 rows on these tiers ran as Q8 GGUF on Metal (same weights as their CPU rows); Vela 2.0 0.3B ran on CPU. Latency scopes differ: Metal rows time the whole adapter call (loopback HTTP included), the CPU row its worker inference. The router reads only the latest request, as in the application; the complex tier's previous exchange is visible to the classifiers only.
 
 ### Campaign latency and memory
 
@@ -314,7 +363,10 @@ Physical-call timings are kept separate from reused logical decisions; session R
 | Clef Flash Q8 · direct Metal | capability | 192 | 616.9 | 953.5 | 10.60 |
 | D3 Flash Q8 · gateway Metal | capability | 192 | 576.9 | 985.8 | 9.48 |
 | D3 mini · macOS CPU | capability | 192 | 78,891.6 | 126,723.2 | 7.82 |
+| D3 mini · Q8 Metal | capability | 192 | 325.2 | 510.8 | 5.35 |
 | D3 nano · macOS CPU | capability | 192 | 29,439.4 | 49,101.0 | 3.47 |
+| D3 nano · Q8 Metal | capability | 192 | 141.0 | 210.6 | 2.80 |
+| D3 lite · Q8 Metal | capability | 192 | 79.1 | 116.2 | 1.41 |
 | D3 lite · macOS CPU | capability | 192 | 13,298.7 | 23,008.6 | 1.83 |
 | Vela 2.0 0.3B · macOS CPU | capability | 192 | 344.5 | 528.2 | 1.26 |
 | D3 Flash Q8 · direct Metal | passage_answerability | 72 | 278.2 | 748.7 | 9.45 |
@@ -326,9 +378,12 @@ Physical-call timings are kept separate from reused logical decisions; session R
 | Clef Flash Q8 · direct Metal | physics | 48 | 196.7 | 211.7 | 9.55 |
 | D3 Flash Q8 · direct Metal | physics | 48 | 193.7 | 202.1 | 9.36 |
 | D3 mini · macOS CPU | physics | 48 | 16,936.2 | 21,044.9 | 7.34 |
+| D3 mini · Q8 Metal | physics | 48 | 103.7 | 108.9 | 5.29 |
 | D3 nano · macOS CPU | physics | 48 | 7,766.9 | 12,607.7 | 3.19 |
+| D3 nano · Q8 Metal | physics | 48 | 52.4 | 54.8 | 2.75 |
 | Vela 2.0 0.3B · macOS CPU | physics | 48 | 169.9 | 211.0 | 1.16 |
 | D3 lite · macOS CPU | physics | 48 | 3,073.8 | 3,981.3 | 1.56 |
+| D3 lite · Q8 Metal | physics | 48 | 27.6 | 30.7 | 1.38 |
 
 [Campaign summary CSV](leaderboard/campaigns.csv) and [task breakdown CSV](leaderboard/task-breakdown.csv) contain denominators, statuses and all exported groups. Ranking/nDCG, longer contexts and repeated timing retain their separate protocols in [other campaigns](leaderboard/other-benchmarks.md). Clef 27B and the six remaining original cohort candidates remain unrun on the new packs.
 
@@ -350,35 +405,38 @@ Equal all-case totals share a competition rank; row order within a tie is alphab
 | 2 | 4 | D3 flash · Q8 direct Metal | 9B class | Metal-U | 124 | 61 | 72 | 26 | 26 | Not run |
 | 2 | 4 | D3 flash · CPU | 8.393B backbone | CPU-H | 124 | 61 | 72 | 26 | 26 | 20 |
 | 5 | 3 | Jev 1.13 · HTTP API | NR | API | 123 | 62 | 67 | 28 | 28 | 20 |
-| 6 | 11 | D3 flash · Q4 Metal | 9B class | Metal | 122 | 59 | 71 | 24 | 27 | 21 |
-| 7 | 9 | D3 mini · CPU | 4.539B backbone | CPU-H | 119 | 60 | 71 | 24 | 24 | 20 |
-| 7 | 9 | D3 mini · macOS CPU | 4.539B backbone | CPU-N | 119 | 60 | 71 | 24 | 24 | 20 |
-| 9 | 4 | D3 nano · CPU | 2.213B backbone | CPU-H | 117 | 61 | 68 | 26 | 23 | 18 |
-| 9 | 4 | D3 nano · macOS CPU | 2.213B backbone | CPU-N | 117 | 61 | 68 | 26 | 23 | 18 |
-| 9 | 2 | GLiClass v4 9B · BF16 MPS | 9B class | MPS | 117 | 63 | 70 | 24 | 23 | 20 |
-| 12 | 11 | Clef Flash · Q8 direct Metal | 9B class | Metal-U | 110 | 59 | 63 | 25 | 22 | Not run |
-| 13 | 13 | Vela 2.0 4B · CPU | 4.211B | CPU-H | 106 | 56 | 64 | 20 | 22 | 18 |
-| 14 | 14 | Decision 2.0 Nox 4B · CPU | 4.208B | CPU-H | 103 | 55 | 54 | 25 | 24 | 18 |
-| 15 | 14 | Liquid d1-3B · CPU | 3.123B | CPU-H | 101 | 55 | 60 | 21 | 20 | 16 |
-| 16 | 16 | Noma · CPU | ~2.67B declared | CPU-H | 98 | 51 | 53 | 25 | 20 | 18 |
-| 17 | 17 | D3 lite · CPU | 0.853B backbone | CPU-H | 95 | 50 | 64 | 15 | 16 | 19 |
-| 18 | 18 | D3 lite · macOS CPU | 0.853B backbone | CPU-N | 94 | 49 | 63 | 15 | 16 | 19 |
-| 19 | 19 | Decision 2.0 Sol 2B · CPU | 2B class | CPU-H | 93 | 47 | 62 | 19 | 12 | 19 |
-| 20 | 20 | Vela 2.0 0.8B · CPU | 0.755B declared | CPU-H | 79 | 45 | 56 | 11 | 12 | 14 |
-| 21 | 21 | Decision 2.0 Eos 0.8B · CPU | 0.8B class | CPU-H | 77 | 40 | 55 | 12 | 10 | 19 |
-| 21 | 21 | Decision 2.0 Eos 0.8B · Q8 Metal | 0.8B class | Metal | 77 | 40 | 55 | 12 | 10 | 19 |
-| 23 | 24 | D3 edge · CPU | 0.594B backbone | CPU-H | 74 | 37 | 48 | 12 | 14 | 18 |
-| 24 | 27 | Decision 2.0 Kai 0.6B · CPU | 0.6B class | CPU-H | 70 | 36 | 56 | 7 | 7 | 16 |
-| 25 | 24 | Vela 2.0 0.3B · CPU | 0.309B declared | CPU-H | 65 | 37 | 52 | 4 | 9 | 18 |
-| 25 | 24 | Vela 2.0 0.3B · macOS CPU | 0.309B declared | CPU-N | 65 | 37 | 52 | 4 | 9 | 18 |
-| 27 | 23 | GLiNER2.5-multi-Decide · CPU | NR | CPU-H | 59 | 38 | 41 | 5 | 13 | 12 |
-| 28 | 29 | Vela 3.0 fast · decision only · CPU | 0.380B decision backbone | CPU-N | 57 | 28 | 43 | 9 | 5 | 18 |
-| 29 | 28 | Laya multilingual · CPU | 322M declared | CPU-H | 56 | 30 | 42 | 8 | 6 | 10 |
-| 30 | 30 | Julia-1 · CPU | NR | CPU-H | 52 | 26 | 32 | 8 | 12 | 11 |
-| 31 | 30 | Liquid d1-omni-600M · CPU | 600M class | CPU-H | 51 | 26 | 39 | 4 | 8 | 16 |
-| 32 | 33 | Indecis · untrained open mode · CPU | NR | CPU-H | 44 | 22 | 32 | 2 | 10 | 11 |
-| 33 | 32 | ModernJEV-Decide-Preview · CPU | NR | CPU-H | 42 | 23 | 23 | 13 | 6 | 8 |
-| 34 | 34 | Muose-50M-Decision · CPU | 50M class | CPU-H | 41 | 21 | 30 | 6 | 5 | 10 |
+| 6 | 13 | D3 flash · Q4 Metal | 9B class | Metal | 122 | 59 | 71 | 24 | 27 | 21 |
+| 7 | 10 | D3 mini · CPU | 4.539B backbone | CPU-H | 119 | 60 | 71 | 24 | 24 | 20 |
+| 7 | 10 | D3 mini · macOS CPU | 4.539B backbone | CPU-N | 119 | 60 | 71 | 24 | 24 | 20 |
+| 7 | 10 | D3 mini · Q8 Metal | 4.539B backbone | Metal-U | 119 | 60 | 71 | 24 | 24 | Not run |
+| 10 | 4 | D3 nano · CPU | 2.213B backbone | CPU-H | 117 | 61 | 68 | 26 | 23 | 18 |
+| 10 | 4 | D3 nano · macOS CPU | 2.213B backbone | CPU-N | 117 | 61 | 68 | 26 | 23 | 18 |
+| 10 | 4 | D3 nano · Q8 Metal | 2.213B backbone | Metal-U | 117 | 61 | 68 | 26 | 23 | Not run |
+| 10 | 2 | GLiClass v4 9B · BF16 MPS | 9B class | MPS | 117 | 63 | 70 | 24 | 23 | 20 |
+| 14 | 13 | Clef Flash · Q8 direct Metal | 9B class | Metal-U | 110 | 59 | 63 | 25 | 22 | Not run |
+| 15 | 15 | Vela 2.0 4B · CPU | 4.211B | CPU-H | 106 | 56 | 64 | 20 | 22 | 18 |
+| 16 | 16 | Decision 2.0 Nox 4B · CPU | 4.208B | CPU-H | 103 | 55 | 54 | 25 | 24 | 18 |
+| 17 | 16 | Liquid d1-3B · CPU | 3.123B | CPU-H | 101 | 55 | 60 | 21 | 20 | 16 |
+| 18 | 18 | Noma · CPU | ~2.67B declared | CPU-H | 98 | 51 | 53 | 25 | 20 | 18 |
+| 19 | 19 | D3 lite · CPU | 0.853B backbone | CPU-H | 95 | 50 | 64 | 15 | 16 | 19 |
+| 20 | 20 | D3 lite · macOS CPU | 0.853B backbone | CPU-N | 94 | 49 | 63 | 15 | 16 | 19 |
+| 20 | 20 | D3 lite · Q8 Metal | 0.853B backbone | Metal-U | 94 | 49 | 63 | 15 | 16 | Not run |
+| 22 | 22 | Decision 2.0 Sol 2B · CPU | 2B class | CPU-H | 93 | 47 | 62 | 19 | 12 | 19 |
+| 23 | 23 | Vela 2.0 0.8B · CPU | 0.755B declared | CPU-H | 79 | 45 | 56 | 11 | 12 | 14 |
+| 24 | 24 | Decision 2.0 Eos 0.8B · CPU | 0.8B class | CPU-H | 77 | 40 | 55 | 12 | 10 | 19 |
+| 24 | 24 | Decision 2.0 Eos 0.8B · Q8 Metal | 0.8B class | Metal | 77 | 40 | 55 | 12 | 10 | 19 |
+| 26 | 27 | D3 edge · CPU | 0.594B backbone | CPU-H | 74 | 37 | 48 | 12 | 14 | 18 |
+| 27 | 30 | Decision 2.0 Kai 0.6B · CPU | 0.6B class | CPU-H | 70 | 36 | 56 | 7 | 7 | 16 |
+| 28 | 27 | Vela 2.0 0.3B · CPU | 0.309B declared | CPU-H | 65 | 37 | 52 | 4 | 9 | 18 |
+| 28 | 27 | Vela 2.0 0.3B · macOS CPU | 0.309B declared | CPU-N | 65 | 37 | 52 | 4 | 9 | 18 |
+| 30 | 26 | GLiNER2.5-multi-Decide · CPU | NR | CPU-H | 59 | 38 | 41 | 5 | 13 | 12 |
+| 31 | 32 | Vela 3.0 fast · decision only · CPU | 0.380B decision backbone | CPU-N | 57 | 28 | 43 | 9 | 5 | 18 |
+| 32 | 31 | Laya multilingual · CPU | 322M declared | CPU-H | 56 | 30 | 42 | 8 | 6 | 10 |
+| 33 | 33 | Julia-1 · CPU | NR | CPU-H | 52 | 26 | 32 | 8 | 12 | 11 |
+| 34 | 33 | Liquid d1-omni-600M · CPU | 600M class | CPU-H | 51 | 26 | 39 | 4 | 8 | 16 |
+| 35 | 36 | Indecis · untrained open mode · CPU | NR | CPU-H | 44 | 22 | 32 | 2 | 10 | 11 |
+| 36 | 35 | ModernJEV-Decide-Preview · CPU | NR | CPU-H | 42 | 23 | 23 | 13 | 6 | 8 |
+| 37 | 37 | Muose-50M-Decision · CPU | 50M class | CPU-H | 41 | 21 | 30 | 6 | 5 | 10 |
 
 ¹ Sizes describe the observed checkpoint: exact tensor counts, nominal classes, and publisher declarations
 are distinguished in [metadata](leaderboard/model-metadata.json). A backbone count may exclude a separate readout;
@@ -405,8 +463,10 @@ A correct choice also does not prove that a plugin was executed or a useful answ
 | D3 flash · Q4 Metal | 62 | 60 | 39 | 37 | 46 | 132 | 24 |
 | D3 mini · CPU | 60 | 59 | 40 | 38 | 41 | 132 | 24 |
 | D3 mini · macOS CPU | 60 | 59 | 40 | 38 | 41 | 132 | 24 |
+| D3 mini · Q8 Metal | 60 | 59 | 40 | 38 | 41 | 132 | Not run |
 | D3 nano · CPU | 58 | 59 | 37 | 38 | 42 | 132 | 24 |
 | D3 nano · macOS CPU | 58 | 59 | 37 | 38 | 42 | 132 | 24 |
+| D3 nano · Q8 Metal | 58 | 59 | 37 | 38 | 42 | 132 | Not run |
 | GLiClass v4 9B · BF16 MPS | 58 | 59 | 39 | 35 | 43 | 132 | 24 |
 | Clef Flash · Q8 direct Metal | 55 | 55 | 36 | 36 | 38 | 132 | Not run |
 | Vela 2.0 4B · CPU | 52 | 54 | 38 | 33 | 35 | 132 | 24 |
@@ -415,6 +475,7 @@ A correct choice also does not prove that a plugin was executed or a useful answ
 | Noma · CPU | 46 | 52 | 35 | 26 | 37 | 132 | 24 |
 | D3 lite · CPU | 45 | 50 | 32 | 31 | 32 | 132 | 24 |
 | D3 lite · macOS CPU | 45 | 49 | 32 | 31 | 31 | 132 | 24 |
+| D3 lite · Q8 Metal | 45 | 49 | 32 | 31 | 31 | 132 | Not run |
 | Decision 2.0 Sol 2B · CPU | 46 | 47 | 32 | 28 | 33 | 132 | 24 |
 | Vela 2.0 0.8B · CPU | 38 | 41 | 29 | 25 | 25 | 132 | 24 |
 | Decision 2.0 Eos 0.8B · CPU | 39 | 38 | 30 | 22 | 25 | 132 | 24 |
@@ -454,8 +515,10 @@ Metal/MPS observations used a 64 GiB Apple M5 Pro. CPU-H observations are not as
 | D3 flash · Q4 Metal | Metal | 197.9 | 203.8 | 132 | NR | 6.66 S | NR |
 | D3 mini · CPU | CPU-H | 5,971.7 | 8,291.9 | 132 | 16,466.7 | 7.55 | NR |
 | D3 mini · macOS CPU | CPU-N | 17,251.7 | 20,198.2 | 132 | 12,279.6 | 7.35 | NR |
+| D3 mini · Q8 Metal | Metal-U | 104.2 | 108.6 | 132 | NR | 5.29 S | NR |
 | D3 nano · CPU | CPU-H | 2,083.7 | 2,453.4 | 132 | 12,354.2 | 3.39 | NR |
 | D3 nano · macOS CPU | CPU-N | 7,272.1 | 8,813.9 | 132 | 9,250.4 | 3.20 | NR |
+| D3 nano · Q8 Metal | Metal-U | 52.0 | 54.0 | 132 | NR | 2.75 S | NR |
 | GLiClass v4 9B · BF16 MPS | MPS | 326.5 | 615.5 | 132 | 13,465.5 | 1.14 | 16.75 |
 | Clef Flash · Q8 direct Metal | Metal-U | 196.8 | 219.8 | 132 | NR | 9.56 S | NR |
 | Vela 2.0 4B · CPU | CPU-H | 7,948.5 | 9,042.8 | 132 | 24,298.6 | 17.99 | NR |
@@ -464,6 +527,7 @@ Metal/MPS observations used a 64 GiB Apple M5 Pro. CPU-H observations are not as
 | Noma · CPU | CPU-H | 4,206.3 | 5,157.5 | 132 | 12,309.9 | 4.82 | NR |
 | D3 lite · CPU | CPU-H | 1,002.3 | 1,349.6 | 132 | 11,239.6 | 1.80 | NR |
 | D3 lite · macOS CPU | CPU-N | 3,195.5 | 3,887.9 | 132 | 6,597.5 | 1.55 | NR |
+| D3 lite · Q8 Metal | Metal-U | 28.6 | 30.8 | 132 | NR | 1.38 S | NR |
 | Decision 2.0 Sol 2B · CPU | CPU-H | 3,471.9 | 6,403.8 | 132 | 28,703.3 | 8.32 | NR |
 | Vela 2.0 0.8B · CPU | CPU-H | 1,573.4 | 1,849.3 | 132 | 11,398.0 | 5.13 | NR |
 | Decision 2.0 Eos 0.8B · CPU | CPU-H | 1,122.6 | 1,379.7 | 132 | 13,056.8 | 3.44 | NR |
@@ -658,7 +722,7 @@ separate historical observations.
 
 ## Every task and downloadable data
 
-- [Model summary CSV](leaderboard/models.csv): all 34 context observations, model sizes, runtimes, quality, latency, and separate resource measurements.
+- [Model summary CSV](leaderboard/models.csv): all 37 context observations, model sizes, runtimes, quality, latency, and separate resource measurements.
 - [Coverage CSV](leaderboard/coverage.csv) and [coverage JSON](leaderboard/coverage.json): every observation × task cell, explicit execution and review status, protocol denominator, source, and unobserved fields.
 - [Campaign summary CSV](leaderboard/campaigns.csv): independent capability, physics and passage rankings, coverage, test scores, class macro scores and measured resource scopes.
 - [Task breakdown CSV](leaderboard/task-breakdown.csv): exported context task types/subtypes, domains, languages, splits and difficulty; tool-choice subgroups; plus capability, physics and passage groups, with task-specific denominators.

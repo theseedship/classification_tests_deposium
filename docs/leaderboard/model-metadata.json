@@ -838,6 +838,78 @@
           "path": "docs/D3_MINI_MACOS_CPU_PROTOCOL_20261031.md"
         }
       ]
+    },
+    "D3liteQ8Metal": {
+      "display_name": "D3 lite · Q8 Metal",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": 852985920,
+        "label": "0.853B backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "BF16 backbone including vision module; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      },
+      "runtime_group": "apple_metal_upstream",
+      "precision": "Q8_0 GGUF (ggml-org conversion of the same weights)",
+      "hardware_group": "Apple M5 Pro GPU (Metal); 64 GiB unified memory",
+      "source_analysis": "docs/evidence/d3-small-gguf-metal-20261101/d3-lite.json",
+      "observed_date": "2026-11-01",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md"
+        }
+      ]
+    },
+    "D3nanoQ8Metal": {
+      "display_name": "D3 nano · Q8 Metal",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": 2213241664,
+        "label": "2.213B backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "BF16 backbone including vision module; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_CPU_PILOT.md"
+        }
+      },
+      "runtime_group": "apple_metal_upstream",
+      "precision": "Q8_0 GGUF (ggml-org conversion of the same weights)",
+      "hardware_group": "Apple M5 Pro GPU (Metal); 64 GiB unified memory",
+      "source_analysis": "docs/evidence/d3-small-gguf-metal-20261101/d3-nano.json",
+      "observed_date": "2026-11-01",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md"
+        }
+      ]
+    },
+    "D3miniQ8Metal": {
+      "display_name": "D3 mini · Q8 Metal",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": 4539265536,
+        "label": "4.539B backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "BF16 backbone; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_LARGER_CPU_PILOT.md"
+        }
+      },
+      "runtime_group": "apple_metal_upstream",
+      "precision": "Q8_0 GGUF (ggml-org conversion of the same weights)",
+      "hardware_group": "Apple M5 Pro GPU (Metal); 64 GiB unified memory",
+      "source_analysis": "docs/evidence/d3-small-gguf-metal-20261101/d3-mini.json",
+      "observed_date": "2026-11-01",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md"
+        }
+      ]
     }
   }
 }
