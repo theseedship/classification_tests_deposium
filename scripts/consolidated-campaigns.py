@@ -41,7 +41,16 @@ GGUF_METAL = (("D3liteQ8Metal", "D3 lite · Q8 Metal", EVIDENCE + "d3-small-gguf
               ("D3nanoQ8Metal", "D3 nano · Q8 Metal", EVIDENCE + "d3-small-gguf-metal-20261101/d3-nano.json", "profiles/d3-nano-q8-assets.json"),
               ("D3miniQ8Metal", "D3 mini · Q8 Metal", EVIDENCE + "d3-small-gguf-metal-20261101/d3-mini.json", "profiles/d3-mini-q8-assets.json"))
 GGUF_PIN = "efe3626b119ff81033e309c3ba07a770bef2c546"
-NEW_CONTEXT_IDS = {"ClefFlashQ8", "D3FlashQ8Upstream"} | {obs for obs, *_ in GGUF_METAL}
+# Deployment variants on the same Mac: D3 mini Q4 and D3 Flash Q4 on the same Metal runtime, and
+# Mirai's 4-bit D3 Flash pack on Uzu (backend requested, not observed).
+DEPLOYMENT_REPORT = "DEPLOYMENT_VARIANTS_RESULTS_20261101.md"
+GGUF_VARIANTS = (("D3miniQ4Metal", "D3 mini · Q4 Metal", EVIDENCE + "deployment-variants-20261101/d3-mini-q4.json", "profiles/d3-mini-q4-assets.json"),
+                 ("D3FlashQ4Metal", "D3 flash · Q4 direct Metal", EVIDENCE + "deployment-variants-20261101/d3-flash-q4.json", "profiles/d3-flash-q4-assets.json"))
+UZU = ("D3FlashMUzu", "D3 flash · 4-bit Uzu", EVIDENCE + "deployment-variants-20261101/uzu-d3-flash-m.json", "profiles/d3-flash-m-uzu-assets.json")
+UZU_PROTOCOL = "docs/UZU_D3_FLASH_M_PROTOCOL_20261101.md"
+UZU_REVISION = "d3d3a5b20a3de507522e1099457d1dae0243effb"
+NEW_CONTEXT_IDS = ({"ClefFlashQ8", "D3FlashQ8Upstream", UZU[0]} | {obs for obs, *_ in GGUF_METAL}
+                   | {obs for obs, *_ in GGUF_VARIANTS})
 STATUSES = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
 DATASETS = {
     "context": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
@@ -197,6 +206,9 @@ class Campaigns:
             self.require(backend["device"] == "cpu" and type(backend["threads"]) is int and backend["threads"] > 0
                          and precision in (("bfloat16", "float32", None), (None, None, "float32")),
                          "campaign: CPU worker identity not observed")
+        elif backend["kind"] == "uzu":
+            self.require(backend == {"kind": "uzu", "requested": "metal", "observed": None},
+                         "campaign: Uzu backend claim changed")
         else:
             self.require(backend["kind"] == "metal" and backend["offloaded_layers"] == backend["total_layers"] > 0,
                          "campaign: Metal not observed")
@@ -209,11 +221,12 @@ class Campaigns:
                 "model_identity": {"model_repo_id": data["model"].get("model_repo_id", data["model"].get("repo_id")),
                                    "model_revision": data["model"].get("model_revision", data["model"].get("revision")),
                                    "model_assets_sha256": data["model"].get("model_sha256") or data["model"].get("model_assets_sha256")
-                                   or data["model"].get("sha256") or data["model"]["files"][0]["sha256"],
+                                   or data["model"].get("sha256") or data["model"].get("assets_sha256")
+                                   or data["model"]["files"][0]["sha256"],
                                    "runtime": dict(data["runtime"])},
                 "adapter_ms": self.stats(phase["latency_ms"], count["statuses"]["ok"]),
                 "session_group_peak_rss_mib": peak,
-                "rss_scope": (resource.get("rss_scope") if backend["kind"] == "cpu" else
+                "rss_scope": (resource.get("rss_scope") if backend["kind"] in ("cpu", "uzu") else
                               "Sampled owned process-group peak over fresh session startup, controls, warm-up and this pack; not total GPU memory")}
 
     def gguf(self, path, asset_path, observation):
@@ -232,6 +245,26 @@ class Campaigns:
         return data, {"adapter": "systemone_local", "model_repo_id": asset["repo_id"], "model_revision": asset["revision"],
                       "model_assets_sha256": asset["files"][0]["sha256"],
                       "runtime": {k: runtime[k] for k in ("backend", "native_revision", "binary_sha256", "decision_type", "layers")}}
+
+    def uzu(self, path, asset_path, observation):
+        """Mirai's D3 Flash pack on the pinned Uzu release, exported by scripts/export-uzu-campaign.py."""
+        data = self.inputs.load(path)
+        asset, model, runtime = self.inputs.load(asset_path), data["model"], data["runtime"]
+        self.require(data["schema_version"] == "deposium.uzu-campaign-public/v1" and data["label"] == observation
+                     and data["protocol"] == UZU_PROTOCOL, f"campaign: Uzu export mismatch: {observation}")
+        self.inputs.read(UZU_PROTOCOL)
+        self.require(model["repo_id"] == asset["repo_id"] and model["revision"] == asset["revision"]
+                     and model["assets_manifest"] == asset_path
+                     and model["assets_sha256"] == hashlib.sha256(self.inputs.read(asset_path)).hexdigest()
+                     and model["weights_sha256"] == asset["files"][0]["sha256"],
+                     f"campaign: Uzu model/asset identity mismatch: {observation}")
+        self.require(runtime["uzu_revision"] == UZU_REVISION and runtime["backend"] == "uzu"
+                     and runtime["backend_requested"] == "metal" and runtime["backend_observed"] is None
+                     and self.hash(runtime["binary_sha256"]), f"campaign: Uzu runtime identity mismatch: {observation}")
+        return data, {"adapter": "uzu_local", "model_repo_id": asset["repo_id"], "model_revision": asset["revision"],
+                      "model_assets_sha256": model["assets_sha256"],
+                      "runtime": {k: runtime[k] for k in ("backend", "uzu_revision", "binary_sha256",
+                                                          "backend_requested", "backend_observed", "egress_isolated")}}
 
     def context_row(self, phase, identity, meta):
         c, groups = phase["counts"], phase["groups"]
@@ -335,12 +368,20 @@ class Campaigns:
                           PHYSICS, "PHYSICS_FLASH_RESULTS_20261029.md", 132, 66)]
         contexts = [self.context_row(p, identity, metadata[p["observation"]]) for p, identity in zip(new, (ci, di))]
         gguf_rows = []
-        for observation, model, source, asset_path in GGUF_METAL:
+        observation, model, source, asset_path = UZU
+        data, identity = self.uzu(source, asset_path, observation)
+        self.inputs.read("docs/" + DEPLOYMENT_REPORT)
+        context = self.phase(data, "context", "context", observation, model, source, DEPLOYMENT_REPORT, 132, 66)
+        contexts.append(self.context_row(context, identity, metadata[observation]))
+        gguf_rows += [self.phase(data, pack, pack, observation, model, source, DEPLOYMENT_REPORT, total, families)
+                      for pack, total, families in (("capability", 192, 48), ("physics", 48, 24))]
+        for observation, model, source, asset_path, report in ([(*g, GGUF_METAL_REPORT) for g in GGUF_METAL]
+                                                               + [(*g, DEPLOYMENT_REPORT) for g in GGUF_VARIANTS]):
             data, identity = self.gguf(source, asset_path, observation)
-            self.inputs.read("docs/" + GGUF_METAL_REPORT)
-            context = self.phase(data, "context", "context", observation, model, source, GGUF_METAL_REPORT, 132, 66)
+            self.inputs.read("docs/" + report)
+            context = self.phase(data, "context", "context", observation, model, source, report, 132, 66)
             contexts.append(self.context_row(context, identity, metadata[observation]))
-            gguf_rows += [self.phase(data, pack, pack, observation, model, source, GGUF_METAL_REPORT, total, families)
+            gguf_rows += [self.phase(data, pack, pack, observation, model, source, report, total, families)
                           for pack, total, families in (("capability", 192, 48), ("physics", 48, 24))]
             passages = data["phases"]["passages"]
             self.require(passages["dataset_sha256"] == DATASETS["passage"] and passages["rotation"] == 0
@@ -353,7 +394,7 @@ class Campaigns:
                     self.partition(count, values)
                 gguf_rows.append({"task": "passage_" + axis, "observation": observation, "model": model, "counts": count,
                                   "groups": groups, "macro_accuracy": self.macro(score, count), "source": source,
-                                  "report": GGUF_METAL_REPORT, "identity": identity})
+                                  "report": report, "identity": identity})
         rows = [self.phase(clef, "capability", "capability", "ClefFlashQ8", "Clef Flash Q8 · direct Metal",
                            CLEF, "CLEF_FLASH_RESULTS_20261029.md", 192, 48),
                 self.phase(clef, "physics", "physics", "ClefFlashQ8", "Clef Flash Q8 · direct Metal",

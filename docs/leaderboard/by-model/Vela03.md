@@ -20,7 +20,7 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 
 | Family | Task | Correct / all | Held-out test | Rank all | Rank test | Execution | Report |
 |---|---|---:|---:|---:|---:|---|---|
-| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 65/132 | 37/66 | 28 | 27 | all `ok` | [VELA2_PILOT](../../VELA2_PILOT.md) |
+| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 65/132 | 37/66 | 31 | 30 | all `ok` | [VELA2_PILOT](../../VELA2_PILOT.md) |
 | RAG decision | [First-tool proposals](../../RESULTS.md#model-quality) | 18/24 | no test split | — | — | all `ok` | provisional agreement, zero qualified cases |
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | not run | — | — | — | — | — |
 | Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | not run | — | — | — | — | — |

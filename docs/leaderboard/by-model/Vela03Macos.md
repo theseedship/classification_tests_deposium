@@ -20,20 +20,32 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 
 | Family | Task | Correct / all | Held-out test | Rank all | Rank test | Execution | Report |
 |---|---|---:|---:|---:|---:|---|---|
-| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 65/132 | 37/66 | 28 | 27 | all `ok` | [VELA2_03_MACOS_CPU_PROTOCOL_20261030](../../VELA2_03_MACOS_CPU_PROTOCOL_20261030.md) |
+| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 65/132 | 37/66 | 31 | 30 | all `ok` | [VELA2_03_MACOS_CPU_PROTOCOL_20261030](../../VELA2_03_MACOS_CPU_PROTOCOL_20261030.md) |
 | RAG decision | [First-tool proposals](../../RESULTS.md#model-quality) | 18/24 | no test split | — | — | all `ok` | provisional agreement, zero qualified cases |
-| Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 128/192 | 62/96 | 9 | 9 | all `ok` | [report](../../VELA2_03_MACOS_RESULTS_20261030.md) |
-| Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 18/48 | 14/36 | 7 | 7 | all `ok` | [report](../../VELA2_03_MACOS_RESULTS_20261030.md) |
+| Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 128/192 | 62/96 | 12 | 12 | all `ok` | [report](../../VELA2_03_MACOS_RESULTS_20261030.md) |
+| Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 18/48 | 14/36 | 10 | 10 | all `ok` | [report](../../VELA2_03_MACOS_RESULTS_20261030.md) |
 | Tool workflow, executed | [Executed tool episodes (closed choice)](../../RESULTS.md#executed-tool-episodes-closed-choice) | 0/32 | 0/12 | 4 | 4 | all `ok` | [report](../../TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md) |
-| Tool routing | [Facade routing (model vs router)](../../RESULTS.md#facade-routing-model-vs-router) | 64/80 | 34/48 | 7 | 7 | all `ok` | [report](../../FACADE_ROUTING_RESULTS_20261101.md) |
-| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 112/512 | no split ranking | 10 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
-| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 151/768 | no split ranking | 10 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
-| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 93/128 | no split ranking | 6 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| Tool routing | [Facade routing (model vs router)](../../RESULTS.md#facade-routing-model-vs-router) | 64/80 | 34/48 | 10 | 10 | all `ok` | [report](../../FACADE_ROUTING_RESULTS_20261101.md) |
+| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 112/512 | no split ranking | 12 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 151/768 | no split ranking | 12 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
+| Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 93/128 | no split ranking | 8 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
 | Retrieved evidence | [Passage relevance, four rotations](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |
 | Retrieved evidence | [Passage ranking](../../leaderboard/other-benchmarks.md#passage-ranking-and-evidence) | not run | — | — | — | — | — |
 | Tool policy, generated | [Tool discovery (generated JSON)](../../RESULTS.md#generated-json-tool-policy-observations) | not run | — | — | — | — | — |
 | Tool policy, generated | [Tool arguments (generated JSON)](../../RESULTS.md#generated-json-tool-policy-observations) | not run | — | — | — | — | — |
 | Tool policy, generated | [Tool episodes (generated JSON)](../../RESULTS.md#generated-json-tool-policy-observations) | not run | — | — | — | — | — |
+
+## Routing tiers, relevance v2 and human confirmation
+
+Packs added on 1 November 2026, joined to this observation by weights and runtime identity. Human confirmation counts are on TEST.
+
+| Pack | Result | Rank | Report |
+|---|---|---:|---|
+| Facade routing, advanced tier | 71/96 (test 53/64) | 6 | [report](../../FACADE_ROUTING_TIERS_RESULTS_20261101.md) |
+| Facade routing, complex tier | 49/96 (test 24/64) | 7 | [report](../../FACADE_ROUTING_TIERS_RESULTS_20261101.md) |
+| Passage relevance v2 | 113/512 (test 59/256; macro 27.4%) | 7 | [report](../../PASSAGE_RELEVANCE_V2_RESULTS_20261101.md) |
+| Human confirmation, explicit option | asks before 1/12 irreversible actions and 0/12 hesitations; 4/38 false alarms | — | [report](../../FACADE_ROUTING_HITL_RESULTS_20261101.md) |
+| Human confirmation, own confidence | detects 20/24; 22/38 false alarms; AUC 0.72 | — | [report](../../FACADE_ROUTING_HITL_RESULTS_20261101.md) |
 
 ## Speed and memory (context session)
 

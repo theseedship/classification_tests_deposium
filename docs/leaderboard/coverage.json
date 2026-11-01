@@ -1214,6 +1214,219 @@
     {
       "cells": {
         "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 192,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
+          "source": "docs/evidence/deployment-variants-20261101/d3-flash-q4.json",
+          "status": "complete",
+          "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 122,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/deployment-variants-20261101/d3-flash-q4.json",
+          "status": "complete",
+          "total": 132
+        },
+        "facade_routing": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 79,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 80,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 80,
+          "source": "docs/evidence/deployment-variants-20261101/facade-easy.json",
+          "status": "complete",
+          "total": 80
+        },
+        "passage_answerability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 126,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 128,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 128,
+          "source": "docs/evidence/deployment-variants-20261101/d3-flash-q4.json",
+          "status": "complete",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 247,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/deployment-variants-20261101/d3-flash-q4.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 430,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 768,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 768,
+          "source": "docs/evidence/deployment-variants-20261101/d3-flash-q4.json",
+          "status": "complete",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 39,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/deployment-variants-20261101/d3-flash-q4.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "generative_observation": false,
+      "id": "D3FlashQ4Metal",
+      "model": "D3 flash · Q4 direct Metal",
+      "runtime": "apple_metal_upstream",
+      "size": "9B class"
+    },
+    {
+      "cells": {
+        "capability": {
           "evidence_present": false,
           "metric": "correct_choice",
           "numerator": null,
@@ -1826,6 +2039,411 @@
       "generative_observation": false,
       "id": "D3miniQ8Metal",
       "model": "D3 mini · Q8 Metal",
+      "runtime": "apple_metal_upstream",
+      "size": "4.539B backbone"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 192,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
+          "source": "docs/evidence/deployment-variants-20261101/uzu-d3-flash-m.json",
+          "status": "complete",
+          "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 118,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/deployment-variants-20261101/uzu-d3-flash-m.json",
+          "status": "complete",
+          "total": 132
+        },
+        "facade_routing": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 78,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 80,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 80,
+          "source": "docs/evidence/deployment-variants-20261101/facade-easy.json",
+          "status": "complete",
+          "total": 80
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 40,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/deployment-variants-20261101/uzu-d3-flash-m.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "generative_observation": false,
+      "id": "D3FlashMUzu",
+      "model": "D3 flash · 4-bit Uzu",
+      "runtime": "apple_uzu",
+      "size": "9B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 192,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
+          "source": "docs/evidence/deployment-variants-20261101/d3-mini-q4.json",
+          "status": "complete",
+          "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 117,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/deployment-variants-20261101/d3-mini-q4.json",
+          "status": "complete",
+          "total": 132
+        },
+        "facade_routing": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 79,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 80,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 80,
+          "source": "docs/evidence/deployment-variants-20261101/facade-easy.json",
+          "status": "complete",
+          "total": 80
+        },
+        "passage_answerability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 100,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 128,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 128,
+          "source": "docs/evidence/deployment-variants-20261101/d3-mini-q4.json",
+          "status": "complete",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 272,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/deployment-variants-20261101/d3-mini-q4.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 540,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 768,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 768,
+          "source": "docs/evidence/deployment-variants-20261101/d3-mini-q4.json",
+          "status": "complete",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 36,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/deployment-variants-20261101/d3-mini-q4.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "generative_observation": false,
+      "id": "D3miniQ4Metal",
+      "model": "D3 mini · Q4 Metal",
       "runtime": "apple_metal_upstream",
       "size": "4.539B backbone"
     },
@@ -8348,9 +8966,9 @@
     "docs/D3_MINI_MACOS_RESULTS_20261031.md": "cdcca85a9e56bb09c0b8a2a9a151e84811abb831d5bd84c52ae0decc426c9af2",
     "docs/D3_NANO_MACOS_CPU_PROTOCOL_20261030.md": "14e0e42587a0114fb230023b7b28ecfbc80423db92b4d517575ee7e141abe641",
     "docs/D3_NANO_MACOS_RESULTS_20261031.md": "f416845dfd6f60847ab979ac4d3a60ae2a1ca900180ae0904a47198359941ce6",
-    "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md": "5ffecfb90ac0f1651469e8dfc826524746ca5f5e9fa8f1aab43d55187f24139f",
+    "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md": "6aa5cf6cacbb3a6d725461e12aea2048d7849b2142127e67f2104148f0f81de1",
     "docs/D3_SMALL_GGUF_METAL_RESULTS_20261101.md": "ce73320e99c4a26c95253149af427b568aee230b9715ae4ce410b4ae3fa9cb84",
-    "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md": "b4bccd20bf9fb96adbe9aebf9a1b2e6dcf1bf3eebe8a09aca30156d6dfa53539",
+    "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md": "ce04aeae5bebb39c46aa9e835b7b108e7233caa17c6ed155c7258a9093ced005",
     "docs/FACADE_ROUTING_HITL_RESULTS_20261101.md": "13c3b57f5466142177c9a5f97aac221c00ec936a63606fb214b9a35ce6da8014",
     "docs/FACADE_ROUTING_RESULTS_20261101.md": "ede837b2a12602c2cc43bc6e1662c0c45b2f803cf7950abe5e86d4d5b8d26ba8",
     "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md": "18dd5b79adb3c4d35ce948e9b184c6a66fccd61a583bd6e3a56068b7f66f40ec",
@@ -8371,6 +8989,7 @@
     "docs/PASSAGE_SMALL_CPU_RESULTS_20261031.md": "03432fde978e191be2a3756803df4fa424ddc0a958a40c7902d366ced3fccace",
     "docs/PHYSICS_FLASH_RESULTS_20261029.md": "356dfd041f7d4646235767601f5272f446f814b4448712910f37c6056d546819",
     "docs/TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md": "49649e91b8769aa595323c6911719f59e83f89fba46c0316d849d8a5b0cd4423",
+    "docs/UZU_D3_FLASH_M_PROTOCOL_20261101.md": "58640e0c1c019d27f519a42763ca705394dd179f4f80f7a911a91de02c1c7172",
     "docs/VELA2_03_MACOS_CPU_PROTOCOL_20261030.md": "4817578dfd85225ede51a6d4c1a06774cb9574f23f3e05c997b63054e250958d",
     "docs/VELA2_03_MACOS_RESULTS_20261030.md": "21ac1f63c1bd4f89d10675e1c59e8ba1af1aea1a194a7472606b35efbc742856",
     "docs/VELA2_PILOT.md": "6743665f0102fe20a5c51810c880b7a3d87d0cd1bb69a7927b55397f32deaf40",
@@ -8390,7 +9009,15 @@
     "docs/evidence/d3-small-gguf-metal-20261101/d3-lite.json": "47b8a3410bedf4c2788a65b52ae8183238e0b9e22aa522ed905876be244cee02",
     "docs/evidence/d3-small-gguf-metal-20261101/d3-mini.json": "2678f39c106b4bed55d5971329a03004fc14ff38a541a279dcd498212cf5841b",
     "docs/evidence/d3-small-gguf-metal-20261101/d3-nano.json": "c2b1842c303d0e4ea2266e19eca5d080c5666e72fade0c9cc27bafcdf163c9fd",
-    "docs/evidence/deployment-variants-20261101/analysis.json": "1613fbe2ad7fc04387806388631a508fa89d0e342600084399a30cadf3a20aaf",
+    "docs/evidence/deployment-variants-20261101/analysis.json": "b40924914dbf7c7b324a6d87e25f203756a8ffc8af15c2fed324467113f49c84",
+    "docs/evidence/deployment-variants-20261101/d3-flash-q4.json": "ddc69af44a2a58fe69c0a76be257529dfe022a2fea194ea9e6abde7cef2b0499",
+    "docs/evidence/deployment-variants-20261101/d3-mini-q4.json": "9b04244241808f64629d5d705ce86d6d92433cb0e4bcd7e375468be9cb0b3875",
+    "docs/evidence/deployment-variants-20261101/facade-advanced.json": "ef919b0d2470a6117681c580e5b41de4835a17f918d6cffda6fbf7f10b994485",
+    "docs/evidence/deployment-variants-20261101/facade-complex.json": "3505fa82a6e2a62b702576187b5454037494c898e80625c29bcb4adb96cf6299",
+    "docs/evidence/deployment-variants-20261101/facade-easy.json": "81741d81829ea2b8bba50eb9bcb577f6fccc7b972a069e5d921c5a0204f02c4d",
+    "docs/evidence/deployment-variants-20261101/facade-hitl.json": "eca1b70ef02155d3d84b87a3b963346c6a37b9e7f89edf9b702df210682af87d",
+    "docs/evidence/deployment-variants-20261101/passage-relevance-v2.json": "b943199f99dbc8eec11bb1c552c27ea07b6f6243b6dce1c9de376382cf7f2188",
+    "docs/evidence/deployment-variants-20261101/uzu-d3-flash-m.json": "6a85b9aabaae8149fe6e02cdefd6b75f60fd43f8af3d7ea5520f1d55ec4095b4",
     "docs/evidence/facade-routing-20261101/analysis.json": "18ec5f9fa0be561d04c198e1260dfdc20fd53b92427266c67269af381f8df3a8",
     "docs/evidence/facade-routing-tiers-20261101/advanced.json": "94e16d347f905327dbb071fc8faacff3a3299cbd20b4e2bdd7b3500d12400648",
     "docs/evidence/facade-routing-tiers-20261101/complex.json": "1d51e130faa662beddb9377098d86c506fab1f4d7e17ad125013f0c309d12e0b",
@@ -8431,10 +9058,11 @@
     "docs/evidence/vela2-03-macos-20261030/capability.json": "f478cddebf09f67250860947836e15ed843ad7b7ddf70811190008ed4462e1ff",
     "docs/evidence/vela2-03-macos-20261030/physics.json": "8a52a92bd08244accdbff5b9b61098701b0954a2f6bf3e0d7085a282e7d78cd3",
     "docs/evidence/vela3-fast-20261028/analysis.json": "83c06bdf377353541aba7944231654f3c794f19ab17016de99e3b0fdba70ae4e",
-    "docs/leaderboard/model-metadata.json": "2f7a37d51083770bdb1b547a7cdc723b0e5026081d1309fd406a884e4411e32f",
+    "docs/leaderboard/model-metadata.json": "ae9bea01c4ea711c30445f128631b77b7cdeb021b93234885a77bd868ad296d8",
     "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
     "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
     "profiles/d3-flash-m-uzu-assets.json": "44704e4506b4749133aa14a630ca07afe8eeb0176084e475db54b2db455cbe18",
+    "profiles/d3-flash-q4-assets.json": "6769964a2cf7af5a45b70695981aaf3e5d104b13eedce74a533ddfafe02f3506",
     "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
     "profiles/d3-lite-assets.json": "0a165940562c277e7050631651b5e59d9a351345c041695e43d48f4de4f4fa71",
     "profiles/d3-lite-macos-choice-episodes.json": "91cabbae4edb9b2c01f74a414efb6e8b912e425f930d918d374e72fe1491c03f",
@@ -8460,10 +9088,10 @@
     "profiles/vela2-03-macos-choice-episodes.json": "0dd5e3e87bbea50d56d7701325adde78646816b262bcd4a85f74b065a10764f3",
     "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "f81cea7fa3b32e7ffcc49ae54615c67b7476233c3c9b6d0bd70e22cb1d585e6b",
+    "scripts/build-full-results.py": "e6860650c6df849ab3a1a547ea067f468c6cd7a6586161081c36441805c043d3",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-    "scripts/consolidated-campaigns.py": "aad0e445b816da17101c9a5664caff05aa3845418284ed3531ae31174e79c719"
+    "scripts/consolidated-campaigns.py": "70f2cea31e3bb436ef204e56a4c4610939240fe355bed697b8fc79caf6a2f484"
   },
   "tasks": [
     {

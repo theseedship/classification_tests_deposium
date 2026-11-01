@@ -34,6 +34,7 @@ EXPECTED_LABELS = {
     "D3FlashQ4", "D3FlashQ8", "D3Q4", "EosQ8", "GLiClass9B", "Vela3Fast",
     "ClefFlashQ8", "D3FlashQ8Upstream", "D3liteMacos", "Vela03Macos", "D3nanoMacos", "D3miniMacos",
     "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal",
+    "D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu",
 }
 
 
@@ -147,11 +148,11 @@ class FullResultsTests(unittest.TestCase):
 
     def test_join_contains_30_unique_context_observations_and_preserves_historical_scores(self):
         self.assertEqual(set(self.by_id), EXPECTED_LABELS)
-        self.assertEqual(len(self.data["observations"]), 37)
+        self.assertEqual(len(self.data["observations"]), 40)
         self.assertEqual(self.data["historical_context_observations"], 32)
         for phase in ("context", "tool_proposal"):
             observed = [r[phase] for r in self.by_id.values() if r[phase] is not None]
-            self.assertEqual(len({r["source"]["seal_sha256"] for r in observed}), 37 if phase == "context" else 32)
+            self.assertEqual(len({r["source"]["seal_sha256"] for r in observed}), 40 if phase == "context" else 32)
             self.assertEqual(len({r["source"]["dataset_sha256"] for r in observed}), 1)
         self.assertEqual(self.by_id["D3Q4"]["context"]["counts"]["correct"], 128)
         self.assertEqual(self.by_id["GLiClass9B"]["context"]["groups"]["split"]["test"]["correct"], 63)
@@ -258,7 +259,7 @@ class FullResultsTests(unittest.TestCase):
                              {"documentary": 76, "mathematics": 28, "chemistry": 28})
             self.assertEqual(sum(context["counts"]["statuses"].values()), 132)
             if tool is None:
-                self.assertIn(row["id"], {"ClefFlashQ8", "D3FlashQ8Upstream", "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal"})
+                self.assertIn(row["id"], {"ClefFlashQ8", "D3FlashQ8Upstream", "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal", "D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu"})
                 self.assertEqual(row["tool_proposal_status"], "not_run")
                 continue
             self.assertEqual(tool["counts"]["total"], 24)
@@ -428,9 +429,9 @@ class FullResultsTests(unittest.TestCase):
             expected = 1 + sum(r["context"]["counts"]["correct"] > correct for r in rows)
             self.assertEqual(row["rank_all_splits"], expected)
         models, tasks = results.flat_rows(self.data)
-        self.assertEqual(len(models), 37)
+        self.assertEqual(len(models), 40)
         test_tasks = [r for r in tasks if r["task"] == "context" and r["axis"] == "split" and r["group"] == "test"]
-        self.assertEqual(len(test_tasks), 37)
+        self.assertEqual(len(test_tasks), 40)
         self.assertEqual({r["total"] for r in test_tasks}, {66})
         self.assertEqual({r["metric"] for r in tasks if r["task"] == "tool_proposal"}, {"provisional_agreement"})
 
@@ -476,8 +477,8 @@ class FullResultsTests(unittest.TestCase):
     def test_independent_task_rankings_keep_physics_test_reversal_and_capability_tie(self):
         rows = {(r["task"], r["observation"]): r for r in self.data["campaigns"]}
         clef, d3 = rows["physics", "ClefFlashQ8"], rows["physics", "D3FlashQ8Upstream"]
-        self.assertEqual((clef["rank_all"], clef["rank_test"]), (1, 4))
-        self.assertEqual((d3["rank_all"], d3["rank_test"]), (2, 1))
+        self.assertEqual((clef["rank_all"], clef["rank_test"]), (1, 6))
+        self.assertEqual((d3["rank_all"], d3["rank_test"]), (3, 1))
         self.assertEqual((clef["counts"]["correct"], clef["counts"]["by_split"]["test"]["correct"]), (41, 31))
         for key in ("ClefFlashQ8", "D3FlashQ8"):
             row = rows["capability", key]
@@ -489,9 +490,10 @@ class FullResultsTests(unittest.TestCase):
 
     def test_passage_rankings_retain_partial_and_unrun_cases_and_separate_rotations(self):
         rows = {(r["task"], r["observation"]): r for r in self.data["campaigns"]}
-        for obs, correct, rank in (("D3FlashQ8Upstream", 122, 1), ("ClefFlashQ8", 109, 2), ("D3miniMacos", 104, 3),
-                                   ("D3miniQ8Metal", 102, 4), ("D3nanoQ8Metal", 94, 5), ("D3nanoMacos", 93, 6),
-                                   ("Vela03Macos", 93, 6), ("D3lite", 88, 8), ("D3liteMacos", 88, 8), ("D3liteQ8Metal", 88, 8)):
+        for obs, correct, rank in (("D3FlashQ4Metal", 126, 1), ("D3FlashQ8Upstream", 122, 2), ("ClefFlashQ8", 109, 3),
+                                   ("D3miniMacos", 104, 4), ("D3miniQ8Metal", 102, 5), ("D3miniQ4Metal", 100, 6),
+                                   ("D3nanoQ8Metal", 94, 7), ("D3nanoMacos", 93, 8), ("Vela03Macos", 93, 8), ("D3lite", 88, 10),
+                                   ("D3liteMacos", 88, 10), ("D3liteQ8Metal", 88, 10)):
             row = rows["passage_answerability", obs]
             self.assertEqual((row["counts"]["correct"], row["counts"]["total"], row["rank_all"]), (correct, 128, rank))
         for task, obs, correct, total in (("passage_relevance", "D3miniMacos", 266, 512),
@@ -538,7 +540,8 @@ class FullResultsTests(unittest.TestCase):
 
     def test_facade_routing_ranks_models_with_the_private_router_row(self):
         rows = {r["observation"]: r for r in self.data["facade_routing"]}
-        self.assertEqual(set(rows), {"FacadeRouterReplay", "D3liteMacos", "Vela03Macos", "D3nanoMacos", "D3miniMacos", "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal"})
+        self.assertEqual(set(rows), {"FacadeRouterReplay", "D3liteMacos", "Vela03Macos", "D3nanoMacos", "D3miniMacos", "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal",
+                                     "D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu"})
         router = rows["FacadeRouterReplay"]
         self.assertEqual((router["kind"], router["counts"]["all"]["correct"], router["paired"]), ("private_router_replay", 28, None))
         for row in rows.values():
@@ -554,7 +557,7 @@ class FullResultsTests(unittest.TestCase):
         self.assertEqual(coverage["D3Q4"]["cells"]["facade_routing"]["status"], "not_run")
         text = results.render(self.data)
         self.assertIn("### Facade routing (model vs router)", text)
-        self.assertIn("| Tool routing | Facade routing (model vs router) | 80 (48 test) | 8 |", text)
+        self.assertIn("| Tool routing | Facade routing (model vs router) | 80 (48 test) | 11 |", text)
         passage_table = text.split("### Passage-only observations and ranking methods")[1].split("###")[0]
         self.assertNotIn("Production router", passage_table)
         self.assertNotIn("Facade routing", passage_table)
@@ -589,8 +592,9 @@ class FullResultsTests(unittest.TestCase):
         rows = {(r["task"], r["observation"]): r for r in self.data["campaigns"]}
         self.assertEqual((rows["capability", "D3miniQ8Metal"]["counts"]["correct"], rows["capability", "D3miniQ8Metal"]["rank_all"]), (192, 1))
         tiers = {r["observation"]: r for r in self.data["facade_tiers"]}
-        self.assertEqual(set(tiers), {"FacadeRouterReplay", "Vela03Macos", "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal"})
-        self.assertEqual((tiers["D3miniQ8Metal"]["rank_complex"], tiers["FacadeRouterReplay"]["rank_complex"]), (1, 5))
+        self.assertEqual(set(tiers), {"FacadeRouterReplay", "Vela03Macos", "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal", "D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu"})
+        self.assertEqual((tiers["D3miniQ4Metal"]["rank_complex"], tiers["D3miniQ8Metal"]["rank_complex"],
+                          tiers["FacadeRouterReplay"]["rank_complex"]), (1, 2, 8))
         for row in tiers.values():
             self.assertEqual((row["advanced"]["all"]["total"], row["complex"]["all"]["total"]), (96, 96))
         coverage = {r["id"]: r for r in self.data["coverage"]["observations"]}
@@ -644,12 +648,44 @@ class FullResultsTests(unittest.TestCase):
 
     def test_deployment_variants_render_and_reject_changed_variants(self):
         deployment = self.data["deployment"]
-        self.assertEqual(set(deployment["variants"]), {"D3miniQ8Metal", "D3miniQ4Metal", "D3FlashMUzu"})
+        self.assertEqual(set(deployment["variants"]), set(results.DEPLOYMENT_VARIANTS))
         facade = deployment["packs"]["facade-routing-v1"]["variants"]
         self.assertEqual((facade["D3miniQ4Metal"]["correct"], facade["D3FlashMUzu"]["correct"]), (79, 78))
-        self.assertIn("### Deployment variants: Q4 and Uzu", results.render(self.data))
+        self.assertEqual(facade["D3FlashMUzu"]["paired_with_same_model"]["variant"], "D3FlashQ4Metal")
+        self.assertEqual({len(v["rounds"]) for t_ in deployment["timing"].values() for v in t_.values()}, {3})
+        text = results.render(self.data)
+        self.assertIn("### Deployment variants: Q4 and Uzu", text)
+        self.assertIn("**Repeated timing.**", text)
         with self.changed_json(results.DEPLOYMENT, lambda d: d["variants"].pop("D3FlashMUzu")):
             with self.assertRaisesRegex(ValueError, "changed schema or variants"):
+                results.build(self.root)
+        with self.changed_json(results.DEPLOYMENT, lambda d: d["variants"]["D3FlashMUzu"]["runtime"].update(binary_sha256="0" * 64)):
+            with self.assertRaisesRegex(ValueError, "another runtime than its observation"):
+                results.build(self.root)
+
+    def test_deployment_variants_are_observations_joined_on_every_pack(self):
+        uzu = self.by_id["D3FlashMUzu"]
+        self.assertEqual(uzu["identity"]["runtime"]["backend"], "uzu")
+        self.assertIsNone(uzu["identity"]["runtime"]["backend_observed"])
+        self.assertEqual(uzu["metadata"]["runtime_group"], "apple_uzu")
+        tiers = {r["observation"]: r for r in self.data["facade_tiers"]}
+        self.assertTrue({"D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu"} <= set(tiers))
+        rel = {r["observation"] for r in self.data["review_packs"]["relevance"]["rows"]}
+        hitl = {r["observation"] for r in self.data["review_packs"]["hitl"]["rows"]}
+        self.assertTrue({"D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu"} <= rel & hitl)
+        page = results.render_model_pages(self.data)[results.MODEL_PAGES_DIR + "D3FlashMUzu.md"]
+        self.assertIn("## Routing tiers, relevance v2 and human confirmation", page)
+        def change(d):
+            d["runs"][-1]["identity"]["binary_sha256"] = "0" * 64
+        with self.changed_json(results.FACADE_VARIANTS["complex"], change):
+            with self.assertRaisesRegex(ValueError, "identity join failed"):
+                results.build(self.root)
+        with self.changed_json(results.REVIEW_VARIANTS["hitl"], lambda d: d["candidates"].pop()):
+            with self.assertRaisesRegex(ValueError, "changed hitl variant roster"):
+                results.build(self.root)
+        uzu_export = "docs/evidence/deployment-variants-20261101/uzu-d3-flash-m.json"
+        with self.changed_json(uzu_export, lambda d: d["runtime"].update(backend_observed="metal")):
+            with self.assertRaisesRegex(ValueError, "Uzu runtime identity mismatch"):
                 results.build(self.root)
 
     def test_executed_episodes_join_by_identity_and_rank_procedure_correct_cases(self):
@@ -676,10 +712,10 @@ class FullResultsTests(unittest.TestCase):
         pages = results.render_model_pages(self.data)
         index = pages[results.MODEL_PAGES_DIR + "README.md"]
         self.assertIn("| [D3 mini · macOS CPU](D3miniMacos.md) | 119/132 (#", index)
-        self.assertIn("| 192/192 (#1) | 39/48 (#2) |", index)
+        self.assertIn("| 192/192 (#1) | 39/48 (#3) |", index)
         mini = pages[results.MODEL_PAGES_DIR + "D3miniMacos.md"]
         self.assertIn("| Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 192/192 | 96/96 | 1 | 1 | all `ok` | [report](../../D3_MINI_MACOS_RESULTS_20261031.md) |", mini)
-        self.assertIn("| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 266/512 | no split ranking | 1 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |", mini)
+        self.assertIn("| Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 266/512 | no split ranking | 2 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |", mini)
         self.assertIn("| Retrieved evidence | [Passage ranking](../../leaderboard/other-benchmarks.md#passage-ranking-and-evidence) | not run | — | — | — | — | — |", mini)
         nano = pages[results.MODEL_PAGES_DIR + "D3nanoMacos.md"]
         self.assertIn("| 188/192 | 92/96 |", nano)
@@ -704,8 +740,8 @@ class FullResultsTests(unittest.TestCase):
         coverage = self.data["coverage"]
         rows = {r["id"]: r for r in coverage["observations"]}
         self.assertEqual({k for k, r in rows.items() if r["context_observation"]}, EXPECTED_LABELS)
-        # 37 context rows, five passage-only methods, one generative candidate, one private router replay.
-        self.assertEqual(len(rows), 44)
+        # 40 context rows, five passage-only methods, one generative candidate, one private router replay.
+        self.assertEqual(len(rows), 47)
         self.assertEqual({len(r["cells"]) for r in rows.values()}, {14})
         generative = rows["QwenToolPolicyV2"]
         self.assertTrue(generative["generative_observation"])
@@ -746,7 +782,7 @@ class FullResultsTests(unittest.TestCase):
         rendered = results.render(self.data)
         self.assertLess(rendered.index("## Coverage overview"), rendered.index("## Updated task rankings"))
         csv_rows = list(csv.DictReader(io.StringIO(results.outputs(self.data)["docs/leaderboard/coverage.csv"])))
-        self.assertEqual(len(csv_rows), 44 * 14)
+        self.assertEqual(len(csv_rows), 47 * 14)
         self.assertIn("### Generated-JSON tool-policy observations", rendered)
         self.assertNotIn("| Discovery (JSON) /10 | Arguments", rendered.split("### Passage-only")[0])
         blank = next(r for r in csv_rows if r["observation"] == "ClefFlashQ8" and r["task"] == "tool_proposal")

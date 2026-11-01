@@ -910,6 +910,87 @@
           "path": "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md"
         }
       ]
+    },
+    "D3miniQ4Metal": {
+      "display_name": "D3 mini · Q4 Metal",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": 4539265536,
+        "label": "4.539B backbone",
+        "basis": "checkpoint_tensor_count",
+        "scope": "BF16 backbone; separate FP32 readout excluded",
+        "source": {
+          "path": "docs/D3_LARGER_CPU_PILOT.md"
+        }
+      },
+      "runtime_group": "apple_metal_upstream",
+      "precision": "Q4_K_M GGUF (ggml-org conversion of the same weights)",
+      "hardware_group": "Apple M5 Pro GPU (Metal); 64 GiB unified memory",
+      "source_analysis": "docs/evidence/deployment-variants-20261101/d3-mini-q4.json",
+      "observed_date": "2026-11-01",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md"
+        },
+        {
+          "path": "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md"
+        }
+      ]
+    },
+    "D3FlashQ4Metal": {
+      "display_name": "D3 flash · Q4 direct Metal",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": null,
+        "label": "9B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name class, not an independent parameter count of converted GGUF; text only, without vision projector",
+        "source": {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        }
+      },
+      "runtime_group": "apple_metal_upstream",
+      "precision": "Q4_K_M GGUF (ggml-org)",
+      "hardware_group": "Apple M5 Pro GPU (Metal); 64 GiB unified memory",
+      "source_analysis": "docs/evidence/deployment-variants-20261101/d3-flash-q4.json",
+      "observed_date": "2026-11-01",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md"
+        },
+        {
+          "path": "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md"
+        }
+      ]
+    },
+    "D3FlashMUzu": {
+      "display_name": "D3 flash · 4-bit Uzu",
+      "family": "Decision 3.0",
+      "model_size": {
+        "parameters": null,
+        "label": "9B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name class, not an independent parameter count of converted GGUF; text only, without vision projector",
+        "source": {
+          "path": "docs/NATIVE_DECISION_RESULTS_20261016.md"
+        }
+      },
+      "runtime_group": "apple_uzu",
+      "precision": "INT4 group-64 (YAQA), Mirai pack trymirai/d3-flash-M",
+      "hardware_group": "Apple M5 Pro (Metal requested, not reported by Uzu); 64 GiB unified memory",
+      "source_analysis": "docs/evidence/deployment-variants-20261101/uzu-d3-flash-m.json",
+      "observed_date": "2026-11-01",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/UZU_D3_FLASH_M_PROTOCOL_20261101.md"
+        },
+        {
+          "path": "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md"
+        }
+      ]
     }
   }
 }

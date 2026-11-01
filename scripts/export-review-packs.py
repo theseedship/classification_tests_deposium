@@ -2,7 +2,8 @@
 """Export public aggregates for passage-relevance-v2 and the human-confirmation facade packs; no inference.
 
 `relevance` mode: `--run LABEL=ARCHIVE=PROFILE` (CPU worker archive) and
-`--gpu-run LABEL=PILOT=ASSETS` (run-upstream-native-pilot.py archive).
+`--gpu-run LABEL=PILOT=ASSETS` (run-upstream-native-pilot.py archive) and
+`--uzu-run LABEL=PILOT=ASSETS` (run-uzu-pilot.py archive).
 `hitl` mode: the same candidate on both variants, `--run LABEL=ARCH9=ARCH8=PROFILE`,
 `--gpu-run LABEL=PILOT9=PILOT8=ASSETS`, plus `--router R9=R8 --router-revision SHA`.
 Seals, tracked pack bytes, tracked profiles or asset manifests, model revisions
@@ -115,6 +116,22 @@ def gpu_candidate(pilot: Path, assets_path: str, cases: dict, digest: str, backe
     return rows, identity
 
 
+def uzu_candidate(pilot: Path, assets_path: str, cases: dict, digest: str):
+    assets_file = (ROOT / assets_path).resolve()
+    require(assets_file.is_relative_to(ROOT / "profiles"), "asset manifest must be tracked under profiles/")
+    deployment = module("scripts/export-deployment-variants.py", "deployment_export")
+    verified = deployment.verify_uzu(pilot, assets_file)
+    require(verified["dataset_sha256"] == digest, "pilot dataset differs from the frozen pack")
+    rows, summary = campaign_rows(pilot / "campaign", cases, digest)
+    assets = load(assets_file)
+    identity = {"adapter": "uzu_local", "backend": "uzu", "backend_requested": "metal", "model_repo_id": assets["repo_id"],
+                "model_revision": assets["revision"], "model_sha256": sha(assets_file.read_bytes()),
+                "assets_manifest": str(assets_file.relative_to(ROOT)), "uzu_revision": verified["runtime"]["uzu_revision"],
+                "binary_sha256": verified["runtime"]["binary_sha256"], "raw_sha256": summary["raw_sha256"],
+                "seal_sha256": sha((pilot / "pilot-seal.json").read_bytes()), "rss_peak_mib": verified["rss_peak_mib"]}
+    return rows, identity
+
+
 def router_candidate(archive: Path, cases: dict, digest: str):
     rows, summary = campaign_rows(archive, cases, digest)
     final = load(archive / "adapter-final.json")
@@ -210,6 +227,7 @@ def main():
     parser.add_argument("--mode", choices=sorted(PACKS), required=True)
     parser.add_argument("--run", action="append", default=[])
     parser.add_argument("--gpu-run", action="append", default=[])
+    parser.add_argument("--uzu-run", action="append", default=[])
     parser.add_argument("--backend", default="metal", choices=("metal", "cuda", "rocm", "vulkan"))
     parser.add_argument("--router")
     parser.add_argument("--router-revision")
@@ -219,7 +237,7 @@ def main():
         require(not args.output.exists(), "refusing to overwrite the output")
         packs = {pack: tracked(pack) for pack in PACKS[args.mode]}
         candidates = []
-        specs = [("cpu", s) for s in args.run] + [("gpu", s) for s in args.gpu_run]
+        specs = [("cpu", s) for s in args.run] + [("gpu", s) for s in args.gpu_run] + [("uzu", s) for s in args.uzu_run]
         require(specs, "at least one candidate run is required")
         for kind_, spec in specs:
             parts = spec.split("=")
@@ -228,6 +246,7 @@ def main():
             loaded = []
             for archive, (pack, (digest, cases)) in zip(archives, packs.items()):
                 loaded.append(cpu_candidate(archive, reference, cases, digest) if kind_ == "cpu"
+                              else uzu_candidate(archive, reference, cases, digest) if kind_ == "uzu"
                               else gpu_candidate(archive, reference, cases, digest, args.backend))
             entry = {"label": label, "identities": [identity for _, identity in loaded]}
             if args.mode == "relevance":

@@ -20,7 +20,7 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 
 | Family | Task | Correct / all | Held-out test | Rank all | Rank test | Execution | Report |
 |---|---|---:|---:|---:|---:|---|---|
-| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 98/132 | 51/66 | 18 | 18 | all `ok` | [LARGER_DECISION_MODELS_PILOT](../../LARGER_DECISION_MODELS_PILOT.md) |
+| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 98/132 | 51/66 | 21 | 21 | all `ok` | [LARGER_DECISION_MODELS_PILOT](../../LARGER_DECISION_MODELS_PILOT.md) |
 | RAG decision | [First-tool proposals](../../RESULTS.md#model-quality) | 18/24 | no test split | — | — | all `ok` | provisional agreement, zero qualified cases |
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | not run | — | — | — | — | — |
 | Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | not run | — | — | — | — | — |

@@ -10,11 +10,36 @@
           "paired_with_d3_mini_q8": {
             "both": 192,
             "identical_answers": 192,
-            "q8_only": 0,
+            "other_only": 0,
+            "variant_only": 0
+          },
+          "paired_with_same_model": {
+            "both": 192,
+            "identical_answers": 192,
+            "other_only": 0,
+            "variant": "D3FlashQ4Metal",
             "variant_only": 0
           },
           "rss_peak_mib": 4280.359375,
           "seal_sha256": "6d5f9c0c9b7fdfb9969abf010cee759763427dc73d94d1d36071985727e9610d",
+          "statuses": {
+            "ok": 192
+          },
+          "test_correct": 96,
+          "test_total": 96,
+          "total": 192
+        },
+        "D3FlashQ4Metal": {
+          "correct": 192,
+          "median_call_ms": 584.4420205030474,
+          "paired_with_d3_mini_q8": {
+            "both": 192,
+            "identical_answers": 192,
+            "other_only": 0,
+            "variant_only": 0
+          },
+          "rss_peak_mib": 6904.375,
+          "seal_sha256": "4985e95194680b4b5c4289377e14e7bff33c1424a34a74f30f9a6dab7544fe8c",
           "statuses": {
             "ok": 192
           },
@@ -28,7 +53,7 @@
           "paired_with_d3_mini_q8": {
             "both": 192,
             "identical_answers": 192,
-            "q8_only": 0,
+            "other_only": 0,
             "variant_only": 0
           },
           "rss_peak_mib": 4101.65625,
@@ -64,8 +89,15 @@
           "paired_with_d3_mini_q8": {
             "both": 112,
             "identical_answers": 118,
-            "q8_only": 7,
+            "other_only": 7,
             "variant_only": 6
+          },
+          "paired_with_same_model": {
+            "both": 114,
+            "identical_answers": 120,
+            "other_only": 8,
+            "variant": "D3FlashQ4Metal",
+            "variant_only": 4
           },
           "rss_peak_mib": 4326.328125,
           "seal_sha256": "47571c4e85164d913f53819c9703835bc6e6e6b61ef02de94dde0a99e8b84dc9",
@@ -76,13 +108,31 @@
           "test_total": 66,
           "total": 132
         },
+        "D3FlashQ4Metal": {
+          "correct": 122,
+          "median_call_ms": 198.33520850079367,
+          "paired_with_d3_mini_q8": {
+            "both": 115,
+            "identical_answers": 118,
+            "other_only": 4,
+            "variant_only": 7
+          },
+          "rss_peak_mib": 6803.671875,
+          "seal_sha256": "3dc0ef135ec288b308abcdd7593ade9e7bd5f24532c73289d47775e6fcb77967",
+          "statuses": {
+            "ok": 132
+          },
+          "test_correct": 59,
+          "test_total": 66,
+          "total": 132
+        },
         "D3miniQ4Metal": {
           "correct": 117,
           "median_call_ms": 107.49214600218693,
           "paired_with_d3_mini_q8": {
             "both": 117,
             "identical_answers": 130,
-            "q8_only": 2,
+            "other_only": 2,
             "variant_only": 0
           },
           "rss_peak_mib": 4033.15625,
@@ -118,8 +168,15 @@
           "paired_with_d3_mini_q8": {
             "both": 91,
             "identical_answers": 92,
-            "q8_only": 3,
+            "other_only": 3,
             "variant_only": 1
+          },
+          "paired_with_same_model": {
+            "both": 92,
+            "identical_answers": 94,
+            "other_only": 2,
+            "variant": "D3FlashQ4Metal",
+            "variant_only": 0
           },
           "rss_peak_mib": 4319.734375,
           "seal_sha256": "12ee76c6b4382dad6edea54a9abb2ca78382b437d6fd25122278551db0c564b6",
@@ -130,13 +187,31 @@
           "test_total": 64,
           "total": 96
         },
+        "D3FlashQ4Metal": {
+          "correct": 94,
+          "median_call_ms": 289.827853506722,
+          "paired_with_d3_mini_q8": {
+            "both": 93,
+            "identical_answers": 94,
+            "other_only": 1,
+            "variant_only": 1
+          },
+          "rss_peak_mib": 6812.296875,
+          "seal_sha256": "cf5516b13b9f92fa157928ed76aa329bc97272cb24bcf9cf3b8bb918212b759e",
+          "statuses": {
+            "ok": 96
+          },
+          "test_correct": 62,
+          "test_total": 64,
+          "total": 96
+        },
         "D3miniQ4Metal": {
           "correct": 94,
           "median_call_ms": 170.38793799292762,
           "paired_with_d3_mini_q8": {
             "both": 94,
             "identical_answers": 96,
-            "q8_only": 0,
+            "other_only": 0,
             "variant_only": 0
           },
           "rss_peak_mib": 4038.96875,
@@ -172,8 +247,15 @@
           "paired_with_d3_mini_q8": {
             "both": 87,
             "identical_answers": 90,
-            "q8_only": 5,
+            "other_only": 5,
             "variant_only": 1
+          },
+          "paired_with_same_model": {
+            "both": 88,
+            "identical_answers": 93,
+            "other_only": 3,
+            "variant": "D3FlashQ4Metal",
+            "variant_only": 0
           },
           "rss_peak_mib": 4322.46875,
           "seal_sha256": "7ad6aec2fa5146b6a72f6c7cdd8b992ed75fffd5750272f2b9372ca192b1be8e",
@@ -184,13 +266,31 @@
           "test_total": 64,
           "total": 96
         },
+        "D3FlashQ4Metal": {
+          "correct": 91,
+          "median_call_ms": 293.8619794949773,
+          "paired_with_d3_mini_q8": {
+            "both": 90,
+            "identical_answers": 93,
+            "other_only": 2,
+            "variant_only": 1
+          },
+          "rss_peak_mib": 6818.625,
+          "seal_sha256": "6b3c28b44fa71262199d7c0d4366fbb84f352a35669e2ac70cecb21f4cc6006b",
+          "statuses": {
+            "ok": 96
+          },
+          "test_correct": 59,
+          "test_total": 64,
+          "total": 96
+        },
         "D3miniQ4Metal": {
           "correct": 93,
           "median_call_ms": 168.7390209917794,
           "paired_with_d3_mini_q8": {
             "both": 92,
             "identical_answers": 95,
-            "q8_only": 0,
+            "other_only": 0,
             "variant_only": 1
           },
           "rss_peak_mib": 4042.3125,
@@ -226,11 +326,36 @@
           "paired_with_d3_mini_q8": {
             "both": 81,
             "identical_answers": 83,
-            "q8_only": 2,
+            "other_only": 2,
             "variant_only": 4
+          },
+          "paired_with_same_model": {
+            "both": 85,
+            "identical_answers": 88,
+            "other_only": 1,
+            "variant": "D3FlashQ4Metal",
+            "variant_only": 0
           },
           "rss_peak_mib": 4321.515625,
           "seal_sha256": "4589138e7dd8f2412a3528d43506801de81221dd4b4f54ef7c14418ffa533ba9",
+          "statuses": {
+            "ok": 90
+          },
+          "test_correct": 58,
+          "test_total": 62,
+          "total": 90
+        },
+        "D3FlashQ4Metal": {
+          "correct": 86,
+          "median_call_ms": 290.4921250010375,
+          "paired_with_d3_mini_q8": {
+            "both": 82,
+            "identical_answers": 85,
+            "other_only": 1,
+            "variant_only": 4
+          },
+          "rss_peak_mib": 6811.4375,
+          "seal_sha256": "5fe94ecb7b0ba899efddaba2b52fb85663586429bd731cfa14d94c9ffbdea7a0",
           "statuses": {
             "ok": 90
           },
@@ -244,7 +369,7 @@
           "paired_with_d3_mini_q8": {
             "both": 81,
             "identical_answers": 88,
-            "q8_only": 2,
+            "other_only": 2,
             "variant_only": 0
           },
           "rss_peak_mib": 4040.609375,
@@ -280,8 +405,15 @@
           "paired_with_d3_mini_q8": {
             "both": 69,
             "identical_answers": 82,
-            "q8_only": 2,
+            "other_only": 2,
             "variant_only": 2
+          },
+          "paired_with_same_model": {
+            "both": 71,
+            "identical_answers": 85,
+            "other_only": 2,
+            "variant": "D3FlashQ4Metal",
+            "variant_only": 0
           },
           "rss_peak_mib": 4320.265625,
           "seal_sha256": "ba5419b9234afffdc19c4ea29b83295b9c02fed27777b8cc2778ce6ccac216a4",
@@ -292,13 +424,31 @@
           "test_total": 62,
           "total": 90
         },
+        "D3FlashQ4Metal": {
+          "correct": 73,
+          "median_call_ms": 299.63089599914383,
+          "paired_with_d3_mini_q8": {
+            "both": 71,
+            "identical_answers": 86,
+            "other_only": 0,
+            "variant_only": 2
+          },
+          "rss_peak_mib": 6816.625,
+          "seal_sha256": "e2850f925dbe248a696040599ee92c5bebd9a435db2622854f72345011780e2c",
+          "statuses": {
+            "ok": 90
+          },
+          "test_correct": 49,
+          "test_total": 62,
+          "total": 90
+        },
         "D3miniQ4Metal": {
           "correct": 69,
           "median_call_ms": 172.61179149500094,
           "paired_with_d3_mini_q8": {
             "both": 69,
             "identical_answers": 87,
-            "q8_only": 2,
+            "other_only": 2,
             "variant_only": 0
           },
           "rss_peak_mib": 4042.96875,
@@ -334,7 +484,14 @@
           "paired_with_d3_mini_q8": {
             "both": 78,
             "identical_answers": 79,
-            "q8_only": 1,
+            "other_only": 1,
+            "variant_only": 0
+          },
+          "paired_with_same_model": {
+            "both": 78,
+            "identical_answers": 79,
+            "other_only": 1,
+            "variant": "D3FlashQ4Metal",
             "variant_only": 0
           },
           "rss_peak_mib": 4321.21875,
@@ -346,13 +503,31 @@
           "test_total": 48,
           "total": 80
         },
+        "D3FlashQ4Metal": {
+          "correct": 79,
+          "median_call_ms": 292.16547901160084,
+          "paired_with_d3_mini_q8": {
+            "both": 79,
+            "identical_answers": 80,
+            "other_only": 0,
+            "variant_only": 0
+          },
+          "rss_peak_mib": 6812.015625,
+          "seal_sha256": "240e15d76a71a92edc58aee30e74c9b8dd828ea512d1e6aa8c60d91c3a0383fb",
+          "statuses": {
+            "ok": 80
+          },
+          "test_correct": 47,
+          "test_total": 48,
+          "total": 80
+        },
         "D3miniQ4Metal": {
           "correct": 79,
           "median_call_ms": 167.12535450642463,
           "paired_with_d3_mini_q8": {
             "both": 79,
             "identical_answers": 80,
-            "q8_only": 0,
+            "other_only": 0,
             "variant_only": 0
           },
           "rss_peak_mib": 4043.078125,
@@ -388,8 +563,15 @@
           "paired_with_d3_mini_q8": {
             "both": 384,
             "identical_answers": 476,
-            "q8_only": 22,
+            "other_only": 22,
             "variant_only": 2
+          },
+          "paired_with_same_model": {
+            "both": 379,
+            "identical_answers": 500,
+            "other_only": 2,
+            "variant": "D3FlashQ4Metal",
+            "variant_only": 7
           },
           "rss_peak_mib": 4321.515625,
           "seal_sha256": "86657dc60c73eb48396ed7503f4673a2cfb78f582c5582a49c4687164d5ff7ec",
@@ -400,13 +582,31 @@
           "test_total": 256,
           "total": 512
         },
+        "D3FlashQ4Metal": {
+          "correct": 381,
+          "median_call_ms": 204.70377049787203,
+          "paired_with_d3_mini_q8": {
+            "both": 379,
+            "identical_answers": 471,
+            "other_only": 27,
+            "variant_only": 2
+          },
+          "rss_peak_mib": 6802.96875,
+          "seal_sha256": "4284d37e0d5cadcb10d17266ad5d17448ed7c456b46a73116df674c773989ebd",
+          "statuses": {
+            "ok": 512
+          },
+          "test_correct": 187,
+          "test_total": 256,
+          "total": 512
+        },
         "D3miniQ4Metal": {
           "correct": 406,
           "median_call_ms": 111.59362499893177,
           "paired_with_d3_mini_q8": {
             "both": 404,
             "identical_answers": 507,
-            "q8_only": 2,
+            "other_only": 2,
             "variant_only": 2
           },
           "rss_peak_mib": 4045.796875,
@@ -442,11 +642,36 @@
           "paired_with_d3_mini_q8": {
             "both": 36,
             "identical_answers": 41,
-            "q8_only": 3,
+            "other_only": 3,
             "variant_only": 4
+          },
+          "paired_with_same_model": {
+            "both": 39,
+            "identical_answers": 46,
+            "other_only": 0,
+            "variant": "D3FlashQ4Metal",
+            "variant_only": 1
           },
           "rss_peak_mib": 4319.9375,
           "seal_sha256": "8b9e065559af32391b0068bb9ec4553adafb26387e4a23e437b5fa2d10207aaa",
+          "statuses": {
+            "ok": 48
+          },
+          "test_correct": 32,
+          "test_total": 36,
+          "total": 48
+        },
+        "D3FlashQ4Metal": {
+          "correct": 39,
+          "median_call_ms": 196.7695210041711,
+          "paired_with_d3_mini_q8": {
+            "both": 36,
+            "identical_answers": 42,
+            "other_only": 3,
+            "variant_only": 3
+          },
+          "rss_peak_mib": 6802.546875,
+          "seal_sha256": "fe7f4845386915c5778d32c23db6bcaea0204f6abb22e01da23defd55b2de9b0",
           "statuses": {
             "ok": 48
           },
@@ -460,7 +685,7 @@
           "paired_with_d3_mini_q8": {
             "both": 36,
             "identical_answers": 45,
-            "q8_only": 3,
+            "other_only": 3,
             "variant_only": 0
           },
           "rss_peak_mib": 4033.9375,
@@ -489,6 +714,349 @@
   },
   "qualification": "exploratory; deployment comparison (weights format, quantization and engine together)",
   "schema_version": "deposium.deployment-variants-public/v1",
+  "timing": {
+    "context-choice-v1": {
+      "D3FlashMUzu": {
+        "median_of_round_medians_ms": 75.03085400821874,
+        "round_median_range_ms": [
+          74.85120849742088,
+          75.06900050066179
+        ],
+        "rounds": [
+          {
+            "correct": 118,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 89.37545800290536,
+            "median_ms": 74.85120849742088,
+            "p95_ms": 87.06283400533721,
+            "round": "1",
+            "rss_peak_mib": 4326.046875,
+            "seal_sha256": "6d585b9dc1d793508b05535bd91e9e59ddd78f3a076e329d0476e7a8bd54bef5"
+          },
+          {
+            "correct": 118,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 90.259958000388,
+            "median_ms": 75.06900050066179,
+            "p95_ms": 87.00066700112075,
+            "round": "2",
+            "rss_peak_mib": 4325.859375,
+            "seal_sha256": "a9d81572136185d8569e9feecc66b5cb0abd8b762852ef4392931cb4e7ad1ccb"
+          },
+          {
+            "correct": 118,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 89.85320800275076,
+            "median_ms": 75.03085400821874,
+            "p95_ms": 86.66479100065771,
+            "round": "3",
+            "rss_peak_mib": 4327.484375,
+            "seal_sha256": "cb34ac95e55caa20602321d3228a7550d05a23acb32ddf71ef90cf7356512b4c"
+          }
+        ]
+      },
+      "D3FlashQ4Metal": {
+        "median_of_round_medians_ms": 199.4107919963426,
+        "round_median_range_ms": [
+          197.42129150108667,
+          199.911041498126
+        ],
+        "rounds": [
+          {
+            "correct": 122,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 209.26712499931455,
+            "median_ms": 197.42129150108667,
+            "p95_ms": 204.93112498661503,
+            "round": "1",
+            "rss_peak_mib": 6802.140625,
+            "seal_sha256": "61db9609fb2634e92c27f1956a869f2633e6da909aeffba1a1c7b4141bbeaec6"
+          },
+          {
+            "correct": 122,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 210.15462499053683,
+            "median_ms": 199.911041498126,
+            "p95_ms": 206.27312500437256,
+            "round": "2",
+            "rss_peak_mib": 6800.921875,
+            "seal_sha256": "2391531c7aaf3438cab7a26c21b21c38be0913adbfc05dfe3132f12a84d88053"
+          },
+          {
+            "correct": 122,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 208.93541700206697,
+            "median_ms": 199.4107919963426,
+            "p95_ms": 205.67024999763817,
+            "round": "3",
+            "rss_peak_mib": 6801.328125,
+            "seal_sha256": "f72e01417132e6d9fadd995c1273cb36befa025022486c77101d843d8fffa7a2"
+          }
+        ]
+      },
+      "D3miniQ4Metal": {
+        "median_of_round_medians_ms": 108.50154149375157,
+        "round_median_range_ms": [
+          107.08270850591362,
+          108.84304199862527
+        ],
+        "rounds": [
+          {
+            "correct": 117,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 115.14587499550544,
+            "median_ms": 107.08270850591362,
+            "p95_ms": 111.12337499798741,
+            "round": "1",
+            "rss_peak_mib": 4034.0625,
+            "seal_sha256": "d1d97d218ccaa3469c6bb19860fcbf414f6b5f5951f37a15314f57dd9881965d"
+          },
+          {
+            "correct": 117,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 116.33900000015274,
+            "median_ms": 108.50154149375157,
+            "p95_ms": 112.827582997852,
+            "round": "2",
+            "rss_peak_mib": 4033.28125,
+            "seal_sha256": "83400f35882f342e417a4b81d6187beda8e4847000c83d4251e2555f9b1d2bc2"
+          },
+          {
+            "correct": 117,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 118.07912499352824,
+            "median_ms": 108.84304199862527,
+            "p95_ms": 112.73745899961796,
+            "round": "3",
+            "rss_peak_mib": 4036.8125,
+            "seal_sha256": "ad2ce1568e382a94475c976f069665c8c0d7e368e55e415bb1d7825b89967769"
+          }
+        ]
+      },
+      "D3miniQ8Metal": {
+        "median_of_round_medians_ms": 105.99064599955454,
+        "round_median_range_ms": [
+          105.8878955009277,
+          106.34470849618083
+        ],
+        "rounds": [
+          {
+            "correct": 119,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 114.96116599300876,
+            "median_ms": 105.8878955009277,
+            "p95_ms": 109.98466599266976,
+            "round": "1",
+            "rss_peak_mib": 5416.3125,
+            "seal_sha256": "388e2132df0087fe5efc6508288f645131aaa6b58c72db7a8856d4088e9bd3d0"
+          },
+          {
+            "correct": 119,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 115.32916700525675,
+            "median_ms": 106.34470849618083,
+            "p95_ms": 110.25987500033807,
+            "round": "2",
+            "rss_peak_mib": 5417.53125,
+            "seal_sha256": "bcc3493018718e3c0775e2c7faa590d9c2f8446abf25fa27b238d1503ae69646"
+          },
+          {
+            "correct": 119,
+            "count": 132,
+            "identical_to_main_pass": 132,
+            "max_ms": 114.89620800421108,
+            "median_ms": 105.99064599955454,
+            "p95_ms": 110.7858750037849,
+            "round": "3",
+            "rss_peak_mib": 5415.953125,
+            "seal_sha256": "f310fb0a34cecf307b2d2487234c50c3f048cd04fdd7e094095705f7d306d500"
+          }
+        ]
+      }
+    },
+    "facade-routing-v1": {
+      "D3FlashMUzu": {
+        "median_of_round_medians_ms": 111.2231039951439,
+        "round_median_range_ms": [
+          110.79837500437861,
+          111.61810449993936
+        ],
+        "rounds": [
+          {
+            "correct": 78,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 137.15137499093544,
+            "median_ms": 111.2231039951439,
+            "p95_ms": 119.82875000103377,
+            "round": "1",
+            "rss_peak_mib": 4321.5,
+            "seal_sha256": "4cb93809f128c70ed50eba84d83d10a85050b0f32e0b94585f5fad89024a38f9"
+          },
+          {
+            "correct": 78,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 140.52045799326152,
+            "median_ms": 111.61810449993936,
+            "p95_ms": 120.58816700300667,
+            "round": "2",
+            "rss_peak_mib": 4321.859375,
+            "seal_sha256": "c499af2c1370ec845a6d0642898dbfe539edcd51d5d9277644f7e82cf4c43665"
+          },
+          {
+            "correct": 78,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 139.0146669873502,
+            "median_ms": 110.79837500437861,
+            "p95_ms": 119.84070799371693,
+            "round": "3",
+            "rss_peak_mib": 4259.234375,
+            "seal_sha256": "8de00935c49cdddc06d8c1ea317b3de7e06cac76a964e9ae1251cc5a6a388a3b"
+          }
+        ]
+      },
+      "D3FlashQ4Metal": {
+        "median_of_round_medians_ms": 290.6875625048997,
+        "round_median_range_ms": [
+          289.03158299362985,
+          291.25856200698763
+        ],
+        "rounds": [
+          {
+            "correct": 79,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 303.92158299218863,
+            "median_ms": 289.03158299362985,
+            "p95_ms": 295.47695801011287,
+            "round": "1",
+            "rss_peak_mib": 6812.703125,
+            "seal_sha256": "e95ecd9dc3bf87f7c7180e181d306aa8a6a706e13787227a2959141517acfaf8"
+          },
+          {
+            "correct": 79,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 308.2265420089243,
+            "median_ms": 291.25856200698763,
+            "p95_ms": 298.4974579885602,
+            "round": "2",
+            "rss_peak_mib": 6812.46875,
+            "seal_sha256": "5e02642343ccaf1103f21becb952ec793b51202ec0c295f5510d5ff28f486c7b"
+          },
+          {
+            "correct": 79,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 306.1619159998372,
+            "median_ms": 290.6875625048997,
+            "p95_ms": 297.4740419886075,
+            "round": "3",
+            "rss_peak_mib": 6812.4375,
+            "seal_sha256": "9ca4ea6efc5474d02b5509eaedbe9dc3b542677d9ae1ab785b6fcf46d59d45b3"
+          }
+        ]
+      },
+      "D3miniQ4Metal": {
+        "median_of_round_medians_ms": 166.67124999366933,
+        "round_median_range_ms": [
+          166.1555419996148,
+          167.5768955028616
+        ],
+        "rounds": [
+          {
+            "correct": 79,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 180.1160000031814,
+            "median_ms": 166.1555419996148,
+            "p95_ms": 171.21700001007412,
+            "round": "1",
+            "rss_peak_mib": 4039.203125,
+            "seal_sha256": "0ec0ac6ab2d224f2be2325c7ee663e2416786a9f5edf65453bdd1d1fc3d4b211"
+          },
+          {
+            "correct": 79,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 183.07220800488722,
+            "median_ms": 167.5768955028616,
+            "p95_ms": 172.28241699922364,
+            "round": "2",
+            "rss_peak_mib": 4043.6875,
+            "seal_sha256": "147a6e416e68ff4d2d0bedda0878b45eb76f498a3254af288f9f779777529c59"
+          },
+          {
+            "correct": 79,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 180.53770800179336,
+            "median_ms": 166.67124999366933,
+            "p95_ms": 172.51520800346043,
+            "round": "3",
+            "rss_peak_mib": 4040.875,
+            "seal_sha256": "4a37e12df2f1004832c625cf9347300421c5b97ff3323261682e5bcbda478f52"
+          }
+        ]
+      },
+      "D3miniQ8Metal": {
+        "median_of_round_medians_ms": 163.37641649442958,
+        "round_median_range_ms": [
+          162.61247899819864,
+          164.17341649503214
+        ],
+        "rounds": [
+          {
+            "correct": 79,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 175.97358400234953,
+            "median_ms": 162.61247899819864,
+            "p95_ms": 167.65754199877847,
+            "round": "1",
+            "rss_peak_mib": 5424.546875,
+            "seal_sha256": "91612775e76578a9b442b8ce0c57f67f0d269825f5363c9d76ab3f13546f9bf5"
+          },
+          {
+            "correct": 79,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 176.66545799875166,
+            "median_ms": 163.37641649442958,
+            "p95_ms": 168.22054200747516,
+            "round": "2",
+            "rss_peak_mib": 5421.671875,
+            "seal_sha256": "edd793a5270ae110b877366915169c740621884269b60f7d3a0c809fc9d78c6b"
+          },
+          {
+            "correct": 79,
+            "count": 80,
+            "identical_to_main_pass": 80,
+            "max_ms": 177.27245899732225,
+            "median_ms": 164.17341649503214,
+            "p95_ms": 168.7608329957584,
+            "round": "3",
+            "rss_peak_mib": 5421.9375,
+            "seal_sha256": "1633e580f22d4ee8221be82de03a2b63093baf721add19755dac2d68ed1b3cea"
+          }
+        ]
+      }
+    }
+  },
+  "timing_protocol": "three interleaved rounds per timing pack after the main passes; each round starts every variant once in a rotated order, one fresh server per pass; same Mac, same loopback HTTP boundary",
   "variants": {
     "D3FlashMUzu": {
       "assets_manifest": "profiles/d3-flash-m-uzu-assets.json",
@@ -499,6 +1067,17 @@
       "runtime": {
         "binary_sha256": "c3e5798127eb037f6b8571817203096ab8a1ae4bcd24a06b951a25d044896f21",
         "uzu_revision": "d3d3a5b20a3de507522e1099457d1dae0243effb"
+      }
+    },
+    "D3FlashQ4Metal": {
+      "assets_manifest": "profiles/d3-flash-q4-assets.json",
+      "backend_observed": "metal",
+      "backend_requested": "metal",
+      "egress_isolated": null,
+      "kind": "gguf",
+      "runtime": {
+        "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+        "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546"
       }
     },
     "D3miniQ4Metal": {
