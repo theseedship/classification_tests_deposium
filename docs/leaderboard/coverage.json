@@ -1679,7 +1679,7 @@
           },
           "review_pending": true,
           "scored_or_valid": 80,
-          "source": "docs/evidence/facade-routing-20261101/analysis.json",
+          "source": "docs/evidence/facade-routing-tiers-20261101/easy-metal.json",
           "status": "complete",
           "total": 80
         },
@@ -2297,7 +2297,7 @@
           },
           "review_pending": true,
           "scored_or_valid": 80,
-          "source": "docs/evidence/facade-routing-20261101/analysis.json",
+          "source": "docs/evidence/facade-routing-tiers-20261101/easy-metal.json",
           "status": "complete",
           "total": 80
         },
@@ -4011,7 +4011,7 @@
           },
           "review_pending": true,
           "scored_or_valid": 80,
-          "source": "docs/evidence/facade-routing-20261101/analysis.json",
+          "source": "docs/evidence/facade-routing-tiers-20261101/easy-metal.json",
           "status": "complete",
           "total": 80
         },
@@ -8452,7 +8452,7 @@
     "profiles/vela2-03-macos-choice-episodes.json": "0dd5e3e87bbea50d56d7701325adde78646816b262bcd4a85f74b065a10764f3",
     "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "61050d33d04cf776b8f4c57a232c3f490322073f787c639cb985b03cc116283b",
+    "scripts/build-full-results.py": "11bf52ce0d2c55719907c4b53d86a07a76ceb81950b092a8279d97296fcf5518",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
     "scripts/consolidated-campaigns.py": "aad0e445b816da17101c9a5664caff05aa3845418284ed3531ae31174e79c719"

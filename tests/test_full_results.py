@@ -604,7 +604,21 @@ class FullResultsTests(unittest.TestCase):
         with self.changed_json(results.FACADE_EASY_METAL, lambda d: d["runs"][0]["identity"].update(binary_sha256="0" * 64)):
             with self.assertRaisesRegex(ValueError, "identity join failed"):
                 results.build(self.root)
+        cells = {r["id"]: r["cells"]["facade_routing"] for r in self.data["coverage"]["observations"]}
+        self.assertEqual(cells["D3nanoQ8Metal"]["source"], results.FACADE_EASY_METAL)
+        self.assertEqual(cells["D3nanoMacos"]["source"], results.FACADE)
         tier_path = results.FACADE_TIERS["complex"][0]
+        for field, value in (("model_sha256", "0" * 64), ("binary_sha256", "0" * 64), ("backend", "cuda")):
+            def change(d, field=field, value=value):
+                next(r for r in d["runs"] if r["label"] == "D3miniQ8Metal")["identity"][field] = value
+            with self.subTest(field=field), self.changed_json(tier_path, change):
+                with self.assertRaisesRegex(ValueError, "identity join failed for D3miniQ8Metal"):
+                    results.build(self.root)
+        def vela(d):
+            next(r for r in d["runs"] if r["label"] == "Vela03Macos")["identity"]["runtime_lock_sha256"] = "0" * 64
+        with self.changed_json(results.FACADE_TIERS["advanced"][0], vela):
+            with self.assertRaisesRegex(ValueError, "identity join failed for Vela03Macos"):
+                results.build(self.root)
         with self.changed_json(tier_path, lambda d: d.update(dataset_sha256="0" * 64)):
             with self.assertRaisesRegex(ValueError, "changed complex pack"):
                 results.build(self.root)

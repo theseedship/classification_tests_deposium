@@ -338,6 +338,27 @@ def capability_campaign(inputs, historical, metadata):
             "reference_review": source["reference_review"], "canary_in_quality_denominators": False}
 
 
+def facade_join(run, observations, inputs):
+    """A facade run joins an observation only with the same weights and runtime, never by label alone."""
+    if run["kind"] != "classifier":
+        return
+    target = observations.get(run["label"])
+    identity = run["identity"]
+    if "backend" in identity:
+        # GPU rows: the same GGUF file, native binary and backend as their context observation.
+        runtime = (target or {}).get("identity", {}).get("runtime", {})
+        require(target is not None and target["identity"].get("model_assets_sha256") == identity["model_sha256"]
+                and runtime.get("binary_sha256") == identity["binary_sha256"] and runtime.get("backend") == identity["backend"],
+                f"facade routing: identity join failed for {run['label']}")
+        inputs.read(identity["assets_manifest"])
+    else:
+        require(target is not None and target["identity"].get("model_revision") == identity["model_revision"]
+                and identity.get("runtime_lock_sha256") is not None
+                and target["identity"].get("hashes", {}).get("runtime_lock_sha256") == identity["runtime_lock_sha256"],
+                f"facade routing: identity join failed for {run['label']}")
+        inputs.read(identity["profile"])
+
+
 def build(root=ROOT):
     inputs = PublicInputs(root)
     composer = load_composer(inputs)
@@ -492,8 +513,10 @@ def build(root=ROOT):
         require(data_.get("pack") == f"facade-routing-{tier}-v1" and data_["dataset_sha256"] == digest_ and data_["cases"] == 96
                 and data_["router"]["identity"]["router_source_revision"] == facade["router"]["identity"]["router_source_revision"],
                 f"facade tiers: changed {tier} pack or router revision")
+        observations = {r["id"]: r for r in rows}
         for run in (data_["router"], *data_["runs"]):
             require(run["label"] in tiers, f"facade tiers: {run['label']} has no easy-tier row")
+            facade_join(run, observations, inputs)
             tiers[run["label"]][tier] = run["counts"]
             tiers[run["label"]].setdefault("latency", run.get("inference_ms"))
     inputs.read("docs/" + FACADE_TIERS_REPORT)
@@ -732,28 +755,16 @@ def build_coverage(observations, campaigns, others, inputs):
                                "runtime": "private_replay", "context_observation": False,
                                "generative_observation": False, "router_observation": True, "cells": unobserved()}
     easy_metal = inputs.load(FACADE_EASY_METAL)
-    for run in (facade["router"], *facade["runs"], *easy_metal["runs"]):
-        if run["kind"] == "classifier" and "backend" in run["identity"]:
-            # GPU rows: the same GGUF file and native binary as their context observation.
-            target = context_ids.get(run["label"])
-            require(target is not None and target["identity"].get("model_assets_sha256") == run["identity"]["model_sha256"]
-                    and target["identity"].get("runtime", {}).get("binary_sha256") == run["identity"]["binary_sha256"],
-                    f"facade routing: identity join failed for {run['label']}")
-            inputs.read(run["identity"]["assets_manifest"])
-        elif run["kind"] == "classifier":
-            target = context_ids.get(run["label"])
-            require(target is not None and target["identity"].get("model_revision") == run["identity"]["model_revision"]
-                    and run["identity"].get("runtime_lock_sha256") is not None
-                    and target["identity"].get("hashes", {}).get("runtime_lock_sha256") == run["identity"]["runtime_lock_sha256"],
-                    f"facade routing: identity join failed for {run['label']}")
-            inputs.read(run["identity"]["profile"])
+    sourced = [(run, FACADE) for run in (facade["router"], *facade["runs"])] + [(run, FACADE_EASY_METAL) for run in easy_metal["runs"]]
+    for run, source in sourced:
+        facade_join(run, context_ids, inputs)
         c = run["counts"]["all"]
         statuses = {**{k: 0 for k in STATUS_KEYS}, **c["statuses"]}
         require(c["total"] == 80 and sum(statuses.values()) == 80, f"facade routing: denominator for {run['label']}")
         require(not by_id[run["label"]]["cells"]["facade_routing"]["evidence_present"], "facade routing: duplicate observation")
         by_id[run["label"]]["cells"]["facade_routing"] = coverage_cell(
             {"total": 80, "scored": statuses["ok"] + statuses["abstain"], "correct": c["correct"], "statuses": statuses},
-            totals["facade_routing"], FACADE)
+            totals["facade_routing"], source)
 
     # Ranking is a distinct task, including derived class-order and tie-break methods.
     order = others["passage_order"]["summary"]
