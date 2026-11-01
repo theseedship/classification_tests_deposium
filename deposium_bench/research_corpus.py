@@ -537,6 +537,10 @@ def validate_oracle(case):
             and case["evaluation"].get("domain") == "physics"):
         from .physics_corpus import validate_oracle as validate_physics_oracle
         return validate_physics_oracle(case)
+    if (isinstance(case, dict) and isinstance(case.get("evaluation"), dict)
+            and str(case["evaluation"].get("base_case_id", "")).startswith("frv1-")):
+        from .facade_corpus import validate_oracle as validate_facade_oracle
+        return validate_facade_oracle(case)
     try:
         evaluation = case["evaluation"]
         if evaluation["base_case_id"].startswith("ccv1-"):
