@@ -368,8 +368,8 @@
       "split": "train",
       "difficulty": "D2",
       "request": {
-        "fr": "Fais un graphique en barres des ventes du trimestre par région.",
-        "en": "Make a bar chart of the quarter's sales by region."
+        "fr": "Fais un camembert des tickets du support par niveau de priorité.",
+        "en": "Make a pie chart of the support tickets by priority level."
       },
       "rationale": "Clear, reversible visualize request: no confirmation needed."
     },

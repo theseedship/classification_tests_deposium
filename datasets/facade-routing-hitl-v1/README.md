@@ -5,10 +5,10 @@
 
 * `facade-routing-hitl-v1` (this directory): nine options, the eight routing
   categories plus *human confirmation*. Cases SHA-256
-  `80a65a54eb1ce33e2e6c6dd9b18a29a39a63ad92928a230b51fecacb344719fa`.
+  `0bd9506d617d5d1bd1df08212c8c453a48064e8d00d61b206d647d75c2c16382`.
 * [`facade-routing-hitl-8opt-v1`](../facade-routing-hitl-8opt-v1/): the eight
   usual options; a request hesitating between two categories accepts either.
-  Cases SHA-256 `3901e26503d37ce80fb1d06af3065f1bc021a9101ca62f620dab7b32330ca521`.
+  Cases SHA-256 `50bc08928060a61ce32fb10f829b8bfb7544a2db36d3343a327bd97344fd3cc6`.
 
 16 families need a human (8 hesitations, 8 irreversible or sensitive
 actions), 21 are close but clear controls, 8 are out of scope or too vague.

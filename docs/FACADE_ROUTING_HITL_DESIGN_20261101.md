@@ -71,10 +71,12 @@ scored and is unaffected.
 
 Review found that two TEST controls reused requests of the easy tier's
 calibration split ("show the error logs of the last hour", and the "shortest
-path between X and Y" template). A candidate calibrated on that split would
-have seen them. Both were replaced by new requests (the deployed service
-version; the groups in which a supplier appears), the packs were refrozen
-(nine options `80a65a54…`, eight options `3901e265…`), and a test now rejects
+path between X and Y" template); the new reuse test then found a TRAIN control
+close to an advanced-tier TEST request (a bar chart of sales by region). A candidate calibrated on that split would
+have seen them. The three were replaced by new requests (the deployed service
+version; the groups in which a supplier appears; a pie chart of support tickets
+by priority), the packs were refrozen
+(nine options `0bd9506d…`, eight options `50bc0892…`), and a test now rejects
 any request shared across splits between the facade packs. Runs made on the
 first freeze are kept locally and not published; every candidate is rerun on
 the corrected packs.

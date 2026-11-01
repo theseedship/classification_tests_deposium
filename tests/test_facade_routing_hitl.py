@@ -55,7 +55,8 @@ class FacadeRoutingHitlTests(unittest.TestCase):
         seen = []
         for dataset_id in ("facade-routing-v1", "facade-routing-advanced-v1", "facade-routing-complex-v1", "facade-routing-hitl-v1"):
             for case in self.load(dataset_id):
-                request = case["input"]["context"].rsplit("\n", 1)[-1]
+                # The quoted request only, without the shared "request sent to a document assistant" preamble.
+                request = re.search(r"[«\"]\s*(.+?)\s*[»\"]\s*$", case["input"]["context"].rsplit("\n", 1)[-1]).group(1)
                 seen.append((dataset_id, case["split"], case["language"], words(request), case["case_id"]))
         for i, a in enumerate(seen):
             for b in seen[i + 1:]:
