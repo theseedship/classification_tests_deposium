@@ -29,6 +29,7 @@ FR/EN translations form 66 families. Differences of a few answers do not establi
   - [Facade routing: harder tiers](#facade-routing-harder-tiers)
   - [Passage relevance v2 (three levels)](#passage-relevance-v2-three-levels)
   - [Facade routing: human confirmation](#facade-routing-human-confirmation)
+  - [Deployment variants: Q4 and Uzu](#deployment-variants-q4-and-uzu)
   - [Campaign latency and memory](#campaign-latency-and-memory)
 - [Model quality](#model-quality)
 - [Language and task complexity](#language-and-task-complexity)
@@ -380,6 +381,24 @@ Can a model tell when to ask a human before acting? 90 FR/EN requests (62 TEST):
 | Production router · private replay | 0/12 | 0/12 | 0/38 | — | — | no probabilities |
 
 The router has no confirmation path; it is shown for reference.
+
+### Deployment variants: Q4 and Uzu
+
+Same packs, three ways to serve a small D3 model on the Mac: D3 mini Q8 and Q4_K_M GGUF on llama.cpp Metal, and Mirai's 4-bit D3 Flash pack (9B, INT4) on the Uzu engine. Cells: correct / all, median call time, sampled process RSS. A deployment comparison: weights, quantization and engine change together. [Report](DEPLOYMENT_VARIANTS_RESULTS_20261101.md).
+
+| Pack | D3 mini Q8 · Metal | D3 mini Q4 · Metal | D3 Flash 4-bit · Uzu |
+|---|---:|---:|---:|
+| capability-choice-v1 | 192/192 · 325.2 ms · 5.4 GiB | 192/192 · 338.4 ms · 4.0 GiB | 192/192 · 263.5 ms · 4.2 GiB |
+| context-choice-v1 | 119/132 · 104.2 ms · 5.3 GiB | 117/132 · 107.5 ms · 3.9 GiB | 118/132 · 73.8 ms · 4.2 GiB |
+| facade-routing-advanced-v1 | 94/96 · 161.6 ms · 5.3 GiB | 94/96 · 170.4 ms · 3.9 GiB | 92/96 · 110.6 ms · 4.2 GiB |
+| facade-routing-complex-v1 | 92/96 · 163.9 ms · 5.3 GiB | 93/96 · 168.7 ms · 3.9 GiB | 88/96 · 111.8 ms · 4.2 GiB |
+| facade-routing-hitl-8opt-v1 | 83/90 · 161.6 ms · 5.3 GiB | 81/90 · 165.2 ms · 3.9 GiB | 85/90 · 107.3 ms · 4.2 GiB |
+| facade-routing-hitl-v1 | 71/90 · 167.6 ms · 5.3 GiB | 69/90 · 172.6 ms · 3.9 GiB | 71/90 · 119.5 ms · 4.2 GiB |
+| facade-routing-v1 | 79/80 · 161.4 ms · 5.3 GiB | 79/80 · 167.1 ms · 3.9 GiB | 78/80 · 110.0 ms · 4.2 GiB |
+| passage-relevance-v2 | 406/512 · 110.1 ms · 5.3 GiB | 406/512 · 111.6 ms · 4.0 GiB | 386/512 · 85.3 ms · 4.2 GiB |
+| physics-choice-v1 | 39/48 · 103.7 ms · 5.3 GiB | 36/48 · 111.1 ms · 3.9 GiB | 40/48 · 72.9 ms · 4.2 GiB |
+
+Uzu does not report its compute backend; Metal is requested, not observed. Its stock CLI fetches an online catalogue at start (no offline claim). Latency is one pass per case.
 
 ### Campaign latency and memory
 

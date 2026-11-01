@@ -28,6 +28,12 @@ v1 kept unchanged), and a [human-confirmation routing pack](FACADE_ROUTING_HITL_
 measures when a model asks a human before acting. Next: human review of the
 references flagged in the tier and passage reports (#8).
 
+Deployment variants, 1 November 2026: D3 mini Q4 on Metal and Mirai's
+4-bit D3 Flash on Uzu ([results](DEPLOYMENT_VARIANTS_RESULTS_20261101.md)) both
+serve the packs in about 4 GiB. Uzu is now runnable end to end (pinned
+`hanashi` input preparation, release 0.6.15); converting D3 mini itself for Uzu
+needs a decision-model recipe that the public converter does not provide.
+
 GPU runtimes, 1 November 2026: D3 lite, nano and mini as Q8 GGUF on Apple Metal
 ([results](D3_SMALL_GGUF_METAL_RESULTS_20261101.md)) give the same decisions as
 their CPU rows on 97.9–100% of cases, 100–240× faster. NVIDIA CUDA

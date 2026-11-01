@@ -44652,8 +44652,9 @@
       "docs/D3_MINI_MACOS_RESULTS_20261031.md": "cdcca85a9e56bb09c0b8a2a9a151e84811abb831d5bd84c52ae0decc426c9af2",
       "docs/D3_NANO_MACOS_CPU_PROTOCOL_20261030.md": "14e0e42587a0114fb230023b7b28ecfbc80423db92b4d517575ee7e141abe641",
       "docs/D3_NANO_MACOS_RESULTS_20261031.md": "f416845dfd6f60847ab979ac4d3a60ae2a1ca900180ae0904a47198359941ce6",
-      "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md": "2ce450707db111edc82f2e4bf6f4cfd566cbfaa30f6d46f8da3ef2ec319b65ef",
+      "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md": "5ffecfb90ac0f1651469e8dfc826524746ca5f5e9fa8f1aab43d55187f24139f",
       "docs/D3_SMALL_GGUF_METAL_RESULTS_20261101.md": "ce73320e99c4a26c95253149af427b568aee230b9715ae4ce410b4ae3fa9cb84",
+      "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md": "b4bccd20bf9fb96adbe9aebf9a1b2e6dcf1bf3eebe8a09aca30156d6dfa53539",
       "docs/FACADE_ROUTING_HITL_RESULTS_20261101.md": "13c3b57f5466142177c9a5f97aac221c00ec936a63606fb214b9a35ce6da8014",
       "docs/FACADE_ROUTING_RESULTS_20261101.md": "ede837b2a12602c2cc43bc6e1662c0c45b2f803cf7950abe5e86d4d5b8d26ba8",
       "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md": "18dd5b79adb3c4d35ce948e9b184c6a66fccd61a583bd6e3a56068b7f66f40ec",
@@ -44693,6 +44694,7 @@
       "docs/evidence/d3-small-gguf-metal-20261101/d3-lite.json": "47b8a3410bedf4c2788a65b52ae8183238e0b9e22aa522ed905876be244cee02",
       "docs/evidence/d3-small-gguf-metal-20261101/d3-mini.json": "2678f39c106b4bed55d5971329a03004fc14ff38a541a279dcd498212cf5841b",
       "docs/evidence/d3-small-gguf-metal-20261101/d3-nano.json": "c2b1842c303d0e4ea2266e19eca5d080c5666e72fade0c9cc27bafcdf163c9fd",
+      "docs/evidence/deployment-variants-20261101/analysis.json": "1613fbe2ad7fc04387806388631a508fa89d0e342600084399a30cadf3a20aaf",
       "docs/evidence/facade-routing-20261101/analysis.json": "18ec5f9fa0be561d04c198e1260dfdc20fd53b92427266c67269af381f8df3a8",
       "docs/evidence/facade-routing-tiers-20261101/advanced.json": "94e16d347f905327dbb071fc8faacff3a3299cbd20b4e2bdd7b3500d12400648",
       "docs/evidence/facade-routing-tiers-20261101/complex.json": "1d51e130faa662beddb9377098d86c506fab1f4d7e17ad125013f0c309d12e0b",
@@ -44736,6 +44738,7 @@
       "docs/leaderboard/model-metadata.json": "2f7a37d51083770bdb1b547a7cdc723b0e5026081d1309fd406a884e4411e32f",
       "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
       "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
+      "profiles/d3-flash-m-uzu-assets.json": "44704e4506b4749133aa14a630ca07afe8eeb0176084e475db54b2db455cbe18",
       "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
       "profiles/d3-lite-assets.json": "0a165940562c277e7050631651b5e59d9a351345c041695e43d48f4de4f4fa71",
       "profiles/d3-lite-macos-choice-episodes.json": "91cabbae4edb9b2c01f74a414efb6e8b912e425f930d918d374e72fe1491c03f",
@@ -44745,6 +44748,7 @@
       "profiles/d3-mini-macos-choice-episodes.json": "70c2952669acc833ba5547c2ed45c3a8129d4513d232de1cef27b9ae2941928a",
       "profiles/d3-mini-macos-cpu-capability.json": "a703b45a4875b6c0114b5942073d42c11967003bd8ae7526f1136c2c43aea592",
       "profiles/d3-mini-macos-cpu.json": "a07b80d131a19c68ea34daea31186bef0f9f5b61698dbdc5dc231a96c7360aa8",
+      "profiles/d3-mini-q4-assets.json": "b0e64c5d41dd0680bb1799edf56d5292e7e342bbf6414b2d3e4c6560f2c35a04",
       "profiles/d3-mini-q8-assets.json": "615e86e70e3541ec554e6994099c0d1127125328994a30934ab5deb015cd51be",
       "profiles/d3-nano-assets.json": "5d07ba7ec2220bc0e34eed2f18fc42f6306dac2a0b5d85a4721d61505fc6dcec",
       "profiles/d3-nano-macos-choice-episodes.json": "6afa47adb2a7015a2a1e18cdfeae99c81c5606e3741c996caf77009dd11cc546",
@@ -44760,7 +44764,7 @@
       "profiles/vela2-03-macos-choice-episodes.json": "0dd5e3e87bbea50d56d7701325adde78646816b262bcd4a85f74b065a10764f3",
       "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
       "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-      "scripts/build-full-results.py": "a96f40bb4249847e6c6573fd5b9c8b8f45072d12fd7af1180e0c21cb9eb9bb37",
+      "scripts/build-full-results.py": "f81cea7fa3b32e7ffcc49ae54615c67b7476233c3c9b6d0bd70e22cb1d585e6b",
       "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
       "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
       "scripts/consolidated-campaigns.py": "aad0e445b816da17101c9a5664caff05aa3845418284ed3531ae31174e79c719"
@@ -44851,6 +44855,533 @@
         "total": 18
       }
     ]
+  },
+  "deployment": {
+    "packs": {
+      "capability-choice-v1": {
+        "cases": 192,
+        "dataset_sha256": "0b409a09bb5358b5c8d7574cbd330799511851a2acd90676e2f092f3d3c75eb0",
+        "variants": {
+          "D3FlashMUzu": {
+            "correct": 192,
+            "median_call_ms": 263.4556459961459,
+            "paired_with_d3_mini_q8": {
+              "both": 192,
+              "identical_answers": 192,
+              "q8_only": 0,
+              "variant_only": 0
+            },
+            "rss_peak_mib": 4280.359375,
+            "seal_sha256": "6d5f9c0c9b7fdfb9969abf010cee759763427dc73d94d1d36071985727e9610d",
+            "statuses": {
+              "ok": 192
+            },
+            "test_correct": 96,
+            "test_total": 96,
+            "total": 192
+          },
+          "D3miniQ4Metal": {
+            "correct": 192,
+            "median_call_ms": 338.420916996256,
+            "paired_with_d3_mini_q8": {
+              "both": 192,
+              "identical_answers": 192,
+              "q8_only": 0,
+              "variant_only": 0
+            },
+            "rss_peak_mib": 4101.65625,
+            "seal_sha256": "7b5c4a3cb664c34d3c2dc38e05c92a5a6fdbea34cc8352e7ca7118ee50b811b2",
+            "statuses": {
+              "ok": 192
+            },
+            "test_correct": 96,
+            "test_total": 96,
+            "total": 192
+          },
+          "D3miniQ8Metal": {
+            "correct": 192,
+            "median_call_ms": 325.18935399275506,
+            "rss_peak_mib": 5482.140625,
+            "seal_sha256": "44d4d69d669fc04d315dd9522d4ab792ddf49535e850565855eac635177c6de1",
+            "statuses": {
+              "ok": 192
+            },
+            "test_correct": 96,
+            "test_total": 96,
+            "total": 192
+          }
+        }
+      },
+      "context-choice-v1": {
+        "cases": 132,
+        "dataset_sha256": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
+        "variants": {
+          "D3FlashMUzu": {
+            "correct": 118,
+            "median_call_ms": 73.8016244940809,
+            "paired_with_d3_mini_q8": {
+              "both": 112,
+              "identical_answers": 118,
+              "q8_only": 7,
+              "variant_only": 6
+            },
+            "rss_peak_mib": 4326.328125,
+            "seal_sha256": "47571c4e85164d913f53819c9703835bc6e6e6b61ef02de94dde0a99e8b84dc9",
+            "statuses": {
+              "ok": 132
+            },
+            "test_correct": 61,
+            "test_total": 66,
+            "total": 132
+          },
+          "D3miniQ4Metal": {
+            "correct": 117,
+            "median_call_ms": 107.49214600218693,
+            "paired_with_d3_mini_q8": {
+              "both": 117,
+              "identical_answers": 130,
+              "q8_only": 2,
+              "variant_only": 0
+            },
+            "rss_peak_mib": 4033.15625,
+            "seal_sha256": "e43dd7d36ac28fe16c850f46d68012ace155f352b2533fa377a21bb32fa1d921",
+            "statuses": {
+              "ok": 132
+            },
+            "test_correct": 59,
+            "test_total": 66,
+            "total": 132
+          },
+          "D3miniQ8Metal": {
+            "correct": 119,
+            "median_call_ms": 104.16539599827956,
+            "rss_peak_mib": 5416.078125,
+            "seal_sha256": "9879da73c18a8188217f6ae9bcbf33cf0fa5337276ffc396bd3ba7e93eaa0ab5",
+            "statuses": {
+              "ok": 132
+            },
+            "test_correct": 60,
+            "test_total": 66,
+            "total": 132
+          }
+        }
+      },
+      "facade-routing-advanced-v1": {
+        "cases": 96,
+        "dataset_sha256": "42364fed544e842a02f68314242b767a7c3fae0dde8505bd66499063930337f3",
+        "variants": {
+          "D3FlashMUzu": {
+            "correct": 92,
+            "median_call_ms": 110.60100000031525,
+            "paired_with_d3_mini_q8": {
+              "both": 91,
+              "identical_answers": 92,
+              "q8_only": 3,
+              "variant_only": 1
+            },
+            "rss_peak_mib": 4319.734375,
+            "seal_sha256": "12ee76c6b4382dad6edea54a9abb2ca78382b437d6fd25122278551db0c564b6",
+            "statuses": {
+              "ok": 96
+            },
+            "test_correct": 61,
+            "test_total": 64,
+            "total": 96
+          },
+          "D3miniQ4Metal": {
+            "correct": 94,
+            "median_call_ms": 170.38793799292762,
+            "paired_with_d3_mini_q8": {
+              "both": 94,
+              "identical_answers": 96,
+              "q8_only": 0,
+              "variant_only": 0
+            },
+            "rss_peak_mib": 4038.96875,
+            "seal_sha256": "d482a15ea83fa3013744723cf51a78cfd4a3c49180522c9e9ad16e973bc7e039",
+            "statuses": {
+              "ok": 96
+            },
+            "test_correct": 62,
+            "test_total": 64,
+            "total": 96
+          },
+          "D3miniQ8Metal": {
+            "correct": 94,
+            "median_call_ms": 161.58322900446365,
+            "rss_peak_mib": 5423.8125,
+            "seal_sha256": "838ee70e8634a8b25f18094fe4c0f1273bcf995bcd613ac75ad4c037e0798d5c",
+            "statuses": {
+              "ok": 96
+            },
+            "test_correct": 62,
+            "test_total": 64,
+            "total": 96
+          }
+        }
+      },
+      "facade-routing-complex-v1": {
+        "cases": 96,
+        "dataset_sha256": "389d362dafa7696b3cb4fb18f0d44a1ae98569a1ae661133f7ec9db44b6930d6",
+        "variants": {
+          "D3FlashMUzu": {
+            "correct": 88,
+            "median_call_ms": 111.7922084958991,
+            "paired_with_d3_mini_q8": {
+              "both": 87,
+              "identical_answers": 90,
+              "q8_only": 5,
+              "variant_only": 1
+            },
+            "rss_peak_mib": 4322.46875,
+            "seal_sha256": "7ad6aec2fa5146b6a72f6c7cdd8b992ed75fffd5750272f2b9372ca192b1be8e",
+            "statuses": {
+              "ok": 96
+            },
+            "test_correct": 56,
+            "test_total": 64,
+            "total": 96
+          },
+          "D3miniQ4Metal": {
+            "correct": 93,
+            "median_call_ms": 168.7390209917794,
+            "paired_with_d3_mini_q8": {
+              "both": 92,
+              "identical_answers": 95,
+              "q8_only": 0,
+              "variant_only": 1
+            },
+            "rss_peak_mib": 4042.3125,
+            "seal_sha256": "0efb6155f7f2e9d6af880c400667bc5b4fe33eff9c146d524595711106d1d159",
+            "statuses": {
+              "ok": 96
+            },
+            "test_correct": 61,
+            "test_total": 64,
+            "total": 96
+          },
+          "D3miniQ8Metal": {
+            "correct": 92,
+            "median_call_ms": 163.85729150351835,
+            "rss_peak_mib": 5426.09375,
+            "seal_sha256": "c39e1c032c64b361d4092381df7dbb1f5cfac24fbb50ce30c9dbcb6da0230511",
+            "statuses": {
+              "ok": 96
+            },
+            "test_correct": 60,
+            "test_total": 64,
+            "total": 96
+          }
+        }
+      },
+      "facade-routing-hitl-8opt-v1": {
+        "cases": 90,
+        "dataset_sha256": "50bc08928060a61ce32fb10f829b8bfb7544a2db36d3343a327bd97344fd3cc6",
+        "variants": {
+          "D3FlashMUzu": {
+            "correct": 85,
+            "median_call_ms": 107.34764600056224,
+            "paired_with_d3_mini_q8": {
+              "both": 81,
+              "identical_answers": 83,
+              "q8_only": 2,
+              "variant_only": 4
+            },
+            "rss_peak_mib": 4321.515625,
+            "seal_sha256": "4589138e7dd8f2412a3528d43506801de81221dd4b4f54ef7c14418ffa533ba9",
+            "statuses": {
+              "ok": 90
+            },
+            "test_correct": 58,
+            "test_total": 62,
+            "total": 90
+          },
+          "D3miniQ4Metal": {
+            "correct": 81,
+            "median_call_ms": 165.15345799416536,
+            "paired_with_d3_mini_q8": {
+              "both": 81,
+              "identical_answers": 88,
+              "q8_only": 2,
+              "variant_only": 0
+            },
+            "rss_peak_mib": 4040.609375,
+            "seal_sha256": "6e2b51a4eeeafc58e9cc99c08dabcfae61134e39a502495686cc737d464cf56a",
+            "statuses": {
+              "ok": 90
+            },
+            "test_correct": 54,
+            "test_total": 62,
+            "total": 90
+          },
+          "D3miniQ8Metal": {
+            "correct": 83,
+            "median_call_ms": 161.6463755053701,
+            "rss_peak_mib": 5424.34375,
+            "seal_sha256": "5a0f19f25ed2375cc6bfcf30a5a1e8b4c63334b477999de0204945eef92e8971",
+            "statuses": {
+              "ok": 90
+            },
+            "test_correct": 55,
+            "test_total": 62,
+            "total": 90
+          }
+        }
+      },
+      "facade-routing-hitl-v1": {
+        "cases": 90,
+        "dataset_sha256": "0bd9506d617d5d1bd1df08212c8c453a48064e8d00d61b206d647d75c2c16382",
+        "variants": {
+          "D3FlashMUzu": {
+            "correct": 71,
+            "median_call_ms": 119.52102099894546,
+            "paired_with_d3_mini_q8": {
+              "both": 69,
+              "identical_answers": 82,
+              "q8_only": 2,
+              "variant_only": 2
+            },
+            "rss_peak_mib": 4320.265625,
+            "seal_sha256": "ba5419b9234afffdc19c4ea29b83295b9c02fed27777b8cc2778ce6ccac216a4",
+            "statuses": {
+              "ok": 90
+            },
+            "test_correct": 47,
+            "test_total": 62,
+            "total": 90
+          },
+          "D3miniQ4Metal": {
+            "correct": 69,
+            "median_call_ms": 172.61179149500094,
+            "paired_with_d3_mini_q8": {
+              "both": 69,
+              "identical_answers": 87,
+              "q8_only": 2,
+              "variant_only": 0
+            },
+            "rss_peak_mib": 4042.96875,
+            "seal_sha256": "c8ef9c5d60f7df98cbd005a5b83f449030fe3b530ba94119e13ae5bab03cdc73",
+            "statuses": {
+              "ok": 90
+            },
+            "test_correct": 46,
+            "test_total": 62,
+            "total": 90
+          },
+          "D3miniQ8Metal": {
+            "correct": 71,
+            "median_call_ms": 167.56879150489112,
+            "rss_peak_mib": 5426.578125,
+            "seal_sha256": "1a16a9e5f4ea4e39b5b0e7849d3bd1db285c6055522d7280fd84e963b6fb16ca",
+            "statuses": {
+              "ok": 90
+            },
+            "test_correct": 47,
+            "test_total": 62,
+            "total": 90
+          }
+        }
+      },
+      "facade-routing-v1": {
+        "cases": 80,
+        "dataset_sha256": "03f30a621298ecb45f78aefc50e048b6737024245a49a347dd982e28bca72c18",
+        "variants": {
+          "D3FlashMUzu": {
+            "correct": 78,
+            "median_call_ms": 110.00452099688118,
+            "paired_with_d3_mini_q8": {
+              "both": 78,
+              "identical_answers": 79,
+              "q8_only": 1,
+              "variant_only": 0
+            },
+            "rss_peak_mib": 4321.21875,
+            "seal_sha256": "99536fdb7fcc3d907156112610e7f6c3752adf6decacbce6d5f7c9e87c7a8b27",
+            "statuses": {
+              "ok": 80
+            },
+            "test_correct": 46,
+            "test_total": 48,
+            "total": 80
+          },
+          "D3miniQ4Metal": {
+            "correct": 79,
+            "median_call_ms": 167.12535450642463,
+            "paired_with_d3_mini_q8": {
+              "both": 79,
+              "identical_answers": 80,
+              "q8_only": 0,
+              "variant_only": 0
+            },
+            "rss_peak_mib": 4043.078125,
+            "seal_sha256": "1dc832b1168a0f20f88c85764d3062e854cefec381ace286d243f24a4cd69ad3",
+            "statuses": {
+              "ok": 80
+            },
+            "test_correct": 47,
+            "test_total": 48,
+            "total": 80
+          },
+          "D3miniQ8Metal": {
+            "correct": 79,
+            "median_call_ms": 161.36695799650624,
+            "rss_peak_mib": 5422.71875,
+            "seal_sha256": "b864a3fd6b55b601586a5a6120bb461872c80457cf7ef74a2869f7a5c3c8e554",
+            "statuses": {
+              "ok": 80
+            },
+            "test_correct": 47,
+            "test_total": 48,
+            "total": 80
+          }
+        }
+      },
+      "passage-relevance-v2": {
+        "cases": 512,
+        "dataset_sha256": "f95b3a604af5c1762ac5a59e096f35de6c88ff7a601e67c5483cf87516f154a0",
+        "variants": {
+          "D3FlashMUzu": {
+            "correct": 386,
+            "median_call_ms": 85.25043749978067,
+            "paired_with_d3_mini_q8": {
+              "both": 384,
+              "identical_answers": 476,
+              "q8_only": 22,
+              "variant_only": 2
+            },
+            "rss_peak_mib": 4321.515625,
+            "seal_sha256": "86657dc60c73eb48396ed7503f4673a2cfb78f582c5582a49c4687164d5ff7ec",
+            "statuses": {
+              "ok": 512
+            },
+            "test_correct": 189,
+            "test_total": 256,
+            "total": 512
+          },
+          "D3miniQ4Metal": {
+            "correct": 406,
+            "median_call_ms": 111.59362499893177,
+            "paired_with_d3_mini_q8": {
+              "both": 404,
+              "identical_answers": 507,
+              "q8_only": 2,
+              "variant_only": 2
+            },
+            "rss_peak_mib": 4045.796875,
+            "seal_sha256": "08fa175221487986e76594dd7fc2e4171e1c774ae37398e530bb381eb6ed01a6",
+            "statuses": {
+              "ok": 512
+            },
+            "test_correct": 200,
+            "test_total": 256,
+            "total": 512
+          },
+          "D3miniQ8Metal": {
+            "correct": 406,
+            "median_call_ms": 110.05404149182141,
+            "rss_peak_mib": 5429.71875,
+            "seal_sha256": "d6ece661c49d31abaac03fef3832aa74b9acdde185b8852c7151f209ea49de36",
+            "statuses": {
+              "ok": 512
+            },
+            "test_correct": 200,
+            "test_total": 256,
+            "total": 512
+          }
+        }
+      },
+      "physics-choice-v1": {
+        "cases": 48,
+        "dataset_sha256": "e21cd2e0f4e35465b56158ba1fa07c8d8203be81a969c6edf4b7630d2f0d7307",
+        "variants": {
+          "D3FlashMUzu": {
+            "correct": 40,
+            "median_call_ms": 72.8980204949039,
+            "paired_with_d3_mini_q8": {
+              "both": 36,
+              "identical_answers": 41,
+              "q8_only": 3,
+              "variant_only": 4
+            },
+            "rss_peak_mib": 4319.9375,
+            "seal_sha256": "8b9e065559af32391b0068bb9ec4553adafb26387e4a23e437b5fa2d10207aaa",
+            "statuses": {
+              "ok": 48
+            },
+            "test_correct": 32,
+            "test_total": 36,
+            "total": 48
+          },
+          "D3miniQ4Metal": {
+            "correct": 36,
+            "median_call_ms": 111.0978119977517,
+            "paired_with_d3_mini_q8": {
+              "both": 36,
+              "identical_answers": 45,
+              "q8_only": 3,
+              "variant_only": 0
+            },
+            "rss_peak_mib": 4033.9375,
+            "seal_sha256": "cf8e3d478727227209e4c58d19755a243828e9abef1b4c3e4a7aea3366efc5c4",
+            "statuses": {
+              "ok": 48
+            },
+            "test_correct": 30,
+            "test_total": 36,
+            "total": 48
+          },
+          "D3miniQ8Metal": {
+            "correct": 39,
+            "median_call_ms": 103.72266700142063,
+            "rss_peak_mib": 5414.5,
+            "seal_sha256": "0c4a474d27c105e7898c3d7c3f143eb6fde4991ea396d8526d600f34e73e71b0",
+            "statuses": {
+              "ok": 48
+            },
+            "test_correct": 32,
+            "test_total": 36,
+            "total": 48
+          }
+        }
+      }
+    },
+    "qualification": "exploratory; deployment comparison (weights format, quantization and engine together)",
+    "schema_version": "deposium.deployment-variants-public/v1",
+    "variants": {
+      "D3FlashMUzu": {
+        "assets_manifest": "profiles/d3-flash-m-uzu-assets.json",
+        "backend_observed": null,
+        "backend_requested": "metal",
+        "egress_isolated": false,
+        "kind": "uzu",
+        "runtime": {
+          "binary_sha256": "c3e5798127eb037f6b8571817203096ab8a1ae4bcd24a06b951a25d044896f21",
+          "uzu_revision": "d3d3a5b20a3de507522e1099457d1dae0243effb"
+        }
+      },
+      "D3miniQ4Metal": {
+        "assets_manifest": "profiles/d3-mini-q4-assets.json",
+        "backend_observed": "metal",
+        "backend_requested": "metal",
+        "egress_isolated": null,
+        "kind": "gguf",
+        "runtime": {
+          "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+          "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546"
+        }
+      },
+      "D3miniQ8Metal": {
+        "assets_manifest": "profiles/d3-mini-q8-assets.json",
+        "backend_observed": "metal",
+        "backend_requested": "metal",
+        "egress_isolated": null,
+        "kind": "gguf",
+        "runtime": {
+          "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+          "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546"
+        }
+      }
+    }
   },
   "facade_routing": [
     {
@@ -152483,8 +153014,9 @@
     "docs/D3_MINI_MACOS_RESULTS_20261031.md": "cdcca85a9e56bb09c0b8a2a9a151e84811abb831d5bd84c52ae0decc426c9af2",
     "docs/D3_NANO_MACOS_CPU_PROTOCOL_20261030.md": "14e0e42587a0114fb230023b7b28ecfbc80423db92b4d517575ee7e141abe641",
     "docs/D3_NANO_MACOS_RESULTS_20261031.md": "f416845dfd6f60847ab979ac4d3a60ae2a1ca900180ae0904a47198359941ce6",
-    "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md": "2ce450707db111edc82f2e4bf6f4cfd566cbfaa30f6d46f8da3ef2ec319b65ef",
+    "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md": "5ffecfb90ac0f1651469e8dfc826524746ca5f5e9fa8f1aab43d55187f24139f",
     "docs/D3_SMALL_GGUF_METAL_RESULTS_20261101.md": "ce73320e99c4a26c95253149af427b568aee230b9715ae4ce410b4ae3fa9cb84",
+    "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md": "b4bccd20bf9fb96adbe9aebf9a1b2e6dcf1bf3eebe8a09aca30156d6dfa53539",
     "docs/FACADE_ROUTING_HITL_RESULTS_20261101.md": "13c3b57f5466142177c9a5f97aac221c00ec936a63606fb214b9a35ce6da8014",
     "docs/FACADE_ROUTING_RESULTS_20261101.md": "ede837b2a12602c2cc43bc6e1662c0c45b2f803cf7950abe5e86d4d5b8d26ba8",
     "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md": "18dd5b79adb3c4d35ce948e9b184c6a66fccd61a583bd6e3a56068b7f66f40ec",
@@ -152524,6 +153056,7 @@
     "docs/evidence/d3-small-gguf-metal-20261101/d3-lite.json": "47b8a3410bedf4c2788a65b52ae8183238e0b9e22aa522ed905876be244cee02",
     "docs/evidence/d3-small-gguf-metal-20261101/d3-mini.json": "2678f39c106b4bed55d5971329a03004fc14ff38a541a279dcd498212cf5841b",
     "docs/evidence/d3-small-gguf-metal-20261101/d3-nano.json": "c2b1842c303d0e4ea2266e19eca5d080c5666e72fade0c9cc27bafcdf163c9fd",
+    "docs/evidence/deployment-variants-20261101/analysis.json": "1613fbe2ad7fc04387806388631a508fa89d0e342600084399a30cadf3a20aaf",
     "docs/evidence/facade-routing-20261101/analysis.json": "18ec5f9fa0be561d04c198e1260dfdc20fd53b92427266c67269af381f8df3a8",
     "docs/evidence/facade-routing-tiers-20261101/advanced.json": "94e16d347f905327dbb071fc8faacff3a3299cbd20b4e2bdd7b3500d12400648",
     "docs/evidence/facade-routing-tiers-20261101/complex.json": "1d51e130faa662beddb9377098d86c506fab1f4d7e17ad125013f0c309d12e0b",
@@ -152567,6 +153100,7 @@
     "docs/leaderboard/model-metadata.json": "2f7a37d51083770bdb1b547a7cdc723b0e5026081d1309fd406a884e4411e32f",
     "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
     "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
+    "profiles/d3-flash-m-uzu-assets.json": "44704e4506b4749133aa14a630ca07afe8eeb0176084e475db54b2db455cbe18",
     "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
     "profiles/d3-lite-assets.json": "0a165940562c277e7050631651b5e59d9a351345c041695e43d48f4de4f4fa71",
     "profiles/d3-lite-macos-choice-episodes.json": "91cabbae4edb9b2c01f74a414efb6e8b912e425f930d918d374e72fe1491c03f",
@@ -152576,6 +153110,7 @@
     "profiles/d3-mini-macos-choice-episodes.json": "70c2952669acc833ba5547c2ed45c3a8129d4513d232de1cef27b9ae2941928a",
     "profiles/d3-mini-macos-cpu-capability.json": "a703b45a4875b6c0114b5942073d42c11967003bd8ae7526f1136c2c43aea592",
     "profiles/d3-mini-macos-cpu.json": "a07b80d131a19c68ea34daea31186bef0f9f5b61698dbdc5dc231a96c7360aa8",
+    "profiles/d3-mini-q4-assets.json": "b0e64c5d41dd0680bb1799edf56d5292e7e342bbf6414b2d3e4c6560f2c35a04",
     "profiles/d3-mini-q8-assets.json": "615e86e70e3541ec554e6994099c0d1127125328994a30934ab5deb015cd51be",
     "profiles/d3-nano-assets.json": "5d07ba7ec2220bc0e34eed2f18fc42f6306dac2a0b5d85a4721d61505fc6dcec",
     "profiles/d3-nano-macos-choice-episodes.json": "6afa47adb2a7015a2a1e18cdfeae99c81c5606e3741c996caf77009dd11cc546",
@@ -152591,7 +153126,7 @@
     "profiles/vela2-03-macos-choice-episodes.json": "0dd5e3e87bbea50d56d7701325adde78646816b262bcd4a85f74b065a10764f3",
     "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "a96f40bb4249847e6c6573fd5b9c8b8f45072d12fd7af1180e0c21cb9eb9bb37",
+    "scripts/build-full-results.py": "f81cea7fa3b32e7ffcc49ae54615c67b7476233c3c9b6d0bd70e22cb1d585e6b",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
     "scripts/consolidated-campaigns.py": "aad0e445b816da17101c9a5664caff05aa3845418284ed3531ae31174e79c719"

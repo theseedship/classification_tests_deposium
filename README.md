@@ -61,7 +61,8 @@ D3 mini routes a request in about 160 ms, and leads the [advanced and complex ro
 replaces an undecidable v1 grade (D3 mini 406/512, macro 91%), and a
 [human-confirmation routing pack](docs/FACADE_ROUTING_HITL_RESULTS_20261101.md) shows D3 mini asking
 before 9/12 irreversible actions with no false alarm, but never on hesitation unless its own confidence is used.
-Its [harness overview](docs/RESULTS.md#harness-coverage)
+To save memory, [D3 mini Q4 and D3 Flash 4-bit on Uzu](docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md)
+both run in about 4 GiB: Q4 keeps D3 mini's answers, Uzu is about 30% faster. Its [harness overview](docs/RESULTS.md#harness-coverage)
 separates implemented scripted discovery, arguments and feedback fixtures from
 untested real-model output paths, empirical model allocation, application replay,
 and final answer/citation quality. Closed-choice success does not fill those cells.

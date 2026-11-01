@@ -15,7 +15,7 @@ from . import systemone_local as local
 from .native_supervision import require_native_supervision
 from .worker_transport import decode
 
-UZU_REVISION = "023bf5d94c719d15734e7b77b2e44b4452b2819f"
+UZU_REVISION = "d3d3a5b20a3de507522e1099457d1dae0243effb"  # release 0.6.15 (official CLI binary)
 PACK_REVISION = "86f617b67e3f0ce02fe678c38801e2296a303777"
 PACK_REPO = "trymirai/d3-flash-M"
 REPOSITORY = "https://github.com/trymirai/uzu.git"
