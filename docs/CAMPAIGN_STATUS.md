@@ -22,6 +22,14 @@ observed choice/yes-no/score responses and a closed server; it exposed the stock
 CLI's online catalogue bootstrap requirement. No benchmark score was added.
 Existing campaigns may continue independently.
 
+Facade routing, 1 November 2026 ([#56](https://github.com/theseedship/classification_tests_deposium/issues/56), option B):
+the production router was replayed privately on the synthetic
+[facade-routing pack](../datasets/facade-routing-v1/README.md) and scored
+28/80 (test 10/48); the four macOS CPU classifiers scored 64–79/80
+([results](FACADE_ROUTING_RESULTS_20261101.md)). Only aggregates and hashes of
+the router are public. The pack is near ceiling for D3 mini; a harder pack is
+needed before ranking the strongest classifiers on routing.
+
 Passage evidence on the small CPU rows, 1 November 2026 ([#52](https://github.com/theseedship/classification_tests_deposium/issues/52)):
 D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini completed the 728 rotation-0 passage
 calls on the pinned macOS CPU runtime, all `ok` with no worker restart

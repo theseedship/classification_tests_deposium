@@ -25,6 +25,7 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 128/192 | 62/96 | 6 | 6 | all `ok` | [report](../../VELA2_03_MACOS_RESULTS_20261030.md) |
 | Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 18/48 | 14/36 | 5 | 5 | all `ok` | [report](../../VELA2_03_MACOS_RESULTS_20261030.md) |
 | Tool workflow, executed | [Executed tool episodes (closed choice)](../../RESULTS.md#executed-tool-episodes-closed-choice) | 0/32 | 0/12 | 4 | 4 | all `ok` | [report](../../TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md) |
+| Tool routing | [Facade routing (model vs router)](../../RESULTS.md#facade-routing-model-vs-router) | 64/80 | 34/48 | 4 | 4 | all `ok` | [report](../../FACADE_ROUTING_RESULTS_20261101.md) |
 | Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | 112/512 | no split ranking | 7 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
 | Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | 151/768 | no split ranking | 7 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
 | Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | 93/128 | no split ranking | 4 | — | all `ok` | [report](../../PASSAGE_SMALL_CPU_RESULTS_20261031.md) |
