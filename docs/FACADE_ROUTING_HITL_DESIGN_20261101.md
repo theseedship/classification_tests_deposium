@@ -66,3 +66,15 @@ of the eight-option pack (attempt 001) stopped at campaign start with no
 prediction beyond the excluded warm-up; they stay recorded and are rerun as
 attempt 002. The router replay, a recorded harness control, was already
 scored and is unaffected.
+
+## Correction, 1 November 2026: two reused requests replaced, all candidates rerun
+
+Review found that two TEST controls reused requests of the easy tier's
+calibration split ("show the error logs of the last hour", and the "shortest
+path between X and Y" template). A candidate calibrated on that split would
+have seen them. Both were replaced by new requests (the deployed service
+version; the groups in which a supplier appears), the packs were refrozen
+(nine options `80a65a54…`, eight options `3901e265…`), and a test now rejects
+any request shared across splits between the facade packs. Runs made on the
+first freeze are kept locally and not published; every candidate is rerun on
+the corrected packs.

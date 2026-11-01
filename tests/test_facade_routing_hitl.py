@@ -47,6 +47,22 @@ class FacadeRoutingHitlTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaises(CampaignError):
                 _validate_output_scope([bad], {"adapter": "d3", "capabilities": ["bench.context-choice"]})
 
+    def test_no_request_is_reused_across_splits_between_facade_packs(self):
+        import re
+        def words(text):
+            # Content words only: generic openings such as "find the documents" are not reuse.
+            return {w for w in re.findall(r"\w+", text.lower()) if len(w) > 3}
+        seen = []
+        for dataset_id in ("facade-routing-v1", "facade-routing-advanced-v1", "facade-routing-complex-v1", "facade-routing-hitl-v1"):
+            for case in self.load(dataset_id):
+                request = case["input"]["context"].rsplit("\n", 1)[-1]
+                seen.append((dataset_id, case["split"], case["language"], words(request), case["case_id"]))
+        for i, a in enumerate(seen):
+            for b in seen[i + 1:]:
+                if a[0] != b[0] and a[2] == b[2] and a[1] != b[1]:
+                    overlap = len(a[3] & b[3]) / len(a[3] | b[3])
+                    self.assertLess(overlap, 0.5, (a[4], b[4]))
+
     def test_altered_case_is_rejected(self):
         for dataset_id in hitl.PACKS:
             case = deepcopy(self.load(dataset_id)[5])
