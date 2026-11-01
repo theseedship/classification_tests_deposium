@@ -1,0 +1,37 @@
+{
+  "schema_version": "deposium.model-assets/v1",
+  "repo_id": "trymirai/d3-flash-M",
+  "revision": "86f617b67e3f0ce02fe678c38801e2296a303777",
+  "files": [
+    {
+      "path": "model.safetensors",
+      "size": 4295274576,
+      "sha256": "dcf55ac5fdda40f5d13e4b504770e3de32b5db463f8135382f5f4e8adbfb8469"
+    },
+    {
+      "path": "config.json",
+      "size": 75177,
+      "sha256": "75cf05b66ff21ca7a3be46ad2117c554a4fae321bd7efee30f86274b9812cca8"
+    },
+    {
+      "path": "chat_template.jinja",
+      "size": 5273,
+      "sha256": "f0a26e018515b6fa860f5d24696c1a6ec480b29de515f5d7f2adf2d4b72b038d"
+    },
+    {
+      "path": "tokenizer.json",
+      "size": 12807982,
+      "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "size": 8551,
+      "sha256": "c93be87113bd8f29e7d7f389ac03ba5e22fa3c31f076c8ab4c521447574fbda4"
+    },
+    {
+      "path": "LICENSE",
+      "size": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    }
+  ]
+}
