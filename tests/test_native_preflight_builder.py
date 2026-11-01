@@ -57,6 +57,8 @@ class NativePreflightBuilderTests(unittest.TestCase):
         self.addCleanup(stack.close)
         stack.enter_context(patch.object(builder, "ROOT", self.checkout))
         stack.enter_context(patch.object(builder, "HELPER", self.helper))
+        # The compiler probe is a real subprocess; these offline controls only simulate -isysroot roots.
+        stack.enter_context(patch.object(builder, "system_include_roots", return_value=[]))
         self.commands = []
 
     def captured(self, command, *, cwd=None):
@@ -188,6 +190,24 @@ class NativePreflightBuilderTests(unittest.TestCase):
             builder.build(self.source, self.native, self.output)
         self.assertFalse((self.output / "build.json").exists())
         self.assertTrue((self.output / "build.log").is_file())
+
+
+class SystemIncludeRootsTests(unittest.TestCase):
+    def test_compiler_search_list_is_parsed_and_an_empty_list_is_refused(self):
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        include, frameworks = Path(temp.name) / "include", Path(temp.name) / "Frameworks"
+        include.mkdir(), frameworks.mkdir()
+        stderr = (f"ignoring nonexistent directory\n#include <...> search starts here:\n {include}\n"
+                  f" {frameworks} (framework directory)\n /missing/dir\nEnd of search list.\n")
+        result = type("Result", (), {"stderr": stderr, "returncode": 0, "stdout": ""})()
+        with patch.object(builder.subprocess, "run", return_value=result), patch.object(builder.sys, "platform", "linux"):
+            roots = builder.system_include_roots(Path("c++"))
+        self.assertEqual(roots, [include.resolve(), frameworks.resolve()])
+        empty = type("Result", (), {"stderr": "", "returncode": 0, "stdout": ""})()
+        with patch.object(builder.subprocess, "run", return_value=empty), patch.object(builder.sys, "platform", "linux"):
+            with self.assertRaisesRegex(ValueError, "system include"):
+                builder.system_include_roots(Path("c++"))
 
 
 if __name__ == "__main__":

@@ -33,6 +33,16 @@ def encoded(case, model_id="fixture-model", negative=False):
             "option_keys": ["c0", "c1", "c2", "c3"], "within_limit": not negative}]}
 
 
+def upstream_args(**changes):
+    from types import SimpleNamespace
+    values = dict(context=4096, min_free_mb=8192, max_seconds=600, port=11438, max_rss_mb=24576,
+                  execution_envelope=upstream.DEFAULT_ENVELOPE, phase="canary", decision_type="d3",
+                  task="choices", technical_only=False, model_id=upstream.D327_ALIAS, backend="metal",
+                  preparation_receipt=None, calibration_receipt=None, dataset=None)
+    values.update(changes)
+    return SimpleNamespace(**values)
+
+
 class UpstreamPilotTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -64,6 +74,48 @@ class UpstreamPilotTests(unittest.TestCase):
                 self.write_audit(changed)
                 with self.assertRaises(ValueError):
                     upstream.preparation_map(self.audit, [self.case], "fixture-model", 4096)
+
+    def test_preparation_accepts_two_to_sixteen_contiguous_option_keys(self):
+        from deposium_bench.facade_corpus import build_cases as facade_cases
+        case = facade_cases()[0]
+        self.assertEqual(len(case["input"]["options"]), 8)
+        rows = [encoded(case), encoded(case, negative=True)]
+        rows[0]["variants"][0]["option_keys"] = ["c" + str(i) for i in range(8)]
+        self.write_audit(rows)
+        upstream.preparation_map(self.audit, [case], "fixture-model", 4096)
+        for keys in (["c" + str(i) for i in range(17)], ["c0"], ["c0", "c2"], ["c1", "c0"]):
+            with self.subTest(keys=keys):
+                changed = deepcopy(rows)
+                changed[0]["variants"][0]["option_keys"] = keys
+                self.write_audit(changed)
+                with self.assertRaises(ValueError):
+                    upstream.preparation_map(self.audit, [case], "fixture-model", 4096)
+
+    def test_declared_backends_have_a_distinct_offload_marker_and_27b_stays_metal(self):
+        self.assertEqual(set(upstream.BACKEND_BUFFERS), {"metal", "cuda", "rocm", "vulkan"})
+        import re
+        logs = {"cuda": "load_tensors:        CUDA0 model buffer size =  4914.39 MiB",
+                "rocm": "load_tensors:        ROCm0 model buffer size =  4914.39 MiB",
+                "vulkan": "load_tensors:      Vulkan0 model buffer size =  4914.39 MiB"}
+        for backend, line in logs.items():
+            self.assertRegex(line, upstream.BACKEND_BUFFERS[backend])
+            for other in set(logs) - {backend}:
+                self.assertIsNone(re.search(upstream.BACKEND_BUFFERS[other], line))
+        self.assertIsNone(re.search(upstream.BACKEND_BUFFERS["cuda"], "load_tensors: CPU_Mapped model buffer size = 1 MiB"))
+        args = upstream_args(execution_envelope=upstream.D327_ENVELOPE, backend="cuda")
+        with self.assertRaisesRegex(ValueError, "d327_exact_candidate_required"):
+            upstream.execution_envelope(args, upstream.D327_ASSETS, Path(upstream.D327_ASSETS["files"][0]["path"]), [])
+
+    def test_small_envelope_admits_only_small_models_at_eight_gib(self):
+        small = {"repo_id": "ggml-org/vllm-d3-mini-GGUF", "files": [{"path": "m.gguf", "size": 5 * 1024 ** 3, "sha256": "a" * 64}]}
+        args = upstream_args(execution_envelope=upstream.SMALL_ENVELOPE, max_rss_mb=8192, phase=None)
+        self.assertEqual(upstream.execution_envelope(args, small, Path("m.gguf"), [])[0], {"name": upstream.SMALL_ENVELOPE})
+        large = {**small, "files": [{**small["files"][0], "size": 7 * 1024 ** 3}]}
+        with self.assertRaisesRegex(ValueError, "small_envelope_requires_a_small_model"):
+            upstream.execution_envelope(args, large, Path("m.gguf"), [])
+        with self.assertRaisesRegex(ValueError, "fixed_envelope_required"):
+            upstream.execution_envelope(upstream_args(execution_envelope=upstream.SMALL_ENVELOPE, max_rss_mb=18432, phase=None),
+                                        small, Path("m.gguf"), [])
 
     def test_runtime_refuses_wrong_source_and_binary_hash(self):
         binary = self.root / "llama-server"

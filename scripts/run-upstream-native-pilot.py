@@ -41,6 +41,14 @@ SPEC.loader.exec_module(shared)
 PIN = "efe3626b119ff81033e309c3ba07a770bef2c546"
 REPOSITORY = "https://github.com/ggml-org/llama.cpp.git"
 DEFAULT_ENVELOPE = "flash-clef-18g-v1"
+# Small GGUF decision models (file at most 6 GiB): 8 GiB sampled RSS ceiling, same 8 GiB reserve.
+SMALL_ENVELOPE = "small-gguf-8g-v1"
+SMALL_MAX_FILE_BYTES = 6 * 1024 ** 3
+# Declared GPU backend and the load-time log line proving the model buffer lives on it.
+# Metal keeps its historical check; the others require a device model buffer of that backend.
+BACKEND_BUFFERS = {"metal": None, "cuda": r"\bCUDA\d+\S* model buffer size",
+                   "rocm": r"\bROCm\d+\S* model buffer size", "vulkan": r"\bVulkan\d+\S* model buffer size"}
+MAX_OPTIONS = 16
 D327_ENVELOPE = "d3-27b-q4-24g-v1"
 D327_ALIAS = "d3-27b-q4-v1"
 D327_ASSETS = {"schema_version": "deposium.model-assets/v1",
@@ -117,7 +125,16 @@ def execution_envelope(args, assets, model, cases):
                 and assets["files"][0]["sha256"] != D327_ASSETS["files"][0]["sha256"],
                 "d327_explicit_envelope_required")
         return {"name": name}, cases, None
+    if name == SMALL_ENVELOPE:
+        require(args.max_rss_mb == 8192 and 0 < args.max_seconds <= 1200 and phase is None
+                and getattr(args, "preparation_receipt", None) is None
+                and getattr(args, "calibration_receipt", None) is None,
+                "upstream_pilot_fixed_envelope_required")
+        require(assets.get("repo_id") != D327_ASSETS["repo_id"] and assets["files"][0]["size"] <= SMALL_MAX_FILE_BYTES,
+                "small_envelope_requires_a_small_model")
+        return {"name": name}, cases, None
     require(name == D327_ENVELOPE and typed_equal(assets, D327_ASSETS) and model.name == D327_ASSETS["files"][0]["path"]
+            and getattr(args, "backend", "metal") == "metal"
             and getattr(args, "decision_type", "d3") == "d3" and getattr(args, "task", "choices") == "choices"
             and not getattr(args, "technical_only", False) and args.model_id == D327_ALIAS,
             "d327_exact_candidate_required")
@@ -325,7 +342,8 @@ def preparation_map(audit_path, cases, model_id, context, decision_type="d3", *,
         variant = row["variants"][0]
         tokens = variant["token_ids"]
         option_keys = variant["option_keys"]
-        require(option_keys in (["c0", "c1", "c2"], ["c0", "c1", "c2", "c3"])
+        require(isinstance(option_keys, list) and 2 <= len(option_keys) <= MAX_OPTIONS
+                and option_keys == ["c" + str(i) for i in range(len(option_keys))]
                 and isinstance(tokens, list) and tokens and all(type(t) is int for t in tokens)
                 and type(variant["token_count"]) is int and len(tokens) == variant["token_count"],
                 "native_preparation_tokens_invalid")
@@ -488,7 +506,7 @@ def pilot(args):
               "execution_scope": "isolated_upstream_llama_cpp_no_application_gateway", "dataset": dataset,
               "completed": False, "model_assets": assets, "runtime": runtime, "memory_before": before,
               "synthetic_control_calls_in_quality_denominator": False}
-    if canary is not None:
+    if canary is not None or envelope["name"] != DEFAULT_ENVELOPE:
         result["execution_envelope"] = envelope
     try:
         with (output / "engine.log").open("xb") as log:
@@ -510,18 +528,23 @@ def pilot(args):
                 time.sleep(.1)
             native_log = (output / "engine.log").read_text(errors="replace")
             offload = re.search(r"offloaded (\d+)/(\d+) layers to GPU", native_log)
-            require(offload is not None and int(offload[1]) == int(offload[2]) > 0
-                    and re.search(r"metal", native_log, re.I), "upstream_metal_offload_not_observed")
+            backend = getattr(args, "backend", "metal")
+            require(offload is not None and int(offload[1]) == int(offload[2]) > 0,
+                    "upstream_gpu_offload_not_observed")
+            if backend == "metal":
+                require(re.search(r"metal", native_log, re.I), "upstream_metal_offload_not_observed")
+            else:
+                require(re.search(BACKEND_BUFFERS[backend], native_log), "upstream_" + backend + "_offload_not_observed")
             native_type = "clef" if decision_type == "clef" else "vllm-d3"
             require("decision model type: " + native_type in native_log, "upstream_decision_type_not_observed")
-            result["actual_backend"] = {"kind": "metal", "offloaded_layers": int(offload[1]),
+            result["actual_backend"] = {"kind": backend, "offloaded_layers": int(offload[1]),
                                         "total_layers": int(offload[2]), "decision_type": native_type}
             session = {"schema_version": "deposium.local-model-session/v1",
                 "endpoint": f"http://127.0.0.1:{args.port}/v1/systemone",
                 "model": {"repo_id": assets["repo_id"], "revision": assets["revision"],
                           "path": str(model), "sha256": assets["files"][0]["sha256"], "alias": args.model_id},
                 "runtime": {"repository": REPOSITORY, "revision": PIN, "binary": str(binary),
-                            "sha256": runtime["binary_sha256"], "backend_requested": "metal",
+                            "sha256": runtime["binary_sha256"], "backend_requested": backend,
                             "decision_type": decision_type},
                 "gateway": {"kind": "upstream_native_http_listener_no_application_gateway",
                             "binary": str(binary), "sha256": runtime["binary_sha256"]},
@@ -636,13 +659,15 @@ def main(argv=None):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--model-id", required=True)
     parser.add_argument("--decision-type", choices=("d3", "clef"), default="d3")
-    parser.add_argument("--execution-envelope", choices=(DEFAULT_ENVELOPE, D327_ENVELOPE), default=DEFAULT_ENVELOPE)
+    parser.add_argument("--execution-envelope", choices=(DEFAULT_ENVELOPE, SMALL_ENVELOPE, D327_ENVELOPE), default=DEFAULT_ENVELOPE)
     parser.add_argument("--phase", choices=("canary", "anchor", "capability"))
     parser.add_argument("--preparation-receipt", type=Path)
     parser.add_argument("--calibration-receipt", type=Path)
     parser.add_argument("--task", choices=("choices", "passages"), default="choices")
     parser.add_argument("--passage-split", choices=("calibration", "test"), default="test")
     parser.add_argument("--technical-only", action="store_true")
+    parser.add_argument("--backend", choices=tuple(BACKEND_BUFFERS), default="metal",
+                        help="GPU backend the binary was built for; every layer must be offloaded to it")
     parser.add_argument("--port", type=int, default=11438)
     parser.add_argument("--context", type=int, default=4096)
     parser.add_argument("--max-rss-mb", type=int, default=18432)

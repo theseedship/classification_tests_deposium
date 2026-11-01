@@ -14,6 +14,7 @@
 static constexpr const char * PIN = "efe3626b119ff81033e309c3ba07a770bef2c546";
 static constexpr size_t MAX_BODY_BYTES = 131072;
 static constexpr size_t MAX_LINE_BYTES = 1024 * 1024;
+static constexpr size_t MAX_OPTIONS = 16;
 
 static void require(bool value) {
     if (!value) {
@@ -42,7 +43,7 @@ static void usage() {
               << "stdin: JSONL {case_id, native_request_json: exact gateway request body string}\n"
               << "stdout: JSONL native preparation evidence; no weights or forward are executed\n"
               << "token_ids_sha256 hashes a compact UTF-8 JSON integer array without a newline\n"
-              << "Only text-only, single choice questions with three or four c0..cN options are supported.\n";
+              << "Only text-only, single choice questions with two to sixteen c0..cN options are supported.\n";
 }
 
 int main(int argc, char ** argv) {
@@ -142,8 +143,11 @@ int main(int argc, char ** argv) {
             require(exact_keys(question, {"type", "instructions", "criteria"}));
             require(question["type"] == "choice" && nonempty_text(question["instructions"]));
             const size_t n_options = question["criteria"].size();
-            require((n_options == 3 && exact_keys(question["criteria"], {"c0", "c1", "c2"})) ||
-                    (n_options == 4 && exact_keys(question["criteria"], {"c0", "c1", "c2", "c3"})));
+            std::set<std::string> wanted_keys;
+            for (size_t i = 0; i < n_options; ++i) {
+                wanted_keys.insert("c" + std::to_string(i));
+            }
+            require(n_options >= 2 && n_options <= MAX_OPTIONS && exact_keys(question["criteria"], wanted_keys));
             for (const auto & item : question["criteria"].items()) {
                 require(nonempty_text(item.value()));
             }

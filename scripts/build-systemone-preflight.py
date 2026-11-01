@@ -45,6 +45,31 @@ def make_flags(path, key):
     return shlex.split(lines[0])
 
 
+def system_include_roots(compiler):
+    """Directories the compiler itself searches for system headers, plus the active macOS SDK.
+
+    CMake 4 no longer writes -isysroot into flags.make, and Linux toolchains use
+    /usr/include; both are system dependencies, not native source drift.
+    """
+    probe = subprocess.run([str(compiler), "-E", "-x", "c++", "-", "-v"], input="", capture_output=True, text=True)
+    lines, roots, inside = probe.stderr.splitlines(), [], False
+    for line in lines:
+        if line.startswith("#include <...> search starts here:"):
+            inside = True
+        elif line.startswith("End of search list."):
+            inside = False
+        elif inside:
+            entry = line.strip().removesuffix(" (framework directory)")
+            if entry and Path(entry).is_dir():
+                roots.append(Path(entry).resolve())
+    if sys.platform == "darwin":
+        sdk = subprocess.run(["xcrun", "--show-sdk-path"], capture_output=True, text=True)
+        if sdk.returncode == 0 and Path(sdk.stdout.strip()).is_dir():
+            roots.append(Path(sdk.stdout.strip()).resolve())
+    require(roots, "compiler system include directories not observed")
+    return roots
+
+
 def build(source, runtime_build, output):
     source, runtime_build = Path(source).resolve(strict=True), Path(runtime_build).resolve(strict=True)
     output = Path(output).absolute()
@@ -106,6 +131,7 @@ def build(source, runtime_build, output):
     cxx_flags = make_flags(flags, "CXX_FLAGS")
     sdk_roots = [Path(cxx_flags[i + 1]).resolve(strict=True) for i, value in enumerate(cxx_flags)
                  if value == "-isysroot" and i + 1 < len(cxx_flags)]
+    sdk_roots += system_include_roots(compiler)
     compile_command = [str(compiler), *make_flags(flags, "CXX_DEFINES"),
         *make_flags(flags, "CXX_INCLUDES"), *cxx_flags,
         "-MMD", "-MF", str(depfile), "-c", str(HELPER), "-o", str(object_path)]
