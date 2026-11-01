@@ -1619,6 +1619,219 @@
     {
       "cells": {
         "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 192,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-mini.json",
+          "status": "complete",
+          "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 119,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-mini.json",
+          "status": "complete",
+          "total": 132
+        },
+        "facade_routing": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 79,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 80,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 80,
+          "source": "docs/evidence/facade-routing-20261101/analysis.json",
+          "status": "complete",
+          "total": 80
+        },
+        "passage_answerability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 102,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 128,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 128,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-mini.json",
+          "status": "complete",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 266,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-mini.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 517,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 768,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 768,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-mini.json",
+          "status": "complete",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 39,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-mini.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "generative_observation": false,
+      "id": "D3miniQ8Metal",
+      "model": "D3 mini · Q8 Metal",
+      "runtime": "apple_metal_upstream",
+      "size": "4.539B backbone"
+    },
+    {
+      "cells": {
+        "capability": {
           "evidence_present": false,
           "metric": "correct_choice",
           "numerator": null,
@@ -2019,6 +2232,219 @@
       "id": "D3nanoMacos",
       "model": "D3 nano · macOS CPU",
       "runtime": "cpu_new",
+      "size": "2.213B backbone"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 187,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-nano.json",
+          "status": "complete",
+          "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 117,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-nano.json",
+          "status": "complete",
+          "total": 132
+        },
+        "facade_routing": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 75,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 80,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 80,
+          "source": "docs/evidence/facade-routing-20261101/analysis.json",
+          "status": "complete",
+          "total": 80
+        },
+        "passage_answerability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 94,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 128,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 128,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-nano.json",
+          "status": "complete",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 252,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-nano.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 366,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 768,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 768,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-nano.json",
+          "status": "complete",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 27,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-nano.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "generative_observation": false,
+      "id": "D3nanoQ8Metal",
+      "model": "D3 nano · Q8 Metal",
+      "runtime": "apple_metal_upstream",
       "size": "2.213B backbone"
     },
     {
@@ -3520,6 +3946,219 @@
       "id": "D3liteMacos",
       "model": "D3 lite · macOS CPU",
       "runtime": "cpu_new",
+      "size": "0.853B backbone"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 170,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-lite.json",
+          "status": "complete",
+          "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 94,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-lite.json",
+          "status": "complete",
+          "total": 132
+        },
+        "facade_routing": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 71,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 80,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 80,
+          "source": "docs/evidence/facade-routing-20261101/analysis.json",
+          "status": "complete",
+          "total": 80
+        },
+        "passage_answerability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 88,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 128,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 128,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-lite.json",
+          "status": "complete",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 231,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 512,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 512,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-lite.json",
+          "status": "complete",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 449,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 768,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 768,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-lite.json",
+          "status": "complete",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 14,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/d3-small-gguf-metal-20261101/d3-lite.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "generative_observation": false,
+      "id": "D3liteQ8Metal",
+      "model": "D3 lite · Q8 Metal",
+      "runtime": "apple_metal_upstream",
       "size": "0.853B backbone"
     },
     {
@@ -7709,7 +8348,10 @@
     "docs/D3_MINI_MACOS_RESULTS_20261031.md": "cdcca85a9e56bb09c0b8a2a9a151e84811abb831d5bd84c52ae0decc426c9af2",
     "docs/D3_NANO_MACOS_CPU_PROTOCOL_20261030.md": "14e0e42587a0114fb230023b7b28ecfbc80423db92b4d517575ee7e141abe641",
     "docs/D3_NANO_MACOS_RESULTS_20261031.md": "f416845dfd6f60847ab979ac4d3a60ae2a1ca900180ae0904a47198359941ce6",
+    "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md": "2ce450707db111edc82f2e4bf6f4cfd566cbfaa30f6d46f8da3ef2ec319b65ef",
+    "docs/D3_SMALL_GGUF_METAL_RESULTS_20261101.md": "ce73320e99c4a26c95253149af427b568aee230b9715ae4ce410b4ae3fa9cb84",
     "docs/FACADE_ROUTING_RESULTS_20261101.md": "ede837b2a12602c2cc43bc6e1662c0c45b2f803cf7950abe5e86d4d5b8d26ba8",
+    "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md": "18dd5b79adb3c4d35ce948e9b184c6a66fccd61a583bd6e3a56068b7f66f40ec",
     "docs/GLICLASS_V4_RESULTS_20261017.md": "9b2795a6c3a90b05ca7dbf8ede7d950873dfb7637fc097f79405d72bc01d065d",
     "docs/GLINER_PILOT.md": "70d485a2a84cde3fd039398a8d35c250fc6368fed16138ed1987342d39c0439c",
     "docs/INDECIS_PILOT.md": "7f2c1b72608d86166832837313c40e7f016558bd9a98c11f589ae3426602db71",
@@ -7742,7 +8384,13 @@
     "docs/evidence/d3-nano-macos-20261031/analysis.json": "f0ec4987332398b2c1666482d4e1543e0dfed8a25575aadd9006aa30d56c576d",
     "docs/evidence/d3-nano-macos-20261031/capability-002.json": "4d038ab1f5014753f770ac7519bb3c5215c5d0ce4b66c9fda365691ff88985c9",
     "docs/evidence/d3-nano-macos-20261031/physics.json": "27d205837cf83e44b7366ad898071000a03ff25c4e50a18af40d8d3100e077ee",
+    "docs/evidence/d3-small-gguf-metal-20261101/d3-lite.json": "47b8a3410bedf4c2788a65b52ae8183238e0b9e22aa522ed905876be244cee02",
+    "docs/evidence/d3-small-gguf-metal-20261101/d3-mini.json": "2678f39c106b4bed55d5971329a03004fc14ff38a541a279dcd498212cf5841b",
+    "docs/evidence/d3-small-gguf-metal-20261101/d3-nano.json": "c2b1842c303d0e4ea2266e19eca5d080c5666e72fade0c9cc27bafcdf163c9fd",
     "docs/evidence/facade-routing-20261101/analysis.json": "18ec5f9fa0be561d04c198e1260dfdc20fd53b92427266c67269af381f8df3a8",
+    "docs/evidence/facade-routing-tiers-20261101/advanced.json": "94e16d347f905327dbb071fc8faacff3a3299cbd20b4e2bdd7b3500d12400648",
+    "docs/evidence/facade-routing-tiers-20261101/complex.json": "1d51e130faa662beddb9377098d86c506fab1f4d7e17ad125013f0c309d12e0b",
+    "docs/evidence/facade-routing-tiers-20261101/easy-metal.json": "2424dcf4de5432caca57fc7069e17f670e5e4588fe32f25a8b3be8392187e673",
     "docs/evidence/gliclass-model-comparison-20261017/analysis.json": "62e3280544704ede362a8be9d8be4244dc34935a4a30dbe8d4f2bbcad8fd354a",
     "docs/evidence/gliclass-model-comparison-20261017/gliclass-session.json": "938b445cac5d50ddde7776c43dad22e0ac9e8c4e14246db73232f3a00fb19639",
     "docs/evidence/length-comparison-20261004/analysis.json": "48311eb6272d28dc4e5d607dfbc09bd77d35d6ef399075bb696115cd257c5f9e",
@@ -7777,21 +8425,24 @@
     "docs/evidence/vela2-03-macos-20261030/capability.json": "f478cddebf09f67250860947836e15ed843ad7b7ddf70811190008ed4462e1ff",
     "docs/evidence/vela2-03-macos-20261030/physics.json": "8a52a92bd08244accdbff5b9b61098701b0954a2f6bf3e0d7085a282e7d78cd3",
     "docs/evidence/vela3-fast-20261028/analysis.json": "83c06bdf377353541aba7944231654f3c794f19ab17016de99e3b0fdba70ae4e",
-    "docs/leaderboard/model-metadata.json": "f48d109b5762a4202ff9bb7b2eb38f43bfc72ddb77691eb74733575b30f010a6",
+    "docs/leaderboard/model-metadata.json": "2f7a37d51083770bdb1b547a7cdc723b0e5026081d1309fd406a884e4411e32f",
     "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
     "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
     "profiles/d3-flash-q8-assets.json": "255157c915f35d123eb719611fd4fb891f50653e75d7d136af8483d0e10aceb6",
     "profiles/d3-lite-assets.json": "0a165940562c277e7050631651b5e59d9a351345c041695e43d48f4de4f4fa71",
     "profiles/d3-lite-macos-choice-episodes.json": "91cabbae4edb9b2c01f74a414efb6e8b912e425f930d918d374e72fe1491c03f",
     "profiles/d3-lite-macos-cpu.json": "01abd2d2bad5d6b92ab2bc71c5135b8a3984098b30ebdbd2a162e5c734bcbde9",
+    "profiles/d3-lite-q8-assets.json": "3e422ddbcbc28d3d0438a3095b74ce225746e17e5c18d6c659d57d70d248bee4",
     "profiles/d3-mini-assets.json": "1e2e953b0dd4c956cef407eb4608e880fecf64c58cc9d9c70961af705042b898",
     "profiles/d3-mini-macos-choice-episodes.json": "70c2952669acc833ba5547c2ed45c3a8129d4513d232de1cef27b9ae2941928a",
     "profiles/d3-mini-macos-cpu-capability.json": "a703b45a4875b6c0114b5942073d42c11967003bd8ae7526f1136c2c43aea592",
     "profiles/d3-mini-macos-cpu.json": "a07b80d131a19c68ea34daea31186bef0f9f5b61698dbdc5dc231a96c7360aa8",
+    "profiles/d3-mini-q8-assets.json": "615e86e70e3541ec554e6994099c0d1127125328994a30934ab5deb015cd51be",
     "profiles/d3-nano-assets.json": "5d07ba7ec2220bc0e34eed2f18fc42f6306dac2a0b5d85a4721d61505fc6dcec",
     "profiles/d3-nano-macos-choice-episodes.json": "6afa47adb2a7015a2a1e18cdfeae99c81c5606e3741c996caf77009dd11cc546",
     "profiles/d3-nano-macos-cpu-capability.json": "3c4049a93842fb9905b27d93c1d525767addbd617e28927f14787056d3a1ebf7",
     "profiles/d3-nano-macos-cpu.json": "134bb4384ff9543fed3dbe286ac4d17ee1e50b22b32789633ea6a345f5fee4f0",
+    "profiles/d3-nano-q8-assets.json": "54c2cf76388915ba3ae591ee4f744b7f4e5f607dd3a66e418e0947bf26d2f6aa",
     "profiles/decision2-eos-assets.json": "31675c97916270d1744f9ea2446f591bc04165ef531bc2a12aedd159f16e3d1c",
     "profiles/decision2-kai-assets.json": "88a103ac103b1c21a9b8aca6cb3caba6d807a588a390d42d6c0ae5da1aea101d",
     "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
@@ -7801,10 +8452,10 @@
     "profiles/vela2-03-macos-choice-episodes.json": "0dd5e3e87bbea50d56d7701325adde78646816b262bcd4a85f74b065a10764f3",
     "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "adc3c0e51c332cddde15c0a18bd87fed2ec2f4448ccd51123b37e62e6a2bb8e2",
+    "scripts/build-full-results.py": "61050d33d04cf776b8f4c57a232c3f490322073f787c639cb985b03cc116283b",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-    "scripts/consolidated-campaigns.py": "8a4d7cf5ccdf4b5e412cb440cee81e25fa80a6a4828302b43260d21bf1afa607"
+    "scripts/consolidated-campaigns.py": "aad0e445b816da17101c9a5664caff05aa3845418284ed3531ae31174e79c719"
   },
   "tasks": [
     {

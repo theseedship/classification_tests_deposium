@@ -38,6 +38,13 @@ FACADE = EVIDENCE + "facade-routing-20261101/analysis.json"
 FACADE_REPORT = "FACADE_ROUTING_RESULTS_20261101.md"
 FACADE_ROUTER = ("FacadeRouterReplay", "Production router · private replay")
 FACADE_DATASET_SHA256 = "03f30a621298ecb45f78aefc50e048b6737024245a49a347dd982e28bca72c18"
+# Q8 Metal rows on the easy tier, and every candidate on the advanced and complex tiers.
+FACADE_EASY_METAL = EVIDENCE + "facade-routing-tiers-20261101/easy-metal.json"
+FACADE_TIERS = {"advanced": (EVIDENCE + "facade-routing-tiers-20261101/advanced.json",
+                             "42364fed544e842a02f68314242b767a7c3fae0dde8505bd66499063930337f3"),
+                "complex": (EVIDENCE + "facade-routing-tiers-20261101/complex.json",
+                            "389d362dafa7696b3cb4fb18f0d44a1ae98569a1ae661133f7ec9db44b6930d6")}
+FACADE_TIERS_REPORT = "FACADE_ROUTING_TIERS_RESULTS_20261101.md"
 CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
 LOCAL_POLICY = (EVIDENCE + "local-tool-policy-20261030/analysis.json",
                 EVIDENCE + "local-tool-policy-v2-train-20261030/analysis.json",
@@ -79,7 +86,13 @@ RECENT_INPUTS = (CAMPAIGN_MODULE, EVIDENCE + "clef-flash-20261029/analysis.json"
                  EVIDENCE + "passage-small-cpu-20261031/d3-nano.json", EVIDENCE + "passage-small-cpu-20261031/d3-mini.json",
                  "docs/PASSAGE_SMALL_CPU_RESULTS_20261031.md", "docs/PASSAGE_SMALL_CPU_PROTOCOL_20261031.md",
                  EVIDENCE + "facade-routing-20261101/analysis.json", "docs/FACADE_ROUTING_RESULTS_20261101.md",
-                 "docs/FACADE_ROUTING_DESIGN_20261031.md")
+                 "docs/FACADE_ROUTING_DESIGN_20261031.md",
+                 EVIDENCE + "d3-small-gguf-metal-20261101/d3-lite.json", EVIDENCE + "d3-small-gguf-metal-20261101/d3-nano.json",
+                 EVIDENCE + "d3-small-gguf-metal-20261101/d3-mini.json", "docs/D3_SMALL_GGUF_METAL_RESULTS_20261101.md",
+                 "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md", "profiles/d3-lite-q8-assets.json",
+                 "profiles/d3-nano-q8-assets.json", "profiles/d3-mini-q8-assets.json",
+                 EVIDENCE + "facade-routing-tiers-20261101/easy-metal.json", EVIDENCE + "facade-routing-tiers-20261101/advanced.json",
+                 EVIDENCE + "facade-routing-tiers-20261101/complex.json", "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md")
 # Constant majority-class answer on passage-evidence-v1, rotation 0 (dataset sha pinned in campaigns).
 PASSAGE_MAJORITY = {"relevance": ("grade 1", 224, 512), "support": ("`insufficient`", 584, 768),
                     "answerability": ("`answerable`", 88, 128)}
@@ -460,20 +473,42 @@ def build(root=ROOT):
     choice_episodes.sort(key=lambda r: (r["rank_all"], r["model"]))
     facade = inputs.load(FACADE)
     facade_names = {**names, FACADE_ROUTER[0]: FACADE_ROUTER[1]}
+    easy_metal = inputs.load(FACADE_EASY_METAL)
+    require(easy_metal.get("pack") == "facade-routing-v1" and easy_metal["dataset_sha256"] == FACADE_DATASET_SHA256
+            and easy_metal["router"]["identity"] == facade["router"]["identity"], "facade routing: Metal export uses another router replay")
     facade_routing = [{"observation": run["label"], "model": facade_names[run["label"]], "kind": run["kind"],
                        "counts": run["counts"], "paired": run.get("paired_with_router"),
-                       "inference_ms": run.get("inference_ms"), "report": FACADE_REPORT}
-                      for run in (facade["router"], *facade["runs"])]
+                       "inference_ms": run.get("inference_ms"),
+                       "report": FACADE_TIERS_REPORT if run in easy_metal["runs"] else FACADE_REPORT}
+                      for run in (facade["router"], *facade["runs"], *easy_metal["runs"])]
     for row in facade_routing:
         row["rank_all"] = 1 + sum(o["counts"]["all"]["correct"] > row["counts"]["all"]["correct"] for o in facade_routing)
         row["rank_test"] = 1 + sum(o["counts"]["by_split"]["test"]["correct"] > row["counts"]["by_split"]["test"]["correct"]
                                    for o in facade_routing)
     facade_routing.sort(key=lambda r: (r["rank_all"], r["model"]))
+    tiers = {row["observation"]: {"model": row["model"], "easy": row["counts"]} for row in facade_routing}
+    for tier, (path, digest_) in FACADE_TIERS.items():
+        data_ = inputs.load(path)
+        require(data_.get("pack") == f"facade-routing-{tier}-v1" and data_["dataset_sha256"] == digest_ and data_["cases"] == 96
+                and data_["router"]["identity"]["router_source_revision"] == facade["router"]["identity"]["router_source_revision"],
+                f"facade tiers: changed {tier} pack or router revision")
+        for run in (data_["router"], *data_["runs"]):
+            require(run["label"] in tiers, f"facade tiers: {run['label']} has no easy-tier row")
+            tiers[run["label"]][tier] = run["counts"]
+            tiers[run["label"]].setdefault("latency", run.get("inference_ms"))
+    inputs.read("docs/" + FACADE_TIERS_REPORT)
+    facade_tiers = [{"observation": k, **v} for k, v in tiers.items() if all(t_ in v for t_ in FACADE_TIERS)]
+    for tier in ("easy", *FACADE_TIERS):
+        for row in facade_tiers:
+            row["rank_" + tier] = 1 + sum(o[tier]["all"]["correct"] > row[tier]["all"]["correct"] for o in facade_tiers)
+            row["rank_test_" + tier] = 1 + sum(o[tier]["by_split"]["test"]["correct"] > row[tier]["by_split"]["test"]["correct"]
+                                               for o in facade_tiers)
+    facade_tiers.sort(key=lambda r: (r["rank_complex"], r["model"]))
     inputs.read("scripts/build-full-results.py")
     coverage["sources_sha256"] = dict(sorted(inputs.hashes.items()))
     return {"schema_version": "deposium.public-results/v1", "observations": rows,
             "campaigns": campaign_rows, "coverage": coverage, "historical_context_observations": len(base),
-            "choice_episodes": choice_episodes, "facade_routing": facade_routing,
+            "choice_episodes": choice_episodes, "facade_routing": facade_routing, "facade_tiers": facade_tiers,
             "other_campaigns": others, "other_benchmarks_markdown": other_guide,
             "capability_campaign": complementary,
             "scope": "aggregate_presentation_only_no_inference_or_raw_archive_verification",
@@ -696,8 +731,16 @@ def build_coverage(observations, campaigns, others, inputs):
     by_id[FACADE_ROUTER[0]] = {"id": FACADE_ROUTER[0], "model": FACADE_ROUTER[1], "size": "Deterministic rules",
                                "runtime": "private_replay", "context_observation": False,
                                "generative_observation": False, "router_observation": True, "cells": unobserved()}
-    for run in (facade["router"], *facade["runs"]):
-        if run["kind"] == "classifier":
+    easy_metal = inputs.load(FACADE_EASY_METAL)
+    for run in (facade["router"], *facade["runs"], *easy_metal["runs"]):
+        if run["kind"] == "classifier" and "backend" in run["identity"]:
+            # GPU rows: the same GGUF file and native binary as their context observation.
+            target = context_ids.get(run["label"])
+            require(target is not None and target["identity"].get("model_assets_sha256") == run["identity"]["model_sha256"]
+                    and target["identity"].get("runtime", {}).get("binary_sha256") == run["identity"]["binary_sha256"],
+                    f"facade routing: identity join failed for {run['label']}")
+            inputs.read(run["identity"]["assets_manifest"])
+        elif run["kind"] == "classifier":
             target = context_ids.get(run["label"])
             require(target is not None and target["identity"].get("model_revision") == run["identity"]["model_revision"]
                     and run["identity"].get("runtime_lock_sha256") is not None
@@ -1065,6 +1108,27 @@ def render_facade_routing(data):
     lines += ["", "The router's role in the application is narrower than this pack: a low score here does not mean the application "
               "fails on these requests. Paraphrases avoid the obvious word on purpose; correlated FR/EN pairs and ten requests per "
               "category do not support a general ranking.", ""]
+    tiers = data.get("facade_tiers") or []
+    if tiers:
+        def cell(r, tier):
+            c = r[tier]
+            return f"{c['all']['correct']}/{c['all']['total']} ({c['by_split']['test']['correct']}/{c['by_split']['test']['total']})"
+        lines += ["### Facade routing: harder tiers", "",
+                  "Same eight categories on two frozen harder tiers of 96 cases (64 TEST). **Advanced**: implicit requests, lexical "
+                  "traps toward another category, near misses, informal or misspelt requests. **Complex**: multi-step requests scored "
+                  "on the first step, requests that depend on a previous exchange, compound refusals, goals without the action, "
+                  "genuine ambiguity. Cells are correct / all (test). [Tiers report](" + FACADE_TIERS_REPORT + ").", "",
+                  f"**Leading on the complex tier (test)**: {leaders(tiers, 'rank_test_complex', lambda r: r['model'], lambda r: str(r['complex']['by_split']['test']['correct']) + '/64 test')}.", "",
+                  "| Rank complex | Model / runtime | Easy /80 (test /48) | Advanced /96 (test /64) | Complex /96 (test /64) | Median call ms (advanced) |",
+                  "|---:|---|---:|---:|---:|---:|"]
+        for r in tiers:
+            median = (r.get("latency") or {}).get("median")
+            lines.append(f"| {r['rank_complex']} | {r['model']} | {cell(r, 'easy')} | {cell(r, 'advanced')} | {cell(r, 'complex')} | "
+                         f"{number(median) if median is not None else 'NR'} |")
+        lines += ["", "D3 rows on these tiers ran as Q8 GGUF on Metal (same weights as their CPU rows); Vela 2.0 0.3B ran on CPU. "
+                  "Latency scopes differ: Metal rows time the whole adapter call (loopback HTTP included), the CPU row its worker inference. "
+                  "The router reads only the latest request, as in the application; the complex tier's previous exchange is "
+                  "visible to the classifiers only.", ""]
     return lines
 
 
@@ -1232,11 +1296,19 @@ def render_at_a_glance(data):
                      leaders(episode_rows, "rank_test", lambda r: r["model"], lambda r: f"{r['counts']['test']['procedure_correct_cases']}/12 test"),
                      "[Executed episodes](#executed-tool-episodes-closed-choice)"))
     facade_rows = data["facade_routing"]
+    tier_rows = data.get("facade_tiers") or []
     if facade_rows:
         rows.append(("Tool routing", "Facade routing (model vs router)", "80 (48 test)", len(facade_rows),
                      leaders(facade_rows, "rank_all", lambda r: r["model"], lambda r: f"{r['counts']['all']['correct']}/80"),
                      leaders(facade_rows, "rank_test", lambda r: r["model"], lambda r: f"{r['counts']['by_split']['test']['correct']}/48 test"),
                      "[Facade routing](#facade-routing-model-vs-router)"))
+    for tier in ("advanced", "complex"):
+        if tier_rows:
+            rows.append(("Tool routing", f"Facade routing, {tier} tier", "96 (64 test)", len(tier_rows),
+                         leaders(tier_rows, "rank_" + tier, lambda r, tier=tier: r["model"], lambda r, tier=tier: f"{r[tier]['all']['correct']}/96"),
+                         leaders(tier_rows, "rank_test_" + tier, lambda r, tier=tier: r["model"],
+                                 lambda r, tier=tier: f"{r[tier]['by_split']['test']['correct']}/64 test"),
+                         "[Harder tiers](#facade-routing-harder-tiers)"))
     for axis, title, total, section in (("relevance", "Passage relevance", 512, "#passage-relevance"),
                                         ("support", "Claim support", 768, "#claim-support"),
                                         ("answerability", "Answerability", 128, "#answerability")):

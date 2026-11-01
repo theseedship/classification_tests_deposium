@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 from collections import Counter
 from pathlib import Path
@@ -22,8 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from deposium_bench.campaigns import _encode  # noqa: E402
 
-DATASET = "datasets/facade-routing-v1/cases.jsonl"
-MANIFEST = "datasets/facade-routing-v1/manifest.json"
+PACKS = ("facade-routing-v1", "facade-routing-advanced-v1", "facade-routing-complex-v1")
 SCHEMA = "deposium.facade-routing-public/v1"
 CATEGORIES = ("search", "analyze", "visualize", "graph", "evaluate", "process", "system", "none")
 ROUTER_LABEL = "FacadeRouterReplay"
@@ -116,7 +116,11 @@ def paired(result, router, cases):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--run", action="append", required=True, help="LABEL=ARCHIVE=PROFILE")
+    parser.add_argument("--pack", choices=PACKS, default="facade-routing-v1")
+    parser.add_argument("--run", action="append", default=[], help="LABEL=ARCHIVE=PROFILE (CPU worker archive)")
+    parser.add_argument("--gpu-run", action="append", default=[],
+                        help="LABEL=PILOT_ARCHIVE=ASSETS (run-upstream-native-pilot.py archive and tracked asset manifest)")
+    parser.add_argument("--backend", choices=("metal", "cuda", "rocm", "vulkan"), default="metal")
     parser.add_argument("--router", required=True, type=Path)
     parser.add_argument("--router-revision", required=True)
     parser.add_argument("--output", required=True, type=Path)
@@ -124,9 +128,10 @@ def main():
     try:
         require(not args.output.exists(), "refusing to overwrite the output")
         require(re.fullmatch(r"[0-9a-f]{40}", args.router_revision), "router revision must be a full commit hash")
-        data = (ROOT / DATASET).read_bytes()
+        require(args.run or args.gpu_run, "at least one candidate run is required")
+        data = (ROOT / "datasets" / args.pack / "cases.jsonl").read_bytes()
         dataset_sha = sha(data)
-        require(load(ROOT / MANIFEST)["cases_sha256"] == dataset_sha, "frozen pack manifest mismatch")
+        require(load(ROOT / "datasets" / args.pack / "manifest.json")["cases_sha256"] == dataset_sha, "frozen pack manifest mismatch")
         cases = {c["case_id"]: c for c in map(json.loads, data.decode("utf-8").splitlines())}
         _, rsummary, _, router = decisions(args.router, cases, dataset_sha)
         rfinal = load(args.router / "adapter-final.json")
@@ -160,7 +165,33 @@ def main():
                                       "worker_restarts": len(final.get("worker_restarts") or [])},
                          "counts": summarize(result, cases), "paired_with_router": paired(result, router, cases),
                          "inference_ms": stats(latency), "worker_rss_mib_max": max(rss) if rss else None})
-        out = {"schema_version": SCHEMA, "dataset_sha256": dataset_sha, "cases": len(cases),
+        if args.gpu_run:
+            spec_ = importlib.util.spec_from_file_location("gguf_gpu_export", ROOT / "scripts/export-gguf-gpu-campaign.py")
+            gpu = importlib.util.module_from_spec(spec_)
+            spec_.loader.exec_module(gpu)
+        for spec in args.gpu_run:
+            label, pilot, assets_path = spec.split("=")
+            pilot, assets_path = Path(pilot), (ROOT / assets_path).resolve()
+            require(assets_path.is_relative_to(ROOT / "profiles"), "asset manifest must be tracked under profiles/")
+            assets = load(assets_path)
+            pilot_result = gpu.verify_pilot(pilot, assets, args.backend)
+            require(pilot_result["dataset"]["sha256"] == dataset_sha, "pilot dataset differs from the frozen pack")
+            manifest, summary, rows, result = decisions(pilot / "campaign", cases, dataset_sha)
+            latency = [r["duration_ms"] for r in rows if r["status"] == "ok"]
+            runs.append({"label": label, "kind": "classifier",
+                         "identity": {"adapter": "systemone_local", "backend": args.backend,
+                                      "model_repo_id": assets["repo_id"], "model_revision": assets["revision"],
+                                      "model_sha256": assets["files"][0]["sha256"],
+                                      "assets_manifest": str(assets_path.relative_to(ROOT)),
+                                      "native_revision": pilot_result["runtime"]["revision"],
+                                      "binary_sha256": pilot_result["runtime"]["binary_sha256"],
+                                      "layers": pilot_result["actual_backend"]["total_layers"],
+                                      "raw_sha256": summary["raw_sha256"],
+                                      "seal_sha256": sha((pilot / "pilot-seal.json").read_bytes())},
+                         "counts": summarize(result, cases), "paired_with_router": paired(result, router, cases),
+                         "inference_ms": stats(latency), "worker_rss_mib_max": pilot_result["resources"]["rss_peak_mib"],
+                         "latency_scope": "adapter call duration, including loopback HTTP"})
+        out = {"schema_version": SCHEMA, "pack": args.pack, "dataset_sha256": dataset_sha, "cases": len(cases),
                "qualification": "exploratory; agent-authored references pending human review",
                "router": router_row, "runs": runs}
         text = json.dumps(out, ensure_ascii=False, indent=2, sort_keys=True) + "\n"

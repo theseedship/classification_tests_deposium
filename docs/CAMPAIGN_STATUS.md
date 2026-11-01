@@ -22,6 +22,15 @@ observed choice/yes-no/score responses and a closed server; it exposed the stock
 CLI's online catalogue bootstrap requirement. No benchmark score was added.
 Existing campaigns may continue independently.
 
+GPU runtimes, 1 November 2026: D3 lite, nano and mini as Q8 GGUF on Apple Metal
+([results](D3_SMALL_GGUF_METAL_RESULTS_20261101.md)) give the same decisions as
+their CPU rows on 97.9–100% of cases, 100–240× faster. NVIDIA CUDA
+([#65](https://github.com/theseedship/classification_tests_deposium/issues/65)) and
+AMD ([#66](https://github.com/theseedship/classification_tests_deposium/issues/66))
+use the same launcher and protocol. Harder facade-routing tiers
+([results](FACADE_ROUTING_TIERS_RESULTS_20261101.md)): D3 mini 94/96 advanced,
+92/96 complex; the router 24/96 on both.
+
 Facade routing, 1 November 2026 ([#56](https://github.com/theseedship/classification_tests_deposium/issues/56), option B):
 the production router was replayed privately on the synthetic
 [facade-routing pack](../datasets/facade-routing-v1/README.md) and scored

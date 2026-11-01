@@ -34,7 +34,14 @@ D3MINI_MACOS_CAPABILITY = EVIDENCE + "d3-mini-macos-20261031/capability.json"
 D3MINI_MACOS_CAPABILITY_PROFILE = "profiles/d3-mini-macos-cpu-capability.json"
 D3MINI_MACOS_PHYSICS = EVIDENCE + "d3-mini-macos-20261031/physics.json"
 D3MINI_MACOS_REPORT = "D3_MINI_MACOS_RESULTS_20261031.md"
-NEW_CONTEXT_IDS = {"ClefFlashQ8", "D3FlashQ8Upstream"}
+# Small D3 GGUF Q8 models on Apple Metal (upstream llama.cpp); same weights as the macOS CPU rows.
+GGUF_METAL_REPORT = "D3_SMALL_GGUF_METAL_RESULTS_20261101.md"
+GGUF_METAL_PROTOCOL = "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md"
+GGUF_METAL = (("D3liteQ8Metal", "D3 lite · Q8 Metal", EVIDENCE + "d3-small-gguf-metal-20261101/d3-lite.json", "profiles/d3-lite-q8-assets.json"),
+              ("D3nanoQ8Metal", "D3 nano · Q8 Metal", EVIDENCE + "d3-small-gguf-metal-20261101/d3-nano.json", "profiles/d3-nano-q8-assets.json"),
+              ("D3miniQ8Metal", "D3 mini · Q8 Metal", EVIDENCE + "d3-small-gguf-metal-20261101/d3-mini.json", "profiles/d3-mini-q8-assets.json"))
+GGUF_PIN = "efe3626b119ff81033e309c3ba07a770bef2c546"
+NEW_CONTEXT_IDS = {"ClefFlashQ8", "D3FlashQ8Upstream"} | {obs for obs, *_ in GGUF_METAL}
 STATUSES = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
 DATASETS = {
     "context": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
@@ -202,12 +209,29 @@ class Campaigns:
                 "model_identity": {"model_repo_id": data["model"].get("model_repo_id", data["model"].get("repo_id")),
                                    "model_revision": data["model"].get("model_revision", data["model"].get("revision")),
                                    "model_assets_sha256": data["model"].get("model_sha256") or data["model"].get("model_assets_sha256")
-                                   or data["model"]["files"][0]["sha256"],
+                                   or data["model"].get("sha256") or data["model"]["files"][0]["sha256"],
                                    "runtime": dict(data["runtime"])},
                 "adapter_ms": self.stats(phase["latency_ms"], count["statuses"]["ok"]),
                 "session_group_peak_rss_mib": peak,
                 "rss_scope": (resource.get("rss_scope") if backend["kind"] == "cpu" else
                               "Sampled owned process-group peak over fresh session startup, controls, warm-up and this pack; not total GPU memory")}
+
+    def gguf(self, path, asset_path, observation):
+        """A small GGUF model on a GPU backend exported by scripts/export-gguf-gpu-campaign.py."""
+        data = self.inputs.load(path)
+        asset, model, runtime = self.inputs.load(asset_path), data["model"], data["runtime"]
+        self.require(data["schema_version"] == "deposium.gguf-gpu-campaign-public/v1" and data["label"] == observation
+                     and data["protocol"] == GGUF_METAL_PROTOCOL, f"campaign: GGUF export mismatch: {observation}")
+        self.inputs.read(GGUF_METAL_PROTOCOL)
+        self.require(model["repo_id"] == asset["repo_id"] and model["revision"] == asset["revision"]
+                     and model["sha256"] == asset["files"][0]["sha256"] and model["assets_manifest"] == asset_path,
+                     f"campaign: GGUF model/asset identity mismatch: {observation}")
+        self.require(runtime["native_revision"] == GGUF_PIN and runtime["backend"] == "metal"
+                     and runtime["decision_type"] == "vllm-d3" and self.hash(runtime["binary_sha256"]),
+                     f"campaign: GGUF runtime identity mismatch: {observation}")
+        return data, {"adapter": "systemone_local", "model_repo_id": asset["repo_id"], "model_revision": asset["revision"],
+                      "model_assets_sha256": asset["files"][0]["sha256"],
+                      "runtime": {k: runtime[k] for k in ("backend", "native_revision", "binary_sha256", "decision_type", "layers")}}
 
     def context_row(self, phase, identity, meta):
         c, groups = phase["counts"], phase["groups"]
@@ -310,6 +334,26 @@ class Campaigns:
                self.phase(physics, "fresh_context_anchor", "context", "D3FlashQ8Upstream", "D3 Flash Q8 · direct Metal",
                           PHYSICS, "PHYSICS_FLASH_RESULTS_20261029.md", 132, 66)]
         contexts = [self.context_row(p, identity, metadata[p["observation"]]) for p, identity in zip(new, (ci, di))]
+        gguf_rows = []
+        for observation, model, source, asset_path in GGUF_METAL:
+            data, identity = self.gguf(source, asset_path, observation)
+            self.inputs.read("docs/" + GGUF_METAL_REPORT)
+            context = self.phase(data, "context", "context", observation, model, source, GGUF_METAL_REPORT, 132, 66)
+            contexts.append(self.context_row(context, identity, metadata[observation]))
+            gguf_rows += [self.phase(data, pack, pack, observation, model, source, GGUF_METAL_REPORT, total, families)
+                          for pack, total, families in (("capability", 192, 48), ("physics", 48, 24))]
+            passages = data["phases"]["passages"]
+            self.require(passages["dataset_sha256"] == DATASETS["passage"] and passages["rotation"] == 0
+                         and passages["split"] == "test", f"campaign: GGUF passage selection mismatch: {observation}")
+            for axis, score in passages["choice_scores"].items():
+                count = self.legacy_score(score)
+                groups = {name: {key: self.legacy_score(value) for key, value in values.items()}
+                          for name, values in score["by"].items()}
+                for values in groups.values():
+                    self.partition(count, values)
+                gguf_rows.append({"task": "passage_" + axis, "observation": observation, "model": model, "counts": count,
+                                  "groups": groups, "macro_accuracy": self.macro(score, count), "source": source,
+                                  "report": GGUF_METAL_REPORT, "identity": identity})
         rows = [self.phase(clef, "capability", "capability", "ClefFlashQ8", "Clef Flash Q8 · direct Metal",
                            CLEF, "CLEF_FLASH_RESULTS_20261029.md", 192, 48),
                 self.phase(clef, "physics", "physics", "ClefFlashQ8", "Clef Flash Q8 · direct Metal",
@@ -388,6 +432,7 @@ class Campaigns:
                 rows.append({"task": "passage_" + axis, "observation": obs, "model": model, "counts": count,
                              "groups": groups, "macro_accuracy": self.macro(score, count), "source": source,
                              "report": PASSAGE_SMALL_CPU_REPORT, "identity": data["choice_model"]})
+        rows += gguf_rows
         # The Jev relevance export repeats decisions over four rotations: never put 2048 in the 512-choice ranking.
         rows.append({"task": "passage_relevance_four_rotations", "observation": "Jev114", "model": "Jev 1.14 · API",
                      "counts": self.legacy_score(jev["relevance_scores"]),
