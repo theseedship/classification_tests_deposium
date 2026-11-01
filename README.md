@@ -57,7 +57,11 @@ needs), the same four rows scored 64–79/80 against 28/80 for a private replay 
 production router. As Q8 GGUF on Apple Metal, the same D3 weights give the
 same decisions (at most one case in 48 differs) [100–240× faster](docs/D3_SMALL_GGUF_METAL_RESULTS_20261101.md):
 D3 mini routes a request in about 160 ms, and leads the [advanced and complex routing tiers](docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md)
-(94/96 and 92/96). To save memory, [D3 mini Q4 and D3 Flash 4-bit on Uzu](docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md)
+(94/96 and 92/96). Two review follow-ups: a [three-level passage relevance pack](docs/PASSAGE_RELEVANCE_V2_RESULTS_20261101.md)
+replaces an undecidable v1 grade (D3 mini 406/512, macro 91%), and a
+[human-confirmation routing pack](docs/FACADE_ROUTING_HITL_RESULTS_20261101.md) shows D3 mini asking
+before 9/12 irreversible actions with no false alarm, but never on hesitation unless its own confidence is used.
+To save memory, [D3 mini Q4 and D3 Flash 4-bit on Uzu](docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md)
 both run in about 4 GiB: Q4 keeps D3 mini's answers, Uzu is about 30% faster. Its [harness overview](docs/RESULTS.md#harness-coverage)
 separates implemented scripted discovery, arguments and feedback fixtures from
 untested real-model output paths, empirical model allocation, application replay,

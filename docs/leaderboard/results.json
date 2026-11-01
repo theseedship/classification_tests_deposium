@@ -44655,6 +44655,7 @@
       "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md": "5ffecfb90ac0f1651469e8dfc826524746ca5f5e9fa8f1aab43d55187f24139f",
       "docs/D3_SMALL_GGUF_METAL_RESULTS_20261101.md": "ce73320e99c4a26c95253149af427b568aee230b9715ae4ce410b4ae3fa9cb84",
       "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md": "b4bccd20bf9fb96adbe9aebf9a1b2e6dcf1bf3eebe8a09aca30156d6dfa53539",
+      "docs/FACADE_ROUTING_HITL_RESULTS_20261101.md": "13c3b57f5466142177c9a5f97aac221c00ec936a63606fb214b9a35ce6da8014",
       "docs/FACADE_ROUTING_RESULTS_20261101.md": "ede837b2a12602c2cc43bc6e1662c0c45b2f803cf7950abe5e86d4d5b8d26ba8",
       "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md": "18dd5b79adb3c4d35ce948e9b184c6a66fccd61a583bd6e3a56068b7f66f40ec",
       "docs/GLICLASS_V4_RESULTS_20261017.md": "9b2795a6c3a90b05ca7dbf8ede7d950873dfb7637fc097f79405d72bc01d065d",
@@ -44670,7 +44671,8 @@
       "docs/PASSAGE_CPU_RESULTS_20261015.md": "32325371aa205b06321763bf40f4bcb17a3d42dcb8f52aae3610c8c3a522c3c5",
       "docs/PASSAGE_FLASH_RESULTS_20261029.md": "cf376c533151ac8e2427fb13f8b4229e439556b514f9e128c83668ec16dbbd67",
       "docs/PASSAGE_JEV_RESULTS_20261015.md": "ba48c94fe882498e397b0bf7b7c5d07da3edb776403526e8bdab4cde67710848",
-      "docs/PASSAGE_SMALL_CPU_RESULTS_20261031.md": "7cdb98fb57f3c741ead34eaddd06a4c7032a177c7447957e43bd02af5b07a12a",
+      "docs/PASSAGE_RELEVANCE_V2_RESULTS_20261101.md": "0d99078ffe6abd736b7d09bc90ec27c575f3af847804161aa365c062fbe3525f",
+      "docs/PASSAGE_SMALL_CPU_RESULTS_20261031.md": "03432fde978e191be2a3756803df4fa424ddc0a958a40c7902d366ced3fccace",
       "docs/PHYSICS_FLASH_RESULTS_20261029.md": "356dfd041f7d4646235767601f5272f446f814b4448712910f37c6056d546819",
       "docs/TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md": "49649e91b8769aa595323c6911719f59e83f89fba46c0316d849d8a5b0cd4423",
       "docs/VELA2_03_MACOS_CPU_PROTOCOL_20261030.md": "4817578dfd85225ede51a6d4c1a06774cb9574f23f3e05c997b63054e250958d",
@@ -44726,6 +44728,8 @@
       "docs/evidence/passage-small-cpu-20261031/d3-nano.json": "3ee147e61204fd99ffe0ebc8f8929eb6ffc4165ed1f1f4dd6e679d48c2aa7923",
       "docs/evidence/passage-small-cpu-20261031/vela2-03.json": "dbfda7aae3b79df848599d291d3d4d6d8876b9df9eacf6cd9a5d32fd0ce038a4",
       "docs/evidence/physics-flash-20261029/analysis.json": "b7675cb4a17cf92ef66bc2107ace0d48dbcd37a37d676e1b0e3a280cc165ec56",
+      "docs/evidence/review-packs-20261101/facade-hitl.json": "acbce130e9e1f1494a1fbfa9ec9aff1fdc401b5b9fd06e13fe0c71910c685679",
+      "docs/evidence/review-packs-20261101/passage-relevance-v2.json": "192f347d216faaf19175b5c0f2ad7565d282db9a317d5e2d622581026cd49e58",
       "docs/evidence/timing-comparison-20261004/analysis.json": "eb8c5babe3dac5033291bd118b761e0e84b5aceb4c3b73b8ad0e429c2db65942",
       "docs/evidence/vela2-03-macos-20261030/analysis.json": "9feebff166f7b888ebc3762cadf51585c5de9b7b4cce429d929b9eb207eeae3c",
       "docs/evidence/vela2-03-macos-20261030/capability.json": "f478cddebf09f67250860947836e15ed843ad7b7ddf70811190008ed4462e1ff",
@@ -44760,7 +44764,7 @@
       "profiles/vela2-03-macos-choice-episodes.json": "0dd5e3e87bbea50d56d7701325adde78646816b262bcd4a85f74b065a10764f3",
       "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
       "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-      "scripts/build-full-results.py": "ef621b052c8e9b7c7e35e981d3f3f4127bacea528fedc72c8761bf3dfc117940",
+      "scripts/build-full-results.py": "f81cea7fa3b32e7ffcc49ae54615c67b7476233c3c9b6d0bd70e22cb1d585e6b",
       "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
       "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
       "scripts/consolidated-campaigns.py": "aad0e445b816da17101c9a5664caff05aa3845418284ed3531ae31174e79c719"
@@ -151890,6 +151894,1113 @@
   },
   "ranking": "Competition rank by correct/132, all splits; ties ordered by observation ID",
   "reference_review": "agent_only_pending_human",
+  "review_packs": {
+    "hitl": {
+      "report": "FACADE_ROUTING_HITL_RESULTS_20261101.md",
+      "rows": [
+        {
+          "explicit_option": {
+            "all": {
+              "correct": 44,
+              "total": 90
+            },
+            "statuses": {
+              "ok": 90
+            },
+            "test": {
+              "correct": 29,
+              "total": 62
+            },
+            "test_by_kind": {
+              "ambiguous": {
+                "asks_human": 4,
+                "none": 2
+              },
+              "control": {
+                "candidate": 20,
+                "none": 2,
+                "other": 4
+              },
+              "hitl_choose": {
+                "candidate": 4,
+                "none": 8
+              },
+              "hitl_confirm": {
+                "asks_human": 1,
+                "candidate": 6,
+                "none": 5
+              },
+              "out_of_scope": {
+                "none": 6
+              }
+            }
+          },
+          "identities": [
+            {
+              "adapter": "vela2",
+              "model_repo_id": "vllm-sr/Vela-2.0-0.3B",
+              "model_revision": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+              "profile": "profiles/vela2-03-macos-cpu.json",
+              "raw_sha256": "655851b5e4ac9bf5c613e74522a515d3d1bb0c6bfc92bbcf51a2240bb7087107",
+              "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+              "seal_sha256": "4ee369c9380231343cf06335feb19d6b030b5308a455dcafe6c130d8f31ac6cc"
+            },
+            {
+              "adapter": "vela2",
+              "model_repo_id": "vllm-sr/Vela-2.0-0.3B",
+              "model_revision": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+              "profile": "profiles/vela2-03-macos-cpu.json",
+              "raw_sha256": "0296208bfe77ed4d17551b3e3967c11189780c09d1b7f5a1b7c05c904ff4dfa5",
+              "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+              "seal_sha256": "7dc020ecd1e26944cd4e7477aeb1788009e6ecc0e853610e78f7464df3ebfb48"
+            }
+          ],
+          "label": "Vela03Macos",
+          "median_call_ms": 182.4976664938731,
+          "model": "Vela 2.0 0.3B · macOS CPU",
+          "observation": "Vela03Macos",
+          "own_confidence": {
+            "combined_with_explicit": {
+              "test_detected": 20,
+              "test_detected_by_kind": {
+                "hitl_choose": 11,
+                "hitl_confirm": 9
+              },
+              "test_false_alarms": 24
+            },
+            "routing_all": {
+              "correct": 61,
+              "total": 90
+            },
+            "routing_test": {
+              "correct": 43,
+              "total": 62
+            },
+            "threshold": {
+              "fit_cases": 28,
+              "tau": 0.9424861543622052,
+              "test_asked_by_kind": {
+                "ambiguous": {
+                  "asked": 4,
+                  "total": 6
+                },
+                "control": {
+                  "asked": 13,
+                  "total": 26
+                },
+                "hitl_choose": {
+                  "asked": 11,
+                  "total": 12
+                },
+                "hitl_confirm": {
+                  "asked": 9,
+                  "total": 12
+                },
+                "out_of_scope": {
+                  "asked": 5,
+                  "total": 6
+                }
+              },
+              "test_auc": 0.7182017543859649,
+              "test_clear": 38,
+              "test_detected": 20,
+              "test_false_alarms": 22,
+              "test_needs_human": 24,
+              "test_routed": 20,
+              "test_routed_correct": 20
+            }
+          }
+        },
+        {
+          "explicit_option": {
+            "all": {
+              "correct": 49,
+              "total": 90
+            },
+            "statuses": {
+              "ok": 90
+            },
+            "test": {
+              "correct": 30,
+              "total": 62
+            },
+            "test_by_kind": {
+              "ambiguous": {
+                "asks_human": 1,
+                "none": 4,
+                "other": 1
+              },
+              "control": {
+                "candidate": 20,
+                "none": 2,
+                "other": 4
+              },
+              "hitl_choose": {
+                "candidate": 9,
+                "none": 2,
+                "other": 1
+              },
+              "hitl_confirm": {
+                "candidate": 8,
+                "none": 4
+              },
+              "out_of_scope": {
+                "none": 6
+              }
+            }
+          },
+          "identities": [
+            {
+              "adapter": "systemone_local",
+              "assets_manifest": "profiles/d3-lite-q8-assets.json",
+              "backend": "metal",
+              "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+              "model_repo_id": "ggml-org/vllm-d3-lite-GGUF",
+              "model_revision": "d4d6ebde7717eb37014a1c7401127fb48f26da42",
+              "model_sha256": "ffed04a9607034d641b95181d79abf36bec3a03ed647949bad8277d0e2984ddf",
+              "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+              "raw_sha256": "dede056cc68527038fb267a39bcb692aa6291e0f55e4e73298a3e6dc6b41b84a",
+              "rss_peak_mib": 1415.234375,
+              "seal_sha256": "87f40e5a7ef8ac191d59e7ad5615fa9d59d99f29de66d6abddc6c0d034e7060f"
+            },
+            {
+              "adapter": "systemone_local",
+              "assets_manifest": "profiles/d3-lite-q8-assets.json",
+              "backend": "metal",
+              "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+              "model_repo_id": "ggml-org/vllm-d3-lite-GGUF",
+              "model_revision": "d4d6ebde7717eb37014a1c7401127fb48f26da42",
+              "model_sha256": "ffed04a9607034d641b95181d79abf36bec3a03ed647949bad8277d0e2984ddf",
+              "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+              "raw_sha256": "f50f2c0b8dc867c8ee0331e8e2f8255229e0e80ff646925055916a69a43616fd",
+              "rss_peak_mib": 1413.046875,
+              "seal_sha256": "49b9c58e6fb7ceb5045b8ba734c4db420c95014fd8a3ee516ed278bcfa4f14fe"
+            }
+          ],
+          "label": "D3liteQ8Metal",
+          "median_call_ms": 39.60466650460148,
+          "model": "D3 lite · Q8 Metal",
+          "observation": "D3liteQ8Metal",
+          "own_confidence": {
+            "combined_with_explicit": {
+              "test_detected": 19,
+              "test_detected_by_kind": {
+                "hitl_choose": 9,
+                "hitl_confirm": 10
+              },
+              "test_false_alarms": 18
+            },
+            "routing_all": {
+              "correct": 69,
+              "total": 90
+            },
+            "routing_test": {
+              "correct": 49,
+              "total": 62
+            },
+            "threshold": {
+              "fit_cases": 28,
+              "tau": 0.9211571437782143,
+              "test_asked_by_kind": {
+                "ambiguous": {
+                  "asked": 4,
+                  "total": 6
+                },
+                "control": {
+                  "asked": 12,
+                  "total": 26
+                },
+                "hitl_choose": {
+                  "asked": 9,
+                  "total": 12
+                },
+                "hitl_confirm": {
+                  "asked": 10,
+                  "total": 12
+                },
+                "out_of_scope": {
+                  "asked": 1,
+                  "total": 6
+                }
+              },
+              "test_auc": 0.7379385964912281,
+              "test_clear": 38,
+              "test_detected": 19,
+              "test_false_alarms": 17,
+              "test_needs_human": 24,
+              "test_routed": 26,
+              "test_routed_correct": 23
+            }
+          }
+        },
+        {
+          "explicit_option": {
+            "all": {
+              "correct": 61,
+              "total": 90
+            },
+            "statuses": {
+              "ok": 90
+            },
+            "test": {
+              "correct": 39,
+              "total": 62
+            },
+            "test_by_kind": {
+              "ambiguous": {
+                "none": 6
+              },
+              "control": {
+                "candidate": 24,
+                "other": 2
+              },
+              "hitl_choose": {
+                "candidate": 9,
+                "none": 1,
+                "other": 2
+              },
+              "hitl_confirm": {
+                "asks_human": 5,
+                "candidate": 6,
+                "none": 1
+              },
+              "out_of_scope": {
+                "asks_human": 2,
+                "none": 4
+              }
+            }
+          },
+          "identities": [
+            {
+              "adapter": "systemone_local",
+              "assets_manifest": "profiles/d3-nano-q8-assets.json",
+              "backend": "metal",
+              "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+              "model_repo_id": "ggml-org/vllm-d3-nano-GGUF",
+              "model_revision": "50dea2057df10c4b393559a155ab3bf0bc7532c6",
+              "model_sha256": "4867d306fd22aec8c5ebd1851b7f1074f480702655e8000ceedf0c47c6a6f337",
+              "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+              "raw_sha256": "08bdd55412d026bcd6a2748d0427d2b9937dc6e762a0f61cf1f91b0a58bc25e3",
+              "rss_peak_mib": 2827.078125,
+              "seal_sha256": "3c754fb02cd036a005f580b42d364cc80c037fd9cda4ba482a13dd827ef1cf7f"
+            },
+            {
+              "adapter": "systemone_local",
+              "assets_manifest": "profiles/d3-nano-q8-assets.json",
+              "backend": "metal",
+              "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+              "model_repo_id": "ggml-org/vllm-d3-nano-GGUF",
+              "model_revision": "50dea2057df10c4b393559a155ab3bf0bc7532c6",
+              "model_sha256": "4867d306fd22aec8c5ebd1851b7f1074f480702655e8000ceedf0c47c6a6f337",
+              "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+              "raw_sha256": "c0c56437eebaa21be389b3f06328c958f5e993b751b63485d16d5b0f10741224",
+              "rss_peak_mib": 2821.703125,
+              "seal_sha256": "a561a51d45440cbf556fcaaed08d42ccb2805b4690633ae9d85335bcc528b92f"
+            }
+          ],
+          "label": "D3nanoQ8Metal",
+          "median_call_ms": 71.9103544979589,
+          "model": "D3 nano · Q8 Metal",
+          "observation": "D3nanoQ8Metal",
+          "own_confidence": {
+            "combined_with_explicit": {
+              "test_detected": 18,
+              "test_detected_by_kind": {
+                "hitl_choose": 10,
+                "hitl_confirm": 8
+              },
+              "test_false_alarms": 16
+            },
+            "routing_all": {
+              "correct": 81,
+              "total": 90
+            },
+            "routing_test": {
+              "correct": 55,
+              "total": 62
+            },
+            "threshold": {
+              "fit_cases": 28,
+              "tau": 0.8886729136833309,
+              "test_asked_by_kind": {
+                "ambiguous": {
+                  "asked": 5,
+                  "total": 6
+                },
+                "control": {
+                  "asked": 9,
+                  "total": 26
+                },
+                "hitl_choose": {
+                  "asked": 10,
+                  "total": 12
+                },
+                "hitl_confirm": {
+                  "asked": 8,
+                  "total": 12
+                },
+                "out_of_scope": {
+                  "asked": 0,
+                  "total": 6
+                }
+              },
+              "test_auc": 0.8081140350877193,
+              "test_clear": 38,
+              "test_detected": 18,
+              "test_false_alarms": 14,
+              "test_needs_human": 24,
+              "test_routed": 30,
+              "test_routed_correct": 30
+            }
+          }
+        },
+        {
+          "explicit_option": {
+            "all": {
+              "correct": 71,
+              "total": 90
+            },
+            "statuses": {
+              "ok": 90
+            },
+            "test": {
+              "correct": 47,
+              "total": 62
+            },
+            "test_by_kind": {
+              "ambiguous": {
+                "none": 6
+              },
+              "control": {
+                "candidate": 26
+              },
+              "hitl_choose": {
+                "candidate": 11,
+                "none": 1
+              },
+              "hitl_confirm": {
+                "asks_human": 9,
+                "candidate": 2,
+                "none": 1
+              },
+              "out_of_scope": {
+                "none": 6
+              }
+            }
+          },
+          "identities": [
+            {
+              "adapter": "systemone_local",
+              "assets_manifest": "profiles/d3-mini-q8-assets.json",
+              "backend": "metal",
+              "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+              "model_repo_id": "ggml-org/vllm-d3-mini-GGUF",
+              "model_revision": "e7230e2309c186c80182fbeed6fef70680b20c64",
+              "model_sha256": "f9f99be46b7ce1e5a5f09ed620de89106447646b34f7d2993e7563b48feb2858",
+              "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+              "raw_sha256": "89db9b20048429e1fe36b310393b2413a7d4409e2215dbccf4532f7ccfc8fbe0",
+              "rss_peak_mib": 5426.578125,
+              "seal_sha256": "1a16a9e5f4ea4e39b5b0e7849d3bd1db285c6055522d7280fd84e963b6fb16ca"
+            },
+            {
+              "adapter": "systemone_local",
+              "assets_manifest": "profiles/d3-mini-q8-assets.json",
+              "backend": "metal",
+              "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+              "model_repo_id": "ggml-org/vllm-d3-mini-GGUF",
+              "model_revision": "e7230e2309c186c80182fbeed6fef70680b20c64",
+              "model_sha256": "f9f99be46b7ce1e5a5f09ed620de89106447646b34f7d2993e7563b48feb2858",
+              "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+              "raw_sha256": "e02fa1d4eeb0b62056d1e6c4a84ca758dc9196785b5423f0f7603882743243ea",
+              "rss_peak_mib": 5424.34375,
+              "seal_sha256": "5a0f19f25ed2375cc6bfcf30a5a1e8b4c63334b477999de0204945eef92e8971"
+            }
+          ],
+          "label": "D3miniQ8Metal",
+          "median_call_ms": 161.6463755053701,
+          "model": "D3 mini · Q8 Metal",
+          "observation": "D3miniQ8Metal",
+          "own_confidence": {
+            "combined_with_explicit": {
+              "test_detected": 18,
+              "test_detected_by_kind": {
+                "hitl_choose": 8,
+                "hitl_confirm": 10
+              },
+              "test_false_alarms": 12
+            },
+            "routing_all": {
+              "correct": 83,
+              "total": 90
+            },
+            "routing_test": {
+              "correct": 55,
+              "total": 62
+            },
+            "threshold": {
+              "fit_cases": 28,
+              "tau": 0.8921464402891744,
+              "test_asked_by_kind": {
+                "ambiguous": {
+                  "asked": 3,
+                  "total": 6
+                },
+                "control": {
+                  "asked": 9,
+                  "total": 26
+                },
+                "hitl_choose": {
+                  "asked": 8,
+                  "total": 12
+                },
+                "hitl_confirm": {
+                  "asked": 10,
+                  "total": 12
+                },
+                "out_of_scope": {
+                  "asked": 0,
+                  "total": 6
+                }
+              },
+              "test_auc": 0.8278508771929824,
+              "test_clear": 38,
+              "test_detected": 18,
+              "test_false_alarms": 12,
+              "test_needs_human": 24,
+              "test_routed": 32,
+              "test_routed_correct": 32
+            }
+          }
+        },
+        {
+          "explicit_option": {
+            "all": {
+              "correct": 26,
+              "total": 90
+            },
+            "statuses": {
+              "ok": 90
+            },
+            "test": {
+              "correct": 17,
+              "total": 62
+            },
+            "test_by_kind": {
+              "ambiguous": {
+                "none": 5,
+                "other": 1
+              },
+              "control": {
+                "candidate": 8,
+                "none": 15,
+                "other": 3
+              },
+              "hitl_choose": {
+                "candidate": 3,
+                "none": 7,
+                "other": 2
+              },
+              "hitl_confirm": {
+                "candidate": 3,
+                "none": 6,
+                "other": 3
+              },
+              "out_of_scope": {
+                "none": 4,
+                "other": 2
+              }
+            }
+          },
+          "identities": [
+            {
+              "raw_sha256": "91bfa089025b5607f38e61eb5edadb846fb651cab4d22f3483b5efecf25ca6d4",
+              "recordings_sha256": "4dc019740e699144af2632e0f46aab6a01a44bf05896fb5adb35a878f1804f91",
+              "seal_sha256": "ef1a2098d927077ca6912e157eca0cf9ff11b537c8c25ac19dc2aa53f47002a5"
+            },
+            {
+              "raw_sha256": "14190ac1ce55e50af352c3dde23473867d084ded08f8306e018ed07229c9cad8",
+              "recordings_sha256": "77ad41fbcc7cccfedfb1b927d089aed0ec3dde34c51f53fb22b41943bd26f6ed",
+              "seal_sha256": "83ad5111ae797e42228024c9b485ef7f43497a1d1d3fc61360a1337362f9efdc"
+            }
+          ],
+          "label": "FacadeRouterReplay",
+          "model": "Production router · private replay",
+          "observation": "FacadeRouterReplay",
+          "own_confidence": {
+            "routing_all": {
+              "correct": 34,
+              "total": 90
+            },
+            "routing_test": {
+              "correct": 23,
+              "total": 62
+            },
+            "threshold": null
+          },
+          "router_source_revision": "2847d2d9193dfe7e20f8742694af5560e4c10765"
+        }
+      ],
+      "source": "docs/evidence/review-packs-20261101/facade-hitl.json"
+    },
+    "relevance": {
+      "report": "PASSAGE_RELEVANCE_V2_RESULTS_20261101.md",
+      "rows": [
+        {
+          "counts": {
+            "all": {
+              "correct": 113,
+              "total": 512
+            },
+            "by_class": {
+              "direct": {
+                "correct": 55,
+                "total": 112
+              },
+              "no_usable_evidence": {
+                "correct": 55,
+                "total": 384
+              },
+              "partial": {
+                "correct": 3,
+                "total": 16
+              }
+            },
+            "by_role": {
+              "base_variant": {
+                "correct": 0,
+                "total": 16
+              },
+              "binding_premise": {
+                "correct": 3,
+                "total": 16
+              },
+              "direct": {
+                "correct": 23,
+                "total": 64
+              },
+              "evidence_after_neutral_prefix": {
+                "correct": 4,
+                "total": 16
+              },
+              "evidence_outside_visible_projection": {
+                "correct": 14,
+                "total": 16
+              },
+              "explicit_conflict": {
+                "correct": 14,
+                "total": 16
+              },
+              "explicit_exception": {
+                "correct": 14,
+                "total": 16
+              },
+              "other_field": {
+                "correct": 0,
+                "total": 16
+              },
+              "other_rule": {
+                "correct": 6,
+                "total": 16
+              },
+              "other_subject": {
+                "correct": 0,
+                "total": 32
+              },
+              "other_subject_same_number": {
+                "correct": 0,
+                "total": 16
+              },
+              "other_zone": {
+                "correct": 2,
+                "total": 16
+              },
+              "sibling_variant": {
+                "correct": 0,
+                "total": 16
+              },
+              "unrelated": {
+                "correct": 15,
+                "total": 128
+              },
+              "wrong_component": {
+                "correct": 10,
+                "total": 32
+              },
+              "wrong_condition": {
+                "correct": 0,
+                "total": 16
+              },
+              "wrong_quantity_and_unit": {
+                "correct": 0,
+                "total": 16
+              },
+              "wrong_relation": {
+                "correct": 8,
+                "total": 48
+              }
+            },
+            "macro_accuracy": 0.27393353174603174,
+            "majority_baseline": 384,
+            "median_call_ms": 164.44912500446662,
+            "statuses": {
+              "ok": 512
+            },
+            "test": {
+              "correct": 59,
+              "total": 256
+            },
+            "test_by_class": {
+              "direct": {
+                "correct": 29,
+                "total": 56
+              },
+              "no_usable_evidence": {
+                "correct": 29,
+                "total": 192
+              },
+              "partial": {
+                "correct": 1,
+                "total": 8
+              }
+            },
+            "test_macro_accuracy": 0.2646329365079365
+          },
+          "identities": [
+            {
+              "adapter": "vela2",
+              "model_repo_id": "vllm-sr/Vela-2.0-0.3B",
+              "model_revision": "d6f03aa9baca4f9017fa8f8e9c2764d3bed3f409",
+              "profile": "profiles/vela2-03-macos-cpu.json",
+              "raw_sha256": "1c17212a64c9b8a5e0dfc0ee039d8073210b5e113906c9904b1c8373d0d7c86b",
+              "runtime_lock_sha256": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
+              "seal_sha256": "fb2ddaa25be57e051a32347c6f517523f6a571b989a62634e0344f4d196beacc"
+            }
+          ],
+          "label": "Vela03Macos",
+          "model": "Vela 2.0 0.3B · macOS CPU",
+          "observation": "Vela03Macos"
+        },
+        {
+          "counts": {
+            "all": {
+              "correct": 338,
+              "total": 512
+            },
+            "by_class": {
+              "direct": {
+                "correct": 100,
+                "total": 112
+              },
+              "no_usable_evidence": {
+                "correct": 233,
+                "total": 384
+              },
+              "partial": {
+                "correct": 5,
+                "total": 16
+              }
+            },
+            "by_role": {
+              "base_variant": {
+                "correct": 0,
+                "total": 16
+              },
+              "binding_premise": {
+                "correct": 5,
+                "total": 16
+              },
+              "direct": {
+                "correct": 60,
+                "total": 64
+              },
+              "evidence_after_neutral_prefix": {
+                "correct": 8,
+                "total": 16
+              },
+              "evidence_outside_visible_projection": {
+                "correct": 16,
+                "total": 16
+              },
+              "explicit_conflict": {
+                "correct": 16,
+                "total": 16
+              },
+              "explicit_exception": {
+                "correct": 16,
+                "total": 16
+              },
+              "other_field": {
+                "correct": 9,
+                "total": 16
+              },
+              "other_rule": {
+                "correct": 0,
+                "total": 16
+              },
+              "other_subject": {
+                "correct": 0,
+                "total": 32
+              },
+              "other_subject_same_number": {
+                "correct": 0,
+                "total": 16
+              },
+              "other_zone": {
+                "correct": 0,
+                "total": 16
+              },
+              "sibling_variant": {
+                "correct": 5,
+                "total": 16
+              },
+              "unrelated": {
+                "correct": 104,
+                "total": 128
+              },
+              "wrong_component": {
+                "correct": 30,
+                "total": 32
+              },
+              "wrong_condition": {
+                "correct": 16,
+                "total": 16
+              },
+              "wrong_quantity_and_unit": {
+                "correct": 15,
+                "total": 16
+              },
+              "wrong_relation": {
+                "correct": 38,
+                "total": 48
+              }
+            },
+            "macro_accuracy": 0.6040426587301587,
+            "majority_baseline": 384,
+            "median_call_ms": 30.87674999551382,
+            "statuses": {
+              "ok": 512
+            },
+            "test": {
+              "correct": 168,
+              "total": 256
+            },
+            "test_by_class": {
+              "direct": {
+                "correct": 52,
+                "total": 56
+              },
+              "no_usable_evidence": {
+                "correct": 114,
+                "total": 192
+              },
+              "partial": {
+                "correct": 2,
+                "total": 8
+              }
+            },
+            "test_macro_accuracy": 0.5907738095238095
+          },
+          "identities": [
+            {
+              "adapter": "systemone_local",
+              "assets_manifest": "profiles/d3-lite-q8-assets.json",
+              "backend": "metal",
+              "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+              "model_repo_id": "ggml-org/vllm-d3-lite-GGUF",
+              "model_revision": "d4d6ebde7717eb37014a1c7401127fb48f26da42",
+              "model_sha256": "ffed04a9607034d641b95181d79abf36bec3a03ed647949bad8277d0e2984ddf",
+              "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+              "raw_sha256": "09a56a69ae8754176ec432d721bec1406eb4d43a5470cd3e6f075690bfa46a26",
+              "rss_peak_mib": 1418.21875,
+              "seal_sha256": "b52eed8c7d031f482051905735c0a5a696b6457771cc23f055ce1374e0d615bd"
+            }
+          ],
+          "label": "D3liteQ8Metal",
+          "model": "D3 lite · Q8 Metal",
+          "observation": "D3liteQ8Metal"
+        },
+        {
+          "counts": {
+            "all": {
+              "correct": 371,
+              "total": 512
+            },
+            "by_class": {
+              "direct": {
+                "correct": 97,
+                "total": 112
+              },
+              "no_usable_evidence": {
+                "correct": 258,
+                "total": 384
+              },
+              "partial": {
+                "correct": 16,
+                "total": 16
+              }
+            },
+            "by_role": {
+              "base_variant": {
+                "correct": 0,
+                "total": 16
+              },
+              "binding_premise": {
+                "correct": 16,
+                "total": 16
+              },
+              "direct": {
+                "correct": 56,
+                "total": 64
+              },
+              "evidence_after_neutral_prefix": {
+                "correct": 10,
+                "total": 16
+              },
+              "evidence_outside_visible_projection": {
+                "correct": 16,
+                "total": 16
+              },
+              "explicit_conflict": {
+                "correct": 15,
+                "total": 16
+              },
+              "explicit_exception": {
+                "correct": 16,
+                "total": 16
+              },
+              "other_field": {
+                "correct": 14,
+                "total": 16
+              },
+              "other_rule": {
+                "correct": 0,
+                "total": 16
+              },
+              "other_subject": {
+                "correct": 0,
+                "total": 32
+              },
+              "other_subject_same_number": {
+                "correct": 0,
+                "total": 16
+              },
+              "other_zone": {
+                "correct": 0,
+                "total": 16
+              },
+              "sibling_variant": {
+                "correct": 13,
+                "total": 16
+              },
+              "unrelated": {
+                "correct": 113,
+                "total": 128
+              },
+              "wrong_component": {
+                "correct": 30,
+                "total": 32
+              },
+              "wrong_condition": {
+                "correct": 16,
+                "total": 16
+              },
+              "wrong_quantity_and_unit": {
+                "correct": 15,
+                "total": 16
+              },
+              "wrong_relation": {
+                "correct": 41,
+                "total": 48
+              }
+            },
+            "macro_accuracy": 0.8459821428571429,
+            "majority_baseline": 384,
+            "median_call_ms": 55.529499499243684,
+            "statuses": {
+              "ok": 512
+            },
+            "test": {
+              "correct": 181,
+              "total": 256
+            },
+            "test_by_class": {
+              "direct": {
+                "correct": 47,
+                "total": 56
+              },
+              "no_usable_evidence": {
+                "correct": 126,
+                "total": 192
+              },
+              "partial": {
+                "correct": 8,
+                "total": 8
+              }
+            },
+            "test_macro_accuracy": 0.8318452380952381
+          },
+          "identities": [
+            {
+              "adapter": "systemone_local",
+              "assets_manifest": "profiles/d3-nano-q8-assets.json",
+              "backend": "metal",
+              "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+              "model_repo_id": "ggml-org/vllm-d3-nano-GGUF",
+              "model_revision": "50dea2057df10c4b393559a155ab3bf0bc7532c6",
+              "model_sha256": "4867d306fd22aec8c5ebd1851b7f1074f480702655e8000ceedf0c47c6a6f337",
+              "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+              "raw_sha256": "7617f5673e49ab1c682480f3614c9f7df1d93833a9b2f8153c1fd3c673ddc442",
+              "rss_peak_mib": 2828.875,
+              "seal_sha256": "7991c2d51a51d38b616c6c0e885ac3ee03549de3d77f2d77c592b7b12da812b3"
+            }
+          ],
+          "label": "D3nanoQ8Metal",
+          "model": "D3 nano · Q8 Metal",
+          "observation": "D3nanoQ8Metal"
+        },
+        {
+          "counts": {
+            "all": {
+              "correct": 406,
+              "total": 512
+            },
+            "by_class": {
+              "direct": {
+                "correct": 112,
+                "total": 112
+              },
+              "no_usable_evidence": {
+                "correct": 278,
+                "total": 384
+              },
+              "partial": {
+                "correct": 16,
+                "total": 16
+              }
+            },
+            "by_role": {
+              "base_variant": {
+                "correct": 0,
+                "total": 16
+              },
+              "binding_premise": {
+                "correct": 16,
+                "total": 16
+              },
+              "direct": {
+                "correct": 64,
+                "total": 64
+              },
+              "evidence_after_neutral_prefix": {
+                "correct": 16,
+                "total": 16
+              },
+              "evidence_outside_visible_projection": {
+                "correct": 16,
+                "total": 16
+              },
+              "explicit_conflict": {
+                "correct": 16,
+                "total": 16
+              },
+              "explicit_exception": {
+                "correct": 16,
+                "total": 16
+              },
+              "other_field": {
+                "correct": 15,
+                "total": 16
+              },
+              "other_rule": {
+                "correct": 0,
+                "total": 16
+              },
+              "other_subject": {
+                "correct": 0,
+                "total": 32
+              },
+              "other_subject_same_number": {
+                "correct": 0,
+                "total": 16
+              },
+              "other_zone": {
+                "correct": 5,
+                "total": 16
+              },
+              "sibling_variant": {
+                "correct": 16,
+                "total": 16
+              },
+              "unrelated": {
+                "correct": 120,
+                "total": 128
+              },
+              "wrong_component": {
+                "correct": 30,
+                "total": 32
+              },
+              "wrong_condition": {
+                "correct": 16,
+                "total": 16
+              },
+              "wrong_quantity_and_unit": {
+                "correct": 16,
+                "total": 16
+              },
+              "wrong_relation": {
+                "correct": 44,
+                "total": 48
+              }
+            },
+            "macro_accuracy": 0.9079861111111112,
+            "majority_baseline": 384,
+            "median_call_ms": 110.05404149182141,
+            "statuses": {
+              "ok": 512
+            },
+            "test": {
+              "correct": 200,
+              "total": 256
+            },
+            "test_by_class": {
+              "direct": {
+                "correct": 56,
+                "total": 56
+              },
+              "no_usable_evidence": {
+                "correct": 136,
+                "total": 192
+              },
+              "partial": {
+                "correct": 8,
+                "total": 8
+              }
+            },
+            "test_macro_accuracy": 0.9027777777777778
+          },
+          "identities": [
+            {
+              "adapter": "systemone_local",
+              "assets_manifest": "profiles/d3-mini-q8-assets.json",
+              "backend": "metal",
+              "binary_sha256": "7f24d4d9065e7a56c530aebe1d8262478aef88ed750731e113dbcd9ac19edc30",
+              "model_repo_id": "ggml-org/vllm-d3-mini-GGUF",
+              "model_revision": "e7230e2309c186c80182fbeed6fef70680b20c64",
+              "model_sha256": "f9f99be46b7ce1e5a5f09ed620de89106447646b34f7d2993e7563b48feb2858",
+              "native_revision": "efe3626b119ff81033e309c3ba07a770bef2c546",
+              "raw_sha256": "9bb81edc26242125eecf740b59c247e7974fbae38702c348d74ca55f22ea25af",
+              "rss_peak_mib": 5429.71875,
+              "seal_sha256": "d6ece661c49d31abaac03fef3832aa74b9acdde185b8852c7151f209ea49de36"
+            }
+          ],
+          "label": "D3miniQ8Metal",
+          "model": "D3 mini · Q8 Metal",
+          "observation": "D3miniQ8Metal"
+        }
+      ],
+      "source": "docs/evidence/review-packs-20261101/passage-relevance-v2.json"
+    }
+  },
   "schema_version": "deposium.public-results/v1",
   "scope": "aggregate_presentation_only_no_inference_or_raw_archive_verification",
   "sources_sha256": {
@@ -151906,6 +153017,7 @@
     "docs/D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md": "5ffecfb90ac0f1651469e8dfc826524746ca5f5e9fa8f1aab43d55187f24139f",
     "docs/D3_SMALL_GGUF_METAL_RESULTS_20261101.md": "ce73320e99c4a26c95253149af427b568aee230b9715ae4ce410b4ae3fa9cb84",
     "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md": "b4bccd20bf9fb96adbe9aebf9a1b2e6dcf1bf3eebe8a09aca30156d6dfa53539",
+    "docs/FACADE_ROUTING_HITL_RESULTS_20261101.md": "13c3b57f5466142177c9a5f97aac221c00ec936a63606fb214b9a35ce6da8014",
     "docs/FACADE_ROUTING_RESULTS_20261101.md": "ede837b2a12602c2cc43bc6e1662c0c45b2f803cf7950abe5e86d4d5b8d26ba8",
     "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md": "18dd5b79adb3c4d35ce948e9b184c6a66fccd61a583bd6e3a56068b7f66f40ec",
     "docs/GLICLASS_V4_RESULTS_20261017.md": "9b2795a6c3a90b05ca7dbf8ede7d950873dfb7637fc097f79405d72bc01d065d",
@@ -151921,7 +153033,8 @@
     "docs/PASSAGE_CPU_RESULTS_20261015.md": "32325371aa205b06321763bf40f4bcb17a3d42dcb8f52aae3610c8c3a522c3c5",
     "docs/PASSAGE_FLASH_RESULTS_20261029.md": "cf376c533151ac8e2427fb13f8b4229e439556b514f9e128c83668ec16dbbd67",
     "docs/PASSAGE_JEV_RESULTS_20261015.md": "ba48c94fe882498e397b0bf7b7c5d07da3edb776403526e8bdab4cde67710848",
-    "docs/PASSAGE_SMALL_CPU_RESULTS_20261031.md": "7cdb98fb57f3c741ead34eaddd06a4c7032a177c7447957e43bd02af5b07a12a",
+    "docs/PASSAGE_RELEVANCE_V2_RESULTS_20261101.md": "0d99078ffe6abd736b7d09bc90ec27c575f3af847804161aa365c062fbe3525f",
+    "docs/PASSAGE_SMALL_CPU_RESULTS_20261031.md": "03432fde978e191be2a3756803df4fa424ddc0a958a40c7902d366ced3fccace",
     "docs/PHYSICS_FLASH_RESULTS_20261029.md": "356dfd041f7d4646235767601f5272f446f814b4448712910f37c6056d546819",
     "docs/TOOL_EPISODES_CHOICE_PILOT_RESULTS_20261031.md": "49649e91b8769aa595323c6911719f59e83f89fba46c0316d849d8a5b0cd4423",
     "docs/VELA2_03_MACOS_CPU_PROTOCOL_20261030.md": "4817578dfd85225ede51a6d4c1a06774cb9574f23f3e05c997b63054e250958d",
@@ -151977,6 +153090,8 @@
     "docs/evidence/passage-small-cpu-20261031/d3-nano.json": "3ee147e61204fd99ffe0ebc8f8929eb6ffc4165ed1f1f4dd6e679d48c2aa7923",
     "docs/evidence/passage-small-cpu-20261031/vela2-03.json": "dbfda7aae3b79df848599d291d3d4d6d8876b9df9eacf6cd9a5d32fd0ce038a4",
     "docs/evidence/physics-flash-20261029/analysis.json": "b7675cb4a17cf92ef66bc2107ace0d48dbcd37a37d676e1b0e3a280cc165ec56",
+    "docs/evidence/review-packs-20261101/facade-hitl.json": "acbce130e9e1f1494a1fbfa9ec9aff1fdc401b5b9fd06e13fe0c71910c685679",
+    "docs/evidence/review-packs-20261101/passage-relevance-v2.json": "192f347d216faaf19175b5c0f2ad7565d282db9a317d5e2d622581026cd49e58",
     "docs/evidence/timing-comparison-20261004/analysis.json": "eb8c5babe3dac5033291bd118b761e0e84b5aceb4c3b73b8ad0e429c2db65942",
     "docs/evidence/vela2-03-macos-20261030/analysis.json": "9feebff166f7b888ebc3762cadf51585c5de9b7b4cce429d929b9eb207eeae3c",
     "docs/evidence/vela2-03-macos-20261030/capability.json": "f478cddebf09f67250860947836e15ed843ad7b7ddf70811190008ed4462e1ff",
@@ -152011,7 +153126,7 @@
     "profiles/vela2-03-macos-choice-episodes.json": "0dd5e3e87bbea50d56d7701325adde78646816b262bcd4a85f74b065a10764f3",
     "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "ef621b052c8e9b7c7e35e981d3f3f4127bacea528fedc72c8761bf3dfc117940",
+    "scripts/build-full-results.py": "f81cea7fa3b32e7ffcc49ae54615c67b7476233c3c9b6d0bd70e22cb1d585e6b",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
     "scripts/consolidated-campaigns.py": "aad0e445b816da17101c9a5664caff05aa3845418284ed3531ae31174e79c719"
