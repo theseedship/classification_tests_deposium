@@ -1,0 +1,95 @@
+{
+  "schema_version": "deposium.intent-choice-cards/v1",
+  "question_key": "intent",
+  "max_state_chars": 1500,
+  "intro": {
+    "fr": "Message adressé à un assistant documentaire : « {message} »",
+    "en": "Message sent to a document assistant: “{message}”"
+  },
+  "question": {
+    "fr": "Quelle est l'intention de ce message ?",
+    "en": "What is the intent of this message?"
+  },
+  "intents": [
+    {
+      "id": "greeting",
+      "option_id": "a",
+      "description": {
+        "fr": "Saluer, remercier ou engager un échange social sans demande documentaire.",
+        "en": "Greet, thank or start a social exchange without a document request."
+      }
+    },
+    {
+      "id": "meta_question",
+      "option_id": "b",
+      "description": {
+        "fr": "Poser une question sur l’assistant, ses capacités, son fonctionnement ou l’inventaire global des documents.",
+        "en": "Ask about the assistant, its capabilities, how it works or the overall document inventory."
+      }
+    },
+    {
+      "id": "search_query",
+      "option_id": "c",
+      "description": {
+        "fr": "Rechercher des faits ou des informations dans les documents, y compris leurs lieux explicitement décrits.",
+        "en": "Find facts or information in documents, including locations explicitly described in them."
+      }
+    },
+    {
+      "id": "complex_analysis",
+      "option_id": "d",
+      "description": {
+        "fr": "Analyser ou croiser les documents pour en dégager des implications, des tendances ou une interprétation.",
+        "en": "Analyze or compare documents to derive implications, patterns or an interpretation."
+      }
+    },
+    {
+      "id": "graph_query",
+      "option_id": "e",
+      "description": {
+        "fr": "Explorer les relations ou les liens entre les entités présentes dans les documents.",
+        "en": "Explore relationships or links between entities present in the documents."
+      }
+    },
+    {
+      "id": "instruction",
+      "option_id": "f",
+      "description": {
+        "fr": "Exécuter une consigne de transformation sur le contenu fourni, comme traduire, résumer, corriger ou mettre en forme.",
+        "en": "Follow an instruction to transform supplied content, such as translating, summarizing, correcting or formatting it."
+      }
+    },
+    {
+      "id": "web_search",
+      "option_id": "g",
+      "description": {
+        "fr": "Rechercher sur Internet des informations explicitement demandées en ligne, en direct ou actuelles et absentes des documents.",
+        "en": "Search the Internet for explicitly requested online, live or current information unavailable in the documents."
+      }
+    },
+    {
+      "id": "geo_analysis",
+      "option_id": "h",
+      "description": {
+        "fr": "Effectuer une observation ou un calcul géospatial externe, notamment une prévision météo ou une analyse de végétation par satellite.",
+        "en": "Perform external geospatial observation or computation, including weather forecasts or satellite vegetation analysis."
+      }
+    },
+    {
+      "id": "connector_search",
+      "option_id": "i",
+      "description": {
+        "fr": "Rechercher des informations dans une source externe connectée désignée par la demande.",
+        "en": "Search for information in a connected external source specified by the request."
+      }
+    },
+    {
+      "id": "opendata",
+      "option_id": "j",
+      "description": {
+        "fr": "Consulter des données publiques ou officielles, comme les statistiques démographiques, les prix immobiliers ou la qualité de l’eau.",
+        "en": "Consult public or official data, such as demographic statistics, property prices or water quality."
+      }
+    }
+  ]
+}
