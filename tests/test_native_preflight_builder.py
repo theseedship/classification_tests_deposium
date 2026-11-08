@@ -158,6 +158,70 @@ class NativePreflightBuilderTests(unittest.TestCase):
         self.assertFalse(self.output.exists())
         self.assertEqual(external.read_bytes(), b"synthetic outside archive")
 
+    def test_exact_external_archive_allowance_is_hashed_and_recorded(self):
+        external = self.root / "system.a"
+        external.write_bytes(b"synthetic system archive")
+        self.link.write_text(self.link.read_text().strip() + " " + str(external) + "\n")
+        with patch.object(builder, "captured", side_effect=self.captured), \
+                patch.object(builder.subprocess, "run", side_effect=self.simulated_compile):
+            builder.build(self.source, self.native, self.output, system_archives=[external])
+        manifest = json.loads((self.output / "build.json").read_text())
+        self.assertEqual(manifest["allowed_system_archives"], [str(external)])
+        self.assertEqual(manifest["dependency_files_sha256"][str(external)],
+                         hashlib.sha256(external.read_bytes()).hexdigest())
+        self.assertIn(str(external), manifest["link_command"])
+
+    def test_allowance_does_not_permit_other_external_archives(self):
+        allowed, other = self.root / "allowed.a", self.root / "other.a"
+        allowed.write_bytes(b"allowed archive")
+        other.write_bytes(b"unapproved archive")
+        self.link.write_text(self.link.read_text().strip() + f" {allowed} {other}\n")
+        with patch.object(builder, "captured", side_effect=self.captured), \
+                patch.object(builder.subprocess, "run") as compiler, \
+                self.assertRaisesRegex(ValueError, "archive escaped"):
+            builder.build(self.source, self.native, self.output, system_archives=[allowed])
+        compiler.assert_not_called()
+        self.assertFalse(self.output.exists())
+
+    def test_changed_external_archive_during_link_prevents_success_manifest(self):
+        external = self.root / "system.a"
+        external.write_bytes(b"original system archive")
+        self.link.write_text(self.link.read_text().strip() + f" {external}\n")
+        def concurrent_change(command, **kwargs):
+            self.simulated_compile(command, **kwargs)
+            if "-c" not in command:
+                external.write_bytes(b"changed system archive")
+        with patch.object(builder, "captured", side_effect=self.captured), \
+                patch.object(builder.subprocess, "run", side_effect=concurrent_change), \
+                self.assertRaisesRegex(ValueError, "input changed"):
+            builder.build(self.source, self.native, self.output, system_archives=[external])
+        self.assertFalse((self.output / "build.json").exists())
+
+    def test_unused_external_archive_allowance_is_refused(self):
+        external = self.root / "unused.a"
+        external.write_bytes(b"unused system archive")
+        with patch.object(builder, "captured", side_effect=self.captured), \
+                patch.object(builder.subprocess, "run") as compiler, \
+                self.assertRaisesRegex(ValueError, "unused system archive"):
+            builder.build(self.source, self.native, self.output, system_archives=[external])
+        compiler.assert_not_called()
+        self.assertFalse(self.output.exists())
+
+    def test_allowances_require_unique_absolute_regular_archive_files(self):
+        external = self.root / "system.a"
+        external.write_bytes(b"synthetic archive")
+        alias = self.root / "alias.a"
+        alias.symlink_to(external)
+        nonarchive = self.root / "other.txt"
+        nonarchive.write_bytes(b"not an archive")
+        for items in ([Path("system.a")], [self.root], [nonarchive], [external, alias]):
+            with self.subTest(items=items), patch.object(builder, "captured") as commands, \
+                    patch.object(builder.subprocess, "run") as compiler, self.assertRaises(ValueError):
+                builder.build(self.source, self.native, self.output, system_archives=items)
+            commands.assert_not_called()
+            compiler.assert_not_called()
+            self.assertFalse(self.output.exists())
+
     def test_simulated_build_writes_only_fresh_results_and_hashes_its_real_dependencies(self):
         source_before, native_before = snapshot(self.source), snapshot(self.native)
         with patch.object(builder, "captured", side_effect=self.captured), \

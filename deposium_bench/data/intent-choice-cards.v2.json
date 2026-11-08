@@ -1,0 +1,96 @@
+{
+  "schema_version": "deposium.intent-choice-cards/v2",
+  "policy_id": "rubric-v2-frozen-20261108",
+  "question_key": "intent",
+  "max_state_chars": 1500,
+  "intro": {
+    "fr": "Message adressé à un assistant documentaire : « {message} »",
+    "en": "Message sent to a document assistant: “{message}”"
+  },
+  "question": {
+    "fr": "Quelle intention correspond à l’objectif demandé et à la source explicitement désignée ? Classer uniquement le message fourni, sans supposer que l’information manque dans les documents. Une demande substantielle prime sur une salutation. Pour un diagramme : texte fourni = transformation ; documents du corpus = analyse ; opération explicite sur un graphe = graphe. La météo et le NDVI restent géospatiaux même si Internet est mentionné.",
+    "en": "Which intent matches the requested objective and explicitly named source? Classify only the supplied message; do not assume information is absent from the documents. A substantive request takes precedence over a greeting. For a diagram: supplied text means transformation; corpus documents mean analysis; an explicit graph operation means graph. Weather and NDVI remain geospatial even when the Internet is mentioned."
+  },
+  "intents": [
+    {
+      "id": "greeting",
+      "option_id": "a",
+      "description": {
+        "fr": "Saluer, remercier ou échanger socialement sans autre demande substantielle.",
+        "en": "Greet, thank or converse socially without another substantive request."
+      }
+    },
+    {
+      "id": "meta_question",
+      "option_id": "b",
+      "description": {
+        "fr": "Interroger les capacités ou le fonctionnement de l’assistant, ou l’inventaire global des documents ; une recherche documentaire thématique relève de la recherche.",
+        "en": "Ask about assistant capabilities or operation, or the overall document inventory; a thematic document lookup is search."
+      }
+    },
+    {
+      "id": "search_query",
+      "option_id": "c",
+      "description": {
+        "fr": "Retrouver dans les documents un ou plusieurs faits, une réponse oui/non ou un fait relationnel. Une relation mentionnée ne suffit pas à demander un graphe.",
+        "en": "Retrieve one or several facts, a yes/no answer or a relational fact from documents. Mentioning a relationship alone does not request a graph."
+      }
+    },
+    {
+      "id": "complex_analysis",
+      "option_id": "d",
+      "description": {
+        "fr": "Résumer, comparer, interpréter ou calculer à partir des documents du corpus, ou en produire une synthèse ou un diagramme. Distinguer la transformation de texte directement fourni.",
+        "en": "Summarize, compare, interpret or calculate using corpus documents, or produce a synthesis or diagram from them. Distinguish transformation of directly supplied text."
+      }
+    },
+    {
+      "id": "graph_query",
+      "option_id": "e",
+      "description": {
+        "fr": "Demander explicitement une structure ou une opération de graphe : chemins, voisinages, centralité, communautés ou exploration structurée des liens. Un simple fait relationnel reste une recherche documentaire.",
+        "en": "Explicitly request graph structure or a graph operation: paths, neighborhoods, centrality, communities or structured link exploration. A simple relational fact remains document search."
+      }
+    },
+    {
+      "id": "instruction",
+      "option_id": "f",
+      "description": {
+        "fr": "Transformer un contenu directement fourni : traduire, résumer, corriger, reformater ou créer un diagramme depuis ce texte. Une synthèse du corpus relève de l’analyse.",
+        "en": "Transform directly supplied content: translate, summarize, correct, reformat or create a diagram from that text. A corpus synthesis is analysis."
+      }
+    },
+    {
+      "id": "web_search",
+      "option_id": "g",
+      "description": {
+        "fr": "Rechercher explicitement sur le Web externe générique. Ne pas déduire ce besoin d’une absence supposée dans le corpus ; distinguer source connectée, jeu de données public/officiel et opération géospatiale.",
+        "en": "Explicitly search the generic external Web. Do not infer this need from assumed absence in the corpus; distinguish a connected source, a public/official dataset and a geospatial operation."
+      }
+    },
+    {
+      "id": "geo_analysis",
+      "option_id": "h",
+      "description": {
+        "fr": "Demander une opération ou observation géospatiale, une prévision météo ou une analyse satellite de végétation/NDVI, même avec une demande Internet. Une localisation factuelle dans un document reste une recherche.",
+        "en": "Request a geospatial operation or observation, weather forecast or satellite vegetation/NDVI analysis, even with an Internet request. A factual location in a document remains search."
+      }
+    },
+    {
+      "id": "connector_search",
+      "option_id": "i",
+      "description": {
+        "fr": "Rechercher explicitement dans une source ou un compte externe connecté désigné par la demande. La simple mention d’un service sans recherche dans le compte connecté ne suffit pas.",
+        "en": "Explicitly search a connected external source or account named by the request. Merely mentioning a service without requesting search in the connected account is insufficient."
+      }
+    },
+    {
+      "id": "opendata",
+      "option_id": "j",
+      "description": {
+        "fr": "Consulter explicitement un jeu de données public ou officiel, ou les statistiques de cette source. Distinguer la recherche Web générique et les opérations météo/NDVI.",
+        "en": "Explicitly consult a public or official dataset, or statistics from that source. Distinguish generic Web search and weather/NDVI operations."
+      }
+    }
+  ]
+}

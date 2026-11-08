@@ -70,8 +70,16 @@ def system_include_roots(compiler):
     return roots
 
 
-def build(source, runtime_build, output):
+def build(source, runtime_build, output, *, system_archives=()):
     source, runtime_build = Path(source).resolve(strict=True), Path(runtime_build).resolve(strict=True)
+    allowed_system_archives = set()
+    for item in system_archives:
+        supplied = Path(item)
+        require(supplied.is_absolute(), "system archive must be an absolute file path")
+        archive = supplied.resolve(strict=True)
+        require(archive.is_file() and archive.suffix == ".a", "system archive must be an existing regular .a file")
+        require(archive not in allowed_system_archives, "duplicate system archive allowance")
+        allowed_system_archives.add(archive)
     output = Path(output).absolute()
     allowed = ROOT / "results"
     require(not allowed.is_symlink() and output.resolve().is_relative_to(allowed.resolve()),
@@ -104,6 +112,7 @@ def build(source, runtime_build, output):
     require(len(native_objects) == 1 and native_objects[0].endswith("/main.cpp.o"),
             "unexpected native entry-point objects")
     archives = []
+    used_system_archives = set()
     link_flags = []
     index = 1
     while index < len(native_command):
@@ -116,11 +125,15 @@ def build(source, runtime_build, output):
             continue
         if arg.endswith(".a"):
             path = (link_cwd / arg).resolve(strict=True)
-            require(path.is_relative_to(runtime_build) and path.is_file(), "native archive escaped build")
+            require(path.is_file() and (path.is_relative_to(runtime_build) or path in allowed_system_archives),
+                    "native archive escaped build")
+            if not path.is_relative_to(runtime_build):
+                used_system_archives.add(path)
             archives.append(path)
             arg = str(path)
         link_flags.append(arg)
         index += 1
+    require(used_system_archives == allowed_system_archives, "unused system archive allowance")
     require(any(path.name == "libserver-context.a" for path in archives)
             and any(path.name == "libllama.a" for path in archives), "required native libraries missing")
     dependencies = {str(path): digest(path) for path in (cache, flags, link, compiler, HELPER, Path(__file__), *archives)}
@@ -163,6 +176,7 @@ def build(source, runtime_build, output):
         "helper_source_sha256": digest(HELPER), "builder_sha256": digest(Path(__file__)),
         "compiler_version": captured([str(compiler), "--version"]),
         "compile_command": compile_command, "link_command": link_command,
+        "allowed_system_archives": [str(path) for path in sorted(allowed_system_archives)],
         "dependency_files_sha256": dict(sorted(dependencies.items())),
         "helper_binary_sha256": digest(binary), "help_output": help_text,
         "model_or_vocabulary_loaded": False, "inference_run": False,
@@ -177,9 +191,12 @@ def main(argv=None):
     parser.add_argument("--source-dir", required=True, type=Path)
     parser.add_argument("--runtime-build-dir", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--system-archive", action="append", default=[], type=Path,
+                        help="Exact absolute external .a file permitted for this build; repeat as needed")
     args = parser.parse_args(argv)
     try:
-        result = build(args.source_dir, args.runtime_build_dir, args.output_dir)
+        result = build(args.source_dir, args.runtime_build_dir, args.output_dir,
+                       system_archives=args.system_archive)
     except (OSError, ValueError, subprocess.CalledProcessError):
         print("Native preflight build failed; inspect the ignored build log.", file=sys.stderr)
         return 2
