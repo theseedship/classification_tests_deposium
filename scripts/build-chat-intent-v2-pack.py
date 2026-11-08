@@ -20,7 +20,7 @@ import unicodedata
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from deposium_bench.cases import validate_cases
-from deposium_bench.chat_intent_v2_corpus import CARDS_SHA256, INTENTS, POLICY_ID, make_case
+from deposium_bench.chat_intent_v2_corpus import CARDS_SHA256, INTENTS, POLICY_ID, load_cards, make_case
 
 
 def encoded(value):
@@ -74,6 +74,16 @@ def assign_groups(rows, config):
         a, b = find(i), find(j)
         parent[max(a, b)] = min(a, b)
 
+    # Group exact candidate-visible collisions before full-preview heuristics.
+    # Different suffixes beyond the frozen input bound never reach a candidate.
+    bound = load_cards()["max_state_chars"]
+    visible_members = {}
+    for i, row in enumerate(rows):
+        visible = row["message_preview"][:bound]
+        if visible in visible_members:
+            union(i, visible_members[visible])
+        else:
+            visible_members[visible] = i
     texts = [normalized(r["message_preview"]) for r in rows]
     tokens = [set(t.split()) for t in texts]
     for i in range(len(rows)):
@@ -264,11 +274,17 @@ def main():
     owner = target.parent
     while not (owner / ".git").exists() and owner != owner.parent:
         owner = owner.parent
-    for file in [source / name for name in SOURCE_NAMES] + [target / "manifest.json"]:
+    for file in [source / name for name in SOURCE_NAMES]:
         if subprocess.run(["git", "-C", str(owner), "check-ignore", "-q", str(file)], capture_output=True).returncode != 0:
             raise ValueError("SOURCE_AND_OUTPUT_MUST_BE_GIT_IGNORED")
     source_bytes = {name: (source / name).read_bytes() for name in SOURCE_NAMES}
     files, manifest = build(source_bytes, json.loads(args.config.read_bytes()))
+    # Check every payload, including files added after the manifest is formed,
+    # before creating the destination or reading it in verification mode.
+    for name in files:
+        file = target / name
+        if subprocess.run(["git", "-C", str(owner), "check-ignore", "-q", str(file)], capture_output=True).returncode != 0:
+            raise ValueError("SOURCE_AND_OUTPUT_MUST_BE_GIT_IGNORED")
     if args.check:
         if any((target / name).read_bytes() != data for name, data in files.items()):
             raise ValueError("FROZEN_PACK_CHANGED")

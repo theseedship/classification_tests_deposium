@@ -2,6 +2,9 @@
 from copy import deepcopy
 import importlib.util
 import json
+import subprocess
+import sys
+import tempfile
 from pathlib import Path
 import unittest
 
@@ -87,6 +90,75 @@ class BuildIntentV2Tests(unittest.TestCase):
         groups = builder.assign_groups(queue, configuration())
         self.assertEqual(len({r["split_group_id"] for r in groups.values()}), 1)
         self.assertTrue(all(r["split"] == "calibration" for r in groups.values()))
+
+    def test_identical_bounded_inputs_quarantine_divergent_hidden_suffixes(self):
+        bound = builder.load_cards()["max_state_chars"]
+        prefix = "x" * bound
+        for left_text, right_text in ((prefix + " amber" * 800, prefix + " cobalt" * 800),
+                                      (prefix, prefix + " cobalt" * 800)):
+            with self.subTest(boundary=len(left_text) == bound):
+                first = {"exact_preview_group_id": "synthetic-pilot", "message_preview": left_text,
+                         "in_reviewed_local_pilot": True}
+                # Establish that the independently assigned second row would be
+                # test, so the regression exercises a real cross-split collision.
+                for ordinal in range(100):
+                    second = {"exact_preview_group_id": "synthetic-heldout-" + str(ordinal),
+                              "message_preview": right_text}
+                    standalone = builder.assign_groups([second], configuration())
+                    if standalone[second["exact_preview_group_id"]]["split"] == "test":
+                        break
+                else:
+                    self.fail("Synthetic fixture needs an independently held-out row")
+                groups = builder.assign_groups([first, second], configuration())
+                self.assertEqual(len({r["split_group_id"] for r in groups.values()}), 1)
+                self.assertTrue(all(r["split"] == "calibration" for r in groups.values()))
+                self.assertEqual(groups, builder.assign_groups([second, first], configuration()))
+
+    def test_cli_requires_every_generated_path_ignored_before_writing_or_checking(self):
+        generated, _ = builder.build(source_data(), configuration())
+        script = Path(builder.__file__).resolve()
+        # README is intentionally appended after manifest construction. It is
+        # still private payload and must be checked along with every other file.
+        patterns = ("output/manifest.json\n", "output/*\n!output/cases.test.jsonl\n",
+                    "output/*\n!output/README.md\n", "output/\n")
+        for output_rules in patterns:
+            with self.subTest(ignore_rules=output_rules), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                subprocess.run(["git", "init", "-q", str(root)], check=True, capture_output=True)
+                (root / ".gitignore").write_text("private-source/\n" + output_rules)
+                source = root / "private-source"
+                source.mkdir()
+                for name, payload in source_data().items():
+                    (source / name).write_bytes(payload)
+                config = root / "config.json"
+                config.write_bytes(builder.encoded(configuration()))
+                target = root / "output"
+                command = [sys.executable, str(script), "--source-root", str(source),
+                           "--config", str(config), "--output", str(target)]
+                result = subprocess.run(command, cwd=root, capture_output=True, text=True)
+                if output_rules == "output/\n":
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertEqual({p.name for p in target.iterdir()}, set(generated))
+                    for name, payload in generated.items():
+                        self.assertEqual((target / name).read_bytes(), payload)
+                    checked = subprocess.run(command + ["--check"], cwd=root, capture_output=True, text=True)
+                    self.assertEqual(checked.returncode, 0, checked.stderr)
+                else:
+                    self.assertEqual(result.returncode, 2)
+                    self.assertEqual(result.stderr.strip(), "PRIVATE_INTENT_V2_BUILD_FAILED")
+                    self.assertEqual(result.stdout, "")
+                    self.assertFalse(target.exists())
+                    # Supply otherwise byte-correct artifacts. --check must
+                    # reject privacy eligibility before inspecting payloads.
+                    target.mkdir()
+                    for name, payload in generated.items():
+                        (target / name).write_bytes(payload)
+                    checked = subprocess.run(command + ["--check"], cwd=root, capture_output=True, text=True)
+                    self.assertEqual(checked.returncode, 2)
+                    self.assertEqual(checked.stderr.strip(), "PRIVATE_INTENT_V2_BUILD_FAILED")
+                    self.assertEqual(checked.stdout, "")
+                    for name, payload in generated.items():
+                        self.assertEqual((target / name).read_bytes(), payload)
 
     def test_owner_only_subset_and_candidate_boundary(self):
         files, _ = builder.build(source_data(), configuration())
