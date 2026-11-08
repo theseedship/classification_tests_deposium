@@ -303,7 +303,7 @@ class D327ReadinessTests(unittest.TestCase):
             wrong = next(o["id"] for o in case["input"]["options"] if o["id"] != correct)
             native_choice = next(key for key, value in mapping.items() if value == wrong)
             native = {"model": upstream.D327_ALIAS, "answers": {"answer": {"type": "choice", "choice": native_choice,
-                "probabilities": {key: .7 if key == native_choice else .1 for key in mapping}, "confidence": .7}},
+                "probabilities": {key: .7 if key == native_choice else .3 / (len(mapping) - 1) for key in mapping}, "confidence": .7}},
                 "usage": {"input_tokens": 2, "output_tokens": 0}}
             records.append({"schema_version": "deposium.result/v1", "case_id": case["case_id"],
                 "contract_id": case["contract_id"], "request_sha256": sha(campaigns._encode(candidate_request(case))),

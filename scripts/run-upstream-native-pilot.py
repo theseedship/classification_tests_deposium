@@ -26,7 +26,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from deposium_bench.campaigns import run_campaign, _archive, _decode
+from deposium_bench.campaigns import run_campaign, _archive, _decode, _encode
 from deposium_bench.cases import parse_cases, typed_equal
 from deposium_bench.scoring import summarize
 from deposium_bench import systemone_local
@@ -69,6 +69,8 @@ D327_CANARY_IDS = tuple(f"ccv1-{track}-02-{catalogue}-{language}"
     for catalogue in ("compact", "expanded") for language in ("fr", "en"))
 D327_PHASE_CAPS = {"canary": 600, "anchor": 1200, "capability": 1800}
 D327_BUDGET_RULE = "ceil_180_plus_2n_times_max_canary_adapter_seconds/v1"
+INTENT27_ENVELOPE = "d3-27b-intent-q4-24g-v1"
+INTENT27_PHASE_CAPS = {"canary": 600, "intent": 1800}
 
 
 def require(value, message):
@@ -114,6 +116,42 @@ def d327_inputs(phase, selected, selected_path):
     return packs["anchor"] + packs["capability"], canary
 
 
+def intent27_inputs(args, selected):
+    """Bind a separately pinned private pack; select calibration without golds."""
+    pack = getattr(args, "intent_pack_root", None)
+    expected = getattr(args, "intent_pack_manifest_sha256", None)
+    require(pack is not None and hash_value(expected), "intent27_pack_pin_required")
+    pack = Path(pack).absolute()
+    require(pack.is_dir() and not pack.is_symlink(), "intent27_pack_missing")
+    manifest = pack / "manifest.json"
+    require(manifest.is_file() and not manifest.is_symlink()
+            and manifest.stat().st_size <= 1024 * 1024
+            and digest(manifest) == expected, "intent27_pack_manifest_mismatch")
+    spec = importlib.util.spec_from_file_location("intent27_report", ROOT / "scripts/report-chat-intent-v2.py")
+    report = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(report)
+    evidence = report.verify_pack(pack)
+    payload = (pack / "cases.jsonl").read_bytes()
+    cases, dataset_hash = parse_cases(payload)
+    require(evidence["manifest.json"] == expected and dataset_hash == evidence["cases.jsonl"],
+            "intent27_pack_changed_during_read")
+    from deposium_bench.chat_intent_v2_corpus import validate_oracle
+    for case in cases:
+        validate_oracle(case)
+    calibration = [case for case in cases if case["split"] == "calibration"]
+    require(len(calibration) >= 12 and any(case["split"] == "test" for case in cases)
+            and cases[0]["split"] == "calibration", "intent27_calibration_selection_invalid")
+    canary = calibration[:12]
+    require(selected == (canary if args.phase == "canary" else cases), "intent27_phase_dataset_mismatch")
+    if args.phase != "canary":
+        require(args.dataset.read_bytes() == payload, "intent27_full_phase_bytes_mismatch")
+    binding = {"pack_manifest_sha256": expected, "dataset_sha256": dataset_hash,
+               "cards_sha256": evidence["intent-choice-cards.frozen.json"], "case_count": len(cases),
+               "canary_rule": "first_12_calibration_in_frozen_order/v1",
+               "canary_sha256": hashlib.sha256(b"".join(_encode(c) for c in canary)).hexdigest()}
+    return cases, canary, binding
+
+
 def execution_envelope(args, assets, model, cases):
     """Choose an explicit model-bound envelope, before any model-byte read."""
     name = getattr(args, "execution_envelope", DEFAULT_ENVELOPE)
@@ -121,6 +159,10 @@ def execution_envelope(args, assets, model, cases):
     require(args.context == 4096 and args.min_free_mb == 8192
             and type(args.max_seconds) is int and 1024 <= args.port <= 65535,
             "upstream_pilot_fixed_envelope_required")
+    intent = name == INTENT27_ENVELOPE
+    require(intent or (getattr(args, "intent_pack_root", None) is None
+                       and getattr(args, "intent_pack_manifest_sha256", None) is None),
+            "intent27_explicit_envelope_required")
     if name == DEFAULT_ENVELOPE:
         require(args.max_rss_mb == 18432 and 0 < args.max_seconds <= 1200 and phase is None
                 and getattr(args, "preparation_receipt", None) is None
@@ -147,29 +189,38 @@ def execution_envelope(args, assets, model, cases):
         require(typed_equal(assets, FLASH_Q4_ASSETS) and model.name == FLASH_Q4_ASSETS["files"][0]["path"],
                 "flash_q4_envelope_requires_the_pinned_d3_flash_q4")
         return {"name": name}, cases, None
-    require(name == D327_ENVELOPE and typed_equal(assets, D327_ASSETS) and model.name == D327_ASSETS["files"][0]["path"]
+    require(name in (D327_ENVELOPE, INTENT27_ENVELOPE) and typed_equal(assets, D327_ASSETS) and model.name == D327_ASSETS["files"][0]["path"]
             and getattr(args, "backend", "metal") == "metal"
             and getattr(args, "decision_type", "d3") == "d3" and getattr(args, "task", "choices") == "choices"
             and not getattr(args, "technical_only", False) and args.model_id == D327_ALIAS,
             "d327_exact_candidate_required")
-    require(args.max_rss_mb == 24576 and phase in D327_PHASE_CAPS
-            and 0 < args.max_seconds <= D327_PHASE_CAPS[phase]
+    caps = INTENT27_PHASE_CAPS if intent else D327_PHASE_CAPS
+    require(args.max_rss_mb == 24576 and phase in caps
+            and 0 < args.max_seconds <= caps[phase]
             and (phase != "canary" or args.max_seconds == 600), "d327_fixed_envelope_required")
-    all_cases, canary = d327_inputs(phase, cases, args.dataset)
-    return {"name": name, "phase": phase, "context": 4096, "rss_limit_mib": 24576,
+    if intent:
+        all_cases, canary, binding = intent27_inputs(args, cases)
+    else:
+        all_cases, canary = d327_inputs(phase, cases, args.dataset)
+    envelope = {"name": name, "phase": phase, "context": 4096, "rss_limit_mib": 24576,
             "reserve_mib": 8192, "admission_available_mib": 32768, "max_seconds": args.max_seconds,
-            "full_phase_caps": D327_PHASE_CAPS, "budget_rule": D327_BUDGET_RULE}, all_cases, canary
+            "full_phase_caps": caps, "budget_rule": D327_BUDGET_RULE}
+    if intent:
+        envelope["study_binding"] = binding
+    return envelope, all_cases, canary
 
 
-def d327_preparation_receipt(path, audit, prepared):
+def d327_preparation_receipt(path, audit, prepared, *, study=None):
     payload, receipt = receipt_bytes(path)
     closed(receipt, {"schema_version", "execution_envelope", "model_id", "model_assets", "native_revision",
-                     "helper", "audit_sha256", "case_count", "overflow_controls", "resources"}, "d327_preparation_receipt_shape")
-    require(receipt["schema_version"] == "deposium.d3-27b-native-preparation/v1"
-            and receipt["execution_envelope"] == D327_ENVELOPE and receipt["model_id"] == D327_ALIAS
+                     "helper", "audit_sha256", "case_count", "overflow_controls", "resources"}
+           | ({"study_binding"} if study is not None else set()), "d327_preparation_receipt_shape")
+    require(receipt["schema_version"] == ("deposium.d3-27b-native-preparation/v2" if study is not None else "deposium.d3-27b-native-preparation/v1")
+            and receipt["execution_envelope"] == (INTENT27_ENVELOPE if study is not None else D327_ENVELOPE)
+            and (study is None or typed_equal(receipt["study_binding"], study)) and receipt["model_id"] == D327_ALIAS
             and typed_equal(receipt["model_assets"], D327_ASSETS) and receipt["native_revision"] == PIN
             and receipt["audit_sha256"] == digest(audit) == prepared["audit_sha256"]
-            and type(receipt["case_count"]) is int and receipt["case_count"] == 324
+            and type(receipt["case_count"]) is int and receipt["case_count"] == (study["case_count"] if study is not None else 324)
             and type(receipt["overflow_controls"]) is int and receipt["overflow_controls"] == 1,
             "d327_preparation_receipt_binding")
     helper = receipt["helper"]
@@ -189,14 +240,15 @@ def d327_preparation_receipt(path, audit, prepared):
     return payload, receipt
 
 
-def derive_phase_budgets(durations_ms):
+def derive_phase_budgets(durations_ms, *, study=None):
     """Pure, fixed calibration rule; no test scores or future calls are used."""
     require(isinstance(durations_ms, list) and len(durations_ms) == 12
             and all(finite_number(v) and 0 < v <= 30000 for v in durations_ms), "d327_calibration_timings_invalid")
     slowest = max(durations_ms)
-    budgets = {phase: math.ceil(180 + 2 * count * slowest / 1000)
-               for phase, (_, _, count) in D327_PACKS.items()}
-    require(all(budgets[phase] <= D327_PHASE_CAPS[phase] for phase in budgets), "d327_calibration_exceeds_declared_cap")
+    counts = {"intent": study["case_count"]} if study is not None else {k: v[2] for k, v in D327_PACKS.items()}
+    caps = INTENT27_PHASE_CAPS if study is not None else D327_PHASE_CAPS
+    budgets = {phase: math.ceil(180 + 2 * count * slowest / 1000) for phase, count in counts.items()}
+    require(all(budgets[phase] <= caps[phase] for phase in budgets), "d327_calibration_exceeds_declared_cap")
     return {"rule": D327_BUDGET_RULE, "max_canary_adapter_ms": slowest, "phase_max_seconds": budgets}
 
 
@@ -220,14 +272,17 @@ def verify_canary_seal(root, expected):
         require(digest(root / member) == expected_hash, "d327_calibration_sealed_file_changed")
 
 
-def d327_calibration_receipt(path, phase, seconds, preparation_payload, prepared, canary, runtime):
-    require(phase in D327_PACKS, "d327_calibration_phase_invalid")
+def d327_calibration_receipt(path, phase, seconds, preparation_payload, prepared, canary, runtime, *, study=None):
+    require(phase in ({"intent"} if study is not None else D327_PACKS), "d327_calibration_phase_invalid")
+    envelope_name = INTENT27_ENVELOPE if study is not None else D327_ENVELOPE
     payload, receipt = receipt_bytes(path)
     closed(receipt, {"schema_version", "execution_envelope", "model_id", "model_sha256",
-                     "preparation_receipt_sha256", "canary_archive", "canary_seal_sha256", "derivation"},
+                     "preparation_receipt_sha256", "canary_archive", "canary_seal_sha256", "derivation"}
+           | ({"study_binding"} if study is not None else set()),
            "d327_calibration_receipt_shape")
-    require(receipt["schema_version"] == "deposium.d3-27b-calibration/v1"
-            and receipt["execution_envelope"] == D327_ENVELOPE and receipt["model_id"] == D327_ALIAS
+    require(receipt["schema_version"] == ("deposium.d3-27b-calibration/v2" if study is not None else "deposium.d3-27b-calibration/v1")
+            and receipt["execution_envelope"] == envelope_name
+            and (study is None or typed_equal(receipt["study_binding"], study)) and receipt["model_id"] == D327_ALIAS
             and receipt["model_sha256"] == D327_ASSETS["files"][0]["sha256"]
             and receipt["preparation_receipt_sha256"] == hashlib.sha256(preparation_payload).hexdigest()
             and isinstance(receipt["canary_archive"], str) and Path(receipt["canary_archive"]).is_absolute(),
@@ -245,6 +300,7 @@ def d327_calibration_receipt(path, phase, seconds, preparation_payload, prepared
     require(parent["sealed"] and cases == canary and len(records) == 12
             and manifest["qualification"] == "model_isolated" and manifest["input_protocol"] == "context_choice"
             and pilot["completed"] is True and typed_equal(pilot["model_assets"], D327_ASSETS)
+            and (study is None or (type(pilot.get("native_exit_code")) is int and pilot["native_exit_code"] == 0))
             and pilot["runtime"]["binary_sha256"] == runtime["binary_sha256"]
             and pilot["resources"]["stop_reason"] is None
             and finite_number(pilot["resources"].get("rss_peak_mib"))
@@ -253,7 +309,8 @@ def d327_calibration_receipt(path, phase, seconds, preparation_payload, prepared
             and pilot["resources"]["min_available_mib"] >= 8192
             and finite_number(pilot["memory_before"].get("MemAvailable_mib"))
             and pilot["memory_before"]["MemAvailable_mib"] >= 32768
-            and pilot["execution_envelope"]["name"] == D327_ENVELOPE
+            and pilot["execution_envelope"]["name"] == envelope_name
+            and (study is None or typed_equal(pilot["execution_envelope"].get("study_binding"), study))
             and pilot["execution_envelope"]["phase"] == "canary"
             and pilot["execution_envelope"]["max_seconds"] == 600
             and backend["kind"] == "metal" and backend["decision_type"] == "vllm-d3"
@@ -319,8 +376,8 @@ def d327_calibration_receipt(path, phase, seconds, preparation_payload, prepared
                 and all(typed_equal(raw.get(key), value) for key, value in diagnostic.items())
                 and raw.get("native_usage_truncated") is (diagnostic.get("native_usage_truncated")),
                 "d327_calibration_native_response_binding")
-    derivation = derive_phase_budgets([r["duration_ms"] for r in records])
-    require(receipt["derivation"] == derivation and type(seconds) is int
+    derivation = derive_phase_budgets([r["duration_ms"] for r in records], study=study)
+    require(typed_equal(receipt["derivation"], derivation) and type(seconds) is int
             and seconds == derivation["phase_max_seconds"][phase], "d327_calibration_budget_mismatch")
     return payload, receipt
 
@@ -468,13 +525,14 @@ def pilot(args):
     prepared = preparation_map(args.preparation, preparation_cases, args.model_id, args.context, decision_type,
                                exact_cases=canary is not None)
     preparation_payload = calibration_payload = None
+    study = envelope.get("study_binding")
     if canary is not None:
-        preparation_payload, _ = d327_preparation_receipt(getattr(args, "preparation_receipt", None), args.preparation, prepared)
+        preparation_payload, _ = d327_preparation_receipt(getattr(args, "preparation_receipt", None), args.preparation, prepared, study=study)
         if args.phase == "canary":
             require(getattr(args, "calibration_receipt", None) is None, "d327_canary_must_precede_calibration_receipt")
         else:
             calibration_payload, _ = d327_calibration_receipt(getattr(args, "calibration_receipt", None), args.phase,
-                args.max_seconds, preparation_payload, prepared, canary, runtime)
+                args.max_seconds, preparation_payload, prepared, canary, runtime, study=study)
     before = memory_snapshot()
     require(before["MemAvailable_mib"] >= args.max_rss_mb + args.min_free_mb,
             "native_pilot_insufficient_available_memory_before_start")
@@ -494,6 +552,8 @@ def pilot(args):
         if canary is not None:
             for relative in ("docs/D3_27B_CAPABILITY_PROTOCOL_20261030.md", "plans/d3-27b-capability-v1.json"):
                 archive.add(ROOT / relative, arcname=relative, recursive=False)
+            if study is not None:
+                archive.add(ROOT / "docs/CHAT_INTENT_V2_27B_REPLAY.md", arcname="docs/CHAT_INTENT_V2_27B_REPLAY.md", recursive=False)
     shared.write_new(output / "native-preparation.json", prepared)
     shared.write_new(output / "runtime-pin.json", runtime)
     if canary is not None:
@@ -673,8 +733,10 @@ def main(argv=None):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--model-id", required=True)
     parser.add_argument("--decision-type", choices=("d3", "clef"), default="d3")
-    parser.add_argument("--execution-envelope", choices=(DEFAULT_ENVELOPE, SMALL_ENVELOPE, FLASH_Q4_ENVELOPE, D327_ENVELOPE), default=DEFAULT_ENVELOPE)
-    parser.add_argument("--phase", choices=("canary", "anchor", "capability"))
+    parser.add_argument("--execution-envelope", choices=(DEFAULT_ENVELOPE, SMALL_ENVELOPE, FLASH_Q4_ENVELOPE, D327_ENVELOPE, INTENT27_ENVELOPE), default=DEFAULT_ENVELOPE)
+    parser.add_argument("--phase", choices=("canary", "anchor", "capability", "intent"))
+    parser.add_argument("--intent-pack-root", type=Path)
+    parser.add_argument("--intent-pack-manifest-sha256")
     parser.add_argument("--preparation-receipt", type=Path)
     parser.add_argument("--calibration-receipt", type=Path)
     parser.add_argument("--task", choices=("choices", "passages"), default="choices")

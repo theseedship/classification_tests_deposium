@@ -194,7 +194,8 @@ D3 27B is optional and requires the existing
 [27B protocol](D3_27B_CAPABILITY_PROTOCOL_20261030.md), model-specific preparation,
 canary and bound calibration/resource receipts. That launcher path gates its
 existing datasets and phases; it is not an unrestricted chat-intent launch.
-A separate reviewed extension is required before applying it to this pack.
+The separate [27B intent extension](CHAT_INTENT_V2_27B_REPLAY.md) binds a frozen
+private pack and its calibration canary without changing the historical phases.
 Do not substitute a 27B model into the Flash command or relax guards to obtain
 an outcome.
 
