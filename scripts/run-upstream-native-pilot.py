@@ -553,7 +553,9 @@ def pilot(args):
             for relative in ("docs/D3_27B_CAPABILITY_PROTOCOL_20261030.md", "plans/d3-27b-capability-v1.json"):
                 archive.add(ROOT / relative, arcname=relative, recursive=False)
             if study is not None:
-                archive.add(ROOT / "docs/CHAT_INTENT_V2_27B_REPLAY.md", arcname="docs/CHAT_INTENT_V2_27B_REPLAY.md", recursive=False)
+                for relative in ("docs/CHAT_INTENT_V2_27B_REPLAY.md", "scripts/report-chat-intent-v2.py",
+                                 "deposium_bench/data/intent-choice-cards.v2.json"):
+                    archive.add(ROOT / relative, arcname=relative, recursive=False)
     shared.write_new(output / "native-preparation.json", prepared)
     shared.write_new(output / "runtime-pin.json", runtime)
     if canary is not None:
