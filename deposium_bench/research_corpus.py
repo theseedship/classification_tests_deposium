@@ -550,6 +550,11 @@ def validate_oracle(case):
         from .passage_relevance_v2 import validate_oracle as validate_relevance_v2_oracle
         return validate_relevance_v2_oracle(case)
     if (isinstance(case, dict) and isinstance(case.get("evaluation"), dict)
+            and (str(case.get("case_id", "")).startswith("cir2-")
+                 or str(case["evaluation"].get("base_case_id", "")).startswith("cir2-"))):
+        from .chat_intent_v2_corpus import validate_oracle as validate_chat_intent_v2_oracle
+        return validate_chat_intent_v2_oracle(case)
+    if (isinstance(case, dict) and isinstance(case.get("evaluation"), dict)
             and str(case["evaluation"].get("base_case_id", "")).startswith(("cir1-", "cif1-"))):
         from .chat_intent_corpus import validate_oracle as validate_chat_intent_oracle
         return validate_chat_intent_oracle(case)
