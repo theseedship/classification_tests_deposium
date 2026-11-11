@@ -63,6 +63,10 @@ def tracked(pack):
 
 
 def top_probability(raw):
+    # GLiClass reports one probability per option label directly; D3 nests them per answer.
+    if isinstance((raw or {}).get("probabilities"), dict) and isinstance(raw.get("native_result"), list):
+        values = list(raw["probabilities"].values())
+        return max(values) if values else None
     answers = ((raw or {}).get("native_result") or {}).get("answers") or {}
     for answer in answers.values():
         probabilities = answer.get("probabilities")

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Export a reviewed public aggregate from a sealed CPU-worker pack campaign; no inference.
 
-For the context, capability and physics packs run through a `d3` or `vela2` CPU worker with the
-shared engine (`python3 -m deposium_bench run`). The archive's seal, dataset,
+For the context, capability and physics packs run through a `d3` or `vela2` CPU worker, or a
+`gliclass` MPS worker, with the shared engine (`python3 -m deposium_bench run`). The archive's seal, dataset,
 scorer, profile, asset and runtime-lock identities are verified against the
 tracked public files, then only aggregate counts, group breakdowns, timing
 statistics, sampled worker RSS and safe identity hashes are written. Raw
@@ -100,10 +100,14 @@ def export(args):
     require(manifest["source_profile_sha256"] == normalized_hash, "archive profile differs from the tracked profile")
     provenance = manifest["adapter_provenance"]
     adapter = provenance["adapter"]
-    require(adapter in ("d3", "vela2") and adapter == profile["adapter"] and provenance["available"] is True
-            and provenance["device"] == "cpu" and provenance["model_repo_id"] == profile["model"]["repo_id"]
+    device = "mps" if adapter == "gliclass" else "cpu"
+    require(adapter in ("d3", "vela2", "gliclass") and adapter == profile["adapter"] and provenance["available"] is True
+            and provenance["device"] == device and provenance["model_repo_id"] == profile["model"]["repo_id"]
             and provenance["model_revision"] == profile["revision"], "adapter provenance differs from the profile")
-    if adapter == "d3":
+    if adapter == "gliclass":
+        require(provenance["dtype"] == "bfloat16" and provenance["backend"] == "eager", "unexpected GLiClass dtype or attention")
+        precision = {"dtype": "bfloat16", "attention": "eager"}
+    elif adapter == "d3":
         require(provenance["backbone_dtype"] == "bfloat16" and provenance["readout_dtype"] == "float32", "unexpected D3 dtypes")
         precision = {"backbone_dtype": "bfloat16", "readout_dtype": "float32"}
     else:
@@ -111,8 +115,10 @@ def export(args):
         precision = {"dtype": "float32"}
     assets = load(ROOT / "profiles" / profile["model"]["assets_manifest"])
     indexed = {f["path"]: {"sha256": f["sha256"], "size": f["size"]} for f in assets["files"]}
+    # The GLiClass adapter fingerprints the whole verified manifest; the CPU workers its file index.
     require(assets["repo_id"] == profile["model"]["repo_id"] and assets["revision"] == profile["revision"]
-            and provenance["model_assets_sha256"] == sha(wire(indexed)), "asset manifest differs from the run")
+            and provenance["model_assets_sha256"] == sha(wire(assets if adapter == "gliclass" else indexed)),
+            "asset manifest differs from the run")
     lock_path = (profile_path.parent / profile["model"]["runtime_lock"]).resolve()
     require(lock_path.is_relative_to(ROOT / "runtimes"), "runtime lock must be tracked")
     lock_bytes = lock_path.read_bytes()
@@ -174,12 +180,15 @@ def export(args):
         "included_in_full_pack_quality_denominator": True,
         "attempts": attempts,
         "latency_ms": flash.stats(_stats([r["duration_ms"] for r in ok_rows])),
-        "actual_backend": {"kind": "cpu", "device": "cpu", "threads": profile["model"]["threads"], **precision,
-                           "loading_mode": provenance["loading_mode"]},
+        "actual_backend": {"kind": device, "device": device, "threads": profile["model"]["threads"], **precision,
+                           "loading_mode": provenance.get("loading_mode")},
         "resources": {"rss_peak_mib": round(peak, 1), "stop_reason": None,
-                      "rss_scope": "maximum of the worker's own ru_maxrss after loading and after each case; single CPU worker process, not a process-group sample",
+                      "rss_scope": f"maximum of the worker's own ru_maxrss after loading and after each case; single {device.upper()} worker process, not a process-group sample",
+                      **({"gpu_allocated_peak_mib": round(provenance["peak_gpu_allocated_mb"], 1),
+                          "gpu_scope": "torch.mps current allocation sampled after loading and after each case; a separate measurement, never added to RSS"}
+                         if adapter == "gliclass" else {}),
                       "load_ms": provenance.get("load_ms"), "adapter_initialization_ms": provenance.get("init_wall_ms")},
-        "timing": {"scope": "corpus calls through the persistent CPU worker; no synthetic warm-up precedes the first case",
+        "timing": {"scope": f"corpus calls through the persistent {device.upper()} worker; no synthetic warm-up precedes the first case",
                    "first_corpus_call": {"status": first["status"] if first else None,
                                          "adapter_ms": first["duration_ms"] if first else None},
                    "successful_after_first": {"adapter_ms": flash.stats(_stats([r["duration_ms"] for r in later]))}},
@@ -192,17 +201,19 @@ def export(args):
         "schema_version": "deposium.cpu-pack-campaign-public/v1",
         "report_date": manifest["created_at"][:10],
         "reference_review": "agent_only_pending_human",
-        "execution_scope": "isolated_cpu_worker_no_application_gateway",
+        "execution_scope": f"isolated_{device}_worker_no_application_gateway",
         "model": {"model_repo_id": assets["repo_id"], "model_revision": assets["revision"],
                   "model_assets_sha256": provenance["model_assets_sha256"],
                   "assets_manifest": "profiles/" + profile["model"]["assets_manifest"],
                   "backbone_parameters": provenance.get("backbone_parameters"), "readout_shape": provenance.get("readout_shape")},
-        "runtime": {"adapter": adapter, "device": "cpu", "platform": args.platform,
+        "runtime": {"adapter": adapter, "device": device, "platform": args.platform,
                     "pins": {k: pins.get(k) for k in RUNTIME_NAMES},
                     "runtime_lock": str(lock_path.relative_to(ROOT)), "runtime_lock_sha256": sha(lock_bytes),
                     "profile": str(profile_path.relative_to(ROOT)), "profile_id": profile["profile_id"],
                     "max_length": profile["model"]["max_length"], "threads": profile["model"]["threads"],
-                    "max_rss_mb": profile["model"]["max_rss_mb"], "loading_mode": provenance["loading_mode"]},
+                    "max_rss_mb": profile["model"]["max_rss_mb"], "loading_mode": provenance.get("loading_mode"),
+                    **({"dtype": "bfloat16", "attention": "eager", "source_revision": provenance["source_revision"]}
+                       if adapter == "gliclass" else {})},
         "source": {"bench_head": git.get("head"), "local_changes_present": bool(git.get("dirty")),
                    "scorer_sha256": manifest["scorer"]["sha256"], "protocol": args.protocol},
         "phases": {args.pack: phase},
@@ -210,7 +221,9 @@ def export(args):
         "limits": [
             "Agent-authored references and translations await independent human review.",
             "Closed choice among supplied proposals; no tools, executable arguments, agent loop or product journey.",
-            "A new macOS CPU runtime identity: not comparable to the historical Linux/WSL CPU row as if the runtime were the same.",
+            ("GLiClass on Apple MPS in BF16: a different model family and runtime from the D3 rows; the comparison covers both."
+             if adapter == "gliclass" else
+             "A new macOS CPU runtime identity: not comparable to the historical Linux/WSL CPU row as if the runtime were the same."),
             "Worker RSS is the process's own ru_maxrss, not a process-group or unified-memory sample.",
             "Single pass per case; latency is descriptive, not a production guarantee.",
             "Language and catalogue variants are correlated within families; no post-hoc confidence interval is fitted."],

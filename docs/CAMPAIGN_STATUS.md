@@ -28,6 +28,13 @@ v1 kept unchanged), and a [human-confirmation routing pack](FACADE_ROUTING_HITL_
 measures when a model asks a human before acting. Next: human review of the
 references flagged in the tier and passage reports (#8).
 
+GLiClass v4, 11 November 2026: Knowledgator's 2B and 9B ran all nine
+closed-choice packs on Apple MPS under a [protocol fixed before predictions](GLICLASS_V4_2B_PROTOCOL_20261111.md)
+([results](GLICLASS_V4_2B_RESULTS_20261111.md)). Neither passes its reading rule:
+the 2B is on par with D3 nano (595 vs 600 test cases out of 754) and the 9B
+below D3 Flash Q4 (631 vs 649), both BF16 only. This closes the capability,
+physics and routing part of #51; passage evidence and tool proposals were not run.
+
 Deployment variants, 1 November 2026: D3 mini Q4 on Metal and Mirai's
 4-bit D3 Flash on Uzu ([results](DEPLOYMENT_VARIANTS_RESULTS_20261101.md)) both
 serve the packs in about 4 GiB; against D3 Flash Q4 on the same llama.cpp Metal

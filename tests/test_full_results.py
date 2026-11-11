@@ -35,6 +35,7 @@ EXPECTED_LABELS = {
     "ClefFlashQ8", "D3FlashQ8Upstream", "D3liteMacos", "Vela03Macos", "D3nanoMacos", "D3miniMacos",
     "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal",
     "D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu",
+    "GLiClass2BMps", "GLiClass9BMps",
 }
 
 
@@ -148,11 +149,11 @@ class FullResultsTests(unittest.TestCase):
 
     def test_join_contains_30_unique_context_observations_and_preserves_historical_scores(self):
         self.assertEqual(set(self.by_id), EXPECTED_LABELS)
-        self.assertEqual(len(self.data["observations"]), 40)
+        self.assertEqual(len(self.data["observations"]), 42)
         self.assertEqual(self.data["historical_context_observations"], 32)
         for phase in ("context", "tool_proposal"):
             observed = [r[phase] for r in self.by_id.values() if r[phase] is not None]
-            self.assertEqual(len({r["source"]["seal_sha256"] for r in observed}), 40 if phase == "context" else 32)
+            self.assertEqual(len({r["source"]["seal_sha256"] for r in observed}), 42 if phase == "context" else 32)
             self.assertEqual(len({r["source"]["dataset_sha256"] for r in observed}), 1)
         self.assertEqual(self.by_id["D3Q4"]["context"]["counts"]["correct"], 128)
         self.assertEqual(self.by_id["GLiClass9B"]["context"]["groups"]["split"]["test"]["correct"], 63)
@@ -259,7 +260,8 @@ class FullResultsTests(unittest.TestCase):
                              {"documentary": 76, "mathematics": 28, "chemistry": 28})
             self.assertEqual(sum(context["counts"]["statuses"].values()), 132)
             if tool is None:
-                self.assertIn(row["id"], {"ClefFlashQ8", "D3FlashQ8Upstream", "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal", "D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu"})
+                self.assertIn(row["id"], {"ClefFlashQ8", "D3FlashQ8Upstream", "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal", "D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu",
+                                          "GLiClass2BMps", "GLiClass9BMps"})
                 self.assertEqual(row["tool_proposal_status"], "not_run")
                 continue
             self.assertEqual(tool["counts"]["total"], 24)
@@ -429,9 +431,9 @@ class FullResultsTests(unittest.TestCase):
             expected = 1 + sum(r["context"]["counts"]["correct"] > correct for r in rows)
             self.assertEqual(row["rank_all_splits"], expected)
         models, tasks = results.flat_rows(self.data)
-        self.assertEqual(len(models), 40)
+        self.assertEqual(len(models), 42)
         test_tasks = [r for r in tasks if r["task"] == "context" and r["axis"] == "split" and r["group"] == "test"]
-        self.assertEqual(len(test_tasks), 40)
+        self.assertEqual(len(test_tasks), 42)
         self.assertEqual({r["total"] for r in test_tasks}, {66})
         self.assertEqual({r["metric"] for r in tasks if r["task"] == "tool_proposal"}, {"provisional_agreement"})
 
@@ -541,7 +543,7 @@ class FullResultsTests(unittest.TestCase):
     def test_facade_routing_ranks_models_with_the_private_router_row(self):
         rows = {r["observation"]: r for r in self.data["facade_routing"]}
         self.assertEqual(set(rows), {"FacadeRouterReplay", "D3liteMacos", "Vela03Macos", "D3nanoMacos", "D3miniMacos", "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal",
-                                     "D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu"})
+                                     "D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu", "GLiClass2BMps", "GLiClass9BMps"})
         router = rows["FacadeRouterReplay"]
         self.assertEqual((router["kind"], router["counts"]["all"]["correct"], router["paired"]), ("private_router_replay", 28, None))
         for row in rows.values():
@@ -557,7 +559,7 @@ class FullResultsTests(unittest.TestCase):
         self.assertEqual(coverage["D3Q4"]["cells"]["facade_routing"]["status"], "not_run")
         text = results.render(self.data)
         self.assertIn("### Facade routing (model vs router)", text)
-        self.assertIn("| Tool routing | Facade routing (model vs router) | 80 (48 test) | 11 |", text)
+        self.assertIn("| Tool routing | Facade routing (model vs router) | 80 (48 test) | 13 |", text)
         passage_table = text.split("### Passage-only observations and ranking methods")[1].split("###")[0]
         self.assertNotIn("Production router", passage_table)
         self.assertNotIn("Facade routing", passage_table)
@@ -592,9 +594,10 @@ class FullResultsTests(unittest.TestCase):
         rows = {(r["task"], r["observation"]): r for r in self.data["campaigns"]}
         self.assertEqual((rows["capability", "D3miniQ8Metal"]["counts"]["correct"], rows["capability", "D3miniQ8Metal"]["rank_all"]), (192, 1))
         tiers = {r["observation"]: r for r in self.data["facade_tiers"]}
-        self.assertEqual(set(tiers), {"FacadeRouterReplay", "Vela03Macos", "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal", "D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu"})
+        self.assertEqual(set(tiers), {"FacadeRouterReplay", "Vela03Macos", "D3liteQ8Metal", "D3nanoQ8Metal", "D3miniQ8Metal", "D3miniQ4Metal", "D3FlashQ4Metal", "D3FlashMUzu",
+                                      "GLiClass2BMps", "GLiClass9BMps"})
         self.assertEqual((tiers["D3miniQ4Metal"]["rank_complex"], tiers["D3miniQ8Metal"]["rank_complex"],
-                          tiers["FacadeRouterReplay"]["rank_complex"]), (1, 2, 8))
+                          tiers["FacadeRouterReplay"]["rank_complex"]), (1, 2, 10))
         for row in tiers.values():
             self.assertEqual((row["advanced"]["all"]["total"], row["complex"]["all"]["total"]), (96, 96))
         coverage = {r["id"]: r for r in self.data["coverage"]["observations"]}
@@ -661,6 +664,32 @@ class FullResultsTests(unittest.TestCase):
                 results.build(self.root)
         with self.changed_json(results.DEPLOYMENT, lambda d: d["variants"]["D3FlashMUzu"]["runtime"].update(binary_sha256="0" * 64)):
             with self.assertRaisesRegex(ValueError, "another runtime than its observation"):
+                results.build(self.root)
+
+    def test_gliclass_mps_rows_join_by_profile_and_lock_on_every_pack(self):
+        for label, revision in (("GLiClass2BMps", "40fe023b45e8d97d1ae4f7f9342279ac1c76317d"),
+                                ("GLiClass9BMps", "14d11a92b5e0bab4a166e1fce4cc0777cac27182")):
+            row = self.by_id[label]
+            self.assertEqual((row["identity"]["adapter"], row["identity"]["model_revision"]), ("gliclass", revision))
+            self.assertEqual(row["identity"]["runtime"]["device"], "mps")
+            self.assertGreater(row["resources"]["sampled_gpu_allocated_peak_mib"], row["resources"]["session_process_group_peak_rss_mib"])
+        self.assertEqual((self.by_id["GLiClass2BMps"]["context"]["counts"]["correct"],
+                          self.by_id["GLiClass9BMps"]["context"]["counts"]["correct"]), (103, 117))
+        tiers = {r["observation"] for r in self.data["facade_tiers"]}
+        rel = {r["observation"] for r in self.data["review_packs"]["relevance"]["rows"]}
+        hitl = {r["observation"] for r in self.data["review_packs"]["hitl"]["rows"]}
+        self.assertTrue(results.GLICLASS_IDS <= tiers & rel & hitl)
+        def change(d):
+            d["runs"][0]["identity"]["runtime_lock_sha256"] = "0" * 64
+        with self.changed_json(results.GLICLASS_FACADE["advanced"], change):
+            with self.assertRaisesRegex(ValueError, "identity join failed"):
+                results.build(self.root)
+        with self.changed_json(results.GLICLASS_REVIEW["relevance"], lambda d: d["candidates"].pop()):
+            with self.assertRaisesRegex(ValueError, "changed GLiClass relevance roster"):
+                results.build(self.root)
+        export = "docs/evidence/gliclass-v4-20261111/2b-physics.json"
+        with self.changed_json(export, lambda d: d["phases"]["physics"]["actual_backend"].update(dtype="float32")):
+            with self.assertRaisesRegex(ValueError, "MPS worker identity not observed"):
                 results.build(self.root)
 
     def test_deployment_variants_are_observations_joined_on_every_pack(self):
@@ -741,7 +770,7 @@ class FullResultsTests(unittest.TestCase):
         rows = {r["id"]: r for r in coverage["observations"]}
         self.assertEqual({k for k, r in rows.items() if r["context_observation"]}, EXPECTED_LABELS)
         # 40 context rows, five passage-only methods, one generative candidate, one private router replay.
-        self.assertEqual(len(rows), 47)
+        self.assertEqual(len(rows), 49)
         self.assertEqual({len(r["cells"]) for r in rows.values()}, {14})
         generative = rows["QwenToolPolicyV2"]
         self.assertTrue(generative["generative_observation"])
@@ -782,7 +811,7 @@ class FullResultsTests(unittest.TestCase):
         rendered = results.render(self.data)
         self.assertLess(rendered.index("## Coverage overview"), rendered.index("## Updated task rankings"))
         csv_rows = list(csv.DictReader(io.StringIO(results.outputs(self.data)["docs/leaderboard/coverage.csv"])))
-        self.assertEqual(len(csv_rows), 47 * 14)
+        self.assertEqual(len(csv_rows), 49 * 14)
         self.assertIn("### Generated-JSON tool-policy observations", rendered)
         self.assertNotIn("| Discovery (JSON) /10 | Arguments", rendered.split("### Passage-only")[0])
         blank = next(r for r in csv_rows if r["observation"] == "ClefFlashQ8" and r["task"] == "tool_proposal")

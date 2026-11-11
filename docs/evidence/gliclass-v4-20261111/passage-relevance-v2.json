@@ -1,0 +1,276 @@
+{
+  "candidates": [
+    {
+      "counts": {
+        "all": {
+          "correct": 359,
+          "total": 512
+        },
+        "by_class": {
+          "direct": {
+            "correct": 95,
+            "total": 112
+          },
+          "no_usable_evidence": {
+            "correct": 264,
+            "total": 384
+          },
+          "partial": {
+            "correct": 0,
+            "total": 16
+          }
+        },
+        "by_role": {
+          "base_variant": {
+            "correct": 0,
+            "total": 16
+          },
+          "binding_premise": {
+            "correct": 0,
+            "total": 16
+          },
+          "direct": {
+            "correct": 61,
+            "total": 64
+          },
+          "evidence_after_neutral_prefix": {
+            "correct": 3,
+            "total": 16
+          },
+          "evidence_outside_visible_projection": {
+            "correct": 16,
+            "total": 16
+          },
+          "explicit_conflict": {
+            "correct": 15,
+            "total": 16
+          },
+          "explicit_exception": {
+            "correct": 16,
+            "total": 16
+          },
+          "other_field": {
+            "correct": 14,
+            "total": 16
+          },
+          "other_rule": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_subject": {
+            "correct": 0,
+            "total": 32
+          },
+          "other_subject_same_number": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_zone": {
+            "correct": 6,
+            "total": 16
+          },
+          "sibling_variant": {
+            "correct": 9,
+            "total": 16
+          },
+          "unrelated": {
+            "correct": 114,
+            "total": 128
+          },
+          "wrong_component": {
+            "correct": 31,
+            "total": 32
+          },
+          "wrong_condition": {
+            "correct": 16,
+            "total": 16
+          },
+          "wrong_quantity_and_unit": {
+            "correct": 16,
+            "total": 16
+          },
+          "wrong_relation": {
+            "correct": 42,
+            "total": 48
+          }
+        },
+        "macro_accuracy": 0.5119047619047619,
+        "majority_baseline": 384,
+        "median_call_ms": 128.76820850215154,
+        "statuses": {
+          "ok": 512
+        },
+        "test": {
+          "correct": 181,
+          "total": 256
+        },
+        "test_by_class": {
+          "direct": {
+            "correct": 47,
+            "total": 56
+          },
+          "no_usable_evidence": {
+            "correct": 134,
+            "total": 192
+          },
+          "partial": {
+            "correct": 0,
+            "total": 8
+          }
+        },
+        "test_macro_accuracy": 0.5124007936507936
+      },
+      "identities": [
+        {
+          "adapter": "gliclass",
+          "model_repo_id": "knowledgator/gliclass-v4-2b",
+          "model_revision": "40fe023b45e8d97d1ae4f7f9342279ac1c76317d",
+          "profile": "profiles/gliclass-v4-2b-mps.json",
+          "raw_sha256": "7b953c185cbaab901a9b1073f5f091370bbd1b7f9ef012d5be252eb76756836e",
+          "runtime_lock_sha256": "8475e6b1a1259ba0d2c1a1e18e6fdf5eb05a151f02e1db15dbb7a59242b5712b",
+          "seal_sha256": "8dc7be02c16a7117dc49de9ae1d425a0976b9c6cbe55c4a420e4e01dd3639557"
+        }
+      ],
+      "label": "GLiClass2BMps"
+    },
+    {
+      "counts": {
+        "all": {
+          "correct": 388,
+          "total": 512
+        },
+        "by_class": {
+          "direct": {
+            "correct": 101,
+            "total": 112
+          },
+          "no_usable_evidence": {
+            "correct": 275,
+            "total": 384
+          },
+          "partial": {
+            "correct": 12,
+            "total": 16
+          }
+        },
+        "by_role": {
+          "base_variant": {
+            "correct": 1,
+            "total": 16
+          },
+          "binding_premise": {
+            "correct": 12,
+            "total": 16
+          },
+          "direct": {
+            "correct": 62,
+            "total": 64
+          },
+          "evidence_after_neutral_prefix": {
+            "correct": 8,
+            "total": 16
+          },
+          "evidence_outside_visible_projection": {
+            "correct": 16,
+            "total": 16
+          },
+          "explicit_conflict": {
+            "correct": 15,
+            "total": 16
+          },
+          "explicit_exception": {
+            "correct": 16,
+            "total": 16
+          },
+          "other_field": {
+            "correct": 16,
+            "total": 16
+          },
+          "other_rule": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_subject": {
+            "correct": 0,
+            "total": 32
+          },
+          "other_subject_same_number": {
+            "correct": 0,
+            "total": 16
+          },
+          "other_zone": {
+            "correct": 0,
+            "total": 16
+          },
+          "sibling_variant": {
+            "correct": 15,
+            "total": 16
+          },
+          "unrelated": {
+            "correct": 121,
+            "total": 128
+          },
+          "wrong_component": {
+            "correct": 31,
+            "total": 32
+          },
+          "wrong_condition": {
+            "correct": 16,
+            "total": 16
+          },
+          "wrong_quantity_and_unit": {
+            "correct": 16,
+            "total": 16
+          },
+          "wrong_relation": {
+            "correct": 43,
+            "total": 48
+          }
+        },
+        "macro_accuracy": 0.7893105158730158,
+        "majority_baseline": 384,
+        "median_call_ms": 322.12752099985664,
+        "statuses": {
+          "ok": 512
+        },
+        "test": {
+          "correct": 191,
+          "total": 256
+        },
+        "test_by_class": {
+          "direct": {
+            "correct": 48,
+            "total": 56
+          },
+          "no_usable_evidence": {
+            "correct": 137,
+            "total": 192
+          },
+          "partial": {
+            "correct": 6,
+            "total": 8
+          }
+        },
+        "test_macro_accuracy": 0.7735615079365079
+      },
+      "identities": [
+        {
+          "adapter": "gliclass",
+          "model_repo_id": "knowledgator/gliclass-v4-9b",
+          "model_revision": "14d11a92b5e0bab4a166e1fce4cc0777cac27182",
+          "profile": "profiles/gliclass-v4-9b-mps.json",
+          "raw_sha256": "39500251bcf1eaaf15d96f61199630e5ab0d73045dd873c06655efa48896f7c1",
+          "runtime_lock_sha256": "8475e6b1a1259ba0d2c1a1e18e6fdf5eb05a151f02e1db15dbb7a59242b5712b",
+          "seal_sha256": "f2e49ab102028d1e24cac7b72e161b4d0f73b0816913e0a4fe9e6aabc1f53a79"
+        }
+      ],
+      "label": "GLiClass9BMps"
+    }
+  ],
+  "mode": "relevance",
+  "packs": {
+    "passage-relevance-v2": "f95b3a604af5c1762ac5a59e096f35de6c88ff7a601e67c5483cf87516f154a0"
+  },
+  "qualification": "exploratory; agent-authored references pending human review",
+  "schema_version": "deposium.review-packs-public/v1"
+}

@@ -64,6 +64,12 @@ FACADE_VARIANTS = {"easy": EVIDENCE + "deployment-variants-20261101/facade-easy.
                    "complex": EVIDENCE + "deployment-variants-20261101/facade-complex.json"}
 REVIEW_VARIANTS = {"relevance": EVIDENCE + "deployment-variants-20261101/passage-relevance-v2.json",
                    "hitl": EVIDENCE + "deployment-variants-20261101/facade-hitl.json"}
+# GLiClass v4 2B and 9B (MPS, BF16) on the same routing tiers and review packs, 11 November 2026.
+GLICLASS_REPORT = "GLICLASS_V4_2B_RESULTS_20261111.md"
+GLICLASS_IDS = {"GLiClass2BMps", "GLiClass9BMps"}
+GLICLASS_FACADE = {tier: EVIDENCE + f"gliclass-v4-20261111/facade-{tier}.json" for tier in ("easy", "advanced", "complex")}
+GLICLASS_REVIEW = {"relevance": EVIDENCE + "gliclass-v4-20261111/passage-relevance-v2.json",
+                   "hitl": EVIDENCE + "gliclass-v4-20261111/facade-hitl.json"}
 CAPABILITY = EVIDENCE + "capability-flash-20261029/analysis.json"
 LOCAL_POLICY = (EVIDENCE + "local-tool-policy-20261030/analysis.json",
                 EVIDENCE + "local-tool-policy-v2-train-20261030/analysis.json",
@@ -119,7 +125,14 @@ RECENT_INPUTS = (CAMPAIGN_MODULE, EVIDENCE + "clef-flash-20261029/analysis.json"
                  "profiles/d3-flash-q4-assets.json", "docs/UZU_D3_FLASH_M_PROTOCOL_20261101.md",
                  *(EVIDENCE + "deployment-variants-20261101/" + name for name in (
                      "d3-mini-q4.json", "d3-flash-q4.json", "uzu-d3-flash-m.json", "facade-easy.json", "facade-advanced.json",
-                     "facade-complex.json", "passage-relevance-v2.json", "facade-hitl.json")))
+                     "facade-complex.json", "passage-relevance-v2.json", "facade-hitl.json")),
+                 "docs/GLICLASS_V4_2B_PROTOCOL_20261111.md", "docs/GLICLASS_V4_2B_RESULTS_20261111.md",
+                 "profiles/gliclass-v4-2b-assets.json", "profiles/gliclass-v4-2b-mps.json",
+                 "profiles/gliclass-v4-9b-assets.json", "profiles/gliclass-v4-9b-mps.json", "runtimes/gliclass/runtime.lock",
+                 *(EVIDENCE + "gliclass-v4-20261111/" + name for name in (
+                     "2b-context.json", "2b-capability.json", "2b-physics.json", "9b-context.json", "9b-capability.json",
+                     "9b-physics.json", "facade-easy.json", "facade-advanced.json", "facade-complex.json",
+                     "passage-relevance-v2.json", "facade-hitl.json")))
 # Constant majority-class answer on passage-evidence-v1, rotation 0 (dataset sha pinned in campaigns).
 PASSAGE_MAJORITY = {"relevance": ("grade 1 (thematic)", 224, 512), "support": ("`insufficient`", 584, 768),
                     "answerability": ("`answerable`", 88, 128)}
@@ -525,6 +538,12 @@ def build(root=ROOT):
     require(easy_metal.get("pack") == "facade-routing-v1" and easy_metal["dataset_sha256"] == FACADE_DATASET_SHA256
             and easy_metal["router"]["identity"] == facade["router"]["identity"], "facade routing: Metal export uses another router replay")
     variant_tiers = {tier: inputs.load(path) for tier, path in FACADE_VARIANTS.items()}
+    gliclass_tiers = {tier: inputs.load(path) for tier, path in GLICLASS_FACADE.items()}
+    for tier, data_ in gliclass_tiers.items():
+        require(data_["router"]["identity"] == variant_tiers[tier]["router"]["identity"]
+                and data_["dataset_sha256"] == variant_tiers[tier]["dataset_sha256"]
+                and {r["label"] for r in data_["runs"]} == GLICLASS_IDS,
+                f"GLiClass facade: {tier} export uses another pack, router or roster")
     for tier, data_ in variant_tiers.items():
         pack, digest_ = (("facade-routing-v1", FACADE_DATASET_SHA256) if tier == "easy"
                          else (f"facade-routing-{tier}-v1", FACADE_TIERS[tier][1]))
@@ -537,8 +556,10 @@ def build(root=ROOT):
                        "counts": run["counts"], "paired": run.get("paired_with_router"),
                        "inference_ms": run.get("inference_ms"),
                        "report": (FACADE_TIERS_REPORT if run in easy_metal["runs"] else
-                                  DEPLOYMENT_REPORT if run in variant_tiers["easy"]["runs"] else FACADE_REPORT)}
-                      for run in (facade["router"], *facade["runs"], *easy_metal["runs"], *variant_tiers["easy"]["runs"])]
+                                  DEPLOYMENT_REPORT if run in variant_tiers["easy"]["runs"] else
+                                  GLICLASS_REPORT if run in gliclass_tiers["easy"]["runs"] else FACADE_REPORT)}
+                      for run in (facade["router"], *facade["runs"], *easy_metal["runs"], *variant_tiers["easy"]["runs"],
+                                  *gliclass_tiers["easy"]["runs"])]
     for row in facade_routing:
         row["rank_all"] = 1 + sum(o["counts"]["all"]["correct"] > row["counts"]["all"]["correct"] for o in facade_routing)
         row["rank_test"] = 1 + sum(o["counts"]["by_split"]["test"]["correct"] > row["counts"]["by_split"]["test"]["correct"]
@@ -553,7 +574,7 @@ def build(root=ROOT):
         require(variant_tiers[tier]["router"]["identity"] == data_["router"]["identity"],
                 f"facade variants: {tier} export uses another router replay")
         observations = {r["id"]: r for r in rows}
-        for run in (data_["router"], *data_["runs"], *variant_tiers[tier]["runs"]):
+        for run in (data_["router"], *data_["runs"], *variant_tiers[tier]["runs"], *gliclass_tiers[tier]["runs"]):
             require(run["label"] in tiers, f"facade tiers: {run['label']} has no easy-tier row")
             facade_join(run, observations, inputs)
             tiers[run["label"]][tier] = run["counts"]
@@ -811,7 +832,8 @@ def build_coverage(observations, campaigns, others, inputs):
                                "generative_observation": False, "router_observation": True, "cells": unobserved()}
     easy_metal = inputs.load(FACADE_EASY_METAL)
     sourced = ([(run, FACADE) for run in (facade["router"], *facade["runs"])] + [(run, FACADE_EASY_METAL) for run in easy_metal["runs"]]
-               + [(run, FACADE_VARIANTS["easy"]) for run in inputs.load(FACADE_VARIANTS["easy"])["runs"]])
+               + [(run, FACADE_VARIANTS["easy"]) for run in inputs.load(FACADE_VARIANTS["easy"])["runs"]]
+               + [(run, GLICLASS_FACADE["easy"]) for run in inputs.load(GLICLASS_FACADE["easy"])["runs"]])
     for run, source in sourced:
         facade_join(run, context_ids, inputs)
         c = run["counts"]["all"]
@@ -1152,7 +1174,10 @@ def review_packs(inputs, observations):
                                      ("hitl", REVIEW_HITL, REVIEW_HITL_REPORT, "hitl")):
         data = inputs.load(path)
         extra = inputs.load(REVIEW_VARIANTS[key])
-        for d in (data, extra):
+        gli = inputs.load(GLICLASS_REVIEW[key])
+        require({c["label"] for c in gli["candidates"]} == GLICLASS_IDS
+                and (mode != "hitl" or gli["router"] == data["router"]), f"review packs: changed GLiClass {mode} roster")
+        for d in (data, extra, gli):
             require(d.get("schema_version") == "deposium.review-packs-public/v1" and d["mode"] == mode
                     and d["packs"] == data["packs"] and all(REVIEW_PACKS[pack] == digest for pack, digest in d["packs"].items()),
                     f"review packs: changed {mode} pack or schema")
@@ -1160,7 +1185,7 @@ def review_packs(inputs, observations):
                 and (mode != "hitl" or extra["router"] == data["router"]), f"review packs: changed {mode} variant roster")
         inputs.read("docs/" + report)
         rows = []
-        for candidate in (*data["candidates"], *extra["candidates"]):
+        for candidate in (*data["candidates"], *extra["candidates"], *gli["candidates"]):
             for identity in candidate["identities"]:
                 facade_join({"kind": "classifier", "label": candidate["label"], "identity": identity}, by_id, inputs)
             rows.append({"observation": candidate["label"], "model": by_id[candidate["label"]]["metadata"]["display_name"], **candidate})
@@ -1547,7 +1572,7 @@ def render_at_a_glance(data):
 def render(data):
     lines = ["# Full results", "", "[README](../README.md) · [At a glance](#at-a-glance) · [Contents](#contents) · [Every model, every task](leaderboard/by-model/README.md) · "
              "[Passages and other campaigns](leaderboard/other-benchmarks.md) · [Proposed tool and model routing](INTENT_AND_MODEL_ROUTING.md)", "",
-             f"**{len(data['observations'])} context model/runtime observations through 1 November 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8, the direct upstream D3 Flash Q8 runtime, D3 lite, nano and mini Q8 on Metal, and the deployment variants D3 mini Q4 and D3 Flash Q4 on Metal and D3 Flash 4-bit on Uzu.",
+             f"**{len(data['observations'])} context model/runtime observations through 11 November 2026**: 28 earlier observations, the macOS CPU D3 lite, Vela 2.0 0.3B, D3 nano and D3 mini runtimes, Clef Flash Q8, the direct upstream D3 Flash Q8 runtime, D3 lite, nano and mini Q8 on Metal, the deployment variants D3 mini Q4 and D3 Flash Q4 on Metal and D3 Flash 4-bit on Uzu, and GLiClass v4 2B and 9B (BF16, Apple MPS) on all nine closed-choice packs.",
              "Rows identify observations, not independent model families. Gateway-backed and direct native binaries remain distinct. Repeated exports of the same sealed run are deduplicated;",
              "quantizations and devices remain separate. Rendering this page does not rerun or rescore models.", "",
              "**Exploratory evidence:** synthetic, agent-authored references and translations await human review.",

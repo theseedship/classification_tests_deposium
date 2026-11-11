@@ -20,7 +20,7 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | not run | — | — | — | — | — |
 | Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | not run | — | — | — | — | — |
 | Tool workflow, executed | [Executed tool episodes (closed choice)](../../RESULTS.md#executed-tool-episodes-closed-choice) | not run | — | — | — | — | — |
-| Tool routing | [Facade routing (model vs router)](../../RESULTS.md#facade-routing-model-vs-router) | 28/80 | 10/48 | 11 | 11 | all `ok` | [report](../../FACADE_ROUTING_RESULTS_20261101.md) |
+| Tool routing | [Facade routing (model vs router)](../../RESULTS.md#facade-routing-model-vs-router) | 28/80 | 10/48 | 13 | 13 | all `ok` | [report](../../FACADE_ROUTING_RESULTS_20261101.md) |
 | Retrieved evidence | [Passage relevance](../../RESULTS.md#passage-relevance) | not run | — | — | — | — | — |
 | Retrieved evidence | [Claim support](../../RESULTS.md#claim-support) | not run | — | — | — | — | — |
 | Retrieved evidence | [Answerability](../../RESULTS.md#answerability) | not run | — | — | — | — | — |
@@ -36,8 +36,8 @@ Packs added on 1 November 2026, joined to this observation by weights and runtim
 
 | Pack | Result | Rank | Report |
 |---|---|---:|---|
-| Facade routing, advanced tier | 24/96 (test 20/64) | 8 | [report](../../FACADE_ROUTING_TIERS_RESULTS_20261101.md) |
-| Facade routing, complex tier | 24/96 (test 17/64) | 8 | [report](../../FACADE_ROUTING_TIERS_RESULTS_20261101.md) |
+| Facade routing, advanced tier | 24/96 (test 20/64) | 10 | [report](../../FACADE_ROUTING_TIERS_RESULTS_20261101.md) |
+| Facade routing, complex tier | 24/96 (test 17/64) | 10 | [report](../../FACADE_ROUTING_TIERS_RESULTS_20261101.md) |
 | Human confirmation, explicit option | asks before 0/12 irreversible actions and 0/12 hesitations; 0/38 false alarms | — | [report](../../FACADE_ROUTING_HITL_RESULTS_20261101.md) |
 | Human confirmation, own confidence | no probabilities | — | [report](../../FACADE_ROUTING_HITL_RESULTS_20261101.md) |
 

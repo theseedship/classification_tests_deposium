@@ -20,7 +20,7 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 
 | Family | Task | Correct / all | Held-out test | Rank all | Rank test | Execution | Report |
 |---|---|---:|---:|---:|---:|---|---|
-| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 117/132 | 59/66 | 12 | 14 | all `ok` | [D3_SMALL_GGUF_GPU_PROTOCOL_20261101](../../D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md), [DEPLOYMENT_VARIANTS_RESULTS_20261101](../../DEPLOYMENT_VARIANTS_RESULTS_20261101.md) |
+| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 117/132 | 59/66 | 12 | 15 | all `ok` | [D3_SMALL_GGUF_GPU_PROTOCOL_20261101](../../D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md), [DEPLOYMENT_VARIANTS_RESULTS_20261101](../../DEPLOYMENT_VARIANTS_RESULTS_20261101.md) |
 | RAG decision | [First-tool proposals](../../RESULTS.md#model-quality) | not run | — | — | — | — | — |
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 192/192 | 96/96 | 1 | 1 | all `ok` | [report](../../DEPLOYMENT_VARIANTS_RESULTS_20261101.md) |
 | Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 36/48 | 30/36 | 7 | 7 | all `ok` | [report](../../DEPLOYMENT_VARIANTS_RESULTS_20261101.md) |

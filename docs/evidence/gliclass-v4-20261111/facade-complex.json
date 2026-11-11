@@ -1,0 +1,986 @@
+{
+  "cases": 96,
+  "dataset_sha256": "389d362dafa7696b3cb4fb18f0d44a1ae98569a1ae661133f7ec9db44b6930d6",
+  "pack": "facade-routing-complex-v1",
+  "qualification": "exploratory; agent-authored references pending human review",
+  "router": {
+    "counts": {
+      "all": {
+        "correct": 24,
+        "statuses": {
+          "ok": 96
+        },
+        "total": 96
+      },
+      "by_category": {
+        "analyze": {
+          "correct": 2,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "evaluate": {
+          "correct": 2,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "graph": {
+          "correct": 2,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "none": {
+          "correct": 8,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "process": {
+          "correct": 2,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "search": {
+          "correct": 3,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "system": {
+          "correct": 1,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        },
+        "visualize": {
+          "correct": 4,
+          "statuses": {
+            "ok": 12
+          },
+          "total": 12
+        }
+      },
+      "by_kind": {
+        "ambiguous": {
+          "correct": 2,
+          "statuses": {
+            "ok": 4
+          },
+          "total": 4
+        },
+        "compound_negation": {
+          "correct": 1,
+          "statuses": {
+            "ok": 14
+          },
+          "total": 14
+        },
+        "context_turn": {
+          "correct": 8,
+          "statuses": {
+            "ok": 28
+          },
+          "total": 28
+        },
+        "context_vague": {
+          "correct": 4,
+          "statuses": {
+            "ok": 4
+          },
+          "total": 4
+        },
+        "first_step": {
+          "correct": 5,
+          "statuses": {
+            "ok": 28
+          },
+          "total": 28
+        },
+        "implicit_goal": {
+          "correct": 2,
+          "statuses": {
+            "ok": 14
+          },
+          "total": 14
+        },
+        "out_of_scope": {
+          "correct": 2,
+          "statuses": {
+            "ok": 4
+          },
+          "total": 4
+        }
+      },
+      "by_language": {
+        "en": {
+          "correct": 13,
+          "statuses": {
+            "ok": 48
+          },
+          "total": 48
+        },
+        "fr": {
+          "correct": 11,
+          "statuses": {
+            "ok": 48
+          },
+          "total": 48
+        }
+      },
+      "by_split": {
+        "calibration": {
+          "correct": 4,
+          "statuses": {
+            "ok": 16
+          },
+          "total": 16
+        },
+        "test": {
+          "correct": 17,
+          "statuses": {
+            "ok": 64
+          },
+          "total": 64
+        },
+        "train": {
+          "correct": 3,
+          "statuses": {
+            "ok": 16
+          },
+          "total": 16
+        }
+      },
+      "confusion": {
+        "analyze": {
+          "analyze": 2,
+          "graph": 1,
+          "none": 2,
+          "process": 1,
+          "search": 2,
+          "visualize": 4
+        },
+        "evaluate": {
+          "analyze": 1,
+          "evaluate": 2,
+          "graph": 1,
+          "none": 2,
+          "search": 3,
+          "visualize": 3
+        },
+        "graph": {
+          "graph": 2,
+          "none": 3,
+          "search": 3,
+          "visualize": 4
+        },
+        "none": {
+          "graph": 2,
+          "none": 8,
+          "search": 1,
+          "visualize": 1
+        },
+        "process": {
+          "none": 5,
+          "process": 2,
+          "search": 1,
+          "visualize": 4
+        },
+        "search": {
+          "analyze": 2,
+          "graph": 2,
+          "none": 2,
+          "search": 3,
+          "visualize": 3
+        },
+        "system": {
+          "evaluate": 2,
+          "none": 2,
+          "process": 2,
+          "search": 1,
+          "system": 1,
+          "visualize": 4
+        },
+        "visualize": {
+          "none": 4,
+          "search": 3,
+          "system": 1,
+          "visualize": 4
+        }
+      },
+      "predicted_distribution": {
+        "analyze": 5,
+        "evaluate": 4,
+        "graph": 8,
+        "none": 28,
+        "process": 5,
+        "search": 17,
+        "system": 2,
+        "visualize": 27
+      },
+      "test_by_category": {
+        "analyze": {
+          "correct": 2,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "evaluate": {
+          "correct": 2,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "graph": {
+          "correct": 1,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "none": {
+          "correct": 6,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "process": {
+          "correct": 1,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "search": {
+          "correct": 2,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "system": {
+          "correct": 1,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        },
+        "visualize": {
+          "correct": 2,
+          "statuses": {
+            "ok": 8
+          },
+          "total": 8
+        }
+      }
+    },
+    "identity": {
+      "identity_sha256": "ed2d7c40766ac433ae7e3301398e4b9e98f29750f32337e9403b73ec14bdbdd9",
+      "raw_sha256": "271bee886e3fede2bde7ebbd8a482c966f8faf75df66ac04650486a5d4c63de9",
+      "recordings_sha256": "072127b287de56fa65876376d67f244ad0cbec69635ea943a0612e9329fdc2f4",
+      "router_source_revision": "2847d2d9193dfe7e20f8742694af5560e4c10765",
+      "seal_sha256": "d193ac256c3486ca00dd900144780712d6a245246169ad6550139c64fdea45f8"
+    },
+    "kind": "private_router_replay",
+    "label": "FacadeRouterReplay"
+  },
+  "runs": [
+    {
+      "counts": {
+        "all": {
+          "correct": 86,
+          "statuses": {
+            "ok": 96
+          },
+          "total": 96
+        },
+        "by_category": {
+          "analyze": {
+            "correct": 11,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "evaluate": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "graph": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "none": {
+            "correct": 8,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "process": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "search": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "system": {
+            "correct": 9,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "visualize": {
+            "correct": 10,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          }
+        },
+        "by_kind": {
+          "ambiguous": {
+            "correct": 3,
+            "statuses": {
+              "ok": 4
+            },
+            "total": 4
+          },
+          "compound_negation": {
+            "correct": 12,
+            "statuses": {
+              "ok": 14
+            },
+            "total": 14
+          },
+          "context_turn": {
+            "correct": 28,
+            "statuses": {
+              "ok": 28
+            },
+            "total": 28
+          },
+          "context_vague": {
+            "correct": 2,
+            "statuses": {
+              "ok": 4
+            },
+            "total": 4
+          },
+          "first_step": {
+            "correct": 27,
+            "statuses": {
+              "ok": 28
+            },
+            "total": 28
+          },
+          "implicit_goal": {
+            "correct": 11,
+            "statuses": {
+              "ok": 14
+            },
+            "total": 14
+          },
+          "out_of_scope": {
+            "correct": 3,
+            "statuses": {
+              "ok": 4
+            },
+            "total": 4
+          }
+        },
+        "by_language": {
+          "en": {
+            "correct": 45,
+            "statuses": {
+              "ok": 48
+            },
+            "total": 48
+          },
+          "fr": {
+            "correct": 41,
+            "statuses": {
+              "ok": 48
+            },
+            "total": 48
+          }
+        },
+        "by_split": {
+          "calibration": {
+            "correct": 16,
+            "statuses": {
+              "ok": 16
+            },
+            "total": 16
+          },
+          "test": {
+            "correct": 56,
+            "statuses": {
+              "ok": 64
+            },
+            "total": 64
+          },
+          "train": {
+            "correct": 14,
+            "statuses": {
+              "ok": 16
+            },
+            "total": 16
+          }
+        },
+        "confusion": {
+          "analyze": {
+            "analyze": 11,
+            "none": 1
+          },
+          "evaluate": {
+            "evaluate": 12
+          },
+          "graph": {
+            "graph": 12
+          },
+          "none": {
+            "none": 8,
+            "process": 1,
+            "search": 3
+          },
+          "process": {
+            "process": 12
+          },
+          "search": {
+            "search": 12
+          },
+          "system": {
+            "evaluate": 2,
+            "none": 1,
+            "system": 9
+          },
+          "visualize": {
+            "analyze": 1,
+            "none": 1,
+            "visualize": 10
+          }
+        },
+        "predicted_distribution": {
+          "analyze": 12,
+          "evaluate": 14,
+          "graph": 12,
+          "none": 11,
+          "process": 13,
+          "search": 15,
+          "system": 9,
+          "visualize": 10
+        },
+        "test_by_category": {
+          "analyze": {
+            "correct": 7,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "evaluate": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "graph": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "none": {
+            "correct": 5,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "process": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "search": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "system": {
+            "correct": 5,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "visualize": {
+            "correct": 7,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          }
+        }
+      },
+      "identity": {
+        "adapter": "gliclass",
+        "identity_sha256": "64e0c26cb023cd422515baf14996fd7cc7a47cf7e94b4ad2f25e3284fc6327aa",
+        "model_repo_id": "knowledgator/gliclass-v4-2b",
+        "model_revision": "40fe023b45e8d97d1ae4f7f9342279ac1c76317d",
+        "profile": "profiles/gliclass-v4-2b-mps.json",
+        "raw_sha256": "2b3b7f4df8a96fa8aed922ea9e0b3d700251e5e9d55dc2f273a0e4d72f0f8c35",
+        "runtime_lock_sha256": "8475e6b1a1259ba0d2c1a1e18e6fdf5eb05a151f02e1db15dbb7a59242b5712b",
+        "seal_sha256": "0ff15e05cafe6d0fbec09b6d2bcef41055f8a9e920cfa8da3a1b52ec3b58ae2b",
+        "worker_restarts": 0
+      },
+      "inference_ms": {
+        "count": 96,
+        "max": 323.3478330002981,
+        "median": 198.7022290013556,
+        "p95": 219.40095800164272
+      },
+      "kind": "classifier",
+      "label": "GLiClass2BMps",
+      "paired_with_router": {
+        "all": {
+          "both": 20,
+          "model_only": 66,
+          "neither": 6,
+          "router_only": 4
+        },
+        "by_category": {
+          "analyze": {
+            "both": 1,
+            "model_only": 10,
+            "neither": 0,
+            "router_only": 1
+          },
+          "evaluate": {
+            "both": 2,
+            "model_only": 10,
+            "neither": 0,
+            "router_only": 0
+          },
+          "graph": {
+            "both": 2,
+            "model_only": 10,
+            "neither": 0,
+            "router_only": 0
+          },
+          "none": {
+            "both": 6,
+            "model_only": 2,
+            "neither": 2,
+            "router_only": 2
+          },
+          "process": {
+            "both": 2,
+            "model_only": 10,
+            "neither": 0,
+            "router_only": 0
+          },
+          "search": {
+            "both": 3,
+            "model_only": 9,
+            "neither": 0,
+            "router_only": 0
+          },
+          "system": {
+            "both": 1,
+            "model_only": 8,
+            "neither": 3,
+            "router_only": 0
+          },
+          "visualize": {
+            "both": 3,
+            "model_only": 7,
+            "neither": 1,
+            "router_only": 1
+          }
+        },
+        "test": {
+          "both": 14,
+          "model_only": 42,
+          "neither": 5,
+          "router_only": 3
+        }
+      },
+      "worker_rss_mib_max": 1095.0
+    },
+    {
+      "counts": {
+        "all": {
+          "correct": 91,
+          "statuses": {
+            "ok": 96
+          },
+          "total": 96
+        },
+        "by_category": {
+          "analyze": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "evaluate": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "graph": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "none": {
+            "correct": 9,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "process": {
+            "correct": 11,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "search": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "system": {
+            "correct": 11,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          },
+          "visualize": {
+            "correct": 12,
+            "statuses": {
+              "ok": 12
+            },
+            "total": 12
+          }
+        },
+        "by_kind": {
+          "ambiguous": {
+            "correct": 4,
+            "statuses": {
+              "ok": 4
+            },
+            "total": 4
+          },
+          "compound_negation": {
+            "correct": 13,
+            "statuses": {
+              "ok": 14
+            },
+            "total": 14
+          },
+          "context_turn": {
+            "correct": 28,
+            "statuses": {
+              "ok": 28
+            },
+            "total": 28
+          },
+          "context_vague": {
+            "correct": 2,
+            "statuses": {
+              "ok": 4
+            },
+            "total": 4
+          },
+          "first_step": {
+            "correct": 28,
+            "statuses": {
+              "ok": 28
+            },
+            "total": 28
+          },
+          "implicit_goal": {
+            "correct": 13,
+            "statuses": {
+              "ok": 14
+            },
+            "total": 14
+          },
+          "out_of_scope": {
+            "correct": 3,
+            "statuses": {
+              "ok": 4
+            },
+            "total": 4
+          }
+        },
+        "by_language": {
+          "en": {
+            "correct": 47,
+            "statuses": {
+              "ok": 48
+            },
+            "total": 48
+          },
+          "fr": {
+            "correct": 44,
+            "statuses": {
+              "ok": 48
+            },
+            "total": 48
+          }
+        },
+        "by_split": {
+          "calibration": {
+            "correct": 16,
+            "statuses": {
+              "ok": 16
+            },
+            "total": 16
+          },
+          "test": {
+            "correct": 59,
+            "statuses": {
+              "ok": 64
+            },
+            "total": 64
+          },
+          "train": {
+            "correct": 16,
+            "statuses": {
+              "ok": 16
+            },
+            "total": 16
+          }
+        },
+        "confusion": {
+          "analyze": {
+            "analyze": 12
+          },
+          "evaluate": {
+            "evaluate": 12
+          },
+          "graph": {
+            "graph": 12
+          },
+          "none": {
+            "none": 9,
+            "search": 3
+          },
+          "process": {
+            "process": 11,
+            "search": 1
+          },
+          "search": {
+            "search": 12
+          },
+          "system": {
+            "none": 1,
+            "system": 11
+          },
+          "visualize": {
+            "visualize": 12
+          }
+        },
+        "predicted_distribution": {
+          "analyze": 12,
+          "evaluate": 12,
+          "graph": 12,
+          "none": 10,
+          "process": 11,
+          "search": 16,
+          "system": 11,
+          "visualize": 12
+        },
+        "test_by_category": {
+          "analyze": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "evaluate": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "graph": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "none": {
+            "correct": 5,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "process": {
+            "correct": 7,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "search": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "system": {
+            "correct": 7,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          },
+          "visualize": {
+            "correct": 8,
+            "statuses": {
+              "ok": 8
+            },
+            "total": 8
+          }
+        }
+      },
+      "identity": {
+        "adapter": "gliclass",
+        "identity_sha256": "bcabbb7a41a84c7f0788be9d70cc1708ae29633df1b48f71f6fe8cebf81869a3",
+        "model_repo_id": "knowledgator/gliclass-v4-9b",
+        "model_revision": "14d11a92b5e0bab4a166e1fce4cc0777cac27182",
+        "profile": "profiles/gliclass-v4-9b-mps.json",
+        "raw_sha256": "76860ffe3cf4db602868e6895dddd2641cfd978d6d73eb1f4be106bc558264cc",
+        "runtime_lock_sha256": "8475e6b1a1259ba0d2c1a1e18e6fdf5eb05a151f02e1db15dbb7a59242b5712b",
+        "seal_sha256": "6f4314fede48deb5427fbdb9962671d67b5fafdc3a0a0ac0393b2fad5c053102",
+        "worker_restarts": 0
+      },
+      "inference_ms": {
+        "count": 96,
+        "max": 748.5434169975633,
+        "median": 512.285229500776,
+        "p95": 589.9007500011066
+      },
+      "kind": "classifier",
+      "label": "GLiClass9BMps",
+      "paired_with_router": {
+        "all": {
+          "both": 22,
+          "model_only": 69,
+          "neither": 3,
+          "router_only": 2
+        },
+        "by_category": {
+          "analyze": {
+            "both": 2,
+            "model_only": 10,
+            "neither": 0,
+            "router_only": 0
+          },
+          "evaluate": {
+            "both": 2,
+            "model_only": 10,
+            "neither": 0,
+            "router_only": 0
+          },
+          "graph": {
+            "both": 2,
+            "model_only": 10,
+            "neither": 0,
+            "router_only": 0
+          },
+          "none": {
+            "both": 6,
+            "model_only": 3,
+            "neither": 1,
+            "router_only": 2
+          },
+          "process": {
+            "both": 2,
+            "model_only": 9,
+            "neither": 1,
+            "router_only": 0
+          },
+          "search": {
+            "both": 3,
+            "model_only": 9,
+            "neither": 0,
+            "router_only": 0
+          },
+          "system": {
+            "both": 1,
+            "model_only": 10,
+            "neither": 1,
+            "router_only": 0
+          },
+          "visualize": {
+            "both": 4,
+            "model_only": 8,
+            "neither": 0,
+            "router_only": 0
+          }
+        },
+        "test": {
+          "both": 15,
+          "model_only": 44,
+          "neither": 3,
+          "router_only": 2
+        }
+      },
+      "worker_rss_mib_max": 1112.421875
+    }
+  ],
+  "schema_version": "deposium.facade-routing-public/v1"
+}

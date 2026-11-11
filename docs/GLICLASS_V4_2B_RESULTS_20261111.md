@@ -49,6 +49,10 @@ paired case by case over all cases:
 | physics-choice-v1 | 18 | 10 | 10 | 10 |
 | facade-routing-v1 | 74 | 2 | 2 | 2 |
 
+On passage relevance v2 the 2B never answers *partial* (0/16 on all cases), so
+its macro accuracy is 51.2% against 84.6% for D3 nano at the same test count.
+Rows for both models are in [RESULTS.md](RESULTS.md).
+
 Language: 422/540 French and 448/540 English cases over the packs that
 carry those two labels; the publisher also states that quality is lower
 outside English. The weakest spots are context choices and the explicit
