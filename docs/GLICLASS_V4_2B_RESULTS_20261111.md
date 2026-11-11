@@ -1,4 +1,4 @@
-# GLiClass v4 2B on the closed-choice packs: results
+# GLiClass v4 2B and 9B on the closed-choice packs: results
 
 **11 November 2026. GLiClass v4 2B scores about like D3 nano and below D3
 mini, and does not pass the reading rule fixed in the
@@ -8,6 +8,12 @@ were required), and its summed test score is 595/754 against 600 for D3 nano
 and 659 for D3 mini. The answer for our use is therefore no, whatever the
 publisher's benchmarks. References are synthetic and agent-authored, pending
 human review; this is an exploratory reading, not a product decision.
+
+**The 9B does not pass its rule either** (fixed in the protocol amendment
+before any 9B prediction): it matches or beats D3 Flash Q4 direct Metal on
+the test split of 4 packs out of 9, and totals 631/754 against 649 for D3
+Flash Q4 and 659 for D3 mini, while needing 16.7 GiB of MPS memory in BF16.
+See [the 9B section](#gliclass-v4-9b).
 
 ## Scores
 
@@ -70,3 +76,35 @@ measurements and are not summed.
   rendering and runtime together.
 - No quantized GLiClass build was tested: BF16 is the only published format
   for this checkpoint.
+
+## GLiClass v4 9B
+
+Same nine packs, same code, profile `profiles/gliclass-v4-9b-mps.json`
+(`14d11a92`, assets re-downloaded and byte-identical to the tracked manifest),
+attempt 001 each, all 1,336 cases `ok`. Its context run reproduces the
+17 October observation exactly: 117/132, with the same pass or fail on all
+132 cases.
+
+| Pack | GLiClass 9B, all | GLiClass 9B, test | D3 Flash Q4, test | D3 mini, test |
+| --- | ---: | ---: | ---: | ---: |
+| context-choice-v1 | 117/132 | **63/66** | 59/66 | 60/66 |
+| capability-choice-v1 | 192/192 | **96/96** | 96/96 | 96/96 |
+| physics-choice-v1 | 30/48 | 23/36 | 32/36 | 32/36 |
+| facade-routing-v1 | 77/80 | 45/48 | 47/48 | 47/48 |
+| facade-routing-advanced-v1 | 93/96 | 61/64 | 62/64 | 62/64 |
+| facade-routing-complex-v1 | 91/96 | **59/64** | 59/64 | 60/64 |
+| passage-relevance-v2 | 388/512 | **191/256** | 187/256 | 200/256 |
+| facade-routing-hitl-v1 (explicit option) | 62/90 | 40/62 | 49/62 | 47/62 |
+| facade-routing-hitl-8opt-v1 | 81/90 | 53/62 | 58/62 | 55/62 |
+| **Test total** | | **631/754** | **649/754** | **659/754** |
+
+Bold: packs where the 9B matches or beats D3 Flash Q4 on test. Its strength
+is context choice, where it beats every D3 of its size; its weak spots are
+physics (reasoning with a supplied law, 9 test cases behind) and the explicit
+human-confirmation option (9 behind). Language: 460/540 French and 474/540
+English cases.
+
+Median inference per call, first call excluded: 307–571 ms, 1,514 ms on
+capability (D3 Flash Q4 direct Metal: about 200–290 ms). Peak MPS allocation
+16.7 GiB in BF16, against 6.6 GiB sampled RSS for D3 Flash Q4; no quantized
+GLiClass 9B is published, so it cannot fit an 8 GB GPU.
