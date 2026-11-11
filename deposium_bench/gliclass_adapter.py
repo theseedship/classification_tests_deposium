@@ -19,6 +19,11 @@ from .worker_transport import MAX_LINE, decode, exchange, wire
 
 REPO_ID = "knowledgator/gliclass-v4-9b"
 REVISION = "14d11a92b5e0bab4a166e1fce4cc0777cac27182"
+# Pinned checkpoints this adapter accepts, with their fixed RSS ceiling (MiB).
+# The 9B keeps its historical envelope; the 2B gets its own, fixed before any prediction.
+MODELS = {REPO_ID: {"revision": REVISION, "max_rss_mb": 32768},
+          "knowledgator/gliclass-v4-2b": {"revision": "40fe023b45e8d97d1ae4f7f9342279ac1c76317d",
+                                          "max_rss_mb": 16384}}
 SOURCE_REPO = "Knowledgator/GLiClass"
 SOURCE_REVISION = "6a00f8067648f25aa0f4f477d167c5f391cb4165"
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,16 +34,17 @@ MODEL_FIELDS = PATH_FIELDS | {"repo_id", "source_revision", "max_length", "threa
 
 def validate_model_profile(profile):
     model = profile.get("model") if isinstance(profile, dict) else None
-    if (not isinstance(model, dict) or set(model) != MODEL_FIELDS
+    pinned = MODELS.get(model.get("repo_id")) if isinstance(model, dict) and isinstance(model.get("repo_id"), str) else None
+    if (not isinstance(model, dict) or set(model) != MODEL_FIELDS or pinned is None
             or profile.get("adapter") != "gliclass" or profile.get("qualification") != "model_isolated"
             or profile.get("capabilities") != [CONTEXT_CHOICE_CONTRACT] or profile.get("recordings") is not None
-            or profile.get("revision") != REVISION or model["repo_id"] != REPO_ID
+            or profile.get("revision") != pinned["revision"]
             or model["source_revision"] != SOURCE_REVISION):
         raise ValueError("gliclass_profile_identity_invalid")
     for name in PATH_FIELDS:
         if not isinstance(model[name], str) or not model[name].strip() or "\0" in model[name]:
             raise ValueError("gliclass_profile_path_invalid")
-    for name, expected in (("max_length", 4096), ("max_rss_mb", 32768), ("min_free_mb", 8192)):
+    for name, expected in (("max_length", 4096), ("max_rss_mb", pinned["max_rss_mb"]), ("min_free_mb", 8192)):
         if type(model[name]) is not int or model[name] != expected:
             raise ValueError("gliclass_profile_limit_invalid")
     if type(model["threads"]) is not int or not 1 <= model["threads"] <= 2:
@@ -65,6 +71,8 @@ class GLiClassAdapter:
         validate_model_profile(profile)
         self._profile = decode(wire(profile))
         self._model = self._profile["model"]
+        self._repo_id = self._model["repo_id"]
+        self._revision = MODELS[self._repo_id]["revision"]
         self.capabilities = list(profile["capabilities"])
         self._paths = {key: Path(os.path.abspath(Path(profile_path).parent / self._model[key])) for key in PATH_FIELDS}
         self._process = None
@@ -79,7 +87,7 @@ class GLiClassAdapter:
         self._last_monitor = 0.0
         self._stderr_path = None
         self.provenance = dict(adapter="gliclass", qualification="model_isolated", available=False,
-                               model=dict(self._model), model_revision=REVISION, model_repo_id=REPO_ID,
+                               model=dict(self._model), model_revision=self._revision, model_repo_id=self._repo_id,
                                source_revision=SOURCE_REVISION, capabilities=self.capabilities,
                                profile_sha256=hashlib.sha256(wire(profile)).hexdigest())
         try:
@@ -154,7 +162,7 @@ class GLiClassAdapter:
             raise
         finally:
             identity = {k: v for k, v in self.provenance.items() if k.endswith("_sha256") and k != "identity_sha256"}
-            identity.update(model_revision=REVISION, source_revision=SOURCE_REVISION, settings=self.provenance.get("settings"))
+            identity.update(model_revision=self._revision, source_revision=SOURCE_REVISION, settings=self.provenance.get("settings"))
             self.provenance["identity_sha256"] = hashlib.sha256(wire(identity)).hexdigest()
             self.provenance["init_wall_ms"] = (time.monotonic()-started)*1000
 
@@ -233,7 +241,7 @@ class GLiClassAdapter:
         return manifest, digest
 
     def _prepare(self, deadline):
-        model, digest = self._bundle("local_dir", "assets_manifest", REPO_ID, REVISION, deadline)
+        model, digest = self._bundle("local_dir", "assets_manifest", self._repo_id, self._revision, deadline)
         names = {item["path"] for item in model["files"]}
         if (not {"config.json", "tokenizer.json", "tokenizer_config.json"} <= names
                 or not any(name.endswith(".safetensors") for name in names)):

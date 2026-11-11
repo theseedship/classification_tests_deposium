@@ -85,6 +85,29 @@ class GLiClassAdapterTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             module.validate_model_profile(value)
 
+    def test_2b_checkpoint_has_its_own_pins_and_envelope(self):
+        two_b = "knowledgator/gliclass-v4-2b"
+
+        def small():
+            value = profile()
+            value["revision"] = module.MODELS[two_b]["revision"]
+            value["model"].update(repo_id=two_b, max_rss_mb=16384)
+            return value
+        module.validate_model_profile(small())
+        parsed, _ = parse_profile(wire(small()))
+        self.assertEqual(parsed, small())
+        mixes = (("revision", module.REVISION, None), ("max_rss_mb", 32768, "model"),
+                 ("repo_id", "knowledgator/gliclass-v4-27b", "model"))
+        for key, bad, scope in mixes:
+            value = small()
+            (value["model"] if scope else value)[key] = bad
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                module.validate_model_profile(value)
+        nine_b = profile()
+        nine_b["model"]["max_rss_mb"] = 16384
+        with self.assertRaises(ValueError):
+            module.validate_model_profile(nine_b)
+
     def test_profile_paths_are_archived_absolute_without_resolving_venv_symlink(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary).resolve()
