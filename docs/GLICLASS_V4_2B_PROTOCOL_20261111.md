@@ -94,6 +94,21 @@ The 9B (`14d11a92`, 17 GB BF16) then runs the same packs with the same code
 and its historical profile, against D3 Flash Q4 Metal and D3 mini. Its
 17 October context run is not repeated unless its runtime identity changes.
 
+### Amendment, 11 November 2026, after the 2B run and before any 9B prediction
+
+The adapter file changed (two pinned identities), so the 9B runtime identity
+changed: **the 9B runs all nine packs, context included**, in the order above,
+with its unchanged profile `profiles/gliclass-v4-9b-mps.json` (32,768 MiB RSS
+ceiling, 8,192 MiB reserve) and assets re-downloaded at `14d11a92` and checked
+against the tracked manifest. The 17 October context archive stays as it is.
+
+Reading rule for the 9B, fixed now: its comparator is **D3 Flash Q4 direct
+Metal** (same 9B class; published test counts 59, 96, 32, 47, 62, 59, 187, 49
+and 58 in the pack order above, 649/754 in all). The 9B is worth further work
+only if it matches or beats D3 Flash Q4 on the test split of at least five of
+the nine packs **and** its summed test score is at least 649. D3 mini (659)
+is reported beside it.
+
 ## Reporting
 
 Per pack: correct over all cases and over `test`, every non-`ok` status,
