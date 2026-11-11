@@ -20,7 +20,7 @@ One observation: one checkpoint, one runtime, one pass per case. Scores are **co
 
 | Family | Task | Correct / all | Held-out test | Rank all | Rank test | Execution | Report |
 |---|---|---:|---:|---:|---:|---|---|
-| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 122/132 | 59/66 | 6 | 14 | all `ok` | [D3_SMALL_GGUF_GPU_PROTOCOL_20261101](../../D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md), [DEPLOYMENT_VARIANTS_RESULTS_20261101](../../DEPLOYMENT_VARIANTS_RESULTS_20261101.md) |
+| RAG decision | [Context choices](../../RESULTS.md#model-quality) | 122/132 | 59/66 | 6 | 15 | all `ok` | [D3_SMALL_GGUF_GPU_PROTOCOL_20261101](../../D3_SMALL_GGUF_GPU_PROTOCOL_20261101.md), [DEPLOYMENT_VARIANTS_RESULTS_20261101](../../DEPLOYMENT_VARIANTS_RESULTS_20261101.md) |
 | RAG decision | [First-tool proposals](../../RESULTS.md#model-quality) | not run | — | — | — | — | — |
 | Tool workflow | [Capability and workflow choices](../../RESULTS.md#capability-choices) | 192/192 | 96/96 | 1 | 1 | all `ok` | [report](../../DEPLOYMENT_VARIANTS_RESULTS_20261101.md) |
 | Reasoning with a supplied law | [Physics choices](../../RESULTS.md#physics-choices) | 39/48 | 32/36 | 3 | 1 | all `ok` | [report](../../DEPLOYMENT_VARIANTS_RESULTS_20261101.md) |
@@ -43,7 +43,7 @@ Packs added on 1 November 2026, joined to this observation by weights and runtim
 |---|---|---:|---|
 | Facade routing, advanced tier | 94/96 (test 62/64) | 1 | [report](../../FACADE_ROUTING_TIERS_RESULTS_20261101.md) |
 | Facade routing, complex tier | 91/96 (test 59/64) | 3 | [report](../../FACADE_ROUTING_TIERS_RESULTS_20261101.md) |
-| Passage relevance v2 | 381/512 (test 187/256; macro 88.2%) | 4 | [report](../../PASSAGE_RELEVANCE_V2_RESULTS_20261101.md) |
+| Passage relevance v2 | 381/512 (test 187/256; macro 88.2%) | 5 | [report](../../PASSAGE_RELEVANCE_V2_RESULTS_20261101.md) |
 | Human confirmation, explicit option | asks before 11/12 irreversible actions and 0/12 hesitations; 0/38 false alarms | — | [report](../../FACADE_ROUTING_HITL_RESULTS_20261101.md) |
 | Human confirmation, own confidence | detects 22/24; 13/38 false alarms; AUC 0.88 | — | [report](../../FACADE_ROUTING_HITL_RESULTS_20261101.md) |
 

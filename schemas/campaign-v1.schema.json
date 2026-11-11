@@ -7145,10 +7145,16 @@
           "const": "deposium.model-assets/v1"
         },
         "repo_id": {
-          "const": "knowledgator/gliclass-v4-9b"
+          "enum": [
+            "knowledgator/gliclass-v4-9b",
+            "knowledgator/gliclass-v4-2b"
+          ]
         },
         "revision": {
-          "const": "14d11a92b5e0bab4a166e1fce4cc0777cac27182"
+          "enum": [
+            "14d11a92b5e0bab4a166e1fce4cc0777cac27182",
+            "40fe023b45e8d97d1ae4f7f9342279ac1c76317d"
+          ]
         },
         "files": {
           "type": "array",
@@ -7212,10 +7218,16 @@
           "$ref": "#/$defs/gliclass_model_config"
         },
         "model_revision": {
-          "const": "14d11a92b5e0bab4a166e1fce4cc0777cac27182"
+          "enum": [
+            "14d11a92b5e0bab4a166e1fce4cc0777cac27182",
+            "40fe023b45e8d97d1ae4f7f9342279ac1c76317d"
+          ]
         },
         "model_repo_id": {
-          "const": "knowledgator/gliclass-v4-9b"
+          "enum": [
+            "knowledgator/gliclass-v4-9b",
+            "knowledgator/gliclass-v4-2b"
+          ]
         },
         "profile_sha256": {
           "type": "string",
@@ -7323,7 +7335,10 @@
               "const": 4096
             },
             "max_rss_mb": {
-              "const": 32768
+              "enum": [
+                16384,
+                32768
+              ]
             },
             "min_free_mb": {
               "const": 8192
@@ -7528,7 +7543,10 @@
       ],
       "properties": {
         "repo_id": {
-          "const": "knowledgator/gliclass-v4-9b"
+          "enum": [
+            "knowledgator/gliclass-v4-9b",
+            "knowledgator/gliclass-v4-2b"
+          ]
         },
         "source_revision": {
           "const": "6a00f8067648f25aa0f4f477d167c5f391cb4165"
@@ -7577,7 +7595,10 @@
           "maximum": 2
         },
         "max_rss_mb": {
-          "const": 32768
+          "enum": [
+            16384,
+            32768
+          ]
         },
         "device": {
           "const": "mps"

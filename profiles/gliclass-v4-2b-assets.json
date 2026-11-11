@@ -1,0 +1,47 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "76e1877450b815b4d770c5d1f0a9c21938216ede587101bab4468a3dde75a5d4",
+      "size": 29797
+    },
+    {
+      "path": "calibration_report.json",
+      "sha256": "423724a32024412ae8159f81b62ea5f16463f1acd4ac5ad7f706d6b6b82e4df1",
+      "size": 3606
+    },
+    {
+      "path": "chat_template.jinja",
+      "sha256": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+      "size": 7755
+    },
+    {
+      "path": "config.json",
+      "sha256": "9b6b740b1abfebd17af0738f1b2f663f783feeec9fcc8846049c07aa2cc24ff3",
+      "size": 7124
+    },
+    {
+      "path": "model.safetensors",
+      "sha256": "8b8308376488066a594c886c5539b19c0398b8c6baf261a8c547441d10bae345",
+      "size": 4733273906
+    },
+    {
+      "path": "processor_config.json",
+      "sha256": "bfbc24af59a3e73a9cd0653b8d4ae758dfaec4e3e6c15dfb1c6c8ee8d5683c85",
+      "size": 1220
+    },
+    {
+      "path": "tokenizer.json",
+      "sha256": "04472e9fcd4aea467a49025c27c0469a428bda2f812268fc9b26fea77c016f71",
+      "size": 19989897
+    },
+    {
+      "path": "tokenizer_config.json",
+      "sha256": "44d30b6b485384681a21b3de5073e58439aab66cb650f30f2d3d1073da429af0",
+      "size": 1506
+    }
+  ],
+  "repo_id": "knowledgator/gliclass-v4-2b",
+  "revision": "40fe023b45e8d97d1ae4f7f9342279ac1c76317d",
+  "schema_version": "deposium.model-assets/v1"
+}

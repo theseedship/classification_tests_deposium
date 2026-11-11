@@ -3259,6 +3259,198 @@
           },
           "review_pending": true,
           "scored_or_valid": 192,
+          "source": "docs/evidence/gliclass-v4-20261111/9b-capability.json",
+          "status": "complete",
+          "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 117,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/gliclass-v4-20261111/9b-context.json",
+          "status": "complete",
+          "total": 132
+        },
+        "facade_routing": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 77,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 80,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 80,
+          "source": "docs/evidence/gliclass-v4-20261111/facade-easy.json",
+          "status": "complete",
+          "total": 80
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 30,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/gliclass-v4-20261111/9b-physics.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "generative_observation": false,
+      "id": "GLiClass9BMps",
+      "model": "GLiClass v4 9B · BF16 MPS · all packs",
+      "runtime": "apple_mps",
+      "size": "9B class"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 192,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
           "source": "docs/evidence/clef-flash-20261029/analysis.json",
           "status": "complete",
           "total": 192
@@ -3626,6 +3818,198 @@
       "model": "Vela 2.0 4B · CPU",
       "runtime": "historical_cpu",
       "size": "4.211B"
+    },
+    {
+      "cells": {
+        "capability": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 186,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 192,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 192,
+          "source": "docs/evidence/gliclass-v4-20261111/2b-capability.json",
+          "status": "complete",
+          "total": 192
+        },
+        "choice_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 32
+        },
+        "context": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 103,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 132,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 132,
+          "source": "docs/evidence/gliclass-v4-20261111/2b-context.json",
+          "status": "complete",
+          "total": 132
+        },
+        "facade_routing": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 76,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 80,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 80,
+          "source": "docs/evidence/gliclass-v4-20261111/facade-easy.json",
+          "status": "complete",
+          "total": 80
+        },
+        "passage_answerability": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 128
+        },
+        "passage_ranking": {
+          "evidence_present": false,
+          "metric": "ndcg@1",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 512
+        },
+        "passage_relevance_four_rotations": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 2048
+        },
+        "passage_support": {
+          "evidence_present": false,
+          "metric": "correct_choice",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 768
+        },
+        "physics": {
+          "evidence_present": true,
+          "metric": "correct_choice",
+          "numerator": 28,
+          "outcomes": {
+            "abstain": 0,
+            "error": 0,
+            "missing": 0,
+            "ok": 48,
+            "timeout": 0,
+            "unsupported": 0
+          },
+          "review_pending": true,
+          "scored_or_valid": 48,
+          "source": "docs/evidence/gliclass-v4-20261111/2b-physics.json",
+          "status": "complete",
+          "total": 48
+        },
+        "tool_arguments": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 6
+        },
+        "tool_discovery": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 10
+        },
+        "tool_episodes": {
+          "evidence_present": false,
+          "metric": "case_pass",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 18
+        },
+        "tool_proposal": {
+          "evidence_present": false,
+          "metric": "provisional_agreement",
+          "numerator": null,
+          "outcomes": null,
+          "review_pending": true,
+          "scored_or_valid": null,
+          "source": null,
+          "status": "not_run",
+          "total": 24
+        }
+      },
+      "context_observation": true,
+      "generative_observation": false,
+      "id": "GLiClass2BMps",
+      "model": "GLiClass v4 2B · BF16 MPS",
+      "runtime": "apple_mps",
+      "size": "2B class"
     },
     {
       "cells": {
@@ -8972,6 +9356,8 @@
     "docs/FACADE_ROUTING_HITL_RESULTS_20261101.md": "13c3b57f5466142177c9a5f97aac221c00ec936a63606fb214b9a35ce6da8014",
     "docs/FACADE_ROUTING_RESULTS_20261101.md": "ede837b2a12602c2cc43bc6e1662c0c45b2f803cf7950abe5e86d4d5b8d26ba8",
     "docs/FACADE_ROUTING_TIERS_RESULTS_20261101.md": "18dd5b79adb3c4d35ce948e9b184c6a66fccd61a583bd6e3a56068b7f66f40ec",
+    "docs/GLICLASS_V4_2B_PROTOCOL_20261111.md": "0d3d8c23405a7af9c847d7e5a51fdeb05eabf6b158866b3dcdc45bef7dcc38f4",
+    "docs/GLICLASS_V4_2B_RESULTS_20261111.md": "706f5e008189adcaa03908e0fdad70de7f4a8106f2af4af72e6b3e7d4bd91376",
     "docs/GLICLASS_V4_RESULTS_20261017.md": "9b2795a6c3a90b05ca7dbf8ede7d950873dfb7637fc097f79405d72bc01d065d",
     "docs/GLINER_PILOT.md": "70d485a2a84cde3fd039398a8d35c250fc6368fed16138ed1987342d39c0439c",
     "docs/INDECIS_PILOT.md": "7f2c1b72608d86166832837313c40e7f016558bd9a98c11f589ae3426602db71",
@@ -9024,6 +9410,17 @@
     "docs/evidence/facade-routing-tiers-20261101/easy-metal.json": "2424dcf4de5432caca57fc7069e17f670e5e4588fe32f25a8b3be8392187e673",
     "docs/evidence/gliclass-model-comparison-20261017/analysis.json": "62e3280544704ede362a8be9d8be4244dc34935a4a30dbe8d4f2bbcad8fd354a",
     "docs/evidence/gliclass-model-comparison-20261017/gliclass-session.json": "938b445cac5d50ddde7776c43dad22e0ac9e8c4e14246db73232f3a00fb19639",
+    "docs/evidence/gliclass-v4-20261111/2b-capability.json": "62fac38911722d7aa10784e569e7d6aada5a1320b910156a8b9b6a2edc76496b",
+    "docs/evidence/gliclass-v4-20261111/2b-context.json": "0e4e9f6d7800291d18a60a8918303b788b209111ba8ce4926d80d81eb2e6659d",
+    "docs/evidence/gliclass-v4-20261111/2b-physics.json": "f37b60bab636d892c69eaf27005f247a597c113d19bd4dd7623c41bf2666446c",
+    "docs/evidence/gliclass-v4-20261111/9b-capability.json": "8f2b5eea079bf40f787a89227503dadbf25741aac01f47d99824eb94052ceb91",
+    "docs/evidence/gliclass-v4-20261111/9b-context.json": "70f4ce853c2fa0191eb693526c747487266d7f3dba521b1127818944b79c1b53",
+    "docs/evidence/gliclass-v4-20261111/9b-physics.json": "76c42dfa17688e22cf6312892d125578b52ba7faea5408bca5bf48c63f33f87e",
+    "docs/evidence/gliclass-v4-20261111/facade-advanced.json": "18a07d73d93b233b7d3f9eecd0893058f93192c17034700a9c92418d8313ae47",
+    "docs/evidence/gliclass-v4-20261111/facade-complex.json": "fec9d9575509640881dd86a7fd62c60e9daba24bf8282dd39a09ea1e6862e996",
+    "docs/evidence/gliclass-v4-20261111/facade-easy.json": "e3d6da046238813fb461fc914a6f211a9676491a4638b9937fb5a5bc13f7b0b8",
+    "docs/evidence/gliclass-v4-20261111/facade-hitl.json": "d2ec9b4e96e66918b90a22f3dc7adee6c2f864555957f09e9812a917401e282a",
+    "docs/evidence/gliclass-v4-20261111/passage-relevance-v2.json": "4607300a28757a0e9dc9c2dd4208ca692caffd482f0f1cbfa1e75b48107ad58e",
     "docs/evidence/length-comparison-20261004/analysis.json": "48311eb6272d28dc4e5d607dfbc09bd77d35d6ef399075bb696115cd257c5f9e",
     "docs/evidence/local-tool-policy-20261030/analysis.json": "a1958d86ae75a28c417edc25976c4684e110baa7e3cb1ea11853dcf41d90594f",
     "docs/evidence/local-tool-policy-heldout-002-20261030/analysis.json": "d92146eb33150333f2709a9a20aa134722bfb01c62fb8b6df5404fa9e4dcca4a",
@@ -9058,7 +9455,7 @@
     "docs/evidence/vela2-03-macos-20261030/capability.json": "f478cddebf09f67250860947836e15ed843ad7b7ddf70811190008ed4462e1ff",
     "docs/evidence/vela2-03-macos-20261030/physics.json": "8a52a92bd08244accdbff5b9b61098701b0954a2f6bf3e0d7085a282e7d78cd3",
     "docs/evidence/vela3-fast-20261028/analysis.json": "83c06bdf377353541aba7944231654f3c794f19ab17016de99e3b0fdba70ae4e",
-    "docs/leaderboard/model-metadata.json": "ae9bea01c4ea711c30445f128631b77b7cdeb021b93234885a77bd868ad296d8",
+    "docs/leaderboard/model-metadata.json": "a4dfa49ab837677a3d6ebc32ca4725cd8d75fcc399df8fc7c65a33ba4066ab7c",
     "docs/leaderboard/other-benchmarks.md": "5f41877195ebb621d17c160ba9bb6386f107012977bed2dabb5b7355ad60308f",
     "profiles/clef-flash-q8-assets.json": "e26948e445b61e9418658eafaf2a960e594008ab2eed9310747a1c1a9db991c3",
     "profiles/d3-flash-m-uzu-assets.json": "44704e4506b4749133aa14a630ca07afe8eeb0176084e475db54b2db455cbe18",
@@ -9081,6 +9478,10 @@
     "profiles/d3-nano-q8-assets.json": "54c2cf76388915ba3ae591ee4f744b7f4e5f607dd3a66e418e0947bf26d2f6aa",
     "profiles/decision2-eos-assets.json": "31675c97916270d1744f9ea2446f591bc04165ef531bc2a12aedd159f16e3d1c",
     "profiles/decision2-kai-assets.json": "88a103ac103b1c21a9b8aca6cb3caba6d807a588a390d42d6c0ae5da1aea101d",
+    "profiles/gliclass-v4-2b-assets.json": "eeea9679e7adf3bc3ae697f96559f180bb9d85a7c0725510ea8efe096572640c",
+    "profiles/gliclass-v4-2b-mps.json": "555382346ce79b43d787fc82d2e3e6286ab49b51ca7c644020b94cb57d0a87d0",
+    "profiles/gliclass-v4-9b-assets.json": "53a7a2a60011901b4e3b72a6a05cda8917eff77eff060c632d2494e6b9bb582d",
+    "profiles/gliclass-v4-9b-mps.json": "76a78a3b8984339227be9154cd0f25962d01508a1f8ce6c1d7842841f00969bc",
     "profiles/modernjev-assets.json": "20a488892546112b14ddc80a28979712405895b1b1057f86e4febe6a4849a2a5",
     "profiles/muose-assets.json": "375f7174e1027354bb61cdf418bc38696b1b39abf8ec57529a51993c29f3ae90",
     "profiles/omni-assets.json": "a78af466c043ae373db72bacff4e195042809b83822629be4f5a8aecb1657a9e",
@@ -9088,10 +9489,11 @@
     "profiles/vela2-03-macos-choice-episodes.json": "0dd5e3e87bbea50d56d7701325adde78646816b262bcd4a85f74b065a10764f3",
     "profiles/vela2-03-macos-cpu.json": "70a477ac480962461fdce7ec0b19e966e329aa8b964c3c9830a529c711df1e01",
     "runtimes/d3-macos/runtime.lock": "21df05d1d0a61c4e45b42ed88eda9c1ba82b406cc733f70e4c7f186c318720eb",
-    "scripts/build-full-results.py": "e6860650c6df849ab3a1a547ea067f468c6cd7a6586161081c36441805c043d3",
+    "runtimes/gliclass/runtime.lock": "8475e6b1a1259ba0d2c1a1e18e6fdf5eb05a151f02e1db15dbb7a59242b5712b",
+    "scripts/build-full-results.py": "ef68b0f8c2455db71b1c1a08efd0761580d86c8bd64e8e53636b5a0b1d6f82ae",
     "scripts/compose-d3-comparison.py": "e75413b62da0caaad74585b920fb79d2b9e74fc3cd60ba432394f67ad770d036",
     "scripts/compose-larger-cpu-comparison.py": "263f562372faf95835896d22dac8b7dcfa2eee5535ef17427d79db0b8f382fb7",
-    "scripts/consolidated-campaigns.py": "70f2cea31e3bb436ef204e56a4c4610939240fe355bed697b8fc79caf6a2f484"
+    "scripts/consolidated-campaigns.py": "836a5c5de09cba555ee56672532f61901945c1ed2d0af3ffd9ddfef984f2e2fd"
   },
   "tasks": [
     {

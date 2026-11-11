@@ -49,8 +49,16 @@ GGUF_VARIANTS = (("D3miniQ4Metal", "D3 mini · Q4 Metal", EVIDENCE + "deployment
 UZU = ("D3FlashMUzu", "D3 flash · 4-bit Uzu", EVIDENCE + "deployment-variants-20261101/uzu-d3-flash-m.json", "profiles/d3-flash-m-uzu-assets.json")
 UZU_PROTOCOL = "docs/UZU_D3_FLASH_M_PROTOCOL_20261101.md"
 UZU_REVISION = "d3d3a5b20a3de507522e1099457d1dae0243effb"
+# Knowledgator GLiClass v4 2B and 9B on Apple MPS (BF16) through the shared engine, 11 November 2026.
+GLICLASS_REPORT = "GLICLASS_V4_2B_RESULTS_20261111.md"
+GLICLASS_PROTOCOL = "docs/GLICLASS_V4_2B_PROTOCOL_20261111.md"
+GLICLASS_LOCK = "runtimes/gliclass/runtime.lock"
+GLICLASS = (("GLiClass2BMps", "GLiClass v4 2B · BF16 MPS", "profiles/gliclass-v4-2b-assets.json",
+             "profiles/gliclass-v4-2b-mps.json", EVIDENCE + "gliclass-v4-20261111/2b-"),
+            ("GLiClass9BMps", "GLiClass v4 9B · BF16 MPS · all packs", "profiles/gliclass-v4-9b-assets.json",
+             "profiles/gliclass-v4-9b-mps.json", EVIDENCE + "gliclass-v4-20261111/9b-"))
 NEW_CONTEXT_IDS = ({"ClefFlashQ8", "D3FlashQ8Upstream", UZU[0]} | {obs for obs, *_ in GGUF_METAL}
-                   | {obs for obs, *_ in GGUF_VARIANTS})
+                   | {obs for obs, *_ in GGUF_VARIANTS} | {obs for obs, *_ in GLICLASS})
 STATUSES = {"ok", "missing", "unsupported", "error", "timeout", "abstain"}
 DATASETS = {
     "context": "767e239c4d40573e0ffa0744bce0f6c6dfc5570604c1f02a6fae6138ea7d5616",
@@ -151,9 +159,10 @@ class Campaigns:
     def cpu(self, path, asset_path, lock_path, profile_path):
         """A CPU-worker pack campaign exported by scripts/export-cpu-pack-campaign.py."""
         data = self.inputs.load(path)
+        device = "mps" if data["runtime"]["adapter"] == "gliclass" else "cpu"
         self.require(data["schema_version"] == "deposium.cpu-pack-campaign-public/v1"
                      and data["reference_review"] == "agent_only_pending_human"
-                     and data["execution_scope"] == "isolated_cpu_worker_no_application_gateway",
+                     and data["execution_scope"] == f"isolated_{device}_worker_no_application_gateway",
                      "campaign: changed CPU qualification")
         asset, model, runtime = self.inputs.load(asset_path), data["model"], data["runtime"]
         profile = self.inputs.load(profile_path)
@@ -162,8 +171,8 @@ class Campaigns:
                      and model["assets_manifest"] == asset_path, "campaign: CPU model/asset identity mismatch")
         lock_bytes = self.inputs.read(lock_path)
         lock = self.lock_pins(lock_bytes.decode("utf-8"))
-        self.require(runtime["adapter"] in ("d3", "vela2") and runtime["adapter"] == profile_adapter
-                     and runtime["device"] == "cpu" and runtime["runtime_lock"] == lock_path
+        self.require(runtime["adapter"] in ("d3", "vela2", "gliclass") and runtime["adapter"] == profile_adapter
+                     and runtime["device"] == device and runtime["runtime_lock"] == lock_path
                      and runtime["runtime_lock_sha256"] == hashlib.sha256(lock_bytes).hexdigest()
                      and runtime["profile"] == profile_path, "campaign: CPU runtime identity mismatch")
         # The aggregate's pins must be the lock's own values, not merely present.
@@ -175,7 +184,9 @@ class Campaigns:
                      and profile["model"]["repo_id"] == asset["repo_id"], "campaign: CPU profile mismatch")
         return data, {"adapter": runtime["adapter"], "model_repo_id": asset["repo_id"], "model_revision": asset["revision"],
                       "model_assets_sha256": model["model_assets_sha256"],
-                      "runtime": {k: runtime[k] for k in ("device", "platform", "pins", "runtime_lock_sha256", "loading_mode")}}
+                      "hashes": {"runtime_lock_sha256": runtime["runtime_lock_sha256"]},
+                      "runtime": {k: runtime.get(k) for k in ("device", "platform", "pins", "runtime_lock_sha256", "loading_mode",
+                                                              "dtype", "source_revision")}}
 
     def phase(self, data, name, task, observation, model, source, report, total, families):
         phase = data["phases"][name]
@@ -206,6 +217,10 @@ class Campaigns:
             self.require(backend["device"] == "cpu" and type(backend["threads"]) is int and backend["threads"] > 0
                          and precision in (("bfloat16", "float32", None), (None, None, "float32")),
                          "campaign: CPU worker identity not observed")
+        elif backend["kind"] == "mps":
+            self.require(backend["device"] == "mps" and backend["dtype"] == "bfloat16" and backend["attention"] == "eager"
+                         and type(backend["threads"]) is int and backend["threads"] > 0,
+                         "campaign: MPS worker identity not observed")
         elif backend["kind"] == "uzu":
             self.require(backend == {"kind": "uzu", "requested": "metal", "observed": None},
                          "campaign: Uzu backend claim changed")
@@ -226,7 +241,8 @@ class Campaigns:
                                    "runtime": dict(data["runtime"])},
                 "adapter_ms": self.stats(phase["latency_ms"], count["statuses"]["ok"]),
                 "session_group_peak_rss_mib": peak,
-                "rss_scope": (resource.get("rss_scope") if backend["kind"] in ("cpu", "uzu") else
+                "gpu_allocated_peak_mib": resource.get("gpu_allocated_peak_mib"),
+                "rss_scope": (resource.get("rss_scope") if backend["kind"] in ("cpu", "uzu", "mps") else
                               "Sampled owned process-group peak over fresh session startup, controls, warm-up and this pack; not total GPU memory")}
 
     def gguf(self, path, asset_path, observation):
@@ -283,7 +299,8 @@ class Campaigns:
                 "resources": {"adapter_ms": phase["adapter_ms"], "initialization_ms": None,
                               "worker_rss_mib": {"count": 0, "min": None, "median": None, "p95": None, "max": None},
                               "session_process_group_peak_rss_mib": phase["session_group_peak_rss_mib"],
-                              "sampled_gpu_allocated_peak_mib": None, "rss_scope": phase["rss_scope"]}}
+                              "sampled_gpu_allocated_peak_mib": phase.get("gpu_allocated_peak_mib"),
+                              "rss_scope": phase["rss_scope"]}}
 
     def passage_count(self, value):
         return self.counts(value["correct"], value["scored"], value["total"], value["statuses"], value["families"])
@@ -395,6 +412,16 @@ class Campaigns:
                 gguf_rows.append({"task": "passage_" + axis, "observation": observation, "model": model, "counts": count,
                                   "groups": groups, "macro_accuracy": self.macro(score, count), "source": source,
                                   "report": report, "identity": identity})
+        self.inputs.read(GLICLASS_PROTOCOL)
+        self.inputs.read("docs/" + GLICLASS_REPORT)
+        for observation, model, assets, profile, prefix in GLICLASS:
+            data, identity = self.cpu(prefix + "context.json", assets, GLICLASS_LOCK, profile)
+            context = self.phase(data, "context", "context", observation, model, prefix + "context.json", GLICLASS_REPORT, 132, 66)
+            contexts.append(self.context_row(context, identity, metadata[observation]))
+            for pack, total, families in (("capability", 192, 48), ("physics", 48, 24)):
+                data, _ = self.cpu(prefix + pack + ".json", assets, GLICLASS_LOCK, profile)
+                gguf_rows.append(self.phase(data, pack, pack, observation, model, prefix + pack + ".json",
+                                            GLICLASS_REPORT, total, families))
         rows = [self.phase(clef, "capability", "capability", "ClefFlashQ8", "Clef Flash Q8 · direct Metal",
                            CLEF, "CLEF_FLASH_RESULTS_20261029.md", 192, 48),
                 self.phase(clef, "physics", "physics", "ClefFlashQ8", "Clef Flash Q8 · direct Metal",

@@ -1,0 +1,297 @@
+{
+  "candidates": [
+    {
+      "explicit_option": {
+        "all": {
+          "correct": 51,
+          "total": 90
+        },
+        "statuses": {
+          "ok": 90
+        },
+        "test": {
+          "correct": 33,
+          "total": 62
+        },
+        "test_by_kind": {
+          "ambiguous": {
+            "asks_human": 2,
+            "none": 4
+          },
+          "control": {
+            "candidate": 22,
+            "none": 2,
+            "other": 2
+          },
+          "hitl_choose": {
+            "candidate": 8,
+            "none": 4
+          },
+          "hitl_confirm": {
+            "asks_human": 4,
+            "candidate": 6,
+            "none": 2
+          },
+          "out_of_scope": {
+            "asks_human": 3,
+            "none": 3
+          }
+        }
+      },
+      "identities": [
+        {
+          "adapter": "gliclass",
+          "model_repo_id": "knowledgator/gliclass-v4-2b",
+          "model_revision": "40fe023b45e8d97d1ae4f7f9342279ac1c76317d",
+          "profile": "profiles/gliclass-v4-2b-mps.json",
+          "raw_sha256": "5ae29ad57ef25b07361b0db7c7a9fe7dcf024d660c927e822c3aae798d6d5958",
+          "runtime_lock_sha256": "8475e6b1a1259ba0d2c1a1e18e6fdf5eb05a151f02e1db15dbb7a59242b5712b",
+          "seal_sha256": "dceaea59f33706e5dd9fce2916e550dcd446a4c1a563d568233bf2da47a52237"
+        },
+        {
+          "adapter": "gliclass",
+          "model_repo_id": "knowledgator/gliclass-v4-2b",
+          "model_revision": "40fe023b45e8d97d1ae4f7f9342279ac1c76317d",
+          "profile": "profiles/gliclass-v4-2b-mps.json",
+          "raw_sha256": "b85ba923cd9e0dec01c4a14ca1d369d5d52398cd7d54bd2ce1a059b898c34af2",
+          "runtime_lock_sha256": "8475e6b1a1259ba0d2c1a1e18e6fdf5eb05a151f02e1db15dbb7a59242b5712b",
+          "seal_sha256": "8f351d952f78b2922e92bd45d9ebd5a3e5f0eb0ba25f5893b18a0236825be126"
+        }
+      ],
+      "label": "GLiClass2BMps",
+      "median_call_ms": 195.34356200165348,
+      "own_confidence": {
+        "combined_with_explicit": {
+          "test_detected": 20,
+          "test_detected_by_kind": {
+            "hitl_choose": 10,
+            "hitl_confirm": 10
+          },
+          "test_false_alarms": 22
+        },
+        "routing_all": {
+          "correct": 78,
+          "total": 90
+        },
+        "routing_test": {
+          "correct": 54,
+          "total": 62
+        },
+        "threshold": {
+          "fit_cases": 28,
+          "tau": 0.920313835144043,
+          "test_asked_by_kind": {
+            "ambiguous": {
+              "asked": 6,
+              "total": 6
+            },
+            "control": {
+              "asked": 12,
+              "total": 26
+            },
+            "hitl_choose": {
+              "asked": 10,
+              "total": 12
+            },
+            "hitl_confirm": {
+              "asked": 10,
+              "total": 12
+            },
+            "out_of_scope": {
+              "asked": 1,
+              "total": 6
+            }
+          },
+          "test_auc": 0.7719298245614035,
+          "test_clear": 38,
+          "test_detected": 20,
+          "test_false_alarms": 19,
+          "test_needs_human": 24,
+          "test_routed": 23,
+          "test_routed_correct": 23
+        }
+      }
+    },
+    {
+      "explicit_option": {
+        "all": {
+          "correct": 62,
+          "total": 90
+        },
+        "statuses": {
+          "ok": 90
+        },
+        "test": {
+          "correct": 40,
+          "total": 62
+        },
+        "test_by_kind": {
+          "ambiguous": {
+            "none": 6
+          },
+          "control": {
+            "candidate": 24,
+            "other": 2
+          },
+          "hitl_choose": {
+            "candidate": 6,
+            "none": 6
+          },
+          "hitl_confirm": {
+            "asks_human": 6,
+            "candidate": 6
+          },
+          "out_of_scope": {
+            "asks_human": 2,
+            "none": 4
+          }
+        }
+      },
+      "identities": [
+        {
+          "adapter": "gliclass",
+          "model_repo_id": "knowledgator/gliclass-v4-9b",
+          "model_revision": "14d11a92b5e0bab4a166e1fce4cc0777cac27182",
+          "profile": "profiles/gliclass-v4-9b-mps.json",
+          "raw_sha256": "7016b9316a5add752a407e668e99b1d29d528dfaa98a2b908239bd271ab1ce15",
+          "runtime_lock_sha256": "8475e6b1a1259ba0d2c1a1e18e6fdf5eb05a151f02e1db15dbb7a59242b5712b",
+          "seal_sha256": "9c51e127b156f12068eef5042fdb9c6f6af8f6a78c2e31411adc6958ac0ba578"
+        },
+        {
+          "adapter": "gliclass",
+          "model_repo_id": "knowledgator/gliclass-v4-9b",
+          "model_revision": "14d11a92b5e0bab4a166e1fce4cc0777cac27182",
+          "profile": "profiles/gliclass-v4-9b-mps.json",
+          "raw_sha256": "6a9b36fd5b64fce3e0c1b6f27ed9cb71744d930c1c46418baec8e9179fc41664",
+          "runtime_lock_sha256": "8475e6b1a1259ba0d2c1a1e18e6fdf5eb05a151f02e1db15dbb7a59242b5712b",
+          "seal_sha256": "d3c1daef1e6ca5b1b819ead34b028cc7ba228b2e6e836ea2e91d0c7b49344c04"
+        }
+      ],
+      "label": "GLiClass9BMps",
+      "median_call_ms": 522.5413335010671,
+      "own_confidence": {
+        "combined_with_explicit": {
+          "test_detected": 22,
+          "test_detected_by_kind": {
+            "hitl_choose": 12,
+            "hitl_confirm": 10
+          },
+          "test_false_alarms": 10
+        },
+        "routing_all": {
+          "correct": 81,
+          "total": 90
+        },
+        "routing_test": {
+          "correct": 53,
+          "total": 62
+        },
+        "threshold": {
+          "fit_cases": 28,
+          "tau": 0.8357449769973755,
+          "test_asked_by_kind": {
+            "ambiguous": {
+              "asked": 1,
+              "total": 6
+            },
+            "control": {
+              "asked": 7,
+              "total": 26
+            },
+            "hitl_choose": {
+              "asked": 12,
+              "total": 12
+            },
+            "hitl_confirm": {
+              "asked": 8,
+              "total": 12
+            },
+            "out_of_scope": {
+              "asked": 0,
+              "total": 6
+            }
+          },
+          "test_auc": 0.8223684210526315,
+          "test_clear": 38,
+          "test_detected": 20,
+          "test_false_alarms": 8,
+          "test_needs_human": 24,
+          "test_routed": 34,
+          "test_routed_correct": 34
+        }
+      }
+    }
+  ],
+  "mode": "hitl",
+  "packs": {
+    "facade-routing-hitl-8opt-v1": "50bc08928060a61ce32fb10f829b8bfb7544a2db36d3343a327bd97344fd3cc6",
+    "facade-routing-hitl-v1": "0bd9506d617d5d1bd1df08212c8c453a48064e8d00d61b206d647d75c2c16382"
+  },
+  "qualification": "exploratory; agent-authored references pending human review",
+  "router": {
+    "explicit_option": {
+      "all": {
+        "correct": 26,
+        "total": 90
+      },
+      "statuses": {
+        "ok": 90
+      },
+      "test": {
+        "correct": 17,
+        "total": 62
+      },
+      "test_by_kind": {
+        "ambiguous": {
+          "none": 5,
+          "other": 1
+        },
+        "control": {
+          "candidate": 8,
+          "none": 15,
+          "other": 3
+        },
+        "hitl_choose": {
+          "candidate": 3,
+          "none": 7,
+          "other": 2
+        },
+        "hitl_confirm": {
+          "candidate": 3,
+          "none": 6,
+          "other": 3
+        },
+        "out_of_scope": {
+          "none": 4,
+          "other": 2
+        }
+      }
+    },
+    "identities": [
+      {
+        "raw_sha256": "91bfa089025b5607f38e61eb5edadb846fb651cab4d22f3483b5efecf25ca6d4",
+        "recordings_sha256": "4dc019740e699144af2632e0f46aab6a01a44bf05896fb5adb35a878f1804f91",
+        "seal_sha256": "ef1a2098d927077ca6912e157eca0cf9ff11b537c8c25ac19dc2aa53f47002a5"
+      },
+      {
+        "raw_sha256": "14190ac1ce55e50af352c3dde23473867d084ded08f8306e018ed07229c9cad8",
+        "recordings_sha256": "77ad41fbcc7cccfedfb1b927d089aed0ec3dde34c51f53fb22b41943bd26f6ed",
+        "seal_sha256": "83ad5111ae797e42228024c9b485ef7f43497a1d1d3fc61360a1337362f9efdc"
+      }
+    ],
+    "label": "FacadeRouterReplay",
+    "own_confidence": {
+      "routing_all": {
+        "correct": 34,
+        "total": 90
+      },
+      "routing_test": {
+        "correct": 23,
+        "total": 62
+      },
+      "threshold": null
+    },
+    "router_source_revision": "2847d2d9193dfe7e20f8742694af5560e4c10765"
+  },
+  "schema_version": "deposium.review-packs-public/v1"
+}

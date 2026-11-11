@@ -895,7 +895,10 @@
             "const": "model_isolated"
           },
           "revision": {
-            "const": "14d11a92b5e0bab4a166e1fce4cc0777cac27182"
+            "enum": [
+              "14d11a92b5e0bab4a166e1fce4cc0777cac27182",
+              "40fe023b45e8d97d1ae4f7f9342279ac1c76317d"
+            ]
           },
           "recordings": {
             "type": "null"
@@ -2541,7 +2544,10 @@
       ],
       "properties": {
         "repo_id": {
-          "const": "knowledgator/gliclass-v4-9b"
+          "enum": [
+            "knowledgator/gliclass-v4-9b",
+            "knowledgator/gliclass-v4-2b"
+          ]
         },
         "source_revision": {
           "const": "6a00f8067648f25aa0f4f477d167c5f391cb4165"
@@ -2590,7 +2596,10 @@
           "maximum": 2
         },
         "max_rss_mb": {
-          "const": 32768
+          "enum": [
+            16384,
+            32768
+          ]
         },
         "device": {
           "const": "mps"

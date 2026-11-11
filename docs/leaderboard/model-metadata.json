@@ -991,6 +991,60 @@
           "path": "docs/DEPLOYMENT_VARIANTS_RESULTS_20261101.md"
         }
       ]
+    },
+    "GLiClass2BMps": {
+      "display_name": "GLiClass v4 2B · BF16 MPS",
+      "family": "GLiClass v4",
+      "runtime_group": "apple_mps",
+      "precision": "BF16",
+      "hardware_group": "Apple M5 Pro GPU (MPS); 64 GiB unified memory",
+      "observed_date": "2026-11-11",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/GLICLASS_V4_2B_PROTOCOL_20261111.md"
+        },
+        {
+          "path": "docs/GLICLASS_V4_2B_RESULTS_20261111.md"
+        }
+      ],
+      "model_size": {
+        "parameters": null,
+        "label": "2B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name size class (Qwen3.5-2B backbone); not a measured parameter count",
+        "source": {
+          "path": "docs/GLICLASS_V4_2B_PROTOCOL_20261111.md"
+        }
+      },
+      "source_analysis": "docs/evidence/gliclass-v4-20261111/2b-context.json"
+    },
+    "GLiClass9BMps": {
+      "display_name": "GLiClass v4 9B · BF16 MPS · all packs",
+      "family": "GLiClass v4",
+      "runtime_group": "apple_mps",
+      "precision": "BF16",
+      "hardware_group": "Apple M5 Pro GPU (MPS); 64 GiB unified memory",
+      "observed_date": "2026-11-11",
+      "date_label": null,
+      "evidence": [
+        {
+          "path": "docs/GLICLASS_V4_2B_PROTOCOL_20261111.md"
+        },
+        {
+          "path": "docs/GLICLASS_V4_2B_RESULTS_20261111.md"
+        }
+      ],
+      "model_size": {
+        "parameters": null,
+        "label": "9B class",
+        "basis": "nominal_model_class",
+        "scope": "Publisher model-name size class; not a measured parameter count",
+        "source": {
+          "path": "docs/GLICLASS_V4_2B_PROTOCOL_20261111.md"
+        }
+      },
+      "source_analysis": "docs/evidence/gliclass-v4-20261111/9b-context.json"
     }
   }
 }

@@ -9,11 +9,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REPO = "knowledgator/gliclass-v4-9b"
 REVISION = "14d11a92b5e0bab4a166e1fce4cc0777cac27182"
+# Pinned checkpoints; the same eight publisher files are selected for each.
+PINNED = {REPO: REVISION, "knowledgator/gliclass-v4-2b": "40fe023b45e8d97d1ae4f7f9342279ac1c76317d"}
 REQUIRED = {"README.md", "config.json", "calibration_report.json", "chat_template.jinja",
             "model.safetensors", "processor_config.json", "tokenizer.json", "tokenizer_config.json"}
 
 
-def prepare(model_dir, metadata, output):
+def prepare(model_dir, metadata, output, repo=REPO):
+    if repo not in PINNED:
+        raise ValueError("unpinned GLiClass repository")
+    revision = PINNED[repo]
     source = Path(model_dir).resolve(strict=True)
     destination = Path(output).absolute()
     if destination.resolve().is_relative_to(source) or destination.exists() or destination.is_symlink():
@@ -21,7 +26,7 @@ def prepare(model_dir, metadata, output):
     spec = importlib.util.spec_from_file_location("bench_asset_verifier", ROOT / "scripts/prepare-small-decision-assets.py")
     helper = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(helper)
-    published = helper._publisher_files(json.loads(Path(metadata).read_text()), REPO, REVISION)
+    published = helper._publisher_files(json.loads(Path(metadata).read_text()), repo, revision)
     if helper._inventory(source) != REQUIRED:
         raise ValueError("GLiClass snapshot inventory differs from the selected files")
     files = []
@@ -34,8 +39,8 @@ def prepare(model_dir, metadata, output):
                 or ("lfs" not in item and blob != item["blobId"])):
             raise ValueError("GLiClass publisher hash mismatch: " + name)
         files.append({"path": name, "size": item["size"], "sha256": digest})
-    manifest = {"schema_version": "deposium.model-assets/v1", "repo_id": REPO,
-                "revision": REVISION, "files": files}
+    manifest = {"schema_version": "deposium.model-assets/v1", "repo_id": repo,
+                "revision": revision, "files": files}
     destination.parent.mkdir(parents=True, exist_ok=True)
     with destination.open("x") as stream:
         json.dump(manifest, stream, sort_keys=True, indent=2)
@@ -48,8 +53,9 @@ def main():
     parser.add_argument("--model-dir", type=Path, required=True)
     parser.add_argument("--metadata", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--repo", choices=sorted(PINNED), default=REPO)
     args = parser.parse_args()
-    manifest = prepare(args.model_dir, args.metadata, args.output)
+    manifest = prepare(args.model_dir, args.metadata, args.output, args.repo)
     print(json.dumps({"repo_id": manifest["repo_id"], "revision": manifest["revision"],
                       "files_verified": len(manifest["files"])}))
 
