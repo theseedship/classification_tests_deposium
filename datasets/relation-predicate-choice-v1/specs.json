@@ -1,0 +1,74 @@
+[
+  {
+    "family": "apprenticeship", "split": "train",
+    "entities": [["Neral", "person", "personne"], ["Ovira", "person", "personne"]],
+    "options": ["disciple_of", "teacher_of", "criticizes"],
+    "gold": "disciple_of", "reverse": "teacher_of",
+    "en": ["Ovira accepted Neral as an apprentice and supervised the whole training.", "Neral and Ovira were both listed as visitors to the training hall."],
+    "fr": ["Ovira a pris Neral comme apprenti et a encadré toute sa formation.", "Neral et Ovira figurent tous deux sur la liste des visiteurs de la salle de formation."]
+  },
+  {
+    "family": "translation", "split": "train",
+    "entities": [["The Folded Map", "manuscript", "manuscrit"], ["Sivel", "person", "personne"]],
+    "options": ["translated_by", "edited_by", "criticizes"],
+    "gold": "translated_by", "reverse": "none",
+    "en": ["Sivel produced the first version of The Folded Map in another language.", "Sivel was asked to produce a version of The Folded Map in another language but declined."],
+    "fr": ["Sivel a réalisé la première version de The Folded Map dans une autre langue.", "Sivel a refusé la demande de réaliser une version de The Folded Map dans une autre langue."]
+  },
+  {
+    "family": "assembly", "split": "train",
+    "entities": [["Doval", "mechanism", "mécanisme"], ["Tarin", "mechanism", "mécanisme"]],
+    "options": ["part_of", "has_part", "uses"],
+    "gold": "part_of", "reverse": "has_part",
+    "en": ["The assembly diagram shows Doval as a permanent component inside Tarin.", "The assembly diagrams for Doval and Tarin are on the same sheet."],
+    "fr": ["Le schéma de montage montre Doval comme un composant permanent de Tarin.", "Les schémas de montage de Doval et de Tarin figurent sur la même feuille."]
+  },
+  {
+    "family": "mentoring", "split": "calibration",
+    "entities": [["Selko", "person", "personne"], ["Lumet", "person", "personne"]],
+    "options": ["disciple_of", "teacher_of", "criticizes"],
+    "gold": "teacher_of", "reverse": "disciple_of",
+    "en": ["Throughout a two-year apprenticeship Lumet learned engraving under Selko's supervision.", "Selko and Lumet each wrote to ask about apprenticeships in engraving."],
+    "fr": ["Pendant ses deux ans d'apprentissage, Lumet a appris la gravure sous la direction de Selko.", "Selko et Lumet ont chacun écrit pour se renseigner sur les formations en gravure."]
+  },
+  {
+    "family": "editing", "split": "calibration",
+    "entities": [["The Amber Register", "manuscript", "manuscrit"], ["Veyra", "person", "personne"]],
+    "options": ["translated_by", "edited_by", "criticizes"],
+    "gold": "edited_by", "reverse": "none",
+    "en": ["Veyra was responsible for editing The Amber Register and approved its final text.", "Veyra asked who had edited The Amber Register."],
+    "fr": ["Veyra a assuré le travail éditorial sur The Amber Register et en a validé le texte final.", "Veyra a demandé qui avait assuré le travail éditorial sur The Amber Register."]
+  },
+  {
+    "family": "equipment", "split": "calibration",
+    "entities": [["Pelni", "mechanism", "mécanisme"], ["Ivaro", "mechanism", "mécanisme"]],
+    "options": ["part_of", "has_part", "uses"],
+    "gold": "uses", "reverse": "none",
+    "en": ["During calibration, Pelni drives the external Ivaro as a tool to hold the target steady.", "Tests did not find that Pelni activates Ivaro during calibration."],
+    "fr": ["Pendant l’étalonnage, Pelni se sert du mécanisme externe Ivaro pour maintenir la cible en place.", "Les essais n'ont pas montré que Pelni active Ivaro pendant l'étalonnage."]
+  },
+  {
+    "family": "critique", "split": "test",
+    "entities": [["Arven", "person", "personne"], ["Merika", "person", "personne"]],
+    "options": ["disciple_of", "teacher_of", "criticizes"],
+    "gold": "criticizes", "reverse": "none",
+    "en": ["Arven called Merika's attribution of the unsigned sketches untenable and listed three errors in it.", "Arven asked whether another speaker had challenged Merika's attribution of the unsigned sketches."],
+    "fr": ["Arven a jugé intenable l'attribution des croquis anonymes par Merika et y a relevé trois erreurs.", "Arven a demandé si une autre personne avait contesté l'attribution des croquis anonymes par Merika."]
+  },
+  {
+    "family": "catalogue", "split": "test",
+    "entities": [["The Slate Almanac", "manuscript", "manuscrit"], ["Tesil", "person", "personne"]],
+    "options": ["translated_by", "edited_by", "criticizes"],
+    "gold": "translated_by", "reverse": "none",
+    "en": ["The publisher notes that Tesil rendered The Slate Almanac in Hillish from the Riverish original.", "The publisher listed Tesil as a possible translator for The Slate Almanac, a proposal later withdrawn."],
+    "fr": ["L'éditeur indique que Tesil a transposé The Slate Almanac en langue des collines à partir du texte original en langue du fleuve.", "L'éditeur avait envisagé de confier la traduction de The Slate Almanac à Tesil, puis a retiré cette proposition."]
+  },
+  {
+    "family": "subassembly", "split": "test",
+    "entities": [["Queral", "mechanism", "mécanisme"], ["Maspen", "mechanism", "mécanisme"]],
+    "options": ["part_of", "has_part", "uses"],
+    "gold": "has_part", "reverse": "part_of",
+    "en": ["Each Queral includes a sealed Maspen module mounted inside its body.", "The register lists Queral and Maspen on separate rows and gives no assembly details."],
+    "fr": ["Chaque Queral intègre un module Maspen scellé à l'intérieur de son boîtier.", "Le registre inscrit Queral et Maspen sur deux lignes distinctes, sans préciser leur montage."]
+  }
+]
