@@ -534,6 +534,10 @@ def validate_oracle(case):
     oracle families fail explicitly rather than claiming general symbolic proof.
     """
     if (isinstance(case, dict) and isinstance(case.get("evaluation"), dict)
+            and str(case["evaluation"].get("base_case_id", "")).startswith("rpc1-")):
+        from .relation_predicate_corpus import validate_oracle as validate_relation_predicate_oracle
+        return validate_relation_predicate_oracle(case)
+    if (isinstance(case, dict) and isinstance(case.get("evaluation"), dict)
             and case["evaluation"].get("domain") == "physics"):
         from .physics_corpus import validate_oracle as validate_physics_oracle
         return validate_physics_oracle(case)

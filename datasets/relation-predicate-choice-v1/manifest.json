@@ -1,0 +1,22 @@
+{
+  "schema_version": "deposium.research-dataset/v1",
+  "dataset_id": "relation-predicate-choice-v1",
+  "version": "1.0.0-exploratory",
+  "case_schema": "deposium.case/v2",
+  "cases_file": "cases.jsonl",
+  "contract_id": "bench.context-choice",
+  "cases_sha256": "40b9c7d3ac1b114d82b23ac33c2b75c4cff97d8c26d74468a0e3c67410c9f2a0",
+  "spec_sha256": "33d64760ca9e28d85b0e14fdff7332cfa618ebbe11c55317530702cc81d71796",
+  "case_count": 54,
+  "family_count": 9,
+  "counts_by_split": {
+    "train": 18,
+    "calibration": 18,
+    "test": 18
+  },
+  "counts_by_language": {
+    "en": 27,
+    "fr": 27
+  },
+  "reference_review": "agent_only_pending_human"
+}
